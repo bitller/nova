@@ -5991,9 +5991,6 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-.first-section {
-  background-color: #3498DB; }
-
 .custom-button {
   background-color: #3498DB;
   border: 2px solid #ffffff;
@@ -6006,6 +6003,17 @@ button.close {
   color: #3498DB;
   border-color: #ffffff;
   transition: background-color 300ms; }
+
+.first-section {
+  background-color: #3498DB;
+  padding-bottom: 50px; }
+
+.first-section .welcome-text, .first-section .description-text {
+  color: #ffffff; }
+
+.second-section {
+  background-color: #F7F7F7;
+  color: #515253; }
 
 body {
   padding-top: 40px; }

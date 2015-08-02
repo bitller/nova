@@ -1,7 +1,3 @@
-.first-section {
-  background-color: $navbar-default-bg;
-}
-
 $border-and-text-color: #ffffff;
 
 .custom-button {
@@ -17,4 +13,22 @@ $border-and-text-color: #ffffff;
   color: #3498DB;
   border-color: $border-and-text-color;
   transition: background-color 300ms;
+}
+
+.first-section {
+  background-color: $navbar-default-bg;
+  padding-bottom: 50px;
+}
+
+$text-color: #ffffff;
+
+.first-section .welcome-text, .first-section .description-text {
+  color: $text-color;
+}
+
+$second-section-background-color: #F7F7F7;
+
+.second-section {
+  background-color: $second-section-background-color;
+  color: #515253;
 }

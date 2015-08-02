@@ -34,8 +34,14 @@
 
 <div class="first-section">
     <div class="container">
-        <h2 class="text-center">Bun venit</h2>
-        <h4 class="text-center">Nova este aplicatia de facturare si management al produselor dedicata reprezentantilor avon</h4>
+        <h2 class="text-center welcome-text">Bun venit</h2>
+        <h4 class="text-center description-text">Nova este aplicatia de facturare si management al produselor dedicata reprezentantilor avon</h4>
+    </div>
+</div>
+
+<div class="second-section">
+    <div class="container">
+        <h3 class="text-center">De ce sa folosesti Nova?</h3>
     </div>
 </div>
 
