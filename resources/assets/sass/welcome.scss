@@ -1,3 +1,20 @@
 .first-section {
-  background-color: #3498db
+  background-color: $navbar-default-bg;
+}
+
+$border-and-text-color: #ffffff;
+
+.custom-button {
+  background-color: $navbar-default-bg;
+  border: 2px solid $border-and-text-color;
+  border-radius: 4px;
+  color: $border-and-text-color;
+  transition: 300ms;
+}
+
+.custom-button:hover {
+  background-color: $border-and-text-color;
+  color: #3498DB;
+  border-color: $border-and-text-color;
+  transition: background-color 300ms;
 }

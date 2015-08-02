@@ -9,7 +9,7 @@
 <body>
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -24,7 +24,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <p class="navbar-btn">
-                        <a href="#" class="btn btn-default">I'm a link button!</a>
+                        <a href="/login" class="btn btn-default custom-button">Conecteaza-te</a>
                     </p>
                 </li>
             </ul>
@@ -34,7 +34,8 @@
 
 <div class="first-section">
     <div class="container">
-        <h2 class="text-center">Welcome</h2>
+        <h2 class="text-center">Bun venit</h2>
+        <h4 class="text-center">Nova este aplicatia de facturare si management al produselor dedicata reprezentantilor avon</h4>
     </div>
 </div>
 

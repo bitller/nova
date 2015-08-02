@@ -4077,13 +4077,13 @@ tbody.collapse.in {
       margin-right: 0; } }
 
 .navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7; }
+  background-color: #3498DB;
+  border-color: #3498DB; }
   .navbar-default .navbar-brand {
-    color: #777; }
+    color: #f1f1f1; }
     .navbar-default .navbar-brand:hover,
     .navbar-default .navbar-brand:focus {
-      color: #5e5e5e;
+      color: #ffffff;
       background-color: transparent; }
   .navbar-default .navbar-text {
     color: #777; }
@@ -4097,7 +4097,7 @@ tbody.collapse.in {
   .navbar-default .navbar-nav > .active > a:hover,
   .navbar-default .navbar-nav > .active > a:focus {
     color: #555;
-    background-color: #e7e7e7; }
+    background-color: #2487ca; }
   .navbar-default .navbar-nav > .disabled > a,
   .navbar-default .navbar-nav > .disabled > a:hover,
   .navbar-default .navbar-nav > .disabled > a:focus {
@@ -4112,11 +4112,11 @@ tbody.collapse.in {
       background-color: #888; }
   .navbar-default .navbar-collapse,
   .navbar-default .navbar-form {
-    border-color: #e7e7e7; }
+    border-color: #3498DB; }
   .navbar-default .navbar-nav > .open > a,
   .navbar-default .navbar-nav > .open > a:hover,
   .navbar-default .navbar-nav > .open > a:focus {
-    background-color: #e7e7e7;
+    background-color: #2487ca;
     color: #555; }
   @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -4129,7 +4129,7 @@ tbody.collapse.in {
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
       color: #555;
-      background-color: #e7e7e7; }
+      background-color: #2487ca; }
     .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
     .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
@@ -5992,7 +5992,20 @@ button.close {
     display: none !important; } }
 
 .first-section {
-  background-color: #3498db; }
+  background-color: #3498DB; }
+
+.custom-button {
+  background-color: #3498DB;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  color: #ffffff;
+  transition: 300ms; }
+
+.custom-button:hover {
+  background-color: #ffffff;
+  color: #3498DB;
+  border-color: #ffffff;
+  transition: background-color 300ms; }
 
 body {
   padding-top: 40px; }
