@@ -35,14 +35,51 @@
 <div class="first-section">
     <div class="container">
         <h2 class="text-center welcome-text">Bun venit</h2>
-        <h4 class="text-center description-text">Nova este aplicatia de facturare si management al produselor dedicata reprezentantilor avon</h4>
+        <h4 class="text-center description-text">Nova este o aplicatie de facturare si management al facturilor dedicata reprezentantilor Avon</h4>
     </div>
 </div>
 
 <div class="second-section">
     <div class="container">
-        <h3 class="text-center">De ce sa folosesti Nova?</h3>
+        <h3 class="text-center why-nova">De ce sa folosesti Nova?</h3>
+        <div class="col-md-4">
+            <img class="img-center center-block" src="{{ url('/img/add.png') }}">
+            <h4 class="text-center">Creeaza o noua factura in cateva secunde</h4>
+            <h5 class="text-center">Ai primit o noua comanda? Dureaza doar cateva secunde sa creezi o noua factura</h5>
+        </div>
+        <div class="col-md-4">
+            <img class="img-center center-block" src="{{ url('/img/easy-access.png') }}">
+            <h4 class="text-center">Access rapid la toate facturile</h4>
+            <h5 class="text-center">Vrei sa gasesti o factura de acum o luna sau un an? Nimic mai simplu. Ai access rapid la toate facturile</h5>
+        </div>
+        <div class="col-md-4">
+            <img class="img-center center-block" src="{{ url('/img/print.png') }}">
+            <h4 class="text-center">Printeaza facturile simplu si rapid</h4>
+            <h5 class="text-center">Ai creat o noua comanda? Ai adaugat toate produsele si totul este gata? Atunci printeaza factura pentru a o da clientului</h5>
+        </div>
     </div>
+
+    <div class="container">
+        <div class="col-md-4">
+            <img class="img-center center-block" src="{{ url('/img/code.png') }}">
+            <h4 class="text-center">Adauga produsele dupa codul lor</h4>
+            <h5 class="text-center">Dupa cum stiti, fiecare produs avon are un cod din 5 cifre. Pentru a adauga un produs la o factura, nu trebuie de cat sa introduceti codul produsului din catalogul avon</h5>
+        </div>
+
+        <div class="col-md-4">
+            <img class="img-center center-block" src="{{ url('/img/stats.png') }}">
+            <h4 class="text-center">Statistici despre vanzari</h4>
+            <h5 class="text-center">Aveti la dispozitie statistici despre vanzarile efectuate, cele mai vandute produse, campania cu cele mai mari vanzari si multe altele</h5>
+        </div>
+
+        <div class="col-md-4">
+            <img class="img-center center-block" src="{{ url('/img/search.png') }}">
+            <h4 class="text-center">Cauta un produs dupa cod</h4>
+            <h5 class="text-center">Baza noastra de date contine toate produsele avon, iar pentru a gasi rapid un produs trebuie doar sa ii stiti codul din 5 cifre din catalogul avon</h5>
+        </div>
+
+    </div>
+
 </div>
 
 </body>

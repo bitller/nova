@@ -6013,7 +6013,8 @@ button.close {
 
 .second-section {
   background-color: #F7F7F7;
-  color: #515253; }
+  color: #515253;
+  padding: 20px 0 20px 0; }
 
 body {
   padding-top: 40px; }
