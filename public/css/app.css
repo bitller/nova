@@ -6022,6 +6022,18 @@ button.close {
   color: #515253;
   padding: 20px 0 20px 0; }
 
+.why-nova {
+  padding-bottom: 20px; }
+
+#login-page {
+  background-color: #f1f1f1; }
+
+#login-page .login-form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 3px;
+  border: 1px solid #f8f8f8; }
+
 body {
   padding-top: 40px; }
 

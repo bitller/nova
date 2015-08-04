@@ -1,0 +1,16 @@
+$page-background-color: #f1f1f1;
+$login-form-background-color: #ffffff;
+$login-form-border-radius: 3px;
+$login-form-border-color: #f8f8f8;
+$login-form-padding: 20px;
+
+#login-page {
+  background-color: $page-background-color;
+}
+
+#login-page .login-form {
+  background-color: $login-form-background-color;
+  padding: $login-form-padding;
+  border-radius: $login-form-border-radius;
+  border: 1px solid $login-form-border-color;
+}

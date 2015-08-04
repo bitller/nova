@@ -1,6 +1,11 @@
 @import "custom-variables";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Welcome page
 @import "welcome";
+
+// Login page
+@import "auth/login";
 
 body {
   padding-top: 40px;
