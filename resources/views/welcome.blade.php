@@ -37,7 +37,7 @@
         <h2 class="text-center welcome-text">Bun venit</h2>
         <h4 class="text-center description-text">Nova este o aplicatie de facturare si management al facturilor dedicata reprezentantilor Avon</h4>
         <div class="col-md-12 text-center start-button">
-            <button class="btn btn-default custom-button">Incepe sa folosesti Nova</button>
+            <a href="/register"><button class="btn btn-default custom-button">Incepe sa folosesti Nova</button></a>
         </div>
     </div>
 </div>
