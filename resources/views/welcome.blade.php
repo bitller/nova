@@ -36,6 +36,9 @@
     <div class="container">
         <h2 class="text-center welcome-text">Bun venit</h2>
         <h4 class="text-center description-text">Nova este o aplicatie de facturare si management al facturilor dedicata reprezentantilor Avon</h4>
+        <div class="col-md-12 text-center start-button">
+            <button class="btn btn-default custom-button">Incepe sa folosesti Nova</button>
+        </div>
     </div>
 </div>
 
@@ -63,7 +66,7 @@
         <div class="col-md-4">
             <img class="img-center center-block" src="{{ url('/img/code.png') }}">
             <h4 class="text-center">Adauga produsele dupa codul lor</h4>
-            <h5 class="text-center">Dupa cum stiti, fiecare produs avon are un cod din 5 cifre. Pentru a adauga un produs la o factura, nu trebuie de cat sa introduceti codul produsului din catalogul avon</h5>
+            <h5 class="text-center">Dupa cum stiti, fiecare produs avon are un cod din 5 cifre. Pentru a adauga un produs la o factura, nu trebuie de cat sa introduceti codul produsului din catalogul avon iar de restul se ocupa aplicatia</h5>
         </div>
 
         <div class="col-md-4">
