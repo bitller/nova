@@ -6028,11 +6028,23 @@ button.close {
 #login-page {
   background-color: #f1f1f1; }
 
+#login-page .register-button {
+  padding-bottom: 40px; }
+
+#login-page .login-logo {
+  padding-bottom: 10px; }
+
+#login-page .login-logo a:hover {
+  text-decoration: none; }
+
 #login-page .login-form {
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 3px;
-  border: 1px solid #f8f8f8; }
+  border-radius: 4px;
+  border: 1px solid #d1d1d1; }
+
+#login-page .forgot-password {
+  padding-top: 20px; }
 
 body {
   padding-top: 40px; }
