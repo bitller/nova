@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Guard;
 
 /**
  * Handle user login
+ *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class LoginController extends Controller {
@@ -43,6 +44,7 @@ class LoginController extends Controller {
         if ($this->auth->attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
             // User logged in
             // Fire LoggedIn event
+            echo 'logged in';
         }
 
         // Fire FailedLogIn event (with email as parameter)

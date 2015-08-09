@@ -16,7 +16,7 @@
 
     <div class="row">
         <!-- BEGIN Login form -->
-        <form class="col-md-4 col-md-offset-4 login-form">
+        <form name="login" method="post" action="{{ url('/login') }}" class="col-md-4 col-md-offset-4 login-form">
 
             <!-- BEGIN Logo -->
             <div class="login-logo">
@@ -26,15 +26,17 @@
 
             <!-- BEGIN Email input -->
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email" />
+                <input type="text" name="email" class="form-control" placeholder="Email" />
             </div>
             <!-- END Email input -->
 
             <!-- BEGIN Password input -->
             <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" />
+                <input type="password" name="password" class="form-control" placeholder="Password" />
             </div>
             <!-- END Password input -->
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <input type="submit" class="btn btn-primary btn-block" value="Conecteaza-te">
         </form>
