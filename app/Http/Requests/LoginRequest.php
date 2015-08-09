@@ -3,17 +3,22 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Illuminate\Contracts\Auth\Guard;
 
-class LoginRequest extends Request
-{
+/**
+ * Check if user is allowed to make requests to login page
+ *
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ */
+class LoginRequest extends Request {
+
     /**
      * Determine if the user is authorized to make this request.
-     *
+     * @param Guard $auth
      * @return bool
      */
-    public function authorize()
-    {
-        return false;
+    public function authorize(Guard $auth) {
+        return !$auth->check();
     }
 
     /**
@@ -21,10 +26,10 @@ class LoginRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            //
+            'email' => ['required', 'email'],
+            'password' => ['required']
         ];
     }
 }
