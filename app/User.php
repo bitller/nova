@@ -8,7 +8,12 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model {
+/**
+ * User model
+ *
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ */
+class User extends Model implements AuthenticatableContract {
 
     use Authenticatable, CanResetPassword;
 
