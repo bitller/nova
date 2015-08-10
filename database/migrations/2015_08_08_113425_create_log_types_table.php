@@ -8,6 +8,7 @@ use Illuminate\Database\Migrations\Migration;
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class CreateLogTypesTable extends Migration {
+
     /**
      * Run the migrations.
      *
@@ -15,7 +16,7 @@ class CreateLogTypesTable extends Migration {
      */
     public function up() {
         Schema::create('log_types', function(Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('key');
             $table->string('description');
         });
