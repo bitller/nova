@@ -74,4 +74,15 @@ class LogTypes {
         return $this->getLogTypeId($this->dangerKey);
     }
 
+    /**
+     * @return array
+     */
+    public function getLogTypes() {
+        return [
+            'info' => 'Not an error, just useful information',
+            'warning' => 'Something that can be dangerous',
+            'danger' => 'Need investigated right now'
+        ];
+    }
+
 }
