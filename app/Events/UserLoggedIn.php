@@ -8,6 +8,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
  * UserLoggedIn event
+ *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class UserLoggedIn extends Event {
