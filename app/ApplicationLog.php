@@ -4,7 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ApplicationLog extends Model
-{
+/**
+ * ApplicationLog model
+ *
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ */
+class ApplicationLog extends Model {
     //
 }
