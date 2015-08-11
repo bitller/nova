@@ -14,7 +14,10 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
-        '\App\Console\Commands\GenerateRoles'
+        '\App\Console\Commands\GenerateRoles',
+        '\App\Console\Commands\GenerateAdmin',
+        '\App\Console\Commands\GenerateAll',
+        '\App\Console\Commands\GenerateLogTypes'
     ];
 
     /**
