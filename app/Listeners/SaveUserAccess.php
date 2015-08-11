@@ -3,11 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\UserLoggedIn;
+use App\Helpers\LogTypes;
+use App\UserLog;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
  * Listen when a user logs in
+ *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class SaveUserAccess {
@@ -22,10 +25,18 @@ class SaveUserAccess {
     /**
      * Handle the event.
      *
-     * @param  UserLoggedIn  $event
-     * @return void
+     * @param  UserLoggedIn $event
+     * @internal param Guard $auth
      */
     public function handle(UserLoggedIn $event) {
-        // $event->userId
+
+        $logTypes = new LogTypes();
+
+        $userLog = new UserLog();
+        $userLog->message = 'Logged in';
+        $userLog->log_type_id = $logTypes->getInfoId();
+        $userLog->user_id = $event->userId;
+        $userLog->save();
+
     }
 }
