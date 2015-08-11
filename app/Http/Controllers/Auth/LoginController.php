@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use App\Events\Event;
+use App\Events\UserLoggedIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Contracts\Auth\Guard;
@@ -44,7 +46,8 @@ class LoginController extends Controller {
         if ($this->auth->attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
             // User logged in
             // Fire LoggedIn event
-            echo 'logged in';
+            event(new UserLoggedIn($this->auth->user()->id));
+            return redirect('/bills');
         }
 
         // Fire FailedLogIn event (with email as parameter)
