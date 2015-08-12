@@ -18,7 +18,7 @@ class FailedLogIn extends Event {
     /**
      * @var int
      */
-    protected $userId;
+    public $userId;
 
     /**
      * Create a new event instance.

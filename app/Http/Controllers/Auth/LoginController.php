@@ -1,9 +1,12 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Events\Event;
+use App\Events\FailedLogIn;
 use App\Events\UserLoggedIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Listeners\LogLoginAttempt;
+use App\User;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
@@ -43,14 +46,20 @@ class LoginController extends Controller {
 
         // Fire TriedToLogIn event (check for login attempts)
 
+        $userId = User::where('email', $email)->value('id');
+
+        // Check if credentials are ok
         if ($this->auth->attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
-            // User logged in
-            // Fire LoggedIn event
+
             event(new UserLoggedIn($this->auth->user()->id));
             return redirect('/bills');
+
         }
 
-        // Fire FailedLogIn event (with email as parameter)
+        // If email exists in database log the login attempt
+        if ($userId) {
+            event(new FailedLogIn($userId));
+        }
 
     }
 

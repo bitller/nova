@@ -3,18 +3,21 @@
 namespace App\Listeners;
 
 use App\Events\FailedLogIn;
+use App\Helpers\LogTypes;
+use App\LoginAttempt;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class LogLoginAttempt
-{
+/**
+ * Listener for login attempts
+ * @package App\Listeners
+ */
+class LogLoginAttempt {
     /**
      * Create the event listener.
      *
-     * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         //
     }
 
@@ -24,8 +27,15 @@ class LogLoginAttempt
      * @param  FailedLogIn  $event
      * @return void
      */
-    public function handle(FailedLogIn $event)
-    {
-        //
+    public function handle(FailedLogIn $event){
+
+        $logTypes = new LogTypes();
+
+        $loginAttempt = new LoginAttempt();
+        $loginAttempt->user_id = $event->userId;
+        $loginAttempt->ip = 'ip goes here';
+        $loginAttempt->client = 'client goes here';
+        $loginAttempt->save();
+
     }
 }
