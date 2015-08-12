@@ -39,14 +39,21 @@ class LoginController extends Controller {
         return view('auth.login');
     }
 
+    /**
+     * Log user in
+     *
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function login(LoginRequest $request) {
 
+        // Get inputs
         $email = $request->input('email');
         $password = $request->input('password');
 
-        // Fire TriedToLogIn event (check for login attempts)
-
         $userId = User::where('email', $email)->value('id');
+
+        // todo check for login attempts
 
         // Check if credentials are ok
         if ($this->auth->attempt(['email' => $email, 'password' => $password, 'active' => 1])) {

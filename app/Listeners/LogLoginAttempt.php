@@ -13,6 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
  * @package App\Listeners
  */
 class LogLoginAttempt {
+
     /**
      * Create the event listener.
      *
