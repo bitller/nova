@@ -24,6 +24,11 @@
             </div>
             <!-- END Logo -->
 
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger">{{ $error }}</div>
+                <?php break; ?>
+            @endforeach
+
             <!-- BEGIN Email input -->
             <div class="form-group">
                 <input type="text" name="email" class="form-control" placeholder="Email" />
