@@ -24,10 +24,22 @@
             </div>
             <!-- END Logo -->
 
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger">{{ $error }}</div>
-                <?php break; ?>
+            <?php $error = ''; ?>
+
+            @foreach ($errors->all() as $errorMessage)
+                <?php
+                    $error = $errorMessage;
+                    break;
+                ?>
             @endforeach
+
+            @if (session('error'))
+                <?php $error = session('error'); ?>
+            @endif
+
+            @if ($error)
+                <div class="alert alert-danger">{{ $error }}</div>
+            @endif
 
             <!-- BEGIN Email input -->
             <div class="form-group">

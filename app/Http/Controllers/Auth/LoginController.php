@@ -68,6 +68,8 @@ class LoginController extends Controller {
             event(new FailedLogIn($userId));
         }
 
+        return redirect('/login')->with('error', 'Email sau parola incorecta');
+
     }
 
     /**
