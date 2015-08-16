@@ -63,11 +63,25 @@ class LoginTest extends TestCase {
 
     }
 
+    /**
+     * Check if create account button on login page works
+     */
     public function testCreateAccountButton() {
 
         $this->visit('/login')
             ->click('Creaza cont')
             ->seePageIs('/register');
+
+    }
+
+    /**
+     * Check if forgot password link on login page works
+     */
+    public function testRecoverPasswordLink() {
+
+        $this->visit('/login')
+            ->click('Ai uitat parola?')
+            ->seePageIs('/recover');
 
     }
 

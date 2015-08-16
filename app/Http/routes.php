@@ -20,4 +20,6 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/register', 'Auth\RegisterController@index');
 
+Route::get('/recover', 'Auth\RecoverController@index');
+
 Route::get('/bills', 'BillsController@index');
