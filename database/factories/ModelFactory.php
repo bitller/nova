@@ -11,11 +11,37 @@
 |
 */
 
+// Generate a normal user
 $factory->define(App\User::class, function ($faker) {
+
+    $roleHelper = new \App\Helpers\Roles();
+
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->email,
         'password' => str_random(10),
         'remember_token' => str_random(10),
+        'role_id' => $roleHelper->getUserRoleId()
     ];
+});
+
+// Generate an administrator user
+$factory->defineAs(App\User::class, 'admin', function($faker) use ($factory) {
+
+    $roleHelper = new \App\Helpers\Roles();
+    $user = $factory->raw(App\User::class);
+
+    return array_merge($user, ['role_id' => $roleHelper->getAdminRoleId()]);
+
+});
+
+// Generate an moderator user
+$factory->defineAs(App\User::class, 'moderator', function($faker) use ($factory) {
+
+    $roleHelper = new \App\Helpers\Roles();
+    $user = $factory->raw(App\User::class);
+
+    return array_merge($user, ['role_id' => $roleHelper->getModeratorRoleId()]);
+
 });
