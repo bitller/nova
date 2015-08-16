@@ -20,7 +20,7 @@ $factory->define(App\User::class, function ($faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->email,
-        'password' => str_random(10),
+        'password' => '123456',
         'remember_token' => str_random(10),
         'role_id' => $roleHelper->getUserRoleId()
     ];
