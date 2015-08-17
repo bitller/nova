@@ -14,6 +14,12 @@ class LoginTest extends TestCase {
      */
     private $loginButton = 'Conecteaza-te';
 
+    private $errors = [
+        'empty_form' => 'The email field is required.',
+        'empty_email' => 'The email field is required.',
+        'empty_password' => 'The password field is required.',
+    ];
+
     /**
      * Submit login form with valid credentials
      */
@@ -36,16 +42,19 @@ class LoginTest extends TestCase {
 
         $this->visit('/login')
             ->press($this->loginButton)
-            ->see('The email field is required.');
+            ->see($this->errors['empty_form']);
 
     }
 
+    /**
+     * Submit login form with email input empty
+     */
     public function testLoginWithoutEmail() {
 
         $this->visit('/login')
             ->type(str_random(10), 'password')
             ->press($this->loginButton)
-            ->see('The email field is required.');
+            ->see($this->errors['empty_email']);
 
     }
 
@@ -59,7 +68,7 @@ class LoginTest extends TestCase {
         $this->visit('/login')
             ->type($user->email, 'email')
             ->press($this->loginButton)
-            ->see('The password field is required.');
+            ->see($this->errors['empty_password']);
 
     }
 

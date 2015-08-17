@@ -10,7 +10,7 @@
 
     <div class="row register-button">
         {{--<div class="register-button">--}}
-            <a href="/register"><button class="btn btn-danger pull-right">Creaza cont</button></a>
+            <a href="/register"><button class="btn btn-danger pull-right">{{ Lang::get('login.register_button') }}</button></a>
         {{--</div>--}}
     </div>
 
@@ -43,25 +43,25 @@
 
             <!-- BEGIN Email input -->
             <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="Email" />
+                <input type="text" name="email" class="form-control" placeholder="{{ Lang::get('login.email_placeholder') }}" />
             </div>
             <!-- END Email input -->
 
             <!-- BEGIN Password input -->
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Password" />
+                <input type="password" name="password" class="form-control" placeholder="{{ Lang::get('login.password_placeholder') }}" />
             </div>
             <!-- END Password input -->
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <input type="submit" class="btn btn-primary btn-block" value="Conecteaza-te">
+            <input type="submit" class="btn btn-primary btn-block" value="{{ Lang::get('login.login_button') }}">
         </form>
         <!-- END Login form -->
     </div>
 
     <div class="row forgot-password">
-        <a href="/recover"><p class="text-center">Ai uitat parola?</p></a>
+        <a href="/recover"><p class="text-center">{{ Lang::get('login.forgot_password') }}</p></a>
     </div>
 
 </div>

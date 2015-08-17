@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Listeners\LogLoginAttempt;
 use App\User;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Handle user login
@@ -68,7 +69,7 @@ class LoginController extends Controller {
             event(new FailedLogIn($userId));
         }
 
-        return redirect('/login')->with('error', 'Email sau parola incorecta');
+        return redirect('/login')->with('error', Lang::get('login.wrong_credentials'));
 
     }
 
