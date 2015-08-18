@@ -1,5 +1,11 @@
 $navbar-default-bg: #3498DB;
 $navbar-default-border: $navbar-default-bg;
 
-$navbar-default-brand-color: #f1f1f1;
-$navbar-default-brand-hover-color: #ffffff;
+$navbar-color-for-links: #EFEFEF;
+$navbar-color-for-hover-links: #ffffff;
+
+$navbar-default-brand-color: $navbar-color-for-links;
+$navbar-default-brand-hover-color: $navbar-color-for-hover-links;
+$navbar-default-link-color: $navbar-color-for-links;
+$navbar-default-link-hover-color: $navbar-color-for-hover-links;
+$navbar-default-link-active-color: #DCDCDC;
