@@ -1,10 +1,9 @@
 <?php
 
 return [
-    'wrong_credentials' => 'Email-ul sau parola introdusă nu este corectă.',
-    'login_button' => 'Conectează-te',
-    'register_button' => 'Creează cont',
-    'forgot_password' => 'Ai uitat parola?',
     'email_placeholder' => 'Email',
+    'forgot_password' => 'Ai uitat parola?',
     'password_placeholder' => 'Parolă',
+    'register_button' => 'Creează cont',
+    'wrong_credentials' => 'Email-ul sau parola introdusă nu este corectă.',
 ];

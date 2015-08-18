@@ -55,7 +55,7 @@
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <input type="submit" class="btn btn-primary btn-block" value="{{ Lang::get('login.login_button') }}">
+            <input type="submit" class="btn btn-primary btn-block" value="{{ Lang::get('common.login_button') }}">
         </form>
         <!-- END Login form -->
     </div>

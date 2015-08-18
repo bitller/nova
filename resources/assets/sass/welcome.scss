@@ -34,14 +34,24 @@ $text-color: #ffffff;
   padding: 15px;
 }
 
-$second-section-background-color: #F7F7F7;
+.video {
+  text-align: center;
+  padding-top: 30px;
+}
+
+$second-section-background-color: #FAFAFA;
 
 .second-section {
   background-color: $second-section-background-color;
   color: #515253;
-  padding: 20px 0 20px 0;
+  padding: 20px 0 40px 0;
 }
 
 .why-nova {
   padding-bottom: 20px;
+  color: #3498DB;
+}
+
+.gray-color {
+  color: #777777;
 }
