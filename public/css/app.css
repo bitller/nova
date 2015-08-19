@@ -5992,7 +5992,7 @@ button.close {
     display: none !important; } }
 
 .custom-button {
-  background-color: #3498DB;
+  background-color: transparent;
   border: 2px solid #ffffff;
   border-radius: 4px;
   color: #ffffff;
@@ -6031,6 +6031,24 @@ button.close {
 
 .gray-color {
   color: #777777; }
+
+/******/
+.navbar-default {
+  background-color: #3498DB;
+  border: none !important; }
+
+.navbar-nav > li > a:hover {
+  color: #1a1a1a; }
+
+.collapse.in {
+  background-color: #f2f2f2 !important; }
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus
+.spacer {
+  background-color: #888; }
+
+.spacer {
+  height: 100px; }
 
 #login-page {
   background-color: #f1f1f1; }

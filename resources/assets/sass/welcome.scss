@@ -1,7 +1,7 @@
 $border-and-text-color: #ffffff;
 
 .custom-button {
-  background-color: $navbar-default-bg;
+  background-color: rgba(0,0,0,0.0);
   border: 2px solid $border-and-text-color;
   border-radius: 4px;
   color: $border-and-text-color;
@@ -54,4 +54,25 @@ $second-section-background-color: #FAFAFA;
 
 .gray-color {
   color: #777777;
+}
+
+/******/
+.navbar-default{
+  background-color:#3498DB;
+  border:none !important;
+}
+.navbar-nav>li>a:hover{
+  color:#1a1a1a;
+}
+.collapse.in{
+
+  background-color:#f2f2f2 !important;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus
+.spacer{
+  background-color:#888;
+}
+
+.spacer{
+  height:100px;
 }

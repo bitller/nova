@@ -32,6 +32,7 @@
     </div>
 </nav>
 
+<div id="startchange">
 <div class="first-section">
     <div class="container">
         <h2 class="text-center welcome-text">{{ Lang::get('welcome.welcome') }}</h2>
@@ -89,6 +90,10 @@
     </div>
 
 </div>
+</div>
+
+<script src="/js/vendor.js"></script>
+<script src="js/welcome.js"></script>
 
 </body>
 

@@ -6,13 +6,14 @@ $(document).ready(function(){
         $(document).scroll(function() {
             scroll_start = $(this).scrollTop();
             if(scroll_start > offset.top) {
-                $(".navbar-default").css('background-color', '#f0f0f0');
-                console.log('first');
+                $(".navbar-default").css({
+                    backgroundColor: '#2184C6',
+                    transition: 'background-color 0.5s'
+                });
             } else {
-                console.log('second');
-                $('.navbar-default').css('background-color', '#ff0000');
+                $('.navbar-default').css('background-color', '#3498DB');
             }
         });
     }
 });
-//# sourceMappingURL=all.js.map
+//# sourceMappingURL=welcome.js.map
