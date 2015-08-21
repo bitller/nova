@@ -22,8 +22,14 @@ $border-and-text-color: #ffffff;
 
 $text-color: #ffffff;
 
+.first-section .welcome-text {
+  font-weight: 200;
+  font-size: 40px;
+}
+
 .first-section .welcome-text, .first-section .description-text {
   color: $text-color;
+  font-family: 'Raleway', sans-serif;
 }
 
 .start-button {
@@ -49,7 +55,7 @@ $second-section-background-color: #FAFAFA;
 
 .why-nova {
   padding-bottom: 20px;
-//  color: #3498DB;
+  font-family: 'Raleway', sans-serif;
 }
 
 .gray-color {
@@ -75,4 +81,17 @@ $second-section-background-color: #FAFAFA;
 
 .spacer{
   height:100px;
+}
+
+.third-section {
+  padding: 80px 0 80px 0;
+}
+
+.third-section .title {
+  font-family: 'Raleway', sans-serif;
+}
+
+.third-section .description {
+  font-family: 'Raleway', sans-serif;
+  line-height: 160%;
 }

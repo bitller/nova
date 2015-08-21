@@ -6008,8 +6008,13 @@ button.close {
   background-color: #3498DB;
   padding-bottom: 50px; }
 
+.first-section .welcome-text {
+  font-weight: 200;
+  font-size: 40px; }
+
 .first-section .welcome-text, .first-section .description-text {
-  color: #ffffff; }
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif; }
 
 .start-button {
   padding: 20px 0 0 0; }
@@ -6027,7 +6032,8 @@ button.close {
   padding: 20px 0 40px 0; }
 
 .why-nova {
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  font-family: 'Raleway', sans-serif; }
 
 .gray-color {
   color: #777777; }
@@ -6049,6 +6055,16 @@ button.close {
 
 .spacer {
   height: 100px; }
+
+.third-section {
+  padding: 80px 0 80px 0; }
+
+.third-section .title {
+  font-family: 'Raleway', sans-serif; }
+
+.third-section .description {
+  font-family: 'Raleway', sans-serif;
+  line-height: 160%; }
 
 #login-page {
   background-color: #f1f1f1; }
