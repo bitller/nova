@@ -62,6 +62,10 @@ return [
     'string'                => ':attribute trebuie să fie un șir.',
     'timezone'              => ':attribute trebuie să fie o zonă validă.',
     'unique'                => ':attribute este deja folosit.',
-    'url'                   => ':attribute are un format invalid.'
+    'url'                   => ':attribute are un format invalid.',
+
+    'attributes' => [
+        'password' => 'parolă'
+    ],
 
 ];

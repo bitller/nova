@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Lang;
 
 /**
  * LoginTest
@@ -6,19 +7,6 @@
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class LoginTest extends TestCase {
-
-    /**
-     * Login button text
-     *
-     * @var string
-     */
-    private $loginButton = 'Conecteaza-te';
-
-    private $errors = [
-        'empty_form' => 'The email field is required.',
-        'empty_email' => 'The email field is required.',
-        'empty_password' => 'The password field is required.',
-    ];
 
     /**
      * Submit login form with valid credentials
@@ -31,7 +19,7 @@ class LoginTest extends TestCase {
         $this->visit('/login')
             ->type($validEmail, 'email')
             ->type($validPassword, 'password')
-            ->press($this->loginButton)
+            ->press(trans('common.login_button'))
             ->seePageIs('/bills');
     }
 
@@ -41,8 +29,8 @@ class LoginTest extends TestCase {
     public function testLoginWithEmptyForm() {
 
         $this->visit('/login')
-            ->press($this->loginButton)
-            ->see($this->errors['empty_form']);
+            ->press(trans('common.login_button'))
+            ->see(trans('validation.required', ['attribute' => 'email']));
 
     }
 
@@ -53,8 +41,8 @@ class LoginTest extends TestCase {
 
         $this->visit('/login')
             ->type(str_random(10), 'password')
-            ->press($this->loginButton)
-            ->see($this->errors['empty_email']);
+            ->press(trans('common.login_button'))
+            ->see(trans('validation.required', ['attribute' => 'email']));
 
     }
 
@@ -67,8 +55,8 @@ class LoginTest extends TestCase {
 
         $this->visit('/login')
             ->type($user->email, 'email')
-            ->press($this->loginButton)
-            ->see($this->errors['empty_password']);
+            ->press(trans('common.login_button'))
+            ->see(trans('validation.required', ['attribute' => 'parolă']));
 
     }
 
@@ -78,7 +66,7 @@ class LoginTest extends TestCase {
     public function testCreateAccountButton() {
 
         $this->visit('/login')
-            ->click('Creaza cont')
+            ->click(trans('login.register_button'))
             ->seePageIs('/register');
 
     }
@@ -89,7 +77,7 @@ class LoginTest extends TestCase {
     public function testRecoverPasswordLink() {
 
         $this->visit('/login')
-            ->click('Ai uitat parola?')
+            ->click(trans('login.forgot_password'))
             ->seePageIs('/recover');
 
     }
