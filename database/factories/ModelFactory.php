@@ -20,7 +20,7 @@ $factory->define(App\User::class, function ($faker) {
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->email,
-        'password' => '123456',
+        'password' => bcrypt('123456'),
         'remember_token' => str_random(10),
         'role_id' => $roleHelper->getUserRoleId()
     ];
@@ -43,5 +43,27 @@ $factory->defineAs(App\User::class, 'moderator', function($faker) use ($factory)
     $user = $factory->raw(App\User::class);
 
     return array_merge($user, ['role_id' => $roleHelper->getModeratorRoleId()]);
+
+});
+
+// Generate a client
+$factory->define(App\Client::class, function($faker) {
+
+    return [
+        'name' => $faker->name,
+        'phone_number' => $faker->phoneNumber
+    ];
+
+});
+
+// Generate a bill
+$factory->define(App\Bill::class, function($faker) {
+
+    return [
+        'campaign_number' => rand(1, 13),
+        'campaign_year' => date('Y'),
+        'payment_term' => date('Y-m-d'),
+        'other_details' => $faker->paragraph()
+    ];
 
 });

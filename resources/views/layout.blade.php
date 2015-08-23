@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Nova</title>
+    <link rel="stylesheet" href="http://css-spinners.com/css/spinner/plus.css" type="text/css">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 
@@ -41,9 +42,9 @@
     @yield('content')
 </div>
 
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="/js/bundle.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="/js/vendor.js"></script>
+@yield('scripts')
 
 </body>
 

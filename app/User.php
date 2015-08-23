@@ -37,4 +37,18 @@ class User extends Model implements AuthenticatableContract {
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function clients() {
+        return $this->hasMany('App\Client');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bills() {
+        return $this->hasMany('App\Bill');
+    }
 }

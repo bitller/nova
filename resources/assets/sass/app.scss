@@ -7,10 +7,19 @@
 // Login page
 @import "auth/login";
 
+// Bills page
+@import "bills";
+
+@import "css/sweeet-alert";
+
 body {
   padding-top: 40px;
 }
 
 #layout {
   padding-top: 60px;
+}
+
+#plus-loader {
+  margin-top: 200px;
 }

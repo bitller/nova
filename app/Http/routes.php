@@ -22,4 +22,11 @@ Route::get('/register', 'Auth\RegisterController@index');
 
 Route::get('/recover', 'Auth\RecoverController@index');
 
-Route::get('/bills', 'BillsController@index');
+Route::group(['prefix' => 'bills'], function() {
+    Route::get('/', 'BillsController@index');
+    Route::get('/delete/{billId}', 'BillsController@delete');
+});
+
+Route::group(['prefix' => 'ajax'], function() {
+    Route::get('get-bills',  'BillsController@getBills');
+});

@@ -58,5 +58,8 @@ class GenerateAll extends Command {
         Artisan::call('generate:admin');
         $this->info('Generated an admin user with default credentials.');
 
+        Artisan::call('db:seed');
+        $this->info('Seeded tables.');
+
     }
 }
