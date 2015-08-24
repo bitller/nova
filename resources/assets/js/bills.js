@@ -1,13 +1,17 @@
 new Vue({
     el: '#bills',
 
+    data: {
+        rows: 0
+    },
+
     ready: function() {
         this.getBills('/ajax/get-bills');
     },
 
     methods: {
 
-        deleteBill: function(bill_id, current_page, loading) {
+        deleteBill: function(bill_id, current_page, rows_on_page, loading) {
 
             // Show loader
             swal({
@@ -21,7 +25,8 @@ new Vue({
             this.$http.get(url).success(function(response) {
 
                 // Build url for bills request
-                var billUrl = '/ajax/get-bills?page='+current_page;
+                var billUrl = this.buildBillUrl(rows_on_page, current_page);
+
                 this.$http.get(billUrl).success(function(data) {
                     swal({
                         title: response.title,
@@ -56,6 +61,19 @@ new Vue({
                 this.$set('bills', data);
                 this.$set('loaded', true);
             });
+        },
+
+        buildBillUrl: function(rows_on_page, current_page) {
+
+            var billUrl;
+
+            if (rows_on_page < 1) {
+                billUrl = '/ajax/get-bills?page=' + (current_page - 1);
+            } else {
+                billUrl = '/ajax/get-bills?page=' + current_page;
+            }
+
+            return billUrl;
         }
 
     }
