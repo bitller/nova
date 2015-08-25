@@ -45,6 +45,47 @@ new Vue({
 
         },
 
+        createBill: function(title, placeholder, empty_input_error, message, loading, success) {
+
+            var before = this;
+
+            // Show prompt
+            swal({
+                    title: title,
+                    type: "input",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    animation: "slide-from-top",
+                    inputPlaceholder: placeholder
+                },
+                function(inputValue) {
+                    if (inputValue === false) return false;
+
+                    if (inputValue === "") {
+                        swal.showInputError(empty_input_error);
+                        return false
+                    }
+
+                    swal({
+                        title: loading,
+                        type: "info",
+                        showConfirmButton: false
+                    });
+
+                    before.$http.post('/bills/create', {client:inputValue, _token:$('#token').attr('content')}).success(function() {
+                        this.paginate('/ajax/get-bills');
+                        swal({
+                            title: success,
+                            text: message,
+                            type: "success",
+                            timer: 1750,
+                            showConfirmButton: false
+                        });
+                    });
+            });
+
+        },
+
         paginate: function(page_url) {
             if (page_url) {
                 this.getBills(page_url);

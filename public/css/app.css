@@ -6090,6 +6090,16 @@ button.close {
 .table tbody > tr > td.vert-align {
   vertical-align: middle; }
 
+.add-bill-button {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.add-bill-button .bills-number {
+  display: inline-block; }
+
+.no-bills-info {
+  margin-top: 15px; }
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden; }

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta id="token" content="{{ csrf_token() }}">
     <title>Nova</title>
     <link rel="stylesheet" href="http://css-spinners.com/css/spinner/plus.css" type="text/css">
     <link rel="stylesheet" href="/css/app.css">
@@ -22,6 +23,10 @@
             <a class="navbar-brand" href="#">Nova</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/products">{{ trans('navbar.products') }}</a></li>
+                <li><a href="/clients">{{ trans('navbar.clients') }}</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->email }}<span class="caret"></span></a>

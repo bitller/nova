@@ -25,6 +25,7 @@ Route::get('/recover', 'Auth\RecoverController@index');
 Route::group(['prefix' => 'bills'], function() {
     Route::get('/', 'BillsController@index');
     Route::get('/delete/{billId}', 'BillsController@delete');
+    Route::post('/create', 'BillsController@create');
 });
 
 Route::group(['prefix' => 'ajax'], function() {

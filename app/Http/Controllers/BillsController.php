@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Bill;
+use App\Client;
+use App\Http\Requests\CreateBillRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -36,11 +38,37 @@ class BillsController extends Controller {
      */
     public function getBills() {
 
-        $bills = Bill::where('bills.user_id', Auth::user()->id)->join('clients', function($join) {
-            $join->on('client_id', '=', 'clients.id');
-        })->paginate(10);
+        $bills = Bill::select('bills.id', 'bills.campaign_number', 'bills.campaign_year', 'bills.payment_term', 'bills.other_details', 'clients.name as client_name')
+            ->where('bills.user_id', Auth::user()->id)
+            ->orderBy('bills.created_at', 'desc')
+            ->join('clients', function($join) {
+                $join->on('bills.client_id', '=', 'clients.id');
+            })
+            ->paginate(10);
 
         return $bills;
+    }
+
+    public function create(CreateBillRequest $request) {
+
+        // Create new client if not exists
+        $client = DB::table('clients')->where('name', $request->get('client'))->first();
+        if (!$client) {
+            $client = new Client();
+            $client->user_id = Auth::user()->id;
+            $client->name = $request->get('client');
+            $client->save();
+        }
+
+        $bill = new Bill();
+        $bill->client_id = $client->id;
+        $bill->user_id = Auth::user()->id;
+        $bill->save();
+
+        return [
+            'success' => true,
+            'message' => trans('bills.bill_created')
+        ];
     }
 
     /**
@@ -56,8 +84,7 @@ class BillsController extends Controller {
         return [
             'success' => true,
             'title' => trans('common.success'),
-            'message' => trans('bills.bill_deleted'),
-            's' => $billId
+            'message' => trans('bills.bill_deleted')
         ];
 
     }
