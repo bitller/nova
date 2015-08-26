@@ -10,7 +10,6 @@ return [
     'complete_with_client' => 'Introdu numele clientului',
     'create' => 'Creează factură',
     'created_at' => 'Creată în',
-    'delete' => 'Șterge',
     'info' => 'Util: ',
     'number_of_products' => 'Numărul de produse',
 ];

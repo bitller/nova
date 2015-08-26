@@ -6,7 +6,7 @@ new Vue({
     },
 
     ready: function() {
-        this.getBills('/ajax/get-bills');
+        this.getBills('/bills/get');
     },
 
     methods: {
@@ -21,7 +21,7 @@ new Vue({
             });
 
             // Build request url and make request
-            var url = '/bills/delete/'+bill_id;
+            var url = '/bills/'+bill_id+'/delete';
             this.$http.get(url).success(function(response) {
 
                 // Build url for bills request
@@ -73,7 +73,7 @@ new Vue({
                     });
 
                     before.$http.post('/bills/create', {client:inputValue, _token:$('#token').attr('content')}).success(function() {
-                        this.paginate('/ajax/get-bills');
+                        this.paginate('/bills/get');
                         swal({
                             title: success,
                             text: message,
@@ -86,35 +86,46 @@ new Vue({
 
         },
 
+        /**
+         * This method is called by pagination links
+         *
+         * @param page_url
+         */
         paginate: function(page_url) {
             if (page_url) {
                 this.getBills(page_url);
             }
         },
 
+        /**
+         * Make ajax request to get bills
+         *
+         * @param url
+         */
         getBills: function(url) {
 
             this.$set('loaded', false);
 
-            this.$http.get(url, function(data) {
-                //
-            }).success(function(data) {
+            this.$http.get(url).success(function(data) {
                 this.$set('bills', data);
                 this.$set('loaded', true);
             });
         },
 
+        /**
+         * Return url to paginate bills
+         *
+         * @param rows_on_page
+         * @param current_page
+         * @returns {string}
+         */
         buildBillUrl: function(rows_on_page, current_page) {
 
-            var billUrl;
-
             if (rows_on_page < 1) {
-                billUrl = '/ajax/get-bills?page=' + (current_page - 1);
-            } else {
-                billUrl = '/ajax/get-bills?page=' + current_page;
+                current_page = current_page - 1;
             }
 
-            return billUrl;
+            return '/bills/get?page=' + current_page;
         }
 
     }

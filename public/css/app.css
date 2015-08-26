@@ -6100,6 +6100,10 @@ button.close {
 .no-bills-info {
   margin-top: 15px; }
 
+.add-client-button {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden; }

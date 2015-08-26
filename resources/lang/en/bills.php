@@ -10,7 +10,6 @@ return [
     'complete_with_client' => 'To create a new bill, complete with client name',
     'create' => 'Create bill',
     'created_at' => 'Created at',
-    'delete' => 'Delete',
     'info' => 'Info: ',
     'number_of_products' => 'Number of products',
 ];

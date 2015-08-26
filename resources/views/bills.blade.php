@@ -28,7 +28,7 @@
                     <th>{{ trans('bills.campaign') }}</th>
                     <th>{{ trans('bills.number_of_products') }}</th>
                     <th>{{ trans('bills.created_at') }}</th>
-                    <th>{{ trans('bills.delete') }}</th>
+                    <th>{{ trans('common.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@
                     <td class="vert-align">@{{ bill.campaign_number }} din @{{ bill.campaign_year }}</td>
                     <td class="vert-align">18</td>
                     <td class="vert-align">@{{ bill.created_at }}</td>
-                    <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')">{{ trans('bills.delete') }}</button></td>
+                    <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')">{{ trans('common.delete') }}</button></td>
                 </tr>
                 </tbody>
             </table>

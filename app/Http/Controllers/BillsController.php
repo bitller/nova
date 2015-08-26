@@ -49,6 +49,10 @@ class BillsController extends Controller {
         return $bills;
     }
 
+    /**
+     * @param CreateBillRequest $request
+     * @return array
+     */
     public function create(CreateBillRequest $request) {
 
         // Create new client if not exists

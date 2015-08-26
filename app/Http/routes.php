@@ -24,10 +24,15 @@ Route::get('/recover', 'Auth\RecoverController@index');
 
 Route::group(['prefix' => 'bills'], function() {
     Route::get('/', 'BillsController@index');
-    Route::get('/delete/{billId}', 'BillsController@delete');
+    Route::get('/get', 'BillsController@getBills');
+    Route::get('/{billId}/delete', 'BillsController@delete');
     Route::post('/create', 'BillsController@create');
 });
 
-Route::group(['prefix' => 'ajax'], function() {
-    Route::get('get-bills',  'BillsController@getBills');
+Route::group(['prefix' => 'clients'], function() {
+    Route::get('/', 'ClientsController@index');
+    Route::get('/get', 'ClientsController@getClients');
+    Route::post('/create', 'ClientsController@create');
+    Route::get('/{clientId}', 'ClientsController@client');
+    Route::get('/{clientId}/delete', 'ClientsController@delete');
 });
