@@ -104,6 +104,7 @@ new Vue({
                         text: clientsSelector.attr('phone-is-optional'),
                         type: "input",
                         closeOnConfirm: false,
+                        confirmButtonText: clientsSelector.attr('continue'),
                         inputPlaceholder: clientsSelector.attr('client-phone-number')
                     }, function(phoneInput) {
 

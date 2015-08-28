@@ -11,5 +11,6 @@ return [
     'create' => 'Creează factură',
     'created_at' => 'Creată în',
     'info' => 'Util: ',
+    'my_bills' => 'Facturile mele',
     'number_of_products' => 'Numărul de produse',
 ];

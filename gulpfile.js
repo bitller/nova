@@ -16,5 +16,6 @@ elixir(function(mix) {
     mix.scripts(['jquery.min.js', 'bootstrap.min.js', 'vue/vue.js', 'vue/vue-resource.js', 'components/loader.js', 'sweetAlert.js'], 'public/js/vendor.js')
         .scripts(['script.js'], 'public/js/welcome.js')
         .scripts(['bills.js'], 'public/js/bills.js')
-        .scripts(['clients.js'], 'public/js/clients.js');
+        .scripts(['clients.js'], 'public/js/clients.js')
+        .scripts(['client.js'], 'public/js/client.js');
 });

@@ -6104,6 +6104,12 @@ button.close {
   margin-top: 20px;
   margin-bottom: 20px; }
 
+.edit-client-details {
+  margin-top: 20px; }
+
+.client-bills {
+  margin-top: 15px; }
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden; }
@@ -7037,5 +7043,14 @@ body {
 
 #plus-loader {
   margin-top: 200px; }
+
+.divider {
+  height: 1px;
+  width: 100%;
+  display: block;
+  /* for use on default inline elements like span */
+  margin: 35px 0 35px 0;
+  overflow: hidden;
+  background-color: #D6D6D6; }
 
 /*# sourceMappingURL=app.css.map */

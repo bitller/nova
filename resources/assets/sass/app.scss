@@ -12,6 +12,7 @@
 
 // Clients page
 @import "clients";
+@import "client";
 
 @import "css/sweeet-alert";
 
@@ -27,6 +28,11 @@ body {
   margin-top: 200px;
 }
 
-.glyphicon {
-//  font-size: 50px;
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 35px 0 35px 0;
+  overflow: hidden;
+  background-color: #D6D6D6;
 }

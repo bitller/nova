@@ -11,5 +11,6 @@ return [
     'create' => 'Create bill',
     'created_at' => 'Created at',
     'info' => 'Info: ',
+    'my_bills' => 'My bills',
     'number_of_products' => 'Number of products',
 ];

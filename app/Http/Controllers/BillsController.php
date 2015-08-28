@@ -93,4 +93,8 @@ class BillsController extends Controller {
 
     }
 
+    public function bill($billId) {
+
+    }
+
 }

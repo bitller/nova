@@ -34,5 +34,8 @@ Route::group(['prefix' => 'clients'], function() {
     Route::get('/get', 'ClientsController@getClients');
     Route::post('/create', 'ClientsController@create');
     Route::get('/{clientId}', 'ClientsController@client');
+    Route::get('/{clientId}/get', 'ClientsController@getClient');
     Route::get('/{clientId}/delete', 'ClientsController@delete');
+    Route::post('/{clientId}/edit-name', 'ClientsController@editName');
+    Route::post('/{clientId}/edit-phone', 'ClientsController@editPhone');
 });
