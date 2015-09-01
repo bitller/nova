@@ -22,3 +22,24 @@ $btn-default-border: $btn-default-bg;
 $btn-primary-border: $brand-primary;
 
 $btn-danger-border: $brand-danger;
+
+// Pagination
+$pagination-bg: $brand-primary;
+$pagination-border: $brand-primary;
+
+$pagination-hover-color: #ffffff;
+$pagination-hover-bg: darken($brand-primary, 8%);
+
+$pager-bg:                             $pagination-bg !default;
+$pager-border:                         $pagination-border !default;
+$pager-border-radius:                  15px !default;
+$pager-color: #ffffff;
+$pager-border-radius: 5px;
+
+$pager-hover-bg:                       $pagination-hover-bg !default;
+
+$pager-active-bg:                      $brand-primary !default;
+$pager-active-color:                   #ffffff !default;
+
+$pager-disabled-color:                 #ffffff !default;
+$pager-disabled-bg: lighten($brand-primary, 9%);
