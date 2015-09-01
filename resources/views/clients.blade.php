@@ -17,7 +17,7 @@
 
             <div class="add-client-button">
                 <span class="my-clients-title">{{ trans('clients.my_clients') }} (@{{ clients.total }})</span>
-                <button type="button" class="btn btn-default pull-right" v-on="click: createClient()">
+                <button type="button" class="btn btn-primary pull-right" v-on="click: createClient()">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('clients.add') }}
                 </button>
             </div>
