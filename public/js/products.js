@@ -253,4 +253,8 @@ new Vue({
     }
 
 });
+
+$(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
+});
 //# sourceMappingURL=products.js.map

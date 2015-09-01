@@ -7,7 +7,8 @@
             <!-- BEGIN Add product button -->
             <div class="add-product-button">
                 <span class="avon-products">{{ trans('products.avon_products') }} (@{{ products.total }})</span>
-                <a href="/my-products"><button type="button" class="btn btn-default pull-right" v-on="click: addClient()">
+                <button class="btn btn-default" data-toggle="popover" data-trigger="focus" data-content="{{ trans('products.page_help') }}">{{ trans('products.page_details') }}</button>
+                <a href="/my-products"><button type="button" class="btn btn-primary pull-right" v-on="click: addClient()">
                     <span class="glyphicon glyphicon-link"></span> {{ trans('products.my_products') }}
                 </button></a>
             </div>
@@ -25,8 +26,6 @@
                 <tr v-repeat="product in products.data">
                     <td class="vert-align">@{{ product.code }}</td>
                     <td class="vert-align">@{{ product.name }}</td>
-                    {{--<td class="vert-align"><button class="btn btn-warning" v-attr="disabled:product.default" v-on="click: editProduct(product.id, product.name, products.current_page, products.to-products.from)"><span class="glyphicon glyphicon-pencil"></span> {{ trans('common.edit') }}</button></td>--}}
-                    {{--<td class="vert-align"><button class="btn btn-danger" v-attr="disabled:product.default" v-on="click: editProduct(product.id, product.name, products.current_page, products.to-products.from)"><span class="glyphicon glyphicon-pencil"></span> {{ trans('common.delete') }}</button></td>--}}
                 </tr>
                 </tbody>
             </table>
