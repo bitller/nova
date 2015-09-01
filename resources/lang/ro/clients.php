@@ -17,6 +17,7 @@ return [
     'client_since' => 'Client din',
     'client_statistics' => 'Stitasticile clientului',
     'insert_client_name' => 'Introduceți numele si prenumele clientului',
+    'my_clients' => 'Clienții mei',
     'name' => 'Nume',
     'number_of_orders' => 'Comenzi efectuate',
     'phone_number' => 'Numărul de telefon',

@@ -25,6 +25,8 @@ Route::get('/recover', 'Auth\RecoverController@index');
 Route::group(['prefix' => 'bills'], function() {
     Route::get('/', 'BillsController@index');
     Route::get('/get', 'BillsController@getBills');
+    Route::get('/{billId}', 'BillsController@bill');
+    Route::get('/{billId}/get', 'BillsController@getBill');
     Route::get('/{billId}/delete', 'BillsController@delete');
     Route::post('/create', 'BillsController@create');
 });
@@ -38,4 +40,11 @@ Route::group(['prefix' => 'clients'], function() {
     Route::get('/{clientId}/delete', 'ClientsController@delete');
     Route::post('/{clientId}/edit-name', 'ClientsController@editName');
     Route::post('/{clientId}/edit-phone', 'ClientsController@editPhone');
+});
+
+Route::group(['prefix' => 'products'], function() {
+    Route::get('/', 'ProductsController@index');
+    Route::get('/get', 'ProductsController@getProducts');
+    Route::get('/create', 'ProductsController@create');
+    Route::post('/{productId}/edit-name', 'ProductsController@editName');
 });

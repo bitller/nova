@@ -17,6 +17,7 @@ return [
     'client_since' => 'Client since',
     'client_statistics' => 'Client statistics',
     'insert_client_name' => 'Insert client name',
+    'my_clients' => 'My clients',
     'name' => 'Name',
     'number_of_orders' => 'Number of orders',
     'phone_number' => 'Phone number',

@@ -94,7 +94,11 @@ class BillsController extends Controller {
     }
 
     public function bill($billId) {
+        return view('bill')->with('billId', $billId);
+    }
 
+    public function getBill($billId) {
+        //
     }
 
 }

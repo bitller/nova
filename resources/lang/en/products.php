@@ -1,0 +1,12 @@
+<?php
+
+return [
+    'add' => 'Add product',
+    'avon_products' => 'Products from catalogue',
+    'code' => 'Product code',
+    'edit_name' => 'Edit name',
+    'my_products' => 'My products',
+    'name' => 'Product name',
+    'product_name_edit' => 'Product name edited!',
+    'products_list' => 'Products list',
+];

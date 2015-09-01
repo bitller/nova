@@ -67,3 +67,20 @@ $factory->define(App\Bill::class, function($faker) {
     ];
 
 });
+
+// Generate product
+$factory->define(App\Product::class, function($faker) {
+
+    return [
+        'name' => $faker->name,
+        'code' => $faker->randomNumber(5)
+    ];
+
+});
+
+// Generate application product
+$factory->define(App\ApplicationProduct::class, function() use ($factory) {
+
+    return $factory->raw(App\Product::class);
+
+});

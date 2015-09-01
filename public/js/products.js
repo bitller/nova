@@ -141,106 +141,116 @@ var Nova = {
 };
 new Vue({
 
-    el: "#client",
+    el: '#products',
 
     /**
-     * Called when page is loaded
+     * Called when page is ready
      */
     ready: function() {
-        this.getPageData();
+        this.getProducts('/products/get');
     },
 
     methods: {
 
         /**
-         * Make ajax request to load initial page data
+         * Get products data
+         *
+         * @param url
          */
-        getPageData: function() {
+        getProducts: function(url) {
 
-            Nova.showLoader(Nova.getClientTranslation('loading'));
+            Nova.showLoader(Nova.getProductTranslation('loading'));
 
-            var url = '/clients/' + Nova.getClientTranslation('client-id') + '/get';
-
-            // Make request to get page data
             this.$http.get(url, function(response) {
-
-                // Update models
-                this.$set('name', response.data.name);
-                this.$set('phone', response.data.phone_number);
-                this.$set('oldName', this.$get('name'));
-                this.$set('oldPhone', this.$get('phone'));
-
-                this.$set('client', response.data);
-
-                // Hide loader
+                this.$set('products', response);
                 this.$set('loaded', true);
-                swal.close();
+                Nova.hideLoader();
             });
         },
 
         /**
-         * Allow user to edit clients name
+         * Get products data if an url was given
+         *
+         * @param url
          */
-        saveName: function() {
+        paginate: function(url) {
+            if (url) {
+                this.getProducts(url);
+            }
+        },
 
-            Nova.showLoader(Nova.getClientTranslation('loading'));
-
-            // Build url and data to post
-            var url = '/clients/' + Nova.getClientTranslation('client-id') + '/edit-name';
-            var data = {
-                name: this.$get('name'),
-                _token: Nova.getToken()
-            };
+        editProduct: function(product_id, product_name, current_page, rows_on_page) {
 
             var thisInstance = this;
 
-            // Make request
-            this.$http.post(url, data).success(function(response) {
+            // Show product name prompt
+            swal({
+                title: Nova.getProductTranslation('edit-product-name'),
+                type: 'input',
+                inputValue: product_name,
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                confirmButtonText: Nova.getProductTranslation('edit-product-name'),
+                cancelButtonText: Nova.getProductTranslation('cancel')
 
-                Nova.showSuccessAlert(response.title, response.message);
+            }, function(inputValue) {
 
-            }).error(function(response) {
+                if (inputValue === false) {
+                    return false;
+                }
 
-                Nova.showErrorAlert(response.title, response.message);
+                if (inputValue === "") {
+                    swal.showInputError('');
+                    return false;
+                }
 
-                // Typed name is not valid so display the old one
-                thisInstance.$set('name', thisInstance.$get('oldName'));
+                // Show loader
+                Nova.showLoader(Nova.getProductTranslation('loading'));
+
+                // Build data
+                var url = Nova.buildEditProductNameRequestUrl(product_id, rows_on_page, current_page);
+                var data = {
+                    name: inputValue,
+                    _token: Nova.getToken()
+                };
+
+                // Make request
+                thisInstance.$http.post(url, data, function(response) {
+
+                    var getProductsUrl = Nova.buildProductsRequestUrl(rows_on_page, current_page);
+                    thisInstance.paginate(getProductsUrl);
+
+                    Nova.showSuccessAlert(response.title, response.message);
+                }).error(function(response) {
+                    Nova.showErrorAlert(response.title, response.message);
+                });
 
             });
 
         },
 
-        /**
-         * Allow user to edit clients phone number
-         */
-        savePhone: function() {
+        addProduct: function() {
 
-            Nova.showLoader(Nova.getClientTranslation('loading'));
-
-            // Build url and data object to post
-            var url = '/clients/' + Nova.getClientTranslation('client-id') + '/edit-phone';
-            var data = {
-                phone: this.$get('phone'),
-                _token: Nova.getToken()
-            };
-
-            var thisInstance = this;
-
-            // Make request
-            this.$http.post(url, data, function(response) {
-
-                Nova.showSuccessAlert(response.title, response.message);
-
-            }).error(function(response) {
-
-                Nova.showErrorAlert(response.title, response.message);
-
-                // Typed phone is not valid so display the old one
-                thisInstance.$set('phone', thisInstance.$get('oldPhone'));
-
+            // Show product code modal
+            swal({
+                title: Nova.getProductTranslation('add-product-title'),
+                type: 'input',
+                inputPlaceholder: Nova.getProductTranslation('product-name'),
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: 'slide-from-top',
+                confirmButtonText: '',
+                cancelButtonText: ''
             });
+
+            // Ask for product code
+
+            // Do request and show errors or success message if all is ok
 
         }
+
     }
+
 });
-//# sourceMappingURL=client.js.map
+//# sourceMappingURL=products.js.map

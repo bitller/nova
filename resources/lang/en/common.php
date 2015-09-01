@@ -7,6 +7,7 @@ return [
     'continue' => 'Continue',
     'delete' => 'Delete',
     'delete_error' => 'An error occurred. Please try again later.',
+    'edit' => 'Edit',
     'fail' => 'Error!',
     'loading' => 'Loading...',
     'login_button' => 'Log In',

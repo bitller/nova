@@ -14,7 +14,7 @@
 
             <!-- BEGIN Add bill button -->
             <div class="add-bill-button">
-                <span style="font-size: 20px;">{{ trans('bills.my_bills') }} (@{{ bills.total }})</span>
+                <span class="my-bills-title">{{ trans('bills.my_bills') }} (@{{ bills.total }})</span>
                 <button type="button" class="btn btn-danger pull-right" v-on="click: createBill('{{ trans('bills.create') }}', '{{ trans('bills.client_name') }}', '{{ trans('bills.client_name_required') }}', '{{ trans('bills.bill_created') }}', '{{ trans('common.loading') }}', '{{ trans('common.success') }}')">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('bills.create') }}
                 </button>

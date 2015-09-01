@@ -16,7 +16,8 @@
         <div v-show="loaded">
 
             <div class="add-client-button">
-                <button type="button" class="btn btn-default" v-on="click: createClient()">
+                <span class="my-clients-title">{{ trans('clients.my_clients') }} (@{{ clients.total }})</span>
+                <button type="button" class="btn btn-default pull-right" v-on="click: createClient()">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('clients.add') }}
                 </button>
             </div>
@@ -38,7 +39,7 @@
                         <td class="vert-align">@{{ client.phone_number }}</td>
                         <td class="vert-align">4</td>
                         <td class="vert-align">@{{ client.created_at }}</td>
-                        <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)">{{ trans('common.delete') }}</button></td>
+                        <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                     </tr>
                 </tbody>
             </table>

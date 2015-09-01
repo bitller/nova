@@ -26,6 +26,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/products">{{ trans('navbar.products') }}</a></li>
                 <li><a href="/clients">{{ trans('navbar.clients') }}</a></li>
+                <li><a href="/my-products">{{ trans('navbar.my_products') }}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

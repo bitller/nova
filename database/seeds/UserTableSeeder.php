@@ -18,14 +18,27 @@ class UserTableSeeder extends Seeder {
     public function run() {
 
         // Generate users
-        factory(App\User::class, 2)->create()->each(function($u) {
+        factory(App\User::class, 2)->create()->each(function($user) {
 
-            $rows = 30;
-            $faker = Faker::create();
+            // Bills per user
+            $rows = 12;
+
+            // Products per bill
+            $productsPerBill = 5;
 
             for ($i = 0; $i < $rows; $i++) {
-                $client = $u->clients()->save(factory(App\Client::class)->make());
-                $u->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+                // Generate client
+                $client = $user->clients()->save(factory(App\Client::class)->make());
+
+                // Generate bill for that client
+                $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+                // Generate products
+                for ($j = 0; $j < $productsPerBill; $j++) {
+                    $user->products()->save(factory(App\Product::class)->make());
+                }
+
             }
 
         });
