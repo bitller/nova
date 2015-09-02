@@ -48,3 +48,7 @@ Route::group(['prefix' => 'products'], function() {
     Route::get('/create', 'ProductsController@create');
     Route::post('/{productId}/edit-name', 'ProductsController@editName');
 });
+
+Route::group(['prefix' => 'my-products'], function() {
+    Route::get('/', 'MyProductsController@index');
+});
