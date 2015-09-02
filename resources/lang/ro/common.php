@@ -13,6 +13,7 @@ return [
     'login_button' => 'Conectează-te',
     'next' => 'Înainte',
     'ok' => 'Ok',
+    'page_details' => 'Detalii',
     'previous' => 'Înapoi',
     'success' => 'Succes!',
     'unauthorized' => 'Accessul nu este permis.'

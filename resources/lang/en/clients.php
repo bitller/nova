@@ -20,6 +20,7 @@ return [
     'my_clients' => 'My clients',
     'name' => 'Name',
     'number_of_orders' => 'Number of orders',
+    'page_help' => 'Here you find all your clients and useful details about them. Also you can add new clients or delete old ones.',
     'phone_number' => 'Phone number',
     'phone_number_optional' => 'Now insert the client phone number. This field is optional.',
     'purchased_products' => 'Purchased products',

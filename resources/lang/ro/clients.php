@@ -20,6 +20,7 @@ return [
     'my_clients' => 'Clienții mei',
     'name' => 'Nume',
     'number_of_orders' => 'Comenzi efectuate',
+    'page_help' => 'Aici găsiți toți clienții dumneavoastră și detalii despre aceștia. Puteți adăuga clienți noi sau să îi stergei pe cei existenți. ',
     'phone_number' => 'Numărul de telefon',
     'phone_number_optional' => 'Acum introcudeți numarul de telefon al clientului. Acest câmp este opțional.',
     'purchased_products' => 'Produse cumpărate',

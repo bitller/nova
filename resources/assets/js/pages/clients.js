@@ -229,3 +229,7 @@ new Vue({
         }
     }
 });
+
+$(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
+});

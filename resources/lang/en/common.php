@@ -13,6 +13,7 @@ return [
     'login_button' => 'Log In',
     'next' => 'Next',
     'ok' => 'Ok',
+    'page_details' => 'Details',
     'previous' => 'Previous',
     'success' => 'Success!',
     'unauthorized' => 'Unauthorized',
