@@ -1,5 +1,5 @@
 $brand-primary: #3498DB;
-$brand-danger: #DD6B55;
+$brand-warning: #F0AD4E;
 
 // Navbar
 $navbar-default-bg: #3498DB;
@@ -20,6 +20,8 @@ $btn-default-bg: #C1C1C1;
 $btn-default-border: $btn-default-bg;
 
 $btn-primary-border: $brand-primary;
+
+$btn-warning-border: $brand-warning;
 
 $btn-danger-border: $brand-danger;
 

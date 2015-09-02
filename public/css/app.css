@@ -3058,23 +3058,23 @@ fieldset[disabled] a.btn {
 
 .btn-warning {
   color: #fff;
-  background-color: #f0ad4e;
-  border-color: #eea236; }
+  background-color: #F0AD4E;
+  border-color: #F0AD4E; }
   .btn-warning:focus,
   .btn-warning.focus {
     color: #fff;
     background-color: #ec971f;
-    border-color: #985f0d; }
+    border-color: #b06d0f; }
   .btn-warning:hover {
     color: #fff;
     background-color: #ec971f;
-    border-color: #d58512; }
+    border-color: #eb9316; }
   .btn-warning:active,
   .btn-warning.active,
   .open > .btn-warning.dropdown-toggle {
     color: #fff;
     background-color: #ec971f;
-    border-color: #d58512; }
+    border-color: #eb9316; }
     .btn-warning:active:hover,
     .btn-warning:active:focus,
     .btn-warning:active.focus,
@@ -3086,7 +3086,7 @@ fieldset[disabled] a.btn {
     .open > .btn-warning.dropdown-toggle.focus {
       color: #fff;
       background-color: #d58512;
-      border-color: #985f0d; }
+      border-color: #b06d0f; }
   .btn-warning:active,
   .btn-warning.active,
   .open > .btn-warning.dropdown-toggle {
@@ -3109,10 +3109,10 @@ fieldset[disabled] a.btn {
   fieldset[disabled] .btn-warning.focus,
   fieldset[disabled] .btn-warning:active,
   fieldset[disabled] .btn-warning.active {
-    background-color: #f0ad4e;
-    border-color: #eea236; }
+    background-color: #F0AD4E;
+    border-color: #F0AD4E; }
   .btn-warning .badge {
-    color: #f0ad4e;
+    color: #F0AD4E;
     background-color: #fff; }
 
 .btn-danger {
@@ -4420,7 +4420,7 @@ a.label:focus {
     background-color: #31b0d5; }
 
 .label-warning {
-  background-color: #f0ad4e; }
+  background-color: #F0AD4E; }
   .label-warning[href]:hover,
   .label-warning[href]:focus {
     background-color: #ec971f; }
@@ -4641,7 +4641,7 @@ a.thumbnail.active {
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
 .progress-bar-warning {
-  background-color: #f0ad4e; }
+  background-color: #F0AD4E; }
   .progress-striped .progress-bar-warning {
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
