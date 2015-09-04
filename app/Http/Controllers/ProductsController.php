@@ -48,7 +48,7 @@ class ProductsController extends Controller {
         $page--;
 
         $applicationProducts = DB::table('application_products')->select('id', 'code', 'name', 'default');
-        $data = DB::table('products')->select('id', 'code', 'name', 'default')->where('user_id', Auth::user()->id)->union($applicationProducts)->orderBy('code', 'asc')->get();
+        $data = DB::table('products')->select('id', 'code', 'name', 'default')->where('user_id', Auth::user()->id)->orderBy('code', 'asc')->get();
 
         $perPage = 10;
 

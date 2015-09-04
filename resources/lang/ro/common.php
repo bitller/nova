@@ -15,6 +15,8 @@ return [
     'ok' => 'Ok',
     'page_details' => 'Detalii',
     'previous' => 'Înapoi',
+    'product_code' => 'Codul produsului',
+    'product_name' => 'Numele produsului',
     'success' => 'Succes!',
     'unauthorized' => 'Accessul nu este permis.'
 ];

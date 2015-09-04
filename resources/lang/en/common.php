@@ -15,6 +15,8 @@ return [
     'ok' => 'Ok',
     'page_details' => 'Details',
     'previous' => 'Previous',
+    'product_code' => 'Product code',
+    'product_name' => 'Product name',
     'success' => 'Success!',
     'unauthorized' => 'Unauthorized',
 ];

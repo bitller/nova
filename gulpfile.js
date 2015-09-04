@@ -18,5 +18,6 @@ elixir(function(mix) {
         .scripts(['pages/bills.js'], 'public/js/bills.js')
         .scripts(['pages/clients.js'], 'public/js/clients.js')
         .scripts(['pages/base.js', 'pages/client.js'], 'public/js/client.js')
-        .scripts(['pages/base.js', 'pages/products.js'], 'public/js/products.js');
+        .scripts(['pages/base.js', 'pages/products.js'], 'public/js/products.js')
+        .scripts(['pages/base.js', 'pages/my-products.js'], 'public/js/my-products.js');
 });

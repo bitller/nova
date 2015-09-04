@@ -58,6 +58,16 @@ var Nova = {
     },
 
     /**
+     * Get common translation that match given attribute
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    getCommonTranslation: function(attribute) {
+        return this.getTranslation('#common-trans', attribute);
+    },
+
+    /**
      * Get client page translation that match given attribute
      *
      * @param attribute
@@ -75,6 +85,16 @@ var Nova = {
      */
     getProductTranslation: function(attribute) {
         return this.getTranslation('#product-trans', attribute);
+    },
+
+    /**
+     * Get my products page translation that match given attribute
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    getMyProductTranslation: function(attribute) {
+        return this.getTranslation('#my-products-trans', attribute);
     },
 
     /**

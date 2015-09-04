@@ -18,8 +18,8 @@
             <table class="table table-bordered" v-show="products.total">
                 <thead>
                 <tr>
-                    <th>{{ trans('products.code') }}</th>
-                    <th>{{ trans('products.name') }}</th>
+                    <th>{{ trans('common.product_code') }}</th>
+                    <th>{{ trans('common.product_name') }}</th>
                 </tr>
                 </thead>
                 <tbody>

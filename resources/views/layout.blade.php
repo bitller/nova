@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta id="token" content="{{ csrf_token() }}">
     <title>Nova</title>
-    <link rel="stylesheet" href="http://css-spinners.com/css/spinner/plus.css" type="text/css">
+    {{--<link rel="stylesheet" href="http://css-spinners.com/css/spinner/plus.css" type="text/css">--}}
     <link rel="stylesheet" href="/css/app.css">
 </head>
 

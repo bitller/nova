@@ -18,7 +18,7 @@ new Vue({
          */
         getProducts: function(url) {
 
-            Nova.showLoader(Nova.getProductTranslation('loading'));
+            Nova.showLoader(Nova.getCommonTranslation('loading'));
 
             this.$http.get(url, function(response) {
                 this.$set('products', response);
