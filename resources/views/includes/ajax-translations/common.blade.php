@@ -1,3 +1,6 @@
 <div id="common-trans"
-        loading="{{ trans('common.loading') }}">
+        fail="{{ trans('common.fail') }}"
+        general-error="{{ trans('common.general_error') }}"
+        loading="{{ trans('common.loading') }}"
+        >
 </div>

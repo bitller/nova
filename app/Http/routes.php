@@ -52,4 +52,5 @@ Route::group(['prefix' => 'products'], function() {
 Route::group(['prefix' => 'my-products'], function() {
     Route::get('/', 'MyProductsController@index');
     Route::get('/get', 'MyProductsController@getProducts');
+    Route::get('/{productId}/delete', 'MyProductsController@deleteProduct');
 });

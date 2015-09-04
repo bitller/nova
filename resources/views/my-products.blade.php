@@ -16,7 +16,7 @@
             <!-- END Add product button -->
 
             <!-- BEGIN Products table-->
-            <table class="table table-hover" v-show="myProducts.total">
+            <table class="table table-bordered" v-show="myProducts.total">
                 <thead>
                 <tr>
                     <th>{{ trans('common.product_code') }}</th>
@@ -28,7 +28,7 @@
                 <tr v-repeat="product in myProducts.data">
                     <td class="vert-align">@{{ product.code }}</td>
                     <td class="vert-align">@{{ product.name }}</td>
-                    <td class="vert-align"><button class="btn btn-danger">{{ trans('common.delete') }}</button></td>
+                    <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteMyProduct(product.id, myProducts.current_page, myProducts.to-myProducts.from)">{{ trans('common.delete') }}</button></td>
                 </tr>
                 </tbody>
             </table>
