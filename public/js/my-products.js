@@ -31,6 +31,13 @@ var Nova = {
     },
 
     /**
+     * Show general error alert
+     */
+    showGeneralErrorAlert: function() {
+        this.showErrorAlert(this.getCommonTranslation('fail'), this.getCommonTranslation('general-error'));
+    },
+
+    /**
      * Show error alert
      *
      * @param title
@@ -197,6 +204,69 @@ new Vue({
             }
         },
 
+        addProduct: function(current_page, rows_on_page) {
+
+            var thisInstance = this;
+
+            // Show product code prompt
+            swal(this.getAddProductSwalConfig(), function(code) {
+
+                if (!thisInstance.isProductCodeValid(code)) {
+                    return false;
+                }
+
+                // Check if code is already used
+                thisInstance.$http.get('/my-products/check/' + code).success(function(response) {
+
+                    if (!response.success) {
+                        swal.showInputError(response.message);
+                        return false;
+                    }
+
+                    // Get product name
+                    swal(this.getAddProductNameSwalConfig(), function(name) {
+
+                        if (!thisInstance.isProductNameValid(name)) {
+                            return false;
+                        }
+
+                        // Build data object and make request
+                        var data = {
+                            code: code,
+                            name: name,
+                            _token: Nova.getToken()
+                        };
+
+                        thisInstance.$http.post('/my-products/add', data, function(response) {
+
+                            var paginationUrl = Nova.buildPaginationRequestUrl('/my-products/get', rows_on_page, current_page);
+                            this.paginate(paginationUrl);
+                            Nova.showSuccessAlert(response.title, response.message);
+
+                        }).error(function(response) {
+                            if (!response.message) {
+                                Nova.showGeneralErrorAlert();
+                                return false;
+                            }
+                            Nova.showErrorAlert(response.title, response.message);
+                        });
+
+                    });
+
+                }).error(function(response) {
+
+                    // Handle situations with an error response
+                    if (!response.message) {
+                        Nova.showGeneralErrorAlert();
+                        return false;
+                    }
+
+                    Nova.showErrorAlert(response.title, response.message);
+                });
+            });
+
+        },
+
         /**
          * Delete user product
          *
@@ -248,6 +318,75 @@ new Vue({
                 });
 
             });
+
+        },
+
+        /**
+         * Return swal configuration object for add product popup
+         *
+         * @returns {{title: (*|jQuery), text: (*|jQuery), type: string, showCancelButton: boolean, closeOnConfirm: boolean, showLoaderOnConfirm: boolean, inputPlaceholder: (*|jQuery)}}
+         */
+        getAddProductSwalConfig: function() {
+            return {
+                title: Nova.getMyProductTranslation('add-product'),
+                text: Nova.getMyProductTranslation('add-product-description'),
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                inputPlaceholder: Nova.getMyProductTranslation('code')
+            };
+        },
+
+        /**
+         * Return swal configuration object for add product popup
+         *
+         * @returns {{title: (*|jQuery), text: (*|jQuery), type: string, showCancelButton: boolean, closeOnConfirm: boolean, showLoaderOnConfirm: boolean, inputPlaceholder: (*|jQuery)}}
+         */
+        getAddProductNameSwalConfig: function() {
+            return {
+                title: Nova.getMyProductTranslation('add-product'),
+                text: Nova.getMyProductTranslation('add-product-description'),
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+                inputPlaceholder: Nova.getMyProductTranslation('name')
+            }
+        },
+
+        /**
+         * Check if given product code is valid
+         *
+         * @param code
+         * @returns {boolean}
+         */
+        isProductCodeValid: function(code) {
+
+            if (code === false) {
+                return false;
+            }
+
+            if (code === "") {
+                swal.showInputError(Nova.getMyProductTranslation('product-code-required'));
+                return false;
+            }
+
+            return true;
+        },
+
+        isProductNameValid: function(name) {
+
+            if (name === false) {
+                return false;
+            }
+
+            if (name === "") {
+                swal.showInputError(Nova.getMyProductTranslation('product-name-required'));
+                return false;
+            }
+
+            return true;
 
         }
 

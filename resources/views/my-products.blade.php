@@ -9,7 +9,7 @@
             <div class="add-product-button">
                 <span class="avon-products">{{ trans('my_products.my_products') }} (@{{ myProducts.total }})</span>
                 <button class="btn btn-default" data-toggle="popover" data-trigger="focus" data-content="{{ trans('my_products.page_help') }}">{{ trans('common.page_details') }}</button>
-                <button type="button" class="btn btn-primary pull-right" v-on="click: addClient()">
+                <button type="button" class="btn btn-primary pull-right" v-on="click: addProduct(myProducts.current_page, myProducts.to-myProducts.from)">
                         <span class="glyphicon glyphicon-plus"></span> {{ trans('my_products.add_product') }}
                 </button>
             </div>

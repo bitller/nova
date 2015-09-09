@@ -31,6 +31,13 @@ var Nova = {
     },
 
     /**
+     * Show general error alert
+     */
+    showGeneralErrorAlert: function() {
+        this.showErrorAlert(this.getCommonTranslation('fail'), this.getCommonTranslation('general-error'));
+    },
+
+    /**
      * Show error alert
      *
      * @param title

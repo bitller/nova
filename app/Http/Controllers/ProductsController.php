@@ -59,10 +59,11 @@ class ProductsController extends Controller {
 
     }
 
-    public function addProduct() {
-        //
-    }
-
+    /**
+     * @param int $productId
+     * @param EditProductNameRequest $request
+     * @return mixed
+     */
     public function editName($productId, EditProductNameRequest $request) {
 
         $name = $request->get('name');
