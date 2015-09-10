@@ -1,105 +1,214 @@
 <?php
 
+use App\Bill;
+
 /**
- * BillsTest
+ * Test bills page
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class BillsTest extends TestCase {
 
+    /**
+     * Access bills page as a visitor
+     */
     public function testBillsPageAsVisitor() {
-        //
+        $this->visit('/bills')
+            ->seePageIs('/login');
     }
 
-////    use WithoutMiddleware;
-//
-//    /**
-//     * Access bills page as a not logged in user
-//     */
-//    public function testBillsPageAsVisitor() {
-//        $this->visit('/bills')
-//            ->seePageIs('/login');
-//    }
-//
-//    /**
-//     * Access bills page as a logged in user
-//     */
-//    public function testBillsPageAsLoggedInUser() {
-//
-//        $user = factory(App\User::class)->create();
-//
-//        $this->actingAs($user)
-//            ->visit('/bills')
-//            ->see($user->email);
-//
-//    }
-//
-//    /**
-//     * Create a bill as a logged in user
-//     */
-//    public function testCreateBill() {
-//
-//        $this->withoutMiddleware();
-//
-//        $user = factory(App\User::class)->create();
-//
-//        $this->actingAs($user)
-//            ->post('/bills/create', ['client' => 'John Doe'])
-//            ->seeJsonEquals([
-//                'success' => true,
-//                'message' => trans('bills.bill_created')
-//            ]);
-//
-//    }
-//
-////    /**
-////     * Create a bill as visitor
-////     */
-////    public function testCreateBillAsVisitor() {
-////
-////        $this->withoutMiddleware();
-////
-////        $response = $this->call('POST', '/bills/create', ['client' => 'John Doe']);
-////        $this->assertEquals(403, $response->status());
-////
-////    }
-//
-//    /**
-//     * Delete a bill as logged in user
-//     */
-//    public function testDeleteBill() {
-//
-//        $user = factory(App\User::class)->create();
-//        $client = factory(App\Client::class)->create(['user_id' => $user->id]);
-//        $bill = factory(App\Bill::class)->create([
-//            'client_id' => $client->id,
-//            'user_id' => $user->id
-//        ]);
-//
-//        $this->actingAs($user)
-//            ->get('/bills/delete/'.$bill->id)
-//            ->seeJsonEquals([
-//                'success' => true,
-//                'title' => trans('common.success'),
-//                'message' => trans('bills.bill_deleted')
-//            ]);
-//
-//    }
-//
-////    public function testDeleteBillAsVisitor() {
-////
-////        $user = factory(App\User::class)->create();
-////        $client = factory(App\Client::class)->create(['user_id' => $user->id]);
-////        $bill = factory(App\Bill::class)->create([
-////            'client_id' => $client->id,
-////            'user_id' => $user->id
-////        ]);
-////
-////        $this->withoutMiddleware();
-////
-////        $response = $this->call('POST', '/bills/delete/'.$bill->id);
-////        $this->assertEquals(405, $response->status());
-////
-////    }
+    /**
+     * Access bills page as a logged in user
+     */
+    public function testBillsPageAsLoggedInUser() {
+
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('/bills')
+            ->see($user->email);
+
+    }
+
+    /**
+     * Make ajax request to get paginated bills
+     */
+    public function testBillsPagination() {
+
+        $numberOfBills = 10;
+
+        // Generate one user
+        $user = factory(App\User::class)->create();
+
+        // Generate one client
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+
+        // Generate bills
+        for ($i = 0; $i < $numberOfBills; $i++) {
+            $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+        }
+
+        // Paginate results and compare with json response
+        $pagination = Bill::select('bills.id', 'bills.campaign_number', 'bills.campaign_year', 'bills.payment_term', 'bills.other_details', 'clients.name as client_name')
+            ->where('bills.user_id', $user->id)
+            ->orderBy('bills.created_at', 'desc')
+            ->join('clients', function($join) {
+                $join->on('bills.client_id', '=', 'clients.id');
+            })
+            ->paginate(10);
+
+        $this->actingAs($user)
+            ->get('/bills/get')
+            ->seeJson([
+                'total' => $pagination->total(),
+                'per_page' => $pagination->perPage(),
+                'current_page' => $pagination->currentPage(),
+                'last_page' => $pagination->lastPage(),
+                'next_page_url' => $pagination->nextPageUrl(),
+                'prev_page_url' => $pagination->previousPageUrl(),
+            ]);
+    }
+
+    /**
+     * Make ajax request to get paginated bills as a visitor
+     */
+    public function testBillsPaginationAsVisitor() {
+
+        $this->visit('/bills/get')
+            ->seePageIs('/login');
+
+    }
+
+    /**
+     * Make ajax request to get paginated bills from page 3
+     */
+    public function testBillsFromThirdPagePagination() {
+
+        $numberOfBills = 45;
+
+        // Generate one user
+        $user = factory(App\User::class)->create();
+
+        // Generate one client
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+
+        // Generate bills
+        for ($i = 0; $i < $numberOfBills; $i++) {
+            $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+        }
+
+        $this->actingAs($user)
+            ->visit('/bills/get?page=3')
+            ->seeJson([
+                'current_page' => 3
+            ]);
+
+    }
+
+    /**
+     * Access third bills page as a visitor
+     */
+    public function testBillsFromThirdPagePaginationAsVisitor() {
+
+        $this->visit('/bills/get?page=3')
+            ->seePageIs('/login');
+
+    }
+
+    /**
+     * Create a new bill
+     */
+    public function testCreateBill() {
+
+        $this->withoutMiddleware();
+
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->post('/bills/create', ['client' => 'John Doe'])
+            ->seeJson(['success' => true]);
+
+    }
+
+    /**
+     * Create a new bill without client name
+     */
+    public function testCreateBillWithEmptyClient() {
+
+        $this->withoutMiddleware();
+
+        // Generate user
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->post('/bills/create', ['client' => ''])
+            ->seeJson(['success' => false]);
+
+    }
+
+    /**
+     * Make ajax request to create bill as a visitor
+     */
+    public function testCreateBillAsVisitor() {
+
+        $this->withoutMiddleware();
+
+        $this->post('/bills/create', ['client' => 'Bau'])
+            ->see('Forbidden');
+
+    }
+
+    /**
+     * Test delete bill functionality
+     */
+    public function testDeleteBill() {
+
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        $this->actingAs($user)
+            ->get('/bills/' . $bill->id . '/delete')
+            ->seeJson(['success' => true]);
+
+    }
+
+    /**
+     * Try to delete a not existent bill
+     */
+    public function testDeleteNotExistentBill() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Make request to delete current created bill
+        $this->actingAs($user)
+            ->get('/bills/' . $bill->id . '/delete')
+            ->seeJson(['success' => true]);
+
+        // Now try again to delete the bill that not exist anymore
+        $this->actingAs($user)
+            ->get('/bills/' . $bill->id . '/delete')
+            ->seeJson(['success' => false]);
+
+    }
+
+    /**
+     * Try to delete a bill with an invalid id
+     */
+    public function testDeleteBillWithInvalidId() {
+
+        $invalidBillId = '12dc';
+
+        // Generate user
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->get('/bills/' . $invalidBillId . '/delete')
+            ->seeJson(['success' => false]);
+
+    }
 
 }
