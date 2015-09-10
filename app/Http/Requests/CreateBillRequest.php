@@ -10,7 +10,7 @@ use Illuminate\Contracts\Auth\Guard;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class CreateBillRequest extends Request {
+class CreateBillRequest extends AjaxRequest {
 
     /**
      * Determine if the user is authorized to make this request.
