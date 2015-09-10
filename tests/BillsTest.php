@@ -82,7 +82,7 @@ class BillsTest extends TestCase {
     /**
      * Make ajax request to get paginated bills from page 3
      */
-    public function testBillsFromThirdPagePagination() {
+    public function testBillsPaginationFromThirdPage() {
 
         $numberOfBills = 45;
 
@@ -108,7 +108,7 @@ class BillsTest extends TestCase {
     /**
      * Access third bills page as a visitor
      */
-    public function testBillsFromThirdPagePaginationAsVisitor() {
+    public function testBillsPaginationFromThirdPageAsVisitor() {
 
         $this->visit('/bills/get?page=3')
             ->seePageIs('/login');
