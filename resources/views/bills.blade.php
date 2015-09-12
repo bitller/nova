@@ -2,8 +2,7 @@
 @section('content')
     <div id="bills">
 
-        @include('templates.loader-template')
-        <loader loaded="@{{ loaded }}"></loader>
+        @include('includes.ajax-translations.common')
 
         <div id="table" v-show="loaded">
             <!-- BEGIN No bills info -->

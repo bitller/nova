@@ -15,7 +15,7 @@ elixir(function(mix) {
     mix.sass('app.scss');
     mix.scripts(['jquery.min.js', 'bootstrap.min.js', 'vue/vue.js', 'vue/vue-resource.js', 'components/loader.js', 'sweetAlert.js'], 'public/js/vendor.js')
         .scripts(['welcome.js'], 'public/js/welcome.js')
-        .scripts(['pages/bills.js'], 'public/js/bills.js')
+        .scripts(['pages/base.js', 'pages/bills.js'], 'public/js/bills.js')
         .scripts(['pages/clients.js'], 'public/js/clients.js')
         .scripts(['pages/base.js', 'pages/client.js'], 'public/js/client.js')
         .scripts(['pages/base.js', 'pages/products.js'], 'public/js/products.js')

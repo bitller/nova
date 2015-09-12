@@ -106,9 +106,16 @@ new Vue({
 
             this.$set('loaded', false);
 
+            swal({
+                title: Nova.getCommonTranslation('loading'),
+                type: "info",
+                showConfirmButton: false
+            });
+
             this.$http.get(url).success(function(data) {
                 this.$set('bills', data);
                 this.$set('loaded', true);
+                swal.close();
             });
         },
 
