@@ -93,6 +93,10 @@ class BillsController extends Controller {
 
     }
 
+    /**
+     * @param int $billId
+     * @return $this
+     */
     public function bill($billId) {
         return view('bill')->with('billId', $billId);
     }
