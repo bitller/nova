@@ -154,7 +154,7 @@ class BillsTest extends TestCase {
         $this->withoutMiddleware();
 
         $this->post('/bills/create', ['client' => 'Bau'])
-            ->see('Forbidden');
+            ->seeJson(['success' => false]);
 
     }
 

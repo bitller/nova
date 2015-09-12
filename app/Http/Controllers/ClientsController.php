@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\Client;
 use App\Http\Requests\CreateClientRequest;
+use App\Http\Requests\DeleteClientRequest;
 use App\Http\Requests\EditClientNameRequest;
 use App\Http\Requests\EditClientPhoneRequest;
 use Illuminate\Support\Facades\Auth;
@@ -178,10 +179,11 @@ class ClientsController extends Controller {
     /**
      * Delete client
      *
+     * @param DeleteClientRequest $request
      * @param int $clientId
      * @return array
      */
-    public function delete($clientId) {
+    public function delete($clientId, DeleteClientRequest $request) {
 
         $table = 'clients';
 

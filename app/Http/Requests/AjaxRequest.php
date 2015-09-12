@@ -13,6 +13,34 @@ use Illuminate\Contracts\Validation\Validator;
 class AjaxRequest extends Request {
 
     /**
+     * @param array $errors
+     * @return mixed
+     */
+    public function response(array $errors) {
+
+        $error = '';
+
+        foreach ($errors as $errorMessage) {
+            $error = $errorMessage;
+        }
+
+        $response = [
+            'success' => false,
+            'title' => trans('common.fail'),
+            'message' => $error
+        ];
+
+        return response($response)->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function forbiddenResponse() {
+        return response(['success' => false])->header('Content-Type', 'application/json');
+    }
+
+    /**
      * Format error messages for ajax requests
      *
      * @param Validator $validator
@@ -33,7 +61,6 @@ class AjaxRequest extends Request {
             'title' => trans('common.fail'),
             'message' => $error
         ];
-
     }
 
 }

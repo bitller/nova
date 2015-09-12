@@ -4,15 +4,13 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Validation\Validator;
 
 /**
- * Authorize and validate CreateClientRequest
+ * Authorize DeleteClientRequest
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class CreateClientRequest extends AjaxRequest {
-
+class DeleteClientRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,9 +28,7 @@ class CreateClientRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'name' => ['required', 'min:3', 'max:60'],
-            'phone' => ['numeric', 'digits_between:9,12']
+            //
         ];
     }
-
 }
