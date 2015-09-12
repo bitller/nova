@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+    @include('includes.ajax-translations.common')
     @include('includes.ajax-translations.products')
     <div id="products">
         <div v-show="loaded">
