@@ -10,7 +10,7 @@ use Illuminate\Contracts\Auth\Guard;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class AddProductRequest extends Request {
+class AddProductRequest extends AjaxRequest {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,8 @@ class AddProductRequest extends Request {
      */
     public function rules() {
         return [
-            'code' => ['required', 'digits:5']
+            'code' => ['required', 'digits:5'],
+            'name' => ['required', 'between:3,50']
         ];
     }
 }
