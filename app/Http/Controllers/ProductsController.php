@@ -40,7 +40,7 @@ class ProductsController extends Controller {
      */
     public function getProducts(Request $request) {
 
-        $page = $request->get('page');
+       /* $page = $request->get('page');
         if ($page < 1) {
             $page = 1;
         }
@@ -55,7 +55,9 @@ class ProductsController extends Controller {
         $paginator = new LengthAwarePaginator(array_slice($data, $page * $perPage, $perPage), count($data), $perPage);
         $paginator->setPath('/products/get');
 
-        return response($paginator)->header('Content-Type', 'application/json');
+        return response($paginator)->header('Content-Type', 'application/json');*/
+
+        return ApplicationProduct::orderBy('code', 'asc')->paginate(10);
 
     }
 
