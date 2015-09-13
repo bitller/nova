@@ -6,6 +6,19 @@
 var Alert = {
 
     /**
+     * Show loader.
+     *
+     * @param title
+     */
+    loader: function(title) {
+        swal({
+            title: title,
+            type: 'info',
+            showConfirmButton: false
+        })
+    },
+
+    /**
      * Show success alert box.
      *
      * @param title
