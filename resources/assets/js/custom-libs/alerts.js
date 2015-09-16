@@ -7,12 +7,10 @@ var Alert = {
 
     /**
      * Show loader.
-     *
-     * @param title
      */
-    loader: function(title) {
+    loader: function() {
         swal({
-            title: title,
+            title: Translation.common('loading'),
             type: 'info',
             showConfirmButton: false
         })

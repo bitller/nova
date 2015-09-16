@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ApplicationProduct;
 use App\Bill;
 use App\Client;
+use App\Helpers\Bills;
 use App\Http\Requests\CreateBillRequest;
+use App\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -101,7 +104,37 @@ class BillsController extends Controller {
         return view('bill')->with('billId', $billId);
     }
 
+    /**
+     * @param int $billId
+     * @return mixed
+     */
     public function getBill($billId) {
+
+        $billsHelper = new Bills();
+
+        // todo check if bill belongs to current user
+
+        return $billsHelper->getBillProducts($billId);
+
+    }
+
+    public function editPage() {
+        //
+    }
+
+    public function editQuantity() {
+        //
+    }
+
+    public function editPrice() {
+        //
+    }
+
+    public function editDiscount() {
+        //
+    }
+
+    public function deleteProduct() {
         //
     }
 

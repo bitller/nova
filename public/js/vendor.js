@@ -1308,4 +1308,155 @@ Vue.component('loader', {
     }
 
 })(window, document);
+/**
+ * Handle work with alerts.
+ *
+ * @type {{show: Function}}
+ */
+var Alert = {
+
+    /**
+     * Show loader.
+     */
+    loader: function() {
+        swal({
+            title: Translation.common('loading'),
+            type: 'info',
+            showConfirmButton: false
+        })
+    },
+
+    /**
+     * Show success alert box.
+     *
+     * @param title
+     * @param message
+     */
+    success: function(title, message) {
+        this.show('success', title, message);
+    },
+
+    /**
+     * Show general error alert box.
+     */
+    generalError: function() {
+        this.error(Translation.common('fail'), Translation.common('general-error'));
+    },
+
+    /**
+     * Show error alert box.
+     *
+     * @param title
+     * @param message
+     */
+    error: function(title, message) {
+        this.show('error', title, message);
+    },
+
+    /**
+     * @param type
+     * @param title
+     * @param message
+     * @param time
+     */
+    show: function(type, title, message, time) {
+
+        // Set default value to hide hide the alert
+        if (typeof time === 'undefined') {
+            time = 1750;
+        }
+
+        var config = {
+            title: title,
+            text: message,
+            type: type,
+            timer: time,
+            showConfirmButton: false
+        };
+
+        swal(config);
+    },
+
+    /**
+     * Close alert box.
+     */
+    close: function() {
+        swal.close()
+    }
+}
+var Swal = {
+    //
+};
+/**
+ * Handle work with tokens
+ *
+ * @type {{get: Function}}
+ */
+var Token = {
+
+    /**
+     * Return token
+     * @returns {*|jQuery}
+     */
+    get: function() {
+        return $('#token').attr('content');
+    }
+
+};
+/**
+ * Handle work with translations.
+ *
+ * @type {{get: Function}}
+ */
+var Translation = {
+
+    /**
+     * Get common translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    common: function(attribute) {
+        return this.get('#common-trans', attribute);
+    },
+
+    /**
+     * Get client page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    client: function(attribute) {
+        return this.get('#client-trans', attribute);
+    },
+
+    /**
+     * Get products page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    products: function(attribute) {
+        return this.get('#product-trans', attribute);
+    },
+
+    /**
+     * Get my products page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    myProducts: function(attribute) {
+        return this.get('#my-products-trans', attribute);
+    },
+
+    /**
+     * @param pageSelector
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    get: function(pageSelector, attribute) {
+        return $(pageSelector).attr(attribute);
+    }
+};
 //# sourceMappingURL=vendor.js.map

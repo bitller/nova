@@ -7,8 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Bill model
  *
- * @uahtor Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class Bill extends Model {
-    //
+
+    public function products() {
+        return $this->hasMany('App\BillProduct');
+    }
+
+    public function applicationProducts() {
+        return $this->hasMany('App\BillApplicationProduct');
+    }
+
 }

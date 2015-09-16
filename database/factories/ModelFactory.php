@@ -84,3 +84,10 @@ $factory->define(App\ApplicationProduct::class, function() use ($factory) {
     return $factory->raw(App\Product::class);
 
 });
+
+// Generate bill product
+$factory->define(App\BillProduct::class, function() use($factory) {
+
+    return [];
+
+});

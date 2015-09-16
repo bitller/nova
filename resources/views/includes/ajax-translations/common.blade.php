@@ -4,3 +4,4 @@
         loading="{{ trans('common.loading') }}"
         >
 </div>
+@yield('trans')

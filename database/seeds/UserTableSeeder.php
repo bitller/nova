@@ -32,11 +32,12 @@ class UserTableSeeder extends Seeder {
                 $client = $user->clients()->save(factory(App\Client::class)->make());
 
                 // Generate bill for that client
-                $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+                $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
 
                 // Generate products
                 for ($j = 0; $j < $productsPerBill; $j++) {
-                    $user->products()->save(factory(App\Product::class)->make());
+                    $product = $user->products()->save(factory(App\Product::class)->make());
+                    $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
                 }
 
             }
