@@ -7,5 +7,6 @@ return [
     'name' => 'Nume',
     'page' => 'Pagină',
     'price' => 'Preţ',
+    'product_will_be_deleted' => 'Produsul va fi șters din această factură!',
     'quantity' => 'Cantitate',
 ];

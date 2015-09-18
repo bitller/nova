@@ -38,6 +38,9 @@ class UserTableSeeder extends Seeder {
                 for ($j = 0; $j < $productsPerBill; $j++) {
                     $product = $user->products()->save(factory(App\Product::class)->make());
                     $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+                    $applicationProduct = factory(App\ApplicationProduct::class)->create();
+                    $bill->applicationProducts()->save(factory(App\BillApplicationProduct::class)->make(['product_id' => $applicationProduct->id]));
                 }
 
             }

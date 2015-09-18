@@ -1354,6 +1354,27 @@ var Alert = {
     },
 
     /**
+     * Show confirm delete product from bill alert.
+     *
+     * @param callback
+     */
+    confirmDelete: function(callback) {
+
+        swal({
+            title: Translation.common('confirm'),
+            text: Translation.bill('product-will-be-deleted'),
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: Translation.common('confirm-delete'),
+            cancelButtonText: Translation.common('cancel'),
+            closeOnConfirm: false
+        }, function () {
+            callback();
+        });
+    },
+
+    /**
      * @param type
      * @param title
      * @param message
@@ -1448,6 +1469,16 @@ var Translation = {
      */
     myProducts: function(attribute) {
         return this.get('#my-products-trans', attribute);
+    },
+
+    /**
+     * Get bill page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    bill: function(attribute) {
+        return this.get('#bill-trans', attribute);
     },
 
     /**

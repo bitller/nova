@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\ApplicationProduct;
 use App\Bill;
+use App\BillApplicationProduct;
+use App\BillProduct;
 use App\Client;
+use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Http\Requests\CreateBillRequest;
 use App\Product;
@@ -134,8 +137,30 @@ class BillsController extends Controller {
         //
     }
 
-    public function deleteProduct() {
-        //
+    public function deleteProduct($billId, $productId, Requests\DeleteProductFromBillRequest $request) {
+
+        $response = new AjaxResponse();
+        $product = BillProduct::where('product_id', $productId)->where('bill_id', $billId);
+
+        // Check if product is in bill_application_products table
+        if (!$product) {
+            $product = BillApplicationProduct::where('product_id', $productId)->where('bill_id', $billId);
+        }
+
+        // Check if product exists in database
+        if (!$product) {
+            $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        // Count how many products was before delete
+//        $productsCount = BillProduct::where('bill_id')
+
+        $product->delete();
+
+        $response->setSuccessMessage('good');
+        return response($response->get())->header('Content-Type', 'application/json');
+
     }
 
 }
