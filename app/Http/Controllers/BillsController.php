@@ -137,30 +137,68 @@ class BillsController extends Controller {
         //
     }
 
-    public function deleteProduct($billId, $productId, Requests\DeleteProductFromBillRequest $request) {
+    /**
+     * Delete product form bill.
+     *
+     * @param int $billId
+     * @param int $productId
+     * @param string $code
+     * @param Requests\DeleteProductFromBillRequest $request
+     * @return mixed
+     */
+    public function deleteProduct($billId, $productId, $code, Requests\DeleteProductFromBillRequest $request) {
 
         $response = new AjaxResponse();
-        $product = BillProduct::where('product_id', $productId)->where('bill_id', $billId);
 
-        // Check if product is in bill_application_products table
-        if (!$product) {
-            $product = BillApplicationProduct::where('product_id', $productId)->where('bill_id', $billId);
-        }
-
-        // Check if product exists in database
-        if (!$product) {
+        // Make sure bill exists
+        $bill = Auth::user()->bills()->where('id', $billId)->first();
+        if (!$bill->count()) {
             $response->setFailMessage(trans('common.general_error'));
-            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
         }
 
-        // Count how many products was before delete
-//        $productsCount = BillProduct::where('bill_id')
+        // Check if is an application product
+        if ($this->isApplicationProduct($productId, $code)) {
 
-        $product->delete();
+            BillApplicationProduct::where('product_id', $productId)->where('bill_id', $bill->id)->delete();
+            $response->setSuccessMessage(trans('common.product_deleted'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
 
-        $response->setSuccessMessage('good');
-        return response($response->get())->header('Content-Type', 'application/json');
+        // Check if is a custom product
+        if ($this->isCustomProduct($productId, $code)) {
 
+            BillProduct::where('product_id', $productId)->where('bill_id', $bill->id)->delete();
+            $response->setSuccessMessage(trans('common.product_deleted'));
+            return response($response->get())->header('Content-Type', 'application/json');
+
+        }
+
+        // If we arrive here something went wrong
+        $response->setFailMessage(trans('common.general_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+
+    }
+
+    /**
+     * Check if given product exists in application products.
+     *
+     * @param int $id
+     * @param string $code
+     * @return mixed
+     */
+    private function isApplicationProduct($id, $code) {
+        return ApplicationProduct::where('id', $id)->where('code', $code)->count();
+    }
+
+    /**
+     * Check if given product is custom.
+     *
+     * @param int $id
+     * @param string $code
+     * @return mixed
+     */
+    private function isCustomProduct($id, $code) {
+        return Product::where('id', $id)->where('code', $code)->where('user_id', Auth::user()->id)->count();
     }
 
 }

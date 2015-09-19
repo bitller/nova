@@ -49,7 +49,7 @@
                 <td class="text-center editable">@{{ product.price }} ron</td>
                 <td class="text-center editable">@{{ product.discount }}</td>
                 <td class="text-center">9.00 ron</td>
-                <td class="text-center editable delete-product"  v-on="click: deleteProduct(product.id)"><span class="glyphicon glyphicon-trash"></span></td>
+                <td class="text-center editable delete-product"  v-on="click: deleteProduct(product.id, product.code)"><span class="glyphicon glyphicon-trash"></span></td>
             </tr>
 
             </tbody>
