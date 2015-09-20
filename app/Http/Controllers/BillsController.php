@@ -10,6 +10,7 @@ use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Http\Requests\CreateBillRequest;
+use App\Http\Requests\EditProductPageFromBillRequest;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -129,8 +130,49 @@ class BillsController extends Controller {
         //
     }
 
-    public function editPage() {
-        //
+    /**
+     * Handle product page edit.
+     *
+     * @param int $billId
+     * @param EditProductPageFromBillRequest $request
+     * @return mixed
+     */
+    public function editPage($billId, EditProductPageFromBillRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Make sure bill exists
+        $bill = Auth::user()->bills()->where('id', $billId)->first();
+
+        if (!$bill) {
+            $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        $success = false;
+
+        // Check if is a custom product
+        if ($this->isCustomProduct($request->get('product_id'), $request->get('product_code'))) {
+            BillProduct::where('id', $request->get('product_id'))->update(['page' => $request->get('product_page')]);
+            $success = true;
+        }
+
+        // Check if is an application product
+        if ($this->isApplicationProduct($request->get('product_id'), $request->get('product_code'))) {
+            BillApplicationProduct::where('id', $request->get('product_id'))->update(['page' => $request->get('product_page')]);
+            $success = true;
+        }
+
+        if ($success) {
+            $response->setSuccessMessage(trans('bill.page_updated'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        // If we arrive here something is wrong
+        $response->setFailMessage(trans('common.general_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+
+
     }
 
     public function editQuantity() {

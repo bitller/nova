@@ -14,11 +14,14 @@ new Vue({
     methods: {
 
         /**
-         * @param showSuccess
+         * @param showSuccess callback when get bills request is finished
+         * @param hideLoader If set to true, loading alert will not be displayed
          */
-        getBill: function(showSuccess) {
+        getBill: function(showSuccess, hideLoader) {
 
-            Alert.loader();
+            if (typeof hideLoader === 'undefined') {
+                Alert.loader();
+            }
 
             this.$http.get('/bills/' + $('#bill').attr('bill-id') + '/get', function(response) {
 
@@ -34,6 +37,13 @@ new Vue({
 
         },
 
+        /**
+         * Edit product page from bill.
+         *
+         * @param productPage
+         * @param productId
+         * @param productCode
+         */
         editPage: function(productPage, productId, productCode) {
 
             var thisInstance = this;
@@ -42,7 +52,8 @@ new Vue({
 
                 var data = {
                     product_id: productId,
-                    product_code: productCode
+                    product_code: productCode,
+                    product_page: inputValue
                 };
 
                 thisInstance.$http.post('/bills/' + $('#bill').attr('bill-id') + '/edit-page/', data, function(response) {
@@ -51,7 +62,7 @@ new Vue({
                     if (response.success) {
                         this.getBill(function() {
                             Alert.success(Translation.common('success'), Translation.bill('page-updated'));
-                        });
+                        }, true);
                         return true;
                     }
 
@@ -63,7 +74,7 @@ new Vue({
         },
 
         /**
-         * Delete product from bill
+         * Delete product from bill.
          *
          * @param id
          */
