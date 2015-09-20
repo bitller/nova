@@ -34,6 +34,34 @@ new Vue({
 
         },
 
+        editPage: function(productPage, productId, productCode) {
+
+            var thisInstance = this;
+
+            Alert.editPage(function(inputValue) {
+
+                var data = {
+                    product_id: productId,
+                    product_code: productCode
+                };
+
+                thisInstance.$http.post('/bills/' + $('#bill').attr('bill-id') + '/edit-page/', data, function(response) {
+
+                    // Handle success response
+                    if (response.success) {
+                        this.getBill(function() {
+                            Alert.success(Translation.common('success'), Translation.bill('page-updated'));
+                        });
+                        return true;
+                    }
+
+                }).error(function(response) {
+                    Alert.generalError();
+                });
+
+            });
+        },
+
         /**
          * Delete product from bill
          *

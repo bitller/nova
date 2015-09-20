@@ -5,6 +5,35 @@
  */
 var Alert = {
 
+    editPage: function(callback) {
+
+        swal({
+            title: Translation.bill('edit-page'),
+            type: 'input',
+            text: Translation.bill('edit-page-description'),
+            showCancelButton: true,
+            cancelButtonText: Translation.common('cancel'),
+            confirmButtonText: Translation.bill('edit-page'),
+            showLoaderOnConfirm: true,
+            closeOnConfirm: false
+        }, function(inputValue) {
+
+            if (typeof callback !== 'undefined') {
+
+                if (inputValue === false) {
+                    return false;
+                }
+
+                if (inputValue === "") {
+                    swal.showInputError(Translation.bill('product-page-required'));
+                    return false;
+                }
+
+                callback(inputValue);
+            }
+        });
+    },
+
     /**
      * Show loader.
      */
