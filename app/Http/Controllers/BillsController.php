@@ -121,6 +121,14 @@ class BillsController extends Controller {
 
     }
 
+    public function addProduct() {
+        //
+    }
+
+    public function editPaymentTerm() {
+        //
+    }
+
     public function editPage() {
         //
     }
@@ -152,8 +160,10 @@ class BillsController extends Controller {
 
         // Make sure bill exists
         $bill = Auth::user()->bills()->where('id', $billId)->first();
-        if (!$bill->count()) {
+
+        if (!$bill) {
             $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
         }
 
         // Check if is an application product
