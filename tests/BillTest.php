@@ -1,4 +1,5 @@
 <?php
+
 use App\Helpers\TestUrlBuilder;
 
 /**
@@ -7,6 +8,8 @@ use App\Helpers\TestUrlBuilder;
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class BillTest extends TestCase {
+
+    use \Illuminate\Foundation\Testing\DatabaseTransactions;
 
     /**
      * Access bill page as logged in user. Bill page should be displayed.
@@ -35,6 +38,427 @@ class BillTest extends TestCase {
 
     public function testBillProducts() {
         //
+    }
+
+    /**
+     * Edit custom product page. Success message is expected.
+     */
+    public function testEditCustomProductPage() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate one product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => $product->code,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Edit product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => true,
+                'message' => trans('bill.page_updated')
+            ]);
+
+    }
+
+    /**
+     * Edit application product page. Success response is expected.
+     */
+    public function testEditApplicationProductPage() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate application product and add to bill
+        $applicationProduct = factory(App\ApplicationProduct::class)->create();
+        $bill->applicationProducts()->save(factory(App\BillApplicationProduct::class)->make(['product_id' => $applicationProduct->id]));
+
+        $data = [
+            'product_id' => $applicationProduct->id,
+            'product_code' => $applicationProduct->code,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Edit application product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => true,
+                'message' => trans('bill.page_updated')
+            ]);
+
+    }
+
+    /**
+     * Edit product page without posting any data.
+     */
+    public function editProductPageWithEmptyPostData() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate application product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id))
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Try to edit product page without product id field. Fail response is expected.
+     */
+    public function editProductPageWithEmptyProductId() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_code' => $product->code,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Try to edit product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id))
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page without product code field. Fail response is expected.
+     */
+    public function editProductPageWithEmptyProductCode() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Edit product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id))
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page without page field. Fail response is expected.
+     */
+    public function testEditProductPageWithEmptyProductPage() {
+
+        // Generate user, client, bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => $product->code
+        ];
+
+        // Try to edit product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page with an invalid page. Fail response is expected.
+     */
+    public function testEditProductPageWithInvalidProductPage() {
+
+        // Generate user, client, bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => $product->code,
+            'product_page' => 'btl04'
+        ];
+
+        // Try to edit product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page with too small and too big page. Fail response is expected.
+     */
+    public function testEditProductPageWithTooSmallAndTooBigProductPage() {
+
+        // Generate user, client, bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => $product->code,
+            'product_page' => rand(-99, -1)
+        ];
+
+        // Edit product page request with too small page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+        $data['product_page'] = rand(2001, 99999);
+
+        // Edit product page with too big page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Try to edit product page with an invalid product id format. Fail response is expected.
+     */
+    public function testEditProductPageWithInvalidProductId() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product  = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => 'btl04',
+            'product_code' => $product->code,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Try to edit product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page with invalid product code. Fail response is expected.
+     */
+    public function testEditProductPageWithInvalidProductCode() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => 'abcd4',
+            'product_page' => rand(1, 99)
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page with an too short, then too long code. Fail response is expected.
+     */
+    public function testEditProductPageWithTooShortAndTooLongProductCode() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => '1234',
+            'product_page' => rand(1, 99)
+        ];
+
+        // Try to edit with too short product code
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+        $data['product_code'] = str_repeat($product->code, 10);
+
+        // Try to edit with too long product code
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page using code of another product. Fail response is expected.
+     */
+    public function testEditProductPageWithProductCodeOfAnotherProduct() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate two products and add to bill
+        $firstProduct = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $firstProduct->id]));
+        $secondProduct = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $secondProduct->id]));
+
+        $data = [
+            'product_id' => $firstProduct->id,
+            'product_code' => $secondProduct->code,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Edit page with code of another product
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Try to edit product page from bill of another user. Fail response is expected.
+     */
+    public function testEditProductPageFromBillOfAnotherUser() {
+
+        // Generate first user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+
+        // Generate first product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => $product->code,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Generate another user
+        $secondUser = factory(App\User::class)->create();
+
+        // Try to edit product page of another user
+        $this->actingAs($secondUser)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product page with not existent product id. Fail response is expected.
+     */
+    public function testEditProductPageWithNotExistentProductId() {
+
+        // Generate user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Generate product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id * 44 + $product->id,
+            'product_code' => $product->code,
+            'product_page' => rand(1, 99)
+        ];
+
+        // Edit product page
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductPage($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
     }
 
     /**

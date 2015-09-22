@@ -5,11 +5,12 @@
  */
 var Alert = {
 
-    editPage: function(callback) {
+    editPage: function(page, callback) {
 
         swal({
             title: Translation.bill('edit-page'),
             type: 'input',
+            inputPlaceholder: page,
             text: Translation.bill('edit-page-description'),
             showCancelButton: true,
             cancelButtonText: Translation.common('cancel'),

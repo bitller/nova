@@ -14,7 +14,8 @@ new Vue({
     methods: {
 
         /**
-         * @param showSuccess
+         * @param showSuccess callback when get bills request is finished
+         * @param hideLoader If set to true, loading alert will not be displayed
          */
         getBill: function(showSuccess, hideLoader) {
 
@@ -36,11 +37,18 @@ new Vue({
 
         },
 
+        /**
+         * Edit product page from bill.
+         *
+         * @param productPage
+         * @param productId
+         * @param productCode
+         */
         editPage: function(productPage, productId, productCode) {
 
             var thisInstance = this;
 
-            Alert.editPage(function(inputValue) {
+            Alert.editPage(productPage, function(inputValue) {
 
                 var data = {
                     product_id: productId,
@@ -66,7 +74,7 @@ new Vue({
         },
 
         /**
-         * Delete product from bill
+         * Delete product from bill.
          *
          * @param id
          */

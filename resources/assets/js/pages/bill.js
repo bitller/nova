@@ -48,7 +48,7 @@ new Vue({
 
             var thisInstance = this;
 
-            Alert.editPage(function(inputValue) {
+            Alert.editPage(productPage, function(inputValue) {
 
                 var data = {
                     product_id: productId,

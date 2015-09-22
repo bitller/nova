@@ -21,7 +21,7 @@ class CreateBillApplicationProductsTable extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('bill_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
-            $table->tinyInteger('page')->default(4);
+            $table->smallInteger('page')->default(4);
             $table->tinyInteger('quantity');
             $table->float('price');
             $table->tinyInteger('discount');

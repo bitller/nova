@@ -29,9 +29,9 @@ class EditProductPageFromBillRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'product_id' => ['required'],
+            'product_id' => ['required', 'numeric'],
             'product_code' => ['required', 'digits:5'],
-            'product_page' => ['required', 'numeric']
+            'product_page' => ['required', 'numeric', 'between:1,2000']
         ];
     }
 }
