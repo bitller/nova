@@ -5,16 +5,57 @@
  */
 var Alert = {
 
+    /**
+     * Edit product page alert.
+     *
+     * @param page
+     * @param callback
+     */
     editPage: function(page, callback) {
 
-        swal({
+        var pageConfig = {
             title: Translation.bill('edit-page'),
-            type: 'input',
-            inputPlaceholder: page,
+            placeholder: page,
             text: Translation.bill('edit-page-description'),
+            requiredInput: Translation.bill('product-page-required')
+        };
+
+        this.edit(pageConfig, callback);
+    },
+
+    /**
+     * Edit product quantity alert.
+     *
+     * @param quantity
+     * @param callback
+     */
+    editQuantity: function(quantity, callback) {
+
+        var quantityConfig = {
+            title: Translation.bill('edit-quantity'),
+            placeholder: quantity,
+            text: Translation.bill('edit-quantity-description'),
+            requiredInput: Translation.bill('product-quantity-required')
+        };
+
+        this.edit(quantityConfig, callback);
+    },
+
+    /**
+     *
+     * @param data
+     * @param callback
+     */
+    edit: function(data, callback) {
+
+        swal({
+            title: data.title,
+            type: 'input',
+            inputPlaceholder: data.placeholder,
+            text: data.text,
             showCancelButton: true,
             cancelButtonText: Translation.common('cancel'),
-            confirmButtonText: Translation.bill('edit-page'),
+            confirmButtonText: Translation.common('save'),
             showLoaderOnConfirm: true,
             closeOnConfirm: false
         }, function(inputValue) {
@@ -25,14 +66,16 @@ var Alert = {
                     return false;
                 }
 
-                if (inputValue === "") {
-                    swal.showInputError(Translation.bill('product-page-required'));
+                if (inputValue === '') {
+                    swal.showInputError(data.requiredInput);
                     return false;
                 }
 
                 callback(inputValue);
             }
+
         });
+
     },
 
     /**

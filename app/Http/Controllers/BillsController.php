@@ -11,6 +11,7 @@ use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Http\Requests\CreateBillRequest;
 use App\Http\Requests\EditProductPageFromBillRequest;
+use App\Http\Requests\Bill\EditProductQuantityRequest;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -139,44 +140,41 @@ class BillsController extends Controller {
      */
     public function editPage($billId, EditProductPageFromBillRequest $request) {
 
-        $response = new AjaxResponse();
+        $handler = 'page';
 
-        // Make sure bill exists
-        $bill = Auth::user()->bills()->where('id', $billId)->first();
+        $data = [
+            'billId' => $billId,
+            'productId' => $request->get('product_id'),
+            'productCode' => $request->get('product_code'),
+            'columnToUpdate' => $handler,
+            'newValue' => $request->get('product_page')
+        ];
 
-        if (!$bill) {
-            $response->setFailMessage(trans('common.general_error'));
-            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
-        }
-
-        $success = false;
-
-        // Check if is a custom product
-        if ($this->isCustomProduct($request->get('product_id'), $request->get('product_code'))) {
-            BillProduct::where('id', $request->get('product_id'))->update(['page' => $request->get('product_page')]);
-            $success = true;
-        }
-
-        // Check if is an application product
-        if ($this->isApplicationProduct($request->get('product_id'), $request->get('product_code'))) {
-            BillApplicationProduct::where('id', $request->get('product_id'))->update(['page' => $request->get('product_page')]);
-            $success = true;
-        }
-
-        if ($success) {
-            $response->setSuccessMessage(trans('bill.page_updated'));
-            return response($response->get())->header('Content-Type', 'application/json');
-        }
-
-        // If we arrive here something is wrong
-        $response->setFailMessage(trans('common.general_error'));
-        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
-
+        return $this->handleProductEdit('page', $data);
 
     }
 
-    public function editQuantity() {
-        //
+    /**
+     * Handle product quantity edit.
+     *
+     * @param int $billId
+     * @param Requests\EditProductQuantityRequest $request
+     * @return mixed
+     */
+    public function editQuantity($billId, EditProductQuantityRequest $request) {
+
+        $handler = 'quantity';
+
+        $data = [
+            'billId' => $billId,
+            'productId' => $request->get('product_id'),
+            'productCode' => $request->get('product_code'),
+            'columnToUpdate' => $handler,
+            'newValue' => $request->get('product_quantity')
+        ];
+
+        return $this->handleProductEdit($handler, $data);
+
     }
 
     public function editPrice() {
@@ -229,6 +227,49 @@ class BillsController extends Controller {
         $response->setFailMessage(trans('common.general_error'));
         return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
 
+    }
+
+    /**
+     * Handle edit of product page, quantity, price or discount in function of given parameters.
+     *
+     * @param string $handler Can be: page, quantity, price and discount
+     * @param array $data
+     * @return mixed
+     */
+    private function handleProductEdit($handler = 'page', $data = []) {
+
+        $response = new AjaxResponse();
+
+        // Make sure bill exists
+        $bill = Auth::user()->bills()->where('id', $data['billId'])->first();
+
+        if (!$bill) {
+            $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        $success = false;
+
+        // Check if is a custom product
+        if ($this->isCustomProduct($data['productId'], $data['productCode'])) {
+            BillProduct::where('id', $data['productId'])->update([$data['columnToUpdate'] => $data['newValue']]);
+            $success = true;
+        }
+
+        // Check if is an application product
+        if ($this->isApplicationProduct($data['productId'], $data['productCode'])) {
+            BillApplicationProduct::where('id', $data['productId'])->update([$data['columnToUpdate'] => $data['newValue']]);
+            $success = true;
+        }
+
+        if ($success) {
+            $response->setSuccessMessage(trans('bill.' . $data['columnToUpdate'] . '_updated'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        // If we arrive here something is wrong
+        $response->setFailMessage(trans('common.general_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
     }
 
     /**

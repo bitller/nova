@@ -30,7 +30,7 @@ class AjaxRequest extends Request {
             'message' => $error
         ];
 
-        return response($response)->header('Content-Type', 'application/json');
+        return response($response, 422)->header('Content-Type', 'application/json');
     }
 
     /**

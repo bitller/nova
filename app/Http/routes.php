@@ -31,6 +31,7 @@ Route::group(['prefix' => 'bills'], function() {
     Route::get('/{billId}/delete/{productId}/{code}', 'BillsController@deleteProduct');
     Route::post('/create', 'BillsController@create');
     Route::post('/{billId}/edit-page', 'BillsController@editPage');
+    Route::post('/{billId}/edit-quantity', 'BillsController@editQuantity');
 });
 
 Route::group(['prefix' => 'clients'], function() {

@@ -67,10 +67,62 @@ new Vue({
                     }
 
                 }).error(function(response) {
+
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return false;
+                    }
+
                     Alert.generalError();
                 });
 
             });
+        },
+
+        /**
+         * Edit product quantity.
+         *
+         * @param productQuantity
+         * @param productId
+         * @param productCode
+         */
+        editQuantity: function(productQuantity, productId, productCode) {
+
+            var thisInstance = this;
+
+            // Show edit quantity alert
+            Alert.editQuantity(productQuantity, function(inputValue) {
+
+                // Build post data
+                var data = {
+                    product_id: productId,
+                    product_code: productCode,
+                    product_quantity: inputValue
+                };
+
+                // Make post request
+                thisInstance.$http.post('/bills/' + $('#bill').attr('bill-id') + '/edit-quantity', data, function(response) {
+
+                    if (response.success) {
+                        this.getBill(function() {
+                            Alert.success(Translation.common('success'), Translation.bill('quantity-updated'));
+                        }, true);
+                        return true;
+                    }
+
+                }).error(function(response) {
+
+                    if (response.message) {
+                        Alert.error(response.title, response.message);
+                        return false;
+                    }
+
+                    Alert.generalError();
+
+                });
+
+            });
+
         },
 
         /**

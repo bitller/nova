@@ -19,6 +19,7 @@ return [
     'product_delete_error' => 'You product was not deleted. Try again later!',
     'product_deleted' => 'Product deleted!',
     'product_name' => 'Product name',
+    'save' => 'Save',
     'success' => 'Success!',
     'unauthorized' => 'Unauthorized',
 ];

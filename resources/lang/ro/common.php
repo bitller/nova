@@ -19,6 +19,7 @@ return [
     'product_delete_error' => 'Produsul nu a fost şters. Încearcă mai târziu!',
     'product_deleted' => 'Produsul a fost şters!',
     'product_name' => 'Numele produsului',
+    'save' => 'Salvează',
     'success' => 'Succes!',
     'unauthorized' => 'Accessul nu este permis.'
 ];

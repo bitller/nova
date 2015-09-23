@@ -7,6 +7,7 @@
         cancel="{{ trans('common.cancel') }}"
         success="{{ trans('common.success') }}"
         product-deleted="{{ trans('common.product_deleted') }}"
+        save="{{ trans('common.save') }}"
         >
 </div>
 @yield('trans')

@@ -6,5 +6,9 @@
     page-updated="{{ trans('bill.page_updated') }}"
     edit-page="{{ trans('bill.edit_page') }}"
     edit-page-description="{{ trans('bill.edit_page_description') }}"
+    edit-quantity="{{ trans('bill.edit_quantity') }}"
+    edit-quantity-description="{{ trans('bill.edit_quantity_description') }}"
+    product-quantity-required="{{ trans('bill.product_quantity_required') }}"
+    quantity-updated="{{ trans('bill.quantity_updated') }}"
     ></div>
 @endsection

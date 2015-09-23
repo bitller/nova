@@ -45,7 +45,7 @@
                 <td class="text-center editable"  v-on="click: editPage(product.page, product.id, product.code)">@{{ product.page }}</td>
                 <td class="text-center">@{{ product.code }}</td>
                 <td>@{{ product.name }}</td>
-                <td class="text-center editable">@{{ product.quantity }}</td>
+                <td class="text-center editable" v-on="click: editQuantity(product.quantity, product.id, product.code)">@{{ product.quantity }}</td>
                 <td class="text-center editable">@{{ product.price }} ron</td>
                 <td class="text-center editable">@{{ product.discount }}</td>
                 <td class="text-center">9.00 ron</td>
