@@ -75,7 +75,6 @@ new Vue({
 
                     Alert.generalError();
                 });
-
             });
         },
 
@@ -118,11 +117,8 @@ new Vue({
                     }
 
                     Alert.generalError();
-
                 });
-
             });
-
         },
 
         /**
@@ -164,9 +160,44 @@ new Vue({
                     }
 
                     Alert.generalError();
-
                 });
+            });
+        },
 
+        editDiscount: function(productDiscount, productId, productCode) {
+
+            var thisInstance = this;
+
+            // Show edit discount alert
+            Alert.editDiscount(productDiscount, function(inputValue) {
+
+                // Data used is post request
+                var data = {
+                    product_id: productId,
+                    product_code: productCode,
+                    product_discount: inputValue
+                };
+
+                // Do request
+                thisInstance.$http.post('/bills/' + $('#bill').attr('bill-id') + '/edit-discount', data, function(response) {
+
+                    // Handle success response
+                    if (response.success) {
+                        this.getBill(function() {
+                            Alert.success(Translation.common('success'), Translation.bill('discount-updated'));
+                        }, true);
+                        return true;
+                    }
+                }).error(function(response) {
+
+                    // Handle error response
+                    if (response.message) {
+                        Alert.error(response.title, response.message);
+                        return false;
+                    }
+
+                    Alert.generalError();
+                });
             });
 
         },
@@ -202,9 +233,7 @@ new Vue({
                 }).error(function(response) {
                     Alert.generalError();
                 });
-
             });
         }
-
     }
 });
