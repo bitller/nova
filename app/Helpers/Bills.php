@@ -42,7 +42,7 @@ class Bills {
                 'bill_application_products.quantity',
                 'bill_application_products.price',
                 'bill_application_products.discount'
-            )->union($firstQuery)->get();
+            )->union($firstQuery)->orderBy('page', 'asc')->get();
 
         return $secondQuery;
 
