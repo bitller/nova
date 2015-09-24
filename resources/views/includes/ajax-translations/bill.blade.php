@@ -14,5 +14,9 @@
     edit-price-description="{{ trans('bill.edit_price_description') }}"
     product-price-required="{{ trans('bill.product_price_required') }}"
     price-updated="{{ trans('bill.price_updated') }}"
+    edit-discount="{{ trans('bill.edit_discount') }}"
+    edit-discount-description="{{ trans('bill.edit_discount_description') }}"
+    product-discount-required="{{ trans('bill.product_discount_required') }}"
+    discount-updated="{{ trans('bill.discount_updated') }}"
     ></div>
 @endsection

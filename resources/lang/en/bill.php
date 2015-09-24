@@ -3,6 +3,9 @@
 return [
     'code' => 'Code',
     'discount' => 'Discount',
+    'discount_updated' => 'Product discount was updated!',
+    'edit_discount' => 'Edit product discount',
+    'edit_discount_description' => 'Change discount applied to this product',
     'edit_page' => 'Edit product page',
     'edit_page_description' => 'This is product page from catalogue. Remember, products are ordered ascending by their page.',
     'edit_price' => 'Edit product price',
@@ -15,6 +18,7 @@ return [
     'page_updated' => 'Product page updated!',
     'price' => 'Price',
     'price_updated' => 'Product price updated!',
+    'product_discount_required' => 'Product discount is required!',
     'product_page_required' => 'Product page is required!',
     'product_price_required' => 'Product price is required!',
     'product_quantity_required' => 'Product quantity is required!',
