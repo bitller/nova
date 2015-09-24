@@ -164,6 +164,13 @@ new Vue({
             });
         },
 
+        /**
+         * Edit product discount.
+         *
+         * @param productDiscount
+         * @param productId
+         * @param productCode
+         */
         editDiscount: function(productDiscount, productId, productCode) {
 
             var thisInstance = this;
