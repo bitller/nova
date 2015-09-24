@@ -125,6 +125,13 @@ new Vue({
 
         },
 
+        /**
+         * Edit product price.
+         *
+         * @param productPrice
+         * @param productId
+         * @param productCode
+         */
         editPrice: function(productPrice, productId, productCode) {
 
             var thisInstance = this;
