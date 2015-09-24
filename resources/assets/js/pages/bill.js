@@ -125,6 +125,45 @@ new Vue({
 
         },
 
+        editPrice: function(productPrice, productId, productCode) {
+
+            var thisInstance = this;
+
+            // Show edit price alert
+            Alert.editPrice(productPrice, function(inputValue) {
+
+                // Post data
+                var data = {
+                    product_id: productId,
+                    product_code: productCode,
+                    product_price: inputValue
+                };
+
+                // Make post request
+                thisInstance.$http.post('/bills/' + $('#bill').attr('bill-id') + '/edit-price', data, function(response) {
+
+                    if (response.success) {
+                        this.getBill(function() {
+                            Alert.success(Translation.common('success'), Translation.bill('price-updated'));
+                        }, true);
+                        return true;
+                    }
+
+                }).error(function(response) {
+
+                    if (response.message) {
+                        Alert.error(response.title, response.message);
+                        return false;
+                    }
+
+                    Alert.generalError();
+
+                });
+
+            });
+
+        },
+
         /**
          * Delete product from bill.
          *

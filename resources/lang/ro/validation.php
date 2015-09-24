@@ -65,7 +65,10 @@ return [
     'url'                   => ':attribute are un format invalid.',
 
     'attributes' => [
-        'password' => 'parolă'
+        'password' => 'parolă',
+        'product_id' => 'ID-ul produsului',
+        'product_code' => 'codul produsului',
+        'product_quantity' => 'cantitatea produsului',
     ],
 
 ];

@@ -1352,6 +1352,25 @@ var Alert = {
     },
 
     /**
+     * Edit product price alert.
+     *
+     * @param price
+     * @param callback
+     */
+    editPrice: function(price, callback) {
+
+        var priceConfig = {
+            title: Translation.bill('edit-price'),
+            placeholder: price,
+            text: Translation.bill('edit-price-description'),
+            requiredInput: Translation.bill('product-price-required')
+        };
+
+        this.edit(priceConfig, callback);
+
+    },
+
+    /**
      *
      * @param data
      * @param callback

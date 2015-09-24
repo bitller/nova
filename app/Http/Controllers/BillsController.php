@@ -9,6 +9,7 @@ use App\BillProduct;
 use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
+use App\Http\Requests\Bill\EditProductPriceRequest;
 use App\Http\Requests\CreateBillRequest;
 use App\Http\Requests\EditProductPageFromBillRequest;
 use App\Http\Requests\Bill\EditProductQuantityRequest;
@@ -158,7 +159,7 @@ class BillsController extends Controller {
      * Handle product quantity edit.
      *
      * @param int $billId
-     * @param Requests\EditProductQuantityRequest $request
+     * @param EditProductQuantityRequest $request
      * @return mixed
      */
     public function editQuantity($billId, EditProductQuantityRequest $request) {
@@ -177,8 +178,27 @@ class BillsController extends Controller {
 
     }
 
-    public function editPrice() {
-        //
+    /**
+     * Handle product price edit.
+     *
+     * @param int $billId
+     * @param EditProductPriceRequest $request
+     * @return mixed
+     */
+    public function editPrice($billId, EditProductPriceRequest $request) {
+
+        $handler = 'price';
+
+        $data = [
+            'billId' => $billId,
+            'productId' => $request->get('product_id'),
+            'productCode' => $request->get('product_code'),
+            'columnToUpdate' => $handler,
+            'newValue' => $request->get('product_price')
+        ];
+
+        return $this->handleProductEdit($handler, $data);
+
     }
 
     public function editDiscount() {

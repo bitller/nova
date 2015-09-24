@@ -10,5 +10,9 @@
     edit-quantity-description="{{ trans('bill.edit_quantity_description') }}"
     product-quantity-required="{{ trans('bill.product_quantity_required') }}"
     quantity-updated="{{ trans('bill.quantity_updated') }}"
+    edit-price="{{ trans('bill.edit_price') }}"
+    edit-price-description="{{ trans('bill.edit_price_description') }}"
+    product-price-required="{{ trans('bill.product_price_required') }}"
+    price-updated="{{ trans('bill.price_updated') }}"
     ></div>
 @endsection

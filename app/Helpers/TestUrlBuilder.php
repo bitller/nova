@@ -20,6 +20,26 @@ class TestUrlBuilder {
     }
 
     /**
+     * Build url used to edit product quantity.
+     *
+     * @param int $billId
+     * @return string
+     */
+    public static function editBillProductQuantity($billId) {
+        return '/bills/' . $billId . '/edit-quantity';
+    }
+
+    /**
+     * Build url used to edit product price.
+     *
+     * @param int $billId
+     * @return string
+     */
+    public static function editBillProductPrice($billId) {
+        return '/bills/' . $billId . '/edit-price';
+    }
+
+    /**
      * Build url used to delete a product from a bill.
      *
      * @param int $billId
