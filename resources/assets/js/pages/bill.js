@@ -213,6 +213,7 @@ new Vue({
          * Delete product from bill.
          *
          * @param id
+         * @param code
          */
         deleteProduct: function(id, code) {
 
