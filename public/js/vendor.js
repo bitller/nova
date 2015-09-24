@@ -1371,6 +1371,25 @@ var Alert = {
     },
 
     /**
+     * Edit product discount alert.
+     *
+     * @param discount
+     * @param callback
+     */
+    editDiscount: function(discount, callback) {
+
+        var discountConfig = {
+            title: Translation.bill('edit-discount'),
+            placeholder: discount,
+            text: Translation.bill('edit-discount-description'),
+            requiredInput: Translation.bill('product-discount-required')
+        };
+
+        this.edit(discountConfig, callback);
+
+    },
+
+    /**
      *
      * @param data
      * @param callback
