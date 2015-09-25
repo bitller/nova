@@ -9,6 +9,7 @@ use App\BillProduct;
 use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
+use App\Http\Requests\Bill\AddProductRequest;
 use App\Http\Requests\Bill\EditProductDiscountRequest;
 use App\Http\Requests\Bill\EditProductPriceRequest;
 use App\Http\Requests\CreateBillRequest;
@@ -125,8 +126,26 @@ class BillsController extends Controller {
 
     }
 
-    public function addProduct() {
-        //
+    public function addProduct($billId, AddProductRequest $request) {
+
+        // todo check if bill belongs to current user
+
+        // Query for application product with same code
+        $applicationProduct = ApplicationProduct::where('code', $request->get('product_code'))->first();
+
+        // Check if is an application product
+        if ($applicationProduct) {
+            $billApplicationProduct = new BillApplicationProduct();
+            $billApplicationProduct->product_id = $applicationProduct->id;
+            
+        }
+
+        // Query for product with same code
+        $product = Product::where('code', $request->get('product_code'))->where('bill_id', $billId)->first();
+
+        if ($product) {
+            // Is custom product
+        }
     }
 
     public function editPaymentTerm() {

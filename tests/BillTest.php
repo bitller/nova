@@ -13,6 +13,8 @@ class BillTest extends TestCase {
 
     /**
      * Access bill page as logged in user. Bill page should be displayed.
+     *
+     * @group bill
      */
     public function testBillPage() {
 
@@ -28,6 +30,8 @@ class BillTest extends TestCase {
 
     /**
      * Access bill page as visitor. Redirect to login is expected.
+     *
+     * @group bill
      */
     public function testBillPageAsVisitor() {
 
@@ -48,6 +52,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit custom product page. Success message is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditCustomProductPage() {
 
@@ -78,6 +85,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit application product page. Success response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditApplicationProductPage() {
 
@@ -108,6 +118,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page without posting any data.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function editProductPageWithEmptyPostData() {
 
@@ -130,6 +143,9 @@ class BillTest extends TestCase {
 
     /**
      * Try to edit product page without product id field. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function editProductPageWithEmptyProductId() {
 
@@ -158,6 +174,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page without product code field. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function editProductPageWithEmptyProductCode() {
 
@@ -186,6 +205,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page without page field. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithEmptyProductPage() {
 
@@ -214,6 +236,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page with an invalid page. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithInvalidProductPage() {
 
@@ -243,6 +268,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page with too small and too big page. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithTooSmallAndTooBigProductPage() {
 
@@ -281,6 +309,9 @@ class BillTest extends TestCase {
 
     /**
      * Try to edit product page with an invalid product id format. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithInvalidProductId() {
 
@@ -310,6 +341,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page with invalid product code. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithInvalidProductCode() {
 
@@ -338,6 +372,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page with an too short, then too long code. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithTooShortAndTooLongProductCode() {
 
@@ -376,6 +413,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page using code of another product. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithProductCodeOfAnotherProduct() {
 
@@ -407,6 +447,9 @@ class BillTest extends TestCase {
 
     /**
      * Try to edit product page from bill of another user. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageFromBillOfAnotherUser() {
 
@@ -440,6 +483,9 @@ class BillTest extends TestCase {
 
     /**
      * Edit product page with not existent product id. Fail response is expected.
+     *
+     * @group editProductPage
+     * @group bill
      */
     public function testEditProductPageWithNotExistentProductId() {
 
@@ -1143,6 +1189,359 @@ class BillTest extends TestCase {
         // Try with o big price
         $this->actingAs($user)
             ->post(TestUrlBuilder::editBillProductPrice($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /*
+     * --------------------------------------------------------------------------------------
+     *      Edit product discount tests
+     * --------------------------------------------------------------------------------------
+     */
+
+    /**
+     * Edit custom product discount. Success message is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditCustomProductDiscount() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => $product->code,
+            'product_discount' => rand(1, 100)
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => true
+            ]);
+
+    }
+
+    /**
+     * Edit application product discount. Success message is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditApplicationProductDiscount() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $applicationProduct = factory(App\ApplicationProduct::class)->create();
+        $bill->applicationProducts()->save(factory(App\BillApplicationProduct::class)->make(['product_id' => $applicationProduct->id]));
+
+        $data = [
+            'product_id' => $applicationProduct->id,
+            'product_code' => $applicationProduct->code,
+            'product_discount' => rand(1, 100)
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => true
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with empty data. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithEmptyData() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id))
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with empty product id. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithEmptyProductId() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_code' => $product->code,
+            'product_discount' => rand(1, 100)
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with invalid product id. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithInvalidProductId() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => 'bt04',
+            'product_code' => $product->code,
+            'product_discount' => rand(1, 100)
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with empty product code. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithEmptyProductCode() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => 'bt04',
+            'product_discount' => rand(1, 100)
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with invalid product code. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithInvalidProductCode() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => 'btl04',
+            'product_discount' => rand(1, 100)
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with too short and too long product code. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithTooShortAndTooLongProductCode() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => '0404',
+            'product_discount' => rand(1, 100)
+        ];
+
+        // Try with too short product code
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+        // Try with too long product code
+        $data['product_code'] = str_repeat($product->code, 10);
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+    }
+
+    /**
+     * Edit product discount with empty product discount. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithEmptyProductDiscount() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => $product->code
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with invalid product discount. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithInvalidProductDiscount() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => '0404',
+            'product_discount' => 'b04'
+        ];
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id), $data)
+            ->seeJson([
+                'success' => false
+            ]);
+
+    }
+
+    /**
+     * Edit product discount with too small and too big product discount. Fail response is expected.
+     *
+     * @group editProductDiscount
+     * @group bill
+     */
+    public function testEditProductDiscountWithTooSmallAndTooBigProductDiscount() {
+
+        // Create user, client and bill
+        $user = factory(App\User::class)->create();
+        $client = $user->clients()->save(factory(App\Client::class)->make());
+        $bill = $user->bills()->save(factory(App\Bill::class)->make(['client_id' => $client->id]));
+
+        // Create product and add to bill
+        $product = $user->products()->save(factory(App\Product::class)->make());
+        $bill->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+
+        $data = [
+            'product_id' => $product->id,
+            'product_code' => '0404',
+            'product_discount' => rand(-99, -1)
+        ];
+
+        // Try with too small product discount
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id))
+            ->seeJson([
+                'success' => false
+            ]);
+
+        // Try with too big discount
+        $data['product_discount'] = rand(101, 999);
+
+        $this->actingAs($user)
+            ->post(TestUrlBuilder::editBillProductDiscount($bill->id))
             ->seeJson([
                 'success' => false
             ]);

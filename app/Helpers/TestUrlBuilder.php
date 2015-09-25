@@ -40,6 +40,16 @@ class TestUrlBuilder {
     }
 
     /**
+     * Build url used to edit product discount.
+     *
+     * @param int $billId
+     * @return string
+     */
+    public static function editBillProductDiscount($billId) {
+        return '/bills/' . $billId . '/edit-discount';
+    }
+
+    /**
      * Build url used to delete a product from a bill.
      *
      * @param int $billId
