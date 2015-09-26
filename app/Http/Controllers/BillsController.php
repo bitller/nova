@@ -22,6 +22,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\Products;
 
 /**
  * Handle the work with bills
@@ -127,25 +128,7 @@ class BillsController extends Controller {
     }
 
     public function addProduct($billId, AddProductRequest $request) {
-
-        // todo check if bill belongs to current user
-
-        // Query for application product with same code
-        $applicationProduct = ApplicationProduct::where('code', $request->get('product_code'))->first();
-
-        // Check if is an application product
-        if ($applicationProduct) {
-            $billApplicationProduct = new BillApplicationProduct();
-            $billApplicationProduct->product_id = $applicationProduct->id;
-            
-        }
-
-        // Query for product with same code
-        $product = Product::where('code', $request->get('product_code'))->where('bill_id', $billId)->first();
-
-        if ($product) {
-            // Is custom product
-        }
+        Products::insertProduct($billId, $request->all());
     }
 
     public function editPaymentTerm() {
@@ -299,9 +282,10 @@ class BillsController extends Controller {
 
         $response = new AjaxResponse();
 
-        // Make sure bill exists
+        // Query for bill details
         $bill = Auth::user()->bills()->where('id', $data['billId'])->first();
 
+        // Make sure bill exists
         if (!$bill) {
             $response->setFailMessage(trans('common.general_error'));
             return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
@@ -309,15 +293,40 @@ class BillsController extends Controller {
 
         $success = false;
 
+        // Data to be updated
+        $dataToUpdate = [
+            $data['columnToUpdate'] => $data['newValue']
+        ];
+
         // Check if is a custom product
         if ($this->isCustomProduct($data['productId'], $data['productCode'])) {
-            BillProduct::where('id', $data['productId'])->update([$data['columnToUpdate'] => $data['newValue']]);
+
+            // Get product details
+            $product = BillProduct::where('product_id', $data['productId'])->first();
+
+            // When quantity column is updated, update also relative columns
+            if ($data['columnToUpdate'] === 'quantity') {
+                // Update also the price
+                $dataToUpdate['price'] = Products::newPrice($product->price, $product->quantity, $data['newValue']);
+            }
+
+            BillProduct::where('id', $data['productId'])->update($dataToUpdate);
             $success = true;
         }
 
         // Check if is an application product
         if ($this->isApplicationProduct($data['productId'], $data['productCode'])) {
-            BillApplicationProduct::where('id', $data['productId'])->update([$data['columnToUpdate'] => $data['newValue']]);
+
+            // Get product details
+            $product = BillApplicationProduct::where('product_id', $data['productId'])->first();
+
+            // When quantity column is updated, update also relative columns
+            if ($data['columnToUpdate'] === 'quantity') {
+                // Update also the price
+                $dataToUpdate['price'] = Products::newPrice($product->price, $product->quantity, $data['newValue']);
+            }
+
+            BillApplicationProduct::where('id', $data['productId'])->update($dataToUpdate);
             $success = true;
         }
 
@@ -351,6 +360,14 @@ class BillsController extends Controller {
      */
     private function isCustomProduct($id, $code) {
         return Product::where('id', $id)->where('code', $code)->where('user_id', Auth::user()->id)->count();
+    }
+
+    private function calculateProductData($productData) {
+
+        $productData['price'] = $productData['price'] * $productData['quantity'];
+        $productData['final_price'] = ($productData['discount']/100) * $productData['price'];
+
+        return $productData;
     }
 
 }

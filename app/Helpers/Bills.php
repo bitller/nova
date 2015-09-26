@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Bill;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -46,6 +47,16 @@ class Bills {
 
         return $secondQuery;
 
+    }
+
+    /**
+     * Check if given bill belongs to currently authenticated user.
+     *
+     * @param int $billId
+     * @return mixed
+     */
+    public static function belongsToAuthUser($billId) {
+        return Bill::where('id', $billId)->where('user_id', Auth::user()->id)->count();
     }
 
     /**

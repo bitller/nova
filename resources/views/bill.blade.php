@@ -2,31 +2,36 @@
 @section('content')
     @include('includes.ajax-translations.bill')
     <div id="bill" bill-id="{{ $billId }}" v-show="loaded">
-        <div class="col-md-12 bill-menu">
-            <div class="col-md-3">
-                <button class="btn btn-block btn-default">
-                    <span class="glyphicon glyphicon-print"></span> Print bill
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-block btn-default">
-                    <span class="glyphicon glyphicon-pencil"></span> Edit other details
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button type="button" class="btn btn-block btn-default">
-                    <span class="glyphicon glyphicon-plus"></span> Add product
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-block btn-default">
-                    <span class="glyphicon glyphicon-calendar"></span> Edit payment term
-                </button>
-            </div>
-        </div>
+        {{--<div class="col-md-12 bill-menu">--}}
+            {{--<div class="col-md-3">--}}
+                {{--<button class="btn btn-block btn-default">--}}
+                    {{--<span class="glyphicon glyphicon-print"></span> Print bill--}}
+                {{--</button>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-3">--}}
+                {{--<button class="btn btn-block btn-default">--}}
+                    {{--<span class="glyphicon glyphicon-pencil"></span> Edit other details--}}
+                {{--</button>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-3">--}}
+                {{--<button type="button" class="btn btn-block btn-default">--}}
+                    {{--<span class="glyphicon glyphicon-plus"></span> Add product--}}
+                {{--</button>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-3">--}}
+                {{--<button class="btn btn-block btn-default">--}}
+                    {{--<span class="glyphicon glyphicon-calendar"></span> Edit payment term--}}
+                {{--</button>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="col-md-12">
-        <h4 class="bill-title"><a href="#">John Doe</a> (acest client mai are 2 facturi)</h4>
-        <table class="table table-bordered">
+            <div class="add-client-button">
+                <span class="my-clients-title"><a href="#">John Doe</a> (acest client mai are 2 facturi)</span>
+                <button type="button" class="btn btn-primary pull-right" v-on="click: createClient()">
+                    <span class="glyphicon glyphicon-plus"></span> {{ trans('products.add') }}
+                </button>
+            </div>
+        <table class="table table-bordered bill-products-table">
             <thead>
                 <tr>
                     <th class="text-center">{{ trans('bill.page') }}</th>
