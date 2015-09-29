@@ -3,8 +3,11 @@ new Vue({
     el: '#bill',
 
     data: {
-        pageHover: false,
-        counter: 0
+        code: '',
+        page: '',
+        discount: '',
+        price: '',
+        quantity: ''
     },
 
     ready: function() {
@@ -14,6 +17,8 @@ new Vue({
     methods: {
 
         /**
+         * Make request to get user bills.
+         *
          * @param showSuccess callback when get bills request is finished
          * @param hideLoader If set to true, loading alert will not be displayed
          */
@@ -35,6 +40,47 @@ new Vue({
                 showSuccess();
             });
 
+        },
+
+        addProduct: function(productId, productCode) {
+
+            // Build post data
+            var data = {
+                product_page: this.$get('page'),
+                product_code: this.$get('code'),
+                product_price: this.$get('price'),
+                product_quantity: this.$get('quantity'),
+                product_discount: this.$get('discount')
+            };
+
+            // Make post request
+            this.$http.post('/bills/' + Data.getBillId() + '/add', data, function(response) {
+
+                if (!response.success) {
+                    this.$set('error', response.message);
+                    return;
+                }
+
+                this.getBill(function() {
+                    $('#addProductToBillModal').modal('hide');
+                    Alert.success('Product added!', 'Product successfully added to this bill.');
+                }, true);
+
+            }).error(function(response) {
+                if (response.message) {
+                    this.$set('error', response.message)
+                }
+            });
+
+        },
+
+        resetModal: function() {
+            this.$set('page', '');
+            this.$set('code', '');
+            this.$set('price', '');
+            this.$set('quantity', '');
+            this.$set('discount', '');
+            this.$set('error', false);
         },
 
         /**

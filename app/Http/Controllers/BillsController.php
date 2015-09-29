@@ -128,7 +128,7 @@ class BillsController extends Controller {
     }
 
     public function addProduct($billId, AddProductRequest $request) {
-        Products::insertProduct($billId, $request->all());
+        return Products::insertProduct($billId, $request->all());
     }
 
     public function editPaymentTerm() {

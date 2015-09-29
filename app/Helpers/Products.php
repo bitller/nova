@@ -65,18 +65,21 @@ class Products {
             return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
         }
 
+        $applicationProduct = ApplicationProduct::where('code', $inputs['product_code'])->first();
+        $customProduct = Product::where('code', $inputs['product_code'])->where('user_id', Auth::user()->id)->first();
+
         // Check if products exists and if is an application product or custom product
-        if (self::isApplicationProduct($inputs['product_id'], $inputs['product_code'])) {
+        if ($applicationProduct) {
 
             // Get application product and create db table instance
-            $product = ApplicationProduct::where('code', $inputs['product_code'])->first();
-            $query = DB::table('bill_products');
+            $product = $applicationProduct;
+            $query = DB::table('bill_application_products');
 
-        } else if (self::isCustomProduct($inputs['product_id'], $inputs['product_code'])) {
+        } else if ($customProduct) {
 
             // Query for custom product and create db table instance
-            $product = Product::where('code', $inputs['product_code'])->where('user_id', Auth::user()->id)->first();
-            $query = DB::table('bill_application_products');
+            $product = $customProduct;
+            $query = DB::table('bill_products');
 
         } else {
             // Product does not exists
@@ -144,6 +147,7 @@ class Products {
         }
 
         $insertQuery->insert($insertData);
+
     }
 
 }

@@ -25,6 +25,7 @@ class CreateBillProductsTable extends Migration {
             $table->tinyInteger('quantity')->default(1);
             $table->float('price');
             $table->tinyInteger('discount');
+            $table->float('calculated_discount');
             $table->float('final_price');
             $table->timestamps();
 

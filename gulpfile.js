@@ -15,7 +15,7 @@ elixir(function(mix) {
     mix.sass('app.scss');
     mix.scripts([
         'jquery.min.js', 'bootstrap.min.js', 'vue/vue.js', 'vue/vue-resource.js', 'components/loader.js', 'sweetAlert.js',
-        'custom-libs/alerts.js', 'custom-libs/swal-config.js', 'custom-libs/token.js', 'custom-libs/translations.js'
+        'custom-libs/alerts.js', 'custom-libs/swal-config.js', 'custom-libs/token.js', 'custom-libs/translations.js', 'custom-libs/data.js'
     ], 'public/js/vendor.js')
         .scripts(['welcome.js'], 'public/js/welcome.js')
         .scripts(['pages/base.js', 'pages/bills.js'], 'public/js/bills.js')

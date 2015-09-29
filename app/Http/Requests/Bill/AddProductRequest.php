@@ -29,11 +29,11 @@ class AddProductRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'page' => ['numeric', 'between:1,2000'],
-            'code' => ['required', 'digits:5'],
-            'price' => ['required', 'numeric', 'between:0,9999'],
-            'quantity' => ['numeric', 'between:1,999'],
-            'discount' => ['numeric', 'between:1,100']
+            'product_code' => ['required', 'digits:5'],
+            'product_page' => ['numeric', 'between:1,2000'],
+            'product_price' => ['required', 'numeric', 'between:0,9999'],
+            'product_discount' => ['numeric', 'between:1,100'],
+            'product_quantity' => ['numeric', 'between:1,999']
         ];
     }
 

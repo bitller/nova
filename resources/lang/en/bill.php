@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'add_product_bill' => 'Add product to bill',
     'code' => 'Code',
     'discount' => 'Discount',
     'discount_updated' => 'Product discount was updated!',
@@ -18,9 +19,14 @@ return [
     'page_updated' => 'Product page updated!',
     'price' => 'Price',
     'price_updated' => 'Product price updated!',
+    'product_code' => 'Product code',
+    'product_discount' => 'Product discount',
     'product_discount_required' => 'Product discount is required!',
+    'product_page' => 'Product price',
     'product_page_required' => 'Product page is required!',
+    'product_price' => 'Product price',
     'product_price_required' => 'Product price is required!',
+    'product_quantity' => 'Product quantity',
     'product_quantity_required' => 'Product quantity is required!',
     'product_will_be_deleted' => 'Product will be deleted from this bill!',
     'quantity' => 'Quantity',
