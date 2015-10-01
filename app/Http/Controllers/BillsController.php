@@ -149,6 +149,7 @@ class BillsController extends Controller {
         $data = [
             'billId' => $billId,
             'productId' => $request->get('product_id'),
+            'billProductId' => $request->get('bill_product_id'),
             'productCode' => $request->get('product_code'),
             'columnToUpdate' => $handler,
             'newValue' => $request->get('product_page')
@@ -172,6 +173,7 @@ class BillsController extends Controller {
         $data = [
             'billId' => $billId,
             'productId' => $request->get('product_id'),
+            'billProductId' => $request->get('bill_product_id'),
             'productCode' => $request->get('product_code'),
             'columnToUpdate' => $handler,
             'newValue' => $request->get('product_quantity')
@@ -195,6 +197,7 @@ class BillsController extends Controller {
         $data = [
             'billId' => $billId,
             'productId' => $request->get('product_id'),
+            'billProductId' => $request->get('bill_product_id'),
             'productCode' => $request->get('product_code'),
             'columnToUpdate' => $handler,
             'newValue' => $request->get('product_price')
@@ -218,6 +221,7 @@ class BillsController extends Controller {
         $data = [
             'billId' => $billId,
             'productId' => $request->get('product_id'),
+            'billProductId' => $request->get('bill_product_id'),
             'productCode' => $request->get('product_code'),
             'columnToUpdate' =>$handler,
             'newValue' => $request->get('product_discount')
@@ -302,7 +306,7 @@ class BillsController extends Controller {
         if ($this->isCustomProduct($data['productId'], $data['productCode'])) {
 
             // Get product details
-            $product = BillProduct::where('product_id', $data['productId'])->first();
+            $product = BillProduct::where('id', $data['billProductId'])->first();
 
             // When quantity column is updated, update also relative columns
             if ($data['columnToUpdate'] === 'quantity') {
@@ -310,7 +314,7 @@ class BillsController extends Controller {
                 $dataToUpdate['price'] = Products::newPrice($product->price, $product->quantity, $data['newValue']);
             }
 
-            BillProduct::where('id', $data['productId'])->update($dataToUpdate);
+            BillProduct::where('id', $data['billProductId'])->update($dataToUpdate);
             $success = true;
         }
 
@@ -318,7 +322,7 @@ class BillsController extends Controller {
         if ($this->isApplicationProduct($data['productId'], $data['productCode'])) {
 
             // Get product details
-            $product = BillApplicationProduct::where('product_id', $data['productId'])->first();
+            $product = BillApplicationProduct::where('id', $data['billProductId'])->first();
 
             // When quantity column is updated, update also relative columns
             if ($data['columnToUpdate'] === 'quantity') {
@@ -326,7 +330,7 @@ class BillsController extends Controller {
                 $dataToUpdate['price'] = Products::newPrice($product->price, $product->quantity, $data['newValue']);
             }
 
-            BillApplicationProduct::where('id', $data['productId'])->update($dataToUpdate);
+            BillApplicationProduct::where('id', $data['billProductId'])->update($dataToUpdate);
             $success = true;
         }
 

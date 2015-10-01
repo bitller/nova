@@ -25,12 +25,12 @@
             <tbody>
 
             <tr v-repeat="product in bill">
-                <td class="text-center editable"  v-on="click: editPage(product.page, product.id, product.code)">@{{ product.page }}</td>
+                <td class="text-center editable"  v-on="click: editPage(product.page, product.id, product.code, product.bill_product_id)">@{{ product.page }}</td>
                 <td class="text-center">@{{ product.code }}</td>
                 <td>@{{ product.name }}</td>
-                <td class="text-center editable" v-on="click: editQuantity(product.quantity, product.id, product.code)">@{{ product.quantity }}</td>
-                <td class="text-center editable" v-on="click: editPrice(product.price, product.id, product.code)">@{{ product.price }} ron</td>
-                <td class="text-center editable" v-on="click: editDiscount(product.discount, product.id, product.code)">@{{ product.discount }}</td>
+                <td class="text-center editable" v-on="click: editQuantity(product.quantity, product.id, product.code, product.bill_product_id)">@{{ product.quantity }}</td>
+                <td class="text-center editable" v-on="click: editPrice(product.price, product.id, product.code, product.bill_product_id)">@{{ product.price }} ron</td>
+                <td class="text-center editable" v-on="click: editDiscount(product.discount, product.id, product.code, product.bill_product_id)">@{{ product.discount }}</td>
                 <td class="text-center">9.00 ron</td>
                 <td class="text-center editable delete-product"  v-on="click: deleteProduct(product.id, product.code)"><span class="glyphicon glyphicon-trash"></span></td>
             </tr>

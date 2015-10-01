@@ -24,9 +24,10 @@ class Bills {
         $firstQuery = DB::table('products')->whereIn('products.id', $productIds)
             ->leftJoin('bill_products', 'bill_products.product_id', '=', 'products.id')
             ->select(
+                'products.id',
                 'products.name',
                 'products.code',
-                'bill_products.id',
+                'bill_products.id as bill_product_id',
                 'bill_products.page',
                 'bill_products.quantity',
                 'bill_products.price',
@@ -36,9 +37,10 @@ class Bills {
         $secondQuery = DB::table('application_products')->whereIn('application_products.id', $applicationProductIds)
             ->leftJoin('bill_application_products', 'bill_application_products.product_id', '=', 'application_products.id')
             ->select(
+                'application_products.id',
                 'application_products.name',
                 'application_products.code',
-                'bill_application_products.id',
+                'bill_application_products.id as bill_product_id',
                 'bill_application_products.page',
                 'bill_application_products.quantity',
                 'bill_application_products.price',

@@ -46,11 +46,11 @@ new Vue({
 
             // Build post data
             var data = {
-                product_page: this.$get('page'),
                 product_code: this.$get('code'),
+                product_page: this.$get('page'),
                 product_price: this.$get('price'),
-                product_quantity: this.$get('quantity'),
-                product_discount: this.$get('discount')
+                product_discount: this.$get('discount'),
+                product_quantity: this.$get('quantity')
             };
 
             // Make post request
@@ -89,8 +89,9 @@ new Vue({
          * @param productPage
          * @param productId
          * @param productCode
+         * @param billProductId
          */
-        editPage: function(productPage, productId, productCode) {
+        editPage: function(productPage, productId, productCode, billProductId) {
 
             var thisInstance = this;
 
@@ -98,6 +99,7 @@ new Vue({
 
                 var data = {
                     product_id: productId,
+                    bill_product_id: billProductId,
                     product_code: productCode,
                     product_page: inputValue
                 };
@@ -131,7 +133,7 @@ new Vue({
          * @param productId
          * @param productCode
          */
-        editQuantity: function(productQuantity, productId, productCode) {
+        editQuantity: function(productQuantity, productId, productCode, billProductId) {
 
             var thisInstance = this;
 
@@ -141,6 +143,7 @@ new Vue({
                 // Build post data
                 var data = {
                     product_id: productId,
+                    bill_product_id: billProductId,
                     product_code: productCode,
                     product_quantity: inputValue
                 };
@@ -174,7 +177,7 @@ new Vue({
          * @param productId
          * @param productCode
          */
-        editPrice: function(productPrice, productId, productCode) {
+        editPrice: function(productPrice, productId, productCode, billProductId) {
 
             var thisInstance = this;
 
@@ -184,6 +187,7 @@ new Vue({
                 // Post data
                 var data = {
                     product_id: productId,
+                    bill_product_id: billProductId,
                     product_code: productCode,
                     product_price: inputValue
                 };
@@ -217,7 +221,7 @@ new Vue({
          * @param productId
          * @param productCode
          */
-        editDiscount: function(productDiscount, productId, productCode) {
+        editDiscount: function(productDiscount, productId, productCode, billProductId) {
 
             var thisInstance = this;
 
@@ -227,6 +231,7 @@ new Vue({
                 // Data used is post request
                 var data = {
                     product_id: productId,
+                    bill_product_id: billProductId,
                     product_code: productCode,
                     product_discount: inputValue
                 };
