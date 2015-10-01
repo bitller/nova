@@ -297,22 +297,13 @@ class BillsController extends Controller {
 
         $success = false;
 
-        // Data to be updated
-        $dataToUpdate = [
-            $data['columnToUpdate'] => $data['newValue']
-        ];
-
         // Check if is a custom product
         if ($this->isCustomProduct($data['productId'], $data['productCode'])) {
 
             // Get product details
             $product = BillProduct::where('id', $data['billProductId'])->first();
 
-            // When quantity column is updated, update also relative columns
-            if ($data['columnToUpdate'] === 'quantity') {
-                // Update also the price
-                $dataToUpdate['price'] = Products::newPrice($product->price, $product->quantity, $data['newValue']);
-            }
+            $dataToUpdate = Bills::getDataToUpdateOnEdit($data['columnToUpdate'], $data['newValue'], $product);
 
             BillProduct::where('id', $data['billProductId'])->update($dataToUpdate);
             $success = true;
@@ -324,11 +315,7 @@ class BillsController extends Controller {
             // Get product details
             $product = BillApplicationProduct::where('id', $data['billProductId'])->first();
 
-            // When quantity column is updated, update also relative columns
-            if ($data['columnToUpdate'] === 'quantity') {
-                // Update also the price
-                $dataToUpdate['price'] = Products::newPrice($product->price, $product->quantity, $data['newValue']);
-            }
+            $dataToUpdate = Bills::getDataToUpdateOnEdit($data['columnToUpdate'], $data['newValue'], $product);
 
             BillApplicationProduct::where('id', $data['billProductId'])->update($dataToUpdate);
             $success = true;

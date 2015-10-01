@@ -31,7 +31,9 @@ class Bills {
                 'bill_products.page',
                 'bill_products.quantity',
                 'bill_products.price',
-                'bill_products.discount'
+                'bill_products.discount',
+                'bill_products.calculated_discount',
+                'bill_products.final_price'
             );
 
         $secondQuery = DB::table('application_products')->whereIn('application_products.id', $applicationProductIds)
@@ -44,7 +46,9 @@ class Bills {
                 'bill_application_products.page',
                 'bill_application_products.quantity',
                 'bill_application_products.price',
-                'bill_application_products.discount'
+                'bill_application_products.discount',
+                'bill_application_products.calculated_discount',
+                'bill_application_products.final_price'
             )->union($firstQuery)->orderBy('page', 'asc')->get();
 
         return $secondQuery;
@@ -59,6 +63,65 @@ class Bills {
      */
     public static function belongsToAuthUser($billId) {
         return Bill::where('id', $billId)->where('user_id', Auth::user()->id)->count();
+    }
+
+    /**
+     * Return an array with columns to update on bill product edit.
+     *
+     * @param string $columnToUpdate
+     * @param string|int $newValue
+     * @param Product $product
+     * @return array
+     */
+    public static function getDataToUpdateOnEdit($columnToUpdate, $newValue, $product) {
+
+        if ($columnToUpdate === 'page') {
+
+            return [
+                $columnToUpdate => $newValue
+            ];
+        }
+
+        // When quantity is updated, update price, calculated discount and final price
+        if ($columnToUpdate === 'quantity') {
+
+            $toUpdate = [
+                $columnToUpdate => $newValue
+            ];
+
+            $toUpdate['price'] = Products::newPrice($product->price, $product->quantity, $newValue);
+            $toUpdate['calculated_discount'] = Products::discount($toUpdate['price'], $product->discount);
+            $toUpdate['final_price'] = $toUpdate['price'] - $toUpdate['calculated_discount'];
+
+            return $toUpdate;
+        }
+
+        // When price is updated, update calculated discount and final price
+        if ($columnToUpdate === 'price') {
+
+            $toUpdate = [
+                $columnToUpdate => $newValue * $product->quantity
+            ];
+
+            $toUpdate['calculated_discount'] = Products::discount($newValue * $product->quantity, $product->discount);
+            $toUpdate['final_price'] = ($newValue * $product->quantity) - $toUpdate['calculated_discount'];
+
+            return $toUpdate;
+        }
+
+        // When discount is updated, update calculated discount and final price
+        if ($columnToUpdate === 'discount') {
+
+            $toUpdate = [
+                $columnToUpdate => $newValue
+            ];
+
+            $toUpdate['calculated_discount'] = Products::discount($product->price, $newValue);
+            $toUpdate['final_price'] = $product->price - $toUpdate['calculated_discount'];
+
+            return $toUpdate;
+        }
+
     }
 
     /**

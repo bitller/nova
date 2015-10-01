@@ -30,8 +30,8 @@
                 <td>@{{ product.name }}</td>
                 <td class="text-center editable" v-on="click: editQuantity(product.quantity, product.id, product.code, product.bill_product_id)">@{{ product.quantity }}</td>
                 <td class="text-center editable" v-on="click: editPrice(product.price, product.id, product.code, product.bill_product_id)">@{{ product.price }} ron</td>
-                <td class="text-center editable" v-on="click: editDiscount(product.discount, product.id, product.code, product.bill_product_id)">@{{ product.discount }}</td>
-                <td class="text-center">9.00 ron</td>
+                <td class="text-center editable" v-on="click: editDiscount(product.discount, product.id, product.code, product.bill_product_id)">@{{ product.discount }}% - @{{ product.calculated_discount }} ron</td>
+                <td class="text-center">@{{ product.final_price }} ron</td>
                 <td class="text-center editable delete-product"  v-on="click: deleteProduct(product.id, product.code)"><span class="glyphicon glyphicon-trash"></span></td>
             </tr>
 
