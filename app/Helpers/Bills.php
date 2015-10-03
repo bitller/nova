@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 use App\Bill;
+use App\BillApplicationProduct;
+use App\BillProduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 class Bills {
 
     /**
+     * Query database for products of a given bill.
+     *
      * @param int $billId
      * @return mixed
      */
@@ -56,6 +60,135 @@ class Bills {
     }
 
     /**
+     * Handle database operations to delete a product from a given bill.
+     *
+     * @param array $data
+     *      @option int billId
+     *      @option int productId
+     *      @option int billProductId
+     *      @option string productCode
+     * @return mixed
+     */
+    public static function handleBillProductDelete($data = []) {
+
+        $response = new AjaxResponse();
+
+        // Make sure bill exists
+        $bill = Auth::user()->bills()->where('id', $data['billId'])->first();
+
+        if (!$bill) {
+            $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        $response->setSuccessMessage(trans('common.product_deleted'));
+        $successResponse = response($response->get())->header('Content-Type', 'application/json');
+
+        // Check if is custom product
+        if (Products::isCustomProduct($data['productId'], $data['productCode'])) {
+
+            BillProduct::where('id', $data['billProductId'])->where('bill_id', $data['billId'])->delete();
+            return $successResponse;
+        }
+
+        // Check if is application product
+        if (Products::isApplicationProduct($data['productId'], $data['productCode'])) {
+
+            BillApplicationProduct::where('id', $data['billProductId'])->where('bill_id', $data['billId'])->delete();
+            return $successResponse;
+        }
+
+        // If we arrive here something went wrong
+        $response->setFailMessage(trans('common.general_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Handle database operations to edit a bill product.
+     *
+     * @param array $data
+     *      @option int billId
+     *      @option int productId
+     *      @option int billProductId
+     *      @option string productCode
+     *      @option string columnToUpdate
+     *      @option string newValue
+     * @return mixed
+     */
+    public static function handleBillProductEdit($data = []) {
+
+        $response = new AjaxResponse();
+
+        // Query for bill
+        $bill = Auth::user()->bills()->where('id', $data['billId'])->first();
+
+        // Now make sure exists in database
+        if (!$bill) {
+            $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        // We will use this variable to check if operation was successful
+        $success = false;
+
+        // Check if is a custom product
+        if (Products::isCustomProduct($data['productId'], $data['productCode'])) {
+
+            // Get product details and update with new data
+            $product = BillProduct::where('id', $data['billProductId'])->first();
+            BillProduct::where('id', $data['billProductId'])->update(Bills::getDataToUpdateOnEdit($data['columnToUpdate'], $data['newValue'], $product));
+            $success = true;
+
+        }
+
+        // Check if is an application product
+        if (Products::isApplicationProduct($data['productId'], $data['productCode'])) {
+
+            // Get product details and update with new data
+            $product = BillApplicationProduct::where('id', $data['billProductId'])->first();
+            BillApplicationProduct::where('id', $data['billProductId'])->update(Bills::getDataToUpdateOnEdit($data['columnToUpdate'], $data['newValue'], $product));
+            $success = true;
+
+        }
+
+        // Check if update was successful
+        if ($success) {
+            $response->setSuccessMessage(trans('bill.' . $data['columnToUpdate'] . '_updated'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        // If we arrive here something is wrong
+        $response->setFailMessage(trans('common.general_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+
+    }
+
+    /**
+     * Return a config used by handleBillProductEdit method.
+     *
+     * @param $request
+     * @param int $billId
+     * @param string $columnToUpdate
+     * @param string $newValueKey
+     * @return array
+     */
+    public static function getBillProductEditConfig($request, $billId, $columnToUpdate, $newValueKey = '') {
+        $config = [
+            'billId' => $billId,
+            'productId' => $request->get('product_id'),
+            'billProductId' => $request->get('bill_product_id'),
+            'productCode' => $request->get('product_code'),
+            'columnToUpdate' => $columnToUpdate,
+        ];
+
+        if (strlen($newValueKey) < 1) {
+            $config['newValueKey'] = 'product_' . $columnToUpdate;
+        }
+
+        return $config;
+    }
+
+    /**
      * Check if given bill belongs to currently authenticated user.
      *
      * @param int $billId
@@ -73,7 +206,7 @@ class Bills {
      * @param Product $product
      * @return array
      */
-    public static function getDataToUpdateOnEdit($columnToUpdate, $newValue, $product) {
+    private static function getDataToUpdateOnEdit($columnToUpdate, $newValue, $product) {
 
         if ($columnToUpdate === 'page') {
 

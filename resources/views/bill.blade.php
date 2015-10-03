@@ -32,7 +32,7 @@
                 <td class="text-center editable" v-on="click: editPrice(product.price, product.id, product.code, product.bill_product_id)">@{{ product.price }} ron</td>
                 <td class="text-center editable" v-on="click: editDiscount(product.discount, product.id, product.code, product.bill_product_id)">@{{ product.discount }}% - @{{ product.calculated_discount }} ron</td>
                 <td class="text-center">@{{ product.final_price }} ron</td>
-                <td class="text-center editable delete-product"  v-on="click: deleteProduct(product.id, product.code)"><span class="glyphicon glyphicon-trash"></span></td>
+                <td class="text-center editable delete-product"  v-on="click: deleteProduct(product.id, product.code, product.bill_product_id)"><span class="glyphicon glyphicon-trash"></span></td>
             </tr>
 
             </tbody>

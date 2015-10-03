@@ -266,7 +266,7 @@ new Vue({
          * @param id
          * @param code
          */
-        deleteProduct: function(id, code) {
+        deleteProduct: function(id, code, billProductId) {
 
             var thisInstance = this;
 
@@ -277,7 +277,7 @@ new Vue({
                 Alert.loader();
 
                 // Make request
-                thisInstance.$http.get('/bills/' + $('#bill').attr('bill-id') + '/delete/' + id + '/' + code, function(response) {
+                thisInstance.$http.get('/bills/' + $('#bill').attr('bill-id') + '/delete/' + id + '/' + code + '/' + billProductId, function(response) {
 
                     // If a success response is returned reload products and show a success message
                     if (response.success) {

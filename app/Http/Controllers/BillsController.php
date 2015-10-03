@@ -144,18 +144,8 @@ class BillsController extends Controller {
      */
     public function editPage($billId, EditProductPageFromBillRequest $request) {
 
-        $handler = 'page';
-
-        $data = [
-            'billId' => $billId,
-            'productId' => $request->get('product_id'),
-            'billProductId' => $request->get('bill_product_id'),
-            'productCode' => $request->get('product_code'),
-            'columnToUpdate' => $handler,
-            'newValue' => $request->get('product_page')
-        ];
-
-        return $this->handleProductEdit('page', $data);
+        $data = Bills::getBillProductEditConfig($request, $billId, 'page');
+        return Bills::handleBillProductEdit($data);
 
     }
 
@@ -168,18 +158,8 @@ class BillsController extends Controller {
      */
     public function editQuantity($billId, EditProductQuantityRequest $request) {
 
-        $handler = 'quantity';
-
-        $data = [
-            'billId' => $billId,
-            'productId' => $request->get('product_id'),
-            'billProductId' => $request->get('bill_product_id'),
-            'productCode' => $request->get('product_code'),
-            'columnToUpdate' => $handler,
-            'newValue' => $request->get('product_quantity')
-        ];
-
-        return $this->handleProductEdit($handler, $data);
+        $data = Bills::getBillProductEditConfig($request, $billId, 'quantity');
+        return Bills::handleBillProductEdit($data);
 
     }
 
@@ -192,18 +172,8 @@ class BillsController extends Controller {
      */
     public function editPrice($billId, EditProductPriceRequest $request) {
 
-        $handler = 'price';
-
-        $data = [
-            'billId' => $billId,
-            'productId' => $request->get('product_id'),
-            'billProductId' => $request->get('bill_product_id'),
-            'productCode' => $request->get('product_code'),
-            'columnToUpdate' => $handler,
-            'newValue' => $request->get('product_price')
-        ];
-
-        return $this->handleProductEdit($handler, $data);
+        $data = Bills::getBillProductEditConfig($request, $billId, 'price');
+        return Bills::handleBillProductEdit($data);
 
     }
 
@@ -216,18 +186,8 @@ class BillsController extends Controller {
      */
     public function editDiscount($billId, EditProductDiscountRequest $request) {
 
-        $handler = 'discount';
-
-        $data = [
-            'billId' => $billId,
-            'productId' => $request->get('product_id'),
-            'billProductId' => $request->get('bill_product_id'),
-            'productCode' => $request->get('product_code'),
-            'columnToUpdate' =>$handler,
-            'newValue' => $request->get('product_discount')
-        ];
-
-        return $this->handleProductEdit($handler, $data);
+        $data = Bills::getBillProductEditConfig($request, $billId, 'discount');
+        return Bills::handleBillProductEdit($data);
 
     }
 
@@ -236,129 +196,20 @@ class BillsController extends Controller {
      *
      * @param int $billId
      * @param int $productId
+     * @param int $billProductId
      * @param string $code
      * @param Requests\DeleteProductFromBillRequest $request
      * @return mixed
      */
-    public function deleteProduct($billId, $productId, $code, Requests\DeleteProductFromBillRequest $request) {
+    public function deleteProduct($billId, $productId, $code, $billProductId, Requests\DeleteProductFromBillRequest $request) {
 
-        $response = new AjaxResponse();
+        return Bills::handleBillProductDelete([
+            'billId' => $billId,
+            'productId' => $productId,
+            'billProductId' => $billProductId,
+            'productCode' => $code
+        ]);
 
-        // Make sure bill exists
-        $bill = Auth::user()->bills()->where('id', $billId)->first();
-
-        if (!$bill) {
-            $response->setFailMessage(trans('common.general_error'));
-            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
-        }
-
-        // Check if is an application product
-        if ($this->isApplicationProduct($productId, $code)) {
-
-            BillApplicationProduct::where('product_id', $productId)->where('bill_id', $bill->id)->delete();
-            $response->setSuccessMessage(trans('common.product_deleted'));
-            return response($response->get())->header('Content-Type', 'application/json');
-        }
-
-        // Check if is a custom product
-        if ($this->isCustomProduct($productId, $code)) {
-
-            BillProduct::where('product_id', $productId)->where('bill_id', $bill->id)->delete();
-            $response->setSuccessMessage(trans('common.product_deleted'));
-            return response($response->get())->header('Content-Type', 'application/json');
-
-        }
-
-        // If we arrive here something went wrong
-        $response->setFailMessage(trans('common.general_error'));
-        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
-
-    }
-
-    /**
-     * Handle edit of product page, quantity, price or discount in function of given parameters.
-     *
-     * @param string $handler Can be: page, quantity, price and discount
-     * @param array $data
-     * @return mixed
-     */
-    private function handleProductEdit($handler = 'page', $data = []) {
-
-        $response = new AjaxResponse();
-
-        // Query for bill details
-        $bill = Auth::user()->bills()->where('id', $data['billId'])->first();
-
-        // Make sure bill exists
-        if (!$bill) {
-            $response->setFailMessage(trans('common.general_error'));
-            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
-        }
-
-        $success = false;
-
-        // Check if is a custom product
-        if ($this->isCustomProduct($data['productId'], $data['productCode'])) {
-
-            // Get product details
-            $product = BillProduct::where('id', $data['billProductId'])->first();
-
-            $dataToUpdate = Bills::getDataToUpdateOnEdit($data['columnToUpdate'], $data['newValue'], $product);
-
-            BillProduct::where('id', $data['billProductId'])->update($dataToUpdate);
-            $success = true;
-        }
-
-        // Check if is an application product
-        if ($this->isApplicationProduct($data['productId'], $data['productCode'])) {
-
-            // Get product details
-            $product = BillApplicationProduct::where('id', $data['billProductId'])->first();
-
-            $dataToUpdate = Bills::getDataToUpdateOnEdit($data['columnToUpdate'], $data['newValue'], $product);
-
-            BillApplicationProduct::where('id', $data['billProductId'])->update($dataToUpdate);
-            $success = true;
-        }
-
-        if ($success) {
-            $response->setSuccessMessage(trans('bill.' . $data['columnToUpdate'] . '_updated'));
-            return response($response->get())->header('Content-Type', 'application/json');
-        }
-
-        // If we arrive here something is wrong
-        $response->setFailMessage(trans('common.general_error'));
-        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
-    }
-
-    /**
-     * Check if given product exists in application products.
-     *
-     * @param int $id
-     * @param string $code
-     * @return mixed
-     */
-    private function isApplicationProduct($id, $code) {
-        return ApplicationProduct::where('id', $id)->where('code', $code)->count();
-    }
-
-    /**
-     * Check if given product is custom.
-     *
-     * @param int $id
-     * @param string $code
-     * @return mixed
-     */
-    private function isCustomProduct($id, $code) {
-        return Product::where('id', $id)->where('code', $code)->where('user_id', Auth::user()->id)->count();
-    }
-
-    private function calculateProductData($productData) {
-
-        $productData['price'] = $productData['price'] * $productData['quantity'];
-        $productData['final_price'] = ($productData['discount']/100) * $productData['price'];
-
-        return $productData;
     }
 
 }
