@@ -182,8 +182,10 @@ class Bills {
         ];
 
         if (strlen($newValueKey) < 1) {
-            $config['newValueKey'] = 'product_' . $columnToUpdate;
+            $newValueKey = 'product_' . $columnToUpdate;
         }
+
+        $config['newValue'] = $request->get($newValueKey);
 
         return $config;
     }

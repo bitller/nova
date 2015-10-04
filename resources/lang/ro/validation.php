@@ -65,9 +65,12 @@ return [
     'url'                   => ':attribute are un format invalid.',
 
     'attributes' => [
+        'bill_product_id' => 'id-ul produsului din factură',
         'password' => 'parolă',
         'product_id' => 'ID-ul produsului',
         'product_code' => 'codul produsului',
+        'product_name' => 'numele produsului',
+        'product_page' => 'pagina produsului',
         'product_quantity' => 'cantitatea produsului',
     ],
 

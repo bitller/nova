@@ -73,7 +73,7 @@ $factory->define(App\Product::class, function($faker) {
 
     return [
         'name' => $faker->name,
-        'code' => $faker->numberBetween(10000, 99999)
+        'code' => (string) $faker->numberBetween(10000, 99999)
     ];
 
 });
