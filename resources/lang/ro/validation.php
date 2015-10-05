@@ -71,6 +71,7 @@ return [
         'product_code' => 'codul produsului',
         'product_name' => 'numele produsului',
         'product_page' => 'pagina produsului',
+        'product_price' => 'prețul produsului',
         'product_quantity' => 'cantitatea produsului',
     ],
 
