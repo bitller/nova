@@ -12,6 +12,8 @@
 */
 
 // Generate a normal user
+use App\Helpers\Products;
+
 $factory->define(App\User::class, function ($faker) {
 
     $roleHelper = new \App\Helpers\Roles();
@@ -88,14 +90,26 @@ $factory->define(App\ApplicationProduct::class, function() use ($factory) {
 // Generate bill product
 $factory->define(App\BillProduct::class, function() use ($factory) {
 
-    return [];
+    $page = rand(1, 999);
+    $quantity = rand(1, 99);
+    $price = rand(1, 200) * $quantity;
+    $discount = rand(0, 100);
+    $calculatedDiscount = Products::discount($price, $discount);
+    $finalPrice = $price - $calculatedDiscount;
+
+    return [
+        'page' => $page,
+        'quantity' => $quantity,
+        'price' => $price,
+        'discount' => $discount,
+        'calculated_discount' =>$calculatedDiscount,
+        'final_price' =>$finalPrice
+    ];
 
 });
 
 $factory->define(App\BillApplicationProduct::class, function() use ($factory) {
 
-    return [
-        //
-    ];
+    return $factory->raw(App\BillProduct::class);
 
 });
