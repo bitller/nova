@@ -55,10 +55,11 @@ class TestUrlBuilder {
      * @param int $billId
      * @param int $productId
      * @param string $productCode
+     * @param int $billProductId
      * @return string
      */
-    public static function deleteBillProduct($billId, $productId, $productCode) {
-        return '/bills/' . $billId . '/delete/' . $productId . '/' . $productCode;
+    public static function deleteBillProduct($billId, $productId, $productCode, $billProductId) {
+        return '/bills/' . $billId . '/delete/' . $productId . '/' . $productCode . '/' . $billProductId;
     }
 
 }
