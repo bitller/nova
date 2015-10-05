@@ -69,6 +69,7 @@ return [
         'password' => 'parolă',
         'product_id' => 'ID-ul produsului',
         'product_code' => 'codul produsului',
+        'product_discount' => 'discount-ul produsului',
         'product_name' => 'numele produsului',
         'product_page' => 'pagina produsului',
         'product_price' => 'prețul produsului',

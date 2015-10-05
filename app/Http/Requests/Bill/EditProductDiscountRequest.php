@@ -30,6 +30,7 @@ class EditProductDiscountRequest extends AjaxRequest {
     public function rules() {
         return [
             'product_id' => ['required', 'numeric'],
+            'bill_product_id' => ['required', 'numeric'],
             'product_code' => ['required', 'digits:5'],
             'product_discount' => ['required', 'numeric', 'between:0,100']
         ];
