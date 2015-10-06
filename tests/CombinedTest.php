@@ -7,7 +7,7 @@ use App\Helpers\TestUrlBuilder;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class CombinedTest extends BaseTest {
+class CombinedTest extends TestCase {
 
     /**
      * Edit product page, quantity, price and discount.

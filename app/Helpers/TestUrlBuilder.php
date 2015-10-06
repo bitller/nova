@@ -10,6 +10,16 @@ namespace App\Helpers;
 class TestUrlBuilder {
 
     /**
+     * Build url used to add product to bill.
+     *
+     * @param int $billId
+     * @return string
+     */
+    public static function addBillProduct($billId) {
+        return '/bills/' . $billId . '/add';
+    }
+
+    /**
      * Build url used to edit product page.
      *
      * @param int $billId

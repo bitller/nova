@@ -63,7 +63,7 @@ new Vue({
 
                 this.getBill(function() {
                     $('#addProductToBillModal').modal('hide');
-                    Alert.success('Product added!', 'Product successfully added to this bill.');
+                    Alert.success(response.title, response.message);
                 }, true);
 
             }).error(function(response) {

@@ -90,7 +90,7 @@ class Products {
         $inputs['bill_id'] = $billId;
         self::handleProductInsert($product, $inputs, $query);
 
-        $response->setSuccessMessage('');
+        $response->setSuccessMessage(trans('bill.product_added_successfully'));
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
@@ -134,13 +134,13 @@ class Products {
         ];
 
         // Check if discount exists
-        if ($inputs['product_discount']) {
+        if (isset($inputs['product_discount'])) {
             $insertData['discount'] = $inputs['product_discount'];
             $insertData['calculated_discount'] = self::discount($insertData['price'], $insertData['discount']);
         }
 
         // Calculate final price
-        if ($insertData['calculated_discount']) {
+        if (isset($insertData['calculated_discount'])) {
             $insertData['final_price'] = $insertData['price'] - $insertData['calculated_discount'];
         } else {
             $insertData['final_price'] = $insertData['price'];

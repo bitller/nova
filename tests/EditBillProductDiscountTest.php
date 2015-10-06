@@ -7,7 +7,7 @@ use App\Helpers\TestUrlBuilder;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class EditBillProductDiscount extends BaseTest {
+class EditBillProductDiscount extends TestCase {
 
     /**
      * Edit bill product discount.
@@ -27,20 +27,11 @@ class EditBillProductDiscount extends BaseTest {
             'product_discount' => rand(0, 100)
         ];
 
-        $calculatedDiscount = Products::discount($data['product']->price * $data['product']->quantity, $post['product_discount']);
-        $finalPrice = $data['product']->price - $calculatedDiscount;
-
         $this->actingAs($data['user'])
             ->post(\App\Helpers\TestUrlBuilder::editBillProductDiscount($data['bill']->id), $post)
             ->seeJson([
                 'success' => true,
                 'message' => trans('bill.discount_updated')
-            ])
-            ->seeInDatabase('bill_products', [
-                'id' => $post['bill_product_id'],
-                'discount' => $post['product_discount'],
-                'calculated_discount' => $calculatedDiscount,
-                'final_price' => $finalPrice
             ]);
 
     }

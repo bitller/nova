@@ -19,6 +19,8 @@ return [
     'page_updated' => 'Product page updated!',
     'price' => 'Price',
     'price_updated' => 'Product price updated!',
+    'product_added' => 'Product added!',
+    'product_added_successfully' => 'Product successfully added to this bill.',
     'product_code' => 'Product code',
     'product_discount' => 'Product discount',
     'product_discount_required' => 'Product discount is required!',

@@ -6,7 +6,7 @@ use App\Helpers\TestUrlBuilder;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class DeleteBillProductTest extends BaseTest {
+class DeleteBillProductTest extends TestCase {
 
     /**
      * Delete bill product.

@@ -32,7 +32,7 @@ class AddProductRequest extends AjaxRequest {
             'product_code' => ['required', 'digits:5'],
             'product_page' => ['numeric', 'between:1,2000'],
             'product_price' => ['required', 'numeric', 'between:0,9999'],
-            'product_discount' => ['numeric', 'between:1,100'],
+            'product_discount' => ['numeric', 'between:0,100'],
             'product_quantity' => ['numeric', 'between:1,999']
         ];
     }

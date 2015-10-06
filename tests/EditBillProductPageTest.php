@@ -2,22 +2,22 @@
 use App\Helpers\TestUrlBuilder;
 
 /**
- * Tests for edit bill product quantity functionality
+ * Tests for edit bill product page functionality
  *
- * @author Alexandru Bugairn <alexandru.bugarin@gmail.com>
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class EditBillQuantityTest extends BaseTest {
+class EditBillProductPageTest extends TestCase {
 
     use \Illuminate\Foundation\Testing\DatabaseTransactions;
 
     /**
-     * Edit bill product quantity.
+     * Edit bill product page.
      *
      * @group success
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantity() {
+    public function testEditBillProductPage() {
 
         $data = $this->generateData();
 
@@ -25,61 +25,62 @@ class EditBillQuantityTest extends BaseTest {
             'product_id' => $data['product']->id,
             'bill_product_id' => $data['billProduct']->id,
             'product_code' => $data['product']->code,
-            'product_quantity' =>  rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
+        // Check json response and make sure page was updated in database
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => true,
-                'message' => trans('bill.quantity_updated')
+                'message' => trans('bill.page_updated')
             ])
             ->seeInDatabase('bill_products', [
                 'id' => $data['billProduct']->id,
-                'quantity' => $post['product_quantity']
+                'page' => $post['product_page']
             ]);
 
     }
 
     /**
-     * Edit bill product quantity with empty data.
+     * Edit bill product page with empty post data.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithEmptyData() {
+    public function testEditBillProductPageWithEmptyData() {
 
         $data = $this->generateData();
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id))
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id))
             ->seeJson([
                 'success' => false,
-                'message' => trans('validation.required', ['attribute' => trans('validation.attributes.product_quantity')])
+                'message' => trans('validation.required', ['attribute' => trans('validation.attributes.product_page')])
             ]);
 
     }
 
     /**
-     * Edit bill product quantity with empty bill id.
+     * Edit bill product page with empty product id.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithEmptyProductId() {
+    public function testEditBillProductPageWithEmptyProductId() {
 
         $data = $this->generateData();
 
         $post = [
             'bill_product_id' => $data['billProduct']->id,
             'product_code' => $data['product']->code,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('validation.required', ['attribute' => trans('validation.attributes.product_id')])
@@ -88,13 +89,13 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity with invalid bill id.
+     * Edit bill product page with invalid product id.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithInvalidProductId() {
+    public function testEditBillProductPageWithInvalidProductId() {
 
         $data = $this->generateData();
 
@@ -102,11 +103,11 @@ class EditBillQuantityTest extends BaseTest {
             'product_id' => 'btl4',
             'bill_product_id' => $data['billProduct']->id,
             'product_code' => $data['product']->code,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('validation.numeric', ['attribute' => trans('validation.attributes.product_id')])
@@ -115,28 +116,28 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity with product id of another product.
+     * Edit bill product page with product id of another product.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithProductIdOfAnotherProduct() {
+    public function testEditBillProductPageWithProductIdOfAnotherProduct() {
 
         $data = $this->generateData();
 
-        // Generate another product
+        // Generate another product for current user
         $secondProduct = $data['user']->products()->save(factory(App\Product::class)->make());
 
         $post = [
-            'product_id' => $secondProduct->id,
-            'bill_product_id' => $data['product']->id,
+            'product_id' => $secondProduct['id'],
+            'bill_product_id' => $data['billProduct']->id,
             'product_code' => $data['product']->code,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('common.general_error')
@@ -145,24 +146,24 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity with empty bill product id.
+     * Edit bill product page with empty bill product id.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithEmptyBillProductId() {
+    public function testEditBillProductPageWithEmptyBillProductId() {
 
         $data = $this->generateData();
 
         $post = [
             'product_id' => $data['product']->id,
             'product_code' => $data['product']->code,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('validation.required', ['attribute' => trans('validation.attributes.bill_product_id')])
@@ -171,13 +172,13 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity with invalid bill product id.
+     * Edit bill product page with invalid bill product id.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithInvalidBillProductId() {
+    public function testEditBillProductPageWithInvalidBillProductId() {
 
         $data = $this->generateData();
 
@@ -185,11 +186,11 @@ class EditBillQuantityTest extends BaseTest {
             'product_id' => $data['product']->id,
             'bill_product_id' => 'btl4',
             'product_code' => $data['product']->code,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('validation.numeric', ['attribute' => trans('validation.attributes.bill_product_id')])
@@ -198,24 +199,24 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity with empty product code.
+     * Edit bill product page with empty product code.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithEmptyProductCode() {
+    public function testEditBillProductPageWithEmptyProductCode() {
 
         $data = $this->generateData();
 
         $post = [
             'product_id' => $data['product']->id,
             'bill_product_id' => $data['billProduct']->id,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('validation.required', ['attribute' => trans('validation.attributes.product_code')])
@@ -224,13 +225,13 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Test edit bill product quantity with invalid product code.
+     * Edit bill product page with invalid product code.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithInvalidProductCode() {
+    public function testEditBillProductPageWithInvalidProductCode() {
 
         $data = $this->generateData();
 
@@ -238,11 +239,11 @@ class EditBillQuantityTest extends BaseTest {
             'product_id' => $data['product']->id,
             'bill_product_id' => $data['billProduct']->id,
             'product_code' => 'btl04',
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('validation.digits', ['attribute' => trans('validation.attributes.product_code'), 'digits' => '5'])
@@ -251,26 +252,26 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity with product code of another user.
+     * Edit bill product page with product code of another user.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithProductCodeOfAnotherUser() {
+    public function testEditBillProductPageWithProductCodeOfAnotherUser() {
 
         $firstData = $this->generateData();
         $secondData = $this->generateData();
 
         $post = [
             'product_id' => $firstData['product']->id,
-            'bill_product_id' => $firstData['product']->id,
+            'bill_product_id' => $firstData['billProduct']->id,
             'product_code' => $secondData['product']->code,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($firstData['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($firstData['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($firstData['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('common.general_error')
@@ -279,28 +280,28 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity with product code of another product.
+     * Edit bill product page with code of another product of the same user.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithProductCodeOfAnotherProduct() {
+    public function testEditBillProductPageWithProductCodeOfAnotherProduct() {
 
         $data = $this->generateData();
 
-        // Generate another product
-        $product = $data['user']->products()->save(factory(App\Product::class)->make());
+        // Generate another product for current user
+        $secondProduct = $data['user']->products()->save(factory(App\Product::class)->make());
 
         $post = [
             'product_id' => $data['product']->id,
             'bill_product_id' => $data['billProduct']->id,
-            'product_code' => $product->code,
-            'product_quantity' => rand(1, 100)
+            'product_code' => $secondProduct->code,
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('common.general_error')
@@ -309,33 +310,34 @@ class EditBillQuantityTest extends BaseTest {
     }
 
     /**
-     * Edit bill product quantity using product id and bill product id of another product.
+     * Edit bill product page with product id and bill product id of another product.
      *
      * @group fail
      * @group editBillProduct
-     * @group editBillProductQuantity
+     * @group editBillProductPage
      */
-    public function testEditBillProductQuantityWithProductIdAndBillProductIdOfAnotherProduct() {
+    public function testEditBillProductPageWithProductIdAndBillProductIdOfAnotherProduct() {
 
         $data = $this->generateData();
 
         // Generate another product and add to bill
-        $product = $data['user']->products()->save(factory(App\Product::class)->make());
-        $billProduct = $data['bill']->products()->save(factory(App\BillProduct::class)->make(['product_id' => $product->id]));
+        $secondProduct = $data['user']->products()->save(factory(App\Product::class)->make());
+        $secondBillProduct = $data['bill']->products()->save(factory(App\BillProduct::class)->make(['product_id' => $secondProduct->id]));
 
         $post = [
-            'product_id' => $product->id,
-            'bill_product_id' => $billProduct->id,
+            'product_id' => $secondProduct->id,
+            'bill_product_id' => $secondBillProduct->id,
             'product_code' => $data['product']->code,
-            'product_quantity' => rand(1, 100)
+            'product_page' => rand(1, 999)
         ];
 
         $this->actingAs($data['user'])
-            ->post(TestUrlBuilder::editBillProductQuantity($data['bill']->id), $post)
+            ->post(TestUrlBuilder::editBillProductPage($data['bill']->id), $post)
             ->seeJson([
                 'success' => false,
                 'message' => trans('common.general_error')
             ]);
 
     }
+
 }
