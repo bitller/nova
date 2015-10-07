@@ -42,6 +42,11 @@ new Vue({
 
         },
 
+        /**
+         * 
+         * @param productId
+         * @param productCode
+         */
         addProduct: function(productId, productCode) {
 
             // Build post data
@@ -62,14 +67,6 @@ new Vue({
             if (this.$get('quantity')) {
                 data.product_quantity = this.$get('quantity');
             }
-
-            //var data = {
-            //    product_code: this.$get('code'),
-            //    product_page: this.$get('page'),
-            //    product_price: this.$get('price'),
-            //    product_discount: this.$get('discount'),
-            //    product_quantity: this.$get('quantity')
-            //};
 
             // Make post request
             this.$http.post('/bills/' + Data.getBillId() + '/add', data, function(response) {
