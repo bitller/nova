@@ -12,6 +12,7 @@ use App\Helpers\Bills;
 use App\Http\Requests\Bill\AddProductRequest;
 use App\Http\Requests\Bill\EditProductDiscountRequest;
 use App\Http\Requests\Bill\EditProductPriceRequest;
+use App\Http\Requests\Bill\SuggestProductRequest;
 use App\Http\Requests\CreateBillRequest;
 use App\Http\Requests\EditProductPageFromBillRequest;
 use App\Http\Requests\Bill\EditProductQuantityRequest;
@@ -59,6 +60,16 @@ class BillsController extends Controller {
             ->paginate(10);
 
         return $bills;
+    }
+
+    /**
+     * Query database to return product suggestions based on given code.
+     *
+     * @param SuggestProductRequest $request
+     * @return mixed
+     */
+    public function suggestProducts(SuggestProductRequest $request) {
+        return Products::suggestProducts($request->get('product_code'));
     }
 
     /**

@@ -48,6 +48,26 @@ class Products {
     }
 
     /**
+     * Return product suggestions in function of given product code.
+     *
+     * @param string $code
+     * @return mixed
+     */
+    public static function suggestProducts($code) {
+
+        $firstQuery = DB::table('application_products')->where('code', 'like', $code . '%')
+            ->select('code', 'name')
+            ->take(5);
+
+        return DB::table('products')->where('user_id', Auth::user()->id)
+            ->where('code', 'like', $code . '%')
+            ->select('code', 'name')
+            ->union($firstQuery)
+            ->take(5)
+            ->get();
+    }
+
+    /**
      * Add new product to given bill.
      *
      * @param int $billId
