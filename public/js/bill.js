@@ -45,13 +45,31 @@ new Vue({
         addProduct: function(productId, productCode) {
 
             // Build post data
-            var data = {
-                product_code: this.$get('code'),
-                product_page: this.$get('page'),
-                product_price: this.$get('price'),
-                product_discount: this.$get('discount'),
-                product_quantity: this.$get('quantity')
-            };
+            var data = {};
+
+            if (this.$get('code')) {
+                data.product_code = this.$get('code');
+            }
+            if (this.$get('page')) {
+                data.product_page = this.$get('page');
+            }
+            if (this.$get('price')) {
+                data.product_price = this.$get('price');
+            }
+            if (this.$get('discount')) {
+                data.product_discount = this.$get('discount');
+            }
+            if (this.$get('quantity')) {
+                data.product_quantity = this.$get('quantity');
+            }
+
+            //var data = {
+            //    product_code: this.$get('code'),
+            //    product_page: this.$get('page'),
+            //    product_price: this.$get('price'),
+            //    product_discount: this.$get('discount'),
+            //    product_quantity: this.$get('quantity')
+            //};
 
             // Make post request
             this.$http.post('/bills/' + Data.getBillId() + '/add', data, function(response) {

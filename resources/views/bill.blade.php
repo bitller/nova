@@ -4,8 +4,8 @@
     <div id="bill" bill-id="{{ $billId }}" v-show="loaded">
         <div class="col-md-12">
             <div class="add-client-button">
-                <span class="my-clients-title"><a href="#">John Doe</a> - comanda 1 din campania 3/2015</span>
-                <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addProductToBillModal">
+                <span class="my-clients-title"><a href="#">@{{ bill.name }}</a> - comanda 1 din campania 3/2015</span>
+                <button type="button" class="btn btn-primary pull-right" v-on="click: resetModal()" data-toggle="modal" data-target="#addProductToBillModal">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('products.add') }}
                 </button>
             </div>

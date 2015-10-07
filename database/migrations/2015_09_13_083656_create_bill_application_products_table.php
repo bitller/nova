@@ -21,10 +21,10 @@ class CreateBillApplicationProductsTable extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('bill_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
-            $table->smallInteger('page');
+            $table->smallInteger('page')->default(0);
             $table->tinyInteger('quantity')->default(1);
             $table->float('price');
-            $table->tinyInteger('discount');
+            $table->tinyInteger('discount')->default(0);
             $table->float('calculated_discount');
             $table->float('final_price');
             $table->timestamps();

@@ -128,10 +128,34 @@ class Products {
         $insertData = [
             'bill_id' => $inputs['bill_id'],
             'product_id' => $productQuery->id,
-            'page' => $inputs['product_page'],
-            'quantity' => $inputs['product_quantity'],
-            'price' => self::price($inputs['product_price'], $inputs['product_quantity'])
         ];
+
+        // If page input is empty, set a default value
+        if (!isset($inputs['product_page'])) {
+            $insertData['page'] = 0;
+        } else {
+            $insertData['page'] = $inputs['product_page'];
+        }
+
+        // If quantity input is empty, set a default value
+        if (!isset($inputs['product_quantity'])) {
+            $insertData['quantity'] = 1;
+        } else {
+            $insertData['quantity'] = $inputs['product_quantity'];
+        }
+
+        // Set default value for price
+        if (!isset($inputs['product_price'])) {
+            $insertData['price'] = 0;
+        } else {
+            $insertData['price'] = $inputs['product_price'] * $insertData['quantity'];
+        }
+
+        if (!isset($inputs['product_discount'])) {
+            $insertData['discount'] = 0;
+        } else {
+            $insertData['discount'] = $inputs['product_discount'];
+        }
 
         // Check if discount exists
         if (isset($inputs['product_discount'])) {

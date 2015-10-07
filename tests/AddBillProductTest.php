@@ -147,7 +147,7 @@ class AddBillProductTest extends TestCase {
 
         $post = [
             'product_code' => $data['product']->code,
-            'product_page' => "",
+//            'product_page' => "",
             'product_price' => rand(1, 999),
             'product_discount' => rand(0, 100),
             'product_quantity' => rand(1, 99)
@@ -229,7 +229,7 @@ class AddBillProductTest extends TestCase {
         $post = [
             'product_code' => $data['product']->code,
             'product_page' => rand(1, 999),
-            'product_price' => '',
+//            'product_price' => '',
             'product_discount' => rand(0, 100),
             'product_quantity' => rand(1, 99)
         ];
@@ -311,7 +311,7 @@ class AddBillProductTest extends TestCase {
             'product_code' => $data['product']->code,
             'product_page' => rand(1, 999),
             'product_price' => rand(1, 999),
-            'product_discount' => "",
+//            'product_discount' => "",
             'product_quantity' => rand(0, 99)
         ];
 
@@ -366,7 +366,7 @@ class AddBillProductTest extends TestCase {
             'product_page' => rand(1, 999),
             'product_price' => rand(1, 999),
             'product_discount' => rand(0, 100),
-            'product_quantity' => ''
+//            'product_quantity' => ''
         ];
 
         $this->actingAs($data['user'])
