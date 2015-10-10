@@ -57,11 +57,19 @@ class Bills {
 
         $bill = Auth::user()->bills()->where('bills.id', $billId)
             ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
-            ->select('clients.id as client_id', 'clients.name as client_name', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year')
+            ->select('clients.id as client_id', 'clients.name as client_name', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.other_details')
             ->first();
+
+        $showDiscount = false;
+        foreach ($secondQuery as $billProduct) {
+            if ($billProduct->discount) {
+                $showDiscount = true;
+            }
+        }
 
         return [
             'data' => $bill,
+            'show_discount_column' => $showDiscount,
             'products' => $secondQuery,
         ];
 
