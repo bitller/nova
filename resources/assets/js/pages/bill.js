@@ -43,7 +43,7 @@ new Vue({
         },
 
         /**
-         * 
+         *
          * @param productId
          * @param productCode
          */
@@ -52,9 +52,10 @@ new Vue({
             // Build post data
             var data = {};
 
-            if (this.$get('code')) {
-                data.product_code = this.$get('code');
+            if ($('#product-code').val()) {
+                data.product_code = $('#product-code').val();
             }
+
             if (this.$get('page')) {
                 data.product_page = this.$get('page');
             }

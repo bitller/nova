@@ -25,7 +25,7 @@
                 <div role="form" class="col-md-12">
                     <div class="form-group">
                         <label for="product-code">{{ trans('bill.product_code') }}:</label>
-                        <input type="text" class="form-control" id="product-code" placeholder="Ex: 20401" v-model="code">
+                        <input type="text" class="twitter-typeahead form-control" id="product-code" placeholder="Ex: 20401" v-model="code">
                     </div>
                 </div>
                 <!-- END Product code input -->
