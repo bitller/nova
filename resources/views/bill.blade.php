@@ -4,7 +4,7 @@
     <div id="bill" bill-id="{{ $billId }}" v-show="loaded">
         <div class="col-md-12">
             <div class="add-client-button">
-                <span class="my-clients-title"><a href="#">@{{ bill.name }}</a> - comanda 1 din campania 3/2015</span>
+                <span class="my-clients-title"><a href="/clients/@{{ bill.data.client_id }}">@{{ bill.data.client_name }}</a> - comanda @{{ bill.data.campaign_order }} din campania @{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}</span>
                 <button type="button" class="btn btn-primary pull-right" v-on="click: resetModal()" data-toggle="modal" data-target="#addProductToBillModal">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('products.add') }}
                 </button>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
 
-            <tr v-repeat="product in bill">
+            <tr v-repeat="product in bill.products">
                 <td class="text-center editable"  v-on="click: editPage(product.page, product.id, product.code, product.bill_product_id)">@{{ product.page }}</td>
                 <td class="text-center">@{{ product.code }}</td>
                 <td>@{{ product.name }}</td>

@@ -91,12 +91,19 @@ new Vue({
         },
 
         resetModal: function() {
+            // Reset vue data
             this.$set('page', '');
             this.$set('code', '');
             this.$set('price', '');
             this.$set('quantity', '');
             this.$set('discount', '');
             this.$set('error', false);
+            // Reset inputs
+            $('#product-code').val('');
+            $('#product-price').val('');
+            $('#product-page').val('');
+            $('#product-quantity').val('');
+            $('#product-discount').val('');
         },
 
         /**

@@ -21,6 +21,7 @@ class CreateBillsTable extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('client_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->tinyInteger('campaign_order');
             $table->tinyInteger('campaign_number');
             $table->string('campaign_year');
             $table->date('payment_term');

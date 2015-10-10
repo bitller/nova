@@ -62,6 +62,7 @@ $factory->define(App\Client::class, function($faker) {
 $factory->define(App\Bill::class, function($faker) {
 
     return [
+        'campaign_order' => rand(1, 6),
         'campaign_number' => rand(1, 13),
         'campaign_year' => date('Y'),
         'payment_term' => date('Y-m-d'),

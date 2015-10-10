@@ -134,7 +134,7 @@ class BillsController extends Controller {
 
         // todo check if bill belongs to current user
 
-        return $billsHelper->getBillProducts($billId);
+        return $billsHelper->getBill($billId);
 
     }
 

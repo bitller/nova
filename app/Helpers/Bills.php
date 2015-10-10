@@ -20,7 +20,7 @@ class Bills {
      * @param int $billId
      * @return mixed
      */
-    public function getBillProducts($billId) {
+    public function getBill($billId) {
 
         $productIds = $this->getProductIds($billId);
         $applicationProductIds = $this->getApplicationProductIds($billId);
@@ -55,7 +55,15 @@ class Bills {
                 'bill_application_products.final_price'
             )->union($firstQuery)->orderBy('page', 'asc')->get();
 
-        return $secondQuery;
+        $bill = Auth::user()->bills()->where('bills.id', $billId)
+            ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
+            ->select('clients.id as client_id', 'clients.name as client_name', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year')
+            ->first();
+
+        return [
+            'data' => $bill,
+            'products' => $secondQuery,
+        ];
 
     }
 
