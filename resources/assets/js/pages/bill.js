@@ -378,12 +378,17 @@ new Vue({
 
         },
 
+        /**
+         * Delete bill from bill page.
+         */
         deleteBill: function() {
 
             Alert.loader();
 
+            // Make request
             this.$http.get('/bills/' + Data.getBillId() + '/delete', function(response) {
 
+                // Show success message and redirect on success
                 if (response.success) {
                     Alert.success(response.title, response.message);
                     window.location.replace('/bills');
@@ -393,10 +398,13 @@ new Vue({
                 Alert.generalError();
 
             }).error(function(response) {
+
+                // Handle error response
                 if (response.message) {
                     Alert.error(response.title, response.message);
                     return;
                 }
+
                 Alert.generalError();
             });
 
