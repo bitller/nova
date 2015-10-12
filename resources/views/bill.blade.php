@@ -76,28 +76,39 @@
             </div>
             <!-- END Bill table -->
 
+            <!-- BEGIN Bill other details -->
             <div class="panel panel-default" v-show="other_details">
                 <div class="panel-heading">Alte detalii</div>
                 <div class="panel-body">
                     @{{{ other_details }}}
                 </div>
             </div>
+            <!-- END Bill other details -->
 
+            <!-- BEGIN Bill payment term -->
             <div class="well well-sm col-md-3 text-center">
                 <span class="text-center">Termen de plata: <strong>@{{ payment_term }}</strong></span>
             </div>
+            <!-- END Bill payment term -->
+
             <div class="col-md-2"></div>
 
+            <!-- BEGIN Bill total price -->
             <div class="well well-sm col-md-2 text-center">
                 <span class="text-center">Total: <strong>100 ron</strong></span>
             </div>
+            <!-- END Bill total price -->
+
             <div class="col-md-2"></div>
+
+            <!-- BEGIN Bill total discount -->
             <div class="well well-sm col-md-3 text-center">
                 <span>Economisiti: <strong>1000 ron</strong></span>
             </div>
+            <!-- END Bill total discount -->
 
         </div>
-
+        
         @include('includes.modals.add-product-to-bill')
         @include('includes.modals.other-details')
         @include('includes.modals.payment-term')
