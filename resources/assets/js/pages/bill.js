@@ -320,13 +320,20 @@ new Vue({
             });
         },
 
+        /**
+         * Edit bill other details.
+         */
         saveOtherDetails: function() {
 
+            // Post data
             var data = {
                 other_details: this.$get('otherDetails')
             };
 
+            // Request
             this.$http.post('/bills/' + Data.getBillId() + '/edit-other-details', data, function(response) {
+
+                // Success response
                 if (response.success) {
                     $('#other-details-modal').modal('toggle');
                     this.$set('other_details', response.other_details);
@@ -338,6 +345,7 @@ new Vue({
 
             }).error(function(response) {
 
+                // Fail response
                 if (response.message) {
                     this.$set('error', response.message);
                     return;
