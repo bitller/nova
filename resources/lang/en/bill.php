@@ -18,6 +18,7 @@ return [
     'name' => 'Name',
     'other_details' => 'Other details',
     'other_details_description' => 'If have to add some extra information or just say something to the client, write here and will appear at the bottom of the bill.',
+    'other_details_updated' => 'Bill other details updated!',
     'page' => 'Page',
     'page_updated' => 'Product page updated!',
     'price' => 'Price',

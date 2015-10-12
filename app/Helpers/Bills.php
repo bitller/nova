@@ -76,6 +76,11 @@ class Bills {
 
     }
 
+    /**
+     * @param int $billId
+     * @param string $otherDetails
+     * @return mixed
+     */
     public static function updateOtherDetails($billId, $otherDetails) {
 
         $response = new AjaxResponse();
@@ -94,7 +99,7 @@ class Bills {
             'other_details' => $otherDetails
         ]);
 
-        $response->setSuccessMessage('bau');
+        $response->setSuccessMessage(trans('bill.other_details_updated'));
         $response->addExtraFields(['other_details' => $otherDetails]);
         return response($response->get())->header('Content-Type', 'application/json');
 

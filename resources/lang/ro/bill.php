@@ -18,6 +18,7 @@ return [
     'name' => 'Nume',
     'other_details' => 'Alte detalii',
     'other_details_description' => 'Ai de adăugat informații în plus sau doar vrei să îi spui ceva clientului? Completează câmpul de mai jos și va apărea la sfârșitul facturii.',
+    'other_details_updated' => 'Câmpul Alte detalii a fost actualizat cu succes',
     'page' => 'Pagină',
     'page_updated' => 'Pagina produsului a fost actualizată!',
     'price' => 'Preţ',
