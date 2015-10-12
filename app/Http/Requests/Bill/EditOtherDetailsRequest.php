@@ -6,11 +6,11 @@ use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Authorize and validate EditProductDiscountRequest
+ * Authorize and validate EditOtherDetailsRequest
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class EditProductDiscountRequest extends AjaxRequest {
+class EditOtherDetailsRequest extends AjaxRequest {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -29,10 +29,7 @@ class EditProductDiscountRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'product_id' => ['required', 'numeric'],
-            'bill_product_id' => ['required', 'numeric'],
-            'product_code' => ['required', 'digits:5'],
-            'product_discount' => ['required', 'numeric', 'between:0,100']
+            'other_details' => ['max:2000']
         ];
     }
 

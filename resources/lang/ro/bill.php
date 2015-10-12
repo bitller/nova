@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'add_bill_other_details' => 'Adaugă alte detalii facturii',
     'add_product_bill' => 'Adaugă un produs facturii',
     'code' => 'Cod',
     'discount' => 'Reducere',
@@ -15,6 +16,8 @@ return [
     'edit_quantity_description' => 'Dacă clientul dvs. dorește mai multe produse la fel, adaugă aici numărul lor.',
     'final_price' => 'Preț final',
     'name' => 'Nume',
+    'other_details' => 'Alte detalii',
+    'other_details_description' => 'Ai de adăugat informații în plus sau doar vrei să îi spui ceva clientului? Completează câmpul de mai jos și va apărea la sfârșitul facturii.',
     'page' => 'Pagină',
     'page_updated' => 'Pagina produsului a fost actualizată!',
     'price' => 'Preţ',

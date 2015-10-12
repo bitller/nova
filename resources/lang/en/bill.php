@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'add_bill_other_details' => 'Add other details to the bill',
     'add_product_bill' => 'Add product to bill',
     'code' => 'Code',
     'discount' => 'Discount',
@@ -15,6 +16,8 @@ return [
     'edit_quantity_description' => 'This represents how many products your client want to buy.',
     'final_price' => 'Final price',
     'name' => 'Name',
+    'other_details' => 'Other details',
+    'other_details_description' => 'If have to add some extra information or just say something to the client, write here and will appear at the bottom of the bill.',
     'page' => 'Page',
     'page_updated' => 'Product page updated!',
     'price' => 'Price',

@@ -10,6 +10,7 @@ use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Http\Requests\Bill\AddProductRequest;
+use App\Http\Requests\Bill\EditOtherDetailsRequest;
 use App\Http\Requests\Bill\EditProductDiscountRequest;
 use App\Http\Requests\Bill\EditProductPriceRequest;
 use App\Http\Requests\Bill\SuggestProductRequest;
@@ -140,6 +141,10 @@ class BillsController extends Controller {
 
     public function addProduct($billId, AddProductRequest $request) {
         return Products::insertProduct($billId, $request->all());
+    }
+
+    public function editOtherDetails($billId, EditOtherDetailsRequest $request) {
+        return Bills::updateOtherDetails($billId, $request->get('other_details'));
     }
 
     public function editPaymentTerm() {

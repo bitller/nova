@@ -70,8 +70,33 @@ class Bills {
         return [
             'data' => $bill,
             'show_discount_column' => $showDiscount,
+            'show_other_details_info' => true,
             'products' => $secondQuery,
         ];
+
+    }
+
+    public static function updateOtherDetails($billId, $otherDetails) {
+
+        $response = new AjaxResponse();
+
+        $otherDetails = nl2br($otherDetails);
+
+        // Make sure bill exists
+        $bill = Auth::user()->bills()->where('id', $billId)->first();
+
+        if (!$bill) {
+            $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        Auth::user()->bills()->where('id', $billId)->update([
+            'other_details' => $otherDetails
+        ]);
+
+        $response->setSuccessMessage('bau');
+        $response->addExtraFields(['other_details' => $otherDetails]);
+        return response($response->get())->header('Content-Type', 'application/json');
 
     }
 

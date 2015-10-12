@@ -25,8 +25,8 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a href="#"> Print bill</a></li>
+                            <li><a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal"> Edit other details</a></li>
                             <li><a href="#"> Set payment term</a></li>
-                            <li><a href="#"> Edit other details</a></li>
                             <li class="divider"></li>
                             <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Delete bill</a></li>
                         </ul>
@@ -76,10 +76,10 @@
             </div>
             <!-- END Bill table -->
 
-            <div class="panel panel-default" v-show="bill.data.other_details">
+            <div class="panel panel-default" v-show="other_details">
                 <div class="panel-heading">Alte detalii</div>
                 <div class="panel-body">
-                    @{{ bill.data.other_details }}
+                    @{{{ other_details }}}
                 </div>
             </div>
 
@@ -99,6 +99,7 @@
         </div>
 
         @include('includes.modals.add-product-to-bill')
+        @include('includes.modals.other-details')
 
     </div>
     <!-- END Bill -->

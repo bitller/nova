@@ -31,6 +31,7 @@ new Vue({
             this.$http.get('/bills/' + $('#bill').attr('bill-id') + '/get', function(response) {
 
                 this.$set('bill', response);
+                this.$set('other_details', response.data.other_details);
                 this.$set('loaded', true);
 
                 if (typeof showSuccess === 'undefined') {
@@ -316,6 +317,37 @@ new Vue({
                     Alert.generalError();
                 });
             });
+        },
+
+        saveOtherDetails: function() {
+
+            var data = {
+                other_details: this.$get('otherDetails')
+            };
+
+            this.$http.post('/bills/' + Data.getBillId() + '/edit-other-details', data, function(response) {
+                if (response.success) {
+                    $('#other-details-modal').modal('toggle');
+                    this.$set('other_details', response.other_details);
+                    Alert.success(response.title, response.message);
+                }
+                return;
+
+                this.$set('error', Translation.common('general-error'));
+
+            }).error(function(response) {
+
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('general-error'));
+            });
+
+        },
+
+        resetOtherDetailsModal: function() {
+            this.$set('error', '');
         }
     }
 });

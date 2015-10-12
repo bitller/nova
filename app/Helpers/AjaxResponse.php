@@ -31,6 +31,11 @@ class AjaxResponse {
     private $message = '';
 
     /**
+     * @var array
+     */
+    private $extraFields = [];
+
+    /**
      * Unprocessable Entity code
      *
      * @var int
@@ -115,11 +120,21 @@ class AjaxResponse {
      * @return array
      */
     public function get() {
-        return [
+
+        $response = [
             'success' => $this->success,
             'title' => $this->title,
             'message' => $this->message
         ];
+
+        return array_merge($response, $this->extraFields);
+    }
+
+    /**
+     * @param $fields
+     */
+    public function addExtraFields($fields) {
+        $this->extraFields = $fields;
     }
 
     /**
