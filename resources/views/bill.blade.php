@@ -56,7 +56,7 @@
                             <th class="text-center">{{ trans('bill.price') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.discount') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.final_price') }}</th>
-                            <th class="text-center">Sterge</th>
+                            <th class="text-center">{{ trans('common.delete') }}</th>
                         </tr>
                     </thead>
                     <tbody>
