@@ -24,11 +24,11 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#"> Print bill</a></li>
-                            <li><a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal"> Edit other details</a></li>
-                            <li><a href="#"> Set payment term</a></li>
+                            <li><a href="#"> {{ trans('bill.print') }}</a></li>
+                            <li><a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal"> {{ trans('bill.edit_other_details') }}</a></li>
+                            <li><a href="#"> {{ trans('bill.set_payment_term') }}</a></li>
                             <li class="divider"></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Delete bill</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-trash"></span> {{ trans('bill.delete') }}</a></li>
                         </ul>
                     </div>
                     <!-- END Options button -->
