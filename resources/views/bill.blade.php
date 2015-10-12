@@ -78,7 +78,7 @@
 
             <!-- BEGIN Bill other details -->
             <div class="panel panel-default" v-show="other_details">
-                <div class="panel-heading">Alte detalii</div>
+                <div class="panel-heading">{{ trans('bill.other_details') }}</div>
                 <div class="panel-body">
                     @{{{ other_details }}}
                 </div>
