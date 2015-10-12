@@ -380,10 +380,13 @@ new Vue({
 
         deleteBill: function() {
 
-            this.$http.get('/bills/' + Data.getBillId() + '/delete-bill', function(response) {
+            Alert.loader();
+
+            this.$http.get('/bills/' + Data.getBillId() + '/delete', function(response) {
 
                 if (response.success) {
                     Alert.success(response.title, response.message);
+                    window.location.replace('/bills');
                     return;
                 }
 
