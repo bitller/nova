@@ -23,5 +23,5 @@ elixir(function(mix) {
         .scripts(['pages/base.js', 'pages/client.js'], 'public/js/client.js')
         .scripts(['pages/base.js', 'pages/products.js'], 'public/js/products.js')
         .scripts(['pages/base.js', 'pages/my-products.js'], 'public/js/my-products.js')
-        .scripts(['typeahead.js', 'pages/bill.js', 'jquery-scripts/bill.js'], 'public/js/bill.js');
+        .scripts(['typeahead.js', 'pages/bill.js', 'jquery-scripts/bill.js', 'libs/jquery-ui.js'], 'public/js/bill.js');
 });

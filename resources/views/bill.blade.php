@@ -26,7 +26,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#"> <span class="glyphicon glyphicon-print"></span> {{ trans('bill.print') }}</a></li>
                             <li><a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal"> <span class="glyphicon glyphicon-pencil"></span> {{ trans('bill.edit_other_details') }}</a></li>
-                            <li><a href="#"> <span class="glyphicon glyphicon-calendar"></span> {{ trans('bill.set_payment_term') }}</a></li>
+                            <li><a href="#" v-on="click: resetPaymentTermModal()" data-toggle="modal" data-target="#payment-term-modal"> <span class="glyphicon glyphicon-calendar"></span> {{ trans('bill.set_payment_term') }}</a></li>
                             <li class="divider"></li>
                             <li><a href="#"><span class="glyphicon glyphicon-trash"></span> {{ trans('bill.delete') }}</a></li>
                         </ul>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="well well-sm col-md-3 text-center">
-                <span class="text-center">Termen de plata: <strong>04.01.2016</strong></span>
+                <span class="text-center">Termen de plata: <strong>@{{ payment_term }}</strong></span>
             </div>
             <div class="col-md-2"></div>
 
@@ -100,6 +100,7 @@
 
         @include('includes.modals.add-product-to-bill')
         @include('includes.modals.other-details')
+        @include('includes.modals.payment-term')
 
     </div>
     <!-- END Bill -->

@@ -23,6 +23,7 @@ return [
     'other_details_updated' => 'Câmpul Alte detalii a fost actualizat cu succes',
     'page' => 'Pagină',
     'page_updated' => 'Pagina produsului a fost actualizată!',
+    'payment_term_updated' => 'Termenul de plată a fost actualizat!',
     'price' => 'Preţ',
     'price_updated' => 'Preţul produsului a fost actualizat!',
     'print' => 'Imprimează factura',
@@ -39,4 +40,6 @@ return [
     'quantity' => 'Cantitate',
     'quantity_updated' => 'Cantitatea produsului a fost actualizată!',
     'set_payment_term' => 'Setează termenul de plată',
+    'set_payment_term_description' => 'Setează termenul de plată al facturii',
+    'set_payment_term_placeholder' => 'ZZ/LL/AAAA',
 ];

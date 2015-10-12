@@ -42,4 +42,7 @@ $(document).ready(function() {
             }
         }
     });
+
+    $('#payment-term').datepicker({dateFormat: 'yy-m-d'});
+
 });

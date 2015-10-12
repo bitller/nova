@@ -32,6 +32,7 @@ new Vue({
 
                 this.$set('bill', response);
                 this.$set('other_details', response.data.other_details);
+                this.$set('payment_term', response.data.payment_term);
                 this.$set('loaded', true);
 
                 if (typeof showSuccess === 'undefined') {
@@ -330,8 +331,8 @@ new Vue({
                     $('#other-details-modal').modal('toggle');
                     this.$set('other_details', response.other_details);
                     Alert.success(response.title, response.message);
+                    return;
                 }
-                return;
 
                 this.$set('error', Translation.common('general-error'));
 
@@ -348,6 +349,33 @@ new Vue({
 
         resetOtherDetailsModal: function() {
             this.$set('error', '');
+        },
+
+        setPaymentTerm: function() {
+
+            var data = {
+                payment_term: $('#payment-term').val()
+            };
+
+            this.$http.post('/bills/' + Data.getBillId() + '/edit-payment-term', data, function(response) {
+                if (response.success) {
+                    $('#payment-term-modal').modal('toggle');
+                    this.$set('payment_term', response.payment_term);
+                    Alert.success(response.title, response.message);
+                    return;
+                }
+
+                this.$set('error', Translation.common('general-error'));
+
+            }).error(function(response) {
+
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('general-error'));
+            });
+
         }
     }
 });

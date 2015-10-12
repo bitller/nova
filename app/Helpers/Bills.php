@@ -57,7 +57,7 @@ class Bills {
 
         $bill = Auth::user()->bills()->where('bills.id', $billId)
             ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
-            ->select('clients.id as client_id', 'clients.name as client_name', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.other_details')
+            ->select('clients.id as client_id', 'clients.name as client_name', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.other_details', 'bills.payment_term')
             ->first();
 
         $showDiscount = false;
@@ -77,6 +77,8 @@ class Bills {
     }
 
     /**
+     * Update bill other details.
+     *
      * @param int $billId
      * @param string $otherDetails
      * @return mixed
@@ -103,6 +105,34 @@ class Bills {
         $response->addExtraFields(['other_details' => $otherDetails]);
         return response($response->get())->header('Content-Type', 'application/json');
 
+    }
+
+    /**
+     * Update bill payment term.
+     *
+     * @param int $billId
+     * @param string $paymentTerm
+     * @return mixed
+     */
+    public static function updatePaymentTerm($billId, $paymentTerm) {
+
+        $response = new AjaxResponse();
+
+        // Check if bill exists and belongs to current user
+        $bill = Auth::user()->bills()->where('id', $billId)->first();
+
+        if (!$bill) {
+            $response->setFailMessage(trans('common.general_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        Auth::user()->bills()->where('id', $billId)->update([
+            'payment_term' => $paymentTerm
+        ]);
+
+        $response->setSuccessMessage(trans('bill.payment_term_updated'));
+        $response->addExtraFields(['payment_term' => $paymentTerm]);
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
     /**

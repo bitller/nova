@@ -23,6 +23,7 @@ return [
     'other_details_updated' => 'Bill other details updated!',
     'page' => 'Page',
     'page_updated' => 'Product page updated!',
+    'payment_term_updated' => 'Payment term updated!',
     'price' => 'Price',
     'price_updated' => 'Product price updated!',
     'print' => 'Print bill',
@@ -41,4 +42,6 @@ return [
     'quantity' => 'Quantity',
     'quantity_updated' => 'Product quantity was updated!',
     'set_payment_term' => 'Set payment term',
+    'set_payment_term_description' => 'Set bill payment term',
+    'set_payment_term_placeholder' => 'DD/MM/YYYY',
 ];
