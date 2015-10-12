@@ -23,6 +23,7 @@ return [
     'other_details_updated' => 'Bill other details updated!',
     'page' => 'Page',
     'page_updated' => 'Product page updated!',
+    'payment_term' => 'Payment term',
     'payment_term_updated' => 'Payment term updated!',
     'price' => 'Price',
     'price_updated' => 'Product price updated!',
@@ -41,7 +42,9 @@ return [
     'product_will_be_deleted' => 'Product will be deleted from this bill!',
     'quantity' => 'Quantity',
     'quantity_updated' => 'Product quantity was updated!',
+    'saved_money' => 'You saved',
     'set_payment_term' => 'Set payment term',
     'set_payment_term_description' => 'Set bill payment term',
     'set_payment_term_placeholder' => 'DD/MM/YYYY',
+    'total' => 'Total',
 ];
