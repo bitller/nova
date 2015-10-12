@@ -355,6 +355,9 @@ new Vue({
 
         },
 
+        /**
+         * Reset other details modal.
+         */
         resetOtherDetailsModal: function() {
             this.$set('error', '');
         },
