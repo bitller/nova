@@ -76,6 +76,30 @@ class Bills {
 
     }
 
+    public static function deleteBill($billId) {
+
+        $response = new AjaxResponse();
+        $response->setFailMessage(trans('common.general_error'));
+
+        // Make sure bill belongs to current user
+        $bill = Auth::user()->bills()->where('id', $billId)->first();
+        if (!$bill) {
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        // Delete bill
+        Auth::user()->bills()->where('id', $billId)->delete();
+
+        // Check if bill was deleted
+        if (Auth::user()->bills()->where('id', $billId)->count()) {
+            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        $response->setSuccessMessage(trans('bill.deleted'));
+        return response($response->get())->header('Content-Type', 'application/json');
+
+    }
+
     /**
      * Update bill other details.
      *

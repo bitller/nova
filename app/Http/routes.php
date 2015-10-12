@@ -30,6 +30,7 @@ Route::group(['prefix' => 'bills'], function() {
     Route::get('/{billId}/delete', 'BillsController@delete');
     Route::get('/{billId}/delete/{productId}/{code}/{billProductId}', 'BillsController@deleteProduct');
     Route::get('/{billId}/suggest-products', 'BillsController@suggestProducts');
+    Route::get('/{billId}/delete-bill', 'BillsController@deleteBill');
     Route::post('/create', 'BillsController@create');
     Route::post('/{billId}/edit-page', 'BillsController@editPage');
     Route::post('/{billId}/edit-quantity', 'BillsController@editQuantity');

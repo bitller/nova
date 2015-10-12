@@ -28,7 +28,7 @@
                             <li><a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal"> <span class="glyphicon glyphicon-pencil"></span> {{ trans('bill.edit_other_details') }}</a></li>
                             <li><a href="#" v-on="click: resetPaymentTermModal()" data-toggle="modal" data-target="#payment-term-modal"> <span class="glyphicon glyphicon-calendar"></span> {{ trans('bill.set_payment_term') }}</a></li>
                             <li class="divider"></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-trash"></span> {{ trans('bill.delete') }}</a></li>
+                            <li><a href="#" v-on="click: deleteBill()"><span class="glyphicon glyphicon-trash"></span> {{ trans('bill.delete') }}</a></li>
                         </ul>
                     </div>
                     <!-- END Options button -->

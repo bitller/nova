@@ -5,6 +5,7 @@ return [
     'add_product_bill' => 'Adaugă un produs facturii',
     'code' => 'Cod',
     'delete' => 'Şterge factura',
+    'deleted' => 'Factura a fost ştearsă!',
     'discount' => 'Reducere',
     'discount_updated' => 'Discount-ul a fost actualizat!',
     'edit_discount' => 'Editează discount-ul produsului',

@@ -140,6 +140,10 @@ class BillsController extends Controller {
 
     }
 
+    public function deleteBill($billId) {
+        return Bills::deleteBill($billId);
+    }
+
     /**
      * Add product to bill.
      *

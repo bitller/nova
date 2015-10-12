@@ -5,6 +5,7 @@ return [
     'add_product_bill' => 'Add product to bill',
     'code' => 'Code',
     'delete' => 'Delete bill',
+    'deleted' => 'Bill deleted!',
     'discount' => 'Discount',
     'discount_updated' => 'Product discount was updated!',
     'edit_discount' => 'Edit product discount',

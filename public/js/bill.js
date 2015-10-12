@@ -377,6 +377,27 @@ new Vue({
                 this.$set('error', Translation.common('general-error'));
             });
 
+        },
+
+        deleteBill: function() {
+
+            this.$http.get('/bills/' + Data.getBillId() + '/delete-bill', function(response) {
+
+                if (response.success) {
+                    Alert.success(response.title, response.message);
+                    return;
+                }
+
+                Alert.generalError();
+
+            }).error(function(response) {
+                if (response.message) {
+                    Alert.error(response.title, response.message);
+                    return;
+                }
+                Alert.generalError();
+            });
+
         }
     }
 });
