@@ -351,13 +351,20 @@ new Vue({
             this.$set('error', '');
         },
 
+        /**
+         * Edit bill payment term.
+         */
         setPaymentTerm: function() {
 
+            // Build post data
             var data = {
                 payment_term: $('#payment-term').val()
             };
 
+            // Make post request
             this.$http.post('/bills/' + Data.getBillId() + '/edit-payment-term', data, function(response) {
+
+                // Handle success response
                 if (response.success) {
                     $('#payment-term-modal').modal('toggle');
                     this.$set('payment_term', response.payment_term);
@@ -369,6 +376,7 @@ new Vue({
 
             }).error(function(response) {
 
+                // Handle error response
                 if (response.message) {
                     this.$set('error', response.message);
                     return;
