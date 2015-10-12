@@ -18,6 +18,7 @@ return [
     'edit_quantity_description' => 'This represents how many products your client want to buy.',
     'final_price' => 'Final price',
     'name' => 'Name',
+    'options' => 'Options',
     'other_details' => 'Other details',
     'other_details_description' => 'If have to add some extra information or just say something to the client, write here and will appear at the bottom of the bill.',
     'other_details_updated' => 'Bill other details updated!',

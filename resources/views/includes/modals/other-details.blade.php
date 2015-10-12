@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label for="other-details">{{ trans('bill.add_bill_other_details') }}:</label>
-                    <textarea v-model="otherDetails" name="other-details" id="other-details" class="form-control" rows="6">@{{ bill.data.other_details }}</textarea>
+                    <textarea v-model="otherDetails" name="other-details" id="other-details" class="form-control" rows="6">@{{ other_details }}</textarea>
                 </div>
 
             </div>

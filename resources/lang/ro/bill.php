@@ -18,6 +18,7 @@ return [
     'edit_quantity_description' => 'Dacă clientul dvs. dorește mai multe produse la fel, adaugă aici numărul lor.',
     'final_price' => 'Preț final',
     'name' => 'Nume',
+    'options' => 'Opțiuni',
     'other_details' => 'Alte detalii',
     'other_details_description' => 'Ai de adăugat informații în plus sau doar vrei să îi spui ceva clientului? Completează câmpul de mai jos și va apărea la sfârșitul facturii.',
     'other_details_updated' => 'Câmpul Alte detalii a fost actualizat cu succes',

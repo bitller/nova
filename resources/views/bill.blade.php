@@ -20,7 +20,7 @@
                     <!-- BEGIN Options button -->
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-cog"></span> Optiuni
+                            <span class="glyphicon glyphicon-cog"></span> {{ trans('bill.options') }}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
