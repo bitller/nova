@@ -34,7 +34,7 @@
                 <tbody>
                 <tr v-repeat="bill in bills.data">
                     <td class="vert-align"><a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a></td>
-                    <td class="vert-align">@{{ bill.campaign_number }} din @{{ bill.campaign_year }}</td>
+                    <td class="vert-align">{{ trans('bills.order') }} @{{ bill.campaign_order }} {{ trans('bills.from_campaign') }} @{{ bill.campaign_number }}, {{ trans('bills.year') }} @{{ bill.campaign_year }}</td>
                     <td class="vert-align">18</td>
                     <td class="vert-align">@{{ bill.created_at }}</td>
                     <td class="vert-align"><button class="btn btn-warning" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>

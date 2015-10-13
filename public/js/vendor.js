@@ -1597,6 +1597,16 @@ var Translation = {
     },
 
     /**
+     * Get bills page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    bills: function(attribute) {
+        return this.get('#bills-trans', attribute);
+    },
+
+    /**
      * @param pageSelector
      * @param attribute
      * @returns {*|jQuery}
