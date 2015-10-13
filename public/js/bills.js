@@ -195,14 +195,7 @@ new Vue({
                     var billUrl = this.buildBillUrl(rows_on_page, current_page);
 
                     thisInstance.$http.get(billUrl).success(function(data) {
-                        swal({
-                            title: response.title,
-                            text: response.message,
-                            type: "success",
-                            timer: 1750,
-                            showConfirmButton: false
-                        });
-
+                        Alert.success(response.title, response.message);
                         this.$set('bills', data);
                     });
 
