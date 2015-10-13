@@ -35,6 +35,7 @@ return [
     'product_code' => 'Product code',
     'product_discount' => 'Product discount',
     'product_discount_required' => 'Product discount is required!',
+    'product_not_found' => 'Product not found.',
     'product_page' => 'Product price',
     'product_page_required' => 'Product page is required!',
     'product_price' => 'Product price',

@@ -103,7 +103,7 @@ class Products {
 
         } else {
             // Product does not exists
-            $response->setFailMessage('');
+            $response->setFailMessage(trans('bill.product_not_found'));
             return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
         }
 

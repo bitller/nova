@@ -33,6 +33,7 @@ return [
     'product_code' => 'Codul produsului',
     'product_discount' => 'Reducerea aplicată produsului',
     'product_discount_required' => 'Discount-ul produsului este obligatoriu!',
+    'product_not_found' => 'Produsul nu a fost găsit.',
     'product_page' => 'Pagina produsului',
     'product_page_required' => 'Pagina produsului este obligatorie!',
     'product_price' => 'Prețul produsului',
