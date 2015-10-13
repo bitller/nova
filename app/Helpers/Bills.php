@@ -60,6 +60,7 @@ class Bills {
             ->select('clients.id as client_id', 'clients.name as client_name', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.other_details', 'bills.payment_term')
             ->first();
 
+        // Calculate bill price, saved money and check if discount column should be displayed
         $showDiscount = false;
         $total = 0;
         $savedMoney = 0;
