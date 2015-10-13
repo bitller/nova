@@ -140,6 +140,12 @@ class BillsController extends Controller {
 
     }
 
+    /**
+     * Delete entire bill.
+     *
+     * @param int $billId
+     * @return mixed
+     */
     public function deleteBill($billId) {
         return Bills::deleteBill($billId);
     }
