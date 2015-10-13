@@ -37,7 +37,7 @@
                     <td class="vert-align">@{{ bill.campaign_order }}</td>
                     <td class="vert-align">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
                     <td class="vert-align">@{{ bill.created_at }}</td>
-                    <td class="vert-align"><button class="btn btn-warning" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                    <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                 </tr>
                 </tbody>
             </table>
