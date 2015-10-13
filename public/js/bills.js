@@ -195,13 +195,11 @@ new Vue({
 
                 Alert.loader();
 
-                // Make request
+                // Make request to delete bill
                 thisInstance.$http.get(UrlBuilder.deleteBill(bill_id)).success(function(response) {
 
-                    // Build url for bills request
-                    var billUrl = this.buildBillUrl(rows_on_page, current_page);
-
-                    thisInstance.$http.get(billUrl).success(function(data) {
+                    // Make request to get bills
+                    thisInstance.$http.get(UrlBuilder.getBill(rows_on_page, current_page)).success(function(data) {
                         Alert.success(response.title, response.message);
                         this.$set('bills', data);
                     });
