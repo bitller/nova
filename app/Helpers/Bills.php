@@ -61,17 +61,25 @@ class Bills {
             ->first();
 
         $showDiscount = false;
+        $total = 0;
+        $savedMoney = 0;
         foreach ($secondQuery as $billProduct) {
             if ($billProduct->discount) {
                 $showDiscount = true;
             }
+            $total += $billProduct->price;
+            $savedMoney += $billProduct->final_price;
         }
 
+        $savedMoney = $total-$savedMoney;
+
         return [
-            'data' => $bill,
+            'total' => $total,
+            'saved_money' => $savedMoney,
             'show_discount_column' => $showDiscount,
             'show_other_details_info' => true,
             'products' => $secondQuery,
+            'data' => $bill
         ];
 
     }

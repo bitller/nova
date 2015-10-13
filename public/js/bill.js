@@ -34,6 +34,8 @@ new Vue({
                 this.$set('bill', response);
                 this.$set('other_details', response.data.other_details);
                 this.$set('payment_term', response.data.payment_term);
+                this.$set('total', response.total);
+                this.$set('saved_money', response.saved_money);
                 this.$set('loaded', true);
 
                 if (typeof showSuccess === 'undefined') {
@@ -321,13 +323,20 @@ new Vue({
             });
         },
 
+        /**
+         * Edit bill other details.
+         */
         saveOtherDetails: function() {
 
+            // Post data
             var data = {
                 other_details: this.$get('otherDetails')
             };
 
+            // Request
             this.$http.post('/bills/' + Data.getBillId() + '/edit-other-details', data, function(response) {
+
+                // Success response
                 if (response.success) {
                     $('#other-details-modal').modal('toggle');
                     this.$set('other_details', response.other_details);
@@ -339,6 +348,7 @@ new Vue({
 
             }).error(function(response) {
 
+                // Fail response
                 if (response.message) {
                     this.$set('error', response.message);
                     return;
@@ -348,17 +358,27 @@ new Vue({
 
         },
 
+        /**
+         * Reset other details modal.
+         */
         resetOtherDetailsModal: function() {
             this.$set('error', '');
         },
 
+        /**
+         * Edit bill payment term.
+         */
         setPaymentTerm: function() {
 
+            // Build post data
             var data = {
                 payment_term: $('#payment-term').val()
             };
 
+            // Make post request
             this.$http.post('/bills/' + Data.getBillId() + '/edit-payment-term', data, function(response) {
+
+                // Handle success response
                 if (response.success) {
                     $('#payment-term-modal').modal('toggle');
                     this.$set('payment_term', response.payment_term);
@@ -370,6 +390,7 @@ new Vue({
 
             }).error(function(response) {
 
+                // Handle error response
                 if (response.message) {
                     this.$set('error', response.message);
                     return;
@@ -379,12 +400,17 @@ new Vue({
 
         },
 
+        /**
+         * Delete bill from bill page.
+         */
         deleteBill: function() {
 
             Alert.loader();
 
+            // Make request
             this.$http.get('/bills/' + Data.getBillId() + '/delete', function(response) {
-                
+
+                // Show success message and redirect on success
                 if (response.success) {
                     Alert.success(response.title, response.message);
                     window.location.replace('/bills');
@@ -394,10 +420,13 @@ new Vue({
                 Alert.generalError();
 
             }).error(function(response) {
+
+                // Handle error response
                 if (response.message) {
                     Alert.error(response.title, response.message);
                     return;
                 }
+
                 Alert.generalError();
             });
 

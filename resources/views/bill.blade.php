@@ -95,7 +95,7 @@
 
             <!-- BEGIN Bill total price -->
             <div class="well well-sm col-md-2 text-center">
-                <span class="text-center">{{ trans('bill.total') }}: <strong>100 ron</strong></span>
+                <span class="text-center">{{ trans('bill.total') }}: <strong>@{{ total }} ron</strong></span>
             </div>
             <!-- END Bill total price -->
 
@@ -103,7 +103,7 @@
 
             <!-- BEGIN Bill total discount -->
             <div class="well well-sm col-md-3 text-center">
-                <span>{{ trans('bill.saved_money') }}: <strong>1000 ron</strong></span>
+                <span>{{ trans('bill.saved_money') }}: <strong>@{{ saved_money }} ron</strong></span>
             </div>
             <!-- END Bill total discount -->
 
