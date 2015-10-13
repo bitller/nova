@@ -2,7 +2,7 @@
 @section('content')
     <div id="bills">
 
-        @include('includes.ajax-translations.common')
+        @include('includes.ajax-translations.bills')
 
         <div id="table" v-show="loaded">
             <!-- BEGIN No bills info -->

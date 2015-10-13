@@ -5,6 +5,7 @@ return [
     'add_product_bill' => 'Add product to bill',
     'bill_not_found' => 'Bill not found!',
     'bill_not_found_description' => 'Looks like this bill does not exists. In a few seconds you will be redirected.',
+    'bill_will_be_deleted' => 'This bill will be deleted permanently!',
     'code' => 'Code',
     'delete' => 'Delete bill',
     'deleted' => 'Bill deleted!',

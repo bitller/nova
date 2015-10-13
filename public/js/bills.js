@@ -181,36 +181,35 @@ new Vue({
 
         deleteBill: function(bill_id, current_page, rows_on_page, loading) {
 
-            // Show loader
-            swal({
-                title: loading,
-                type: "info",
-                showConfirmButton: false
-            });
+            var thisInstance = this;
 
-            // Build request url and make request
-            var url = '/bills/'+bill_id+'/delete';
-            this.$http.get(url).success(function(response) {
+            Alert.confirmDeleteBill(function() {
 
-                // Build url for bills request
-                var billUrl = this.buildBillUrl(rows_on_page, current_page);
+                Alert.loader();
 
-                this.$http.get(billUrl).success(function(data) {
-                    swal({
-                        title: response.title,
-                        text: response.message,
-                        type: "success",
-                        timer: 1750,
-                        showConfirmButton: false
+                // Build request url and make request
+                var url = '/bills/'+bill_id+'/delete';
+                thisInstance.$http.get(url).success(function(response) {
+
+                    // Build url for bills request
+                    var billUrl = this.buildBillUrl(rows_on_page, current_page);
+
+                    thisInstance.$http.get(billUrl).success(function(data) {
+                        swal({
+                            title: response.title,
+                            text: response.message,
+                            type: "success",
+                            timer: 1750,
+                            showConfirmButton: false
+                        });
+
+                        this.$set('bills', data);
                     });
 
-                    this.$set('bills', data);
+                }).error(function(response) {
+                    //
                 });
-
-            }).error(function(response) {
-                //
             });
-
         },
 
         createBill: function(title, placeholder, empty_input_error, message, loading, success) {

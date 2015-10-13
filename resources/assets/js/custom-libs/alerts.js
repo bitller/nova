@@ -177,6 +177,17 @@ var Alert = {
     },
 
     /**
+     * Show delete bill confirmation.
+     *
+     * @param callback
+     */
+    confirmDeleteBill: function(callback) {
+        swal(this.getConfirmDeleteConfig(Translation.bills('bill-will-be-deleted')), function() {
+            callback();
+        });
+    },
+
+    /**
      * @param type
      * @param title
      * @param message
@@ -208,5 +219,24 @@ var Alert = {
      */
     close: function() {
         swal.close()
+    },
+
+    /**
+     * Return config object used for delete confirmation.
+     *
+     * @param text
+     * @returns {{title: (*|jQuery), text: *, type: string, showCancelButton: boolean, confirmButtonColor: string, confirmButtonText: (*|jQuery), cancelButtonText: (*|jQuery), closeOnConfirm: boolean}}
+     */
+    getConfirmDeleteConfig: function(text) {
+        return {
+            title: Translation.common('confirm'),
+            text: text,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: Translation.common('confirm-delete'),
+            cancelButtonText: Translation.common('cancel'),
+            closeOnConfirm: false
+        }
     }
 }
