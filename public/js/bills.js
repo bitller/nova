@@ -179,6 +179,14 @@ new Vue({
 
     methods: {
 
+        /**
+         * Make request to delete bill.
+         *
+         * @param bill_id
+         * @param current_page
+         * @param rows_on_page
+         * @param loading
+         */
         deleteBill: function(bill_id, current_page, rows_on_page, loading) {
 
             var thisInstance = this;
@@ -187,9 +195,8 @@ new Vue({
 
                 Alert.loader();
 
-                // Build request url and make request
-                var url = '/bills/'+bill_id+'/delete';
-                thisInstance.$http.get(url).success(function(response) {
+                // Make request
+                thisInstance.$http.get(UrlBuilder.deleteBill(bill_id)).success(function(response) {
 
                     // Build url for bills request
                     var billUrl = this.buildBillUrl(rows_on_page, current_page);
@@ -200,7 +207,14 @@ new Vue({
                     });
 
                 }).error(function(response) {
-                    //
+
+                    if (response.message) {
+                        Alert.error(response.title, response.message);
+                        return;
+                    }
+
+                    Alert.generalError();
+
                 });
             });
         },

@@ -27,9 +27,8 @@ new Vue({
 
                 Alert.loader();
 
-                // Build request url and make request
-                var url = '/bills/'+bill_id+'/delete';
-                thisInstance.$http.get(url).success(function(response) {
+                // Make request
+                thisInstance.$http.get(UrlBuilder.deleteBill(bill_id)).success(function(response) {
 
                     // Build url for bills request
                     var billUrl = this.buildBillUrl(rows_on_page, current_page);
