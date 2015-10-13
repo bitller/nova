@@ -149,9 +149,10 @@ var Alert = {
      *
      * @param title
      * @param message
+     * @param keep
      */
-    error: function(title, message) {
-        this.show('error', title, message);
+    error: function(title, message, keep) {
+        this.show('error', title, message, keep);
     },
 
     /**
@@ -192,9 +193,12 @@ var Alert = {
             title: title,
             text: message,
             type: type,
-            timer: time,
             showConfirmButton: false
         };
+
+        if (time !== 'keep') {
+            config.timer = time;
+        }
 
         swal(config);
     },

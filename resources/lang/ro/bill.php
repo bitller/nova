@@ -3,6 +3,8 @@
 return [
     'add_bill_other_details' => 'Adaugă alte detalii facturii',
     'add_product_bill' => 'Adaugă un produs facturii',
+    'bill_not_found' => 'Această factură nu există!',
+    'bill_not_found_description' => 'Se pare că această factură nu există. În câteva secunde vei fi redirecționat.',
     'code' => 'Cod',
     'delete' => 'Şterge factura',
     'deleted' => 'Factura a fost ştearsă!',

@@ -1,6 +1,8 @@
 @extends('includes.ajax-translations.common')
 @section('trans')
 <div id="bill-trans"
+    bill-not-found="{{ trans('bill.bill_not_found') }}"
+    bill-not-found-description="{{ trans('bill.bill_not_found_description') }}"
     product-will-be-deleted="{{ trans('bill.product_will_be_deleted') }}"
     product-page-required="{{ trans('bill.product_page_required') }}"
     page-updated="{{ trans('bill.page_updated') }}"

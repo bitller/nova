@@ -30,6 +30,15 @@ new Vue({
 
             this.$http.get('/bills/' + $('#bill').attr('bill-id') + '/get', function(response) {
 
+                // Make sure bill exists
+                if (!response.data) {
+                    Alert.error(Translation.bill('bill-not-found'), Translation.bill('bill-not-found-description'), 'keep');
+                    setInterval(function() {
+                        window.location.replace('/bills');
+                    }, 2000);
+                    return;
+                }
+
                 this.$set('bill', response);
                 this.$set('other_details', response.data.other_details);
                 this.$set('payment_term', response.data.payment_term);
