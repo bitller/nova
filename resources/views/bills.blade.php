@@ -24,18 +24,18 @@
             <table class="table table-hover" v-show="bills.total">
                 <thead>
                 <tr>
-                    <th>{{ trans('bills.client') }}</th>
-                    <th>{{ trans('bills.campaign') }}</th>
-                    <th>{{ trans('bills.number_of_products') }}</th>
-                    <th>{{ trans('bills.created_at') }}</th>
-                    <th>{{ trans('common.delete') }}</th>
+                    <th><span class="glyphicon glyphicon-user icon-color"></span> {{ trans('bills.client') }}</th>
+                    <th><span class="glyphicon glyphicon-tag icon-color"></span> {{ trans('bills.campaign_order') }}</th>
+                    <th><span class="glyphicon glyphicon-tags icon-color"></span> {{ trans('bills.campaign') }}</th>
+                    <th><span class="glyphicon glyphicon-calendar icon-color"></span> {{ trans('bills.created_at') }}</th>
+                    <th><span class="glyphicon glyphicon-trash icon-color"></span> {{ trans('common.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-repeat="bill in bills.data">
                     <td class="vert-align"><a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a></td>
-                    <td class="vert-align">{{ trans('bills.order') }} @{{ bill.campaign_order }} {{ trans('bills.from_campaign') }} @{{ bill.campaign_number }}, {{ trans('bills.year') }} @{{ bill.campaign_year }}</td>
-                    <td class="vert-align">18</td>
+                    <td class="vert-align">@{{ bill.campaign_order }}</td>
+                    <td class="vert-align">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
                     <td class="vert-align">@{{ bill.created_at }}</td>
                     <td class="vert-align"><button class="btn btn-warning" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                 </tr>

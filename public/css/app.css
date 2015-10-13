@@ -6105,6 +6105,9 @@ button.close {
 .no-bills-info {
   margin-top: 15px; }
 
+.icon-color {
+  color: #8C8C8C; }
+
 /*! jQuery UI - v1.11.4 - 2015-10-12
 * http://jqueryui.com
 * Includes: core.css, datepicker.css, theme.css
