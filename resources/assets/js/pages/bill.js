@@ -307,7 +307,7 @@ new Vue({
             var thisInstance = this;
 
             // Ask for confirmation
-            Alert.confirmDelete(function() {
+            Alert.confirmDeleteProductFromBill(function() {
 
                 // Show loader
                 Alert.loader();

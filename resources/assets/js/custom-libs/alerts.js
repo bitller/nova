@@ -160,7 +160,7 @@ var Alert = {
      *
      * @param callback
      */
-    confirmDelete: function(callback) {
+    confirmDeleteProductFromBill: function(callback) {
 
         swal({
             title: Translation.common('confirm'),
