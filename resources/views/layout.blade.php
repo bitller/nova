@@ -23,11 +23,22 @@
             <a class="navbar-brand" href="/bills">Nova</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+
             <ul class="nav navbar-nav">
                 <li><a href="/products">{{ trans('navbar.products') }}</a></li>
                 <li><a href="/clients">{{ trans('navbar.clients') }}</a></li>
                 <li><a href="/my-products">{{ trans('navbar.my_products') }}</a></li>
             </ul>
+
+            <!-- BEGIN Search bar -->
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <i class="glyphicon glyphicon-search form-control-feedback"></i>
+                </div>
+            </form>
+            <!-- END Search bar -->
+
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->email }}<span class="caret"></span></a>
