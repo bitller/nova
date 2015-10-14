@@ -187,7 +187,7 @@ new Vue({
          * @param rows_on_page
          * @param loading
          */
-        deleteBill: function(bill_id, current_page, rows_on_page, loading) {
+        deleteBill: function(bill_id, current_page, rows_on_page) {
 
             var thisInstance = this;
 

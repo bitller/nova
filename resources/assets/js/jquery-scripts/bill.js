@@ -9,6 +9,7 @@ $(document).ready(function() {
             cache: false,
             url: 'http://localhost:8888/bills/11/suggest-products?product_code=',
             replace: function() {
+                // todo show loader only on ajax request
                 var url = 'http://localhost:8888/bills/11/suggest-products?product_code=';
                 if ($('#product-code').val()) {
                     url += encodeURIComponent($('#product-code').val())
