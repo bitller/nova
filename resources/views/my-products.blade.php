@@ -16,23 +16,25 @@
             <!-- END Add product button -->
 
             <!-- BEGIN Products table-->
-            <table class="table table-bordered" v-show="myProducts.total">
-                <thead>
-                <tr>
-                    <th>{{ trans('common.product_code') }}</th>
-                    <th>{{ trans('common.product_name') }}</th>
-                    <th>{{ trans('my_products.delete_product') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-repeat="product in myProducts.data">
-                    <td class="vert-align">@{{ product.code }}</td>
-                    <td class="vert-align">@{{ product.name }}</td>
-                    <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteMyProduct(product.id, myProducts.current_page, myProducts.to-myProducts.from)">{{ trans('common.delete') }}</button></td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- END Products table -->
+            <div class="panel panel-default">
+                <table class="table table-bordered" v-show="myProducts.total">
+                    <thead>
+                    <tr>
+                        <th>{{ trans('common.product_code') }}</th>
+                        <th>{{ trans('common.product_name') }}</th>
+                        <th>{{ trans('my_products.delete_product') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-repeat="product in myProducts.data">
+                        <td class="vert-align">@{{ product.code }}</td>
+                        <td class="vert-align">@{{ product.name }}</td>
+                        <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteMyProduct(product.id, myProducts.current_page, myProducts.to-myProducts.from)">{{ trans('common.delete') }}</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- END Products table -->
+            </div>
 
             <!-- BEGIN Pagination links -->
             <ul class="pager" v-show="myProducts.total > myProducts.per_page">
