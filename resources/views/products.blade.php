@@ -16,20 +16,22 @@
             <!-- END Add product button -->
 
             <!-- BEGIN Products table-->
-            <table class="table table-bordered" v-show="products.total">
-                <thead>
-                <tr>
-                    <th>{{ trans('common.product_code') }}</th>
-                    <th>{{ trans('common.product_name') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-repeat="product in products.data">
-                    <td class="vert-align">@{{ product.code }}</td>
-                    <td class="vert-align">@{{ product.name }}</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="panel panel-default">
+                <table class="table table-bordered" v-show="products.total">
+                    <thead>
+                    <tr>
+                        <th>{{ trans('common.product_code') }}</th>
+                        <th>{{ trans('common.product_name') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-repeat="product in products.data">
+                        <td class="vert-align">@{{ product.code }}</td>
+                        <td class="vert-align">@{{ product.name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- END Products table -->
 
             <!-- BEGIN Pagination links -->
