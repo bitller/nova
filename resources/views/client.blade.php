@@ -38,28 +38,32 @@
             </div>
             <!-- END Client statistics -->
 
+            <!-- BEGIN Client bills -->
             <div class="row client-bills" v-show="client.total_bills > 0">
                 <h4>{{ trans('clients.bills_of_this_client') }}</h4>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>{{ trans('bills.client') }}</th>
-                        <th>{{ trans('bills.number_of_products') }}</th>
-                        <th>{{ trans('bills.campaign') }}</th>
-                        <th>{{ trans('bills.created_at') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="panel panel-default">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>{{ trans('bills.client') }}</th>
+                            <th>{{ trans('bills.number_of_products') }}</th>
+                            <th>{{ trans('bills.campaign') }}</th>
+                            <th>{{ trans('bills.created_at') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                    <tr v-repeat="bill in client.bills">
-                        <td><a href="#">@{{ client.name }}</a></td>
-                        <td>0</td>
-                        <td>@{{ bill.campaign_number }}</td>
-                        <td>@{{ bill.created_at }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <tr v-repeat="bill in client.bills">
+                            <td><a href="#">@{{ client.name }}</a></td>
+                            <td>0</td>
+                            <td>@{{ bill.campaign_number }}</td>
+                            <td>@{{ bill.created_at }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <!-- END Client bills -->
 
         </div>
     </div>
