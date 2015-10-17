@@ -44,6 +44,7 @@ new Vue({
                 this.$set('payment_term', response.data.payment_term);
                 this.$set('total', response.total);
                 this.$set('saved_money', response.saved_money);
+                this.$set('to_pay', response.to_pay);
                 this.$set('loaded', true);
 
                 if (typeof showSuccess === 'undefined') {

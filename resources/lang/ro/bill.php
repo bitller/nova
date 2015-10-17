@@ -53,5 +53,5 @@ return [
     'set_payment_term' => 'Setează termenul de plată',
     'set_payment_term_description' => 'Setează termenul de plată al facturii',
     'set_payment_term_placeholder' => 'ZZ/LL/AAAA',
-    'total' => 'Total',
+    'to_pay' => 'De plată',
 ];

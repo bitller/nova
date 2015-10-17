@@ -53,5 +53,5 @@ return [
     'set_payment_term' => 'Set payment term',
     'set_payment_term_description' => 'Set bill payment term',
     'set_payment_term_placeholder' => 'DD/MM/YYYY',
-    'total' => 'Total',
+    'to_pay' => 'To pay',
 ];

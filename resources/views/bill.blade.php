@@ -95,7 +95,7 @@
 
             <!-- BEGIN Bill total price -->
             <div class="well well-sm col-md-2 text-center" v-show="bill.total">
-                <span class="text-center">{{ trans('bill.total') }}: <strong>@{{ total }} ron</strong></span>
+                <span class="text-center">{{ trans('bill.to_pay') }}: <strong>@{{ to_pay }} ron</strong></span>
             </div>
             <!-- END Bill total price -->
 

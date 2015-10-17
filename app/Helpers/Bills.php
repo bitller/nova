@@ -65,21 +65,23 @@ class Bills {
 
         // Calculate bill price, saved money and check if discount column should be displayed
         $showDiscount = false;
-        $total = 0;
-        $savedMoney = 0;
+        $price = 0;
+        $finalPrice = 0;
         foreach ($secondQuery as $billProduct) {
             if ($billProduct->discount) {
                 $showDiscount = true;
             }
-            $total += $billProduct->price;
-            $savedMoney += $billProduct->final_price;
+            $price += $billProduct->price;
+            $finalPrice += $billProduct->final_price;
         }
 
-        $savedMoney = $total-$savedMoney;
+        $toPay = $finalPrice;
+        $savedMoney = $price-$finalPrice;
 
         return [
-            'total' => $total,
+            'to_pay' => $toPay,
             'saved_money' => $savedMoney,
+            'total' => $price,
             'show_discount_column' => $showDiscount,
             'show_other_details_info' => true,
             'products' => $secondQuery,
