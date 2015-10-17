@@ -20,6 +20,7 @@ return [
     'edit_price_description' => 'Insert new product price',
     'edit_quantity' => 'Edit product quantity',
     'edit_quantity_description' => 'This represents how many products your client want to buy.',
+    'empty_bill' => 'This bill has no products. To start adding products use "Add product button". If you have questions contact us.',
     'final_price' => 'Final price',
     'name' => 'Name',
     'options' => 'Options',

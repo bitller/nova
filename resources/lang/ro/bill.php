@@ -20,6 +20,7 @@ return [
     'edit_price_description' => 'Introduce-ți noul preț al produsului',
     'edit_quantity' => 'Editează cantitatea produsului',
     'edit_quantity_description' => 'Dacă clientul dvs. dorește mai multe produse la fel, adaugă aici numărul lor.',
+    'empty_bill' => 'Această factură nu conține niciun produs. Petru a începe adăugarea produselor folosește butonul "Adaugă produs". Dacă ai nelămuriri nu ezita să ne contactezi.',
     'final_price' => 'Preț final',
     'name' => 'Nume',
     'options' => 'Opțiuni',

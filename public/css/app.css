@@ -4562,13 +4562,13 @@ a.thumbnail.active {
     color: #2b542c; }
 
 .alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-  color: #31708f; }
+  background-color: #3498DB;
+  border-color: #3498DB;
+  color: #ffffff; }
   .alert-info hr {
-    border-top-color: #a6e1ec; }
+    border-top-color: #258cd1; }
   .alert-info .alert-link {
-    color: #245269; }
+    color: #e6e6e6; }
 
 .alert-warning {
   background-color: #fcf8e3;

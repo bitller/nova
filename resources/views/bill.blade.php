@@ -45,7 +45,7 @@
             <!-- BEGIN Bill top part -->
 
             <!-- BEGIN Bill table -->
-            <div class="panel panel-default">
+            <div class="panel panel-default" v-show="bill.total">
                 <table class="table table-bordered bill-products-table">
                     <thead>
                         <tr>
@@ -77,7 +77,7 @@
             <!-- END Bill table -->
 
             <!-- BEGIN Bill other details -->
-            <div class="panel panel-default" v-show="other_details">
+            <div class="panel panel-default" v-show="other_details && bill.total">
                 <div class="panel-heading">{{ trans('bill.other_details') }}</div>
                 <div class="panel-body">
                     @{{{ other_details }}}
@@ -86,7 +86,7 @@
             <!-- END Bill other details -->
 
             <!-- BEGIN Bill payment term -->
-            <div class="well well-sm col-md-3 text-center">
+            <div class="well well-sm col-md-3 text-center" v-show="bill.total">
                 <span class="text-center">{{ trans('bill.payment_term') }}: <strong>@{{ payment_term }}</strong></span>
             </div>
             <!-- END Bill payment term -->
@@ -94,7 +94,7 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total price -->
-            <div class="well well-sm col-md-2 text-center">
+            <div class="well well-sm col-md-2 text-center" v-show="bill.total">
                 <span class="text-center">{{ trans('bill.total') }}: <strong>@{{ total }} ron</strong></span>
             </div>
             <!-- END Bill total price -->
@@ -102,10 +102,12 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total discount -->
-            <div class="well well-sm col-md-3 text-center">
+            <div class="well well-sm col-md-3 text-center" v-show="bill.total">
                 <span>{{ trans('bill.saved_money') }}: <strong>@{{ saved_money }} ron</strong></span>
             </div>
             <!-- END Bill total discount -->
+
+            <div class="alert alert-info" v-show="!bill.total">{{ trans('bill.empty_bill') }}</div>
 
         </div>
 
