@@ -34,6 +34,8 @@ return [
     'price' => 'Preţ',
     'price_updated' => 'Preţul produsului a fost actualizat!',
     'print' => 'Imprimează factura',
+    'product_added' => 'Produsul a fost adăugat!',
+    'product_added_successfully' => 'Produsul a fost adăugat cu succes!',
     'product_code' => 'Codul produsului',
     'product_discount' => 'Reducerea aplicată produsului',
     'product_discount_required' => 'Discount-ul produsului este obligatoriu!',

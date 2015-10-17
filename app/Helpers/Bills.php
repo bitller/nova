@@ -25,7 +25,9 @@ class Bills {
         $productIds = $this->getProductIds($billId);
         $applicationProductIds = $this->getApplicationProductIds($billId);
 
-        $firstQuery = DB::table('products')->whereIn('products.id', $productIds)
+        $firstQuery = DB::table('products')
+            ->whereIn('products.id', $productIds)
+            ->where('bill_products.bill_id', $billId)
             ->leftJoin('bill_products', 'bill_products.product_id', '=', 'products.id')
             ->select(
                 'products.id',
@@ -41,6 +43,7 @@ class Bills {
             );
 
         $secondQuery = DB::table('application_products')->whereIn('application_products.id', $applicationProductIds)
+            ->where('bill_application_products.bill_id', $billId)
             ->leftJoin('bill_application_products', 'bill_application_products.product_id', '=', 'application_products.id')
             ->select(
                 'application_products.id',
