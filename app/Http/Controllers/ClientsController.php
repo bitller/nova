@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bill;
 use App\Client;
+use App\Helpers\AjaxResponse;
 use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\DeleteClientRequest;
 use App\Http\Requests\EditClientNameRequest;
@@ -64,27 +65,26 @@ class ClientsController extends Controller {
         $client = Client::where('clients.id', $clientId)
             ->where('clients.user_id', Auth::user()->id)
             ->join('bills', 'clients.id', '=', 'bills.client_id')
-            ->select('clients.*', DB::raw('COUNT(bills.id) as total_bills'))
-            ->first();
+            ->select('clients.*', DB::raw('COUNT(bills.id) as total_bills'));
+
+        $response = new AjaxResponse();
 
         // Make sure client exists
-        if (!$client) {
-            return [
-                'success' => false,
-                'title' => trans('common.error'),
-                'message' => trans('clients.client_not_found')
-            ];
+        if (!$client->count()) {
+            $response->setFailMessage(trans('clients.client_not_found'));
+            return response($response->get(), $response->getDefaultErrorResponseCode());
         }
+
+        $client = $client->first();
 
         $client->bills = Bill::where('client_id', $clientId)
             ->where('user_id', Auth::user()->id)
             ->select('campaign_number', 'campaign_year', 'created_at')
             ->get();
 
-        return [
-            'success' => true,
-            'data' => $client
-        ];
+        $response->setSuccessMessage('');
+        $response->addExtraFields(['data' => $client]);
+        return response($response->get());
 
     }
 
