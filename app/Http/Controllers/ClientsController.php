@@ -65,18 +65,17 @@ class ClientsController extends Controller {
         $client = Client::where('clients.id', $clientId)
             ->where('clients.user_id', Auth::user()->id)
             ->join('bills', 'clients.id', '=', 'bills.client_id')
-            ->select('clients.*', DB::raw('COUNT(bills.id) as total_bills'));
+            ->select('clients.*', DB::raw('COUNT(bills.id) as total_bills'))
+            ->first();
 
         $response = new AjaxResponse();
 
         // Make sure client exists
-        if (!$client->count()) {
+        if (!$client->id) {
             $response->setFailMessage(trans('clients.client_not_found'));
             $response->addExtraFields(['redirect_to' => url('/clients')]);
             return response($response->get(), $response->getDefaultErrorResponseCode());
         }
-
-        $client = $client->first();
 
         $client->bills = Bill::where('client_id', $clientId)
             ->where('user_id', Auth::user()->id)
