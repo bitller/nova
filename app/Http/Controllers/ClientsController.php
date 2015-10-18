@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\Client;
 use App\Helpers\AjaxResponse;
+use App\Helpers\Clients;
 use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\DeleteClientRequest;
 use App\Http\Requests\EditClientNameRequest;
@@ -77,10 +78,14 @@ class ClientsController extends Controller {
             return response($response->get(), $response->getDefaultErrorResponseCode());
         }
 
+        // Get client bills
         $client->bills = Bill::where('client_id', $clientId)
             ->where('user_id', Auth::user()->id)
-            ->select('campaign_number', 'campaign_year', 'created_at')
+            ->select('id', 'campaign_number', 'campaign_year', 'created_at')
             ->get();
+
+        $client->total_price = Clients::getTotalSellsByBillIds($client->bills);
+        $client->total_discount = Clients::getTotalSellsWithoutDiscountByBillIds($client->bills) - $client->total_price;
 
         $response->setSuccessMessage('');
         $response->addExtraFields(['data' => $client]);
