@@ -31,7 +31,7 @@
                     <li class="list-group-item active"><span class="glyphicon glyphicon-stats"></span> {{ trans('clients.client_statistics') }}</li>
                     <li class="list-group-item"><span class="badge">@{{ client.created_at }}</span> {{ trans('clients.client_since') }}</li>
                     <li class="list-group-item"><span class="badge">@{{ client.total_bills }}</span> {{ trans('clients.number_of_orders') }}</li>
-                    <li class="list-group-item"><span class="badge">18</span> {{ trans('clients.purchased_products') }}</li>
+                    {{--<li class="list-group-item"><span class="badge">18</span> {{ trans('clients.purchased_products') }}</li>--}}
                     <li class="list-group-item"><span class="badge">4531,44 ron</span> {{ trans('clients.sales_made') }}</li>
                     <li class="list-group-item"><span class="badge">453,14 ron (10%)</span> {{ trans('clients.received_discount') }}</li>
                 </ul>
