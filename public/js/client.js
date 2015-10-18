@@ -184,7 +184,7 @@ new Vue({
          */
         getPageData: function() {
 
-            Nova.showLoader(Nova.getClientTranslation('loading'));
+            Alert.loader();
 
             var url = '/clients/' + Nova.getClientTranslation('client-id') + '/get';
 
@@ -202,6 +202,15 @@ new Vue({
                 // Hide loader
                 this.$set('loaded', true);
                 swal.close();
+            }).error(function(response) {
+
+                if (response.message) {
+                    Alert.error(response.title, response.message);
+                    window.location.replace(response.redirect_to);
+                    return;
+                }
+
+                Alert.generalError();
             });
         },
 

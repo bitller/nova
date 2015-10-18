@@ -72,6 +72,7 @@ class ClientsController extends Controller {
         // Make sure client exists
         if (!$client->count()) {
             $response->setFailMessage(trans('clients.client_not_found'));
+            $response->addExtraFields(['redirect_to' => url('/clients')]);
             return response($response->get(), $response->getDefaultErrorResponseCode());
         }
 
