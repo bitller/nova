@@ -7113,6 +7113,9 @@ button.close {
 .delete-product:hover {
   color: #363333; }
 
+.add-product-to-bill-loader {
+  display: none; }
+
 .glyphicon-spin {
   -webkit-animation: spin 1000ms infinite linear;
   animation: spin 1000ms infinite linear; }

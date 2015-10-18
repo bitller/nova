@@ -23,10 +23,10 @@
 
                 <!-- BEGIN Product code input -->
                 <div role="form" class="col-md-12">
-                    <div class="form-group has-feedback">
+                    <div class="form-group has-feedback product-code">
                         <label for="product-code">{{ trans('bill.product_code') }}:</label>
                         <input type="text" class="twitter-typeahead form-control" id="product-code" placeholder="Ex: 20401" v-model="code">
-                        <i class="glyphicon glyphicon-refresh glyphicon-spin form-control-feedback" style="display:none"></i>
+                        <i class="glyphicon glyphicon-refresh glyphicon-spin form-control-feedback add-product-to-bill-loader"></i>
                     </div>
                 </div>
                 <!-- END Product code input -->

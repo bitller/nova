@@ -451,6 +451,15 @@ $(document).ready(function() {
         },
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
+            ajax: {
+                beforeSend: function(xhr) {
+                    console.log('called');
+                    $('.product-code i').show();
+                },
+                complete: function() {
+                    $('.product-code i').hide();
+                }
+            },
             cache: false,
             url: 'http://localhost:8888/bills/11/suggest-products?product_code=',
             replace: function() {
