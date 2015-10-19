@@ -182,6 +182,7 @@ class ClientsController extends Controller {
      */
     public function delete($clientId, DeleteClientRequest $request) {
 
+        $response = new AjaxResponse();
         $table = 'clients';
 
         // Count rows, delete record and count rows after the operation
@@ -191,18 +192,12 @@ class ClientsController extends Controller {
 
         // Check if record was deleted or not and return a success or error response
         if ($finalRows < $initialRows) {
-            return [
-                'success' => true,
-                'title' => trans('common.success'),
-                'message' => trans('clients.client_deleted')
-            ];
+            $response->setSuccessMessage(trans('clients.client_deleted'));
+            return response($response->get());
         }
 
-        return [
-            'success' => false,
-            'title' => trans('common.fail'),
-            'message' => trans('common.delete_error')
-        ];
+        $response->setFailMessage(trans('common.delete_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode());
 
     }
 
