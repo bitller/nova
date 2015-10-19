@@ -103,14 +103,13 @@ class ClientsController extends Controller {
      */
     public function editName($clientId, EditClientNameRequest $request) {
 
+        $response = new AjaxResponse();
+
         Client::where('id', $clientId)->where('user_id', Auth::user()->id)
             ->update(['name' => $request->get('name')]);
 
-        return [
-            'success' => true,
-            'title' => trans('common.success'),
-            'message' => trans('clients.client_name_updated')
-        ];
+        $response->setSuccessMessage(trans('clients.client_name_updated'));
+        return response($response->get());
 
     }
 
