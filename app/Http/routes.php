@@ -66,3 +66,7 @@ Route::group(['prefix' => 'my-products'], function() {
     Route::get('/check/{code}', 'MyProductsController@checkProductCode');
     Route::post('/add', 'MyProductsController@addProduct');
 });
+
+Route::group(['prefix' => 'statistics'], function() {
+    Route::get('/', 'StatisticsController@index');
+});
