@@ -28,7 +28,7 @@ class ClientsController extends Controller {
     }
 
     /**
-     * Render index page
+     * Render index page.
      *
      * @return \Illuminate\View\View
      */
@@ -37,7 +37,7 @@ class ClientsController extends Controller {
     }
 
     /**
-     * Paginate clients
+     * Paginate clients.
      *
      * @return mixed
      */
@@ -46,7 +46,7 @@ class ClientsController extends Controller {
     }
 
     /**
-     * Render client page
+     * Render client page.
      *
      * @param int $clientId
      * @return \Illuminate\View\View
@@ -56,7 +56,7 @@ class ClientsController extends Controller {
     }
 
     /**
-     * Get client details
+     * Get client details.
      *
      * @param int $clientId
      * @return array
@@ -95,7 +95,7 @@ class ClientsController extends Controller {
 
 
     /**
-     * Allow user to edit clients name
+     * Allow user to edit clients name.
      *
      * @param int $clientId
      * @param EditClientNameRequest $request
@@ -116,7 +116,7 @@ class ClientsController extends Controller {
 
 
     /**
-     * Allow user to edit clients phone number
+     * Allow user to edit clients phone number.
      *
      * @param int $clientId
      * @param EditClientPhoneRequest $request
@@ -137,7 +137,7 @@ class ClientsController extends Controller {
 
 
     /**
-     * Create a new client
+     * Create a new client.
      *
      * @param CreateClientRequest $request
      * @return array|\Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
@@ -182,7 +182,7 @@ class ClientsController extends Controller {
     }
 
     /**
-     * Delete client
+     * Delete client.
      *
      * @param DeleteClientRequest $request
      * @param int $clientId
