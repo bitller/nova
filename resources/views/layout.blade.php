@@ -43,11 +43,11 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->email }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/settings">Setari</a></li>
-                        <li><a href="/statistics">Statistici</a></li>
-                        <li><a href="/about">Despre Nova</a></li>
+                        <li><a href="/settings">{{ trans('header.settings') }}</a></li>
+                        <li><a href="/statistics">{{ trans('header.statistics') }}</a></li>
+                        <li><a href="/about">{{ trans('header.about') }}</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/logout">Deconectare</a></li>
+                        <li><a href="/logout">{{ trans('header.logout') }}</a></li>
                     </ul>
                 </li>
             </ul>
