@@ -4,7 +4,7 @@ return [
     'bill_created' => 'Factura a fost creată!',
     'bill_deleted' => 'Factura a fost ștearsă!',
     'campaign' => 'Campania',
-    'campaign_order' => 'Numarul comenzii',
+    'campaign_order' => 'Comanda',
     'client' => 'Client',
     'client_name' => 'Numele clientului',
     'client_name_required' => 'Numele clientului este necesar.',
