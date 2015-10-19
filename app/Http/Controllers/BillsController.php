@@ -66,6 +66,7 @@ class BillsController extends Controller {
 
         // Append price to each bill
         foreach ($bills->items() as $bill) {
+            $bill['human_date'] = $bill->created_at->diffForHumans();
             $bill['price'] = Bills::getPrice($bill->id);
         }
 
