@@ -123,14 +123,13 @@ class ClientsController extends Controller {
      */
     public function editPhone($clientId, EditClientPhoneRequest $request) {
 
+        $response = new AjaxResponse();
+
         Client::where('id', $clientId)->where('user_id', Auth::user()->id)
             ->update(['phone_number' => $request->get('phone')]);
 
-        return [
-            'success' => true,
-            'title' => trans('common.success'),
-            'message' => trans('clients.client_phone_updated')
-        ];
+        $response->setSuccessMessage(trans('clients.client_phone_updated'));
+        return response($response->get());
 
     }
 
