@@ -142,15 +142,13 @@ class ClientsController extends Controller {
      */
     public function create(CreateClientRequest $request) {
 
+        $response = new AjaxResponse();
+
         // Check if client already exists
         if (DB::table('clients')->where('name', $request->get('name'))->where('user_id', Auth::user()->id)->count()) {
-            $response = [
-                'success' => false,
-                'title' => trans('common.fail'),
-                'message' => trans('clients.client_exists')
-            ];
 
-            return response($response, 200);
+            $response->setFailMessage(trans('clients.client_exists'));
+            return response($response->get(), $response->getDefaultErrorResponseCode());
         }
 
         // Create client array
@@ -170,12 +168,8 @@ class ClientsController extends Controller {
 
         $client->save();
 
-        // Return success message
-        return [
-            'success' => true,
-            'title' => trans('common.success'),
-            'message' => trans('clients.client_added')
-        ];
+        $response->setSuccessMessage(trans('clients.client_added'));
+        return response($response->get());
 
     }
 
