@@ -90,6 +90,19 @@ class Bills {
 
     }
 
+    /**
+     * Get bill price.
+     *
+     * @param int $billId
+     * @return mixed
+     */
+    public static function getPrice($billId) {
+
+        $bill = Bill::where('id', $billId)->where('user_id', Auth::user()->id)->first();
+        $price = $bill->products()->sum('final_price') + $bill->applicationProducts()->sum('final_price');
+        return $price;
+    }
+
     public static function deleteBill($billId) {
 
         $response = new AjaxResponse();

@@ -53,13 +53,21 @@ class BillsController extends Controller {
      */
     public function getBills() {
 
-        $bills = Bill::select('bills.id', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.payment_term', 'bills.other_details', 'bills.created_at', 'clients.name as client_name')
+        $bills = Bill::select(
+            'bills.id', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.payment_term', 'bills.other_details', 'bills.created_at',
+            'clients.name as client_name'
+            )
             ->where('bills.user_id', Auth::user()->id)
             ->orderBy('bills.created_at', 'desc')
             ->join('clients', function($join) {
                 $join->on('bills.client_id', '=', 'clients.id');
             })
             ->paginate(10);
+
+        // Append price to each bill
+        foreach ($bills->items() as $bill) {
+            $bill['price'] = Bills::getPrice($bill->id);
+        }
 
         return $bills;
     }
