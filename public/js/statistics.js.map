@@ -1,0 +1,1 @@
+{"version":3,"sources":["statistics.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AApBA;AACA;AACA","file":"statistics.js","sourcesContent":["$(document).ready(function() {\n    $('[data-toggle=\"tooltip\"]').tooltip();\n});"],"sourceRoot":"/source/"}

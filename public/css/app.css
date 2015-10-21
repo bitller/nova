@@ -8087,8 +8087,9 @@ body {
 #layout {
   padding-top: 60px; }
 
-#plus-loader {
-  margin-top: 200px; }
+.print-statistics-button {
+  margin-top: 20px;
+  margin-bottom: 20px; }
 
 .divider {
   height: 1px;

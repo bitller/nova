@@ -69,4 +69,5 @@ Route::group(['prefix' => 'my-products'], function() {
 
 Route::group(['prefix' => 'statistics'], function() {
     Route::get('/', 'StatisticsController@index');
+    Route::get('/get', 'StatisticsController@get');
 });
