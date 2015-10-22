@@ -71,3 +71,8 @@ Route::group(['prefix' => 'statistics'], function() {
     Route::get('/', 'StatisticsController@index');
     Route::get('/get', 'StatisticsController@get');
 });
+
+Route::group(['prefix' => 'settings'], function() {
+    Route::get('/', 'SettingsController@index');
+    Route::get('/get', 'SettingsController@get');
+});
