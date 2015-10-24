@@ -5,6 +5,11 @@ namespace App\Http\Requests\Settings;
 use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Authorize and validate EditUserEmailRequest
+ *
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ */
 class EditUserEmailRequest extends AjaxRequest {
 
     /**
