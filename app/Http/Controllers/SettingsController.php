@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Allow user to change application settings.
@@ -79,6 +80,12 @@ class SettingsController extends Controller {
     public function editPassword(EditUserPasswordRequest $request) {
 
         $response = new AjaxResponse();
+
+        // Check if current password is ok
+        if (!Hash::check($request->get('password'), Auth::user()->password)) {
+            $response->setFailMessage(trans('settings.invalid_password'));
+            return response($response->get(), $response->getDefaultErrorResponseCode());
+        }
 
         User::where('id', Auth::user()->id)->update(['password' => bcrypt($request->get('new_password'))]);
 

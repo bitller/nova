@@ -76,4 +76,5 @@ Route::group(['prefix' => 'settings'], function() {
     Route::get('/', 'SettingsController@index');
     Route::get('/get', 'SettingsController@get');
     Route::post('/edit-email', 'SettingsController@editEmail');
+    Route::post('/edit-password', 'SettingsController@editPassword');
 });

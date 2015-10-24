@@ -67,6 +67,43 @@ new Vue({
                 });
 
             });
+        },
+
+        /**
+         * Allow user to change their password.
+         */
+        editPassword: function() {
+
+            var data = {
+                password: this.$get('password'),
+                new_password: this.$get('new_password'),
+                new_password_confirmation: this.$get('confirm_password')
+            };
+
+            this.$http.post('/settings/edit-password', data, function(response) {
+
+                $('#edit-password-modal').modal('hide');
+                Alert.success(response.title, response.message);
+
+            }).error(function(response) {
+
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+                this.$set('error', response.message);
+
+            });
+
+        },
+
+        /**
+         * Reset edit password modal.
+         */
+        resetEditPasswordModal: function() {
+            this.$set('password', '');
+            this.$set('new_password', '');
+            this.$set('confirm_password', '');
         }
 
     }

@@ -33,7 +33,7 @@
             <!-- END User email -->
 
             <!-- BEGIN User password -->
-            <a href="#" class="list-group-item">
+            <a href="#" class="list-group-item" v-on="click: resetEditPasswordModal()" data-toggle="modal" data-target="#edit-password-modal">
                 {{ trans('settings.password') }}: <strong>*********</strong>
                 <div class="pull-right">
                     <span class="glyphicon glyphicon-pencil"></span>
@@ -85,6 +85,9 @@
             </a>
         </ul>
         <!-- END Settings list -->
+
+        @include('includes.modals.edit-password')
+
     </div>
 @endsection
 

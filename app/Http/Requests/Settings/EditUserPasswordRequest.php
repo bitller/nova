@@ -29,8 +29,8 @@ class EditUserPasswordRequest extends AjaxRequest {
      */
     public function rules() {
         return [
+            'new_password' => ['required', 'between:6,250', 'confirmed'],
             'password' => ['required', 'between:6,250'],
-            'new_password' => ['required', 'between:6,250', 'confirmed']
         ];
     }
 
