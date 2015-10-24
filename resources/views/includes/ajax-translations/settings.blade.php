@@ -8,6 +8,9 @@
     displayed-clients="{{ trans('settings.displayed_clients') }}"
     displayed-clients-description="{{ trans('settings.displayed_clients_description') }}"
     number-of-displayed-clients-required="{{ trans('settings.number_of_displayed_clients_required') }}"
+    displayed-products="{{ trans('settings.displayed_products') }}"
+    displayed-products-description="{{ trans('settings.displayed_products_description') }}"
+    number-of-displayed-products-required="{{ trans('settings.number_of_displayed_products_required') }}"
     >
 
 </div>

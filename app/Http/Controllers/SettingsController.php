@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\AjaxResponse;
 use App\Http\Requests\Settings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedClientsRequest;
+use App\Http\Requests\Settings\EditNumberOfDisplayedProductsRequest;
 use App\Http\Requests\Settings\EditUserEmailRequest;
 use App\Http\Requests\Settings\EditUserPasswordRequest;
 use App\User;
@@ -130,8 +131,21 @@ class SettingsController extends Controller {
 
     }
 
-    public function editNumberOfDisplayedProducts() {
-        //
+    /**
+     * Edit number of displayed products.
+     *
+     * @param EditNumberOfDisplayedProductsRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editNumberOfDisplayedProducts(EditNumberOfDisplayedProductsRequest $request) {
+
+        $response = new AjaxResponse();
+
+        Auth::user()->settings()->update(['displayed_products' => $request->get('products_to_display')]);
+
+        $response->setSuccessMessage(trans('settings.number_of_displayed_products_updated'));
+        return response($response->get());
+
     }
 
     public function editNumberOfDisplayedApplicationProducts() {

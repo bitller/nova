@@ -85,4 +85,5 @@ Route::group(['prefix' => 'settings'], function() {
     Route::post('/edit-password', 'SettingsController@editPassword');
     Route::post('/edit-number-of-displayed-bills', 'SettingsController@editNumberOfDisplayedBills');
     Route::post('/edit-number-of-displayed-clients', 'SettingsController@editNumberOfDisplayedClients');
+    Route::post('/edit-number-of-displayed-products', 'SettingsController@editNumberOfDisplayedProducts');
 });
