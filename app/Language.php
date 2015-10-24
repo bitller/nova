@@ -4,7 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Language extends Model
-{
+/**
+ * Language model
+ *
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ */
+class Language extends Model {
     //
 }
