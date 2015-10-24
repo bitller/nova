@@ -132,7 +132,7 @@ new Vue({
                 thisInstance.$http.post('/settings/edit-number-of-displayed-bills', data, function(response) {
 
                     Alert.success(response.title, response.message);
-                    this.$set('displayed_bills', input);
+                    this.$set('displayed_bills', response.displayed_bills);
 
                 }).error(function(response) {
                     if (!response.message) {
@@ -171,7 +171,7 @@ new Vue({
                 thisInstance.$http.post('/settings/edit-number-of-displayed-clients', data, function(response) {
 
                     Alert.success(response.title, response.message);
-                    this.$set('displayed_clients', input);
+                    this.$set('displayed_clients', response.displayed_clients);
 
                 }).error(function(response) {
                     if (!response.message) {
@@ -210,7 +210,7 @@ new Vue({
                 thisInstance.$http.post('/settings/edit-number-of-displayed-products', data, function(response) {
 
                     Alert.success(response.title, response.message);
-                    this.$set('displayed_products', input);
+                    this.$set('displayed_products', response.displayed_products);
 
                 }).error(function(response) {
                     if (!response.message) {
@@ -249,7 +249,7 @@ new Vue({
                 thisInstance.$http.post('/settings/edit-number-of-displayed-custom-products', data, function(response) {
 
                     Alert.success(response.title, response.message);
-                    this.$set('displayed_custom_products', input);
+                    this.$set('displayed_custom_products', response.displayed_custom_products);
 
                 }).error(function(response) {
                     if (!response.message) {

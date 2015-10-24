@@ -109,8 +109,10 @@ class SettingsController extends Controller {
         $response = new AjaxResponse();
 
         Auth::user()->settings()->update(['displayed_bills' => $request->get('bills_to_display')]);
+        $settings = Auth::user()->settings()->first();
 
         $response->setSuccessMessage(trans('settings.number_of_displayed_bills_updated'));
+        $response->addExtraFields(['displayed_bills' => $settings->displayed_bills]);
         return response($response->get());
 
     }
@@ -126,8 +128,10 @@ class SettingsController extends Controller {
         $response = new AjaxResponse();
 
         Auth::user()->settings()->update(['displayed_clients' => $request->get('clients_to_display')]);
+        $settings = Auth::user()->settings()->first();
 
         $response->setSuccessMessage(trans('settings.number_of_displayed_clients_updated'));
+        $response->addExtraFields(['displayed_clients' => $settings->displayed_clients]);
         return response($response->get());
 
     }
@@ -143,8 +147,10 @@ class SettingsController extends Controller {
         $response = new AjaxResponse();
 
         Auth::user()->settings()->update(['displayed_products' => $request->get('products_to_display')]);
+        $settings = Auth::user()->settings()->first();
 
         $response->setSuccessMessage(trans('settings.number_of_displayed_products_updated'));
+        $response->addExtraFields(['displayed_products' => $settings->displayed_products]);
         return response($response->get());
 
     }
@@ -160,8 +166,10 @@ class SettingsController extends Controller {
         $response = new AjaxResponse();
 
         Auth::user()->settings()->update(['displayed_custom_products' => $request->get('custom_products_to_display')]);
+        $settings = Auth::user()->settings()->first();
 
         $response->setSuccessMessage(trans('settings.number_of_displayed_custom_products_updated'));
+        $response->addExtraFields(['displayed_products' => $settings->displayed_custom_products]);
         return response($response->get());
 
     }
