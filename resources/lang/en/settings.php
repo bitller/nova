@@ -2,6 +2,7 @@
 
 return [
     'change_account_password' => 'Change account password',
+    'change_language' => 'Change application language',
     'confirm_password' => 'Confirm password',
     'current_password' => 'Current password',
     'edit_email' => 'Edit email',

@@ -2,6 +2,7 @@
 
 return [
     'change_account_password' => 'Schimbă parola contului',
+    'change_language' => 'Schimbă limba aplicaţiei',
     'confirm_password' => 'Confirmă parola',
     'current_password' => 'Parola actuală',
     'edit_email' => 'Schimbă email-ul',
