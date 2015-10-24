@@ -87,6 +87,7 @@
         <!-- END Settings list -->
 
         @include('includes.modals.edit-password')
+        @include('includes.modals.edit-language')
 
     </div>
 @endsection
