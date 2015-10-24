@@ -148,7 +148,7 @@ class SettingsController extends Controller {
 
     }
 
-    public function editNumberOfDisplayedApplicationProducts() {
+    public function editNumberOfDisplayedCustomProducts() {
         //
     }
 
