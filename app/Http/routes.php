@@ -22,6 +22,7 @@ Route::get('/register', 'Auth\RegisterController@index');
 
 Route::get('/recover', 'Auth\RecoverController@index');
 
+// Bills page
 Route::group(['prefix' => 'bills'], function() {
     Route::get('/', 'BillsController@index');
     Route::get('/get', 'BillsController@getBills');
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'bills'], function() {
     Route::post('/{billId}/edit-payment-term', 'BillsController@editPaymentTerm');
 });
 
+// Clients page
 Route::group(['prefix' => 'clients'], function() {
     Route::get('/', 'ClientsController@index');
     Route::get('/get', 'ClientsController@getClients');
@@ -52,6 +54,7 @@ Route::group(['prefix' => 'clients'], function() {
     Route::post('/{clientId}/edit-phone', 'ClientsController@editPhone');
 });
 
+// Products page
 Route::group(['prefix' => 'products'], function() {
     Route::get('/', 'ProductsController@index');
     Route::get('/get', 'ProductsController@getProducts');
@@ -59,6 +62,7 @@ Route::group(['prefix' => 'products'], function() {
     Route::post('/{productId}/edit-name', 'ProductsController@editName');
 });
 
+// My products page
 Route::group(['prefix' => 'my-products'], function() {
     Route::get('/', 'MyProductsController@index');
     Route::get('/get', 'MyProductsController@getProducts');
@@ -67,15 +71,18 @@ Route::group(['prefix' => 'my-products'], function() {
     Route::post('/add', 'MyProductsController@addProduct');
 });
 
+// Statistics page
 Route::group(['prefix' => 'statistics'], function() {
     Route::get('/', 'StatisticsController@index');
     Route::get('/get', 'StatisticsController@get');
 });
 
+// Settings page
 Route::group(['prefix' => 'settings'], function() {
     Route::get('/', 'SettingsController@index');
     Route::get('/get', 'SettingsController@get');
     Route::post('/edit-email', 'SettingsController@editEmail');
     Route::post('/edit-password', 'SettingsController@editPassword');
     Route::post('/edit-number-of-displayed-bills', 'SettingsController@editNumberOfDisplayedBills');
+    Route::post('/edit-number-of-displayed-clients', 'SettingsController@editNumberOfDisplayedClients');
 });

@@ -51,7 +51,7 @@
             <!-- END Number of displayed bills -->
 
             <!-- BEGIN Number of displayed clients -->
-            <a href="#" class="list-group-item">
+            <a href="#" class="list-group-item" v-on="click: editNumberOfDisplayedClients()">
                 {{ trans('settings.number_of_displayed_clients') }}: <strong>@{{ displayed_clients }}</strong>
                 <div class="pull-right">
                     <span class="glyphicon glyphicon-pencil"></span>

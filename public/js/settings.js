@@ -143,6 +143,45 @@ new Vue({
                 });
 
             });
+        },
+
+        /**
+         * Edit number of displayed clients on clients page.
+         */
+        editNumberOfDisplayedClients: function() {
+
+            // Alert data
+            var alertData = {
+                title: Translation.settings('displayed-clients'),
+                text: Translation.settings('displayed-clients-description'),
+                requiredInput: Translation.settings('number-of-displayed-clients-required'),
+                inputValue: this.$get('displayed_clients')
+            };
+
+            var thisInstance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Post data
+                var data = {
+                    clients_to_display: input
+                };
+
+                // Post request
+                thisInstance.$http.post('/settings/edit-number-of-displayed-clients', data, function(response) {
+
+                    Alert.success(response.title, response.message);
+                    this.$set('displayed_clients', input);
+
+                }).error(function(response) {
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+
+            });
 
         }
 
