@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\AjaxResponse;
 use App\Http\Requests\Settings\EditUserEmailRequest;
+use App\Http\Requests\Settings\EditUserPasswordRequest;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -69,8 +70,21 @@ class SettingsController extends Controller {
 
     }
 
-    public function editPassword() {
-        //
+    /**
+     * Edit user password.
+     *
+     * @param EditUserPasswordRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editPassword(EditUserPasswordRequest $request) {
+
+        $response = new AjaxResponse();
+
+        User::where('id', Auth::user()->id)->update(['password' => bcrypt($request->get('new_password'))]);
+
+        $response->setSuccessMessage(trans('settings.password_updated'));
+        return response($response->get());
+
     }
 
     public function editNumberOfDisplayedBills() {
