@@ -95,7 +95,8 @@ var Alert = {
             cancelButtonText: Translation.common('cancel'),
             confirmButtonText: Translation.common('save'),
             showLoaderOnConfirm: true,
-            closeOnConfirm: false
+            closeOnConfirm: false,
+            inputValue: data.inputValue
         }, function(inputValue) {
 
             if (typeof callback !== 'undefined') {

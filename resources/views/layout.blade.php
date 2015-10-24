@@ -41,7 +41,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->email }}<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user-email">{{ Auth::user()->email }}</span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/settings">{{ trans('header.settings') }}</a></li>
                         <li><a href="/statistics">{{ trans('header.statistics') }}</a></li>

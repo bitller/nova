@@ -66,6 +66,16 @@ var Translation = {
     },
 
     /**
+     * Get settings page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    settings: function(attribute) {
+        return this.get('#settings-trans', attribute);
+    },
+
+    /**
      * @param pageSelector
      * @param attribute
      * @returns {*|jQuery}

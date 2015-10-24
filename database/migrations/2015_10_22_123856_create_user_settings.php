@@ -25,6 +25,7 @@ class CreateUserSettings extends Migration {
             $table->tinyInteger('displayed_products')->default(10);
             $table->tinyInteger('displayed_custom_products')->default(10);
             $table->enum('language', ['en', 'ro'])->default('ro');
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 

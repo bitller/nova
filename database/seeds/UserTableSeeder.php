@@ -20,6 +20,9 @@ class UserTableSeeder extends Seeder {
         // Generate users
         factory(App\User::class, 2)->create()->each(function($user) {
 
+            // Settings
+            $user->settings()->save(factory(App\UserSetting::class)->make(['user_id' => $user->id]));
+
             // Bills per user
             $rows = 12;
 

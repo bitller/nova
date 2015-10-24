@@ -1405,7 +1405,8 @@ var Alert = {
             cancelButtonText: Translation.common('cancel'),
             confirmButtonText: Translation.common('save'),
             showLoaderOnConfirm: true,
-            closeOnConfirm: false
+            closeOnConfirm: false,
+            inputValue: data.inputValue
         }, function(inputValue) {
 
             if (typeof callback !== 'undefined') {
@@ -1634,6 +1635,16 @@ var Translation = {
      */
     bills: function(attribute) {
         return this.get('#bills-trans', attribute);
+    },
+
+    /**
+     * Get settings page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    settings: function(attribute) {
+        return this.get('#settings-trans', attribute);
     },
 
     /**

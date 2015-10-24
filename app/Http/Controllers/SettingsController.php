@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AjaxResponse;
+use App\Http\Requests\Settings\EditUserEmailRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Allow user to change application settings.
@@ -29,11 +33,40 @@ class SettingsController extends Controller {
     }
 
     public function get() {
-        //
+
+        $response = new AjaxResponse();
+
+        $settings = Auth::user()->settings()->public()->first();
+        $settings->email = Auth::user()->email;
+
+        $response->addExtraFields(['data' => $settings]);
+        $response->setSuccessMessage('bau');
+        return response($response->get());
+
     }
 
-    public function editEmail() {
-        //
+    /**
+     * Edit user email.
+     *
+     * @param EditUserEmailRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editEmail(EditUserEmailRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Check if email is already taken
+        if (User::where('email', $request->get('email'))->count()) {
+            $response->setFailMessage(trans('settings.email_already_used'));
+            return response($response->get(), $response->getDefaultErrorResponseCode());
+        }
+
+        User::where('id', Auth::user()->id)->update(['email' => $request->get('email')]);
+
+        $response->setSuccessMessage(trans('settings.email_updated'));
+        $response->addExtraFields(['email' => $request->get('email')]);
+        return response($response->get());
+
     }
 
     public function editPassword() {

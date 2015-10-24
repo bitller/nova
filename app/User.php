@@ -59,4 +59,11 @@ class User extends Model implements AuthenticatableContract {
         return $this->hasMany('App\Product');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function settings() {
+        return $this->hasOne('App\UserSetting');
+    }
+
 }

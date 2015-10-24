@@ -6,4 +6,5 @@
     success="{{ trans('common.success') }}"
     product-name-edited="{{ trans('products.product_name_edited') }}"
     product-name="{{ trans('products.name') }}"
+    >
 </div>

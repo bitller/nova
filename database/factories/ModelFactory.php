@@ -114,3 +114,15 @@ $factory->define(App\BillApplicationProduct::class, function() use ($factory) {
     return $factory->raw(App\BillProduct::class);
 
 });
+
+$factory->define(App\UserSetting::class, function() {
+
+    return [
+        'displayed_bills' => rand(1, 20),
+        'displayed_clients' => rand(1, 20),
+        'displayed_products' => rand(1, 20),
+        'displayed_custom_products' => rand(1, 20),
+        'language' => array_rand(['ro', 'en'])
+    ];
+
+});
