@@ -122,7 +122,15 @@ $factory->define(App\UserSetting::class, function() {
         'displayed_clients' => rand(1, 20),
         'displayed_products' => rand(1, 20),
         'displayed_custom_products' => rand(1, 20),
-        'language' => array_rand(['ro', 'en'])
+    ];
+
+});
+
+$factory->define(App\Language::class, function() {
+
+    return [
+        'key' => 'ro',
+        'language' => 'Romana'
     ];
 
 });

@@ -8,7 +8,7 @@ use Illuminate\Database\Migrations\Migration;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class CreateUserSettings extends Migration {
+class CreateUserSettingsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -24,10 +24,11 @@ class CreateUserSettings extends Migration {
             $table->tinyInteger('displayed_clients')->default(10);
             $table->tinyInteger('displayed_products')->default(10);
             $table->tinyInteger('displayed_custom_products')->default(10);
-            $table->enum('language', ['en', 'ro'])->default('ro');
+            $table->smallInteger('language_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }

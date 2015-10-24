@@ -18,7 +18,13 @@ class UserSetting extends Model {
      * @return mixed
      */
     public function scopePublic($query) {
-        return $query->select('displayed_bills', 'displayed_clients', 'displayed_products', 'displayed_custom_products', 'language');
+        return $query->select(
+            'user_settings.displayed_bills',
+            'user_settings.displayed_clients',
+            'user_settings.displayed_products',
+            'user_settings.displayed_custom_products',
+            'languages.language'
+        )->join('languages', 'languages.id', '=', 'user_settings.language_id');
     }
 
 }
