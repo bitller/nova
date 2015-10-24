@@ -29,7 +29,7 @@ class EditNumberOfDisplayedBillsRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'bills_to_display' => ['required', 'between:1, 100']
+            'bills_to_display' => ['required', 'numeric', 'between:1, 100']
         ];
     }
 

@@ -104,6 +104,46 @@ new Vue({
             this.$set('password', '');
             this.$set('new_password', '');
             this.$set('confirm_password', '');
+        },
+
+        /**
+         * Edit number of displayed bills on bills page.
+         */
+        editNumberOfDisplayedBills: function() {
+
+            // Alert data
+            var alertData = {
+                title: Translation.settings('displayed-bills'),
+                text: Translation.settings('displayed-bills-description'),
+                requiredInput: Translation.settings('number-of-displayed-bills-required'),
+                inputValue: this.$get('displayed_bills')
+            };
+
+            var thisInstance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Post data
+                var data = {
+                    bills_to_display: input
+                };
+
+                // Do request
+                thisInstance.$http.post('/settings/edit-number-of-displayed-bills', data, function(response) {
+
+                    Alert.success(response.title, response.message);
+                    this.$set('displayed_bills', input);
+
+                }).error(function(response) {
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+
+            });
+
         }
 
     }

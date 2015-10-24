@@ -42,7 +42,7 @@
             <!-- END User password -->
 
             <!-- BEGIN Number of displayed bills -->
-            <a href="#" class="list-group-item">
+            <a href="#" class="list-group-item" v-on="click: editNumberOfDisplayedBills()">
                 {{ trans('settings.number_of_displayed_bills') }}: <strong>@{{ displayed_bills }}</strong>
                 <div class="pull-right">
                     <span class="glyphicon glyphicon-pencil"></span>

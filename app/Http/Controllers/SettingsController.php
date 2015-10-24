@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AjaxResponse;
+use App\Http\Requests\Settings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\Settings\EditUserEmailRequest;
 use App\Http\Requests\Settings\EditUserPasswordRequest;
 use App\User;
@@ -94,8 +95,21 @@ class SettingsController extends Controller {
 
     }
 
-    public function editNumberOfDisplayedBills() {
-        //
+    /**
+     * Edit number of displayed bills.
+     *
+     * @param EditNumberOfDisplayedBillsRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editNumberOfDisplayedBills(EditNumberOfDisplayedBillsRequest $request) {
+
+        $response = new AjaxResponse();
+
+        Auth::user()->settings()->update(['displayed_bills' => $request->get('bills_to_display')]);
+
+        $response->setSuccessMessage(trans('settings.number_of_displayed_bills_updated'));
+        return response($response->get());
+
     }
 
     public function editNumberOfDisplayedClients() {
