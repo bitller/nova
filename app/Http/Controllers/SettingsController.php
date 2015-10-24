@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\AjaxResponse;
 use App\Http\Requests\Settings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedClientsRequest;
+use App\Http\Requests\Settings\EditNumberOfDisplayedCustomProductsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedProductsRequest;
 use App\Http\Requests\Settings\EditUserEmailRequest;
 use App\Http\Requests\Settings\EditUserPasswordRequest;
@@ -148,8 +149,21 @@ class SettingsController extends Controller {
 
     }
 
-    public function editNumberOfDisplayedCustomProducts() {
-        //
+    /**
+     * Edit number of custom products displayed.
+     *
+     * @param EditNumberOfDisplayedCustomProductsRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editNumberOfDisplayedCustomProducts(EditNumberOfDisplayedCustomProductsRequest $request) {
+
+        $response = new AjaxResponse();
+
+        Auth::user()->settings()->update(['displayed_custom_products' => $request->get('custom_products_to_display')]);
+
+        $response->setSuccessMessage(trans('settings.number_of_displayed_custom_products_updated'));
+        return response($response->get());
+
     }
 
     public function changeLanguage() {

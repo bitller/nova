@@ -86,4 +86,5 @@ Route::group(['prefix' => 'settings'], function() {
     Route::post('/edit-number-of-displayed-bills', 'SettingsController@editNumberOfDisplayedBills');
     Route::post('/edit-number-of-displayed-clients', 'SettingsController@editNumberOfDisplayedClients');
     Route::post('/edit-number-of-displayed-products', 'SettingsController@editNumberOfDisplayedProducts');
+    Route::post('/edit-number-of-displayed-custom-products', 'SettingsController@editNumberOfDisplayedCustomProducts');
 });

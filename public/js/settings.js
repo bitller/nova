@@ -221,6 +221,44 @@ new Vue({
                 })
 
             });
+        },
+
+        /**
+         * Edit number of custom products displayed.
+         */
+        editNumberOfDisplayedCustomProducts: function() {
+
+            // Alert data
+            var alertData = {
+                title: Translation.settings('displayed-custom-products'),
+                text: Translation.settings('displayed-custom-products-description'),
+                requiredInput: Translation.settings('number-of-displayed-custom-products-required'),
+                inputValue: this.$get('displayed_custom_products')
+            };
+
+            var thisInstance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Post data
+                var data = {
+                    custom_products_to_display: input
+                };
+
+                // Do request
+                thisInstance.$http.post('/settings/edit-number-of-displayed-custom-products', data, function(response) {
+
+                    Alert.success(response.title, response.message);
+                    this.$set('displayed_custom_products', input);
+
+                }).error(function(response) {
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+            });
 
         }
 

@@ -69,7 +69,7 @@
             <!-- END Number of displayed products -->
 
             <!-- BEGIN Number of user products displayed -->
-            <a href="#" class="list-group-item">
+            <a href="#" class="list-group-item" v-on="click: editNumberOfDisplayedCustomProducts()">
                 {{ trans('settings.number_of_your_products_displayed') }}: <strong>@{{ displayed_custom_products }}</strong>
                 <div class="pull-right">
                     <span class="glyphicon glyphicon-pencil"></span>
