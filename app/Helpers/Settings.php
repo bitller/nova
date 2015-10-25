@@ -40,10 +40,18 @@ class Settings {
      * @return mixed
      */
     public static function displayedBills() {
-
         $settings = Auth::user()->settings()->first();
         return $settings->displayed_bills;
+    }
 
+    /**
+     * Return number of displayed clients from user settings.
+     *
+     * @return mixed
+     */
+    public static function displayedClients() {
+        $settings = Auth::user()->settings()->first();
+        return $settings->displayed_clients;
     }
 
 }

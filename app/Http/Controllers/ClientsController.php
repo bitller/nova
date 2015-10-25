@@ -6,6 +6,7 @@ use App\Bill;
 use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Clients;
+use App\Helpers\Settings;
 use App\Http\Requests\CreateClientRequest;
 use App\Http\Requests\DeleteClientRequest;
 use App\Http\Requests\EditClientNameRequest;
@@ -42,7 +43,7 @@ class ClientsController extends Controller {
      * @return mixed
      */
     public function getClients() {
-        return Client::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        return Client::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(Settings::displayedClients());
     }
 
     /**
