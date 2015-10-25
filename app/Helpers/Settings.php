@@ -5,6 +5,11 @@ namespace App\Helpers;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Methods to make easier working with user settings
+ *
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ */
 class Settings {
 
     /**
@@ -37,7 +42,6 @@ class Settings {
     public static function displayedBills() {
 
         $settings = Auth::user()->settings()->first();
-
         return $settings->displayed_bills;
 
     }
