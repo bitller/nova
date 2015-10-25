@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Helpers;
+
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +27,19 @@ class Settings {
 
         $response->setSuccessMessage('updated');
         return response($response->get());
+    }
+
+    /**
+     * Return number of displayed bills from user settings.
+     *
+     * @return mixed
+     */
+    public static function displayedBills() {
+
+        $settings = Auth::user()->settings()->first();
+
+        return $settings->displayed_bills;
+
     }
 
 }

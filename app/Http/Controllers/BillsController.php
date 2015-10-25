@@ -9,6 +9,7 @@ use App\BillProduct;
 use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
+use App\Helpers\Settings;
 use App\Http\Requests\Bill\AddProductRequest;
 use App\Http\Requests\Bill\EditOtherDetailsRequest;
 use App\Http\Requests\Bill\EditPaymentTermRequest;
@@ -53,8 +54,6 @@ class BillsController extends Controller {
      */
     public function getBills() {
 
-        $settings = Auth::user()->settings()->first();
-
         $bills = Bill::select(
             'bills.id', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.payment_term', 'bills.other_details', 'bills.created_at',
             'clients.name as client_name'
@@ -64,7 +63,7 @@ class BillsController extends Controller {
             ->join('clients', function($join) {
                 $join->on('bills.client_id', '=', 'clients.id');
             })
-            ->paginate($settings->displayed_bills);
+            ->paginate(Settings::displayedBills());
 
         // Append price to each bill
         foreach ($bills->items() as $bill) {
