@@ -8,7 +8,7 @@
         <div class="print-statistics-button">
             <span class="avon-products">{{ trans('settings.settings') }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('statistics.description') }}">?</span></span>
             <a href="/my-products"><button type="button" class="btn btn-primary pull-right" v-on="click: addClient()">
-                    <span class="glyphicon glyphicon-print"></span> {{ trans('statistics.print') }}
+                    <span class="glyphicon glyphicon-print"></span> {{ trans('settings.reset_to_defaults') }}
                 </button></a>
         </div>
         <!-- END Reset to defaults button -->

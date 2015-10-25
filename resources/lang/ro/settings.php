@@ -39,5 +39,6 @@ return [
     'number_of_your_products_displayed' => 'Numărul de produse proprii afişate',
     'password' => 'Parolă',
     'password_updated' => 'Parola a fost schimbată!',
+    'reset_to_defaults' => 'Resetează la valorile predefinite',
     'settings' => 'Setări',
 ];

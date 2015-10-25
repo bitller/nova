@@ -39,5 +39,6 @@ return [
     'number_of_your_products_displayed' => 'Number of your products displayed',
     'password' => 'Password',
     'password_updated' => 'Password updated!',
+    'reset_to_defaults' => 'Reset to default values',
     'settings' => 'Settings',
 ];
