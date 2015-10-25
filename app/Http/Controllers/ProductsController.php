@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Helpers\Settings;
 use App\Http\Requests\EditProductNameRequest;
 use App\Product;
 use App\ApplicationProduct;
@@ -39,26 +40,7 @@ class ProductsController extends Controller {
      * @return mixed
      */
     public function getProducts(Request $request) {
-
-       /* $page = $request->get('page');
-        if ($page < 1) {
-            $page = 1;
-        }
-
-        $page--;
-
-        $applicationProducts = DB::table('application_products')->select('id', 'code', 'name', 'default');
-        $data = DB::table('products')->select('id', 'code', 'name', 'default')->where('user_id', Auth::user()->id)->orderBy('code', 'asc')->get();
-
-        $perPage = 10;
-
-        $paginator = new LengthAwarePaginator(array_slice($data, $page * $perPage, $perPage), count($data), $perPage);
-        $paginator->setPath('/products/get');
-
-        return response($paginator)->header('Content-Type', 'application/json');*/
-
-        return ApplicationProduct::orderBy('code', 'asc')->paginate(10);
-
+        return ApplicationProduct::orderBy('code', 'asc')->paginate(Settings::displayedProducts());
     }
 
     /**

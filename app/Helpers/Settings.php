@@ -54,4 +54,14 @@ class Settings {
         return $settings->displayed_clients;
     }
 
+    /**
+     * Return number of displayed products from user settings.
+     *
+     * @return mixed
+     */
+    public static function displayedProducts() {
+        $settings = Auth::user()->settings()->first();
+        return $settings->displayed_products;
+    }
+
 }
