@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ApplicationProduct;
 use App\Helpers\AjaxResponse;
+use App\Helpers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\CheckProductCodeRequest;
@@ -38,9 +39,7 @@ class MyProductsController extends Controller {
      * @return mixed
      */
     public function getProducts() {
-
-        return Product::where('user_id', Auth::user()->id)->orderBy('code', 'asc')->paginate(10);
-
+        return Product::where('user_id', Auth::user()->id)->orderBy('code', 'asc')->paginate(Settings::displayedCustomProducts());
     }
 
     /**
