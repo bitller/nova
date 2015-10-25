@@ -81,10 +81,12 @@ Route::group(['prefix' => 'statistics'], function() {
 Route::group(['prefix' => 'settings'], function() {
     Route::get('/', 'SettingsController@index');
     Route::get('/get', 'SettingsController@get');
+    Route::get('/get-languages', 'SettingsController@getLanguages');
     Route::post('/edit-email', 'SettingsController@editEmail');
     Route::post('/edit-password', 'SettingsController@editPassword');
     Route::post('/edit-number-of-displayed-bills', 'SettingsController@editNumberOfDisplayedBills');
     Route::post('/edit-number-of-displayed-clients', 'SettingsController@editNumberOfDisplayedClients');
     Route::post('/edit-number-of-displayed-products', 'SettingsController@editNumberOfDisplayedProducts');
     Route::post('/edit-number-of-displayed-custom-products', 'SettingsController@editNumberOfDisplayedCustomProducts');
+    Route::post('/change-language', 'SettingsController@changeLanguage');
 });

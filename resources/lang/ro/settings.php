@@ -3,6 +3,7 @@
 return [
     'change_account_password' => 'Schimbă parola contului',
     'change_language' => 'Schimbă limba aplicaţiei',
+    'choose_language' => 'Alege limba',
     'confirm_password' => 'Confirmă parola',
     'current_password' => 'Parola actuală',
     'edit_email' => 'Schimbă email-ul',
@@ -22,6 +23,7 @@ return [
     'general_settings' => 'Setări generale',
     'invalid_password' => 'Parola curentă este invalidă.',
     'language' => 'Limbă',
+    'language_changed' => 'Limba a fost schimbată!',
     'new_password' => 'Parola nouă',
     'number_of_displayed_bills' => 'Numărul de facturi afişate',
     'number_of_displayed_bills_required' => 'Numărul de facturi afişate este obligatoriu!',

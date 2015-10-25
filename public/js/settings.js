@@ -19,6 +19,7 @@ new Vue({
                 this.$set('displayed_clients', response.data.displayed_clients);
                 this.$set('displayed_products', response.data.displayed_products);
                 this.$set('displayed_custom_products', response.data.displayed_custom_products);
+                this.$set('language_name', response.data.language);
                 Alert.close();
             }).error(function(response) {
                 Alert.generalError();
@@ -258,6 +259,46 @@ new Vue({
                     }
                     Alert.error(response.title, response.message);
                 });
+            });
+        },
+
+        loadLanguages: function() {
+
+            if (this.$get('languages')) {
+                return;
+            }
+
+            this.$http.get('settings/get-languages', function(response) {
+                this.$set('languages', response.languages);
+                this.$set('languages_loaded', true);
+            }).error(function(response) {
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+                this.$set('error', response.message);
+            });
+
+        },
+
+        editLanguage: function() {
+
+            var data = {
+                language: this.$get('language')
+            };
+
+            this.$http.post('/settings/change-language', data, function(response) {
+
+                $('#edit-language-modal').modal('hide');
+                Alert.success(response.title, response.message);
+                this.$set('language_name', response.language);
+
+            }).error(function(response) {
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+                this.$set('error', response.message);
             });
 
         }

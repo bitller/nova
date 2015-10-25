@@ -3,6 +3,7 @@
 return [
     'change_account_password' => 'Change account password',
     'change_language' => 'Change application language',
+    'choose_language' => 'Choose language',
     'confirm_password' => 'Confirm password',
     'current_password' => 'Current password',
     'edit_email' => 'Edit email',
@@ -22,6 +23,7 @@ return [
     'general_settings' => 'General settings',
     'invalid_password' => 'Invalid current password',
     'language' => 'Language',
+    'language_changed' => 'Language changed!',
     'new_password' => 'New password',
     'number_of_displayed_bills' => 'Number of displayed bills',
     'number_of_displayed_bills_required' => 'Number of displayed bills is required!',

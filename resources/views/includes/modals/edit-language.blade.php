@@ -21,7 +21,19 @@
                 </div>
                 <!-- END Error message -->
 
-                <!-- other html here -->
+                <div class="col-md-12 text-center" v-show="!languages_loaded">
+                    <span class="glyphicon glyphicon-refresh glyphicon-spin text-center"></span>
+                </div>
+
+                <!-- BEGIN Choose language -->
+                <div class="form-group" v-show="languages_loaded">
+                    <label for="languages">{{ trans('settings.choose_language') }}:</label>
+                    <select class="form-control" id="languages" v-model="language">
+                        <option selected disabled>Choose language</option>
+                        <option v-repeat="available_language in languages" value="@{{ available_language.key }}">@{{ available_ language.language }}</option>
+                    </select>
+                </div>
+                <!-- END Choose language -->
 
             </div>
             <!-- END Modal body -->

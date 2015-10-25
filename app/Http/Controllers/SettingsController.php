@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AjaxResponse;
+use App\Http\Requests\Settings\ChangeLanguageRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedClientsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedCustomProductsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedProductsRequest;
 use App\Http\Requests\Settings\EditUserEmailRequest;
 use App\Http\Requests\Settings\EditUserPasswordRequest;
+use App\Language;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -38,6 +40,9 @@ class SettingsController extends Controller {
         return view('settings');
     }
 
+    /**
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function get() {
 
         $response = new AjaxResponse();
@@ -169,13 +174,38 @@ class SettingsController extends Controller {
         $settings = Auth::user()->settings()->first();
 
         $response->setSuccessMessage(trans('settings.number_of_displayed_custom_products_updated'));
-        $response->addExtraFields(['displayed_products' => $settings->displayed_custom_products]);
+        $response->addExtraFields(['displayed_custom_products' => $settings->displayed_custom_products]);
         return response($response->get());
 
     }
 
-    public function changeLanguage() {
-        //
+    /**
+     * Change application language.
+     *
+     * @param ChangeLanguageRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function changeLanguage(ChangeLanguageRequest $request) {
+
+        $response = new AjaxResponse();
+
+        $language = Language::where('key', $request->get('language'))->first();
+
+        Auth::user()->settings()->update(['language_id' => $language->id]);
+
+        $response->setSuccessMessage(trans('settings.language_changed'));
+        $response->addExtraFields(['language' => $language->language]);
+        return response($response->get());
+
+    }
+
+    public function getLanguages() {
+
+        $response = new AjaxResponse();
+
+        $response->setSuccessMessage(trans('common.success'));
+        $response->addExtraFields(['languages' => Language::select('key', 'language')->get()]);
+        return response($response->get());
     }
 
 }

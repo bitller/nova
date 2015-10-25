@@ -10,5 +10,13 @@ use Illuminate\Database\Eloquent\Model;
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class Language extends Model {
-    //
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublic($query) {
+        return $query->select('key', 'language');
+    }
+
 }
