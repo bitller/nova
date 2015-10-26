@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\DB;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class ProductsController extends Controller {
+class ProductsController extends BaseController {
 
     /**
      * Initialize and run required methods
      */
     public function __construct() {
+        parent::__construct();
         $this->middleware('auth');
     }
 

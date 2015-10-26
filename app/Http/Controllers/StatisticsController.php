@@ -14,9 +14,10 @@ use App\Helpers\Statistics;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class StatisticsController extends Controller {
+class StatisticsController extends BaseController {
 
     public function __construct() {
+        parent::__construct();
         $this->middleware('auth');
     }
 

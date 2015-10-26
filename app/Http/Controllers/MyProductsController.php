@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Validator;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class MyProductsController extends Controller {
+class MyProductsController extends BaseController {
 
     /**
      * Initialize required stuff
      */
     public function __construct() {
+        parent::__construct();
         $this->middleware('auth');
     }
 

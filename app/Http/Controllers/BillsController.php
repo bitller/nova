@@ -33,12 +33,13 @@ use App\Helpers\Products;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class BillsController extends Controller {
+class BillsController extends BaseController {
 
     /**
      * Initialize required stuff
      */
     public function __construct() {
+        parent::__construct();
         $this->middleware('auth');
     }
 

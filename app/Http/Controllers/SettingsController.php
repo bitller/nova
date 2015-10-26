@@ -26,12 +26,13 @@ use Illuminate\Support\Facades\Hash;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmai.com>
  */
-class SettingsController extends Controller {
+class SettingsController extends BaseController {
 
     /**
      * Initialize required stuff.
      */
     public function __construct() {
+        parent::__construct();
         $this->middleware('auth');
     }
 

@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class WelcomeController extends Controller {
+class WelcomeController extends BaseController {
 
     /**
      * @return \Illuminate\View\View

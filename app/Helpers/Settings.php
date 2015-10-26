@@ -75,6 +75,16 @@ class Settings {
     }
 
     /**
+     * Return user language key.
+     *
+     * @return mixed
+     */
+    public static function language() {
+        $language = Auth::user()->settings()->leftJoin('languages', 'language_id', '=', 'languages.id')->first();
+        return $language->key;
+    }
+
+    /**
      * Return user displayed bills, clients, products and custom products.
      *
      * @return array

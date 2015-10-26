@@ -290,6 +290,7 @@ new Vue({
         editLanguage: function() {
 
             var data = {
+                _token: Token.get(),
                 language: this.$get('language')
             };
 

@@ -19,12 +19,13 @@ use Illuminate\Support\Facades\DB;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class ClientsController extends Controller {
+class ClientsController extends BaseController {
 
     /**
      * Initialize required stuff
      */
     public function __construct() {
+        parent::__construct();
         $this->middleware('auth');
     }
 
