@@ -29,7 +29,7 @@
                 <div class="form-group" v-show="languages_loaded">
                     <label for="languages">{{ trans('settings.choose_language') }}:</label>
                     <select class="form-control" id="languages" v-model="language">
-                        <option selected disabled>Choose language</option>
+                        <option selected disabled>{{ trans('settings.choose_language') }}</option>
                         <option v-repeat="available_language in languages" value="@{{ available_language.key }}">@{{ available_ language.language }}</option>
                     </select>
                 </div>
