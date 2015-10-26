@@ -296,8 +296,9 @@ new Vue({
             this.$http.post('/settings/change-language', data, function(response) {
 
                 $('#edit-language-modal').modal('hide');
-                Alert.success(response.title, response.message);
-                this.$set('language_name', response.language);
+                //Alert.success(response.title, response.message);
+                //this.$set('language_name', response.language);
+                window.location.replace('/settings');
 
             }).error(function(response) {
                 if (!response.message) {
