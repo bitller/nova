@@ -64,7 +64,9 @@ new Vue({
         addProduct: function(productId, productCode) {
 
             // Build post data
-            var data = {};
+            var data = {
+                _token: Token.get()
+            };
 
             if ($('#product-code').val()) {
                 data.product_code = $('#product-code').val();
@@ -135,6 +137,7 @@ new Vue({
             Alert.editPage(productPage, function(inputValue) {
 
                 var data = {
+                    _token: Token.get(),
                     product_id: productId,
                     bill_product_id: billProductId,
                     product_code: productCode,
@@ -179,6 +182,7 @@ new Vue({
 
                 // Build post data
                 var data = {
+                    _token: Token.get(),
                     product_id: productId,
                     bill_product_id: billProductId,
                     product_code: productCode,
@@ -223,6 +227,7 @@ new Vue({
 
                 // Post data
                 var data = {
+                    _token: Token.get(),
                     product_id: productId,
                     bill_product_id: billProductId,
                     product_code: productCode,
@@ -267,6 +272,7 @@ new Vue({
 
                 // Data used is post request
                 var data = {
+                    _token: Token.get(),
                     product_id: productId,
                     bill_product_id: billProductId,
                     product_code: productCode,
@@ -339,6 +345,7 @@ new Vue({
 
             // Post data
             var data = {
+                _token: Token.get(),
                 other_details: this.$get('otherDetails')
             };
 
@@ -381,6 +388,7 @@ new Vue({
 
             // Build post data
             var data = {
+                _token: Token.get(),
                 payment_term: $('#payment-term').val()
             };
 

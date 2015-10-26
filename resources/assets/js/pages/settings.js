@@ -46,6 +46,7 @@ new Vue({
 
                 // Post data
                 var data = {
+                    _token: Token.get(),
                     email: input
                 };
 
@@ -76,6 +77,7 @@ new Vue({
         editPassword: function() {
 
             var data = {
+                _token: Token.get(),
                 password: this.$get('password'),
                 new_password: this.$get('new_password'),
                 new_password_confirmation: this.$get('confirm_password')
@@ -126,6 +128,7 @@ new Vue({
 
                 // Post data
                 var data = {
+                    _token: Token.get(),
                     bills_to_display: input
                 };
 
@@ -165,6 +168,7 @@ new Vue({
 
                 // Post data
                 var data = {
+                    _token: Token.get(),
                     clients_to_display: input
                 };
 
@@ -204,6 +208,7 @@ new Vue({
 
                 // Post data
                 var data = {
+                    _token: Token.get(),
                     products_to_display: input
                 };
 
@@ -243,6 +248,7 @@ new Vue({
 
                 // Post data
                 var data = {
+                    _token: Token.get(),
                     custom_products_to_display: input
                 };
 
