@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Instantiate the Bloodhound suggestion engine
-    var products = new Bloodhound({
+    var results = new Bloodhound({
         datumTokenizer: function (datum) {
             return Bloodhound.tokenizers.whitespace(datum.value);
         },
@@ -8,18 +8,18 @@ $(document).ready(function() {
         remote: {
             ajax: {
                 beforeSend: function(xhr) {
-                    $('.product-code i').show();
+                    //$('.product-code i').show();
                 },
                 complete: function() {
-                    $('.product-code i').hide();
+                    //$('.product-code i').hide();
                 }
             },
             cache: false,
-            url: 'http://localhost:8888/bills/11/suggest-products?product_code=',
+            url: '/search/header?query=',
             replace: function() {
-                var url = 'http://localhost:8888/bills/11/suggest-products?product_code=';
-                if ($('#product-code').val()) {
-                    url += encodeURIComponent($('#product-code').val())
+                var url = '/search/header?query=';
+                if ($('#search-bar').val()) {
+                    url += encodeURIComponent($('#search-bar').val())
                 }
                 return url;
             },
@@ -35,22 +35,18 @@ $(document).ready(function() {
         }
     });
 
-    // Initialize the Bloodhound suggestion engine
-    products.initialize();
+    results.initialize();
 
-    var input = $('.twitter-typeahead');
+    var input = $('#search-bar');
 
     // Instantiate the Typeahead UI
     input.typeahead(null, {
         displayKey: 'value',
-        source: products.ttAdapter(),
+        source: results.ttAdapter(),
         templates: {
             suggestion: function(product) {
                 return '<p>' + product.display + '</p>'
             }
         }
     });
-
-    $('#payment-term').datepicker({dateFormat: 'yy-m-d'});
-
 });

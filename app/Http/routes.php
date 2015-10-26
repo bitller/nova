@@ -91,3 +91,8 @@ Route::group(['prefix' => 'settings'], function() {
     Route::post('/edit-number-of-displayed-custom-products', 'SettingsController@editNumberOfDisplayedCustomProducts');
     Route::post('/change-language', 'SettingsController@changeLanguage');
 });
+
+// Search results
+Route::group(['prefix' => 'search'], function() {
+    Route::get('/header', 'SearchController@headerSearch');
+});
