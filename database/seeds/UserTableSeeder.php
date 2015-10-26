@@ -19,6 +19,9 @@ class UserTableSeeder extends Seeder {
 
         factory(App\Language::class)->create();
         factory(App\Language::class)->create(['key' => 'en', 'language' => 'English']);
+        factory(App\UserDefaultSetting::class)->create([
+            'language_id' => 1
+        ]);
 
         // Generate users
         factory(App\User::class, 2)->create()->each(function($user) {

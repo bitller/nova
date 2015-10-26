@@ -82,6 +82,7 @@ Route::group(['prefix' => 'settings'], function() {
     Route::get('/', 'SettingsController@index');
     Route::get('/get', 'SettingsController@get');
     Route::get('/get-languages', 'SettingsController@getLanguages');
+    Route::get('/reset-to-default-values', 'SettingsController@resetToDefaultValues');
     Route::post('/edit-email', 'SettingsController@editEmail');
     Route::post('/edit-password', 'SettingsController@editPassword');
     Route::post('/edit-number-of-displayed-bills', 'SettingsController@editNumberOfDisplayedBills');

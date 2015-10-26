@@ -25,6 +25,8 @@ class CreateUserDefaultSettingsTable extends Migration {
             $table->tinyInteger('displayed_custom_products')->default(10);
             $table->smallInteger('language_id')->unsigned();
 
+            $table->timestamps();
+
             $table->foreign('language_id')->references('id')->on('languages')->onUpadate('cascade')->onDelete('cascade');
 
         });

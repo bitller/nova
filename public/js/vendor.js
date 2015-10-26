@@ -1499,6 +1499,17 @@ var Alert = {
     },
 
     /**
+     * Show reset to default settings confirmation.
+     *
+     * @param callback
+     */
+    confirmResetToDefault: function(callback) {
+        swal(this.getConfirmDeleteConfig(Translation.settings('settings-will-be-restored'), Translation.settings('reset'), Translation.common('cancel')), function() {
+            callback();
+        });
+    },
+
+    /**
      * @param type
      * @param title
      * @param message
@@ -1536,18 +1547,33 @@ var Alert = {
      * Return config object used for delete confirmation.
      *
      * @param text
+     * @param confirmButtonText
+     * @param cancelButtonText
+     *
      * @returns {{title: (*|jQuery), text: *, type: string, showCancelButton: boolean, confirmButtonColor: string, confirmButtonText: (*|jQuery), cancelButtonText: (*|jQuery), closeOnConfirm: boolean}}
      */
-    getConfirmDeleteConfig: function(text) {
+    getConfirmDeleteConfig: function(text, confirmButtonText, cancelButtonText) {
+
+        var confirmText = Translation.common('confirm-delete');
+        var cancelText = Translation.common('cancel');
+
+        if (typeof confirmButtonText !== 'undefined') {
+            confirmText = confirmButtonText;
+        }
+        if (typeof cancelButtonText !== 'undefined') {
+            cancelText = cancelButtonText;
+        }
+
         return {
             title: Translation.common('confirm'),
             text: text,
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: Translation.common('confirm-delete'),
-            cancelButtonText: Translation.common('cancel'),
-            closeOnConfirm: false
+            confirmButtonText: confirmText,
+            cancelButtonText: cancelText,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true
         }
     }
 }

@@ -74,4 +74,19 @@ class Settings {
         return $settings->displayed_custom_products;
     }
 
+    /**
+     * Return user displayed bills, clients, products and custom products.
+     *
+     * @return array
+     */
+    public static function all() {
+        $settings = Auth::user()->settings()->first();
+        return [
+            'displayed_bills' => $settings->displayed_bills,
+            'displayed_clients' => $settings->displayed_clients,
+            'displayed_products' => $settings->displayed_products,
+            'displayed_custom_products' => $settings->displayed_custom_products
+        ];
+    }
+
 }

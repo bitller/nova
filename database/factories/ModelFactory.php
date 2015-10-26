@@ -134,3 +134,12 @@ $factory->define(App\Language::class, function() {
     ];
 
 });
+
+$factory->define(App\UserDefaultSetting::class, function() {
+    return [
+        'displayed_bills' => 10,
+        'displayed_clients' => 10,
+        'displayed_products' => 10,
+        'displayed_custom_products' => 10,
+    ];
+});

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AjaxResponse;
+use App\Helpers\Settings;
 use App\Http\Requests\Settings\ChangeLanguageRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedClientsRequest;
@@ -12,6 +13,7 @@ use App\Http\Requests\Settings\EditUserEmailRequest;
 use App\Http\Requests\Settings\EditUserPasswordRequest;
 use App\Language;
 use App\User;
+use App\UserDefaultSetting;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -206,6 +208,29 @@ class SettingsController extends Controller {
         $response->setSuccessMessage(trans('common.success'));
         $response->addExtraFields(['languages' => Language::select('key', 'language')->get()]);
         return response($response->get());
+    }
+
+    /**
+     * Reset user settings to default.
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function resetToDefaultValues() {
+
+        $response = new AjaxResponse();
+        $defaultSettings = UserDefaultSetting::first();
+
+        Auth::user()->settings()->update([
+            'displayed_bills' => $defaultSettings->displayed_bills,
+            'displayed_clients' => $defaultSettings->displayed_clients,
+            'displayed_products' => $defaultSettings->displayed_products,
+            'displayed_custom_products' => $defaultSettings->displayed_custom_products
+        ]);
+
+        $response->setSuccessMessage(trans('settings.restored_to_default_settings'));
+        $response->addExtraFields(Settings::all());
+        return response($response->get());
+
     }
 
 }

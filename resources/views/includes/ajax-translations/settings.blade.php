@@ -14,6 +14,8 @@
     displayed-custom-products="{{ trans('settings.displayed_custom_products') }}"
     displayed-custom-products-description="{{ trans('settings.displayed_custom_products_description') }}"
     number-of-displayed-custom-products-required="{{ trans('settings.number_of_displayed_custom_products_required') }}"
+    settings-will-be-restored="{{ trans('settings.settings_will_be_restored') }}"
+    reset="{{ trans('settings.reset') }}"
     >
 
 </div>

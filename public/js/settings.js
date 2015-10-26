@@ -262,6 +262,9 @@ new Vue({
             });
         },
 
+        /**
+         * Make request to get available languages.
+         */
         loadLanguages: function() {
 
             if (this.$get('languages')) {
@@ -281,6 +284,9 @@ new Vue({
 
         },
 
+        /**
+         * Edit application language.
+         */
         editLanguage: function() {
 
             var data = {
@@ -300,7 +306,34 @@ new Vue({
                 }
                 this.$set('error', response.message);
             });
+        },
 
+        /**
+         * Reset user settings to default values.
+         */
+        resetToDefaultValues: function() {
+
+            var thisInstance = this;
+
+            // Show confirmation
+            Alert.confirmResetToDefault(function() {
+
+                thisInstance.$http.get('/settings/reset-to-default-values', function(response) {
+
+                    Alert.success(response.title, response.message);
+                    this.$set('displayed_bills', response.displayed_bills);
+                    this.$set('displayed_clients', response.displayed_clients);
+                    this.$set('displayed_products', response.displayed_products);
+                    this.$set('displayed_custom_products', response.displayed_custom_products);
+
+                }).error(function(response) {
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+            });
         }
 
     }
