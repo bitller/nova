@@ -26,6 +26,7 @@ return [
     'mark_as_unpaid' => 'Mark as unpaid',
     'marked_as_paid' => 'Bill was marked as paid',
     'marked_as_unpaid' => 'Bill was marked as unpaid',
+    'my_paid_bills' => 'My paid bills',
     'name' => 'Name',
     'options' => 'Options',
     'other_details' => 'Other details',

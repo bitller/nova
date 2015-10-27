@@ -26,6 +26,7 @@ return [
     'mark_as_unpaid' => 'Marchează factura ca neplatită',
     'marked_as_paid' => 'Factura a fost marcată ca platită.',
     'marked_as_unpaid' => 'Factura a fost marcată ca neplatită.',
+    'my_paid_bills' => 'Facturile mele plătite',
     'name' => 'Nume',
     'options' => 'Opțiuni',
     'other_details' => 'Alte detalii',

@@ -1712,6 +1712,22 @@ var UrlBuilder = {
     },
 
     /**
+     * Return url used to get paid bills.
+     *
+     * @param rowsOnPage
+     * @param currentPage
+     * @returns {string}
+     */
+    getPaidBill: function(rowsOnPage, currentPage) {
+
+        if (rowsOnPage < 1) {
+            currentPage -= 1;
+        }
+
+        return '/paid-bills/get?page=' + currentPage;
+    },
+
+    /**
      * Return url used to delete a bill.
      *
      * @param billId

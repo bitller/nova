@@ -114,7 +114,7 @@ class Bills {
             'bills.id', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year',
             'bills.other_details', 'bills.created_at', 'clients.name as client_name'
         )->where('bills.user_id', Auth::user()->id)
-        ->where('paid', $paid)
+        ->where('bills.paid', $paid)
         ->orderBy('bills.created_at', 'desc')
         ->join('clients', function($join){
             $join->on('bills.client_id', '=', 'clients.id');

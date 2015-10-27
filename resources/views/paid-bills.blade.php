@@ -13,10 +13,7 @@
 
             <!-- BEGIN Add bill button -->
             <div class="add-bill-button" v-show="paid_bills.total">
-                <span class="my-bills-title">{{ trans('bills.my_bills') }} <span class="badge">@{{ bills.total }}</span></span>
-                <button type="button" class="btn btn-primary pull-right" v-on="click: createBill('{{ trans('bills.create') }}', '{{ trans('bills.client_name') }}', '{{ trans('bills.client_name_required') }}', '{{ trans('bills.bill_created') }}', '{{ trans('common.loading') }}', '{{ trans('common.success') }}')">
-                    <span class="glyphicon glyphicon-plus"></span> {{ trans('bills.create') }}
-                </button>
+                <span class="my-bills-title">{{ trans('bill.my_paid_bills') }} <span class="badge">@{{ paid_bills.total }}</span></span>
             </div>
             <!-- END Add bill button -->
 
@@ -33,22 +30,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-repeat="bill in bills.data">
+                <tr v-repeat="bill in paid_bills.data">
                     <td class="vert-align"><a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a></td>
                     <td class="vert-align">@{{ bill.campaign_order }}</td>
                     <td class="vert-align">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
                     <td class="vert-align">@{{ bill.price }} ron</td>
                     <td class="vert-align">@{{ bill.human_date }}</td>
-                    <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                    <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, paid_bills.current_page, paid_bills.to-paid_bills.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                 </tr>
                 </tbody>
             </table>
             <!-- END Bills table -->
 
             <!-- BEGIN Pagination links -->
-            <ul class="pager" v-show="bills.total > bills.per_page">
-                <li v-class="disabled : !bills.prev_page_url"><a href="#" v-on="click: paginate(bills.prev_page_url)">{{ trans('common.previous') }}</a></li>
-                <li v-class="disabled : !bills.next_page_url"><a href="#" v-on="click: paginate(bills.next_page_url)">{{ trans('common.next') }}</a></li>
+            <ul class="pager" v-show="paid_bills.total > paid_bills.per_page">
+                <li v-class="disabled : !paid_bills.prev_page_url"><a href="#" v-on="click: paginate(paid_bills.prev_page_url)">{{ trans('common.previous') }}</a></li>
+                <li v-class="disabled : !paid_bills.next_page_url"><a href="#" v-on="click: paginate(paid_bills.next_page_url)">{{ trans('common.next') }}</a></li>
             </ul>
             <!-- END Pagination links -->
 
