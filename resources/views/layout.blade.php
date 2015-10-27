@@ -25,6 +25,7 @@
         <div id="navbar" class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav">
+                <li><a href="/paid-bills">{{ trans('navbar.paid_bills') }}</a></li>
                 <li><a href="/products">{{ trans('navbar.products') }}</a></li>
                 <li><a href="/clients">{{ trans('navbar.clients') }}</a></li>
                 <li><a href="/my-products">{{ trans('navbar.my_products') }}</a></li>

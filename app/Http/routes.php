@@ -96,3 +96,15 @@ Route::group(['prefix' => 'settings'], function() {
 Route::group(['prefix' => 'search'], function() {
     Route::get('/header', 'SearchController@headerSearch');
 });
+
+// Product details
+Route::group(['prefix' => 'product-details'], function() {
+    Route::get('/{productCode}', 'ProductDetailsController@index');
+    Route::get('/{productCode}/get', 'ProductDetailsController@get');
+});
+
+// Paid bills
+Route::group(['prefix' => 'paid-bills'], function() {
+    Route::get('/', 'PaidBillsController@index');
+    Route::get('/get', 'PaidBillsController@get');
+});

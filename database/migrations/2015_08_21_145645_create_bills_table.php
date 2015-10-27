@@ -26,6 +26,7 @@ class CreateBillsTable extends Migration {
             $table->string('campaign_year')->default(date('Y'));
             $table->date('payment_term');
             $table->text('other_details');
+            $table->enum('paid', [0, 1])->default(0);
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
