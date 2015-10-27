@@ -53,4 +53,6 @@ $(document).ready(function() {
 
     $('#payment-term').datepicker({dateFormat: 'yy-m-d'});
 
+    $('[data-toggle="tooltip"]').tooltip();
+
 });

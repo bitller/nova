@@ -12,6 +12,7 @@
                 <!-- BEGIN Client name and campaign details -->
                 <span class="my-clients-title">
                     <a href="/clients/@{{ bill.data.client_id }}">@{{ bill.data.client_name }}</a> - comanda @{{ bill.data.campaign_order }} din campania @{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}
+                    &nbsp;&nbsp;<span v-show="paid > 0" class="paid-bill glyphicon glyphicon-ok" data-toggle="tooltip" title="This bill has been paid." data-placement="right"></span>
                 </span>
                 <!-- END Client name and campaign details -->
 
@@ -24,11 +25,56 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#"> <span class="glyphicon glyphicon-print"></span> {{ trans('bill.print') }}</a></li>
-                            <li><a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal"> <span class="glyphicon glyphicon-pencil"></span> {{ trans('bill.edit_other_details') }}</a></li>
-                            <li><a href="#" v-on="click: resetPaymentTermModal()" data-toggle="modal" data-target="#payment-term-modal"> <span class="glyphicon glyphicon-calendar"></span> {{ trans('bill.set_payment_term') }}</a></li>
+
+                            <!-- BEGIN Print bill -->
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-print"></span> {{ trans('bill.print') }}
+                                </a>
+                            </li>
+                            <!-- END Print bill -->
+
+                            <!-- BEGIN Edit other details -->
+                            <li>
+                                <a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal">
+                                    <span class="glyphicon glyphicon-pencil"></span> {{ trans('bill.edit_other_details') }}
+                                </a>
+                            </li>
+                            <!-- END Edit other details -->
+
+                            <!-- BEGIN Set payment term -->
+                            <li>
+                                <a href="#" v-on="click: resetPaymentTermModal()" data-toggle="modal" data-target="#payment-term-modal">
+                                    <span class="glyphicon glyphicon-calendar"></span> {{ trans('bill.set_payment_term') }}
+                                </a>
+                            </li>
+                            <!-- END Set payment term -->
+
+                            <!-- BEGIN Mark as paid -->
+                            <li v-show="paid < 1">
+                                <a href="#" v-on="click: markAsPaid()">
+                                    <span class="glyphicon glyphicon-ok"></span> {{ trans('bill.mark_as_paid') }}
+                                </a>
+                            </li>
+                            <!-- END Mark as paid -->
+
+                            <!-- BEGIN Mark as unpaid -->
+                            <li v-show="paid > 0">
+                                <a href="#" v-on="click: markAsUnpaid()">
+                                    <span class="glyphicon glyphicon-remove"></span> {{ trans('bill.mark_as_unpaid') }}
+                                </a>
+                            </li>
+                            <!-- END Mark as unpaid -->
+
                             <li class="divider"></li>
-                            <li><a href="#" v-on="click: deleteBill()"><span class="glyphicon glyphicon-trash"></span> {{ trans('bill.delete') }}</a></li>
+
+                            <!-- BEGIN Delete bill -->
+                            <li>
+                                <a href="#" v-on="click: deleteBill()">
+                                    <span class="glyphicon glyphicon-trash"></span> {{ trans('bill.delete') }}
+                                </a>
+                            </li>
+                            <!-- END Delete bill -->
                         </ul>
                     </div>
                     <!-- END Options button -->

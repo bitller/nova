@@ -45,6 +45,7 @@ new Vue({
                 this.$set('total', response.total);
                 this.$set('saved_money', response.saved_money);
                 this.$set('to_pay', response.to_pay);
+                this.$set('paid', response.data.paid);
                 this.$set('loaded', true);
 
                 if (typeof showSuccess === 'undefined') {
@@ -447,6 +448,48 @@ new Vue({
                 Alert.generalError();
             });
 
+        },
+
+        /**
+         * Mark bill as paid.
+         */
+        markAsPaid: function() {
+
+            Alert.loader();
+
+            this.$http.get('/bills/' + Data.getBillId() + '/mark-as-paid', function(response) {
+                Alert.success(response.title, response.message);
+                this.$set('paid', response.paid);
+            }).error(function(response) {
+                if (!response.message) {
+                    Alert.generalError();
+                    return;
+                }
+                Alert.error(response.title, response.message);
+            });
+        },
+
+        /**
+         * Mark bill as unpaid.
+         */
+        markAsUnpaid: function() {
+
+            Alert.loader();
+
+            this.$http.get('/bills/' + Data.getBillId() + '/mark-as-unpaid', function(response) {
+
+                Alert.success(response.title, response.message);
+                this.$set('paid', response.paid);
+
+            }).error(function(response) {
+
+                if (!response.message) {
+                    Alert.generalError();
+                    return;
+                }
+                Alert.error(response.title, response.message);
+
+            });
         }
     }
 });
@@ -504,6 +547,8 @@ $(document).ready(function() {
     });
 
     $('#payment-term').datepicker({dateFormat: 'yy-m-d'});
+
+    $('[data-toggle="tooltip"]').tooltip();
 
 });
 /*! jQuery UI - v1.11.4 - 2015-10-11

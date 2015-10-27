@@ -60,7 +60,16 @@ class Bills {
 
         $bill = Auth::user()->bills()->where('bills.id', $billId)
             ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
-            ->select('clients.id as client_id', 'clients.name as client_name', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year', 'bills.other_details', 'bills.payment_term')
+            ->select(
+                'clients.id as client_id',
+                'clients.name as client_name',
+                'bills.campaign_order',
+                'bills.campaign_number',
+                'bills.campaign_year',
+                'bills.other_details',
+                'bills.payment_term',
+                'bills.paid'
+            )
             ->first();
 
         // Calculate bill price, saved money and check if discount column should be displayed
@@ -356,6 +365,39 @@ class Bills {
      */
     public static function belongsToAuthUser($billId) {
         return Bill::where('id', $billId)->where('user_id', Auth::user()->id)->count();
+    }
+
+    /**
+     * Mark bill as paid.
+     *
+     * @param int $billId
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public static function markAsPaid($billId) {
+
+        $response = new AjaxResponse();
+        Auth::user()->bills()->where('id', $billId)->update(['paid' => 1]);
+
+        $response->setSuccessMessage(trans('bill.marked_as_paid'));
+        $response->addExtraFields(['paid' => 1]);
+        return response($response->get());
+    }
+
+    /**
+     * Mark bill as unpaid.
+     *
+     * @param int $billId
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public static function markAsUnpaid($billId) {
+
+        $response = new AjaxResponse();
+        Auth::user()->bills()->where('id', $billId)->update(['paid' => 0]);
+
+        $response->setSuccessMessage(trans('bill.marked_as_unpaid'));
+        $response->addExtraFields(['paid' => 0]);
+        return response($response->get());
+
     }
 
     /**

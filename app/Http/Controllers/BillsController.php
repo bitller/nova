@@ -253,4 +253,24 @@ class BillsController extends BaseController {
 
     }
 
+    /**
+     * Mark bill as paid.
+     *
+     * @param int $billId
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function markAsPaid($billId) {
+        return Bills::markAsPaid($billId);
+    }
+
+    /**
+     * Mark bill as unpaid.
+     *
+     * @param int $billId
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function markAsUnpaid($billId) {
+        return Bills::markAsUnpaid($billId);
+    }
+
 }
