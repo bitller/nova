@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 use App\ApplicationProduct;
+use App\Bill;
+use App\BillApplicationProduct;
+use App\BillProduct;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -137,6 +140,102 @@ class Products {
     }
 
     /**
+     * Get product details.
+     *
+     * @param string $productCode
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public static function details($productCode) {
+
+        $response = new AjaxResponse();
+        $isApplicationProduct = false;
+
+        // Check if is in products table
+        $product = Product::where('user_id', Auth::user()->id)->where('code', $productCode)->first();
+        if (!$product) {
+            $product = ApplicationProduct::where('code', $productCode)->first();
+            $isApplicationProduct = true;
+        }
+
+        // Check if is in application_products table
+        if (!$product) {
+            $response->setFailMessage('not found');
+            return response($response->get(), $response->getDefaultErrorResponseCode());
+        }
+
+        $response->setSuccessMessage('ok');
+
+        if ($isApplicationProduct) {
+            $data = [
+                'sold_pieces' => self::productSoldPieces($product->id),
+                'total_price' => self::productTotalPrice($product->id)
+            ];
+            $response->addExtraFields($data);
+            return response($response->get());
+        }
+
+        $response->addExtraFields([
+            'sold_pieces' => self::productSoldPieces($product->id, false),
+            'total_price' => self::productTotalPrice($product->id, false)
+        ]);
+
+        return response($response->get());
+    }
+
+    /**
+     * Return number of product sold pieces.
+     *
+     * @param int $productId
+     * @param bool $isCustomProduct
+     * @return int
+     */
+    public static function productSoldPieces($productId, $isCustomProduct = false) {
+        return self::productSoldPiecesAndTotalPriceCommons($productId, $isCustomProduct)->count();
+    }
+
+    /**
+     * Return total price by sells of a product.
+     *
+     * @param int $productId
+     * @param bool $isCustomProduct
+     * @return mixed
+     */
+    public static function productTotalPrice($productId, $isCustomProduct = false) {
+        return self::productSoldPiecesAndTotalPriceCommons($productId, $isCustomProduct)->sum('final_price');
+    }
+
+    public static function paidBillsThatContainProduct($productId) {
+        
+    }
+
+    /**
+     * Common code used by productSoldPieces() and productTotalPrice() methods.
+     *
+     * @param int $productId
+     * @param bool $isCustomProduct
+     * @return int
+     */
+    private static function productSoldPiecesAndTotalPriceCommons($productId, $isCustomProduct = false) {
+        $paidBillIds = [];
+        $paidBills = Bill::where('user_id', Auth::user()->id)->where('paid', 1)->get();
+
+        if (!$paidBills) {
+            return 0;
+        }
+
+        // Build array with ids of paid bills
+        foreach ($paidBills as $paidBill) {
+            $paidBillIds[] = $paidBill->id;
+        }
+
+        if ($isCustomProduct) {
+            return BillProduct::where('product_id', $productId)->whereIn('bill_id', $paidBillIds);
+        }
+
+        return BillApplicationProduct::where('product_id', $productId)->whereIn('bill_id', $paidBillIds);
+    }
+
+    /**
      * Add new product to bill.
      *
      * @param $productQuery
@@ -191,7 +290,6 @@ class Products {
         }
 
         $insertQuery->insert($insertData);
-
     }
 
 }

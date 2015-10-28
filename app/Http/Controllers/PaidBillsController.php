@@ -11,6 +11,14 @@ use App\Helpers\Bills;
  */
 class PaidBillsController extends BaseController {
 
+    /**
+     * Initialize required stuff.
+     */
+    public function __construct() {
+        parent::__construct();
+        $this->middleware('auth');
+    }
+
     public function index() {
         return view('paid-bills');
     }

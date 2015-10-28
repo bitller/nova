@@ -25,8 +25,8 @@
                     </thead>
                     <tbody>
                     <tr v-repeat="product in products.data">
-                        <td class="vert-align">@{{ product.code }}</td>
-                        <td class="vert-align">@{{ product.name }}</td>
+                        <td class="vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.code }}</a></td>
+                        <td class="vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.name }}</a></td>
                     </tr>
                     </tbody>
                 </table>
