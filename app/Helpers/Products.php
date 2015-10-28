@@ -170,7 +170,8 @@ class Products {
                 'sold_pieces' => self::productSoldPieces($product->id),
                 'total_price' => self::productTotalPrice($product->id),
                 'paid_bills' => self::paidBillsThatContainProduct($product->id),
-                'not_paid_bills' => self::notPaidBillsThatContainProduct($product->id)
+                'not_paid_bills' => self::notPaidBillsThatContainProduct($product->id),
+                'is_application_product' => $isApplicationProduct
             ];
             $response->addExtraFields($data);
             return response($response->get());
@@ -180,7 +181,8 @@ class Products {
             'sold_pieces' => self::productSoldPieces($product->id, true),
             'total_price' => self::productTotalPrice($product->id, true),
             'paid_bills' => self::paidBillsThatContainProduct($product->id, true),
-            'not_paid_bills' => self::notPaidBillsThatContainProduct($product->id, true)
+            'not_paid_bills' => self::notPaidBillsThatContainProduct($product->id, true),
+            'is_application_product' => $isApplicationProduct
         ]);
 
         return response($response->get());

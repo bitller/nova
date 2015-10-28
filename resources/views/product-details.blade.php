@@ -10,7 +10,7 @@
             <div class="add-product-button row">
                 <span class="avon-products">Numele produsului</span>
 
-                <div class="btn-toolbar pull-right">
+                <div class="btn-toolbar pull-right" v-show="!product.is_application_product">
 
                     <!-- BEGIN Edit button -->
                     <div class="btn-group">
