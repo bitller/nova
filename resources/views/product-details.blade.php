@@ -8,7 +8,7 @@
 
             <!-- BEGIN Top part -->
             <div class="add-product-button row">
-                <span class="avon-products">Numele produsului</span>
+                <span class="avon-products">@{{ product.name }}</span>
 
                 <div class="btn-toolbar pull-right" v-show="!product.is_application_product">
 
@@ -62,14 +62,14 @@
             <!-- END Product statistics -->
 
             <!-- BEGIN Not paid bills that contain this product -->
-            <div class="row client-bills">
+            <div class="row client-bills" v-show="product.not_paid_bills[0]">
                 <h4>{{ trans('product_details.bills_that_contain_product') }}</h4>
                 <div class="panel panel-default">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>{{ trans('product_details.client_name') }}</th>
-                            <th>{{ trans('bills.number_of_products') }}</th>
+                            <th>{{ trans('bills.campaign_order') }}</th>
                             <th>{{ trans('bills.campaign') }}</th>
                             <th>{{ trans('bills.created_at') }}</th>
                         </tr>
@@ -77,9 +77,9 @@
                         <tbody>
 
                         <tr v-repeat="not_paid_bill in product.not_paid_bills">
-                            <td><a href="#">@{{ not_paid_bill.client_name }}</a></td>
-                            <td>0</td>
-                            <td>@{{ not_paid_bill.campaign_number }}</td>
+                            <td><a href="/bills/@{{ not_paid_bill.id }}">@{{ not_paid_bill.client_name }}</a></td>
+                            <td>@{{ not_paid_bill.campaign_order }}</td>
+                            <td>@{{ not_paid_bill.campaign_number }}/@{{ not_paid_bill.campaign_year }}</td>
                             <td>@{{ not_paid_bill.created_at }}</td>
                         </tr>
                         </tbody>
@@ -89,14 +89,14 @@
             <!-- END Not paid bills that contain this product -->
 
             <!-- BEGIN Paid bills that contain this product -->
-            <div class="row client-bills">
+            <div class="row client-bills" v-show="product.paid_bills[0]">
                 <h4>{{ trans('product_details.paid_bills_that_contain_product') }}</h4>
                 <div class="panel panel-default">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>{{ trans('product_details.client_name') }}</th>
-                            <th>{{ trans('bills.number_of_products') }}</th>
+                            <th>{{ trans('bills.campaign_order') }}</th>
                             <th>{{ trans('bills.campaign') }}</th>
                             <th>{{ trans('bills.created_at') }}</th>
                         </tr>
@@ -104,9 +104,9 @@
                         <tbody>
 
                         <tr v-repeat="paid_bill in product.paid_bills">
-                            <td><a href="#">@{{ paid_bill.client_name }}</a></td>
-                            <td>0</td>
-                            <td>@{{ paid_bill.campaign_number }}</td>
+                            <td><a href="/bills/@{{ paid_bill.id }}">@{{ paid_bill.client_name }}</a></td>
+                            <td>@{{ paid_bill.campaign_order }}</td>
+                            <td>@{{ paid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
                             <td>@{{ paid_bill.created_at }}</td>
                         </tr>
                         </tbody>

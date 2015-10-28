@@ -167,6 +167,7 @@ class Products {
 
         if ($isApplicationProduct) {
             $data = [
+                'name' => $product->name,
                 'sold_pieces' => self::productSoldPieces($product->id),
                 'total_price' => self::productTotalPrice($product->id),
                 'paid_bills' => self::paidBillsThatContainProduct($product->id),
@@ -178,6 +179,7 @@ class Products {
         }
 
         $response->addExtraFields([
+            'name' => $product->name,
             'sold_pieces' => self::productSoldPieces($product->id, true),
             'total_price' => self::productTotalPrice($product->id, true),
             'paid_bills' => self::paidBillsThatContainProduct($product->id, true),
