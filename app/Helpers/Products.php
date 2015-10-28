@@ -168,15 +168,19 @@ class Products {
         if ($isApplicationProduct) {
             $data = [
                 'sold_pieces' => self::productSoldPieces($product->id),
-                'total_price' => self::productTotalPrice($product->id)
+                'total_price' => self::productTotalPrice($product->id),
+                'paid_bills' => self::paidBillsThatContainProduct($product->id),
+                'not_paid_bills' => self::notPaidBillsThatContainProduct($product->id)
             ];
             $response->addExtraFields($data);
             return response($response->get());
         }
 
         $response->addExtraFields([
-            'sold_pieces' => self::productSoldPieces($product->id, false),
-            'total_price' => self::productTotalPrice($product->id, false)
+            'sold_pieces' => self::productSoldPieces($product->id, true),
+            'total_price' => self::productTotalPrice($product->id, true),
+            'paid_bills' => self::paidBillsThatContainProduct($product->id, true),
+            'not_paid_bills' => self::notPaidBillsThatContainProduct($product->id, true)
         ]);
 
         return response($response->get());
@@ -204,8 +208,26 @@ class Products {
         return self::productSoldPiecesAndTotalPriceCommons($productId, $isCustomProduct)->sum('final_price');
     }
 
-    public static function paidBillsThatContainProduct($productId) {
-        
+    /**
+     * Return paid bills that contain given product.
+     *
+     * @param int $productId
+     * @param bool $isCustomProduct
+     * @return array
+     */
+    public static function paidBillsThatContainProduct($productId, $isCustomProduct = false) {
+        return self::billsThatContainProduct($productId, true, $isCustomProduct);
+    }
+
+    /**
+     * Return not paid bills that contain given product.
+     *
+     * @param int $productId
+     * @param bool $isCustomProduct
+     * @return array
+     */
+    public static function notPaidBillsThatContainProduct($productId, $isCustomProduct = false) {
+        return self::billsThatContainProduct($productId, false, $isCustomProduct);
     }
 
     /**
@@ -233,6 +255,49 @@ class Products {
         }
 
         return BillApplicationProduct::where('product_id', $productId)->whereIn('bill_id', $paidBillIds);
+    }
+
+    /**
+     * Return bills that contain given product.
+     *
+     * @param int $productId
+     * @param bool $paidBill
+     * @param bool $isCustomProduct
+     * @return array
+     */
+    private static function billsThatContainProduct($productId, $paidBill = false, $isCustomProduct = false) {
+
+        $billIds = [];
+
+        if ($paidBill) {
+            $paidBill = 1;
+        } else {
+            $paidBill = 0;
+        }
+
+        // Query in function of product type
+        if ($isCustomProduct) {
+            $billProducts = BillProduct::where('product_id', $productId)->get();
+        } else {
+            $billProducts = BillApplicationProduct::where('product_id', $productId)->get();
+        }
+
+        // Make sure products are returned
+        if (!$billProducts) {
+            return [];
+        }
+
+        // Build array with bill ids
+        foreach ($billProducts as $billProduct) {
+            $billIds[] = $billProduct->bill_id;
+        }
+
+        return Bill::select('bills.*', 'clients.name as client_name')
+            ->leftJoin('clients', 'bills.client_id', '=', 'clients.id')
+            ->whereIn('bills.id', $billIds)
+            ->where('bills.user_id', Auth::user()->id)
+            ->where('bills.paid', $paidBill)
+            ->get();
     }
 
     /**

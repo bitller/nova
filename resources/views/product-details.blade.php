@@ -76,11 +76,11 @@
                         </thead>
                         <tbody>
 
-                        <tr v-repeat="bill in client.bills">
-                            <td><a href="#">@{{ client.name }}</a></td>
+                        <tr v-repeat="not_paid_bill in product.not_paid_bills">
+                            <td><a href="#">@{{ not_paid_bill.client_name }}</a></td>
                             <td>0</td>
-                            <td>@{{ bill.campaign_number }}</td>
-                            <td>@{{ bill.created_at }}</td>
+                            <td>@{{ not_paid_bill.campaign_number }}</td>
+                            <td>@{{ not_paid_bill.created_at }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -103,11 +103,11 @@
                         </thead>
                         <tbody>
 
-                        <tr v-repeat="bill in client.bills">
-                            <td><a href="#">@{{ client.name }}</a></td>
+                        <tr v-repeat="paid_bill in product.paid_bills">
+                            <td><a href="#">@{{ paid_bill.client_name }}</a></td>
                             <td>0</td>
-                            <td>@{{ bill.campaign_number }}</td>
-                            <td>@{{ bill.created_at }}</td>
+                            <td>@{{ paid_bill.campaign_number }}</td>
+                            <td>@{{ paid_bill.created_at }}</td>
                         </tr>
                         </tbody>
                     </table>
