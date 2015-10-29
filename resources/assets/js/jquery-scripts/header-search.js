@@ -41,6 +41,9 @@ $(document).ready(function() {
 
     // Instantiate the Typeahead UI
     input.typeahead(null, {
+        updater: function(product) {
+            window.location.href = '/product-details/' + product.code;
+        },
         displayKey: 'value',
         source: results.ttAdapter(),
         templates: {

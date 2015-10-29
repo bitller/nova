@@ -21,12 +21,12 @@
             <table class="table table-hover" v-show="paid_bills.total">
                 <thead>
                 <tr>
-                    <th><span class="glyphicon glyphicon-user icon-color"></span> {{ trans('bills.client') }}</th>
-                    <th><span class="glyphicon glyphicon-tag icon-color"></span> {{ trans('bills.campaign_order') }}</th>
-                    <th><span class="glyphicon glyphicon-tags icon-color"></span> {{ trans('bills.campaign') }}</th>
-                    <th><span class="glyphicon glyphicon-euro icon-color"></span> Pret</th>
-                    <th><span class="glyphicon glyphicon-calendar icon-color"></span> {{ trans('bills.created_at') }}</th>
-                    <th><span class="glyphicon glyphicon-trash icon-color"></span> {{ trans('common.delete') }}</th>
+                    <th><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
+                    <th><span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}</th>
+                    <th><span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}</th>
+                    <th><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; Pret</th>
+                    <th><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bills.created_at') }}</th>
+                    <th><span class="glyphicon glyphicon-trash icon-color"></span>&nbsp; {{ trans('common.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
