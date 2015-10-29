@@ -9,18 +9,31 @@ new Vue({
     methods: {
 
         /**
-         * Get my products data
+         * Get my products data.
          *
          * @param url
+         * @param callback
          */
-        getMyProducts: function(url) {
+        getMyProducts: function(url, callback) {
 
-            Nova.showLoader(Nova.getCommonTranslation('loading'));
+            // Show loader only if a callback is not given
+            if (typeof callback === 'undefined') {
+                Alert.loader();
+            }
 
+            // Do request
             this.$http.get(url, function(response) {
+
                 this.$set('myProducts', response);
                 this.$set('loaded', true);
-                Nova.hideLoader();
+
+                // Call callback if is given
+                if (typeof callback !== 'undefined') {
+                    callback();
+                    return;
+                }
+
+                Alert.close();
             });
 
         },
@@ -110,46 +123,69 @@ new Vue({
 
             var thisInstance = this;
 
-            // Show confirmation
-            swal({
-                title: Nova.getMyProductTranslation('confirm'),
-                text: Nova.getMyProductTranslation('delete-warning'),
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: Nova.getMyProductTranslation('confirm-delete'),
-                cancelButtonText: Nova.getMyProductTranslation('cancel'),
-                closeOnConfirm: false
-            }, function() {
+            Alert.confirmDeleteProductFromBill(function() {
 
-                // Show loader
-                Nova.showLoader(Nova.getCommonTranslation('loading'));
+                // Do request
+                thisInstance.$http.get('/my-products/' + product_id + '/delete', function(response) {
 
-                // Build request url
-                var url = '/my-products/' + product_id + '/delete';
-                thisInstance.$http.get(url).success(function(response) {
-
-                    var paginationUrl = Nova.buildPaginationRequestUrl('/my-products/get', rows_on_page, current_page);
-                    this.paginate(paginationUrl);
+                    // Handle success response
+                    this.getMyProducts(Nova.buildPaginationRequestUrl('/my-products/get', rows_on_page, current_page), function() {
+                        Alert.success(response.title, response.message);
+                    });
 
                 }).error(function(response) {
 
-                    var error = response.title;
-                    var generalError = response.message;
-
-                    if (!generalError) {
-                        generalError = Nova.getCommonTranslation('general-error');
+                    // Handle error response
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
                     }
 
-                    if (!error) {
-                        error = Nova.getCommonTranslation('fail');
-                    }
-
-                    Nova.showErrorAlert(error, generalError);
-
+                    Alert.error(response.title, response.message);
                 });
 
             });
+
+            //// Show confirmation
+            //swal({
+            //    title: Nova.getMyProductTranslation('confirm'),
+            //    text: Nova.getMyProductTranslation('delete-warning'),
+            //    type: "warning",
+            //    showCancelButton: true,
+            //    confirmButtonColor: "#DD6B55",
+            //    confirmButtonText: Nova.getMyProductTranslation('confirm-delete'),
+            //    cancelButtonText: Nova.getMyProductTranslation('cancel'),
+            //    closeOnConfirm: false
+            //}, function() {
+            //
+            //    // Show loader
+            //    Nova.showLoader(Nova.getCommonTranslation('loading'));
+            //
+            //    // Build request url
+            //    var url = '/my-products/' + product_id + '/delete';
+            //    thisInstance.$http.get(url).success(function(response) {
+            //
+            //        var paginationUrl = Nova.buildPaginationRequestUrl('/my-products/get', rows_on_page, current_page);
+            //        this.paginate(paginationUrl);
+            //
+            //    }).error(function(response) {
+            //
+            //        var error = response.title;
+            //        var generalError = response.message;
+            //
+            //        if (!generalError) {
+            //            generalError = Nova.getCommonTranslation('general-error');
+            //        }
+            //
+            //        if (!error) {
+            //            error = Nova.getCommonTranslation('fail');
+            //        }
+            //
+            //        Nova.showErrorAlert(error, generalError);
+            //
+            //    });
+            //
+            //});
 
         },
 
