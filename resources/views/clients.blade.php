@@ -24,6 +24,10 @@
                 </button>
             </div>
 
+            <div class="alert alert-info" v-show="!clients.total">
+                {{ trans('clients.no_clients') }}
+            </div>
+
             <!-- BEGIN Clients table-->
             <table class="table table-hover" v-show="clients.total">
                 <thead>
