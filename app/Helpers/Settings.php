@@ -81,7 +81,10 @@ class Settings {
      */
     public static function language() {
         $language = Auth::user()->settings()->leftJoin('languages', 'language_id', '=', 'languages.id')->first();
-        return $language->key;
+        if ($language) {
+            return $language->key;
+        }
+        return 'en';
     }
 
     /**
