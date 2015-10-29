@@ -12,7 +12,7 @@ new Vue({
     methods: {
 
         /**
-         * Delete client
+         * Delete client.
          *
          * @param client_id
          * @param current_page
@@ -29,7 +29,7 @@ new Vue({
                     thisInstance.$http.get(this.buildGetClientsUrl(rows_on_page, current_page), function(response) {
 
                         this.$set('clients', response);
-                        Alert.success(Translation.common('success'), Translation.client('client-deleted'));
+                        Alert.success(Translation.common('success'), Translation.clients('client-deleted'));
 
                     }).error(function(response) {
 
@@ -53,55 +53,6 @@ new Vue({
                     Alert.error(resoponse.title, response.message);
                 });
             });
-
-
-            /////-------------------
-            //var thisInstance = this;
-            //var clientsSelector = $('#clients');
-            //
-            //swal({
-            //        title: clientsSelector.attr('confirm'),
-            //        text: clientsSelector.attr('confirm-message'),
-            //        type: "warning",
-            //        showCancelButton: true,
-            //        confirmButtonColor: "#DD6B55",
-            //        confirmButtonText: clientsSelector.attr('confirm-delete'),
-            //        cancelButtonText: clientsSelector.attr('cancel'),
-            //        closeOnConfirm: false
-            //    },
-            //    function() {
-            //        // Show loader
-            //        swal({
-            //            title: $('#clients').attr('loading'),
-            //            type: "info",
-            //            showConfirmButton: false
-            //        });
-            //
-            //        // Build url and make request
-            //        var url = '/clients/' + client_id + '/delete';
-            //        thisInstance.$http.get(url).success(function(response) {
-            //
-            //            // Build url to paginate new clients
-            //            var paginateClientsUrl = this.buildGetClientsUrl(rows_on_page, current_page);
-            //
-            //            // Make request to get paginate clients
-            //            thisInstance.$http.get(paginateClientsUrl).success(function(data) {
-            //                // Show a success message and update clients list
-            //                swal({
-            //                    title: response.title,
-            //                    text: response.message,
-            //                    type: "success",
-            //                    timer: 1750,
-            //                    showConfirmButton: false
-            //                });
-            //                thisInstance.$set('clients', data);
-            //            });
-            //
-            //        }).error(function(response) {
-            //            //
-            //        });
-            //    });
-
         },
 
         /**

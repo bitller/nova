@@ -1682,6 +1682,16 @@ var Translation = {
     },
 
     /**
+     * Get clients page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    clients: function(attribute) {
+        return this.get('#clients-trans', attribute);
+    },
+
+    /**
      * Get products page translations.
      *
      * @param attribute

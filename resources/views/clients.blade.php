@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-    @include('includes.ajax-translations.client')
+    @include('includes.ajax-translations.clients')
     <div id="clients" loading="{{ trans('common.loading') }}"
          confirm="{{ trans('common.confirm') }}"
          confirm-message="{{ trans('clients.all_bills_will_be_deleted') }}"
