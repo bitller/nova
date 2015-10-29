@@ -44,11 +44,11 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user-email">{{ Auth::user()->email }}</span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/settings">{{ trans('header.settings') }}</a></li>
-                        <li><a href="/statistics">{{ trans('header.statistics') }}</a></li>
-                        <li><a href="/about">{{ trans('header.about') }}</a></li>
+                        <li><a href="/settings"><span class="glyphicon glyphicon-cog icon-color">&nbsp;</span>{{ trans('header.settings') }}</a></li>
+                        <li><a href="/statistics"><span class="glyphicon glyphicon-stats icon-color">&nbsp;</span>{{ trans('header.statistics') }}</a></li>
+                        <li><a href="/about"><span class="glyphicon glyphicon-info-sign icon-color">&nbsp;</span>{{ trans('header.about') }}</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/logout">{{ trans('header.logout') }}</a></li>
+                        <li><a href="/logout"><span class="glyphicon glyphicon-off icon-color">&nbsp;</span>{{ trans('header.logout') }}</a></li>
                     </ul>
                 </li>
             </ul>
