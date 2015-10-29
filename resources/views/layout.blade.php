@@ -25,10 +25,10 @@
         <div id="navbar" class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav">
-                <li><a href="/paid-bills">{{ trans('navbar.paid_bills') }}</a></li>
-                <li><a href="/products">{{ trans('navbar.products') }}</a></li>
-                <li><a href="/clients">{{ trans('navbar.clients') }}</a></li>
-                <li><a href="/my-products">{{ trans('navbar.my_products') }}</a></li>
+                <li><a href="/paid-bills"><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ trans('navbar.paid_bills') }}</a></li>
+                <li><a href="/products"><span class="glyphicon glyphicon-th"></span>&nbsp;{{ trans('navbar.products') }}</a></li>
+                <li><a href="/clients"><span class="glyphicon glyphicon-user"></span>&nbsp;{{ trans('navbar.clients') }}</a></li>
+                <li><a href="/my-products"><span class="glyphicon glyphicon-th-list"></span>&nbsp;{{ trans('navbar.my_products') }}</a></li>
             </ul>
 
             <!-- BEGIN Search bar -->
