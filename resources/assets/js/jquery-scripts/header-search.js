@@ -41,9 +41,6 @@ $(document).ready(function() {
 
     // Instantiate the Typeahead UI
     input.typeahead(null, {
-        updater: function(product) {
-            window.location.href = '/product-details/' + product.code;
-        },
         displayKey: 'value',
         source: results.ttAdapter(),
         templates: {
@@ -52,4 +49,9 @@ $(document).ready(function() {
             }
         }
     });
+
+    // Redirect to product details page
+    input.on('typeahead:selected', function(event, product) {
+        window.location.replace('/product-details/' + product.value);
+    })
 });
