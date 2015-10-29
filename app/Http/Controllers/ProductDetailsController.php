@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\ApplicationProduct;
 use App\Helpers\Products;
+use App\Http\Requests\ProductDetails\DeleteProductRequest;
 use App\Http\Requests\ProductDetails\EditProductCodeRequest;
 use App\Http\Requests\ProductDetails\EditProductNameRequest;
 use App\Product;
@@ -60,6 +61,17 @@ class ProductDetailsController extends BaseController {
      */
     public function editCode($productCode, EditProductCodeRequest $request) {
         return Products::editCode($productCode, $request->get('id'), $request->get('code'));
+    }
+
+    /**
+     * Handle custom product delete.
+     *
+     * @param string $productCode
+     * @param DeleteProductRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function delete($productCode, DeleteProductRequest $request) {
+        return Products::delete($productCode, $request->get('id'));
     }
 
 }

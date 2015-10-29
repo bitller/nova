@@ -197,6 +197,39 @@ class Products {
     }
 
     /**
+     * Handle custom product delete.
+     *
+     * @param string $productCode
+     * @param int $productId
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public static function delete($productCode, $productId) {
+
+        $response = new AjaxResponse();
+
+        // Only custom products can be deleted
+        if (!self::isCustomProduct($productId, $productCode)) {
+            $response->setFailMessage(trans('product_details.edit_error'));
+            return response($response->get(), $response->getDefaultErrorResponseCode());
+        }
+
+        // Delete product
+        $productsBeforeDelete = Product::where('user_id', Auth::user()->id)->count();
+        Product::where('id', $productId)->where('user_id', Auth::user()->id)->delete();
+        $productsAfterDelete = Product::where('user_id', Auth::user()->id)->count();
+
+        // Check if product was deleted
+        if ($productsBeforeDelete-1 === $productsAfterDelete) {
+            $response->setSuccessMessage(trans('product_details.product_deleted'));
+            return response($response->get());
+        }
+
+        // If we arrive here something went wrong
+        $response->setFailMessage(trans('product_details.edit_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode());
+    }
+
+    /**
      * Get product details.
      *
      * @param string $productCode

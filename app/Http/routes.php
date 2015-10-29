@@ -105,6 +105,7 @@ Route::group(['prefix' => 'product-details'], function() {
     Route::get('/{productCode}/get', 'ProductDetailsController@get');
     Route::post('/{productCode}/edit-name', 'ProductDetailsController@editName');
     Route::post('/{productCode}/edit-code', 'ProductDetailsController@editCode');
+    Route::post('/{productCode}/delete', 'ProductDetailsController@delete');
 });
 
 // Paid bills

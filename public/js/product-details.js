@@ -124,6 +124,46 @@ new Vue({
                     Alert.error(response.title, response.message);
                 });
             });
+        },
+
+        /**
+         * Delete user product.
+         *
+         * @param productCode
+         * @param productId
+         */
+        deleteProduct: function(productCode, productId) {
+
+            var thisInstance = this;
+
+            // Show confirm alert
+            Alert.confirmDeleteProductFromBill(function() {
+
+                // Build post data
+                var data = {
+                    _token: Token.get(),
+                    id: productId
+                };
+
+                // Make post request
+                thisInstance.$http.post('/product-details/' + Data.getProductCode() + '/delete', data, function(response) {
+
+                    // Handle success response
+                    window.location.replace('/my-products');
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+
+                    // Handle error response
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+
+                    Alert.error(response.title, response.message);
+                });
+            });
+
         }
     }
 });

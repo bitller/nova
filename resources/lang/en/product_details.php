@@ -15,6 +15,7 @@ return [
     'number_of_sold_pieces' => 'Number of sold pieces',
     'paid_bills_that_contain_product' => 'Paid bills that contain this product',
     'product_code_input_required' => 'New product code is required!',
+    'product_deleted' => 'Product deleted!',
     'product_name_input_required' => 'New product name is required!',
     'product_statistics' => 'Product statistics',
     'total_price' => 'Total price',

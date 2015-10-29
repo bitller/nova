@@ -1519,7 +1519,8 @@ var Alert = {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: Translation.common('confirm-delete'),
             cancelButtonText: Translation.common('cancel'),
-            closeOnConfirm: false
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true
         }, function () {
             callback();
         });

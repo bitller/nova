@@ -15,6 +15,7 @@ return [
     'number_of_sold_pieces' => 'Numărul de bucăţi vândute',
     'paid_bills_that_contain_product' => 'Facturile plătite în care apare acest produs',
     'product_code_input_required' => 'Introduceți noul code al produsului!',
+    'product_deleted' => 'Produsul a fost şters!',
     'product_name_input_required' => 'Introduceți noul nume al produsului!',
     'product_statistics' => 'Statisticile produsului',
     'total_price' => 'Preţ total'

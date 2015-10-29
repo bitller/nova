@@ -39,7 +39,7 @@
                             <li class="divider"></li>
 
                             <li>
-                                <a href="#">
+                                <a href="#" v-on="click: deleteProduct(product.code, product.id)">
                                     <span class="glyphicon glyphicon-trash"></span>&nbsp; {{ trans('product_details.delete_product') }}
                                 </a>
                             </li>
