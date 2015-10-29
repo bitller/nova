@@ -1335,6 +1335,25 @@ var Alert = {
     },
 
     /**
+     * Edit product code alert.
+     *
+     * @param code
+     * @param callback
+     */
+    editProductCode: function(code, callback) {
+
+        var codeConfig = {
+            title: Translation.productDetails('edit-code'),
+            inputValue: code,
+            text: Translation.productDetails('edit-code-description'),
+            requiredInput: Translation.productDetails('code-input-required')
+        };
+
+        this.edit(codeConfig, callback);
+
+    },
+
+    /**
      * Edit product page alert.
      *
      * @param page

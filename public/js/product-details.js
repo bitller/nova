@@ -46,27 +46,76 @@ new Vue({
         },
 
         /**
+         * Edit product name.
          *
          * @param currentName
+         * @param productCode
+         * @param productId
          */
         editName: function(currentName, productCode, productId) {
 
             var thisInstance = this;
 
+            // Show edit alert
             Alert.editProductName(currentName, function(newName) {
 
+                // Build post data
                 var data = {
                     _token: Token.get(),
                     id: productId,
-                    name: newName,
+                    name: newName
                 };
 
+                // Make post request
                 thisInstance.$http.post('/product-details/' + Data.getProductCode() + '/edit-name', data, function(response) {
+
+                    // Handle success response
                     this.$set('name', response.name);
                     Alert.success(response.title, response.message);
 
                 }).error(function(response) {
 
+                    // Handle error response
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+
+                    Alert.error(response.title, response.message);
+                });
+            });
+        },
+
+        /**
+         * Edit product code.
+         *
+         * @param productCode
+         * @param productId
+         */
+        editCode: function(productCode, productId) {
+
+            var thisInstance = this;
+
+            // Show edit code alert
+            Alert.editProductCode(productCode, function(newCode) {
+
+                // Build post data
+                var data = {
+                    _token: Token.get(),
+                    id: productId,
+                    code: newCode
+                };
+
+                // Make post request
+                thisInstance.$http.post('/product-details/' + Data.getProductCode() + '/edit-code', data, function(response) {
+
+                    // Handle success response
+                    window.location.replace('/product-details/' + response.code);
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+
+                    // Handle error response
                     if (!response.message) {
                         Alert.generalError();
                         return;

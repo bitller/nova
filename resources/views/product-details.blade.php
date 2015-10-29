@@ -30,7 +30,7 @@
 
                             <!-- BEGIN Edit code -->
                             <li>
-                                <a href="#">
+                                <a href="#" v-on="click: editCode(product.code, product.id)">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp; {{ trans('product_details.edit_code') }}
                                 </a>
                             </li>

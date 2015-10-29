@@ -152,6 +152,7 @@ class Products {
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('product_details.name_updated'));
 
+        // Only name of custom products can be edited
         if (self::isCustomProduct($productId, $productCode)) {
             Product::where('id', $productId)->where('code', $productCode)->where('user_id', Auth::user()->id)->update(['name' => $newName]);
             $response->addExtraFields(['name' => $newName]);
@@ -160,6 +161,39 @@ class Products {
 
         $response->setFailMessage(trans('product_details.edit_error'));
         return response($response->get(), $response->getDefaultErrorResponseCode());
+    }
+
+    /**
+     * Handle product code edit.
+     *
+     * @param string $productCode
+     * @param int $productId
+     * @param string $newCode
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public static function editCode($productCode, $productId, $newCode) {
+
+        $response = new AjaxResponse();
+
+        // Only code of custom products can be updated
+        if (self::isCustomProduct($productId, $productCode)) {
+
+            // Check if new code is already used
+            if (Product::where('code', $newCode)->where('user_id', Auth::user()->id)->count() || ApplicationProduct::where('code', $newCode)->count()) {
+                $response->setFailMessage(trans('product_details.code_already_used'));
+                return response($response->get(), $response->getDefaultErrorResponseCode());
+            }
+
+            // Update code
+            Product::where('id', $productId)->where('user_id', Auth::user()->id)->update(['code' => $newCode]);
+            $response->setSuccessMessage(trans('product_details.code_updated'));
+            $response->addExtraFields(['code' => $newCode]);
+            return response($response->get());
+        }
+
+        // If we arrive here product does not exists or is not a custom product
+        $response->setFailMessage(trans('product_details.edit_error'));
+        return response($response->get());
     }
 
     /**

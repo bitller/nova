@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\ApplicationProduct;
 use App\Helpers\Products;
+use App\Http\Requests\ProductDetails\EditProductCodeRequest;
 use App\Http\Requests\ProductDetails\EditProductNameRequest;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,17 @@ class ProductDetailsController extends BaseController {
      */
     public function editName($productCode, EditProductNameRequest $request) {
         return Products::editName($productCode, $request->get('id'), $request->get('name'));
+    }
+
+    /**
+     * Handle product code edit.
+     *
+     * @param string $productCode
+     * @param EditProductCodeRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editCode($productCode, EditProductCodeRequest $request) {
+        return Products::editCode($productCode, $request->get('id'), $request->get('code'));
     }
 
 }
