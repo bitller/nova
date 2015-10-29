@@ -1,14 +1,14 @@
 @extends('layout')
 @section('content')
 
-    @include('includes.ajax-translations.common')
+    @include('includes.ajax-translations.product-details')
 
     <div id="product-details" product-code="{{ $productCode }}">
         <div v-show="loaded">
 
             <!-- BEGIN Top part -->
             <div class="add-product-button row">
-                <span class="avon-products">@{{ product.name }}</span>
+                <span class="avon-products">@{{ name }}</span>
 
                 <div class="btn-toolbar pull-right" v-show="!product.is_application_product">
 
@@ -22,7 +22,7 @@
 
                             <!-- BEGIN Edit name -->
                             <li>
-                                <a href="#">
+                                <a href="#" v-on="click: editName(name, product.code, product.id)">
                                     <span class="glyphicon glyphicon-font"></span>&nbsp; {{ trans('product_details.edit_name') }}
                                 </a>
                             </li>

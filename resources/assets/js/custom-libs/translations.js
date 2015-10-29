@@ -76,6 +76,16 @@ var Translation = {
     },
 
     /**
+     * Get product details page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    productDetails: function(attribute) {
+        return this.get('#product-details-trans', attribute);
+    },
+
+    /**
      * @param pageSelector
      * @param attribute
      * @returns {*|jQuery}

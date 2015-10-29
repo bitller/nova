@@ -6,6 +6,25 @@
 var Alert = {
 
     /**
+     * Edit product name alert.
+     *
+     * @param name
+     * @param callback
+     */
+    editProductName: function(name, callback) {
+
+        var nameConfig = {
+            title: Translation.productDetails('edit-name'),
+            inputValue: name,
+            text: Translation.productDetails('edit-name-description'),
+            requiredInput: Translation.productDetails('name-input-required')
+        };
+
+        this.edit(nameConfig, callback);
+
+    },
+
+    /**
      * Edit product page alert.
      *
      * @param page

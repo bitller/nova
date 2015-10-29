@@ -140,6 +140,29 @@ class Products {
     }
 
     /**
+     * Handle product name edit.
+     *
+     * @param string $productCode
+     * @param int $productId
+     * @param string $newName
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public static function editName($productCode, $productId, $newName) {
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('product_details.name_updated'));
+
+        if (self::isCustomProduct($productId, $productCode)) {
+            Product::where('id', $productId)->where('code', $productCode)->where('user_id', Auth::user()->id)->update(['name' => $newName]);
+            $response->addExtraFields(['name' => $newName]);
+            return response($response->get());
+        }
+
+        $response->setFailMessage(trans('product_details.edit_error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode());
+    }
+
+    /**
      * Get product details.
      *
      * @param string $productCode
@@ -167,6 +190,8 @@ class Products {
 
         if ($isApplicationProduct) {
             $data = [
+                'id' => $product->id,
+                'code' => $product->code,
                 'name' => $product->name,
                 'sold_pieces' => self::productSoldPieces($product->id),
                 'total_price' => self::productTotalPrice($product->id),
@@ -179,6 +204,8 @@ class Products {
         }
 
         $response->addExtraFields([
+            'id' => $product->id,
+            'code' => $product->code,
             'name' => $product->name,
             'sold_pieces' => self::productSoldPieces($product->id, true),
             'total_price' => self::productTotalPrice($product->id, true),

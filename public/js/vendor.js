@@ -1316,6 +1316,25 @@ Vue.component('loader', {
 var Alert = {
 
     /**
+     * Edit product name alert.
+     *
+     * @param name
+     * @param callback
+     */
+    editProductName: function(name, callback) {
+
+        var nameConfig = {
+            title: Translation.productDetails('edit-name'),
+            inputValue: name,
+            text: Translation.productDetails('edit-name-description'),
+            requiredInput: Translation.productDetails('name-input-required')
+        };
+
+        this.edit(nameConfig, callback);
+
+    },
+
+    /**
      * Edit product page alert.
      *
      * @param page
@@ -1674,6 +1693,16 @@ var Translation = {
     },
 
     /**
+     * Get product details page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    productDetails: function(attribute) {
+        return this.get('#product-details-trans', attribute);
+    },
+
+    /**
      * @param pageSelector
      * @param attribute
      * @returns {*|jQuery}
@@ -1691,6 +1720,15 @@ var Data = {
      */
     getBillId: function() {
         return $('#bill').attr('bill-id')
+    },
+
+    /**
+     * Get product code. Works only on product details page.
+     *
+     * @returns {*|jQuery}
+     */
+    getProductCode: function() {
+        return $('#product-details').attr('product-code');
     }
 };
 var UrlBuilder = {

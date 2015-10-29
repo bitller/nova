@@ -173,6 +173,7 @@ new Vue({
          * @param productQuantity
          * @param productId
          * @param productCode
+         * @param billProductId
          */
         editQuantity: function(productQuantity, productId, productCode, billProductId) {
 
@@ -218,6 +219,7 @@ new Vue({
          * @param productPrice
          * @param productId
          * @param productCode
+         * @param billProductId
          */
         editPrice: function(productPrice, productId, productCode, billProductId) {
 
