@@ -14,9 +14,15 @@
             </div>
             <!-- END Add product button -->
 
+            <!-- BEGIN No product info -->
+            <div class="alert alert-info" v-show="!myProducts.total">
+                {{ trans('my_products.no_products') }}
+            </div>
+            <!-- END No products info -->
+
             <!-- BEGIN Products table-->
-            <div class="panel panel-default">
-                <table class="table table-bordered" v-show="myProducts.total">
+            <div class="panel panel-default" v-show="myProducts.total">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>{{ trans('common.product_code') }}</th>
