@@ -17,5 +17,6 @@ return [
     'my_bills' => 'Facturile mele',
     'number_of_products' => 'Numărul de produse',
     'order' => 'Comanda',
+    'price' => 'Preţ',
     'year' => 'anul',
 ];
