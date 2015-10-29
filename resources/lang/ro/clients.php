@@ -16,6 +16,7 @@ return [
     'client_phone_updated' => 'Numărul de telefon al clientului a fost actualizat!',
     'client_since' => 'Client din',
     'client_statistics' => 'Stitasticile clientului',
+    'client_will_be_deleted' => 'Clientul și toate facturile lui vor fi șterse definitiv!',
     'insert_client_name' => 'Introduceți numele si prenumele clientului',
     'my_clients' => 'Clienții mei',
     'name' => 'Nume',

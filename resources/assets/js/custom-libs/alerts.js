@@ -200,20 +200,39 @@ var Alert = {
      * @param callback
      */
     confirmDeleteProductFromBill: function(callback) {
+        this.confirmDelete(callback, Translation.bill('product-will-be-deleted'));
+    },
+
+    /**
+     * Show confirm delete client.
+     *
+     * @param callback
+     */
+    confirmDeleteClient: function(callback) {
+        this.confirmDelete(callback, Translation.client('client-will-be-deleted'));
+    },
+
+    /**
+     *
+     * @param callback
+     * @param text
+     */
+    confirmDelete: function(callback, text) {
 
         swal({
             title: Translation.common('confirm'),
-            text: Translation.bill('product-will-be-deleted'),
+            text: text,
             type: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
+            confirmButtonColor: "#dd6b55",
             confirmButtonText: Translation.common('confirm-delete'),
             cancelButtonText: Translation.common('cancel'),
             closeOnConfirm: false,
             showLoaderOnConfirm: true
-        }, function () {
+        }, function() {
             callback();
         });
+
     },
 
     /**

@@ -7,7 +7,7 @@
         <div id="table" v-show="loaded">
             <!-- BEGIN No bills info -->
             <div class="alert alert-info no-bills-info" v-show="!paid_bills.total">
-                Aici apar toate facturile achitate. Momentan, se pare ca nu ai nicio factura achitata. Pentru a marca o factura ca achitata apasa butonul "Marcheaza ca platita" din pagina facturii. Cand o factura este achitata, ea va fi inclusa in statistici.
+                {{ trans('paid_bills.no_bills') }}
             </div>
             <!-- END No bills info -->
 

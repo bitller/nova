@@ -16,6 +16,7 @@ return [
     'client_phone_updated' => 'Client phone number updated!',
     'client_since' => 'Client since',
     'client_statistics' => 'Client statistics',
+    'client_will_be_deleted' => 'Client and all their bills will be deleted permanently!',
     'insert_client_name' => 'Insert client name',
     'my_clients' => 'My clients',
     'name' => 'Name',
