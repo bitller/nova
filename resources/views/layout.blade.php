@@ -35,7 +35,7 @@
             <form class="navbar-form navbar-left" role="search" id="search-bar-box">
                 <div class="form-group has-feedback">
                     <input type="text" id="search-bar" class="form-control" placeholder="{{ trans('header.search_by_code_or_name') }}">
-                    <i class="glyphicon glyphicon-search form-control-feedback"></i>
+                    <i class="glyphicon glyphicon-search form-control-feedback icon-color"></i>
                 </div>
             </form>
             <!-- END Search bar -->
