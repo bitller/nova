@@ -353,4 +353,7 @@ new Vue({
     }
 
 });
+$(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+});
 //# sourceMappingURL=settings.js.map
