@@ -113,3 +113,8 @@ Route::group(['prefix' => 'paid-bills'], function() {
     Route::get('/', 'PaidBillsController@index');
     Route::get('/get', 'PaidBillsController@get');
 });
+
+// About page
+Route::group(['prefix' => 'about'], function() {
+    Route::get('/', 'AboutController@index');
+});
