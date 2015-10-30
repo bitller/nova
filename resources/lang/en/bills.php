@@ -15,6 +15,7 @@ return [
     'from_campaign' => 'from campaign',
     'info' => 'Info: ',
     'my_bills' => 'My bills',
+    'no_bills' => 'Looks like you don\'t have any bill. Use the top button to get started.',
     'number_of_products' => 'Number of products',
     'order' => 'Order',
     'price' => 'Price',

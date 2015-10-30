@@ -1,5 +1,5 @@
 <!-- BEGIN Edit password modal -->
-<div id="edit-password-modal" class="modal fade" role="dialog">
+<div id="edit-password-modal" data-backdrop="static" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -7,7 +7,7 @@
 
             <!-- BEGIN Modal header -->
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" v-on="click: resetPasswordModal()">&times;</button>
                 <h4 class="modal-title">{{ trans('settings.change_account_password') }}</h4>
             </div>
             <!-- END Modal header -->
@@ -47,8 +47,8 @@
 
             <!-- BEGIN Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" v-on="click: resetOtherDetailsModal()">{{ trans('common.cancel') }}</button>
-                <button type="button" class="btn btn-primary" v-on="click: editPassword()">{{ trans('common.save') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-on="click: resetEditPasswordModal()" v-attr="disabled: loading">{{ trans('common.cancel') }}</button>
+                <button type="button" class="btn btn-primary" v-on="click: editPassword()" v-attr="disabled: loading">{{ trans('common.save') }}</button>
             </div>
             <!-- END Modal footer -->
 

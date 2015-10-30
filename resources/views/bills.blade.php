@@ -5,11 +5,6 @@
         @include('includes.ajax-translations.bills')
 
         <div id="table" v-show="loaded">
-            <!-- BEGIN No bills info -->
-            <div class="alert alert-info no-bills-info" v-show="!bills.total">
-                 Se pare ca nu ai nici o factura creata. Dupa ce ai creeat o facutra poti incepe sa adaugi produse iar apoi sa o imprimezi. Daca ai nelamuriri sau vrei sa aflii mai multe detalii, acceseaza sectiunea <strong><a href="#">Facturi.</a></strong> In cazul in care tot mai ai nelamuriri, nu ezita sa ne <strong><a href="#">contactezi.</a></strong>
-            </div>
-            <!-- END No bills info -->
 
             <!-- BEGIN Add bill button -->
             <div class="add-bill-button">
@@ -19,6 +14,12 @@
                 </button>
             </div>
             <!-- END Add bill button -->
+
+            <!-- BEGIN No bills info -->
+            <div class="alert alert-info no-bills-info" v-show="!bills.total">
+                {{ trans('bills.no_bills') }}
+            </div>
+            <!-- END No bills info -->
 
             <!-- BEGIN Bills table-->
             <table class="table table-hover" v-show="bills.total">

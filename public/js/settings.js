@@ -76,6 +76,8 @@ new Vue({
          */
         editPassword: function() {
 
+            this.$set('loading', true);
+
             var data = {
                 _token: Token.get(),
                 password: this.$get('password'),
@@ -86,9 +88,12 @@ new Vue({
             this.$http.post('/settings/edit-password', data, function(response) {
 
                 $('#edit-password-modal').modal('hide');
+                this.$set('loading', false);
                 Alert.success(response.title, response.message);
 
             }).error(function(response) {
+
+                this.$set('loading', false);
 
                 if (!response.message) {
                     this.$set('error', Translation.common('general-error'));
@@ -104,6 +109,7 @@ new Vue({
          * Reset edit password modal.
          */
         resetEditPasswordModal: function() {
+            this.$set('error', '');
             this.$set('password', '');
             this.$set('new_password', '');
             this.$set('confirm_password', '');

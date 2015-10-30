@@ -15,6 +15,7 @@ return [
     'from_campaign' => 'din campania',
     'info' => 'Util: ',
     'my_bills' => 'Facturile mele',
+    'no_bills' => 'Se pare că nu ai nicio factură. O factură conține produsele unei comenzi. Folosește butonul de mai sus pentru a începe.',
     'number_of_products' => 'Numărul de produse',
     'order' => 'Comanda',
     'price' => 'Preţ',
