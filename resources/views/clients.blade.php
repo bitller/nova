@@ -29,26 +29,28 @@
             </div>
 
             <!-- BEGIN Clients table-->
-            <table class="table table-hover" v-show="clients.total">
-                <thead>
-                    <tr>
-                        <th>{{ trans('clients.name') }}</th>
-                        <th>{{ trans('clients.phone_number') }}</th>
-                        <th>{{ trans('clients.number_of_orders') }}</th>
-                        <th>{{ trans('clients.client_from') }}</th>
-                        <th>{{ trans('common.delete') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-repeat="client in clients.data">
-                        <td class="vert-align"><a href="/clients/@{{ client.id }}">@{{ client.name }}</a></td>
-                        <td class="vert-align">@{{ client.phone_number }}</td>
-                        <td class="vert-align">4</td>
-                        <td class="vert-align">@{{ client.created_at }}</td>
-                        <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="panel panel-default">
+                <table class="table table-hover table-bordered" v-show="clients.total">
+                    <thead>
+                        <tr>
+                            <th>{{ trans('clients.name') }}</th>
+                            <th>{{ trans('clients.phone_number') }}</th>
+                            <th>{{ trans('clients.number_of_orders') }}</th>
+                            <th>{{ trans('clients.client_from') }}</th>
+                            <th>{{ trans('common.delete') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-repeat="client in clients.data">
+                            <td class="vert-align"><a href="/clients/@{{ client.id }}">@{{ client.name }}</a></td>
+                            <td class="vert-align">@{{ client.phone_number }}</td>
+                            <td class="vert-align">4</td>
+                            <td class="vert-align">@{{ client.created_at }}</td>
+                            <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- END Clients table -->
 
             <!-- BEGIN Pagination links -->
