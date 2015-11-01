@@ -170,7 +170,8 @@ new Vue({
     el: '#bills',
 
     data: {
-        rows: 0
+        rows: 0,
+        create_button: Translation.bills('create-button')
     },
 
     ready: function() {
@@ -217,45 +218,53 @@ new Vue({
             });
         },
 
-        createBill: function(title, placeholder, empty_input_error, message, loading, success) {
+        /**
+         * Create new bill.
+         */
+        createBill: function() {
 
-            var before = this;
+            this.$set('loading', true);
+            this.$set('create_button', Translation.common('loading'));
 
-            // Show prompt
-            swal({
-                    title: title,
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    inputPlaceholder: placeholder
-                },
-                function(inputValue) {
-                    if (inputValue === false) return false;
+            // Build post data
+            var data = {
+                _token: Token.get(),
+                client: $('#client-name').val()
+            };
 
-                    if (inputValue === "") {
-                        swal.showInputError(empty_input_error);
-                        return false
-                    }
+            this.$http.post('/bills/create', data, function(response) {
 
-                    swal({
-                        title: loading,
-                        type: "info",
-                        showConfirmButton: false
-                    });
+                // Handle success response
+                this.getBills('/bills/get', function() {
+                    this.$set('loading', false);
+                    this.$set('create_button', Translation.bills('create-button'));
+                    $('#create-bill-modal').modal('hide');
+                    Alert.success(response.title, response.message);
+                });
 
-                    before.$http.post('/bills/create', {client:inputValue, _token:$('#token').attr('content')}).success(function() {
-                        this.paginate('/bills/get');
-                        swal({
-                            title: success,
-                            text: message,
-                            type: "success",
-                            timer: 1750,
-                            showConfirmButton: false
-                        });
-                    });
+            }).error(function(response) {
+                this.$set('loading', false);
+                this.$set('create_button', Translation.bills('create-button'));
+
+                // Handle error response
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+
+                this.$set('error', response.message);
             });
 
+        },
+
+        /**
+         * Reset create bill modal.
+         */
+        resetCreateBillModal: function() {
+            this.$set('loading', false);
+            this.$set('create_button', Translation.bills('create-button'));
+            this.$set('error', false);
+            $('#client-name').val('');
         },
 
         /**
@@ -273,21 +282,25 @@ new Vue({
          * Make ajax request to get bills
          *
          * @param url
+         * @param callback
          */
-        getBills: function(url) {
+        getBills: function(url, callback) {
 
-            this.$set('loaded', false);
 
-            swal({
-                title: Nova.getCommonTranslation('loading'),
-                type: "info",
-                showConfirmButton: false
-            });
+            if (typeof callback === 'undefined') {
+                this.$set('loaded', false);
+                Alert.loader();
+            }
 
             this.$http.get(url).success(function(data) {
                 this.$set('bills', data);
                 this.$set('loaded', true);
-                swal.close();
+
+                if (typeof callback === 'undefined') {
+                    swal.close();
+                    return;
+                }
+                callback();
             });
         },
 
@@ -308,5 +321,67 @@ new Vue({
         }
 
     }
+});
+$(document).ready(function() {
+
+    // Instantiate the Bloodhound suggestion engine
+    var clients = new Bloodhound({
+
+        datumTokenizer: function (datum) {
+            return Bloodhound.tokenizers.whitespace(datum.value);
+        },
+
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+        remote: {
+            ajax: {
+                // Show loader when request is made
+                beforeSend: function(xhr) {
+                    $('.client-name i').show();
+                },
+                // Hide loader after request
+                complete: function() {
+                    $('.client-name i').hide();
+                }
+            },
+
+            cache: false,
+
+            url: '/suggest/clients?name=',
+
+            replace: function() {
+                var url = '/suggest/clients?name=';
+                if ($('#client-name').val()) {
+                    url += encodeURIComponent($('#client-name').val())
+                }
+                return url;
+            },
+
+            filter: function (clients) {
+                // Map the remote source JSON array to a JavaScript object array
+                return $.map(clients, function (client) {
+                    return {
+                        name: client.name
+                    };
+                });
+            }
+        }
+    });
+
+    // Initialize the Bloodhound suggestion engine
+    clients.initialize();
+
+    var input = $('.twitter-typeahead');
+
+    // Instantiate the Typeahead UI
+    input.typeahead(null, {
+        displayKey: 'name',
+        source: clients.ttAdapter(),
+        templates: {
+            suggestion: function(client) {
+                return '<p>' + client.name + '</p>'
+            }
+        }
+    });
 });
 //# sourceMappingURL=bills.js.map

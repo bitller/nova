@@ -44,6 +44,11 @@ Route::group(['prefix' => 'bills'], function() {
     Route::post('/{billId}/edit-payment-term', 'BillsController@editPaymentTerm');
 });
 
+// Suggestions
+Route::group(['prefix' => 'suggest'], function() {
+    Route::get('clients', 'BillsController@suggestClients');
+});
+
 // Clients page
 Route::group(['prefix' => 'clients'], function() {
     Route::get('/', 'ClientsController@index');

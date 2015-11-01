@@ -2,5 +2,6 @@
 @section('trans')
 <div id="bills-trans"
     bill-will-be-deleted="{{ trans('bill.bill_will_be_deleted') }}"
+    create-button="{{ trans('bills.create_bill') }}"
     ></div>
 @endsection

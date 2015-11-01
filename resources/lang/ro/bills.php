@@ -10,6 +10,7 @@ return [
     'client_name_required' => 'Numele clientului este necesar.',
     'complete_with_client' => 'Introdu numele clientului',
     'create' => 'Creează factură',
+    'create_bill' => 'Creează factura',
     'created_at' => 'Creată în',
     'from' => 'din',
     'from_campaign' => 'din campania',

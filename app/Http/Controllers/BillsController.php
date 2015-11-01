@@ -9,12 +9,14 @@ use App\BillProduct;
 use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
+use App\Helpers\Clients;
 use App\Helpers\Settings;
 use App\Http\Requests\Bill\AddProductRequest;
 use App\Http\Requests\Bill\EditOtherDetailsRequest;
 use App\Http\Requests\Bill\EditPaymentTermRequest;
 use App\Http\Requests\Bill\EditProductDiscountRequest;
 use App\Http\Requests\Bill\EditProductPriceRequest;
+use App\Http\Requests\Bill\SuggestClientRequest;
 use App\Http\Requests\Bill\SuggestProductRequest;
 use App\Http\Requests\CreateBillRequest;
 use App\Http\Requests\EditProductPageFromBillRequest;
@@ -68,6 +70,16 @@ class BillsController extends BaseController {
     }
 
     /**
+     * Return client suggestions base on given name.
+     *
+     * @param SuggestClientRequest $request
+     * @return mixed
+     */
+    public function suggestClients(SuggestClientRequest $request) {
+        return Clients::suggestClients($request->get('name'));
+    }
+
+    /**
      * @param CreateBillRequest $request
      * @return array
      */
@@ -87,10 +99,11 @@ class BillsController extends BaseController {
         $bill->user_id = Auth::user()->id;
         $bill->save();
 
-        return [
-            'success' => true,
-            'message' => trans('bills.bill_created')
-        ];
+        // Return response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('bills.bill_created'));
+        return response($response->get());
+
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Helpers;
+use App\Client;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -31,6 +33,10 @@ class Clients {
 
     }
 
+    /**
+     * @param $clientBills
+     * @return mixed
+     */
     public static function getTotalSellsWithoutDiscountByBillIds($clientBills) {
 
         $billIds = [];
@@ -43,6 +49,16 @@ class Clients {
 
         return $billProductsPrice + $billApplicationProductsFinalPrice;
 
+    }
+
+    /**
+     * Return suggestions based on client name.
+     *
+     * @param string $clientName
+     * @return mixed
+     */
+    public static function suggestClients($clientName) {
+        return Client::where('user_id', Auth::user()->id)->where('name', 'LIKE', "$clientName%")->get();
     }
 
 }

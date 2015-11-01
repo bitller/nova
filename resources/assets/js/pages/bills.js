@@ -2,7 +2,8 @@ new Vue({
     el: '#bills',
 
     data: {
-        rows: 0
+        rows: 0,
+        create_button: Translation.bills('create-button')
     },
 
     ready: function() {
@@ -49,45 +50,53 @@ new Vue({
             });
         },
 
-        createBill: function(title, placeholder, empty_input_error, message, loading, success) {
+        /**
+         * Create new bill.
+         */
+        createBill: function() {
 
-            var before = this;
+            this.$set('loading', true);
+            this.$set('create_button', Translation.common('loading'));
 
-            // Show prompt
-            swal({
-                    title: title,
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    inputPlaceholder: placeholder
-                },
-                function(inputValue) {
-                    if (inputValue === false) return false;
+            // Build post data
+            var data = {
+                _token: Token.get(),
+                client: $('#client-name').val()
+            };
 
-                    if (inputValue === "") {
-                        swal.showInputError(empty_input_error);
-                        return false
-                    }
+            this.$http.post('/bills/create', data, function(response) {
 
-                    swal({
-                        title: loading,
-                        type: "info",
-                        showConfirmButton: false
-                    });
+                // Handle success response
+                this.getBills('/bills/get', function() {
+                    this.$set('loading', false);
+                    this.$set('create_button', Translation.bills('create-button'));
+                    $('#create-bill-modal').modal('hide');
+                    Alert.success(response.title, response.message);
+                });
 
-                    before.$http.post('/bills/create', {client:inputValue, _token:$('#token').attr('content')}).success(function() {
-                        this.paginate('/bills/get');
-                        swal({
-                            title: success,
-                            text: message,
-                            type: "success",
-                            timer: 1750,
-                            showConfirmButton: false
-                        });
-                    });
+            }).error(function(response) {
+                this.$set('loading', false);
+                this.$set('create_button', Translation.bills('create-button'));
+
+                // Handle error response
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+
+                this.$set('error', response.message);
             });
 
+        },
+
+        /**
+         * Reset create bill modal.
+         */
+        resetCreateBillModal: function() {
+            this.$set('loading', false);
+            this.$set('create_button', Translation.bills('create-button'));
+            this.$set('error', false);
+            $('#client-name').val('');
         },
 
         /**
@@ -105,21 +114,25 @@ new Vue({
          * Make ajax request to get bills
          *
          * @param url
+         * @param callback
          */
-        getBills: function(url) {
+        getBills: function(url, callback) {
 
-            this.$set('loaded', false);
 
-            swal({
-                title: Nova.getCommonTranslation('loading'),
-                type: "info",
-                showConfirmButton: false
-            });
+            if (typeof callback === 'undefined') {
+                this.$set('loaded', false);
+                Alert.loader();
+            }
 
             this.$http.get(url).success(function(data) {
                 this.$set('bills', data);
                 this.$set('loaded', true);
-                swal.close();
+
+                if (typeof callback === 'undefined') {
+                    swal.close();
+                    return;
+                }
+                callback();
             });
         },
 
