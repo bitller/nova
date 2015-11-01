@@ -1,5 +1,5 @@
 <!-- BEGIN Add product modal -->
-<div id="addProductToBillModal" class="modal fade" role="dialog">
+<div id="addProductToBillModal" data-backdrop="static" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -7,7 +7,6 @@
 
             <!-- BEGIN Modal header -->
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" v-on="click: resetModal()">&times;</button>
                 <h4 class="modal-title">{{ trans('bill.add_product_bill') }}</h4>
             </div>
             <!-- END Modal header -->
@@ -62,8 +61,8 @@
 
             <!-- BEGIN Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" v-on="click: resetModal()">Close</button>
-                <button type="button" class="btn btn-primary" v-on="click: addProduct()">Add product</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-attr="disabled: loading" v-on="click: resetModal()">{{ trans('common.cancel') }}</button>
+                <button type="button" class="btn btn-primary" v-attr="disabled: loading" v-on="click: addProduct()">@{{ add_product }}</button>
             </div>
             <!-- END Modal footer -->
 

@@ -7,7 +7,8 @@ new Vue({
         page: '',
         discount: '',
         price: '',
-        quantity: ''
+        quantity: '',
+        add_product: Translation.bill('add-product')
     },
 
     ready: function() {
@@ -64,6 +65,9 @@ new Vue({
          */
         addProduct: function(productId, productCode) {
 
+            this.$set('add_product', Translation.common('loading'));
+            this.$set('loading', true);
+
             // Build post data
             var data = {
                 _token: Token.get()
@@ -95,11 +99,15 @@ new Vue({
                 }
 
                 this.getBill(function() {
+                    this.$set('add_product', Translation.bill('add-product'));
+                    this.$set('loading', false);
                     $('#addProductToBillModal').modal('hide');
                     Alert.success(response.title, response.message);
                 }, true);
 
             }).error(function(response) {
+                this.$set('add_product', Translation.bill('add-product'));
+                this.$set('loading', false);
                 if (response.message) {
                     this.$set('error', response.message)
                 }
@@ -107,7 +115,10 @@ new Vue({
 
         },
 
-        resetModal: function() {
+        /**
+         * Reset add product to bill modal.
+         */
+        resetAddProductToBillModal: function() {
             // Reset vue data
             this.$set('page', '');
             this.$set('code', '');
@@ -115,6 +126,8 @@ new Vue({
             this.$set('quantity', '');
             this.$set('discount', '');
             this.$set('error', false);
+            this.$set('loading', false);
+            this.$set('add_product', Translation.bill('add-product'));
             // Reset inputs
             $('#product-code').val('');
             $('#product-price').val('');

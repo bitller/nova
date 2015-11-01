@@ -2,6 +2,7 @@
 
 return [
     'add_bill_other_details' => 'Add other details to the bill',
+    'add_product' => 'Add product',
     'add_product_bill' => 'Add product to bill',
     'bill_not_found' => 'Bill not found!',
     'bill_not_found_description' => 'Looks like this bill does not exists. In a few seconds you will be redirected.',

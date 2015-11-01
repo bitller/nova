@@ -21,5 +21,6 @@
     product-discount-required="{{ trans('bill.product_discount_required') }}"
     discount-updated="{{ trans('bill.discount_updated') }}"
     order="{{ trans('bills.order') }}"
+    add-product="{{ trans('bill.add_product') }}"
     ></div>
 @endsection
