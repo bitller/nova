@@ -22,7 +22,8 @@
             <!-- END No bills info -->
 
             <!-- BEGIN Bills table-->
-            <table class="table table-hover" v-show="bills.total">
+            <div class="panel panel-default">
+            <table class="table table-hover table-bordered" v-show="bills.total">
                 <thead>
                 <tr>
                     <th><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
@@ -44,6 +45,7 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
             <!-- END Bills table -->
 
             <!-- BEGIN Pagination links -->
