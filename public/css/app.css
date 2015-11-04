@@ -6089,6 +6089,9 @@ button.close {
 #login-page .forgot-password {
   padding-top: 20px; }
 
+.register-logo {
+  font-size: 60px; }
+
 .table tbody > tr > td.vert-align {
   vertical-align: middle; }
 

@@ -18,9 +18,17 @@ Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/register', 'Auth\RegisterController@index');
+// Register page
+Route::group(['namespace' => 'Auth', 'prefix' => 'register'], function() {
+    Route::get('/', 'RegisterController@index');
+    Route::post('/', 'RegisterController@register');
+});
 
-Route::get('/recover', 'Auth\RecoverController@index');
+// Recover page
+Route::group(['prefix' => 'recover'], function() {
+    Route::get('/', 'Auth\RegisterController@index');
+    Route::post('/', 'Auth\RegisterController@recover');
+});
 
 // Bills page
 Route::group(['prefix' => 'bills'], function() {

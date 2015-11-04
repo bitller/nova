@@ -1,6 +1,10 @@
 new Vue({
     el: '#settings',
 
+    data: {
+        save_button: Translation.common('save')
+    },
+
     ready: function() {
         this.getSettings();
     },
@@ -301,6 +305,9 @@ new Vue({
          */
         editLanguage: function() {
 
+            this.$set('save_button', Translation.common('loading'));
+            this.$set('loading', true);
+
             var data = {
                 _token: Token.get(),
                 language: this.$get('language')
@@ -309,11 +316,13 @@ new Vue({
             this.$http.post('/settings/change-language', data, function(response) {
 
                 $('#edit-language-modal').modal('hide');
-                //Alert.success(response.title, response.message);
-                //this.$set('language_name', response.language);
                 window.location.replace('/settings');
 
             }).error(function(response) {
+
+                this.$set('save_button', Translation.common('save'));
+                this.$set('loading', false);
+
                 if (!response.message) {
                     this.$set('error', Translation.common('general-error'));
                     return;

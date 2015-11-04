@@ -146,4 +146,22 @@ class AjaxResponse {
         return $this->defaultErrorCode;
     }
 
+    /**
+     * The request had bad syntax or was inherently impossible to be satisfied.
+     *
+     * @return int
+     */
+    public function badRequest() {
+        return 400;
+    }
+
+    /**
+     * The request is for something forbidden. Authorization will not help.
+     *
+     * @return int
+     */
+    public function forbidden() {
+        return 401;
+    }
+
 }
