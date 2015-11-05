@@ -44,7 +44,13 @@ class RegisterController extends Controller {
 
         $roles = new Roles();
         // Build user data array
-        $data = array_merge($request->all(), ['role_id' => $roles->getUserRoleId()]);
+        $data = [
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+            'role_id' => $roles->getUserRoleId()
+        ];
 
         // Insert user
         $user = User::create($data);
