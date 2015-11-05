@@ -26,8 +26,8 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'register'], function() {
 
 // Recover page
 Route::group(['prefix' => 'recover'], function() {
-    Route::get('/', 'Auth\RegisterController@index');
-    Route::post('/', 'Auth\RegisterController@recover');
+    Route::get('/', 'Auth\RecoverController@index');
+    Route::post('/', 'Auth\RecoverController@recover');
 });
 
 // Bills page
