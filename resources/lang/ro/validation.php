@@ -76,4 +76,21 @@ return [
         'product_quantity' => 'cantitatea produsului',
     ],
 
+    'custom' => [
+        'email' => [
+            'unique' => 'Această adresă de email este deja folosită.'
+        ],
+        'first_name' => [
+            'required' => 'Numele tău este obligatoriu.'
+        ],
+        'last_name' => [
+            'required' => 'Prenumele tău este obligatoriu.'
+        ],
+        'password' => [
+            'required' => 'Introduceți o parola de cel puțin 6 caractere.'
+        ],
+        'password_confirmation' => [
+            'required' => 'Parolele nu corespund.'
+        ]
+    ]
 ];

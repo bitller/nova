@@ -22,12 +22,18 @@ new Vue({
 
             // Make post request
             this.$http.post('/register', data, function(response) {
-
                 this.$set('loading', false);
-                swal(response.message);
+                window.location.replace('/next');
+                Alert.success(response.title, response.message);
 
             }).error(function(response) {
+
                 this.$set('loading', false);
+
+                if (!response.message) {
+                    Alert.generalError();
+                    return;
+                }
                 this.$set('errors', response.errors);
             });
 

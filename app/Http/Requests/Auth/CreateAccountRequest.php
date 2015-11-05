@@ -33,7 +33,7 @@ class CreateAccountRequest extends AjaxRequest {
         return [
             'password_confirmation' => ['required', 'min:6'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'last_name' => ['required', 'string', 'between:3,30'],
             'first_name' => ['required', 'string', 'between:3,30']
         ];

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'account_created' => 'Noul tău cont a fost creat cu succes!',
     'choose_password' => 'Alege o parolă',
     'confirm_password' => 'Confirmați parola',
     'create_account' => 'Creaţi un cont',

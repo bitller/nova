@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'account_created' => 'Your account has been created!',
     'choose_password' => 'Please choose a password',
     'confirm_password' => 'Confirm password',
     'create_account' => 'Sign up',

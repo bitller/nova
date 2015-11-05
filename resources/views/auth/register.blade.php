@@ -8,7 +8,7 @@
 </head>
 <body id="login-page">
 <div class="container" id="register">
-
+    @include('includes.ajax-translations.common')
     <div class="row register-button">
         <a href="/login"><button class="btn btn-danger pull-right">{{ trans('register.login') }}</button></a>
     </div>

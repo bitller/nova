@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Language;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -85,6 +86,10 @@ class Settings {
             return $language->key;
         }
         return 'en';
+    }
+    public static function defaultLanguageId() {
+        $language = Language::select('id')->first();
+        return $language->id;
     }
 
     /**
