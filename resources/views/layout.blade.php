@@ -29,6 +29,7 @@
                 <li><a href="/products"><span class="glyphicon glyphicon-th"></span>&nbsp;{{ trans('navbar.products') }}</a></li>
                 <li><a href="/clients"><span class="glyphicon glyphicon-user"></span>&nbsp;{{ trans('navbar.clients') }}</a></li>
                 <li><a href="/my-products"><span class="glyphicon glyphicon-th-list"></span>&nbsp;{{ trans('navbar.my_products') }}</a></li>
+                <li><a href="/help-center"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;{{ trans('navbar.help') }}</a></li>
             </ul>
 
             <!-- BEGIN Search bar -->
