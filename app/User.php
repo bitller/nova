@@ -66,4 +66,11 @@ class User extends Model implements AuthenticatableContract {
         return $this->hasOne('App\UserSetting');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function recoverCode() {
+        return $this->hasOne('App\RecoverCode');
+    }
+
 }

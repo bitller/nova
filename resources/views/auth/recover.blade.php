@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body id="login-page">
-<div class="container" id="register">
+<div class="container" id="recover">
 
     @include('includes.ajax-translations.common')
 
@@ -37,7 +37,7 @@
             </div>
             <!-- END Email input -->
 
-            <button v-on="click: rcover()" v-attr="disabled: loading" class="btn btn-primary btn-block">
+            <button v-on="click: recover()" v-attr="disabled: loading" class="btn btn-primary btn-block">
                 <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
                 <span v-show="!loading">{{ trans('recover.reset_password') }}</span>
             </button>

@@ -1481,9 +1481,10 @@ var Alert = {
      *
      * @param title
      * @param message
+     * @param keep
      */
-    success: function(title, message) {
-        this.show('success', title, message);
+    success: function(title, message, keep) {
+        this.show('success', title, message, keep);
     },
 
     /**

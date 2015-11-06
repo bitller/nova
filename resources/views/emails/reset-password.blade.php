@@ -1,1 +1,1 @@
-reset password mail.
+{{$user->link}}

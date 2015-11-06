@@ -27,7 +27,7 @@ new Vue({
 
                 // Handle success response
                 this.$set('loading', false);
-                Alert.success(response.title, response.message);
+                Alert.success(response.title, response.message, true);
 
             }).error(function(response) {
 
