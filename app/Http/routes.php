@@ -143,3 +143,11 @@ Route::group(['prefix' => 'next'], function() {
 Route::group(['prefix' => 'help-center'], function() {
     Route::get('/', 'HelpCenterController@index');
 });
+
+// Admin center
+Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], function() {
+    Route::get('/', 'UsersManagerController@index');
+    Route::get('/users-manager', 'UsersManagerController@index');
+    Route::get('/users-manager/browse', 'UsersManagerController@browse');
+    Route::get('/users-manager/get-users', 'UsersManagerController@getUsers');
+});

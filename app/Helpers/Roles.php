@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Role;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Role helper
@@ -57,6 +58,27 @@ class Roles {
      */
     public function getUserRoleId() {
         return $this->getRoleId($this->userLevel);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin() {
+        if (Auth::user()->role_id === $this->getAdminRoleId()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isModerator() {
+        if (Auth::user()->role_id === $this->getModeratorRoleId()) {
+            return true;
+        }
+        return false;
     }
 
     /**

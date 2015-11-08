@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta id="token" content="{{ csrf_token() }}">
     <title>Nova</title>
-    {{--<link rel="stylesheet" href="http://css-spinners.com/css/spinner/plus.css" type="text/css">--}}
     <link rel="stylesheet" href="/css/app.css">
 </head>
 
@@ -45,6 +44,10 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user-email">{{ Auth::user()->email }}</span><span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        @if ($showAdminCenter)
+                            <li><a href="/admin-center"><span class="glyphicon glyphicon-wrench icon-color">&nbsp;</span>{{ trans('header.admin_center') }}</a></li>
+                            <li role="separator" class="divider"></li>
+                        @endif
                         <li><a href="/settings"><span class="glyphicon glyphicon-cog icon-color">&nbsp;</span>{{ trans('header.settings') }}</a></li>
                         <li><a href="/statistics"><span class="glyphicon glyphicon-stats icon-color">&nbsp;</span>{{ trans('header.statistics') }}</a></li>
                         <li><a href="/about"><span class="glyphicon glyphicon-info-sign icon-color">&nbsp;</span>{{ trans('header.about') }}</a></li>

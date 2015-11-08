@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'browse' => 'Lista utilizatorilor',
+    'confirmed_users' => 'Utilizatori confirmaţi',
+    'confirmed_users_percentage' => 'Pocentajul utilizatorilor confirmaţi',
+    'email' => 'Email',
+    'logs' => 'Log-uri',
+    'not_confirmed_users' => 'Utilizatori neconfirmaţi',
+    'not_confirmed_users_percentage' => 'Procentajul utilizatorilor neconfirmaţi',
+    'not_subscribed_users' => 'Utilizatori fără abonament',
+    'not_subscribed_users_percentage' => 'Procentajul utilizatorilor fără abonament',
+    'products' => 'Manager de produse',
+    'registered_users' => 'Utilizatori înregistraţi',
+    'search' => 'Caută utilizatori',
+    'settings' => 'Setările aplicaţiei',
+    'subscribed_users' => 'Utilizatori abonaţi',
+    'subscribed_users_percentage' => 'Precentajul utilizatorilor abonaţi',
+    'subscriptions' => 'Abonamente',
+    'users_manager' => 'Manager de utilizatori',
+    'users_registered_today' => 'Utilizatori înregistraţi astăzi',
+    'users_registered_today_percentage' => 'Procentajul utilizatorilor înregistraţi astăzi',
+    'users_statistics' => 'Statistici utilizatori',
+    'users_statistics_percentage' => 'Statisticile utilizatorilor în procentaje',
+];
