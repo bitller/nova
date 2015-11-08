@@ -138,3 +138,8 @@ Route::group(['prefix' => 'about'], function() {
 Route::group(['prefix' => 'next'], function() {
     Route::get('/', 'NextController@index');
 });
+
+// Help center
+Route::group(['prefix' => 'help-center'], function() {
+    Route::get('/', 'HelpCenterController@index');
+});
