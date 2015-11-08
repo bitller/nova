@@ -150,4 +150,5 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::get('/users-manager', 'UsersManagerController@index');
     Route::get('/users-manager/browse', 'UsersManagerController@browse');
     Route::get('/users-manager/get-users', 'UsersManagerController@getUsers');
+    Route::get('/application-settings', 'ApplicationSettingsController@index');
 });
