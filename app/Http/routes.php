@@ -25,9 +25,11 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'register'], function() {
 });
 
 // Recover page
-Route::group(['prefix' => 'recover'], function() {
-    Route::get('/', 'Auth\RecoverController@index');
-    Route::post('/', 'Auth\RecoverController@recover');
+Route::group(['namespace' => 'Auth', 'prefix' => 'recover'], function() {
+    Route::get('/', 'RecoverController@index');
+    Route::get('/{userId}/{code}', 'RecoverController@check');
+    Route::post('/', 'RecoverController@recover');
+    Route::post('/{userId}/{code}', 'RecoverController@setNewPassword');
 });
 
 // Bills page

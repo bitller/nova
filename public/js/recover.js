@@ -27,7 +27,7 @@ new Vue({
 
                 // Handle success response
                 this.$set('loading', false);
-                Alert.success(response.title, response.message, true);
+                Alert.success(response.title, response.message, 'keep');
 
             }).error(function(response) {
 
@@ -40,8 +40,42 @@ new Vue({
 
                 this.$set('error', response.message);
 
-            })
+            });
+        },
 
+        /**
+         * Allow user to set a new password.
+         */
+        setNewPassword: function() {
+
+            this.$set('loading', true);
+
+            // Build post data
+            var data = {
+                _token: Token.get(),
+                new_password: this.$get('new_password'),
+                new_password_confirmation: this.$get('password_confirmation')
+            };
+
+            this.$http.post('/recover/' + $('#user_id').attr('content') + '/' + $('#code').attr('content'), data, function(response) {
+
+                this.$set('loading', false);
+
+                Alert.success(response.title, response.message, 'keep');
+                setTimeout(function() {
+                    window.location.replace('/login');
+                }, 2000);
+
+            }).error(function(response) {
+
+                this.$set('loading', false);
+                if (!response.message) {
+                    Alert.generalError();
+                    return;
+                }
+
+                this.$set('errors', response.errors);
+            });
         }
     }
 });

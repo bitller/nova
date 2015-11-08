@@ -19,17 +19,20 @@ class Generator {
      * @param int $length
      * @return string
      */
-    public static function recoverCode($userId, $length = 100) {
+    public static function recoverCode($userId, $length = 200) {
 
         // Delete old codes
         RecoverCode::where('user_id', $userId)->delete();
 
         // Generate new one
         $code = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, $length) . $userId;
-        RecoverCode::insert([
-            'user_id' => $userId,
-            'code' => $code
-        ]);
+
+        // Insert in database
+        $recoverCode = new RecoverCode();
+        $recoverCode->user_id = $userId;
+        $recoverCode->code = $code;
+        $recoverCode->save();
+
         return $code;
     }
 
