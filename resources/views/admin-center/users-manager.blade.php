@@ -26,7 +26,7 @@
                 </div>
                 <!-- END Edit button -->
 
-                <div class="btn-group pull-right" v-show="!product.is_application_product">
+                <div class="btn-group pull-right">
                     @include('includes.admin-center.buttons.subscriptions')
                     @include('includes.admin-center.buttons.products-manager')
                     @include('includes.admin-center.buttons.logs')
