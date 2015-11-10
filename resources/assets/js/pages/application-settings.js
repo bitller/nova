@@ -6,7 +6,7 @@ new Vue({
     el: '#application-settings',
 
     data: {
-        loaded: true,
+        loaded: true
     },
 
     ready: function() {
@@ -20,6 +20,8 @@ new Vue({
             this.$set('loaded', false);
 
             this.$http.get('/admin-center/application-settings/get', function(response) {
+
+                Alert.close();
 
                 this.$set('loaded', true);
                 this.$set('displayed_bills', response.displayed_bills);
