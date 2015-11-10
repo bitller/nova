@@ -29,17 +29,10 @@
 
                 <!-- BEGIN Number of bills displayed -->
                 <a href="#" class="list-group-item">
-                    {{ trans('application_settings.bills_displayed') }}: <strong>10</strong>
+                    {{ trans('application_settings.bills_displayed') }}: <strong>@{{ displayed_bills }}</strong>
                     @include('includes.common.edit-icon')
                 </a>
                 <!-- END Number of bills displayed -->
-
-                <!-- BEGIN Number of paid bills displayed -->
-                <a href="#" class="list-group-item">
-                    {{ trans('application_settings.paid_bills_displayed') }}: <strong>10</strong>
-                    @include('includes.common.edit-icon')
-                </a>
-                <!-- END Number of paid bills displayed -->
 
             </ul>
         </div>
@@ -58,7 +51,7 @@
 
                 <!-- BEGIN Number of clients displayed -->
                 <a href="#" class="list-group-item">
-                    {{ trans('application_settings.clients_displayed') }}: <strong>10</strong>
+                    {{ trans('application_settings.clients_displayed') }}: <strong>@{{ displayed_clients }}</strong>
                     @include('includes.common.edit-icon')
                 </a>
                 <!-- END Number of clients displayed -->
@@ -80,14 +73,14 @@
 
                 <!-- BEGIN Number of products displayed -->
                 <a href="#" class="list-group-item">
-                    {{ trans('application_settings.products_displayed') }}: <strong>10</strong>
+                    {{ trans('application_settings.products_displayed') }}: <strong>@{{ displayed_products }}</strong>
                     @include('includes.common.edit-icon')
                 </a>
                 <!-- END Number of products displayed -->
 
                 <!-- BEGIN Number of application products displayed -->
                 <a href="#" class="list-group-item">
-                    {{ trans('application_settings.custom_products_displayed') }}: <strong>10</strong>
+                    {{ trans('application_settings.custom_products_displayed') }}: <strong>@{{ displayed_custom_products }}</strong>
                     @include('includes.common.edit-icon')
                 </a>
                 <!-- END Number of application products displayed -->
@@ -107,6 +100,27 @@
                 </li>
                 <!-- END Title -->
 
+                <!-- BEGIN How many minutes recover code is valid -->
+                <a href="#" class="list-group-item">
+                    {{ trans('application_settings.recover_code') }}: <strong>@{{ recover_code_valid_minutes }} {{ trans('application_settings.minutes') }}</strong>
+                    @include('includes.common.edit-icon')
+                </a>
+                <!-- END How many minutes recover code is valid -->
+
+                <!-- BEGIN Number of allowed consecutive login attempts -->
+                <a href="#" class="list-group-item">
+                    {{ trans('application_settings.login_attempts') }}: <strong>@{{ login_attempts }}</strong>
+                    @include('includes.common.edit-icon')
+                </a>
+                <!-- END Number of allowed consecutive login attempts -->
+
+                <!-- BEGIN Allow new accounts -->
+                <a href="#" class="list-group-item">
+                    {{ trans('application_settings.allow_new_accounts') }}: <strong>@{{ allow_new_accounts }}</strong>
+                    @include('includes.common.edit-icon')
+                </a>
+                <!-- END Allow new accounts -->
+
             </ul>
         </div>
         <!-- END Security settings -->
@@ -115,4 +129,5 @@
 @endsection
 
 @section('scripts')
+    <script src="/js/application-settings.js"></script>
 @endsection

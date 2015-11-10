@@ -143,3 +143,7 @@ $factory->define(App\UserDefaultSetting::class, function() {
         'displayed_custom_products' => 10,
     ];
 });
+
+$factory->define(App\SecuritySetting::class, function() {
+    return [];
+});

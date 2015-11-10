@@ -12,6 +12,7 @@ return [
     'loading' => 'Se încarcă...',
     'login_button' => 'Conectează-te',
     'next' => 'Înainte',
+    'no' => 'Nu',
     'ok' => 'Ok',
     'page_details' => 'Detalii',
     'previous' => 'Înapoi',
@@ -21,5 +22,6 @@ return [
     'product_name' => 'Numele produsului',
     'save' => 'Salvează',
     'success' => 'Succes!',
-    'unauthorized' => 'Accessul nu este permis.'
+    'unauthorized' => 'Accessul nu este permis.',
+    'yes' => 'Da',
 ];

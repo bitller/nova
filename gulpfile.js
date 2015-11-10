@@ -30,5 +30,6 @@ elixir(function(mix) {
         .scripts(['pages/paid-bills.js'], 'public/js/paid-bills.js')
         .scripts(['pages/product-details.js'], 'public/js/product-details.js')
         .scripts(['pages/register.js'], 'public/js/register.js')
-        .scripts(['pages/recover.js'], 'public/js/recover.js');
+        .scripts(['pages/recover.js'], 'public/js/recover.js')
+        .scripts(['pages/application-settings.js'], 'public/js/application-settings.js');
 });

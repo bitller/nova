@@ -12,6 +12,7 @@ return [
     'loading' => 'Loading...',
     'login_button' => 'Log In',
     'next' => 'Next',
+    'no' => 'No',
     'ok' => 'Ok',
     'page_details' => 'Details',
     'previous' => 'Previous',
@@ -22,4 +23,5 @@ return [
     'save' => 'Save',
     'success' => 'Success!',
     'unauthorized' => 'Unauthorized',
+    'yes' => 'Yes',
 ];
