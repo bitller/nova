@@ -152,4 +152,6 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::get('/users-manager/get-users', 'UsersManagerController@getUsers');
     Route::get('/application-settings', 'ApplicationSettingsController@index');
     Route::get('/application-settings/get', 'ApplicationSettingsController@get');
+    Route::post('/application-settings/edit-displayed-bills', 'ApplicationSettingsController@editNumberOfDisplayedBills');
+    Route::post('/application-settings/edit-displayed-clients', 'ApplicationSettingsController@editNumberOfDisplayedClients');
 });

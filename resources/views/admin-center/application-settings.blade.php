@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    @include('includes.ajax-translations.common')
+    @include('includes.ajax-translations.application-settings')
     <div id="application-settings" v-show="loaded">
 
         <!-- BEGIN Top part -->
@@ -29,7 +29,7 @@
                 <!-- END Title -->
 
                 <!-- BEGIN Number of bills displayed -->
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item" v-on="click: editNumberOfDisplayedBills()">
                     {{ trans('application_settings.bills_displayed') }}: <strong>@{{ displayed_bills }}</strong>
                     @include('includes.common.edit-icon')
                 </a>
@@ -51,7 +51,7 @@
                 <!-- END Title -->
 
                 <!-- BEGIN Number of clients displayed -->
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item" v-on="click: editNumberOfDisplayedClients()">
                     {{ trans('application_settings.clients_displayed') }}: <strong>@{{ displayed_clients }}</strong>
                     @include('includes.common.edit-icon')
                 </a>

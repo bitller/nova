@@ -35,6 +35,87 @@ new Vue({
             }).error(function(response) {
                 //
             });
+        },
+
+        /**
+         * Edit default number of bills displayed.
+         */
+        editNumberOfDisplayedBills: function() {
+
+            var alertData = {
+                title: Translation.applicationSettings('displayed-bills'),
+                text: Translation.applicationSettings('edit-displayed-bills'),
+                requiredInput: Translation.applicationSettings('displayed-bills-required'),
+                inputValue: this.$get('displayed_bills')
+            };
+
+            var thisInstance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Build post data
+                var data = {
+                    _token: Token.get(),
+                    displayed_bills: input
+                };
+
+                // Do post request
+                thisInstance.$http.post('/admin-center/application-settings/edit-displayed-bills', data, function(response) {
+
+                    // Handle success response
+                    this.$set('displayed_bills', response.displayed_bills);
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+                    // Handle response error
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+            });
+        },
+
+        /**
+         * Edit default number of clients displayed.
+         */
+        editNumberOfDisplayedClients: function() {
+
+            var alertData = {
+                title: Translation.applicationSettings('displayed-clients'),
+                text: Translation.applicationSettings('edit-displayed-clients'),
+                requiredInput: Translation.applicationSettings('displayed-clients-required'),
+                inputValue: this.$get('displayed_clients')
+            };
+
+            var thisInstance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Build post data
+                var data = {
+                    _token: Token.get(),
+                    displayed_clients: input
+                };
+
+                // Post request
+                thisInstance.$http.post('/admin-center/application-settings/edit-displayed-clients', data, function(response) {
+
+                    // Handle success response
+                    this.$set('displayed_clients', response.displayed_clients);
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+                    // Handle error response
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+            });
+
         }
     }
 

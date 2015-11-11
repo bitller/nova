@@ -4,8 +4,11 @@ namespace App\Http\Controllers\AdminCenter;
 
 use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedBillsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedClientsRequest;
 use App\SecuritySetting;
 use App\UserDefaultSetting;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Handle application settings.
@@ -62,4 +65,42 @@ class ApplicationSettingsController extends BaseController {
 
         return response($response->get())->header('Content-Type', 'application/json');
     }
+
+    /**
+     * @param EditNumberOfDisplayedBillsRequest $request
+     * @return mixed
+     */
+    public function editNumberOfDisplayedBills(EditNumberOfDisplayedBillsRequest $request) {
+
+        $userDefaultSetting = UserDefaultSetting::first();
+        $userDefaultSetting->displayed_bills = $request->get('displayed_bills');
+        $userDefaultSetting->save();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.displayed_bills_updated'));
+        $response->addExtraFields(['displayed_bills' => $userDefaultSetting->displayed_bills]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * @param EditNumberOfDisplayedClientsRequest $request
+     * @return mixed
+     */
+    public function editNumberOfDisplayedClients(EditNumberOfDisplayedClientsRequest $request) {
+
+        // Update value in database
+        $userDefaultSetting = UserDefaultSetting::first();
+        $userDefaultSetting->displayed_clients = $request->get('displayed_clients');
+        $userDefaultSetting->save();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.displayed_clients_updated'));
+        $response->addExtraFields(['displayed_clients' => $userDefaultSetting->displayed_clients]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
 }

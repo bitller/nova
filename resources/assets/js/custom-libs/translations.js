@@ -16,6 +16,16 @@ var Translation = {
     },
 
     /**
+     * Get application settings page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    applicationSettings: function(attribute) {
+        return this.get('#application-settings-trans', attribute);
+    },
+
+    /**
      * Get client page translations.
      *
      * @param attribute
