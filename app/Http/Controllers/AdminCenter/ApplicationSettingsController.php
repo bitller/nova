@@ -6,9 +6,9 @@ use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedClientsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedProductsRequest;
 use App\SecuritySetting;
 use App\UserDefaultSetting;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Handle application settings.
@@ -85,6 +85,8 @@ class ApplicationSettingsController extends BaseController {
     }
 
     /**
+     * Edit default number of clients displayed.
+     *
      * @param EditNumberOfDisplayedClientsRequest $request
      * @return mixed
      */
@@ -103,4 +105,24 @@ class ApplicationSettingsController extends BaseController {
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
+    /**
+     * Edit default number of products displayed.
+     *
+     * @param EditNumberOfDisplayedProductsRequest $request
+     * @return mixed
+     */
+    public function editNumberOfDisplayedProducts(EditNumberOfDisplayedProductsRequest $request) {
+
+        // Update value in database
+        $userDefaultSetting = UserDefaultSetting::first();
+        $userDefaultSetting->displayed_products = $request->get('displayed_products');
+        $userDefaultSetting->save();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.displayed_products_updated'));
+        $response->addExtraFields(['displayed_products' => $userDefaultSetting->displayed_products]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
 }

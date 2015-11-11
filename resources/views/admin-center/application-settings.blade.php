@@ -73,7 +73,7 @@
                 <!-- END Title -->
 
                 <!-- BEGIN Number of products displayed -->
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item" v-on="click: editNumberOfDisplayedProducts()">
                     {{ trans('application_settings.products_displayed') }}: <strong>@{{ displayed_products }}</strong>
                     @include('includes.common.edit-icon')
                 </a>

@@ -154,4 +154,5 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::get('/application-settings/get', 'ApplicationSettingsController@get');
     Route::post('/application-settings/edit-displayed-bills', 'ApplicationSettingsController@editNumberOfDisplayedBills');
     Route::post('/application-settings/edit-displayed-clients', 'ApplicationSettingsController@editNumberOfDisplayedClients');
+    Route::post('/application-settings/edit-displayed-products', 'ApplicationSettingsController@editNumberOfDisplayedProducts');
 });

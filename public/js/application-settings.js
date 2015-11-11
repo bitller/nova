@@ -115,7 +115,45 @@ new Vue({
                     Alert.error(response.title, response.message);
                 });
             });
+        },
 
+        /**
+         * Edit number of products displayed.
+         */
+        editNumberOfDisplayedProducts: function() {
+
+            var alertData = {
+                title: Translation.applicationSettings('displayed-products'),
+                text: Translation.applicationSettings('edit-displayed-products'),
+                requiredInput: Translation.applicationSettings('displayed-products-required'),
+                inputValue: this.$get('displayed_products')
+            };
+
+            var thisInstance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Build post data
+                var data = {
+                    _token: Token.get(),
+                    displayed_products: input
+                };
+
+                thisInstance.$http.post('/admin-center/application-settings/edit-displayed-products', data, function(response) {
+
+                    // Success response
+                    this.$set('displayed_products', response.displayed_products);
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+                    // Handle error response
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+            })
         }
     }
 
