@@ -10,5 +10,8 @@
     displayed-products="{{ trans('application_settings.displayed_products') }}"
     edit-displayed-products="{{ trans('application_settings.edit_displayed_products') }}"
     displayed-products-required="{{ trans('application_settings.displayed_products_required') }}"
+    displayed-custom-products="{{ trans('application_settings.displayed_custom_products') }}"
+    edit-displayed-custom-products="{{ trans('application_settings.edit_displayed_custom_products') }}"
+    displayed-custom-products-required="{{ trans('application_settings.displayed_custom_products_required') }}"
     ></div>
 @endsection

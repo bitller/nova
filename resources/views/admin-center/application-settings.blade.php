@@ -80,7 +80,7 @@
                 <!-- END Number of products displayed -->
 
                 <!-- BEGIN Number of application products displayed -->
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item" v-on="click: editNumberOfDisplayedCustomProducts()">
                     {{ trans('application_settings.custom_products_displayed') }}: <strong>@{{ displayed_custom_products }}</strong>
                     @include('includes.common.edit-icon')
                 </a>

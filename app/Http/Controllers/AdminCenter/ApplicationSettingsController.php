@@ -6,6 +6,7 @@ use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedClientsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedCustomProductsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedProductsRequest;
 use App\SecuritySetting;
 use App\UserDefaultSetting;
@@ -122,6 +123,27 @@ class ApplicationSettingsController extends BaseController {
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('application_settings.displayed_products_updated'));
         $response->addExtraFields(['displayed_products' => $userDefaultSetting->displayed_products]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Edit default number of custom products displayed.
+     *
+     * @param EditNumberOfDisplayedCustomProductsRequest $request
+     * @return mixed
+     */
+    public function editNumberOfDisplayedCustomProducts(EditNumberOfDisplayedCustomProductsRequest $request) {
+
+        // Update database
+        $userDefaultSetting = UserDefaultSetting::first();
+        $userDefaultSetting->displayed_custom_products = $request->get('displayed_custom_products');
+        $userDefaultSetting->save();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.displayed_custom_products_updated'));
+        $response->addExtraFields(['displayed_custom_products' => $userDefaultSetting->displayed_custom_products]);
 
         return response($response->get())->header('Content-Type', 'application/json');
     }
