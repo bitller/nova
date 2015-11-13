@@ -17,5 +17,8 @@
     recover-code-valid-time-description="{{ trans('application_settings.recover_code') }}"
     recover-code-required="{{ trans('application_settings.recover_code_required') }}"
     recover-code-updated="{{ trans('application_settings.recover_code_updated') }}"
+    login-attempts-allowed="{{ trans('application_settings.login_attempts_allowed') }}"
+    login-attempts="{{ trans('application_settings.login_attempts') }}"
+    number-of-login-attempts-required="{{ trans('application_settings.number_of_login_attempts_required') }}"
     ></div>
 @endsection

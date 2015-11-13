@@ -203,11 +203,11 @@ new Vue({
             var alertData = {
                 title: Translation.applicationSettings('recover-code-valid-time'),
                 text: Translation.applicationSettings('edit-recover-code-valid-time'),
-                requiredInput: Translation.applicationSettings('recover-code-valid-time-required'),
+                requiredInput: Translation.applicationSettings('recover-code-required'),
                 inputValue: this.$get('recover_code_valid_minutes')
             };
 
-            var thisIntance = this;
+            var thisInstance = this;
 
             Alert.edit(alertData, function(input) {
 
@@ -217,13 +217,53 @@ new Vue({
                     recover_code_valid_minutes: input
                 };
 
-                thisIntance.$http.post('/admin-center/application-settings/edit-recover-code-valid-time', data, function(response) {
+                thisInstance.$http.post('/admin-center/application-settings/edit-recover-code-valid-time', data, function(response) {
 
                     // Success response
                     this.$set('recover_code_valid_minutes', response.recover_code_valid_minutes);
                     Alert.success(response.title, response.message);
 
                 }).error(function(response) {
+                    // Handle error response
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+            });
+        },
+
+        /**
+         * Edit number of consecutive login attempts allowed.
+         */
+        editAllowedLoginAttempts: function() {
+
+            var alertData = {
+                title: Translation.applicationSettings('login-attempts-allowed'),
+                text: Translation.applicationSettings('login-attempts'),
+                requiredInput: Translation.applicationSettings('number-of-login-attempts-required'),
+                inputValue: this.$get('login_attempts')
+            };
+
+            var thisInstance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Post data
+                var data = {
+                    _token: Token.get(),
+                    login_attempts: input
+                };
+
+                thisInstance.$http.post('/admin-center/application-settings/edit-number-of-login-attempts-allowed', data, function(response) {
+
+                    // Success response
+                    this.$set('login_attempts', response.login_attempts);
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+
                     // Handle error response
                     if (!response.message) {
                         Alert.generalError();

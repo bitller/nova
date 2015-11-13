@@ -8,6 +8,7 @@ use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedBills
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedClientsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedCustomProductsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedProductsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfLoginAttemptsAllowedRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditRecoverCodeValidTimeRequest;
 use App\SecuritySetting;
 use App\UserDefaultSetting;
@@ -166,6 +167,27 @@ class ApplicationSettingsController extends BaseController {
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('application_settings.recover_code_updated'));
         $response->addExtraFields(['recover_code_valid_minutes' => $securitySetting->recover_code_valid_minutes]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Change number of consecutive login attempts allowed.
+     *
+     * @param EditNumberOfLoginAttemptsAllowedRequest $request
+     * @return mixed
+     */
+    public function editNumberOfLoginAttemptsAllowed(EditNumberOfLoginAttemptsAllowedRequest $request) {
+
+        // Update in database
+        $securitySetting = SecuritySetting::first();
+        $securitySetting->login_attempts = $request->get('login_attempts');
+        $securitySetting->save();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.number_of_login_attempts_updated'));
+        $response->addExtraFields(['login_attempts' => $securitySetting->login_attempts]);
 
         return response($response->get())->header('Content-Type', 'application/json');
     }

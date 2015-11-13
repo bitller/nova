@@ -109,7 +109,7 @@
                 <!-- END How many minutes recover code is valid -->
 
                 <!-- BEGIN Number of allowed consecutive login attempts -->
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item" v-on="click: editAllowedLoginAttempts()">
                     {{ trans('application_settings.login_attempts') }}: <strong>@{{ login_attempts }}</strong>
                     @include('includes.common.edit-icon')
                 </a>

@@ -157,4 +157,5 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::post('/application-settings/edit-displayed-products', 'ApplicationSettingsController@editNumberOfDisplayedProducts');
     Route::post('/application-settings/edit-displayed-custom-products', 'ApplicationSettingsController@editNumberOfDisplayedCustomProducts');
     Route::post('/application-settings/edit-recover-code-valid-time', 'ApplicationSettingsController@editRecoverCodeValidTime');
+    Route::post('/application-settings/edit-number-of-login-attempts-allowed', 'ApplicationSettingsController@editNumberOfLoginAttemptsAllowed');
 });
