@@ -8,6 +8,7 @@ use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedBills
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedClientsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedCustomProductsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedProductsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\EditRecoverCodeValidTimeRequest;
 use App\SecuritySetting;
 use App\UserDefaultSetting;
 
@@ -144,6 +145,27 @@ class ApplicationSettingsController extends BaseController {
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('application_settings.displayed_custom_products_updated'));
         $response->addExtraFields(['displayed_custom_products' => $userDefaultSetting->displayed_custom_products]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Set how many minutes recover code is valid.
+     *
+     * @param EditRecoverCodeValidTimeRequest $request
+     * @return mixed
+     */
+    public function editRecoverCodeValidTime(EditRecoverCodeValidTimeRequest $request) {
+
+        // Update table
+        $securitySetting = SecuritySetting::first();
+        $securitySetting->recover_code_valid_minutes = $request->get('recover_code_valid_minutes');
+        $securitySetting->save();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.recover_code_updated'));
+        $response->addExtraFields(['recover_code_valid_minutes' => $securitySetting->recover_code_valid_minutes]);
 
         return response($response->get())->header('Content-Type', 'application/json');
     }

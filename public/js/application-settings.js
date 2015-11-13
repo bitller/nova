@@ -193,7 +193,45 @@ new Vue({
                     Alert.error(response.title, response.message);
                 });
             });
+        },
 
+        /**
+         * Set how many minutes recover code is valid.
+         */
+        editRecoverCodeValidTime: function() {
+
+            var alertData = {
+                title: Translation.applicationSettings('recover-code-valid-time'),
+                text: Translation.applicationSettings('edit-recover-code-valid-time'),
+                requiredInput: Translation.applicationSettings('recover-code-valid-time-required'),
+                inputValue: this.$get('recover_code_valid_minutes')
+            };
+
+            var thisIntance = this;
+
+            Alert.edit(alertData, function(input) {
+
+                // Build post data
+                var data = {
+                    _token: Token.get(),
+                    recover_code_valid_minutes: input
+                };
+
+                thisIntance.$http.post('/admin-center/application-settings/edit-recover-code-valid-time', data, function(response) {
+
+                    // Success response
+                    this.$set('recover_code_valid_minutes', response.recover_code_valid_minutes);
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+                    // Handle error response
+                    if (!response.message) {
+                        Alert.generalError();
+                        return;
+                    }
+                    Alert.error(response.title, response.message);
+                });
+            });
         }
     }
 

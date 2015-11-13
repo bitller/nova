@@ -13,5 +13,9 @@
     displayed-custom-products="{{ trans('application_settings.displayed_custom_products') }}"
     edit-displayed-custom-products="{{ trans('application_settings.edit_displayed_custom_products') }}"
     displayed-custom-products-required="{{ trans('application_settings.displayed_custom_products_required') }}"
+    recover-code-valid-time="{{ trans('application_settings.recover_code_valid_time') }}"
+    recover-code-valid-time-description="{{ trans('application_settings.recover_code') }}"
+    recover-code-required="{{ trans('application_settings.recover_code_required') }}"
+    recover-code-updated="{{ trans('application_settings.recover_code_updated') }}"
     ></div>
 @endsection

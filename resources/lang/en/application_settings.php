@@ -30,5 +30,8 @@ return [
     'products_displayed' => 'Products displayed',
     'products_settings' => 'Products settings',
     'recover_code' => 'How many minutes is recover code valid',
+    'recover_code_required' => 'Choose how many minutes a recover code is valid',
+    'recover_code_updated' => 'Recover code validity updated!',
+    'recover_code_valid_time' => 'Recover code',
     'security_settings' => 'Security settings',
 ];

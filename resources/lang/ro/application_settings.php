@@ -30,5 +30,8 @@ return [
     'products_displayed' => 'Produse afişate',
     'products_settings' => 'Setări pentru produse',
     'recover_code' => 'Câte minute este valabil codul de recuperare a parolei',
+    'recover_code_required' => 'Alege câte minute este valabil codul de recuperare a parolei',
+    'recover_code_updated' => 'Valiabilitatea codului de recuperare a parolei a fost actualizată!',
+    'recover_code_valid_time' => 'Codul de recuperare a parolei',
     'security_settings' => 'Setări de securitate',
 ];

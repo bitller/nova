@@ -102,7 +102,7 @@
                 <!-- END Title -->
 
                 <!-- BEGIN How many minutes recover code is valid -->
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item" v-on="click: editRecoverCodeValidTime()">
                     {{ trans('application_settings.recover_code') }}: <strong>@{{ recover_code_valid_minutes }} {{ trans('application_settings.minutes') }}</strong>
                     @include('includes.common.edit-icon')
                 </a>
