@@ -117,8 +117,9 @@
 
                 <!-- BEGIN Allow new accounts -->
                 <a href="#" class="list-group-item">
-                    {{ trans('application_settings.allow_new_accounts') }}: <strong>@{{ allow_new_accounts }}</strong>
-                    @include('includes.common.edit-icon')
+                    {{ trans('application_settings.are_new_accounts_allowed') }}: <strong>@{{ allow_new_accounts }}</strong>
+                    <span v-show="!allow_new_accounts_bool" v-on="click: allowNewAccounts()" class="underline pull-right">{{ trans('application_settings.allow_new_accounts') }}</span>
+                    <span v-show="allow_new_accounts_bool" v-on="click: denyNewAccounts()" class="underline pull-right">{{ trans('application_settings.deny_new_accounts') }}</span>
                 </a>
                 <!-- END Allow new accounts -->
 

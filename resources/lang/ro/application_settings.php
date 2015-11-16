@@ -1,13 +1,15 @@
 <?php
 
 return [
-    'allow_new_accounts' => 'Este permisă crearea de noi conturi',
+    'allow_new_accounts' => 'Permite creearea de noi conturi',
     'application_settings' => 'Setările aplicaţiei',
+    'are_new_accounts_allowed' => 'Este permisă creearea de noi conturi',
     'bills_displayed' => 'Facturi afişate',
     'bills_settings' => 'Setări pentru facturi',
     'clients_displayed' => 'Clienţi afişaţi',
     'clients_settings' => 'Setări pentru clienţi',
     'custom_products_displayed' => 'Produse proprii afişate',
+    'deny_new_accounts' => 'Nu mai permite creearea de noi conturi',
     'displayed_bills' => 'Numărul de facturi afişate',
     'displayed_bills_required' => 'Numărul implicit de facturi afişate este obligatoriu.',
     'displayed_bills_updated' => 'Numărul implicit de facturi afişate a fost actualizat!',
@@ -28,6 +30,8 @@ return [
     'login_attempts_allowed' => 'Încercări de conectare permise',
     'login_attempts_updated' => 'Numărul de încercări de conectare consecutive permise a fost actualizat.',
     'minutes' => 'minute',
+    'new_accounts_are_allowed' => 'Creearea de noi conturi este permisă!',
+    'new_accounts_are_not_allowed' => 'Creearea de noi conturi nu este permisă!',
     'number_of_login_attempts_required' => 'Numărul de încercări de conectare consecutive permise este obligatoriu.',
     'number_of_login_attempts_updated' => 'Numărul de încercări de conectare consecutive permise a fost actualizat!',
     'paid_bills_displayed' => 'Facturi platite afişate',

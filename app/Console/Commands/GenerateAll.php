@@ -55,11 +55,10 @@ class GenerateAll extends Command {
         Artisan::call('generate:log_types');
         $this->info('Generated log types.');
 
-//        Artisan::call('generate:admin');
-//        $this->info('Generated an admin user with default credentials.');
-
         Artisan::call('db:seed');
         $this->info('Seeded tables.');
 
+        Artisan::call('generate:admin');
+        $this->info('Generated an admin user with default credentials.');
     }
 }

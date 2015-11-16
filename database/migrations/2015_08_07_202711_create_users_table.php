@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration {
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->enum('active', [0, 1])->default(1);
+            $table->enum('confirmed', [0, 1])->default(0);
             $table->integer('role_id')->unsigned();
             $table->rememberToken();
             $table->timestamps();

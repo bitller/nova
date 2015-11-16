@@ -148,10 +148,13 @@ Route::group(['prefix' => 'help-center'], function() {
 Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], function() {
     Route::get('/', 'UsersManagerController@index');
     Route::get('/users-manager', 'UsersManagerController@index');
+    Route::get('/users-manager/get', 'UsersManagerController@get');
     Route::get('/users-manager/browse', 'UsersManagerController@browse');
     Route::get('/users-manager/get-users', 'UsersManagerController@getUsers');
     Route::get('/application-settings', 'ApplicationSettingsController@index');
     Route::get('/application-settings/get', 'ApplicationSettingsController@get');
+    Route::get('/application-settings/allow-new-accounts', 'ApplicationSettingsController@allowCreationOfNewAccounts');
+    Route::get('/application-settings/deny-new-accounts', 'ApplicationSettingsController@denyCreationOfNewAccounts');
     Route::post('/application-settings/edit-displayed-bills', 'ApplicationSettingsController@editNumberOfDisplayedBills');
     Route::post('/application-settings/edit-displayed-clients', 'ApplicationSettingsController@editNumberOfDisplayedClients');
     Route::post('/application-settings/edit-displayed-products', 'ApplicationSettingsController@editNumberOfDisplayedProducts');

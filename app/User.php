@@ -80,4 +80,12 @@ class User extends Model implements AuthenticatableContract {
         return $this->hasOne('App\Role', 'id', 'role_id');
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRegisteredToday($query) {
+        return $query->where('created_at', '>=', date('Y-m-d'));
+    }
+
 }

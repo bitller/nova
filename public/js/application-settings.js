@@ -31,6 +31,7 @@ new Vue({
                 this.$set('recover_code_valid_minutes', response.recover_code_valid_minutes);
                 this.$set('login_attempts', response.login_attempts);
                 this.$set('allow_new_accounts', response.allow_new_accounts);
+                this.$set('allow_new_accounts_bool', response.allow_new_accounts_bool);
 
             }).error(function(response) {
                 //
@@ -271,6 +272,50 @@ new Vue({
                     }
                     Alert.error(response.title, response.message);
                 });
+            });
+        },
+
+        /**
+         * Deny creation of new accounts.
+         */
+        denyNewAccounts: function() {
+            this.changeNewAccountsStatus();
+        },
+
+        /**
+         * Allow creation of new accounts.
+         */
+        allowNewAccounts: function() {
+            this.changeNewAccountsStatus(true);
+        },
+
+        /**
+         * @param allow
+         */
+        changeNewAccountsStatus: function(allow) {
+
+            var action = 'deny-new-accounts';
+
+            if (typeof allow !== 'undefined') {
+                action = 'allow-new-accounts';
+            }
+
+            Alert.loader();
+            this.$http.get('/admin-center/application-settings/' + action, function(response) {
+
+                // Success response
+                this.$set('allow_new_accounts_bool', response.allow_new_accounts_bool);
+                this.$set('allow_new_accounts', response.allow_new_accounts);
+                Alert.success(response.title, response.message);
+
+            }).error(function(response) {
+
+                // Handle error response
+                if (!response.message) {
+                    Alert.generalError();
+                    return;
+                }
+                Alert.error(response.title, response.message);
             });
         }
     }

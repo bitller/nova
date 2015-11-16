@@ -4,6 +4,8 @@ namespace App\Http\Controllers\AdminCenter;
 
 use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\AdminCenter\ApplicationSettings\AllowCreationOfNewAccountsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\DenyCreationOfNewAccountsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedClientsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedCustomProductsRequest;
@@ -58,9 +60,13 @@ class ApplicationSettingsController extends BaseController {
 
         if ($securitySettings->allow_new_accounts) {
             $settings['allow_new_accounts'] = trans('common.yes');
+            $allowNewAccounts = true;
         } else {
             $settings['allow_new_accounts'] = trans('common.no');
+            $allowNewAccounts = false;
         }
+
+        $settings['allow_new_accounts_bool'] = $allowNewAccounts;
 
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('common.success'));
@@ -188,6 +194,50 @@ class ApplicationSettingsController extends BaseController {
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('application_settings.number_of_login_attempts_updated'));
         $response->addExtraFields(['login_attempts' => $securitySetting->login_attempts]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Allow creation of new accounts.
+     *
+     * @param AllowCreationOfNewAccountsRequest $request
+     * @return mixed
+     */
+    public function allowCreationOfNewAccounts(AllowCreationOfNewAccountsRequest $request) {
+
+        $securitySetting = SecuritySetting::first();
+        $securitySetting->allow_new_accounts = 1;
+        $securitySetting->save();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.new_accounts_are_allowed'));
+        $response->addExtraFields([
+            'allow_new_accounts' => trans('common.yes'),
+            'allow_new_accounts_bool' => true
+        ]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * @param DenyCreationOfNewAccountsRequest $request
+     * @return mixed
+     */
+    public function denyCreationOfNewAccounts(DenyCreationOfNewAccountsRequest $request) {
+
+        $securitySetting = SecuritySetting::first();
+        $securitySetting->allow_new_accounts = 0;
+        $securitySetting->save();
+
+        // Return response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.new_accounts_are_not_allowed'));
+        $response->addExtraFields([
+            'allow_new_accounts' => trans('common.no'),
+            'allow_new_accounts_bool' => false
+        ]);
 
         return response($response->get())->header('Content-Type', 'application/json');
     }

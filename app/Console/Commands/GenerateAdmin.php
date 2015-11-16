@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Helpers\Roles;
 use App\User;
+use App\UserSetting;
 use Illuminate\Console\Command;
 
 /**
@@ -51,7 +52,12 @@ class GenerateAdmin extends Command {
         $user->password = bcrypt($this->argument('password'));
         $user->role_id = $roles->getAdminRoleId();
         $user->save();
-        
+
+        $settings = new UserSetting();
+        $settings->user_id = $user->id;
+        $settings->language_id = 1;
+        $settings->save();
+
         $this->info('User with admin privileges was generated');
 
     }

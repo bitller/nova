@@ -20,7 +20,7 @@ class CreateSecuritySettingsTable extends Migration {
             $table->smallIncrements('id');
             $table->tinyInteger('recover_code_valid_minutes')->unsigned()->default(30);
             $table->smallInteger('login_attempts')->unsigned()->default(5);
-            $table->enum('allow_new_accounts', [1,2])->default(1);
+            $table->enum('allow_new_accounts', [1,0])->default(1);
             $table->timestamps();
         });
     }
