@@ -1673,6 +1673,16 @@ var Translation = {
     },
 
     /**
+     * Get subscribe page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    subscribe: function(attribute) {
+        return this.get('#subscribe-trans', attribute);
+    },
+
+    /**
      * Get application settings page translations.
      *
      * @param attribute

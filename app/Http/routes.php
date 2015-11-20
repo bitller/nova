@@ -162,3 +162,9 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::post('/application-settings/edit-recover-code-valid-time', 'ApplicationSettingsController@editRecoverCodeValidTime');
     Route::post('/application-settings/edit-number-of-login-attempts-allowed', 'ApplicationSettingsController@editNumberOfLoginAttemptsAllowed');
 });
+
+// Subscribe page
+Route::group(['prefix' => 'subscribe'], function() {
+    Route::get('/', 'SubscribeController@index');
+    Route::post('/process', 'SubscribeController@process');
+});

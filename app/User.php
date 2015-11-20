@@ -81,6 +81,13 @@ class User extends Model implements AuthenticatableContract {
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function payment() {
+        return $this->hasOne('App\Payment');
+    }
+
+    /**
      * @param $query
      * @return mixed
      */

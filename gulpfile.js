@@ -32,5 +32,6 @@ elixir(function(mix) {
         .scripts(['pages/register.js'], 'public/js/register.js')
         .scripts(['pages/recover.js'], 'public/js/recover.js')
         .scripts(['pages/application-settings.js'], 'public/js/application-settings.js')
-        .scripts(['pages/users-manager.js'], 'public/js/users-manager.js');
+        .scripts(['pages/users-manager.js'], 'public/js/users-manager.js')
+        .scripts(['pages/subscribe.js'], 'public/js/subscribe.js');
 });
