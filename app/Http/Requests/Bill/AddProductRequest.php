@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Bill;
 
+use App\Helpers\AjaxResponse;
 use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Validation\Validator;
 
 /**
  * Authorize and validate AddProductRequest
@@ -35,6 +37,38 @@ class AddProductRequest extends AjaxRequest {
             'product_price' => ['required', 'numeric', 'between:0,9999'],
             'product_code' => ['required', 'digits:5'],
         ];
+    }
+
+    /**
+     * @param array $errors
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function response(array $errors) {
+        $response = new AjaxResponse();
+        $response->setFailMessage('error');
+        $response->addExtraFields(['errors' => $errors]);
+        return response($response->get(), $response->badRequest());
+    }
+
+    /**
+     * @param Validator $validator
+     * @return array
+     */
+    protected function formatErrors(Validator $validator) {
+
+        $messages = $validator->errors();
+        $fields = ['product_code', 'product_price', 'product_page', 'product_discount', 'product_quantity'];
+        $errors = [];
+
+        foreach ($fields as $field) {
+            if (!$messages->has($field)) {
+                continue;
+            }
+            $errors[$field] = $messages->first($field);
+        }
+
+        return $errors;
+
     }
 
 }

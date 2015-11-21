@@ -106,11 +106,14 @@ new Vue({
                 }, true);
 
             }).error(function(response) {
-                this.$set('add_product', Translation.bill('add-product'));
-                this.$set('loading', false);
-                if (response.message) {
-                    this.$set('error', response.message)
+
+                if (!response.message) {
+                    this.$set('error', Translation.common('error'));
+                    return;
                 }
+                this.$set('add_product', Translation.bill('add-product'));
+                this.$set('errors', response.errors)
+                this.$set('loading', false);
             });
 
         },
@@ -128,6 +131,7 @@ new Vue({
             this.$set('error', false);
             this.$set('loading', false);
             this.$set('add_product', Translation.bill('add-product'));
+            this.$set('errors', []);
             // Reset inputs
             $('#product-code').val('');
             $('#product-price').val('');
