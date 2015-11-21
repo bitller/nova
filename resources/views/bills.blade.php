@@ -22,8 +22,8 @@
             <!-- END No bills info -->
 
             <!-- BEGIN Bills table-->
-            <div class="panel panel-default">
-            <table class="table table-hover table-bordered" v-show="bills.total">
+            <div class="panel panel-default" v-show="bills.total">
+            <table class="table table-hover table-bordered">
                 <thead>
                 <tr>
                     <th><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
