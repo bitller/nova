@@ -18,8 +18,8 @@
             <!-- END Add bill button -->
 
             <!-- BEGIN Bills table-->
-            <div class="panel panel-default">
-                <table class="table table-hover table-bordered" v-show="paid_bills.total">
+            <div class="panel panel-default" v-show="paid_bills.total">
+                <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
                         <th><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
