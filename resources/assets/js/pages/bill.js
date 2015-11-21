@@ -414,10 +414,12 @@ new Vue({
                 _token: Token.get(),
                 payment_term: $('#payment-term').val()
             };
+            this.$set('loading', true);
 
             // Make post request
             this.$http.post('/bills/' + Data.getBillId() + '/edit-payment-term', data, function(response) {
 
+                this.$set('loading', false);
                 // Handle success response
                 if (response.success) {
                     $('#payment-term-modal').modal('toggle');
@@ -430,6 +432,7 @@ new Vue({
 
             }).error(function(response) {
 
+                this.$set('loading', false);
                 // Handle error response
                 if (response.message) {
                     this.$set('error', response.message);
@@ -438,6 +441,13 @@ new Vue({
                 this.$set('error', Translation.common('general-error'));
             });
 
+        },
+
+        /**
+         * Reset payment term modal.
+         */
+        resetPaymentTermModal: function() {
+            this.$set('error', '');
         },
 
         /**
