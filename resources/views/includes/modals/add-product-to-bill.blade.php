@@ -67,7 +67,10 @@
             <!-- BEGIN Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" v-attr="disabled: loading">{{ trans('common.cancel') }}</button>
-                <button type="button" class="btn btn-primary" v-attr="disabled: loading" v-on="click: addProduct()">@{{ add_product }}</button>
+                <button type="button" class="btn btn-primary" v-attr="disabled: loading" v-on="click: addProduct()">
+                    <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+                    <span v-show="!loading">{{ trans('bill.add_product') }}</span>
+                </button>
             </div>
             <!-- END Modal footer -->
 

@@ -369,9 +369,12 @@ new Vue({
                 other_details: this.$get('otherDetails')
             };
 
+            this.$set('loading', true);
+
             // Request
             this.$http.post('/bills/' + Data.getBillId() + '/edit-other-details', data, function(response) {
 
+                this.$set('loading', false);
                 // Success response
                 if (response.success) {
                     $('#other-details-modal').modal('toggle');
@@ -383,7 +386,7 @@ new Vue({
                 this.$set('error', Translation.common('general-error'));
 
             }).error(function(response) {
-
+                this.$set('loading', false);
                 // Fail response
                 if (response.message) {
                     this.$set('error', response.message);
