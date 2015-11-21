@@ -56,7 +56,6 @@ new Vue({
         createBill: function() {
 
             this.$set('loading', true);
-            this.$set('create_button', Translation.common('loading'));
 
             // Build post data
             var data = {
@@ -69,14 +68,12 @@ new Vue({
                 // Handle success response
                 this.getBills('/bills/get', function() {
                     this.$set('loading', false);
-                    this.$set('create_button', Translation.bills('create-button'));
                     $('#create-bill-modal').modal('hide');
                     Alert.success(response.title, response.message);
                 });
 
             }).error(function(response) {
                 this.$set('loading', false);
-                this.$set('create_button', Translation.bills('create-button'));
 
                 // Handle error response
                 if (!response.message) {
