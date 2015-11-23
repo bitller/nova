@@ -32,6 +32,7 @@
                     @include('includes.admin-center.buttons.products-manager')
                     @include('includes.admin-center.buttons.logs')
                     @include('includes.admin-center.buttons.application-settings')
+                    @include('includes.admin-center.buttons.more')
                 </div>
             </div>
             <!-- END Top part -->

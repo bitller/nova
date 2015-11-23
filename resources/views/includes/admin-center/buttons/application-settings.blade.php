@@ -3,5 +3,5 @@
     <div class="btn btn-primary">
         <span class="glyphicon glyphicon-cog">&nbsp;</span>{{ trans('users-manager.settings') }}
     </div>
-</a>
+</a>&nbsp;
 <!-- END Application settings -->

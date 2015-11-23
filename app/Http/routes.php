@@ -161,6 +161,14 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::post('/application-settings/edit-displayed-custom-products', 'ApplicationSettingsController@editNumberOfDisplayedCustomProducts');
     Route::post('/application-settings/edit-recover-code-valid-time', 'ApplicationSettingsController@editRecoverCodeValidTime');
     Route::post('/application-settings/edit-number-of-login-attempts-allowed', 'ApplicationSettingsController@editNumberOfLoginAttemptsAllowed');
+
+    Route::group(['prefix' => 'help-center-manager'], function() {
+        Route::get('/', 'HelpCenterManagerController@index');
+        Route::get('/get', 'HelpCenterManagerController@get');
+        Route::post('/add-category', 'HelpCenterManagerController@addCategory');
+        Route::post('/delete-category', 'HelpCenterManagerController@deleteCategory');
+        Route::post('/edit-category', 'HelpCenterManagerController@editCategory');
+    });
 });
 
 // Subscribe page

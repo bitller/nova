@@ -16,6 +16,16 @@ var Translation = {
     },
 
     /**
+     * Get help center manager translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    helpCenterManager: function(attribute) {
+        return this.get('#help-center-manager-trans', attribute);
+    },
+
+    /**
      * Get subscribe page translations.
      *
      * @param attribute
