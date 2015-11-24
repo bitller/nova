@@ -34,5 +34,6 @@ elixir(function(mix) {
         .scripts(['pages/application-settings.js'], 'public/js/application-settings.js')
         .scripts(['pages/users-manager.js'], 'public/js/users-manager.js')
         .scripts(['pages/subscribe.js'], 'public/js/subscribe.js')
-        .scripts(['pages/help-center-manager.js'], 'public/js/help-center-manager.js');
+        .scripts(['pages/help-center-manager.js'], 'public/js/help-center-manager.js')
+        .scripts(['pages/help-center-manager/category.js'], 'public/js/help-center-manager-category-page.js');
 });

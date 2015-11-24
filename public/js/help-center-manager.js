@@ -155,6 +155,5 @@ new Vue({
             }, Translation.helpCenterManager('delete-category'));
         }
     }
-
 });
 //# sourceMappingURL=help-center-manager.js.map

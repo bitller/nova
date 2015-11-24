@@ -165,9 +165,14 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::group(['prefix' => 'help-center-manager'], function() {
         Route::get('/', 'HelpCenterManagerController@index');
         Route::get('/get', 'HelpCenterManagerController@get');
+        Route::get('/category/{categoryId}', 'HelpCenterManagerController@category');
+        Route::get('/category/{categoryId}/get', 'HelpCenterManagerController@getCategory');
         Route::post('/add-category', 'HelpCenterManagerController@addCategory');
         Route::post('/delete-category', 'HelpCenterManagerController@deleteCategory');
         Route::post('/edit-category', 'HelpCenterManagerController@editCategory');
+        Route::post('/category/{categoryId}/add-article', 'HelpCenterManagerController@addArticle');
+        Route::post('/category/{categoryId}/delete-article', 'HelpCenterManagerController@deleteArticle');
+        Route::post('/category/{categoryId}/edit-article', 'HelpCenterManagerController@editArticle');
     });
 });
 

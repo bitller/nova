@@ -155,5 +155,4 @@ new Vue({
             }, Translation.helpCenterManager('delete-category'));
         }
     }
-
 });

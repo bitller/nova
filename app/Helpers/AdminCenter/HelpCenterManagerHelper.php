@@ -2,6 +2,7 @@
 
 namespace App\Helpers\AdminCenter;
 
+use App\HelpCenterArticle;
 use App\HelpCenterCategory;
 
 /**
@@ -26,6 +27,24 @@ class HelpCenterManagerHelper {
         }
 
         return $helpCenterCategories;
+    }
+
+    /**
+     * Return category articles.
+     *
+     * @param int $categoryId
+     * @return array
+     */
+    public static function getCategoryArticles($categoryId) {
+
+        $categoryArticles = [];
+        $results = HelpCenterArticle::where('category_id', $categoryId)->get();
+
+        foreach ($results as $result) {
+            $categoryArticles[] = $result;
+        }
+
+        return $categoryArticles;
     }
 
 }
