@@ -147,3 +147,7 @@ $factory->define(App\UserDefaultSetting::class, function() {
 $factory->define(App\SecuritySetting::class, function() {
     return [];
 });
+
+$factory->define(App\QuestionCategory::class, function() {
+    return [];
+});

@@ -143,6 +143,7 @@ Route::group(['prefix' => 'next'], function() {
 Route::group(['prefix' => 'help-center'], function() {
     Route::get('/', 'HelpCenterController@index');
     Route::get('/get', 'HelpCenterController@get');
+    Route::get('/get-question-categories', 'HelpCenterController@getQuestionCategories');
     Route::get('/category/{categoryId}', 'HelpCenterController@category');
     Route::get('/category/{categoryId}/get', 'HelpCenterController@getCategory');
 });
@@ -165,6 +166,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::post('/application-settings/edit-recover-code-valid-time', 'ApplicationSettingsController@editRecoverCodeValidTime');
     Route::post('/application-settings/edit-number-of-login-attempts-allowed', 'ApplicationSettingsController@editNumberOfLoginAttemptsAllowed');
 
+    // Help center manager
     Route::group(['prefix' => 'help-center-manager'], function() {
         Route::get('/', 'HelpCenterManagerController@index');
         Route::get('/get', 'HelpCenterManagerController@get');
@@ -177,6 +179,13 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::post('/category/{categoryId}/delete-article', 'HelpCenterManagerController@deleteArticle');
         Route::post('/category/{categoryId}/edit-article', 'HelpCenterManagerController@editArticle');
     });
+
+    // Support center manager
+    Route::group(['prefix' => 'support-center'], function() {
+        Route::get('/', 'SupportCenterController@index');
+        Route::get('/get', 'SupportCenterController@get');
+    });
+
 });
 
 // Subscribe page

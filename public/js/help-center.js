@@ -13,6 +13,10 @@ new Vue({
     },
 
     methods: {
+
+        /**
+         * Get page data.
+         */
         getData: function() {
             Alert.loader();
 
@@ -24,6 +28,51 @@ new Vue({
 
             }).error(function(response) {
                 //
+            });
+        },
+
+        /**
+         * Load question categories.
+         */
+        loadQuestionCategories: function() {
+            if (this.$get('question_categories')) {
+                return;
+            }
+
+            this.$http.get('/help-center/get-question-categories', function(response) {
+                this.$set('question_categories', response.question_categories);
+                this.$set('question_categories_loaded', true);
+            }).error(function(response) {
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('error'));
+            });
+        },
+
+        askQuestion: function() {
+
+            this.$set('loading', true);
+            var url = '/help-center/ask-question';
+            var data = {
+                _token: Token.get(),
+                question_category_id: this.$get('question_category_id'),
+                question_title: this.$get('question_title'),
+                question_content: this.$get('question')
+            };
+            this.$http.post(url, data, function(response) {
+                //
+            }).error(function(response) {
+
+                // Handle error response
+                this.$set('loading', false);
+
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('general-error'));
             });
         }
     }

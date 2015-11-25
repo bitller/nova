@@ -14,6 +14,7 @@ return [
     'next' => 'Înainte',
     'no' => 'nu',
     'ok' => 'Ok',
+    'or' => 'sau',
     'page_details' => 'Detalii',
     'previous' => 'Înapoi',
     'product_code' => 'Codul produsului',

@@ -14,6 +14,7 @@ return [
     'next' => 'Next',
     'no' => 'no',
     'ok' => 'Ok',
+    'or' => 'or',
     'page_details' => 'Details',
     'previous' => 'Previous',
     'product_code' => 'Product code',

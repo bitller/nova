@@ -7164,7 +7164,8 @@ button.close {
   font-size: 20px; }
 
 .custom-jumbotron {
-  margin-top: -10px; }
+  margin-top: -10px;
+  color: #878787; }
 
 .page-text {
   margin-top: -15px; }

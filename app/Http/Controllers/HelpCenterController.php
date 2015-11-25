@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 use App\HelpCenterArticle;
 use App\HelpCenterCategory;
+use App\Http\Requests\HelpCenter\AskQuestionRequest;
 use App\Http\Requests\HelpCenter\GetCategoryDataRequest;
 use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Helpers\AjaxResponse;
 use App\Helpers\AdminCenter\HelpCenterManagerHelper;
+use App\Http\Requests\HelpCenter\GetQuestionCategoriesRequest;
+use App\QuestionCategory;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -56,6 +59,13 @@ class HelpCenterController extends BaseController {
         return view('help-center.category')->with('categoryId', $categoryId);
     }
 
+    /**
+     * Get category page data.
+     *
+     * @param int $categoryId
+     * @param GetCategoryDataRequest $request
+     * @return mixed
+     */
     public function getCategory($categoryId, GetCategoryDataRequest $request) {
 
         $category = DB::table('help_center_categories')->where('id', $categoryId)->first();
@@ -66,6 +76,23 @@ class HelpCenterController extends BaseController {
         $response->addExtraFields(['category' => $category]);
 
         return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Get question categories.
+     *
+     * @param GetQuestionCategoriesRequest $request
+     * @return mixed
+     */
+    public function getQuestionCategories(GetQuestionCategoriesRequest $request) {
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('common.success'));
+        $response->addExtraFields(['question_categories' => QuestionCategory::all()]);
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    public function askQuestion(AskQuestionRequest $request) {
+        //
     }
 
 }
