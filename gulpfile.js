@@ -35,5 +35,7 @@ elixir(function(mix) {
         .scripts(['pages/users-manager.js'], 'public/js/users-manager.js')
         .scripts(['pages/subscribe.js'], 'public/js/subscribe.js')
         .scripts(['pages/help-center-manager.js'], 'public/js/help-center-manager.js')
-        .scripts(['pages/help-center-manager/category.js'], 'public/js/help-center-manager-category-page.js');
+        .scripts(['pages/help-center-manager/category.js'], 'public/js/help-center-manager-category-page.js')
+        .scripts(['pages/help-center/help-center.js'], 'public/js/help-center.js')
+        .scripts(['pages/help-center/category.js'], 'public/js/help-center-category.js');
 });

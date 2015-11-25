@@ -8113,6 +8113,9 @@ body {
   margin-top: 20px;
   margin-bottom: 20px; }
 
+.pointer:hover {
+  cursor: pointer; }
+
 .divider {
   height: 1px;
   width: 100%;

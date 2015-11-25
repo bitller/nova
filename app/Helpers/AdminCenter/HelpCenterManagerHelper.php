@@ -23,6 +23,8 @@ class HelpCenterManagerHelper {
         $results = HelpCenterCategory::all();
 
         foreach ($results as $result) {
+            $result->articles = HelpCenterArticle::where('category_id', $result->id)->get();
+            $result->number_of_articles = HelpCenterArticle::where('category_id', $result->id)->count();
             $helpCenterCategories[] = $result;
         }
 

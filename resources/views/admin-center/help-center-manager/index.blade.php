@@ -35,9 +35,9 @@
                 <tbody>
                 <tr v-repeat="category in categories">
                     <td><a href="/admin-center/help-center-manager/category/@{{ category.id }}">@{{ category.name }}</a></td>
-                    <td>1</td>
-                    <td v-on="click: editCategory(category.id)" class="text-center"><span class="glyphicon glyphicon-pencil"></span></td>
-                    <td v-on="click: deleteCategory(category.id)" class="text-center"><span class="glyphicon glyphicon-trash"></span></td>
+                    <td class="text-center">@{{ category.number_of_articles }}</td>
+                    <td v-on="click: editCategory(category.id)" class="text-center pointer"><span class="glyphicon glyphicon-pencil"></span></td>
+                    <td v-on="click: deleteCategory(category.id)" class="text-center pointer"><span class="glyphicon glyphicon-trash"></span></td>
                 </tr>
                 </tbody>
             </table>

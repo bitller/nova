@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\HelpCenterArticle;
+use App\HelpCenterCategory;
+use App\Http\Requests\HelpCenter\GetCategoryDataRequest;
+use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
+use App\Helpers\AjaxResponse;
+use App\Helpers\AdminCenter\HelpCenterManagerHelper;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Handle help center.
@@ -24,6 +31,41 @@ class HelpCenterController extends BaseController {
      */
     public function index() {
         return view('help-center.index');
+    }
+
+    /**
+     * @param GetIndexDataRequest $request
+     * @return mixed
+     */
+    public function get(GetIndexDataRequest $request) {
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('common.success'));
+        $response->addExtraFields(['categories' => HelpCenterManagerHelper::getHelpCenterCategories()]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Render category page.
+     *
+     * @param $categoryId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category($categoryId) {
+        return view('help-center.category')->with('categoryId', $categoryId);
+    }
+
+    public function getCategory($categoryId, GetCategoryDataRequest $request) {
+
+        $category = DB::table('help_center_categories')->where('id', $categoryId)->first();
+        $category->articles = HelpCenterArticle::where('category_id', $categoryId)->get();
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('common.success'));
+        $response->addExtraFields(['category' => $category]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
 }

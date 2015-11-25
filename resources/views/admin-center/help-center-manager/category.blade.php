@@ -33,14 +33,15 @@
                 <tbody>
                 <tr v-repeat="article in articles">
                     <td>@{{ article.title }}</td>
-                    <td v-on="click: editArticle(article.id)"><span class="glyphicon glyphicon-pencil"></span></td>
-                    <td v-on="click: deleteArticle(article.id)"><span class="glyphicon glyphicon-trash"></span></td>
+                    <td v-on="click: setClickedArticle(article.id, article.title, article.content)" class="text-center" data-toggle="modal" data-target="#edit-article-modal"><span class="glyphicon glyphicon-pencil"></span></td>
+                    <td v-on="click: deleteArticle(article.id)" class="text-center"><span class="glyphicon glyphicon-trash"></span></td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
         @include('includes.modals.add-article-modal')
+        @include('includes.modals.edit-article')
 
     </div>
 @endsection

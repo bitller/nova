@@ -142,6 +142,9 @@ Route::group(['prefix' => 'next'], function() {
 // Help center
 Route::group(['prefix' => 'help-center'], function() {
     Route::get('/', 'HelpCenterController@index');
+    Route::get('/get', 'HelpCenterController@get');
+    Route::get('/category/{categoryId}', 'HelpCenterController@category');
+    Route::get('/category/{categoryId}/get', 'HelpCenterController@getCategory');
 });
 
 // Admin center
