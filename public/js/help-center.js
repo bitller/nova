@@ -59,7 +59,7 @@ new Vue({
                 _token: Token.get(),
                 question_category_id: this.$get('question_category_id'),
                 question_title: this.$get('question_title'),
-                question_content: this.$get('question')
+                question_content: this.$get('question_content')
             };
             this.$http.post(url, data, function(response) {
                 //
@@ -67,6 +67,11 @@ new Vue({
 
                 // Handle error response
                 this.$set('loading', false);
+
+                if (typeof response.errors !== 'undefined') {
+                    this.$set('errors', response.errors);
+                    return;
+                }
 
                 if (response.message) {
                     this.$set('error', response.message);

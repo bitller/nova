@@ -146,6 +146,7 @@ Route::group(['prefix' => 'help-center'], function() {
     Route::get('/get-question-categories', 'HelpCenterController@getQuestionCategories');
     Route::get('/category/{categoryId}', 'HelpCenterController@category');
     Route::get('/category/{categoryId}/get', 'HelpCenterController@getCategory');
+    Route::post('/ask-question', 'HelpCenterController@askQuestion');
 });
 
 // Admin center

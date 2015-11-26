@@ -42,9 +42,9 @@
                     <!-- END Question title -->
 
                     <!-- BEGIN Question -->
-                    <div class="form-group" v-class="has-error : errors.question">
-                        <textarea class="form-control" placeholder="{{ trans('help_center.question') }}" v-model="question"></textarea>
-                        <span class="text-danger" v-show="errors.question">@{{ errors.question }}</span>
+                    <div class="form-group" v-class="has-error : errors.question_content">
+                        <textarea class="form-control" placeholder="{{ trans('help_center.question') }}" v-model="question_content"></textarea>
+                        <span class="text-danger" v-show="errors.question_content">@{{ errors.question_content }}</span>
                     </div>
                     <!-- END Question -->
                 </div>
