@@ -32,6 +32,14 @@ new Vue({
         },
 
         /**
+         * Load question categories and reset modal data.
+         */
+        loadCategoriesAndResetModal: function() {
+            this.resetAskQuestionModal();
+            this.loadQuestionCategories();
+        },
+
+        /**
          * Load question categories.
          */
         loadQuestionCategories: function() {
@@ -51,6 +59,9 @@ new Vue({
             });
         },
 
+        /**
+         * Allow user to ask a question.
+         */
         askQuestion: function() {
 
             this.$set('loading', true);
@@ -62,7 +73,8 @@ new Vue({
                 question_content: this.$get('question_content')
             };
             this.$http.post(url, data, function(response) {
-                //
+                $('#ask-question-modal').modal('hide');
+                Alert.success(response.title, response.message, 3500);
             }).error(function(response) {
 
                 // Handle error response
@@ -79,6 +91,17 @@ new Vue({
                 }
                 this.$set('error', Translation.common('general-error'));
             });
+        },
+
+        /**
+         * Reset ask question modal.
+         */
+        resetAskQuestionModal: function() {
+            this.$set('error', '');
+            this.$set('errors', '');
+            //this.$set('question_category_id');
+            this.$set('question_title', '');
+            this.$set('question_content', '');
         }
     }
 

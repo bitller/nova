@@ -24,6 +24,7 @@ return [
     'no_category' => 'Se pare că centrul de ajutor nu are nicio categorie.',
     'number_of_articles' => 'Numărul de articole',
     'question' => 'Întrebarea',
+    'question_sent' => 'Întrabarea ta a fost trimisă. Vei primi un răspuns în cel mai scurt timp posibil.',
     'question_title' => 'Titlul întrebării',
     'send_question' => 'Trimite întrebarea',
 ];

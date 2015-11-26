@@ -9,7 +9,9 @@ use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Helpers\AjaxResponse;
 use App\Helpers\AdminCenter\HelpCenterManagerHelper;
 use App\Http\Requests\HelpCenter\GetQuestionCategoriesRequest;
+use App\Question;
 use App\QuestionCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -91,8 +93,25 @@ class HelpCenterController extends BaseController {
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
+    /**
+     * Allow user to ask questions.
+     *
+     * @param AskQuestionRequest $request
+     * @return mixed
+     */
     public function askQuestion(AskQuestionRequest $request) {
-        //
+
+        $question = new Question();
+        $question->title = $request->get('question_title');
+        $question->content = $request->get('question_content');
+        $question->question_category_id = $request->get('question_category_id');
+        $question->user_id = Auth::user()->id;
+        $question->save();
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('help_center.question_sent'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
 }

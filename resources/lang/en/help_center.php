@@ -24,6 +24,7 @@ return [
     'no_category' => 'Looks like help center has no category.',
     'number_of_articles' => 'Number of articles',
     'question' => 'Question',
+    'question_sent' => 'Your question was sent. You will receive an answer as soon as possible. Thank you!',
     'question_title' => 'Question title',
     'send_question' => 'Send question',
 ];

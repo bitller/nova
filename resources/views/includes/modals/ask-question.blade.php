@@ -25,12 +25,13 @@
 
                 <div v-show="question_categories_loaded">
                     <!-- BEGIN Question categories -->
-                    <div class="form-group" v-show="question_categories_loaded">
+                    <div class="form-group" v-class="has-error : errors.question_category_id" v-show="question_categories_loaded">
                         <label for="question-categories">{{ trans('help_center.choose_question_category') }}:</label>
-                        <select class="form-control" id="question-categories" v-model="question_category">
+                        <select class="form-control" id="question-categories" v-model="question_category_id">
                             <option selected disabled>{{ trans('help_center.choose_question_category') }}</option>
                             <option v-repeat="question_category in question_categories" value="@{{ question_category.id }}">@{{ question_category.name }}</option>
                         </select>
+                        <span class="text-danger" v-show="errors.question_category_id">@{{ errors.question_category_id }}</span>
                     </div>
                     <!-- END Question categories -->
 

@@ -7165,7 +7165,8 @@ button.close {
 
 .custom-jumbotron {
   margin-top: -10px;
-  color: #878787; }
+  color: #878787;
+  background-color: #F2F2F2; }
 
 .page-text {
   margin-top: -15px; }
@@ -7178,6 +7179,15 @@ button.close {
 
 .more-dropdown {
   display: inline-block; }
+
+.primary-well {
+  background-color: #3498DB;
+  color: #ffffff;
+  border-color: #3498DB; }
+
+.primary-well:hover {
+  color: #3498DB;
+  background-color: #ffffff; }
 
 body.stop-scrolling {
   height: 100%;

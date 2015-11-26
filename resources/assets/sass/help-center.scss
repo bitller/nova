@@ -1,6 +1,7 @@
 .custom-jumbotron {
   margin-top: -10px;
   color: #878787;
+  background-color: #F2F2F2;
 }
 .page-text {
   margin-top: -15px;
@@ -16,4 +17,15 @@
 
 .more-dropdown {
   display: inline-block;
+}
+
+.primary-well {
+  background-color: $brand-primary;
+  color: #ffffff;
+  border-color: $brand-primary;
+}
+
+.primary-well:hover {
+  color: $brand-primary;
+  background-color: #ffffff;
 }
