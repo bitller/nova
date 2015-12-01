@@ -12,6 +12,17 @@ use App\HelpCenterCategory;
  */
 class HelpCenterManagerHelper {
 
+    public static function getHelpCenterCategoriesAndArticles() {
+
+        $categories = self::getHelpCenterCategories();
+
+        foreach ($categories as &$category) {
+            $category->articles = self::getCategoryArticles($category->id);
+        }
+
+        return $categories;
+    }
+
     /**
      * Return an array with help center categories.
      *

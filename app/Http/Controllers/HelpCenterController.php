@@ -46,7 +46,7 @@ class HelpCenterController extends BaseController {
 
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('common.success'));
-        $response->addExtraFields(['categories' => HelpCenterManagerHelper::getHelpCenterCategories()]);
+        $response->addExtraFields(['categories' => HelpCenterManagerHelper::getHelpCenterCategoriesAndArticles()]);
 
         return response($response->get())->header('Content-Type', 'application/json');
     }

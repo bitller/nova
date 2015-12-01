@@ -60,6 +60,8 @@
     </div>
 </nav>
 
+@yield('full-width')
+
 <div class="container">
     @yield('content')
 </div>
