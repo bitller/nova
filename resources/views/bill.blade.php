@@ -132,7 +132,7 @@
             <!-- END Bill other details -->
 
             <!-- BEGIN Bill payment term -->
-            <div class="well well-sm col-md-3 text-center" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-3 text-center" v-show="bill.total">
                 <span class="text-center">{{ trans('bill.payment_term') }}: <strong>@{{ payment_term }}</strong></span>
             </div>
             <!-- END Bill payment term -->
@@ -140,7 +140,7 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total price -->
-            <div class="well well-sm col-md-2 text-center" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-2 text-center" v-show="bill.total">
                 <span class="text-center">{{ trans('bill.to_pay') }}: <strong>@{{ to_pay }} ron</strong></span>
             </div>
             <!-- END Bill total price -->
@@ -148,7 +148,7 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total discount -->
-            <div class="well well-sm col-md-3 text-center" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-3 text-center" v-show="bill.total">
                 <span>{{ trans('bill.saved_money') }}: <strong>@{{ saved_money }} ron</strong></span>
             </div>
             <!-- END Bill total discount -->
