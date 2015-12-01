@@ -16,6 +16,7 @@ return [
     'delete' => 'Şterge',
     'delete_article' => 'Ești sigur că vrei să ștergi acest articol?',
     'delete_category' => 'Ești sigur că vrei să ștergi această categorie?',
+    'description' => 'In aceasta sectiune gasesti raspunsuri la cele mai comune intrebari pe care le poti avea ca utlizator Nova',
     'getting_started' => 'Pentru început',
     'help_center' => 'Centrul de ajutor',
     'help_center_manager' => 'Manager centru de ajutor',

@@ -7168,9 +7168,13 @@ button.close {
   color: #878787;
   background-color: #3498DB; }
 
+.page-text-container {
+  margin-bottom: 45px; }
+
 .page-text {
-  margin-top: -15px;
-  color: #ffffff; }
+  color: #ffffff;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 40px; }
 
 .search-field {
   margin-top: 15px; }
@@ -7188,7 +7192,8 @@ button.close {
 .ask-button button {
   background-color: rgba(255, 0, 0, 0);
   border: 2px solid #ffffff;
-  color: #ffffff; }
+  color: #ffffff;
+  font-family: 'Source Sans Pro', sans-serif; }
 
 .ask-button button:hover {
   background-color: #ffffff;
@@ -7221,13 +7226,13 @@ button.close {
   margin-bottom: 80px; }
 
 .fancy-divider span {
-  color: #3A3A3A;
+  color: #3a3a3a;
   display: inline-block;
   padding: 0 50px 0 50px;
   background-color: #f4f4f4;
   position: relative;
   top: -20px;
-  font-size: 30px; }
+  font-size: 25px; }
 
 .custom-well {
   background-color: #ffffff;
@@ -7240,10 +7245,14 @@ button.close {
 .well-text {
   color: #7A7A7A; }
 
-.page-description h4 {
+.page-description-container {
+  margin-bottom: 25px; }
+
+.page-description {
   color: #ffffff;
-  line-height: 35px;
-  font-weight: 200; }
+  font-size: 20px;
+  line-height: 30px;
+  font-family: 'Source Sans Pro', sans-serif; }
 
 body.stop-scrolling {
   height: 100%;
