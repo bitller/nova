@@ -4580,13 +4580,13 @@ a.thumbnail.active {
     color: #66512c; }
 
 .alert-danger {
-  background-color: #f2dede;
-  border-color: #ebccd1;
-  color: #a94442; }
+  background-color: #F25D5C;
+  border-color: #F25D5C;
+  color: #ffffff; }
   .alert-danger hr {
-    border-top-color: #e4b9c0; }
+    border-top-color: #f04644; }
   .alert-danger .alert-link {
-    color: #843534; }
+    color: #e6e6e6; }
 
 @-webkit-keyframes progress-bar-stripes {
   from {

@@ -18,16 +18,19 @@ new Vue({
          * Get page data.
          */
         getData: function() {
-            //Alert.loader();
 
             this.$http.get('/help-center/get', function(response) {
 
                 this.$set('categories', response.categories);
                 this.$set('loaded', true);
-                //Alert.close();
 
             }).error(function(response) {
-                //
+                this.$set('loaded', true);
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('general-error'));
             });
         },
 

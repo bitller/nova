@@ -25,7 +25,12 @@ new Vue({
                 this.$set('loaded', true);
 
             }).error(function(response) {
-                //
+                this.$set('loaded', true);
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('general-error'));
             });
         },
 

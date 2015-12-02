@@ -1,6 +1,7 @@
 $brand-primary: #3498DB;
 $brand-warning: #F0AD4E;
 $default-grey: #E1E1E1;
+$danger-color: #F25D5C;
 
 // Navbar
 $navbar-default-bg: #3498DB;
@@ -51,3 +52,7 @@ $pager-disabled-bg: lighten($brand-primary, 9%);
 $alert-info-bg: $brand-primary;
 $alert-info-text: #ffffff;
 $alert-info-border: $brand-primary;
+
+$alert-danger-bg: $danger-color;
+$alert-danger-text: #ffffff;
+$alert-danger-border: $danger-color;

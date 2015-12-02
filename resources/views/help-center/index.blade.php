@@ -12,9 +12,6 @@
                 <span class="page-text">{{ trans('help_center.help_center') }}</span>
             </div>
 
-            {{--<div class="form-group col-md-8 col-md-offset-2 search-field">--}}
-                {{--<input class="form-control input-lg" placeholder="{{ trans('help_center.how_can_we_help') }}">--}}
-            {{--</div>--}}
             <div class="col-md-8 col-md-offset-2 text-center page-description-container">
                 <span class="page-description">{{ trans('help_center.description') }}</span>
             </div>
@@ -24,6 +21,8 @@
     @section('content')
         <div id="help-center">
             @include('includes.ajax-translations.common')
+
+            <div class="alert alert-danger" v-show="error">@{{ error }}</div>
 
             <!-- END Recommended resources -->
             <div v-repeat="category in categories" v-show="loaded">
