@@ -29,6 +29,7 @@ return [
     'marked_as_unpaid' => 'Factura a fost marcată ca neplatită.',
     'my_paid_bills' => 'Facturile mele plătite',
     'name' => 'Nume',
+    'number_of_products' => 'Numărul de produse',
     'options' => 'Opțiuni',
     'other_details' => 'Alte detalii',
     'other_details_description' => 'Ai de adăugat informații în plus sau doar vrei să îi spui ceva clientului? Completează câmpul de mai jos și va apărea la sfârșitul facturii.',

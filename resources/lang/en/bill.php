@@ -29,6 +29,7 @@ return [
     'marked_as_unpaid' => 'Bill was marked as unpaid',
     'my_paid_bills' => 'My paid bills',
     'name' => 'Name',
+    'number_of_products' => 'Number of products',
     'options' => 'Options',
     'other_details' => 'Other details',
     'other_details_description' => 'If have to add some extra information or just say something to the client, write here and will appear at the bottom of the bill.',

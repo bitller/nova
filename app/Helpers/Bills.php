@@ -95,6 +95,7 @@ class Bills {
             'to_pay' => $toPay,
             'saved_money' => $savedMoney,
             'total' => $price,
+            'number_of_products' => count($secondQuery),
             'show_discount_column' => $showDiscount,
             'show_other_details_info' => true,
             'products' => $secondQuery,
