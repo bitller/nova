@@ -10,4 +10,5 @@ return [
     'page_help' => 'Here you find all products from Avon catalogue, ordered ascending by their 5 number unique code.',
     'product_name_edit' => 'Product name edited!',
     'products_list' => 'Products list',
+    'tooltip' => 'Number of Avon products'
 ];

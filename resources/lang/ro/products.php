@@ -10,4 +10,5 @@ return [
     'page_help' => 'Aici găsești toate produsele din catalogul Avon, sortate în mod crescător după codul unic format din 5 cifre.',
     'product_name_edited' => 'Numele produsului a fost actualizat!',
     'products_list' => 'Lista cu produse',
+    'tooltip' => 'Numărul de produse Avon',
 ];

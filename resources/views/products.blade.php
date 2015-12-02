@@ -7,7 +7,7 @@
 
             <!-- BEGIN Add product button -->
             <div class="add-product-button">
-                <span class="avon-products">{{ trans('products.avon_products') }} <span class="badge">@{{ products.total }}</span></span>
+                <span class="avon-products">{{ trans('products.avon_products') }} <span class="badge" data-toggle="tooltip" title="{{ trans('products.tooltip') }}" data-placement="right">@{{ products.total }}</span></span>
                 <a href="/my-products"><button type="button" class="btn btn-primary pull-right" v-on="click: addClient()">
                     <span class="glyphicon glyphicon-link"></span> {{ trans('products.my_products') }}
                 </button></a>
