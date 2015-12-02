@@ -5,6 +5,7 @@
     <meta id="token" content="{{ csrf_token() }}">
     <title>Nova</title>
     <link rel="stylesheet" href="/css/app.css">
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     @yield('fonts')
 </head>
 
@@ -20,7 +21,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/bills">Nova</a>
+            <a class="navbar-brand app-logo" href="/bills">Nova</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
