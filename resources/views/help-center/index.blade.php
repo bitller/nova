@@ -22,11 +22,11 @@
     </div>
     @endsection
     @section('content')
-        <div id="help-center" v-show="loaded">
+        <div id="help-center">
             @include('includes.ajax-translations.common')
 
             <!-- END Recommended resources -->
-            <div v-repeat="category in categories">
+            <div v-repeat="category in categories" v-show="loaded">
                 <div class="fancy-divider col-md-12" v-show="category.number_of_articles">
                     <span>@{{ category.name }}</span>
                 </div>
@@ -36,6 +36,10 @@
                         <span class="well-text">@{{ article.content }}</span>
                     </div>
                 </div>
+            </div>
+            
+            <div v-show="!loaded" class="col-md-12 text-center">
+                <span class="glyphicon glyphicon-refresh glyphicon-spin help-center-load-icon"></span>
             </div>
 
             @include('includes.modals.ask-question')

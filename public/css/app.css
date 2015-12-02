@@ -7254,6 +7254,12 @@ button.close {
   line-height: 30px;
   font-family: 'Source Sans Pro', sans-serif; }
 
+.help-center-load-icon {
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 30px;
+  color: #3a3a3a; }
+
 body.stop-scrolling {
   height: 100%;
   overflow: hidden; }

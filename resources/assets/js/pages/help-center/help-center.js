@@ -18,13 +18,11 @@ new Vue({
          * Get page data.
          */
         getData: function() {
-            Alert.loader();
 
             this.$http.get('/help-center/get', function(response) {
 
                 this.$set('categories', response.categories);
                 this.$set('loaded', true);
-                Alert.close();
 
             }).error(function(response) {
                 //
@@ -99,7 +97,6 @@ new Vue({
         resetAskQuestionModal: function() {
             this.$set('error', '');
             this.$set('errors', '');
-            //this.$set('question_category_id');
             this.$set('question_title', '');
             this.$set('question_content', '');
         }
