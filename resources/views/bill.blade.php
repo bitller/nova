@@ -12,7 +12,7 @@
                 <!-- BEGIN Client name and campaign details -->
                 <span class="my-clients-title">
                     <a href="/clients/@{{ bill.data.client_id }}">@{{ bill.data.client_name }}</a> - comanda @{{ bill.data.campaign_order }} din campania @{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}
-                    &nbsp;&nbsp;<span v-show="paid > 0" class="paid-bill glyphicon glyphicon-ok" data-toggle="tooltip" title="This bill has been paid." data-placement="right"></span>
+                    &nbsp;&nbsp;<span v-show="paid > 0" class="paid-bill glyphicon glyphicon-ok" data-toggle="tooltip" title="{{ trans('bill.tooltip') }}" data-placement="right"></span>
                 </span>
                 <!-- END Client name and campaign details -->
 

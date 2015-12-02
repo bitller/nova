@@ -61,5 +61,6 @@ return [
     'set_payment_term' => 'Set payment term',
     'set_payment_term_description' => 'Set bill payment term',
     'set_payment_term_placeholder' => 'DD/MM/YYYY',
+    'tooltip' => 'This bill has been paid.',
     'to_pay' => 'To pay',
 ];
