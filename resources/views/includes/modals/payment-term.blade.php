@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label for="payment-term">{{ trans('bill.set_payment_term_description') }}:</label>
-                    <input type="text" v-attr="value:payment_term" class="form-control" id="payment-term" placeholder="{{ trans('bill.set_payment_term_placeholder') }}">
+                    <input type="text" class="form-control" id="payment-term" placeholder="{{ trans('bill.set_payment_term_placeholder') }}">
                 </div>
 
             </div>

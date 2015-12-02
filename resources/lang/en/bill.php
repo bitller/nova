@@ -36,6 +36,7 @@ return [
     'page' => 'Page',
     'page_updated' => 'Product page updated!',
     'payment_term' => 'Payment term',
+    'payment_term_not_set' => 'Payment term not set',
     'payment_term_updated' => 'Payment term updated!',
     'price' => 'Price',
     'price_updated' => 'Product price updated!',

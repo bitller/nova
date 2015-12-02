@@ -72,6 +72,10 @@ class Bills {
             )
             ->first();
 
+        if ($bill->payment_term === '0000-00-00') {
+            $bill->payment_term = false;
+        }
+
         // Calculate bill price, saved money and check if discount column should be displayed
         $showDiscount = false;
         $price = 0;

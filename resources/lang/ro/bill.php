@@ -36,6 +36,7 @@ return [
     'page' => 'Pagină',
     'page_updated' => 'Pagina produsului a fost actualizată!',
     'payment_term' => 'Termen de plată',
+    'payment_term_not_set' => 'Termenul de plată nu a fost setat',
     'payment_term_updated' => 'Termenul de plată a fost actualizat!',
     'price' => 'Preţ',
     'price_updated' => 'Preţul produsului a fost actualizat!',

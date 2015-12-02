@@ -43,6 +43,7 @@ new Vue({
                 this.$set('bill', response);
                 this.$set('other_details', response.data.other_details);
                 this.$set('payment_term', response.data.payment_term);
+                this.$set('payment_term_not_set', response.data.payment_term_not_set);
                 this.$set('total', response.total);
                 this.$set('saved_money', response.saved_money);
                 this.$set('to_pay', response.to_pay);
