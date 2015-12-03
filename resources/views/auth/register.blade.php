@@ -5,87 +5,101 @@
     <meta id="token" content="{{ csrf_token() }}">
     <title>{{ trans('register.title') }}</title>
     <link rel="stylesheet" href="/css/app.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
 </head>
-<body id="login-page">
+
+<!-- BEGIN Register page -->
+<body id="register-page">
+
+@include('includes.not-logged.navbar')
+
+<!-- BEGIN Top section -->
+<div class="jumbotron custom-jumbotron text-center">
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center">
+        <span class="first-text">{{ trans('register.start_using_nova') }}</span>
+        <span class="short-description">{{ trans('register.short_description') }}</span>
+    </div></div>
+</div>
+<!-- END Top section -->
+
+<!-- BEGIN Register form -->
 <div class="container" id="register">
     @include('includes.ajax-translations.common')
-    <div class="row register-button">
-        <a href="/login"><button class="btn btn-danger pull-right">{{ trans('register.login') }}</button></a>
-    </div>
 
-    <div class="row">
+    <div class="well custom-well col-md-6 col-md-offset-3" style="margin-top:-70px">
 
-        <!-- BEGIN Login form -->
-        <div class="login-form col-md-4 col-md-offset-4">
-
-            <!-- BEGIN Logo -->
-            <div class="login-logo">
-                {{--<span class="glyphicon glyphicon-list-alt text-center icon-color" style="font-size: 40px"></span>--}}
-                {{--<a href="/register">--}}
-                    <div class="text-center register-logo">
-                        <div class="glyphicon glyphicon-list-alt text-center icon-color"></div>
-                        <h2 class="icon-color">{{ trans('register.create_account') }}</h2>
-                    </div>
-                {{--</a>--}}
-            </div>
-            <!-- END Logo -->
-
-
-            <!-- BEGIN First name input -->
-            <div v-class="has-error: errors.first_name" class="form-group has-feedback">
-                <input v-model="first_name" type="text" class="form-control" placeholder="{{ trans('register.what_is_your_first_name') }}" />
-                <i class="glyphicon glyphicon-user form-control-feedback icon-color"></i>
-                <span v-show="errors.first_name" class="text-danger">@{{ errors.first_name }}</span>
-            </div>
-            <!-- END First name input -->
-
-            <!-- BEGIN Last name input -->
-            <div v-class="has-error: errors.last_name" class="form-group has-feedback">
-                <input v-model="last_name" type="text" class="form-control" placeholder="{{ trans('register.what_is_your_last_name') }}" />
-                <i class="glyphicon glyphicon-user form-control-feedback icon-color"></i>
-                <span v-show="errors.last_name" class="text-danger">@{{ errors.last_name }}</span>
-            </div>
-            <!-- END Last name -->
-
-            <!-- BEGIN Email input -->
-            <div v-class="has-error: errors.email" class="form-group has-error has-feedback">
-                <input v-model="email" type="text" class="form-control" placeholder="{{ trans('register.what_is_your_email') }}" />
-                <i class="glyphicon glyphicon-envelope form-control-feedback icon-color"></i>
-                <span v-show="errors.email" class="text-danger">@{{ errors.email }}</span>
-            </div>
-            <!-- END Email input -->
-
-            <!-- BEGIN Password input -->
-            <div v-class="has-error: errors.password" class="form-group has-error has-feedback">
-                <input v-model="password" type="password" class="form-control" placeholder="{{ trans('register.choose_password') }}" />
-                <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
-                <span v-show="errors.password" class="text-danger">@{{ errors.password }}</span>
-            </div>
-            <!-- END Password input -->
-
-            <!-- BEGIN Confirm password -->
-            <div v-class="has-error: errors.password_confirmation" class="form-group has-error has-feedback">
-                <input v-model="password_confirmation" type="password" class="form-control" placeholder="{{ trans('register.confirm_password') }}" />
-                <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
-                <span v-show="errors.password_confirmation" class="text-danger">@{{ errors.password_confirmation }}</span>
-            </div>
-            <!-- END Confirm password -->
-
-            <button v-on="click: register()" v-attr="disabled: loading" class="btn btn-primary btn-block">
-                <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
-                <span v-show="!loading">{{ trans('register.create_account') }}</span>
-            </button>
-            {{--<input v-attr="disabled: loading" v-on="click: register()" type="submit" class="btn btn-primary btn-block" value="{{ trans('register.create_account') }}">--}}
+        <!-- Price divider -->
+        <div class="fancy-divider-white">
+            <span>{{ trans('register.subscription_price') }}</span>
         </div>
-        <!-- END Login form -->
-    </div>
+        <!-- END Price divider -->
 
-    <div class="row forgot-password">
-        <a href="/recover"><p class="text-center">{{ trans('login.forgot_password') }}</p></a>
-    </div>
+        <div class="text-center">
+            <span class="price">19.99</span>
+            <span class="currency">{{ trans('register.currency') }}</span>
+            <span class="period">/{{ trans('register.period') }}</span>
+        </div>
 
+        <!-- BEGIN Profile divider -->
+        <div class="fancy-divider-white">
+            <span>{{ trans('register.your_profile') }}</span>
+        </div>
+        <!-- END Profile divider -->
+
+        <!-- BEGIN Email -->
+        <div class="form-group">
+            <input class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
+        </div>
+        <!-- END Email -->
+
+        <!-- BEGIN Password -->
+        <div class="form-group">
+            <input class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
+        </div>
+        <!-- END Password -->
+
+        <!-- BEGIN Confirm password -->
+        <div class="form-group">
+            <input class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
+        </div>
+        <!-- END Confirm password -->
+
+        <!-- BEGIN Billing information -->
+        <div class="fancy-divider-white">
+            <span>{{ trans('register.billing_information') }}</span>
+        </div>
+        <!-- END Billing information -->
+
+        <div class="form-group">
+            <input class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
+        </div>
+
+        <div class="form-group">
+            <input class="form-control border-input" type="text" placeholder="{{ trans('register.cvv_code') }}" />
+        </div>
+
+        <label for="expiry" class="expiry-text">{{ trans('register.expiry_date') }}</label>
+        <div class="form-inline" id="expiry">
+
+            <div class="form-group">
+                <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
+            </div>
+            /
+            <div class="form-group">
+                <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
+            </div>
+        </div>
+        <div class="form-group register-button">
+            <button class="btn-block btn btn-primary">{{ trans('register.join') }}</button>
+        </div>
+
+    </div>
 </div>
+<!-- END Register form -->
+
 </body>
+<!-- END Register page -->
 <script src="/js/vendor.js"></script>
 <script src="/js/register.js"></script>
 </html>

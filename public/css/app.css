@@ -6092,6 +6092,37 @@ button.close {
 .register-logo {
   font-size: 60px; }
 
+#register-page .first-text {
+  font-size: 40px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff; }
+
+#register-page .short-description {
+  display: block;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  font-size: 20px;
+  color: #ffffff;
+  font-family: 'Source Sans Pro', sans-serif; }
+
+#register-page .price {
+  display: inline-block;
+  font-size: 30px;
+  color: #747474;
+  margin-bottom: 10px; }
+
+#register-page .currency, #register-page .period {
+  display: inline-block;
+  font-size: 20px;
+  color: #747474;
+  margin-bottom: 10px; }
+
+#register-page .expiry-text {
+  color: #747474; }
+
+#register-page .register-button {
+  margin-top: 20px; }
+
 .table tbody > tr > td.vert-align {
   vertical-align: middle; }
 
@@ -8262,5 +8293,27 @@ body {
 .flat-input {
   border: none;
   border-radius: 3px; }
+
+.border-input {
+  box-shadow: none; }
+
+.border-input:focus {
+  border: 1px solid #3498DB; }
+
+.fancy-divider-white {
+  height: 2px;
+  background-color: #D8D8D8;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px; }
+
+.fancy-divider-white span {
+  color: #909090;
+  display: inline-block;
+  padding: 0 50px 0 50px;
+  background-color: #ffffff;
+  position: relative;
+  top: -20px;
+  font-size: 25px; }
 
 /*# sourceMappingURL=app.css.map */
