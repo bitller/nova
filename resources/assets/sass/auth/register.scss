@@ -2,6 +2,10 @@
   font-size: 60px;
 }
 
+#register-page .register-form {
+  margin-top: -80px;
+}
+
 #register-page .first-text {
   font-size: 40px;
   font-family: 'Source Sans Pro', sans-serif;
@@ -11,7 +15,7 @@
 #register-page .short-description {
   display: block;
   margin-top: 35px;
-  margin-bottom: 35px;
+  margin-bottom: 45px;
   font-size: 20px;
   color: #ffffff;
   font-family: 'Source Sans Pro', sans-serif;
@@ -35,9 +39,19 @@ $marginBottom: 10px;
 }
 
 #register-page .expiry-text {
-  color: $priceSectionColor;
+  color: #909090;
 }
 
 #register-page .register-button {
   margin-top: 20px;
+}
+
+#register-page .secure-form {
+  color: $priceSectionColor;
+  margin-bottom: 70px;
+}
+
+#register-page .copyright {
+  margin-bottom: 15px;
+  color: $priceSectionColor;
 }

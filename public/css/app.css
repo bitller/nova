@@ -6092,6 +6092,9 @@ button.close {
 .register-logo {
   font-size: 60px; }
 
+#register-page .register-form {
+  margin-top: -80px; }
+
 #register-page .first-text {
   font-size: 40px;
   font-family: 'Source Sans Pro', sans-serif;
@@ -6100,7 +6103,7 @@ button.close {
 #register-page .short-description {
   display: block;
   margin-top: 35px;
-  margin-bottom: 35px;
+  margin-bottom: 45px;
   font-size: 20px;
   color: #ffffff;
   font-family: 'Source Sans Pro', sans-serif; }
@@ -6118,10 +6121,18 @@ button.close {
   margin-bottom: 10px; }
 
 #register-page .expiry-text {
-  color: #747474; }
+  color: #909090; }
 
 #register-page .register-button {
   margin-top: 20px; }
+
+#register-page .secure-form {
+  color: #747474;
+  margin-bottom: 70px; }
+
+#register-page .copyright {
+  margin-bottom: 15px;
+  color: #747474; }
 
 .table tbody > tr > td.vert-align {
   vertical-align: middle; }
@@ -8308,12 +8319,36 @@ body {
   margin-bottom: 40px; }
 
 .fancy-divider-white span {
-  color: #909090;
+  color: #747474;
   display: inline-block;
-  padding: 0 50px 0 50px;
+  padding: 0 30px 0 30px;
   background-color: #ffffff;
   position: relative;
   top: -20px;
   font-size: 25px; }
+
+.fancy-divider-blue {
+  height: 2px;
+  background-color: #217dbb;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px; }
+
+.fancy-divider-blue span {
+  color: #ffffff;
+  display: inline-block;
+  padding: 0 30px 0 30px;
+  background-color: #3498DB;
+  position: relative;
+  top: -20px;
+  font-size: 25px; }
+
+.blue-well {
+  color: #ffffff;
+  background-color: #6AB3E4;
+  border-bottom: 2px solid #258cd1;
+  border-left: 1px solid #258cd1;
+  border-right: 1px solid #258cd1;
+  border-top: 1px solid #258cd1; }
 
 /*# sourceMappingURL=app.css.map */

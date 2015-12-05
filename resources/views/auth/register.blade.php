@@ -27,76 +27,141 @@
 <div class="container" id="register">
     @include('includes.ajax-translations.common')
 
-    <div class="well custom-well col-md-6 col-md-offset-3" style="margin-top:-70px">
+    <div class="well custom-well register-form col-md-6 col-md-offset-3">
+        <div class="col-md-10 col-md-offset-1">
+            <!-- Price divider -->
+            <div class="fancy-divider-white">
+                <span>{{ trans('register.subscription_price') }}</span>
+            </div>
+            <!-- END Price divider -->
 
-        <!-- Price divider -->
-        <div class="fancy-divider-white">
-            <span>{{ trans('register.subscription_price') }}</span>
-        </div>
-        <!-- END Price divider -->
+            <div class="text-center">
+                <span class="price">19.99</span>
+                <span class="currency">{{ trans('register.currency') }}</span>
+                <span class="period">/{{ trans('register.period') }}</span>
+            </div>
 
-        <div class="text-center">
-            <span class="price">19.99</span>
-            <span class="currency">{{ trans('register.currency') }}</span>
-            <span class="period">/{{ trans('register.period') }}</span>
-        </div>
+            <!-- BEGIN Profile divider -->
+            <div class="fancy-divider-white">
+                <span>{{ trans('register.your_profile') }}</span>
+            </div>
+            <!-- END Profile divider -->
 
-        <!-- BEGIN Profile divider -->
-        <div class="fancy-divider-white">
-            <span>{{ trans('register.your_profile') }}</span>
-        </div>
-        <!-- END Profile divider -->
+            <!-- BEGIN Email -->
+            <div class="form-group">
+                <input class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
+            </div>
+            <!-- END Email -->
 
-        <!-- BEGIN Email -->
-        <div class="form-group">
-            <input class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
-        </div>
-        <!-- END Email -->
+            <!-- BEGIN Password -->
+            <div class="form-group">
+                <input class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
+            </div>
+            <!-- END Password -->
 
-        <!-- BEGIN Password -->
-        <div class="form-group">
-            <input class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
-        </div>
-        <!-- END Password -->
+            <!-- BEGIN Confirm password -->
+            <div class="form-group">
+                <input class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
+            </div>
+            <!-- END Confirm password -->
 
-        <!-- BEGIN Confirm password -->
-        <div class="form-group">
-            <input class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
-        </div>
-        <!-- END Confirm password -->
-
-        <!-- BEGIN Billing information -->
-        <div class="fancy-divider-white">
-            <span>{{ trans('register.billing_information') }}</span>
-        </div>
-        <!-- END Billing information -->
-
-        <div class="form-group">
-            <input class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
-        </div>
-
-        <div class="form-group">
-            <input class="form-control border-input" type="text" placeholder="{{ trans('register.cvv_code') }}" />
-        </div>
-
-        <label for="expiry" class="expiry-text">{{ trans('register.expiry_date') }}</label>
-        <div class="form-inline" id="expiry">
+            <!-- BEGIN Billing information -->
+            <div class="fancy-divider-white">
+                <span>{{ trans('register.billing_information') }}</span>
+            </div>
+            <!-- END Billing information -->
 
             <div class="form-group">
-                <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
+                <input class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
             </div>
-            /
+
             <div class="form-group">
-                <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
+                <input class="form-control border-input" type="text" placeholder="{{ trans('register.cvv_code') }}" />
+            </div>
+
+            <label for="expiry" class="expiry-text">{{ trans('register.expiry_date') }}</label>
+            <div class="form-inline" id="expiry">
+
+                <div class="form-group">
+                    <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
+                </div>
+                /
+                <div class="form-group">
+                    <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
+                </div>
+            </div>
+            <div class="form-group register-button">
+                <button class="btn-block btn btn-primary">{{ trans('register.join') }}</button>
             </div>
         </div>
-        <div class="form-group register-button">
-            <button class="btn-block btn btn-primary">{{ trans('register.join') }}</button>
+    </div>
+    <div class="secure-form col-md-6 col-md-offset-3">
+        {{ trans('register.secure_form') }}
+    </div>
+</div>
+<!-- END Register form -->
+
+<div class="jumbotron custom-jumbotron">
+    <div class="container">
+        <div class="fancy-divider-blue">
+            <span>{{ trans('register.got_questions') }}</span>
+        </div>
+
+        <!-- BEGIN How to pay question and answer -->
+        <div class="col-md-6">
+            <div class="well blue-well">
+                <div class="question">
+                    <strong>{{ trans('register.how_to_pay_question') }}</strong>
+                </div>
+                <div>{{ trans('register.how_to_pay_answer') }}</div>
+            </div>
+        </div>
+        <!-- END How to pay question and answer -->
+
+        <!-- BEGIN Can i cancel question and answer -->
+        <div class="col-md-6">
+            <div class="well blue-well">
+                <div class="question">
+                    <strong>{{ trans('register.can_i_cancel_question') }}</strong>
+                </div>
+                <div>{{ trans('register.can_i_cancel_answer') }}</div>
+            </div>
+        </div>
+        <!-- END Can i cancel question and answer -->
+
+
+        <!-- BEGIN Automatically renew question and answer -->
+        <div class="col-md-6">
+            <div class="well blue-well">
+                <div class="question">
+                    <strong>{{ trans('register.subscription_automatically_renew_question') }}</strong>
+                </div>
+                <div>{{ trans('register.subscription_automatically_renew_answer') }}</div>
+            </div>
+        </div>
+        <!-- END Automatically renew question and answer -->
+
+        <!-- BEGIN Need help question and answer -->
+        <div class="col-md-6">
+            <div class="well blue-well">
+                <div class="question">
+                    <strong>{{ trans('register.need_help_question') }}</strong>
+                </div>
+                <div>{{ trans('register.need_help_answer') }}</div>
+            </div>
+        </div>
+        <!-- END Need help question and answer -->
+
         </div>
 
     </div>
 </div>
-<!-- END Register form -->
+
+<div class="container">
+<div class="col-md-12 text-center copyright">
+    <span>{{ trans('register.copyright') }}</span>
+</div>
+</div>
 
 </body>
 <!-- END Register page -->

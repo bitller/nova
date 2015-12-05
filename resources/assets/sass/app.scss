@@ -149,11 +149,38 @@ body {
 }
 
 .fancy-divider-white span {
-  color: #909090;
+  color: #747474;
   display: inline-block;
-  padding: 0 50px 0 50px;
+  padding: 0 30px 0 30px;
   background-color: #ffffff;
   position: relative;
   top: -20px;
   font-size: 25px;
+}
+
+.fancy-divider-blue {
+  height: 2px;
+  background-color: darken($brand-primary, 10);
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.fancy-divider-blue span {
+  color: #ffffff;
+  display: inline-block;
+  padding: 0 30px 0 30px;
+  background-color: $brand-primary;
+  position: relative;
+  top: -20px;
+  font-size: 25px;
+}
+
+.blue-well {
+  color: #ffffff;
+  background-color: #6AB3E4;
+  border-bottom: 2px solid darken($brand-primary, 5);
+  border-left: 1px solid darken($brand-primary, 5);
+  border-right: 1px solid darken($brand-primary, 5);
+  border-top: 1px solid darken($brand-primary, 5);
 }
