@@ -31,11 +31,13 @@ class CreateAccountRequest extends AjaxRequest {
      */
     public function rules() {
         return [
+            'card_expiry_year' => ['required', 'numeric', 'between:16,30'],
+            'card_expiry_month' => ['required', 'numeric', 'between:1,12'],
+            'card_cvv_code' => ['required', 'numeric', 'length:3'],
+            'card_number' => ['required', 'numeric', 'between:13,19'],
             'password_confirmation' => ['required', 'min:6'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'last_name' => ['required', 'string', 'between:3,30'],
-            'first_name' => ['required', 'string', 'between:3,30']
         ];
     }
 
@@ -59,7 +61,7 @@ class CreateAccountRequest extends AjaxRequest {
     protected function formatErrors(Validator $validator) {
 
         $messages = $validator->errors();
-        $fields = ['first_name', 'last_name', 'email', 'password', 'password_confirmation'];
+        $fields = ['email', 'password', 'password_confirmation', 'card_number', 'card_cvv_code', 'card_expiry_month', 'card_expiry_year'];
         $errors = [];
 
         foreach ($fields as $field) {

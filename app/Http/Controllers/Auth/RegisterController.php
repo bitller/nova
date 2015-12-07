@@ -63,6 +63,9 @@ class RegisterController extends Controller {
 
         Auth::login($user);
 
+        // Try to create subscription
+
+
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('register.account_created'));
         return response($response->get());
