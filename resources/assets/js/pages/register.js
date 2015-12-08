@@ -6,6 +6,12 @@ new Vue({
     el: '#register',
 
     methods: {
+
+        /**
+         * Handle creation of new accounts.
+         *
+         * @returns {boolean}
+         */
         register: function() {
 
             this.resetErrors();
@@ -29,6 +35,13 @@ new Vue({
             }, this.responseHandler);
         },
 
+        /**
+         * Paymill response handler.
+         *
+         * @param error
+         * @param result
+         * @returns {boolean}
+         */
         responseHandler: function(error, result) {
 
             if (error) {
@@ -61,6 +74,9 @@ new Vue({
             });
         },
 
+        /**
+         * Validate all form fields.
+         */
         validateForm: function() {
             this.validateEmail();
             this.validatePassword();
@@ -84,6 +100,11 @@ new Vue({
             this.$set('form_error', false);
         },
 
+        /**
+         * Validate email field.
+         *
+         * @returns {boolean}
+         */
         validateEmail: function() {
             if (this.$get('email')) {
                 return true;
@@ -92,6 +113,10 @@ new Vue({
             this.$set('email_error', Translation.register('email-error'));
         },
 
+        /**
+         * Validate password field.
+         * @returns {boolean}
+         */
         validatePassword: function() {
             if (this.$get('password')) {
                 return true;
@@ -100,6 +125,11 @@ new Vue({
             this.$set('password_error', Translation.register('password-error'));
         },
 
+        /**
+         * Validate password confirmation field.
+         *
+         * @returns {boolean}
+         */
         validatePasswordConfirmation: function() {
             if (this.$get('password_confirmation')) {
                 return true;
