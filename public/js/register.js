@@ -48,10 +48,7 @@ new Vue({
 
             // Make post request
             this.$http.post('/register', data, function(response) {
-                this.$set('loading', false);
                 window.location.replace('/next');
-                Alert.success(response.title, response.message);
-
             }).error(function(response) {
 
                 this.$set('loading', false);
