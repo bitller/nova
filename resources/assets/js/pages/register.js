@@ -8,6 +8,7 @@ new Vue({
     methods: {
         register: function() {
 
+            this.resetErrors();
             this.validateForm();
 
             if (this.$get('form_error')) {
@@ -70,6 +71,20 @@ new Vue({
             this.validateCardNumber();
             this.validateExpiryDate();
             this.validateCardCvc();
+        },
+
+        /**
+         * Reset all form errors.
+         */
+        resetErrors: function() {
+            this.$set('errors', '');
+            this.$set('email_error', '');
+            this.$set('password_error', '');
+            this.$set('password_confirmation_error', '');
+            this.$set('card_number_error', '');
+            this.$set('card_expiry_date_error', '');
+            this.$set('card_cvc_error', '');
+            this.$set('form_error', false);
         },
 
         validateEmail: function() {

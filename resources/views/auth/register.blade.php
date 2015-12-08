@@ -51,23 +51,26 @@
             <div v-show="general_error" class="alert alert-danger">@{{ general_error }}</div>
 
             <!-- BEGIN Email -->
-            <div class="form-group" v-class="has-error : email_error">
+            <div class="form-group" v-class="has-error : email_error, has-error : errors.email">
                 <input v-model="email" class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
                 <span v-show="email_error" class="text-danger">@{{ email_error }}</span>
+                <span v-show="errors.email" class="text-danger">@{{ errors.email }}</span>
             </div>
             <!-- END Email -->
 
             <!-- BEGIN Password -->
-            <div class="form-group" v-class="has-error : password_error">
+            <div class="form-group" v-class="has-error : password_error, has-error : errors.password">
                 <input v-model="password" class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
                 <span v-show="password_error" class="text-danger">@{{ password_error }}</span>
+                <span v-show="errors.password" class="text-danger">@{{ errors.password }}</span>
             </div>
             <!-- END Password -->
 
             <!-- BEGIN Confirm password -->
-            <div class="form-group" v-class="has-error : password_confirmation_error">
+            <div class="form-group" v-class="has-error : password_confirmation_error, has-error : errors.password_confirmation">
                 <input v-model="password_confirmation" class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
                 <span v-show="password_confirmation_error" class="text-danger">@{{ password_confirmation_error }}</span>
+                <span v-show="errors.password_confirmation" class="text-danger">@{{ errors.password_confirmation }}</span>
             </div>
             <!-- END Confirm password -->
 
@@ -107,7 +110,10 @@
             <!-- END Card expiry date -->
 
             <div class="form-group register-button">
-                <button v-on="click: register()" class="btn-block btn btn-primary">{{ trans('register.join') }}</button>
+                <button v-attr="disabled : loading" v-on="click: register()" class="btn-block btn btn-primary">
+                    <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+                    <span v-show="!loading">{{ trans('register.join') }}</span>
+                </button>
             </div>
         </div>
     </div>
