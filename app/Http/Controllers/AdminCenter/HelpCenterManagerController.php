@@ -80,6 +80,8 @@ class HelpCenterManagerController extends BaseController {
      */
     public function deleteCategory(DeleteCategoryRequest $request) {
 
+        // Delete all articles of given category first
+        HelpCenterArticle::where('category_id', $request->get('category_id'))->delete();
         HelpCenterCategory::where('id', $request->get('category_id'))->delete();
 
         $response = new AjaxResponse();
