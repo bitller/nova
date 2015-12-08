@@ -8235,10 +8235,7 @@ body {
   padding-top: 60px; }
 
 .app-logo {
-  display: inline-block;
-  margin-top: -2px;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 30px; }
+  display: inline-block; }
 
 .print-statistics-button {
   margin-top: 20px;
