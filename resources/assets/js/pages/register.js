@@ -8,17 +8,38 @@ new Vue({
     methods: {
         register: function() {
 
-            if (!this.validateForm()) {
+            this.validateForm();
+
+            if (this.$get('form_error')) {
                 return false;
             }
 
+            // All inputs are completed
             this.$set('loading', true);
+
+            paymill.createToken({
+                number: this.$get('card_number'),
+                exp_month: this.$get('card_expiry_month'),
+                exp_year: this.$get('card_expiry_year'),
+                cvc: this.$get('card_cvc'),
+                cardholder: this.$get('card_holdername'),
+                amount: this.$get('amount'),
+                currency: this.$get('currency')
+            }, this.responseHandler);
+        },
+
+        responseHandler: function(error, result) {
+
+            if (error) {
+                this.$set('loading', false);
+                this.setApiErrorMessage(error.apierror);
+                return false;
+            }
 
             // Build post data
             var data = {
                 _token: Token.get(),
-                first_name: this.$get('first_name'),
-                last_name: this.$get('last_name'),
+                token: result.token,
                 email: this.$get('email'),
                 password: this.$get('password'),
                 password_confirmation: this.$get('password_confirmation')
@@ -40,66 +61,39 @@ new Vue({
                 }
                 this.$set('errors', response.errors);
             });
-
-            // Make request
-
-            // Parse errors to highlight each input
-
-        },
-
-        responseHandler: function(error, result) {
-            //
         },
 
         validateForm: function() {
-            // Email
-            if (!this.validateEmail()) {
-                return false;
-            }
-            // Password
-            if (!this.validatePassword()) {
-                return false;
-            }
-            // Password confirmation
-            if (!this.validatePasswordConfrimation()) {
-                return false;
-            }
-            // Card number
-            if (!this.validateCardNumber()) {
-                return false;
-            }
-            // Card expiry date
-            if (!this.validateExpiryDate()) {
-                return false;
-            }
-            // Card cvv code
-            if (!this.validateCardCvc()) {
-                return false;
-            }
+            this.validateEmail();
+            this.validatePassword();
+            this.validatePasswordConfirmation();
+            this.validateCardNumber();
+            this.validateExpiryDate();
+            this.validateCardCvc();
         },
 
         validateEmail: function() {
-            if (this.$get('email').length() > 0) {
+            if (this.$get('email')) {
                 return true;
             }
+            this.$set('form_error', true);
             this.$set('email_error', Translation.register('email-error'));
-            return false;
         },
 
         validatePassword: function() {
-            if (this.$get('password').length() > 0) {
+            if (this.$get('password')) {
                 return true;
             }
+            this.$set('form_error', true);
             this.$set('password_error', Translation.register('password-error'));
-            return false;
         },
 
-        validatePasswordConfrimation: function() {
-            if (this.$get('password-confirmation').length() > 0) {
+        validatePasswordConfirmation: function() {
+            if (this.$get('password_confirmation')) {
                 return true;
             }
+            this.$set('form_error', true);
             this.$set('password_confirmation_error', Translation.register('password-confirmation-error'));
-            return false;
         },
 
         /**
@@ -114,7 +108,8 @@ new Vue({
             }
 
             // Show error message if card number is invalid
-            this.$set('card_number_error', Translation.subscribe('card-number-error'));
+            this.$set('form_error', true);
+            this.$set('card_number_error', Translation.register('card-number-error'));
         },
 
         /**
@@ -129,7 +124,8 @@ new Vue({
             }
 
             // Show error message if expiry date is invalid
-            this.$set('card_expiry_date_error', Translation.subscribe('card-expiry-date-error'));
+            this.$set('form_error', true);
+            this.$set('card_expiry_date_error', Translation.register('card-expiry-date-error'));
         },
 
         /**
@@ -143,7 +139,8 @@ new Vue({
             }
 
             // Show error if cvc is invalid
-            this.$set('card_cvc_error', Translation.subscribe('card-cvc-error'));
+            this.$set('form_error', true);
+            this.$set('card_cvc_error', Translation.register('card-cvc-error'));
         },
 
         /**

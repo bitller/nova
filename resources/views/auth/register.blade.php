@@ -25,10 +25,11 @@
 
 <!-- BEGIN Register form -->
 <div class="container" id="register">
-    @include('includes.ajax-translations.common')
+    @include('includes.ajax-translations.register')
 
     <div class="well custom-well register-form col-md-6 col-md-offset-3">
         <div class="col-md-10 col-md-offset-1">
+
             <!-- Price divider -->
             <div class="fancy-divider-white">
                 <span>{{ trans('register.subscription_price') }}</span>
@@ -47,21 +48,26 @@
             </div>
             <!-- END Profile divider -->
 
+            <div v-show="general_error" class="alert alert-danger">@{{ general_error }}</div>
+
             <!-- BEGIN Email -->
-            <div class="form-group">
-                <input class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
+            <div class="form-group" v-class="has-error : email_error">
+                <input v-model="email" class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
+                <span v-show="email_error" class="text-danger">@{{ email_error }}</span>
             </div>
             <!-- END Email -->
 
             <!-- BEGIN Password -->
-            <div class="form-group">
-                <input class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
+            <div class="form-group" v-class="has-error : password_error">
+                <input v-model="password" class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
+                <span v-show="password_error" class="text-danger">@{{ password_error }}</span>
             </div>
             <!-- END Password -->
 
             <!-- BEGIN Confirm password -->
-            <div class="form-group">
-                <input class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
+            <div class="form-group" v-class="has-error : password_confirmation_error">
+                <input v-model="password_confirmation" class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
+                <span v-show="password_confirmation_error" class="text-danger">@{{ password_confirmation_error }}</span>
             </div>
             <!-- END Confirm password -->
 
@@ -71,27 +77,37 @@
             </div>
             <!-- END Billing information -->
 
-            <div class="form-group">
-                <input class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
+            <!-- BEGIN Card number -->
+            <div class="form-group" v-class="has-error : card_number_error">
+                <input v-model="card_number" class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
+                <span v-show="card_number_error" class="text-danger">@{{ card_number_error }}</span>
             </div>
+            <!-- END Card number -->
 
-            <div class="form-group">
-                <input class="form-control border-input" type="text" placeholder="{{ trans('register.cvv_code') }}" />
+            <!-- BEGIN Card cvc code -->
+            <div class="form-group" v-class="has-error : card_cvc_error">
+                <input v-model="card_cvc" class="form-control border-input" type="text" placeholder="{{ trans('register.cvc_code') }}" />
+                <span v-show="card_cvc_error" class="text-danger">@{{ card_cvc_error }}</span>
             </div>
+            <!-- END Card cvc code -->
 
+            <!-- BEGIN Card expiry date -->
             <label for="expiry" class="expiry-text">{{ trans('register.expiry_date') }}</label>
             <div class="form-inline" id="expiry">
 
-                <div class="form-group">
-                    <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
+                <div class="form-group" v-class="has-error : card_expiry_date_error">
+                    <input v-model="card_expiry_month" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
                 </div>
                 /
-                <div class="form-group">
-                    <input type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
+                <div class="form-group" v-class="has-error : card_expiry_date_error">
+                    <input v-model="card_expiry_year" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
                 </div>
+                <span v-show="card_expiry_date_error" class="text-danger">@{{ card_expiry_date_error }}</span>
             </div>
+            <!-- END Card expiry date -->
+
             <div class="form-group register-button">
-                <button class="btn-block btn btn-primary">{{ trans('register.join') }}</button>
+                <button v-on="click: register()" class="btn-block btn btn-primary">{{ trans('register.join') }}</button>
             </div>
         </div>
     </div>
@@ -166,5 +182,9 @@
 </body>
 <!-- END Register page -->
 <script src="/js/vendor.js"></script>
+<script type="text/javascript" src="https://bridge.paymill.com/"></script>
+<script type="text/javascript">
+    var PAYMILL_PUBLIC_KEY = '670897165999c7209df7ec84d1d5a55b';
+</script>
 <script src="/js/register.js"></script>
 </html>

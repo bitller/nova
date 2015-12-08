@@ -27,8 +27,7 @@ class SubscribeController extends BaseController {
     public function process(ProcessRequest $request) {
 
         // Initialize paymill request
-        $privateKey = 'cf803e2147fd65a0d2a6b3d5afbfa9af';
-        $paymillRequest = new PaymillRequest($privateKey);
+
 
         // Create credit card payment
         $payment = new Payment();

@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateAccountRequest;
 use App\User;
 use App\UserSetting;
+use Paymill\Request as PaymillRequest;
+use App\Payment as PaymentModel;
+use App\Subscription as SubscriptionModel;
+use Paymill\Models\Request\Payment;
+use Paymill\Models\Request\Subscription;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -45,8 +50,6 @@ class RegisterController extends Controller {
         $roles = new Roles();
         // Build user data array
         $data = [
-            'first_name' => $request->get('first_name'),
-            'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
             'role_id' => $roles->getUserRoleId()
@@ -64,7 +67,37 @@ class RegisterController extends Controller {
         Auth::login($user);
 
         // Try to create subscription
+        $privateKey = 'cf803e2147fd65a0d2a6b3d5afbfa9af';
+        $paymillRequest = new PaymillRequest($privateKey);
 
+        // Create credit card payment
+        $payment = new Payment();
+        $payment->setToken($request->get('token'));
+        $paymentResponse = $paymillRequest->create($payment);
+
+        // Create subscription
+        $subscription = new Subscription();
+        $subscription->setAmount(30)
+            ->setPayment($paymentResponse->getId())
+            ->setCurrency('EUR')
+            ->setInterval('1 week,monday')
+            ->setName('Nova sub')
+            ->setPeriodOfValidity('2 YEAR')
+            ->setStartAt(time());
+
+        $subscriptionResponse = $paymillRequest->create($subscription);
+
+        // Save in database
+        $paymentModel = new PaymentModel();
+        $paymentModel->user_id = Auth::user()->id;
+        $paymentModel->paymill_payment_id = $paymentResponse->getId();
+        $paymentModel->save();
+
+        // Save subscription
+        $subscriptionModel = new SubscriptionModel();
+        $subscriptionModel->user_id = Auth::user()->id;
+        $subscriptionModel->paymill_subscription_id = $subscriptionResponse->getId();
+        $subscriptionModel->save();
 
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('register.account_created'));

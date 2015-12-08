@@ -16,6 +16,16 @@ var Translation = {
     },
 
     /**
+     * Get register page translations.
+     *
+     * @param attribute
+     * @returns {*|jQuery}
+     */
+    register: function(attribute) {
+        return this.get('#register-trans', attribute);
+    },
+
+    /**
      * Get help center manager translations.
      *
      * @param attribute

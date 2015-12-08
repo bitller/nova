@@ -12,7 +12,7 @@ return [
     'copyright' => 'Nova App - toate drepturile rezervate',
     'create_account' => 'Creaţi un cont',
     'currency' => 'ron',
-    'cvv_code' => 'Codul CVV',
+    'cvc_code' => 'Codul CVC',
     'expiry_date' => 'Data expirării',
     'expiry_month' => 'Luna',
     'expiry_year' => 'Anul',

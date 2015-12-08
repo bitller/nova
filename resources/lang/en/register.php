@@ -10,7 +10,7 @@ return [
     'copyright' => 'Nova App - All rights reserved',
     'create_account' => 'Sign up',
     'currency' => 'ron',
-    'cvv_code' => 'CVV code',
+    'cvc_code' => 'CVC code',
     'expiry_date' => 'Expiry date',
     'expiry_month' => 'Month',
     'expiry_year' => 'Year',
