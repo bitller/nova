@@ -38,7 +38,7 @@
             <!-- END Top part -->
 
             <!-- BEGIN Search users -->
-            <div class="jumbotron row">
+            <div class="well custom-well row">
                 <div class="form-group has-feedback">
                     <label for="email">{{ trans('users-manager.search') }}:</label>
                     <input id="email" type="text" class="form-control" placeholder="{{ trans('users-manager.email') }}">
