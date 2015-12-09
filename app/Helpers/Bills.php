@@ -128,7 +128,7 @@ class Bills {
 
         // Append price to each bill
         foreach ($bills->items() as $bill) {
-            $bill['human_date'] = $bill->created_at->diffForHumans();
+            $bill['human_date'] = date('d-m-Y', time($bill->created_at));
             $bill['price'] = Bills::getPrice($bill->id);
         }
 
