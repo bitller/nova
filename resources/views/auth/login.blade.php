@@ -1,69 +1,68 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Conecteaza-te - Nova</title>
-    <link rel="stylesheet" href="/css/app.css">
-</head>
+@include('auth.includes.head')
+
+<!-- BEGIN Login page -->
 <body id="login-page">
-<div class="container">
 
-    <div class="row register-button">
-        {{--<div class="register-button">--}}
-            <a href="/register"><button class="btn btn-danger pull-right">{{ Lang::get('login.register_button') }}</button></a>
-        {{--</div>--}}
-    </div>
+{{-- Include navbar --}}
+@include('includes.not-logged.navbar', ['registerButton' => true])
+{{-- Include top section --}}
+@include('auth.includes.top-section', [
+    'firstText' => trans('login.login'),
+    'shortDescription' => trans('login.short_description')
+])
 
-    <div class="row">
-        <!-- BEGIN Login form -->
-        <form name="login" method="post" action="{{ url('/login') }}" class="col-md-4 col-md-offset-4 login-form">
+<!-- BEGIN Login form -->
+<div class="container" id="login">
+    @include('includes.ajax-translations.common')
+    <div class="well custom-well login-form col-md-6 col-md-offset-3">
+        <div class="col-md-10 col-md-offset-1">
 
-            <!-- BEGIN Logo -->
-            <div class="login-logo">
-                <a href="/"><h2 class="text-center">Nova</h2></a>
+            <!-- BEGIN Your account divider -->
+            <div class="fancy-divider-white">
+                <span>{{ trans('login.your_account') }}</span>
             </div>
-            <!-- END Logo -->
+            <!-- END Your account divider -->
 
-            <?php $error = ''; ?>
-
-            @foreach ($errors->all() as $errorMessage)
-                <?php
-                    $error = $errorMessage;
-                    break;
-                ?>
-            @endforeach
-
-            @if (session('error'))
-                <?php $error = session('error'); ?>
-            @endif
-
-            @if ($error)
-                <div class="alert alert-danger">{{ $error }}</div>
-            @endif
+            <div class="alert alert-danger" v-show="general_error">@{{ general_error }}</div>
 
             <!-- BEGIN Email input -->
-            <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="{{ Lang::get('login.email_placeholder') }}" />
+            <div class="form-group has-feedback" v-class="has-error : errors.email">
+                <input v-model="email" type="text" class="form-control" placeholder="{{ trans('login.email_placeholder') }}">
+                <span v-show="errors.email" class="text-danger">@{{ errors.email }}</span>
+                <i class="glyphicon glyphicon-user form-control-feedback icon-color"></i>
             </div>
             <!-- END Email input -->
 
             <!-- BEGIN Password input -->
-            <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="{{ Lang::get('login.password_placeholder') }}" />
+            <div class="form-group has-feedback" v-class="has-error : errors.password">
+                <input v-model="password" type="password" class="form-control" placeholder="{{ trans('login.password_placeholder') }}">
+                <span v-show="errors.password" class="text-danger">@{{ errors.password }}</span>
+                <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
             </div>
             <!-- END Password input -->
 
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-            <input type="submit" class="btn btn-primary btn-block" value="{{ Lang::get('common.login_button') }}">
-        </form>
-        <!-- END Login form -->
+            <!-- BEGIN Login button -->
+            <div class="form-group login-button">
+                <button v-attr="disabled : loading" v-on="click: login()" class="btn-block btn btn-primary">
+                    <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+                    <span v-show="!loading">{{ trans('login.login') }}</span>
+                </button>
+            </div>
+            <!-- END Login button -->
+        </div>
     </div>
-
-    <div class="row forgot-password">
-        <a href="/recover"><p class="text-center">{{ Lang::get('login.forgot_password') }}</p></a>
+    <div class="col-md-6 col-md-offset-3 text-center forgot-password">
+        <a href="/recover">{{ trans('login.forgot_password') }}</a>
     </div>
-
 </div>
+<!-- END Login form -->
+
+<script src="/js/vendor.js"></script>
+<script src="/js/login.js"></script>
+
 </body>
+<!-- END Login page -->
+
 </html>

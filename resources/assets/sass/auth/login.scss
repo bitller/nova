@@ -1,41 +1,36 @@
-// Page background color
-$page-background-color: #f1f1f1;
-
-// Color of the form background
-$login-form-background-color: #ffffff;
-
-// Radius of the form border
-$login-form-border-radius: 4px;
-
-// Color of the form border
-$login-form-border-color: #d1d1d1;
-
-// Form padding
-$login-form-padding: 20px;
-
-#login-page {
-  background-color: $page-background-color;
-}
-
-#login-page .register-button {
-  padding-bottom: 40px;
-}
-
-#login-page .login-logo {
-  padding-bottom: 10px;
-}
-
-#login-page .login-logo a:hover {
-  text-decoration: none;
-}
-
 #login-page .login-form {
-  background-color: $login-form-background-color;
-  padding: $login-form-padding;
-  border-radius: $login-form-border-radius;
-  border: 1px solid $login-form-border-color;
+  margin-top: -80px;
 }
 
-#login-page .forgot-password {
-  padding-top: 20px;
+#login-page .first-text {
+  font-size: 40px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff;
+}
+
+#login-page .short-description {
+  display: block;
+  margin-top: 35px;
+  margin-bottom: 45px;
+  font-size: 20px;
+  color: #ffffff;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#login-page .login-button {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#login-page .forgot-password a {
+  color: #747474;
+}
+
+#login-page .forgot-password a:hover {
+  color: $brand-primary;
+}
+
+#login-page .copyright {
+  margin-bottom: 15px;
+  color: #747474;
 }

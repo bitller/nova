@@ -14,7 +14,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <p class="navbar-btn">
-                        <a href="/login" class="btn btn-default custom-button">{{ Lang::get('common.login_button') }}</a>
+                        @if (isset($registerButton) && $registerButton)
+                            <a href="/register" class="btn btn-default custom-button">{{ trans('login.join_nova') }}</a>
+                        @else
+                            <a href="/login" class="btn btn-default custom-button">{{ Lang::get('common.login_button') }}</a>
+                        @endif
                     </p>
                 </li>
             </ul>

@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta id="token" content="{{ csrf_token() }}">
-    <title>{{ trans('register.title') }}</title>
-    <link rel="stylesheet" href="/css/app.css">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
-</head>
+@include('auth.includes.head')
 
 <!-- BEGIN Register page -->
 <body id="register-page">
 
 @include('includes.not-logged.navbar')
 
-<!-- BEGIN Top section -->
-<div class="jumbotron custom-jumbotron text-center">
-    <div class="row">
-    <div class="col-md-6 col-md-offset-3 text-center">
-        <span class="first-text">{{ trans('register.start_using_nova') }}</span>
-        <span class="short-description">{{ trans('register.short_description') }}</span>
-    </div></div>
-</div>
-<!-- END Top section -->
+@include('auth.includes.top-section', [
+    'firstText' => trans('register.start_using_nova'),
+    'shortDescription' => trans('register.short_description')
+])
 
 <!-- BEGIN Register form -->
 <div class="container" id="register">

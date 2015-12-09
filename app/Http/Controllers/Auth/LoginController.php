@@ -3,8 +3,9 @@
 use App\Events\Event;
 use App\Events\FailedLogIn;
 use App\Events\UserLoggedIn;
+use App\Helpers\AjaxResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Listeners\LogLoginAttempt;
 use App\User;
 use Illuminate\Contracts\Auth\Guard;
@@ -48,9 +49,11 @@ class LoginController extends Controller {
      */
     public function login(LoginRequest $request) {
 
+        $response = new AjaxResponse();
+
         // Get inputs
-        $email = $request->input('email');
-        $password = $request->input('password');
+        $email = $request->get('email');
+        $password = $request->get('password');
 
         $userId = User::where('email', $email)->value('id');
 
@@ -60,8 +63,8 @@ class LoginController extends Controller {
         if ($this->auth->attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
 
             event(new UserLoggedIn($this->auth->user()->id));
-            return redirect('/bills');
-
+            $response->setSuccessMessage(trans('common.success'));
+            return response($response->get())->header('Content-Type', 'application/json');
         }
 
         // If email exists in database log the login attempt
@@ -69,7 +72,8 @@ class LoginController extends Controller {
             event(new FailedLogIn($userId));
         }
 
-        return redirect('/login')->with('error', Lang::get('login.wrong_credentials'));
+        $response->setFailMessage(trans('login.login_failed'));
+        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
 
     }
 
