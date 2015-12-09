@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Helpers\AjaxResponse;
 use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Validation\Validator;
 
 /**
  * Authorize and validate RecoverPasswordRequest.
@@ -29,8 +31,37 @@ class RecoverPasswordRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'email' => ['required', 'email', 'exists:users,email']
+            'email' => ['required', 'email']
         ];
     }
 
+    /**
+     * @param array $errors
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function response(array $errors) {
+        $response = new AjaxResponse();
+        $response->setFailMessage('error');
+        $response->addExtraFields(['errors' => $errors]);
+        return response($response->get(), $response->badRequest());
+    }
+
+    /**
+     * @param Validator $validator
+     * @return array
+     */
+    protected function formatErrors(Validator $validator) {
+        $messages = $validator->errors();
+        $fields = ['email'];
+        $errors = [];
+
+        foreach ($fields as $field) {
+            if (!$messages->has($field)) {
+                continue;
+            }
+            $errors[$field] = $messages->first($field);
+        }
+
+        return $errors;
+    }
 }

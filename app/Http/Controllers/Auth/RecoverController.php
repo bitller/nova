@@ -44,10 +44,11 @@ class RecoverController extends Controller {
         $response = new AjaxResponse();
 
         $user = User::where('email', $request->email)->first();
+        $response->setSuccessMessage(trans('recover.email_sent'));
+
         if (!$user) {
             // Email not found
-            $response->setFailMessage(trans('recover.email_not_found'));
-            return response($response->get(), $response->badRequest());
+            return response($response->get());
         }
 
         $user->link = url('/recover/'.urlencode($user->id).'/'.Generator::recoverCode($user->id));
@@ -60,7 +61,6 @@ class RecoverController extends Controller {
 
         // todo delete recover code after 0.5 hours
 
-        $response->setSuccessMessage(trans('recover.email_sent'));
         return response($response->get());
 
     }

@@ -5,54 +5,61 @@
     <meta id="token" content="{{ csrf_token() }}">
     <meta id="user_id" content="{{ $id }}">
     <meta id="code" content="{{ $code }}">
-    <title>{{ trans('recover.title') }}</title>
+    <title>{{ trans('recover.check_title') }}</title>
     <link rel="stylesheet" href="/css/app.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
 </head>
-<body id="login-page">
+<body id="recover-page">
+
+@include('includes.not-logged.navbar', ['registerButton' => true])
+@include('auth.includes.top-section', [
+    'firstText' => trans('recover.choose_new_password'),
+    'shortDescription' => trans('recover.choose_new_password_description')
+])
+
 <div class="container" id="recover">
 
     @include('includes.ajax-translations.common')
 
-    <div class="row">
+    <div class="well custom-well recover-form col-md-6 col-md-offset-3">
+        <div class="col-md-10 col-md-offset-1">
 
-        <!-- BEGIN Recover form -->
-        <div class="login-form col-md-4 col-md-offset-4">
-
-            <!-- BEGIN Logo -->
-            <div class="login-logo">
-                <div class="text-center register-logo">
-                    <div class="glyphicon glyphicon-lock text-center icon-color"></div>
-                    <h2 class="icon-color">{{ trans('recover.choose_new_password') }}</h2>
-                </div>
+            <!-- BEGIN Your account divider -->
+            <div class="fancy-divider-white">
+                <span>{{ trans('recover.change_password') }}</span>
             </div>
-            <!-- END Logo -->
+            <!-- END Your account divider -->
 
-            <!-- BEGIN New password input -->
-            <div v-class="has-error: errors.new_password" class="form-group has-feedback">
-                <input type="password" class="form-control" v-model="new_password" placeholder="{{ trans('recover.new_password') }}" />
-                <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
+            <div class="alert alert-danger" v-show="general_error">@{{ general_error }}</div>
+
+            <!-- BEGIN Password input -->
+            <div class="form-group has-feedback" v-class="has-error : errors.new_password">
+                <input v-model="new_password" type="password" class="form-control" placeholder="{{ trans('recover.new_password') }}">
                 <span v-show="errors.new_password" class="text-danger">@{{ errors.new_password }}</span>
+                <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
             </div>
-            <!-- END New password input -->
+            <!-- END Password input -->
 
             <!-- BEGIN Password confirmation input -->
-            <div v-class="has-error: errors.password_confirmation" class="form-group has-feedback">
-                <input type="password" class="form-control" v-model="password_confirmation" placeholder="{{ trans('recover.password_confirmation') }}" />
+            <div class="form-group has-feedback" v-class="has-error : errors.new_password_confirmation">
+                <input v-model="new_password_confirmation" type="password" class="form-control" placeholder="{{ trans('recover.password_confirmation') }}">
+                <span v-show="errors.new_password_confirmation" class="text-danger">@{{ errors.new_password_confirmation }}</span>
                 <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
-                <span v-show="errors.password_confirmation" class="text-danger">@{{ errors.password_confirmation }}</span>
             </div>
             <!-- END Password confirmation input -->
 
-            <button v-on="click: setNewPassword()" v-attr="disabled: loading" class="btn btn-primary btn-block">
-                <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
-                <span v-show="!loading">{{ trans('recover.change_password') }}</span>
-            </button>
+            <!-- BEGIN Change password button -->
+            <div class="form-group login-button">
+                <button v-attr="disabled : loading" v-on="click: setNewPassword()" class="btn-block btn btn-primary">
+                    <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+                    <span v-show="!loading">{{ trans('recover.change_password') }}</span>
+                </button>
+            </div>
+            <!-- END Change password button -->
         </div>
-        <!-- END Recover form -->
     </div>
-
-    <div class="row forgot-password">
-        <a href="/login"><p class="text-center">{{ trans('recover.login') }}</p></a>
+    <div class="col-md-6 col-md-offset-3 text-center forgot-password">
+        <a href="/login">{{ trans('recover.remember_password') }}</a>
     </div>
 
 </div>

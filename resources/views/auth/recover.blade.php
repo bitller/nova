@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta id="token" content="{{ csrf_token() }}">
-    <title>{{ trans('recover.title') }}</title>
-    <link rel="stylesheet" href="/css/app.css">
-</head>
-<body id="login-page">
-<div class="container" id="recover">
+@include('auth.includes.head', ['pageTitle' => trans('recover.title')])
 
+<!-- BEGIN Recover page -->
+<body id="recover-page">
+
+@include('includes.not-logged.navbar')
+@include('auth.includes.top-section', [
+    'firstText' => trans('login.forgot_password'),
+    'shortDescription' => trans('recover.short_description')
+])
+
+<!-- BEGIN Recover form -->
+<div class="container" id="recover">
     @include('includes.ajax-translations.common')
 
-    <div class="row register-button">
-        <a href="/login"><button class="btn btn-danger pull-right">{{ trans('register.login') }}</button></a>
-    </div>
+    <div class="well custom-well recover-form col-md-6 col-md-offset-3">
+        <div class="col-md-10 col-md-offset-1">
 
-    <div class="row">
-
-        <!-- BEGIN Recover form -->
-        <div class="login-form col-md-4 col-md-offset-4">
-
-            <!-- BEGIN Logo -->
-            <div class="login-logo">
-                <div class="text-center register-logo">
-                    <div class="glyphicon glyphicon-refresh text-center icon-color"></div>
-                    <h2 class="icon-color">{{ trans('recover.forgot_password') }}</h2>
-                </div>
+            <!-- BEGIN Your account divider -->
+            <div class="fancy-divider-white">
+                <span>{{ trans('recover.your_email') }}</span>
             </div>
-            <!-- END Logo -->
+            <!-- END Your account divider -->
+
+            <div class="alert alert-danger" v-show="general_error">@{{ general_error }}</div>
 
             <!-- BEGIN Email input -->
-            <div v-class="has-error: error" class="form-group has-error has-feedback">
-                <input v-model="email" type="text" class="form-control" placeholder="{{ trans('register.what_is_your_email') }}" />
-                <i class="glyphicon glyphicon-envelope form-control-feedback icon-color"></i>
-                <span v-show="error" class="text-danger">@{{ error }}</span>
+            <div class="form-group has-feedback" v-class="has-error : errors.email">
+                <input v-model="email" type="text" class="form-control" placeholder="{{ trans('login.email_placeholder') }}">
+                <span v-show="errors.email" class="text-danger">@{{ errors.email }}</span>
+                <i class="glyphicon glyphicon-user form-control-feedback icon-color"></i>
             </div>
             <!-- END Email input -->
 
-            <button v-on="click: recover()" v-attr="disabled: loading" class="btn btn-primary btn-block">
-                <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
-                <span v-show="!loading">{{ trans('recover.reset_password') }}</span>
-            </button>
+            <!-- BEGIN Login button -->
+            <div class="form-group recover-button">
+                <button v-attr="disabled : loading" v-on="click: recover()" class="btn-block btn btn-primary">
+                    <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
+                    <span v-show="!loading">{{ trans('recover.recover') }}</span>
+                </button>
+            </div>
+            <!-- END Login button -->
         </div>
-        <!-- END Recover form -->
-    </div>
-
-    <div class="row forgot-password">
-        <a href="/register"><p class="text-center">{{ trans('recover.no_account') }}</p></a>
     </div>
 
 </div>
-</body>
+<!-- END Recover form -->
 <script src="/js/vendor.js"></script>
 <script src="/js/recover.js"></script>
+</body>
+<!-- END Recover page -->
+
 </html>

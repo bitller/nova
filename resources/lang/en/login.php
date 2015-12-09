@@ -8,6 +8,7 @@ return [
     'login_failed' => 'Incorrect email or password.',
     'password_placeholder' => 'Password',
     'register_button' => 'Register',
+    'title' => 'Log in',
     'wrong_credentials' => 'Invalid email or password.',
     'your_account' => 'Your account',
 ];

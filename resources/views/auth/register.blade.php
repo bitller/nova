@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-@include('auth.includes.head')
+@include('auth.includes.head', ['pageTitle' => trans('register.title')])
 
 <!-- BEGIN Register page -->
 <body id="register-page">
