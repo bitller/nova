@@ -4553,13 +4553,13 @@ a.thumbnail.active {
     color: inherit; }
 
 .alert-success {
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
-  color: #3c763d; }
+  background-color: #2CC36B;
+  border-color: #2CC36B;
+  color: #ffffff; }
   .alert-success hr {
-    border-top-color: #c9e2b3; }
+    border-top-color: #27ae60; }
   .alert-success .alert-link {
-    color: #2b542c; }
+    color: #e6e6e6; }
 
 .alert-info {
   background-color: #3498DB;
@@ -7301,6 +7301,10 @@ button.close {
   margin-top: 30px;
   font-size: 30px;
   color: #3a3a3a; }
+
+#next .welcome-alert {
+  margin-top: 20px;
+  margin-bottom: 70px; }
 
 body.stop-scrolling {
   height: 100%;
