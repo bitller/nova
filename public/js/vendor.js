@@ -1472,7 +1472,9 @@ var Alert = {
         swal({
             title: Translation.common('loading'),
             type: 'info',
-            showConfirmButton: false
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
         })
     },
 
