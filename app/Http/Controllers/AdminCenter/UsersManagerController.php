@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\AdminCenter;
 
 use App\Helpers\AjaxResponse;
+use App\Helpers\Searches;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
+use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
 use App\User;
 
 /**
@@ -64,6 +66,19 @@ class UsersManagerController extends BaseController {
      */
     public function browse() {
         return view('admin-center.browse-users');
+    }
+
+    /**
+     * Return users that match given email.
+     *
+     * @param SearchUsersRequest $request
+     * @return mixed
+     */
+    public function search(SearchUsersRequest $request) {
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('common.success'));
+        $response->addExtraFields(['users' => Searches::searchUsers($request->get('email'))]);
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
 }

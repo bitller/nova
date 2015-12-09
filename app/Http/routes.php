@@ -151,11 +151,18 @@ Route::group(['prefix' => 'help-center'], function() {
 
 // Admin center
 Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], function() {
+
     Route::get('/', 'UsersManagerController@index');
-    Route::get('/users-manager', 'UsersManagerController@index');
-    Route::get('/users-manager/get', 'UsersManagerController@get');
-    Route::get('/users-manager/browse', 'UsersManagerController@browse');
-    Route::get('/users-manager/get-users', 'UsersManagerController@getUsers');
+
+    // Users manager
+    Route::group(['prefix' => 'users-manager'], function() {
+        Route::get('/', 'UsersManagerController@index');
+        Route::get('/get', 'UsersManagerController@get');
+        Route::get('/browse', 'UsersManagerController@browse');
+        Route::get('/get-users', 'UsersManagerController@getUsers');
+        Route::get('/search', 'UsersManagerController@search');
+    });
+
     Route::get('/application-settings', 'ApplicationSettingsController@index');
     Route::get('/application-settings/get', 'ApplicationSettingsController@get');
     Route::get('/application-settings/allow-new-accounts', 'ApplicationSettingsController@allowCreationOfNewAccounts');

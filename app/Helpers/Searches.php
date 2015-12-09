@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\DB;
  */
 class Searches {
 
+    /**
+     * Search products by code or name.
+     *
+     * @param $query
+     * @return mixed
+     */
     public static function headerSearch($query) {
 
         $firstQuery = DB::table('products')->where('code', 'LIKE', $query.'%')->orWhere('name', 'LIKE', $query.'%')->select('id', 'code', 'name');
@@ -25,6 +31,10 @@ class Searches {
 
         return $secondQuery;
 
+    }
+
+    public static function searchUsers($query) {
+        return DB::table('users')->where('email', 'LIKE', $query.'%')->select('id', 'email')->limit(5)->get();
     }
 
 }
