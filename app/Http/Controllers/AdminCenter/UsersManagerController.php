@@ -75,10 +75,7 @@ class UsersManagerController extends BaseController {
      * @return mixed
      */
     public function search(SearchUsersRequest $request) {
-        $response = new AjaxResponse();
-        $response->setSuccessMessage(trans('common.success'));
-        $response->addExtraFields(['users' => Searches::searchUsers($request->get('email'))]);
-        return response($response->get())->header('Content-Type', 'application/json');
+        return Searches::searchUsers($request->get('email'));
     }
 
 }

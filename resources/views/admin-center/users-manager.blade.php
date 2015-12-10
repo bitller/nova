@@ -41,8 +41,9 @@
             <div class="well custom-well row">
                 <div class="form-group has-feedback">
                     <label for="email">{{ trans('users-manager.search') }}:</label>
-                    <input id="email" type="text" class="form-control" placeholder="{{ trans('users-manager.email') }}">
-                    <i class="glyphicon glyphicon-envelope form-control-feedback icon-color"></i>
+                    <input id="users-search" type="text" class="form-control" placeholder="{{ trans('users-manager.email') }}">
+                    <i class="glyphicon glyphicon-envelope form-control-feedback email-icon icon-color"></i>
+                    <i class="glyphicon glyphicon-refresh form-control-feedback search-user-loading-icon icon-color glyphicon-spin"></i>
                 </div>
             </div>
             <!-- END Search users -->
