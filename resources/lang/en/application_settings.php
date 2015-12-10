@@ -2,6 +2,7 @@
 
 return [
     'allow_new_accounts' => 'Allow new accounts',
+    'allow_users_to_change_language' => 'Allow users to change application language',
     'application_settings' => 'Application settings',
     'are_new_accounts_allowed' => 'Are new accounts allowed',
     'bills_displayed' => 'Bills displayed',
@@ -10,6 +11,7 @@ return [
     'clients_settings' => 'Clients settings',
     'custom_products_displayed' => 'Custom products displayed',
     'deny_new_accounts' => 'Deny creation of new accounts',
+    'deny_users_to_change_language' => 'Deny users to change application language',
     'displayed_bills' => 'Number of bills displayed',
     'displayed_bills_required' => 'Default number of displayed bills is required.',
     'displayed_bills_updated' => 'Default number of displayed bills updated!',
@@ -40,4 +42,6 @@ return [
     'recover_code_updated' => 'Recover code validity updated!',
     'recover_code_valid_time' => 'Recover code',
     'security_settings' => 'Security settings',
+    'users_are_allowed_to_change_language' => 'Users are allowed to change language',
+    'users_are_not_allowed_to_change_language' => 'Users are not allowed to change language',
 ];

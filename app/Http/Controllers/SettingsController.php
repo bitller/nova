@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AjaxResponse;
+use App\Helpers\PermissionsHelper;
 use App\Helpers\Settings;
 use App\Http\Requests\Settings\ChangeLanguageRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedBillsRequest;
@@ -40,7 +41,16 @@ class SettingsController extends BaseController {
      * Render index page.
      */
     public function index() {
-        return view('settings');
+
+        $data = [
+            'allowUserToChangeLanguage' => false
+        ];
+
+        if (PermissionsHelper::changeLanguage()) {
+            $data['allowUserToChangeLanguage'] = true;
+        }
+
+        return view('settings')->with($data);
     }
 
     /**

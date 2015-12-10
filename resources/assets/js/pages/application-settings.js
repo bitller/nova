@@ -32,6 +32,8 @@ new Vue({
                 this.$set('login_attempts', response.login_attempts);
                 this.$set('allow_new_accounts', response.allow_new_accounts);
                 this.$set('allow_new_accounts_bool', response.allow_new_accounts_bool);
+                this.$set('allow_users_to_change_language', response.allow_users_to_change_language);
+                this.$set('allow_users_to_change_language_bool', response.allow_users_to_change_language_bool);
 
             }).error(function(response) {
                 //
@@ -306,6 +308,48 @@ new Vue({
                 // Success response
                 this.$set('allow_new_accounts_bool', response.allow_new_accounts_bool);
                 this.$set('allow_new_accounts', response.allow_new_accounts);
+                Alert.success(response.title, response.message);
+
+            }).error(function(response) {
+
+                // Handle error response
+                if (!response.message) {
+                    Alert.generalError();
+                    return;
+                }
+                Alert.error(response.title, response.message);
+            });
+        },
+
+        /**
+         * Allow users to change application language.
+         */
+        allowUsersToChangeLanguage: function() {
+            this.changeAllowUsersToChangeLanguageStatus(true);
+        },
+
+        /**
+         * Deny users to change application language.
+         */
+        denyUsersToChangeLanguage: function() {
+            this.changeAllowUsersToChangeLanguageStatus();
+        },
+
+        /**
+         * @param allow
+         */
+        changeAllowUsersToChangeLanguageStatus: function(allow) {
+            var action = 'deny-users-to-change-language';
+            if (typeof allow !== 'undefined') {
+                action = 'allow-users-to-change-language';
+            }
+
+            Alert.loader();
+            this.$http.get('/admin-center/application-settings/' + action, function(response) {
+
+                // Success response
+                this.$set('allow_users_to_change_language_bool', response.allow_users_to_change_language_bool);
+                this.$set('allow_users_to_change_language', response.allow_users_to_change_language);
                 Alert.success(response.title, response.message);
 
             }).error(function(response) {

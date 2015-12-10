@@ -45,7 +45,7 @@ class RegisterController extends Controller {
         if (PermissionsHelper::newUsers()) {
             $data['allowNewUsers'] = true;
         }
-        
+
         return view('auth.register')->with($data);
 
     }

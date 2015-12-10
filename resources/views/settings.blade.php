@@ -77,12 +77,16 @@
             </a>
             <!-- END Number of user products displayed -->
 
+            @if ($allowUserToChangeLanguage)
+            <!-- BEGIN Change language -->
             <a href="#" class="list-group-item" data-toggle="modal" data-target="#edit-language-modal" v-on="click: loadLanguages()">
                 {{ trans('settings.language') }}: <strong>@{{ language_name }}</strong>
                 <div class="pull-right">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </div>
             </a>
+            <!-- END Change language -->
+            @endif
         </ul>
         <!-- END Settings list -->
 

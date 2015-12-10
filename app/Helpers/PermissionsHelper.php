@@ -24,4 +24,17 @@ class PermissionsHelper {
         return false;
     }
 
+    /**
+     * Return true if users are allowed to change application language, false otherwise.
+     *
+     * @return bool
+     */
+    public static function changeLanguage() {
+        $securitySetting = SecuritySetting::first();
+        if ($securitySetting->allow_users_to_change_language) {
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -2,14 +2,17 @@
 
 return [
     'allow_new_accounts' => 'Permite creearea de noi conturi',
+    'allow_users_to_change_language' => 'Permite utilizatorilor să schimbe limba aplicației',
     'application_settings' => 'Setările aplicaţiei',
     'are_new_accounts_allowed' => 'Este permisă creearea de noi conturi',
+    'are_users_allowed_to_change_language' => 'Este permis utilizatorilor să schimbe limba aplicației',
     'bills_displayed' => 'Facturi afişate',
     'bills_settings' => 'Setări pentru facturi',
     'clients_displayed' => 'Clienţi afişaţi',
     'clients_settings' => 'Setări pentru clienţi',
     'custom_products_displayed' => 'Produse proprii afişate',
     'deny_new_accounts' => 'Nu mai permite creearea de noi conturi',
+    'deny_users_to_change_language' => 'Interzice utilizatorilor să schimbe limba aplicației',
     'displayed_bills' => 'Numărul de facturi afişate',
     'displayed_bills_required' => 'Numărul implicit de facturi afişate este obligatoriu.',
     'displayed_bills_updated' => 'Numărul implicit de facturi afişate a fost actualizat!',
@@ -42,4 +45,6 @@ return [
     'recover_code_updated' => 'Valiabilitatea codului de recuperare a parolei a fost actualizată!',
     'recover_code_valid_time' => 'Codul de recuperare a parolei',
     'security_settings' => 'Setări de securitate',
+    'users_are_allowed_to_change_language' => 'Utilizatorilor le este permis să schimbe limba aplicației',
+    'users_are_not_allowed_to_change_language' => 'Utilizatorilor nu le este permis să schimbe limba aplicației',
 ];

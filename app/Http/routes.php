@@ -163,16 +163,20 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::get('/search', 'UsersManagerController@search');
     });
 
-    Route::get('/application-settings', 'ApplicationSettingsController@index');
-    Route::get('/application-settings/get', 'ApplicationSettingsController@get');
-    Route::get('/application-settings/allow-new-accounts', 'ApplicationSettingsController@allowCreationOfNewAccounts');
-    Route::get('/application-settings/deny-new-accounts', 'ApplicationSettingsController@denyCreationOfNewAccounts');
-    Route::post('/application-settings/edit-displayed-bills', 'ApplicationSettingsController@editNumberOfDisplayedBills');
-    Route::post('/application-settings/edit-displayed-clients', 'ApplicationSettingsController@editNumberOfDisplayedClients');
-    Route::post('/application-settings/edit-displayed-products', 'ApplicationSettingsController@editNumberOfDisplayedProducts');
-    Route::post('/application-settings/edit-displayed-custom-products', 'ApplicationSettingsController@editNumberOfDisplayedCustomProducts');
-    Route::post('/application-settings/edit-recover-code-valid-time', 'ApplicationSettingsController@editRecoverCodeValidTime');
-    Route::post('/application-settings/edit-number-of-login-attempts-allowed', 'ApplicationSettingsController@editNumberOfLoginAttemptsAllowed');
+    Route::group(['prefix' => 'application-settings'], function() {
+        Route::get('/', 'ApplicationSettingsController@index');
+        Route::get('/get', 'ApplicationSettingsController@get');
+        Route::get('/allow-new-accounts', 'ApplicationSettingsController@allowCreationOfNewAccounts');
+        Route::get('/deny-new-accounts', 'ApplicationSettingsController@denyCreationOfNewAccounts');
+        Route::get('/edit-displayed-bills', 'ApplicationSettingsController@editNumberOfDisplayedBills');
+        Route::get('/edit-displayed-clients', 'ApplicationSettingsController@editNumberOfDisplayedClients');
+        Route::get('/edit-displayed-products', 'ApplicationSettingsController@editNumberOfDisplayedProducts');
+        Route::get('/edit-displayed-custom-products', 'ApplicationSettingsController@editNumberOfDisplayedCustomProducts');
+        Route::get('/edit-recover-code-valid-time', 'ApplicationSettingsController@editRecoverCodeValidTime');
+        Route::get('/edit-number-of-login-attempts-allowed', 'ApplicationSettingsController@editNumberOfLoginAttemptsAllowed');
+        Route::get('/allow-users-to-change-language', 'ApplicationSettingsController@allowUsersToChangeLanguage');
+        Route::get('/deny-users-to-change-language', 'ApplicationSettingsController@denyUsersToChangeLanguage');
+    });
 
     // Help center manager
     Route::group(['prefix' => 'help-center-manager'], function() {

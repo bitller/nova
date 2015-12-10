@@ -124,6 +124,14 @@
                 </a>
                 <!-- END Allow new accounts -->
 
+                <!-- BEGIN Allow users to change language -->
+                <a href="#" class="list-group-item">
+                    {{ trans('application_settings.are_users_allowed_to_change_language') }}: <strong>@{{ allow_users_to_change_language }}</strong>
+                    <span v-show="!allow_users_to_change_language_bool" v-on="click: allowUsersToChangeLanguage()" class="underline pull-right">{{ trans('application_settings.allow_users_to_change_language') }}</span>
+                    <span v-show="allow_users_to_change_language_bool" v-on="click: denyUsersToChangeLanguage()" class="underline pull-right">{{ trans('application_settings.deny_users_to_change_language') }}</span>
+                </a>
+                <!-- END Allow users to change language -->
+
             </ul>
         </div>
         <!-- END Security settings -->

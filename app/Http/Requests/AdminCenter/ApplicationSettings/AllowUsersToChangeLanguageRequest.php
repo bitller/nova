@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Http\Requests\Settings;
+namespace App\Http\Requests\AdminCenter\ApplicationSettings;
 
-use App\Helpers\PermissionsHelper;
-use App\Http\Requests\AjaxRequest;
+use App\Helpers\Roles;
+use App\Http\Requests\Request;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Validate and authorize ChangeLanguageRequest
+ * Authorize and validate AllowUsersToChangeLanguageRequest.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class ChangeLanguageRequest extends AjaxRequest {
+class AllowUsersToChangeLanguageRequest extends Request {
 
     /**
      * Determine if the user is authorized to make this request.
      *
      * @param Guard $auth
+     * @param Roles $roles
      * @return bool
      */
-    public function authorize(Guard $auth) {
-        if ($auth->check() && PermissionsHelper::changeLanguage()) {
+    public function authorize(Guard $auth, Roles $roles) {
+        if ($auth->check() && $roles->isAdmin()) {
             return true;
         }
         return false;
@@ -32,9 +33,7 @@ class ChangeLanguageRequest extends AjaxRequest {
      * @return array
      */
     public function rules() {
-        return [
-            'language' => ['required', 'exists:languages,key']
-        ];
+        return [];
     }
 
 }

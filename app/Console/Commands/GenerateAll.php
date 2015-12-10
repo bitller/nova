@@ -43,7 +43,7 @@ class GenerateAll extends Command {
 
         $this->info('Creating a new data set for the application...');
 
-        Artisan::call('migrate:rollback');
+        Artisan::call('migrate:reset');
         $this->info('Database rolled back.');
 
         Artisan::call('migrate');
@@ -58,7 +58,7 @@ class GenerateAll extends Command {
         Artisan::call('db:seed');
         $this->info('Seeded tables.');
 
-//        Artisan::call('generate:admin');
-//        $this->info('Generated an admin user with default credentials.');
+        Artisan::call('generate:admin');
+        $this->info('Generated an admin user with default credentials.');
     }
 }

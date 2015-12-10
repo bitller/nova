@@ -5,7 +5,9 @@ namespace App\Http\Controllers\AdminCenter;
 use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\ApplicationSettings\AllowCreationOfNewAccountsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\AllowUsersToChangeLanguageRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\DenyCreationOfNewAccountsRequest;
+use App\Http\Requests\AdminCenter\ApplicationSettings\DenyUsersToChangeLanguageRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedClientsRequest;
 use App\Http\Requests\AdminCenter\ApplicationSettings\EditNumberOfDisplayedCustomProductsRequest;
@@ -46,7 +48,7 @@ class ApplicationSettingsController extends BaseController {
     public function get() {
 
         $userDefaultSettings = UserDefaultSetting::select('displayed_bills', 'displayed_clients', 'displayed_products', 'displayed_custom_products')->first();
-        $securitySettings = SecuritySetting::select('recover_code_valid_minutes', 'login_attempts', 'allow_new_accounts')->first();
+        $securitySettings = SecuritySetting::select('recover_code_valid_minutes', 'login_attempts', 'allow_new_accounts', 'allow_users_to_change_language')->first();
 
         // Build settings array manually
         $settings = [
@@ -58,6 +60,7 @@ class ApplicationSettingsController extends BaseController {
             'login_attempts' => $securitySettings->login_attempts,
         ];
 
+        // Allow new accounts setting
         if ($securitySettings->allow_new_accounts) {
             $settings['allow_new_accounts'] = trans('common.yes');
             $allowNewAccounts = true;
@@ -66,7 +69,17 @@ class ApplicationSettingsController extends BaseController {
             $allowNewAccounts = false;
         }
 
+        // Allow users to change language setting
+        if ($securitySettings->allow_users_to_change_language) {
+            $settings['allow_users_to_change_language'] = trans('common.yes');
+            $allowUsersToChangeLanguage = true;
+        } else {
+            $settings['allow_users_to_change_language'] = trans('common.no');
+            $allowUsersToChangeLanguage = false;
+        }
+
         $settings['allow_new_accounts_bool'] = $allowNewAccounts;
+        $settings['allow_users_to_change_language_bool'] = $allowUsersToChangeLanguage;
 
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('common.success'));
@@ -241,4 +254,47 @@ class ApplicationSettingsController extends BaseController {
 
         return response($response->get())->header('Content-Type', 'application/json');
     }
+
+    /**
+     * @param AllowUsersToChangeLanguageRequest $request
+     * @return mixed
+     */
+    public function allowUsersToChangeLanguage(AllowUsersToChangeLanguageRequest $request) {
+
+        $securitySetting = SecuritySetting::first();
+        $securitySetting->allow_users_to_change_language = 1;
+        $securitySetting->save();
+
+        // Success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.users_are_allowed_to_change_language'));
+        $response->addExtraFields([
+            'allow_users_to_change_language' => trans('common.yes'),
+            'allow_users_to_change_language_bool' => true
+        ]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * @param DenyUsersToChangeLanguageRequest $request
+     * @return mixed
+     */
+    public function denyUsersToChangeLanguage(DenyUsersToChangeLanguageRequest $request) {
+
+        $securitySetting = SecuritySetting::first();
+        $securitySetting->allow_users_to_change_language = 0;
+        $securitySetting->save();
+
+        // Success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('application_settings.users_are_not_allowed_to_change_language'));
+        $response->addExtraFields([
+            'allow_users_to_change_language' => trans('common.no'),
+            'allow_users_to_change_language_bool' => false
+        ]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
 }
