@@ -41,7 +41,7 @@
 
             <!-- BEGIN Email -->
             <div class="form-group" v-class="has-error : email_error, has-error : errors.email">
-                <input v-model="email" class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
+                <input v-model="email" v-on="keyup:register | key 13" class="form-control border-input" type="text" placeholder="{{ trans('register.what_is_your_email') }}" />
                 <span v-show="email_error" class="text-danger">@{{ email_error }}</span>
                 <span v-show="errors.email" class="text-danger">@{{ errors.email }}</span>
             </div>
@@ -49,7 +49,7 @@
 
             <!-- BEGIN Password -->
             <div class="form-group" v-class="has-error : password_error, has-error : errors.password">
-                <input v-model="password" class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
+                <input v-model="password" v-on="keyup:register | key 13" class="form-control border-input" type="password" placeholder="{{ trans('register.choose_password') }}" />
                 <span v-show="password_error" class="text-danger">@{{ password_error }}</span>
                 <span v-show="errors.password" class="text-danger">@{{ errors.password }}</span>
             </div>
@@ -57,7 +57,7 @@
 
             <!-- BEGIN Confirm password -->
             <div class="form-group" v-class="has-error : password_confirmation_error, has-error : errors.password_confirmation">
-                <input v-model="password_confirmation" class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
+                <input v-model="password_confirmation" v-on="keyup:register | key 13" class="form-control border-input" type="password" placeholder="{{ trans('register.confirm_password') }}" />
                 <span v-show="password_confirmation_error" class="text-danger">@{{ password_confirmation_error }}</span>
                 <span v-show="errors.password_confirmation" class="text-danger">@{{ errors.password_confirmation }}</span>
             </div>
@@ -71,14 +71,14 @@
 
             <!-- BEGIN Card number -->
             <div class="form-group" v-class="has-error : card_number_error">
-                <input v-model="card_number" class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
+                <input v-model="card_number" v-on="keyup:register | key 13" class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
                 <span v-show="card_number_error" class="text-danger">@{{ card_number_error }}</span>
             </div>
             <!-- END Card number -->
 
             <!-- BEGIN Card cvc code -->
             <div class="form-group" v-class="has-error : card_cvc_error">
-                <input v-model="card_cvc" class="form-control border-input" type="text" placeholder="{{ trans('register.cvc_code') }}" />
+                <input v-model="card_cvc" v-on="keyup:register | key 13" class="form-control border-input" type="text" placeholder="{{ trans('register.cvc_code') }}" />
                 <span v-show="card_cvc_error" class="text-danger">@{{ card_cvc_error }}</span>
             </div>
             <!-- END Card cvc code -->
@@ -88,11 +88,11 @@
             <div class="form-inline" id="expiry">
 
                 <div class="form-group" v-class="has-error : card_expiry_date_error">
-                    <input v-model="card_expiry_month" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
+                    <input v-model="card_expiry_month" v-on="keyup:register | key 13" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
                 </div>
                 /
                 <div class="form-group" v-class="has-error : card_expiry_date_error">
-                    <input v-model="card_expiry_year" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
+                    <input v-model="card_expiry_year" v-on="keyup:register | key 13" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
                 </div>
                 <span v-show="card_expiry_date_error" class="text-danger">@{{ card_expiry_date_error }}</span>
             </div>
