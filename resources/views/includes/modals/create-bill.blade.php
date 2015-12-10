@@ -25,7 +25,7 @@
                 <div role="form" class="col-md-12">
                     <div class="form-group has-feedback client-name">
                         <label for="client-name">{{ trans('bills.client_name') }}:</label>
-                        <input type="text" class="twitter-typeahead form-control" id="client-name" v-model="clientName">
+                        <input v-on="keyup:createBill | key 13" type="text" class="twitter-typeahead form-control" id="client-name" v-model="clientName">
                         <i class="glyphicon glyphicon-refresh glyphicon-spin form-control-feedback add-product-to-bill-loader"></i>
                     </div>
                 </div>
