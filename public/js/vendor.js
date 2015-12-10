@@ -1878,10 +1878,12 @@ $(document).ready(function() {
         remote: {
             ajax: {
                 beforeSend: function(xhr) {
-                    //$('.product-code i').show();
+                    $('.search-icon').hide();
+                    $('.loading-icon').show();
                 },
                 complete: function() {
-                    //$('.product-code i').hide();
+                    $('.search-icon').show();
+                    $('.loading-icon').hide();
                 }
             },
             cache: false,

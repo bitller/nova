@@ -8277,6 +8277,9 @@ body {
 .pointer:hover {
   cursor: pointer; }
 
+.loading-icon {
+  display: none; }
+
 .divider {
   height: 1px;
   width: 100%;
