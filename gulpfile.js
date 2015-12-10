@@ -19,7 +19,7 @@ elixir(function(mix) {
         'custom-libs/url-builder.js', 'jquery-scripts/header-search.js', 'typeahead.js'
     ], 'public/js/vendor.js')
         .scripts(['welcome.js'], 'public/js/welcome.js')
-        .scripts(['pages/bills.js', 'jquery-scripts/bills.js'], 'public/js/bills.js')
+        .scripts(['pages/bills.js'], 'public/js/bills.js')
         .scripts(['pages/clients.js'], 'public/js/clients.js')
         .scripts(['pages/base.js', 'pages/client.js'], 'public/js/client.js')
         .scripts(['pages/base.js', 'pages/products.js', 'jquery-scripts/products.js'], 'public/js/products.js')
