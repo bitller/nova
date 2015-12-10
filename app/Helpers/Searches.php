@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\ApplicationProduct;
 use App\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -21,7 +22,7 @@ class Searches {
      */
     public static function headerSearch($query) {
 
-        $firstQuery = DB::table('products')->where('code', 'LIKE', $query.'%')->orWhere('name', 'LIKE', $query.'%')->select('id', 'code', 'name');
+        $firstQuery = DB::table('products')->where('code', 'LIKE', $query.'%')->orWhere('name', 'LIKE', $query.'%')->where('user_id', Auth::user()->id)->select('id', 'code', 'name');
         $secondQuery = DB::table('application_products')->where('code', 'LIKE', "$query%")
             ->orWhere('name', 'LIKE', "$query%")
             ->select('id', 'code', 'name')
