@@ -29,7 +29,7 @@
 
             <!-- BEGIN Email input -->
             <div class="form-group has-feedback" v-class="has-error : errors.email">
-                <input v-model="email" type="text" class="form-control" placeholder="{{ trans('login.email_placeholder') }}">
+                <input v-model="email" v-on="keyup:login | key 13" type="text" class="form-control" placeholder="{{ trans('login.email_placeholder') }}">
                 <span v-show="errors.email" class="text-danger">@{{ errors.email }}</span>
                 <i class="glyphicon glyphicon-user form-control-feedback icon-color"></i>
             </div>
@@ -37,7 +37,7 @@
 
             <!-- BEGIN Password input -->
             <div class="form-group has-feedback" v-class="has-error : errors.password">
-                <input v-model="password" type="password" class="form-control" placeholder="{{ trans('login.password_placeholder') }}">
+                <input v-model="password" v-on="keyup:login | key 13" type="password" class="form-control" placeholder="{{ trans('login.password_placeholder') }}">
                 <span v-show="errors.password" class="text-danger">@{{ errors.password }}</span>
                 <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
             </div>
