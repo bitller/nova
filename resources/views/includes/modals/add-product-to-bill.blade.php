@@ -35,12 +35,12 @@
                 <div role="form" class="col-md-6">
                     <div class="form-group" v-class="has-error : errors.product_price">
                         <label for="product-price">{{ trans('bill.product_price') }}:</label>
-                        <input type="text" class="form-control" id="product-price" placeholder="Ex: 25.50" v-model="price">
+                        <input type="text" v-on="keyup:addProduct | key 13" class="form-control" id="product-price" placeholder="Ex: 25.50" v-model="price">
                         <span class="text-danger" v-show="errors.product_price">@{{ errors.product_price }}</span>
                     </div>
                     <div class="form-group" v-class="has-error : errors.product_page">
                         <label for="product-page">{{ trans('bill.product_page') }}:</label>
-                        <input type="text" class="form-control" id="product-page" placeholder="Ex: 156" v-model="page">
+                        <input type="text" v-on="keyup:addProduct | key 13" class="form-control" id="product-page" placeholder="Ex: 156" v-model="page">
                         <span class="text-danger" v-show="errors.product_page">@{{ errors.product_page }}</span>
                     </div>
                 </div>
@@ -50,12 +50,12 @@
                 <div role="form" class="col-md-6">
                     <div class="form-group" v-class="has-error : errors.product_discount">
                         <label for="product-discount">{{ trans('bill.product_discount') }}:</label>
-                        <input type="text" class="form-control" id="product-discount" placeholder="Ex: 25" v-model="discount">
+                        <input type="text" v-on="keyup:addProduct | key 13" class="form-control" id="product-discount" placeholder="Ex: 25" v-model="discount">
                         <span class="text-danger" v-show="errors.product_discount">@{{ errors.product_discount }}</span>
                     </div>
                     <div class="form-group" v-class="has-error : errors.product_quantity">
                         <label for="product-quantity">{{ trans('bill.product_quantity') }}:</label>
-                        <input type="text" class="form-control" id="product-quantity" placeholder="Ex: 2" v-model="quantity">
+                        <input type="text" v-on="keyup:addProduct | key 13" class="form-control" id="product-quantity" placeholder="Ex: 2" v-model="quantity">
                         <span class="text-danger" v-show="errors.product_quantity">@{{ errors.product_quantity }}</span>
                     </div>
                 </div>
