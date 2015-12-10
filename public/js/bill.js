@@ -50,6 +50,7 @@ new Vue({
                 this.$set('paid', response.data.paid);
                 this.$set('number_of_products', response.number_of_products);
                 this.$set('loaded', true);
+                this.$set('loading', false);
 
                 if (typeof showSuccess === 'undefined') {
                     Alert.close();
