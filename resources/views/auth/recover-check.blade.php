@@ -34,7 +34,7 @@
 
             <!-- BEGIN Password input -->
             <div class="form-group has-feedback" v-class="has-error : errors.new_password">
-                <input v-model="new_password" type="password" class="form-control" placeholder="{{ trans('recover.new_password') }}">
+                <input v-model="new_password" v-on="keyup:setNewPassword | key 13" type="password" class="form-control" placeholder="{{ trans('recover.new_password') }}">
                 <span v-show="errors.new_password" class="text-danger">@{{ errors.new_password }}</span>
                 <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
             </div>
@@ -42,7 +42,7 @@
 
             <!-- BEGIN Password confirmation input -->
             <div class="form-group has-feedback" v-class="has-error : errors.new_password_confirmation">
-                <input v-model="new_password_confirmation" type="password" class="form-control" placeholder="{{ trans('recover.password_confirmation') }}">
+                <input v-model="new_password_confirmation" v-on="keyup:setNewPassword | key 13" type="password" class="form-control" placeholder="{{ trans('recover.password_confirmation') }}">
                 <span v-show="errors.new_password_confirmation" class="text-danger">@{{ errors.new_password_confirmation }}</span>
                 <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
             </div>
