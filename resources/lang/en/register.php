@@ -18,6 +18,7 @@ return [
     'join' => 'Join',
     'login' => 'Log in',
     'main_text' => 'Nova',
+    'new_users_not_allowed' => 'We are sorry, but for now the creation of new accounts is not allowed. Try again later. Thank you!',
     'period' => 'month',
     'secure_form' => 'This form is 100% secure. Your private credit card data will never directly touch our servers. By signing up you agree to enter a subscription until you choose to cancel.',
     'short_description' => 'Joining Nova takes less than a minute, and is a pretty good decision if you want to be better at managing your orders and show professionalism to your customers. Also, if you are not convinced, you may cancel it at any time.',

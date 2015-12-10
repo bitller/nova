@@ -24,6 +24,7 @@ return [
     'main_text' => 'Nova',
     'need_help_answer' => 'Bineînțeles! Vă așteptăm cu un email la support@nova-app.ro în care să ne descrieți cât mai cuprinzător problema care o întâlniți.',
     'need_help_question' => 'Am probleme cu creearea contului sau efectuarea plătii. Mă puteți ajuta?',
+    'new_users_not_allowed' => 'Ne pare rău dar momentan creearea de noi conturi nu este permisă. Vă rugăm încercați mai târziu. Mulțumim!',
     'period' => 'lună',
     'short_description' => 'Creearea unui cont Nova dureaza mai putin de un minut. Este o decizie buna daca vrei sa fii mai productiv in organizarea comenzilor Avon si sa oferi profesionalism crescut clientiilor tai.',
     'start_using_nova' => 'Începe sa folosesti Nova',

@@ -19,6 +19,7 @@
     <div class="well custom-well register-form col-md-6 col-md-offset-3">
         <div class="col-md-10 col-md-offset-1">
 
+            @if ($allowNewUsers)
             <!-- Price divider -->
             <div class="fancy-divider-white">
                 <span>{{ trans('register.subscription_price') }}</span>
@@ -104,14 +105,20 @@
                     <span v-show="!loading">{{ trans('register.join') }}</span>
                 </button>
             </div>
+            @else
+                <span class="text-danger">{{ trans('register.new_users_not_allowed') }}</span>
+            @endif
         </div>
     </div>
+    @if ($allowNewUsers)
     <div class="secure-form col-md-6 col-md-offset-3">
         {{ trans('register.secure_form') }}
     </div>
+    @endif
 </div>
 <!-- END Register form -->
 
+@if ($allowNewUsers)
 <div class="jumbotron custom-jumbotron">
     <div class="container">
         <div class="fancy-divider-blue">
@@ -169,10 +176,11 @@
 </div>
 
 <div class="container">
-<div class="col-md-12 text-center copyright">
-    <span>{{ trans('register.copyright') }}</span>
+    <div class="col-md-12 text-center copyright">
+        <span>{{ trans('register.copyright') }}</span>
+    </div>
 </div>
-</div>
+@endif
 
 </body>
 <!-- END Register page -->

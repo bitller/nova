@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Helpers\AjaxResponse;
+use App\Helpers\PermissionsHelper;
 use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Validation\Validator;
@@ -21,7 +22,10 @@ class CreateAccountRequest extends AjaxRequest {
      * @return bool
      */
     public function authorize(Guard $auth) {
-        return !$auth->check();
+        if ($auth->check() && PermissionsHelper::newUsers()) {
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Helpers\AjaxResponse;
+use App\Helpers\PermissionsHelper;
 use App\Helpers\Roles;
 use App\Helpers\Settings;
 use App\Http\Controllers\Controller;
@@ -36,7 +37,17 @@ class RegisterController extends Controller {
      * @return string
      */
     public function index() {
-        return view('auth.register');
+
+        $data = [
+            'allowNewUsers' => false
+        ];
+
+        if (PermissionsHelper::newUsers()) {
+            $data['allowNewUsers'] = true;
+        }
+        
+        return view('auth.register')->with($data);
+
     }
 
     /**
