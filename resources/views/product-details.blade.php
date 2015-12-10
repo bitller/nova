@@ -120,5 +120,6 @@
 @endsection
 
 @section('scripts')
+    <script src="/js/header-search.js"></script>
     <script src="/js/product-details.js"></script>
 @endsection

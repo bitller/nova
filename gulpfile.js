@@ -16,14 +16,20 @@ elixir(function(mix) {
     mix.scripts([
         'jquery.min.js', 'bootstrap.min.js', 'vue/vue.js', 'vue/vue-resource.js', 'components/loader.js', 'sweetAlert.js',
         'custom-libs/alerts.js', 'custom-libs/swal-config.js', 'custom-libs/token.js', 'custom-libs/translations.js', 'custom-libs/data.js',
-        'custom-libs/url-builder.js', 'jquery-scripts/header-search.js', 'typeahead.js'
+        'custom-libs/url-builder.js', 'typeahead.js'
     ], 'public/js/vendor.js')
+        // Header search script
+        .scripts(['jquery-scripts/header-search.js'], 'public/js/header-search.js')
         .scripts(['welcome.js'], 'public/js/welcome.js')
-        .scripts(['pages/bills.js'], 'public/js/bills.js')
+
+        // Scripts for bills page
+        .scripts(['pages/bills.js', 'jquery-scripts/bills.js'], 'public/js/bills.js')
         .scripts(['pages/clients.js'], 'public/js/clients.js')
         .scripts(['pages/base.js', 'pages/client.js'], 'public/js/client.js')
         .scripts(['pages/base.js', 'pages/products.js', 'jquery-scripts/products.js'], 'public/js/products.js')
         .scripts(['pages/base.js', 'pages/my-products.js'], 'public/js/my-products.js')
+
+        // Scripts for bill page
         .scripts(['pages/bill.js', 'jquery-scripts/bill.js', 'libs/jquery-ui.js'], 'public/js/bill.js')
         .scripts(['pages/statistics.js', 'jquery-scripts/statistics.js'], 'public/js/statistics.js')
         .scripts(['pages/settings.js', 'jquery-scripts/settings.js'], 'public/js/settings.js')

@@ -56,3 +56,4 @@ $(document).ready(function() {
         window.location.replace('/product-details/' + product.value);
     });
 });
+//# sourceMappingURL=header-search.js.map

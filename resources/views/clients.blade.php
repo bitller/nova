@@ -64,5 +64,6 @@
 @endsection
 
 @section('scripts')
+    <script src="/js/header-search.js"></script>
     <script src="/js/clients.js"></script>
 @endsection

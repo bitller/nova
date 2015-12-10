@@ -1,35 +1,43 @@
 $(document).ready(function() {
 
-    // Instantiate the Bloodhound suggestion engine
-    var products = new Bloodhound({
+    // Search engine for client suggestions
+    var clients = new Bloodhound({
+
         datumTokenizer: function (datum) {
             return Bloodhound.tokenizers.whitespace(datum.value);
         },
+
         queryTokenizer: Bloodhound.tokenizers.whitespace,
+
         remote: {
             ajax: {
+                // Show loader when request is made
                 beforeSend: function(xhr) {
-                    $('.product-code i').show();
+                    $('.client-name i').show();
                 },
+                // Hide loader after request
                 complete: function() {
-                    $('.product-code i').hide();
+                    $('.client-name i').hide();
                 }
             },
+
             cache: false,
-            url: 'http://localhost:8888/bills/11/suggest-products?product_code=',
+
+            url: '/suggest/clients?name=',
+
             replace: function() {
-                var url = 'http://localhost:8888/bills/11/suggest-products?product_code=';
-                if ($('#product-code').val()) {
-                    url += encodeURIComponent($('#product-code').val())
+                var url = '/suggest/clients?name=';
+                if ($('#client-name').val()) {
+                    url += encodeURIComponent($('#client-name').val())
                 }
                 return url;
             },
-            filter: function (products) {
+
+            filter: function (clients) {
                 // Map the remote source JSON array to a JavaScript object array
-                return $.map(products, function (product) {
+                return $.map(clients, function (client) {
                     return {
-                        value: product.code,
-                        display: product.code + ' - ' + product.name
+                        name: client.name
                     };
                 });
             }
@@ -37,21 +45,20 @@ $(document).ready(function() {
     });
 
     // Initialize the Bloodhound suggestion engine
-    products.initialize();
+    clients.initialize();
 
-    var input = $('.twitter-typeahead');
+    var clientInput = $('.twitter-typeahead');
 
     // Instantiate the Typeahead UI
-    input.typeahead(null, {
-        displayKey: 'value',
-        source: products.ttAdapter(),
+    clientInput.typeahead(null, {
+        displayKey: 'name',
+        source: clients.ttAdapter(),
         templates: {
-            suggestion: function(product) {
-                return '<p>' + product.display + '</p>'
+            suggestion: function(client) {
+                return '<p>' + client.name + '</p>'
             }
         }
     });
-
 
     /*
      ------------------------
@@ -114,10 +121,5 @@ $(document).ready(function() {
     input.on('typeahead:selected', function(event, product) {
         window.location.replace('/product-details/' + product.value);
     });
-
-
-    $('#payment-term').datepicker({dateFormat: 'yy-m-d'});
-
-    $('[data-toggle="tooltip"]').tooltip();
 
 });

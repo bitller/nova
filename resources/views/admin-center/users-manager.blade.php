@@ -80,5 +80,6 @@
 @endsection
 
 @section('scripts')
-<script src="/js/users-manager.js"></script>
+    <script src="/js/header-search.js"></script>
+    <script src="/js/users-manager.js"></script>
 @endsection
