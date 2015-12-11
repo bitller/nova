@@ -44,6 +44,7 @@ return [
     'subscribed_users' => 'Utilizatori abonaţi',
     'subscribed_users_percentage' => 'Precentajul utilizatorilor abonaţi',
     'subscriptions' => 'Abonamente',
+    'user_bill_deleted' => 'Factura utilizatorului a fost ştearsă!',
     'user_has_no_bills' => 'Se pare că acest utilizator nu are creată nicio factură.',
     'user_has_no_paid_bills' => 'Se pare că acest utilizator nu are nicio factură marcată ca plătită.',
     'users_manager' => 'Manager de utilizatori',

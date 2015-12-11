@@ -36,6 +36,7 @@ return [
     'settings' => 'Application settings',
     'statistics' => 'Statistics',
     'subscriptions' => 'Subscriptions',
+    'user_bill_deleted' => 'User bill has been deleted!',
     'user_has_no_bills' => 'Looks like this user has no bills created.',
     'user_has_no_paid_bills' => 'Looks like this user has no paid bills marked as paid.',
     'users_manager' => 'Users manager',
