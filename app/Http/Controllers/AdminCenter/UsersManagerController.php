@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\AdminCenter;
 
+use App\Bill;
 use App\Helpers\AjaxResponse;
+use App\Helpers\Bills;
 use App\Helpers\Searches;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
 use App\User;
 
 /**
@@ -76,6 +81,44 @@ class UsersManagerController extends BaseController {
      */
     public function search(SearchUsersRequest $request) {
         return Searches::searchUsers($request->get('email'));
+    }
+
+    public function user($userId) {
+        return view('admin-center.users-manager.user')->with('userId', $userId);
+    }
+
+    /**
+     * @param int $userId
+     * @param GetUserBillsRequest $request
+     * @return mixed
+     */
+    public function getUserBills($userId, GetUserBillsRequest $request) {
+        return Bills::get(false, $userId);
+    }
+
+    /**
+     * @param int $userId
+     * @param GetUserPaidBillsRequest $request
+     * @return mixed
+     */
+    public function getUserPaidBills($userId, GetUserPaidBillsRequest $request) {
+        return Bills::get(true, $userId);
+    }
+
+    /**
+     * Delete given bill of given user.
+     *
+     * @param int $userId
+     * @param DeleteUserBillRequest $request
+     * @return mixed
+     */
+    public function deleteUserBill($userId, DeleteUserBillRequest $request) {
+
+        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->delete();
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('users_manager.user_bill_deleted'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
 }

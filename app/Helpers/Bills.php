@@ -106,19 +106,24 @@ class Bills {
 
     /**
      * @param bool $onlyPaidBills
+     * @param bool $useAnotherUserId
      * @return mixed
      */
-    public static function get($onlyPaidBills = false) {
+    public static function get($onlyPaidBills = false, $useAnotherUserId = false) {
 
         $paid = 0;
+        $userId = Auth::user()->id;
         if ($onlyPaidBills) {
             $paid = 1;
+        }
+        if ($useAnotherUserId) {
+            $userId = $useAnotherUserId;
         }
 
         $bills = Bill::select(
             'bills.id', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year',
             'bills.other_details', 'bills.created_at', 'clients.name as client_name'
-        )->where('bills.user_id', Auth::user()->id)
+        )->where('bills.user_id', $userId)
         ->where('bills.paid', $paid)
         ->orderBy('bills.created_at', 'desc')
         ->join('clients', function($join){
@@ -129,7 +134,7 @@ class Bills {
         // Append price to each bill
         foreach ($bills->items() as $bill) {
             $bill['human_date'] = date('d-m-Y', time($bill->created_at));
-            $bill['price'] = Bills::getPrice($bill->id);
+            $bill['price'] = Bills::getPrice($bill->id, $userId);
         }
 
         return $bills;
@@ -139,11 +144,17 @@ class Bills {
      * Get bill price.
      *
      * @param int $billId
+     * @param bool $customUserId
      * @return mixed
      */
-    public static function getPrice($billId) {
+    public static function getPrice($billId, $customUserId = false) {
 
-        $bill = Bill::where('id', $billId)->where('user_id', Auth::user()->id)->first();
+        $userId = Auth::user()->id;
+        if ($customUserId) {
+            $userId = $customUserId;
+        }
+
+        $bill = Bill::where('id', $billId)->where('user_id', $userId)->first();
         $price = $bill->products()->sum('final_price') + $bill->applicationProducts()->sum('final_price');
         return $price;
     }

@@ -41,6 +41,8 @@ elixir(function(mix) {
 
         // Scripts for users manager page
         .scripts(['pages/users-manager.js', '/jquery-scripts/users-manager.js'], 'public/js/users-manager.js')
+        // Scripts for user section of users manager
+        .scripts(['pages/users-manager/user.js'], 'public/js/user.js')
         .scripts(['pages/subscribe.js'], 'public/js/subscribe.js')
         .scripts(['pages/help-center-manager.js'], 'public/js/help-center-manager.js')
         .scripts(['pages/help-center-manager/category.js'], 'public/js/help-center-manager-category-page.js')

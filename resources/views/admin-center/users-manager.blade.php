@@ -5,7 +5,7 @@
         <div v-show="loaded">
             <!-- BEGIN Top part -->
             <div class="add-product-button row">
-                <span class="avon-products">{{ trans('users-manager.users_manager') }}</span>&nbsp;
+                <span class="avon-products">{{ trans('users_manager.users_manager') }}</span>&nbsp;
 
                 <!-- BEGIN Edit button -->
                 <div class="btn-group">
@@ -18,7 +18,7 @@
                         <!-- BEGIN Browse users -->
                         <li>
                             <a href="/admin-center/users-manager/browse">
-                                <span class="glyphicon glyphicon-list"></span>&nbsp; {{ trans('users-manager.browse') }}
+                                <span class="glyphicon glyphicon-list"></span>&nbsp; {{ trans('users_manager.browse') }}
                             </a>
                         </li>
                         <!-- END Browser users -->
@@ -40,8 +40,8 @@
             <!-- BEGIN Search users -->
             <div class="well custom-well row">
                 <div class="form-group has-feedback">
-                    <label for="email">{{ trans('users-manager.search') }}:</label>
-                    <input id="users-search" type="text" class="form-control" placeholder="{{ trans('users-manager.email') }}">
+                    <label for="email">{{ trans('users_manager.search') }}:</label>
+                    <input id="users-search" type="text" class="form-control" placeholder="{{ trans('users_manager.email') }}">
                     <i class="glyphicon glyphicon-envelope form-control-feedback email-icon icon-color"></i>
                     <i class="glyphicon glyphicon-refresh form-control-feedback search-user-loading-icon icon-color glyphicon-spin"></i>
                 </div>

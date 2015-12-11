@@ -161,8 +161,13 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::get('/browse', 'UsersManagerController@browse');
         Route::get('/get-users', 'UsersManagerController@getUsers');
         Route::get('/search', 'UsersManagerController@search');
+        Route::get('/user/{userId}', 'UsersManagerController@user');
+        Route::get('/user/{userId}/get', 'UsersManagerController@getUserBills');
+        Route::get('/user/{userId}/get-paid-bills', 'UsersManagerController@getUserPaidBills');
+        Route::post('/user/{userId}/delete-user-bill', 'UsersManagerController@deleteUserBill');
     });
 
+    // Application settings
     Route::group(['prefix' => 'application-settings'], function() {
         Route::get('/', 'ApplicationSettingsController@index');
         Route::get('/get', 'ApplicationSettingsController@get');
