@@ -22,7 +22,7 @@ class CreateAccountRequest extends AjaxRequest {
      * @return bool
      */
     public function authorize(Guard $auth) {
-        if ($auth->check() && PermissionsHelper::newUsers()) {
+        if (!$auth->check() && PermissionsHelper::newUsers()) {
             return true;
         }
         return false;
