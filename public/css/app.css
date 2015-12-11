@@ -7346,6 +7346,15 @@ button.close {
   margin-bottom: 15px;
   display: inline-block; }
 
+.primary-hover:hover, .danger-hover:hover {
+  cursor: pointer; }
+
+.primary-hover:hover span {
+  color: #3498DB; }
+
+.danger-hover:hover span {
+  color: #d9534f; }
+
 .tab-loader {
   margin-top: 20px;
   font-size: 30px; }

@@ -16,6 +16,18 @@
   display: inline-block;
 }
 
+.primary-hover:hover, .danger-hover:hover {
+  cursor: pointer;
+}
+
+.primary-hover:hover span {
+  color: $brand-primary;
+}
+
+.danger-hover:hover span {
+  color: $brand-danger;
+}
+
 .tab-loader {
   margin-top: 20px;
   font-size: 30px;
