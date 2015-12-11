@@ -10,13 +10,20 @@ new Vue({
     },
 
     methods: {
+        /**
+         * Get user bills.
+         */
         getUserBills: function() {
             this.$set('loading_user_bills', true);
             this.$http.get('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get', function(response) {
                 this.$set('loading_user_bills', false);
                 this.$set('bills', response);
             }).error(function(response) {
-                //
+                if (response.message) {
+                    Alert.error(response.message);
+                    return;
+                }
+                Alert.generalError();
             });
         },
 
@@ -39,6 +46,11 @@ new Vue({
             });
         },
 
+        /**
+         * Delete user bill.
+         *
+         * @param billId
+         */
         deleteUserBill: function(billId) {
             var thisInstance = this;
             Alert.confirmDelete(function() {
@@ -60,6 +72,28 @@ new Vue({
                 });
 
             }, 'bla bla');
+        },
+
+        /**
+         * Delete all user bills.
+         */
+        deleteAllUserBills: function() {
+            var thisInstance = this;
+            Alert.confirmDelete(function() {
+                var data = {
+                    _token: Token.get()
+                }
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-all-bills', data, function(response) {
+                    this.getUserBills();
+                    Alert.success(response.title, response.message);
+                }).error(function(response) {
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                });
+            })
         }
     }
 });

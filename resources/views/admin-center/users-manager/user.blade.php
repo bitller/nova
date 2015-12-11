@@ -154,7 +154,7 @@
                                     </a>
                                 </li>
                                 <li v-show="bills.total > 0">
-                                    <a href="#">
+                                    <a href="#" v-on="click: deleteAllUserBills">
                                         <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_bills') }}
                                     </a>
                                 </li>
