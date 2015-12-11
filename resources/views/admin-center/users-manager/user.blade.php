@@ -188,7 +188,7 @@
                                     <td class="text-center">@{{ bill.price }}</td>
                                     <td class="text-center">@{{ bill.created_at }}</td>
                                     <td class="text-center"><span class="glyphicon glyphicon-ok icon-color"></span></td>
-                                    <td class="text-center"><span class="glyphicon glyphicon-trash icon-color"></span></td>
+                                    <td class="text-center"><span v-on="click:deleteUserBill(bill.id)" class="glyphicon glyphicon-trash icon-color"></span></td>
                                 </tr>
                                 </tbody>
                             </table>
