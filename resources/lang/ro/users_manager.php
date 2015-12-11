@@ -2,6 +2,7 @@
 
 return [
     'actions' => 'Acţiuni',
+    'all_user_bills_deleted' => 'Toate facturile utilizatorului au fost şterse!',
     'bills' => 'Facturi',
     'bills_of_this_user' => 'Facturile acestui utilizator',
     'browse' => 'Lista utilizatorilor',

@@ -9,6 +9,7 @@ use App\Helpers\Searches;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteAllUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
@@ -117,6 +118,22 @@ class UsersManagerController extends BaseController {
         Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->delete();
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('users_manager.user_bill_deleted'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Delete all user bills.
+     *
+     * @param int $userId
+     * @param DeleteAllUserBillsRequest $request
+     * @return mixed
+     */
+    public function deleteAllUserBills($userId, DeleteAllUserBillsRequest $request) {
+
+        Bill::where('user_id', $userId)->delete();
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('users_manager.all_user_bills_deleted'));
 
         return response($response->get())->header('Content-Type', 'application/json');
     }
