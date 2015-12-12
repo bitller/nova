@@ -12,6 +12,7 @@ use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteAllUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
 use App\User;
 
@@ -134,6 +135,22 @@ class UsersManagerController extends BaseController {
         Bill::where('user_id', $userId)->delete();
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('users_manager.all_user_bills_deleted'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Make paid all user bills.
+     *
+     * @param int $userId
+     * @param MakeAllUserBillsPaidRequest $request
+     * @return mixed
+     */
+    public function makeAllUserBillsPaid($userId, MakeAllUserBillsPaidRequest $request) {
+
+        Bill::where('user_id', $userId)->update(['paid' => 1]);
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('users_manager.all_user_bills_are_paid'));
 
         return response($response->get())->header('Content-Type', 'application/json');
     }

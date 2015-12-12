@@ -159,7 +159,7 @@
                                     </a>
                                 </li>
                                 <li v-show="bills.total > 0">
-                                    <a href="#">
+                                    <a href="#" v-on="click: makeAllUserBillsPaid">
                                         <span class="glyphicon glyphicon-ok">&nbsp;</span> {{ trans('users_manager.mark_all_bills_as_paid') }}
                                     </a>
                                 </li>

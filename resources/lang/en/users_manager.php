@@ -2,6 +2,7 @@
 
 return [
     'actions' => 'Actions',
+    'all_user_bills_are_paid' => 'All user bills are paid!',
     'all_user_bills_deleted' => 'All user bills deleted!',
     'bills' => 'Bills',
     'bills_of_this_user' => 'Bills of this user',

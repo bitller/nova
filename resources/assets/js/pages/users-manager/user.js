@@ -82,7 +82,7 @@ new Vue({
             Alert.confirmDelete(function() {
                 var data = {
                     _token: Token.get()
-                }
+                };
                 thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-all-bills', data, function(response) {
                     this.getUserBills();
                     Alert.success(response.title, response.message);
@@ -94,6 +94,32 @@ new Vue({
                     Alert.generalError();
                 });
             })
+        },
+
+        /**
+         * Make all user bills paid.
+         */
+        makeAllUserBillsPaid: function() {
+            var thisInstance = this;
+            Alert.confirmDelete(function() {
+
+                var data = {
+                    _token: Token.get()
+                };
+                // Post request
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/make-all-bills-paid', data, function(response) {
+                    this.getUserBills();
+                    this.$set('paid_bills', '');
+                    //Alert.close();
+                    Alert.success(response.title, response.message);
+                }).error(function(response) {
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                });
+            });
         }
     }
 });
