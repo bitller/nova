@@ -167,6 +167,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::post('/user/{userId}/delete-bill', 'UsersManagerController@deleteUserBill');
         Route::post('/user/{userId}/delete-all-bills', 'UsersManagerController@deleteAllUserBills');
         Route::post('/user/{userId}/make-all-bills-paid', 'UsersManagerController@makeAllUserBillsPaid');
+        Route::post('/user/{userId}/make-bill-paid', 'UsersManagerController@makeUserBillPaid');
     });
 
     // Application settings

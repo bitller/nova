@@ -187,7 +187,7 @@
                                     <td class="text-center">@{{ bill.campaign_number }}</td>
                                     <td class="text-center">@{{ bill.price }}</td>
                                     <td class="text-center">@{{ bill.created_at }}</td>
-                                    <td class="text-center primary-hover"><span class="glyphicon glyphicon-ok icon-color"></span></td>
+                                    <td v-on="click:makeUserBillPaid(bill.id)" class="text-center primary-hover"><span class="glyphicon glyphicon-ok icon-color"></span></td>
                                     <td v-on="click:deleteUserBill(bill.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash icon-color"></span></td>
                                 </tr>
                                 </tbody>

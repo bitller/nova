@@ -75,6 +75,41 @@ new Vue({
         },
 
         /**
+         * Make user bill paid.
+         *
+         * @param billId
+         */
+        makeUserBillPaid: function(billId) {
+
+            var thisInstance = this;
+
+            // Ask for confirmation
+            Alert.confirmDelete(function() {
+
+                // Post data
+                var data = {
+                    _token: Token.get(),
+                    bill_id: billId
+                };
+
+                // Do request
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/make-bill-paid', data, function(response) {
+                    // Handle success response
+                    this.getUserBills();
+                    this.$set('paid_bills', '');
+                    Alert.success(response.title, response.message);
+                }).error(function(response) {
+                    // Handle error response
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                });
+            });
+        },
+
+        /**
          * Delete all user bills.
          */
         deleteAllUserBills: function() {
