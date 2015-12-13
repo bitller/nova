@@ -161,15 +161,18 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::get('/browse', 'UsersManagerController@browse');
         Route::get('/get-users', 'UsersManagerController@getUsers');
         Route::get('/search', 'UsersManagerController@search');
-        Route::get('/user/{userId}', 'UsersManagerController@user');
-        Route::get('/user/{userId}/get-user-data', 'UsersManagerController@getUserData');
-        Route::get('/user/{userId}/get', 'UsersManagerController@getUserBills');
-        Route::get('/user/{userId}/get-paid-bills', 'UsersManagerController@getUserPaidBills');
-        Route::post('/user/{userId}/delete-bill', 'UsersManagerController@deleteUserBill');
-        Route::post('/user/{userId}/delete-all-bills', 'UsersManagerController@deleteAllUserBills');
-        Route::post('/user/{userId}/make-all-bills-paid', 'UsersManagerController@makeAllUserBillsPaid');
-        Route::post('/user/{userId}/make-bill-paid', 'UsersManagerController@makeUserBillPaid');
-        Route::post('/user/{userId}/disable-account', 'UsersManagerController@disableUserAccount');
+
+        Route::group(['prefix' => 'user'], function() {
+            Route::get('/{userId}', 'UsersManagerController@user');
+            Route::get('/{userId}/get', 'UsersManagerController@getUserBills');
+            Route::get('/{userId}/get-user-data', 'UsersManagerController@getUserData');
+            Route::get('/{userId}/get-paid-bills', 'UsersManagerController@getUserPaidBills');
+            Route::post('{userId}/delete-bill', 'UsersManagerController@deleteUserBill');
+            Route::post('/{userId}/delete-all-bills', 'UsersManagerController@deleteAllUserBills');
+            Route::post('/{userId}/make-bill-paid', 'UsersManagerController@makeUserBillPaid');
+            Route::post('/{userId}/make-all-bills-paid', 'UsersManagerController@makeAllUserBillsPaid');
+            Route::post('/{userId}/disable-account', 'UsersManagerController@disableUserAccount');
+        });
     });
 
     // Application settings
