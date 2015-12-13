@@ -21,7 +21,7 @@
         <!-- BEGIN User -->
         <div class="row">
 
-            <h4 class="user-email">user@bitller.com</h4>
+            <h4 class="user-email" v-show="user_email">@{{ user_email }}</h4>
 
             <!-- BEGIN User options -->
             <div class="btn-group user-options">
@@ -48,7 +48,7 @@
                     <!-- END Change password -->
 
                     <!-- BEGIN Disable account -->
-                    <li>
+                    <li v-show="active > 0" v-on="click: disableUserAccount">
                         <a href="#">
                             <span class="glyphicon glyphicon-off"></span>&nbsp; {{ trans('users_manager.disable_account') }}
                         </a>
@@ -56,7 +56,7 @@
                     <!-- END Disable account -->
 
                     <!-- BEGIN Enable account -->
-                    <li>
+                    <li v-show="active < 1">
                         <a href="#">
                             <span class="glyphicon glyphicon-ok"></span>&nbsp; {{ trans('users_manager.enable_account') }}
                         </a>

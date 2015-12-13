@@ -14,8 +14,10 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Manage application users.
@@ -88,6 +90,22 @@ class UsersManagerController extends BaseController {
 
     public function user($userId) {
         return view('admin-center.users-manager.user')->with('userId', $userId);
+    }
+
+    public function getUserData($userId) {
+
+        $response = new AjaxResponse();
+
+        if (DB::table('users')->where('id', $userId)->count()) {
+            $response->setSuccessMessage(trans('common.success'));
+            $response->addExtraFields([
+                'user' => DB::table('users')->where('id', $userId)->select('email', 'active')->first()
+            ]);
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        $response->setFailMessage(trans('common.error'));
+        return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
     }
 
     /**
@@ -168,6 +186,23 @@ class UsersManagerController extends BaseController {
         Bill::where('user_id', $userId)->update(['paid' => 1]);
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('users_manager.all_user_bills_are_paid'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Allow admin to disable users accounts.
+     *
+     * @param int $userId
+     * @param DisableUserAccountRequest $request
+     * @return mixed
+     */
+    public function disableUserAccount($userId, DisableUserAccountRequest $request) {
+
+        User::where('id', $userId)->update(['active' => 0]);
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('users_manager.account_disabled'));
+        $response->addExtraFields(['active' => 0]);
 
         return response($response->get())->header('Content-Type', 'application/json');
     }

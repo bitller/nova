@@ -6,10 +6,21 @@ new Vue({
     el: '#user',
 
     ready: function() {
+        this.loadUser();
         this.getUserBills();
     },
 
     methods: {
+
+        loadUser: function() {
+            this.$http.get('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-user-data', function(response) {
+                this.$set('user_email', response.user.email);
+                this.$set('active', response.user.active);
+            }).error(function(response) {
+                //
+            });
+        },
+
         /**
          * Get user bills.
          */
@@ -155,6 +166,40 @@ new Vue({
                     Alert.generalError();
                 });
             });
+        },
+
+        /**
+         * Disable user account.
+         */
+        disableUserAccount: function() {
+
+            // Save this in variable
+            var thisInstance = this;
+
+            // Ask for confirmation
+            Alert.confirmDelete(function() {
+
+                var data = {
+                    _token: Token.get()
+                };
+
+                // Post request
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/disable-account', data, function(response) {
+
+                    // Handle success response
+                    Alert.success(response.title, response.message);
+                    this.$set('active', response.active);
+
+                }).error(function(response) {
+
+                    // Handle error response
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                }, 'translation goes here');
+            })
         }
     }
 });
