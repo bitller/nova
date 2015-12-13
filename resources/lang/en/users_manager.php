@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'account_deleted' => 'Account has been deleted!',
     'account_disabled' => 'Account has been disabled!',
     'account_enabled' => 'Account has been enabled!',
     'actions' => 'Actions',

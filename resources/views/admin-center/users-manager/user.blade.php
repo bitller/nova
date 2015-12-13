@@ -80,7 +80,7 @@
                     <!-- END Disable subscription -->
 
                     <!-- BEGIN Delete account -->
-                    <li>
+                    <li v-on="click: deleteUserAccount">
                         <a href="#">
                             <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_account') }}
                         </a>

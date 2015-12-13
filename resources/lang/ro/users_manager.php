@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'account_deleted' => 'Contul a fost şters!',
     'account_disabled' => 'Contul a fost dezactivat!',
     'account_enabled' => 'Contul a fost activat!',
     'actions' => 'Acţiuni',

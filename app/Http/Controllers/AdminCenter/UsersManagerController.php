@@ -14,9 +14,11 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EnableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
+use App\Subscription;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
@@ -211,6 +213,23 @@ class UsersManagerController extends BaseController {
      */
     public function enableUserAccount($userId, EnableUserAccountRequest $request) {
         return \App\Helpers\AdminCenter\User::changeAccountStatus(1, $userId);
+    }
+
+    /**
+     * Allow admin to delete user account.
+     *
+     * @param int $userId
+     * @param DeleteUserAccountRequest $request
+     * @return mixed
+     */
+    public function deleteUserAccount($userId, DeleteUserAccountRequest $request) {
+
+        Subscription::where('user_id', $userId)->delete();
+        User::where('id', $userId)->delete();
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('users_manager.account_deleted'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
 }

@@ -223,7 +223,37 @@ new Vue({
                     Alert.generalError();
                 });
             }, message);
+        },
 
+        /**
+         * Allow admin to delete user account.
+         */
+        deleteUserAccount: function() {
+
+            var thisInstance = this;
+
+            Alert.confirmDelete(function() {
+
+                var data = {
+                    _token: Token.get()
+                };
+
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-account', data, function(response) {
+
+                    // Success response
+                    window.location.replace('/admin-center/users-manager');
+
+                }).error(function(response) {
+
+                    // Handle error response
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                });
+
+            }, 'message goes here');
         }
     }
 });
