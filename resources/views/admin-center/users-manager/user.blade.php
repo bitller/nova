@@ -56,7 +56,7 @@
                     <!-- END Disable account -->
 
                     <!-- BEGIN Enable account -->
-                    <li v-show="active < 1">
+                    <li v-show="active < 1" v-on="click: enableUserAccount">
                         <a href="#">
                             <span class="glyphicon glyphicon-ok"></span>&nbsp; {{ trans('users_manager.enable_account') }}
                         </a>

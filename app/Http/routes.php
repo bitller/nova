@@ -162,6 +162,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::get('/get-users', 'UsersManagerController@getUsers');
         Route::get('/search', 'UsersManagerController@search');
 
+        // Manage user
         Route::group(['prefix' => 'user'], function() {
             Route::get('/{userId}', 'UsersManagerController@user');
             Route::get('/{userId}/get', 'UsersManagerController@getUserBills');
@@ -172,6 +173,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             Route::post('/{userId}/make-bill-paid', 'UsersManagerController@makeUserBillPaid');
             Route::post('/{userId}/make-all-bills-paid', 'UsersManagerController@makeAllUserBillsPaid');
             Route::post('/{userId}/disable-account', 'UsersManagerController@disableUserAccount');
+            Route::post('/{userId}/enable-account', 'UsersManagerController@enableUserAccount');
         });
     });
 

@@ -172,19 +172,42 @@ new Vue({
          * Disable user account.
          */
         disableUserAccount: function() {
+            this.changeAccountStatus();
+        },
 
-            // Save this in variable
+        /**
+         * Enable user account.
+         */
+        enableUserAccount: function() {
+            this.changeAccountStatus(true);
+        },
+
+        /**
+         * Enable or disable user account.
+         *
+         * @param enable
+         */
+        changeAccountStatus: function(enable) {
+
+            // Base request url
+            var url = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/';
             var thisInstance = this;
+            var message = 'Enable account';
 
-            // Ask for confirmation
+            if (typeof enable === 'undefined') {
+                url = url + 'disable-account';
+                message = 'Disable account';
+            } else {
+                url = url + 'enable-account';
+            }
+
             Alert.confirmDelete(function() {
-
                 var data = {
                     _token: Token.get()
                 };
 
-                // Post request
-                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/disable-account', data, function(response) {
+                // Do post request
+                thisInstance.$http.post(url, data, function(response) {
 
                     // Handle success response
                     Alert.success(response.title, response.message);
@@ -198,8 +221,9 @@ new Vue({
                         return;
                     }
                     Alert.generalError();
-                }, 'translation goes here');
-            })
+                });
+            }, message);
+
         }
     }
 });

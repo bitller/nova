@@ -15,6 +15,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\EnableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -198,13 +199,18 @@ class UsersManagerController extends BaseController {
      * @return mixed
      */
     public function disableUserAccount($userId, DisableUserAccountRequest $request) {
+        return \App\Helpers\AdminCenter\User::changeAccountStatus(0, $userId);
+    }
 
-        User::where('id', $userId)->update(['active' => 0]);
-        $response = new AjaxResponse();
-        $response->setSuccessMessage(trans('users_manager.account_disabled'));
-        $response->addExtraFields(['active' => 0]);
-
-        return response($response->get())->header('Content-Type', 'application/json');
+    /**
+     * Allow admin to enable users accounts.
+     *
+     * @param int $userId
+     * @param EnableUserAccountRequest $request
+     * @return mixed
+     */
+    public function enableUserAccount($userId, EnableUserAccountRequest $request) {
+        return \App\Helpers\AdminCenter\User::changeAccountStatus(1, $userId);
     }
 
 }

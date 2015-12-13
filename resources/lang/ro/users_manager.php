@@ -2,6 +2,7 @@
 
 return [
     'account_disabled' => 'Contul a fost dezactivat!',
+    'account_enabled' => 'Contul a fost activat!',
     'actions' => 'Acţiuni',
     'all_user_bills_are_paid' => 'Toate facturile utilizatorului au fost marcate ca plătite!',
     'all_user_bills_deleted' => 'Toate facturile utilizatorului au fost şterse!',
