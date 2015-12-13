@@ -194,3 +194,8 @@ body {
   border-right: 1px solid darken($brand-primary, 5);
   border-top: 1px solid darken($brand-primary, 5);
 }
+
+.underline:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

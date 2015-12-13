@@ -171,22 +171,27 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>{{ trans('users_manager.client') }}</th>
-                                    <th>{{ trans('users_manager.order') }}</th>
-                                    <th>{{ trans('users_manager.campaign') }}</th>
-                                    <th>{{ trans('users_manager.price') }}</th>
-                                    <th>{{ trans('users_manager.created_at') }}</th>
-                                    <th>{{ trans('users_manager.mark_as_paid') }}</th>
-                                    <th>{{ trans('users_manager.delete_bill') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.client') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.order') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.campaign') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.price') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.created_at') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.payment_term')}}</th>
+                                    <th class="text-center">{{ trans('users_manager.mark_as_paid') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.delete_bill') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-repeat="bill in bills.data">
-                                    <td>@{{ bill.client_name }}</td>
+                                    <td class="text-center">@{{ bill.client_name }}</td>
                                     <td class="text-center">@{{ bill.campaign_order }}</td>
                                     <td class="text-center">@{{ bill.campaign_number }}</td>
                                     <td class="text-center">@{{ bill.price }}</td>
                                     <td class="text-center">@{{ bill.created_at }}</td>
+                                    <td class="text-center">
+                                        <span v-show="bill.payment_term != '0000-00-00' && bill.payment_term">@{{ bill.payment_term }}</span>
+                                        <span v-show="bill.payment_term == '0000-00-00' || !bill.payment_term">{{ trans('users_manager.payment_term_not_set') }}</span>
+                                    </td>
                                     <td v-on="click:makeUserBillPaid(bill.id)" class="text-center primary-hover"><span class="glyphicon glyphicon-ok icon-color"></span></td>
                                     <td v-on="click:deleteUserBill(bill.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash icon-color"></span></td>
                                 </tr>

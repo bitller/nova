@@ -122,7 +122,7 @@ class Bills {
 
         $bills = Bill::select(
             'bills.id', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year',
-            'bills.other_details', 'bills.created_at', 'clients.name as client_name'
+            'bills.other_details', 'bills.created_at', 'bills.payment_term as payment_term', 'clients.name as client_name'
         )->where('bills.user_id', $userId)
         ->where('bills.paid', $paid)
         ->orderBy('bills.created_at', 'desc')
