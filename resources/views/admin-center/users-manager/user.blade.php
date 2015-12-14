@@ -148,11 +148,6 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-plus">&nbsp;</span> {{ trans('users_manager.create_bill') }}
-                                    </a>
-                                </li>
                                 <li v-show="bills.total > 0">
                                     <a href="#" v-on="click: deleteAllUserBills">
                                         <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_bills') }}
