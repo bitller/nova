@@ -92,33 +92,61 @@ new Vue({
          * @param billId
          */
         makeUserBillPaid: function(billId) {
+            this.changeUserBillPaidStatus(billId);
+        },
+
+        makeUserBillUnpaid: function(billId) {
+            this.changeUserBillPaidStatus(billId, true);
+        },
+
+        changeUserBillPaidStatus: function(billId, makeUnpaid) {
 
             var thisInstance = this;
+            var message = 'make paid';
+            var url = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/make-bill-';
+
+            // Decide which url to use
+            if (typeof makeUnpaid !== 'undefined') {
+                message = 'make unpaid';
+                url = url + 'unpaid';
+            } else {
+                url = url + 'paid'
+            }
 
             // Ask for confirmation
             Alert.confirmDelete(function() {
 
-                // Post data
                 var data = {
                     _token: Token.get(),
                     bill_id: billId
                 };
 
-                // Do request
-                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/make-bill-paid', data, function(response) {
-                    // Handle success response
+                thisInstance.$http.post(url, data, function(response) {
+
+                    // Success handler when bill will be marked unpaid
+                    if (typeof makeUnpaid !== 'undefined') {
+                        this.getUserBills();
+                        this.$set('paid_bills', '');
+                        this.getUserPaidBills();
+                        Alert.success(response.title, response.message);
+                        return;
+                    }
+
+                    // Success handler when bill will be marked as paid
                     this.getUserBills();
                     this.$set('paid_bills', '');
                     Alert.success(response.title, response.message);
+
                 }).error(function(response) {
-                    // Handle error response
-                    if (response.message) {
+
+                    // Error response handler, valid for both situations
+                    if (typeof response.message !== 'undefined') {
                         Alert.error(response.message);
                         return;
                     }
                     Alert.generalError();
                 });
-            });
+            }, message);
         },
 
         /**

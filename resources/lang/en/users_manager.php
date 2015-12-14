@@ -51,6 +51,7 @@ return [
     'subscriptions' => 'Subscriptions',
     'user_bill_deleted' => 'User bill has been deleted!',
     'user_bill_is_paid' => 'User bill is marked as paid.',
+    'user_bill_is_unpaid' => 'User bill is marked as unpaid.',
     'user_email_updated' => 'User email has been updated!',
     'user_has_no_bills' => 'Looks like this user has no bills created or all are paid.',
     'user_has_no_paid_bills' => 'Looks like this user has no paid bills marked as paid.',

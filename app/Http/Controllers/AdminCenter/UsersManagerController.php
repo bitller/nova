@@ -14,6 +14,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillUnpaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\ChangeUserPasswordRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
@@ -159,6 +160,22 @@ class UsersManagerController extends BaseController {
         Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->update(['paid' => 1]);
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('users_manager.user_bill_is_paid'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Make user bill unpaid.
+     *
+     * @param int $userId
+     * @param MakeUserBillUnpaidRequest $request
+     * @return mixed
+     */
+    public function makeUserBillUnpaid($userId, MakeUserBillUnpaidRequest $request) {
+
+        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->update(['paid' => 0]);
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('users_manager.user_bill_is_unpaid'));
 
         return response($response->get())->header('Content-Type', 'application/json');
     }

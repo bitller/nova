@@ -216,22 +216,22 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>{{ trans('users_manager.client') }}</th>
-                                    <th>{{ trans('users_manager.order') }}</th>
-                                    <th>{{ trans('users_manager.campaign') }}</th>
-                                    <th>{{ trans('users_manager.price') }}</th>
-                                    <th>{{ trans('users_manager.created_at') }}</th>
-                                    <th>{{ trans('users_manager.mark_as_unpaid') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.client') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.order') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.campaign') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.price') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.created_at') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.mark_as_unpaid') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-repeat="paid_bill in paid_bills.data">
-                                    <td>@{{ paid_bill.client_name }}</td>
+                                    <td class="text-center">@{{ paid_bill.client_name }}</td>
                                     <td class="text-center">@{{ paid_bill.campaign_order }}</td>
                                     <td class="text-center">@{{ paid_bill.campaign_number }}</td>
                                     <td class="text-center">@{{ paid_bill.price }}</td>
                                     <td class="text-center">@{{ paid_bill.created_at }}</td>
-                                    <td class="text-center"><span class="glyphicon glyphicon-ok icon-color"></span></td>
+                                    <td v-on="click: makeUserBillUnpaid(paid_bill.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-remove icon-color"></span></td>
                                 </tr>
                                 </tbody>
                             </table>
