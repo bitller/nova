@@ -294,6 +294,48 @@ new Vue({
         resetEditUserEmailModal: function() {
             this.$set('error', '');
             this.$set('email', this.$get('user_email'));
+        },
+
+        /**
+         * Allow admin to change user password.
+         */
+        changeUserPassword: function() {
+
+            this.$set('error', '');
+            this.$set('loading', true);
+
+            var data = {
+                _token: Token.get(),
+                new_password: this.$get('new_password'),
+                new_password_confirmation: this.$get('confirm_new_password')
+            };
+
+            this.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/change-password', data, function(response) {
+
+                // Success response
+                this.$set('loading', false);
+                $('#change-user-password-modal').modal('toggle');
+                Alert.success(response.title, response.message);
+
+            }).error(function(response) {
+
+                // Error response
+                this.$set('loading', false);
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('general-error'));
+            });
+        },
+
+        /**
+         * Reset change user password modal.
+         */
+        resetChangeUserPasswordModal: function() {
+            this.$set('error', '');
+            this.$set('new_password', '');
+            this.$set('confirm_new_password', '');
         }
     }
 });

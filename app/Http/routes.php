@@ -176,6 +176,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             Route::post('/{userId}/enable-account', 'UsersManagerController@enableUserAccount');
             Route::post('/{userId}/delete-account', 'UsersManagerController@deleteUserAccount');
             Route::post('/{userId}/edit-email', 'UsersManagerController@editUserEmail');
+            Route::post('/{userId}/change-password', 'UsersManagerController@changeUserPassword');
         });
     });
 

@@ -14,6 +14,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\ChangeUserPasswordRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EditUserEmailRequest;
@@ -229,6 +230,31 @@ class UsersManagerController extends BaseController {
         User::where('id', $userId)->update(['email' => $request->get('email')]);
         $response->setSuccessMessage(trans('users_manager.user_email_updated'));
         $response->addExtraFields(['email' => $request->get('email')]);
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Allow admin to change the password of a given user.
+     *
+     * @param int $userId
+     * @param ChangeUserPasswordRequest $request
+     * @return mixed
+     */
+    public function changeUserPassword($userId, ChangeUserPasswordRequest $request) {
+
+        $response = new AjaxResponse();
+        $user = User::find($userId);
+
+        // Check if user exists
+        if (!$user) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Update password
+        User::where('id', $userId)->update(['password' => bcrypt($request->get('new_password'))]);
+
+        $response->setSuccessMessage(trans('users_manager.user_password_changed'));
         return response($response->get())->header('Content-Type', 'application/json');
     }
 

@@ -40,7 +40,7 @@
                     <!-- END Edit email -->
 
                     <!-- BEGIN Change password -->
-                    <li>
+                    <li v-on="click: resetChangeUserPasswordModal" data-toggle="modal" data-target="#change-user-password-modal">
                         <a href="#">
                             <span class="glyphicon glyphicon-lock"></span>&nbsp; {{ trans('users_manager.change_password') }}
                         </a>
@@ -281,6 +281,7 @@
         <!-- END User -->
 
         @include('includes.modals.edit-user-email')
+        @include('includes.modals.change-user-password')
 
     </div>
 @endsection
