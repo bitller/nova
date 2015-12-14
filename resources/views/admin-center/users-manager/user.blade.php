@@ -32,7 +32,7 @@
                 <ul class="dropdown-menu">
 
                     <!-- BEGIN Edit email -->
-                    <li>
+                    <li v-on="click: resetEditUserEmailModal" data-toggle="modal" data-target="#edit-user-email-modal">
                         <a href="#">
                             <span class="glyphicon glyphicon-envelope"></span>&nbsp; {{ trans('users_manager.edit_email') }}
                         </a>
@@ -279,6 +279,8 @@
             <!-- END Users details -->
         </div>
         <!-- END User -->
+
+        @include('includes.modals.edit-user-email')
 
     </div>
 @endsection

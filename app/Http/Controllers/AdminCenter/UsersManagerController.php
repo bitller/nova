@@ -16,6 +16,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRe
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\EditUserEmailRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EnableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
 use App\Subscription;
@@ -190,6 +191,44 @@ class UsersManagerController extends BaseController {
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('users_manager.all_user_bills_are_paid'));
 
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Allow admin to edit user email.
+     *
+     * @param int $userId
+     * @param EditUserEmailRequest $request
+     * @return mixed
+     */
+    public function editUserEmail($userId, EditUserEmailRequest $request) {
+
+        $response = new AjaxResponse();
+        $user = User::find($userId);
+
+        // Make sure user exists
+        if (!$user) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Do nothing if email is the same
+        if ($user->email === $request->get('email')) {
+            $response->setSuccessMessage(trans('users_manager.user_email_updated'));
+            $response->addExtraFields(['email' => $user->email]);
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        // Check if email is already used by another user
+        if (User::where('email', $request->get('email'))->count()) {
+            $response->setFailMessage(trans('users_manager.email_already_used'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Update
+        User::where('id', $userId)->update(['email' => $request->get('email')]);
+        $response->setSuccessMessage(trans('users_manager.user_email_updated'));
+        $response->addExtraFields(['email' => $request->get('email')]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 

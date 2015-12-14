@@ -15,6 +15,7 @@ new Vue({
         loadUser: function() {
             this.$http.get('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-user-data', function(response) {
                 this.$set('user_email', response.user.email);
+                this.$set('email', response.user.email);
                 this.$set('active', response.user.active);
             }).error(function(response) {
                 //
@@ -254,6 +255,45 @@ new Vue({
                 });
 
             }, 'message goes here');
+        },
+
+        /**
+         * Edit user email.
+         */
+        editUserEmail: function() {
+
+            this.$set('error', '');
+            this.$set('loading', true);
+
+            var data = {
+                _token: Token.get(),
+                email: this.$get('email')
+            };
+
+            this.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/edit-email', data, function(response) {
+                // Success response
+                this.$set('loading', false);
+                this.$set('user_email', response.email);
+                this.$set('email', response.email);
+                $('#edit-user-email-modal').modal('toggle');
+                Alert.success(response.title, response.message);
+            }).error(function(response) {
+                // Error response
+                this.$set('loading', false);
+                if (response.message) {
+                    this.$set('error', response.message);
+                    return;
+                }
+                this.$set('error', Translation.common('general-error'));
+            });
+        },
+
+        /**
+         * Reset edit user email modal.
+         */
+        resetEditUserEmailModal: function() {
+            this.$set('error', '');
+            this.$set('email', this.$get('user_email'));
         }
     }
 });
