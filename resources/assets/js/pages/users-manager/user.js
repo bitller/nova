@@ -150,16 +150,43 @@ new Vue({
         },
 
         /**
-         * Delete all user bills.
+         * Delete user bills.
+         *
+         * @param onlyUnpaid If present, only unpaid bills will be deleted
+         * @param onlyPaid If preset, only paid bills will be deleted
          */
-        deleteAllUserBills: function() {
+        deleteAllUserBills: function(onlyUnpaid, onlyPaid) {
+
             var thisInstance = this;
+            var url = '/admin-center/users-manager/user/' + $('#user').attr('user-id');
+            var message = '';
+
+            // Determine which ulr to use
+            if (typeof onlyPaid === 'undefined' && typeof onlyUnpaid === 'undefined') {
+                // Url used to delete all bills
+                url = url + '/delete-all-bills';
+                message = 'bla bla';
+            } else if (typeof onlyPaid !== 'undefined') {
+                // Url used to delete only paid bills
+                url = url + '/delete-paid-bills';
+                message = 'bla';
+            } else {
+                // Url used to delete only unpaid bills
+                url = url + '/delete-unpaid-bills';
+                message = 'sasda';
+            }
+
+            // Ask for confirmation
             Alert.confirmDelete(function() {
+
                 var data = {
                     _token: Token.get()
                 };
-                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-all-bills', data, function(response) {
+                // Post request
+                thisInstance.$http.post(url, data, function(response) {
                     this.getUserBills();
+                    this.$set('paid_bills', '');
+                    this.getUserPaidBills();
                     Alert.success(response.title, response.message);
                 }).error(function(response) {
                     if (response.message) {
@@ -168,7 +195,8 @@ new Vue({
                     }
                     Alert.generalError();
                 });
-            })
+
+            }, message);
         },
 
         /**

@@ -23,6 +23,7 @@ return [
     'custom_products' => 'Produsele utilizatorului',
     'delete_account' => 'Şterge contul',
     'delete_all_bills' => 'Şterge toate facturile',
+    'delete_all_unpaid_bills' => 'Şterge toate facturile neplătite',
     'delete_bill' => 'Şterge factura',
     'disable_account' => 'Dezactivează contul',
     'disable_subscription' => 'Dezactivează abonamentul',

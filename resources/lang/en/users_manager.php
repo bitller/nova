@@ -23,6 +23,7 @@ return [
     'custom_products' => 'Custom products',
     'delete_account' => 'Delete account',
     'delete_all_bills' => 'Delete all bills',
+    'delete_all_unpaid_bills' => 'Delete all unpaid bills',
     'delete_bill' => 'Delete bill',
     'disable_account' => 'Disable account',
     'disable_subscription' => 'Disable subscription',

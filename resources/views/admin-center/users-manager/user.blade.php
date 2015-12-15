@@ -136,16 +136,31 @@
                         <div v-show="!loading_user_bills" class="dropdown">
                             <h5 class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user-email">{{ trans('users_manager.bills_of_this_user') }}</span><span class="caret"></span></h5>
                             <ul class="dropdown-menu">
+                                <!-- BEGIN Delete all user bills -->
                                 <li v-show="bills.total > 0">
-                                    <a href="#" v-on="click: deleteAllUserBills">
+                                    <a href="#" v-on="click: deleteAllUserBills()">
                                         <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_bills') }}
                                     </a>
                                 </li>
+                                <!-- END Delete all user bills -->
+
+                                <!-- BEGIN Delete all unpaid user bills -->
+                                <li v-show="bills.total > 0">
+                                    <a href="#" v-on="click: deleteAllUserBills(true)">
+                                        <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_unpaid_bills') }}
+                                    </a>
+                                </li>
+                                <!-- END Delete all unpaid user bills -->
+
+                                <li class="divider"></li>
+
+                                <!-- BEGIN Make all user bills paid -->
                                 <li v-show="bills.total > 0">
                                     <a href="#" v-on="click: makeAllUserBillsPaid">
                                         <span class="glyphicon glyphicon-ok">&nbsp;</span> {{ trans('users_manager.mark_all_bills_as_paid') }}
                                     </a>
                                 </li>
+                                <!-- END Make all user bills paid -->
                             </ul>
                         </div>
 

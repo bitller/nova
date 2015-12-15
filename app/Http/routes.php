@@ -170,6 +170,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             Route::get('/{userId}/get-paid-bills', 'UsersManagerController@getUserPaidBills');
             Route::post('{userId}/delete-bill', 'UsersManagerController@deleteUserBill');
             Route::post('/{userId}/delete-all-bills', 'UsersManagerController@deleteAllUserBills');
+            Route::post('/{userId}/delete-unpaid-bills', 'UsersManagerController@deleteUserUnpaidBills');
             Route::post('/{userId}/make-bill-paid', 'UsersManagerController@makeUserBillPaid');
             Route::post('/{userId}/make-bill-unpaid', 'UsersManagerController@makeUserBillUnpaid');
             Route::post('/{userId}/make-all-bills-paid', 'UsersManagerController@makeAllUserBillsPaid');
