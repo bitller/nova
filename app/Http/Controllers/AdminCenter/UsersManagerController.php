@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminCenter;
 
 use App\Bill;
+use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Helpers\Searches;
@@ -18,6 +19,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRe
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillUnpaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\ChangeUserPasswordRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Clients\DeleteUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\GetUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
@@ -295,6 +297,30 @@ class UsersManagerController extends BaseController {
         Bill::where('user_id', $userId)->update(['paid' => 0]);
 
         $response->setSuccessMessage(trans('users_manager.all_user_bills_are_unpaid'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Allow admin to delete all clients of a given user.
+     *
+     * @param int $userId
+     * @param DeleteUserClientsRequest $request
+     * @return mixed
+     */
+    public function deleteUserClients($userId, DeleteUserClientsRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Make sure user id exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Delete user client
+        Client::where('user_id', $userId)->delete();
+
+        $response->setSuccessMessage(trans('users_manager.user_clients_deleted'));
         return response($response->get())->header('Content-Type', 'application/json');
     }
 

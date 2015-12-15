@@ -449,6 +449,40 @@ new Vue({
         },
 
         /**
+         * Delete all user clients.
+         */
+        deleteAllUserClients: function() {
+
+            var thisInstance = this;
+
+            Alert.confirmDelete(function() {
+
+                var data = {
+                    _token: Token.get()
+                };
+
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-clients', data, function(response) {
+
+                    // Success response
+                    this.$set('clients', '');
+                    this.getUserClients();
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+
+                    // Error response
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                });
+
+            }, 'delete all user clients');
+
+        },
+
+        /**
          * Reset change user password modal.
          */
         resetChangeUserPasswordModal: function() {
