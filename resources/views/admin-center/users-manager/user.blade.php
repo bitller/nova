@@ -254,7 +254,9 @@
                                     <th class="text-center">{{ trans('users_manager.campaign') }}</th>
                                     <th class="text-center">{{ trans('users_manager.price') }}</th>
                                     <th class="text-center">{{ trans('users_manager.created_at') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.payment_term') }}</th>
                                     <th class="text-center">{{ trans('users_manager.mark_as_unpaid') }}</th>
+                                    <th class="text-center">{{ trans('users_manager.delete_bill') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -264,7 +266,12 @@
                                     <td class="text-center">@{{ paid_bill.campaign_number }}</td>
                                     <td class="text-center">@{{ paid_bill.price }}</td>
                                     <td class="text-center">@{{ paid_bill.created_at }}</td>
+                                    <td class="text-center">
+                                        <span v-show="paid_bill.payment_term != '0000-00-00' && paid_bill.payment_term">@{{ paid_bill.payment_term }}</span>
+                                        <span v-show="paid_bill.payment_term == '0000-00-00' || !paid_bill.payment_term">{{ trans('users_manager.payment_term_not_set') }}</span>
+                                    </td>
                                     <td v-on="click: makeUserBillUnpaid(paid_bill.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-remove icon-color"></span></td>
+                                    <td v-on="click:deleteUserBill(paid_bill.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash icon-color"></span></td>
                                 </tr>
                                 </tbody>
                             </table>

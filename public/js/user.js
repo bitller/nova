@@ -74,6 +74,8 @@ new Vue({
 
                 thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-bill', postData, function(response) {
                     this.getUserBills();
+                    this.$set('paid_bills', '');
+                    this.getUserPaidBills();
                     Alert.success(response.title, response.message);
                 }).error(function(response) {
                     if (response.message) {
@@ -95,10 +97,21 @@ new Vue({
             this.changeUserBillPaidStatus(billId);
         },
 
+        /**
+         * Allow admin to make user bill unpaid.
+         *
+         * @param billId
+         */
         makeUserBillUnpaid: function(billId) {
             this.changeUserBillPaidStatus(billId, true);
         },
 
+        /**
+         * Allow admin to change user bill paid status.
+         *
+         * @param billId
+         * @param makeUnpaid If present, bill will pe maked unpaid
+         */
         changeUserBillPaidStatus: function(billId, makeUnpaid) {
 
             var thisInstance = this;
