@@ -11,6 +11,7 @@ use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteAllUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserPaidBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserUnpaidBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
@@ -209,6 +210,29 @@ class UsersManagerController extends BaseController {
         Bill::where('user_id', $userId)->where('paid', 0)->delete();
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('users_manager.user_unpaid_bills_deleted'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Delete user paid bills.
+     *
+     * @param int $userId
+     * @param DeleteUserPaidBillsRequest $request
+     * @return mixed
+     */
+    public function deleteUserPaidBills($userId, DeleteUserPaidBillsRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Make sure user exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        Bill::where('user_id', $userId)->where('paid', 1)->delete();
+        $response->setSuccessMessage(trans('users_manager.user_paid_bills_deleted'));
 
         return response($response->get())->header('Content-Type', 'application/json');
     }
