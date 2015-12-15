@@ -140,13 +140,8 @@
                             <span class="glyphicon glyphicon-refresh glyphicon-spin tab-loader icon-color"></span>
                         </div>
 
-                        <h4 class="bill-title" v-show="!loading_user_bills">{{ trans('users_manager.bills_of_this_user') }}</h4>
-
-                        <div class="btn-group bill-options" v-show="!loading_user_bills">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-th-large"></span>&nbsp;
-                                <span class="caret"></span>
-                            </button>
+                        <div v-show="!loading_user_bills" class="dropdown">
+                            <h5 class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user-email">{{ trans('users_manager.bills_of_this_user') }}</span><span class="caret"></span></h5>
                             <ul class="dropdown-menu">
                                 <li v-show="bills.total > 0">
                                     <a href="#" v-on="click: deleteAllUserBills">
