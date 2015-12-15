@@ -254,6 +254,29 @@ class UsersManagerController extends BaseController {
     }
 
     /**
+     * Make unpaid all user bills.
+     *
+     * @param int $userId
+     * @return mixed
+     */
+    public function makeAllUserBillsUnpaid($userId) {
+
+        $response = new AjaxResponse();
+
+        // Make sure user exists in database
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Make user bills as unpaid
+        Bill::where('user_id', $userId)->update(['paid' => 0]);
+
+        $response->setSuccessMessage(trans('users_manager.all_user_bills_are_unpaid'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
      * Allow admin to edit user email.
      *
      * @param int $userId

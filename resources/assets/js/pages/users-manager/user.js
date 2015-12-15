@@ -200,29 +200,51 @@ new Vue({
         },
 
         /**
-         * Make all user bills paid.
+         * Allow admin to make user bills paid or unpaid.
+         *
+         * @param makeUnpaid If present, user bills are marked paid, else unpaid
          */
-        makeAllUserBillsPaid: function() {
+        changeUserBillsPaidStatus: function(makeUnpaid) {
+
             var thisInstance = this;
+            var url = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/make-all-bills-';
+            var message;
+
+            if (typeof makeUnpaid !== 'undefined') {
+                // Url to make bills unpaid
+                url = url + 'unpaid';
+                message = 'make unpaid';
+            } else {
+                // Url to make bills paid
+                url = url + 'paid';
+                message = 'make paid';
+            }
+
             Alert.confirmDelete(function() {
 
+                // Post data
                 var data = {
                     _token: Token.get()
                 };
-                // Post request
-                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/make-all-bills-paid', data, function(response) {
+
+                // Make post request
+                thisInstance.$http.post(url, data, function (response) {
+
+                    // Handle success response
                     this.getUserBills();
                     this.$set('paid_bills', '');
-                    //Alert.close();
+                    this.getUserPaidBills();
                     Alert.success(response.title, response.message);
-                }).error(function(response) {
+
+                }).error(function (response) {
+                    // Handle response error
                     if (response.message) {
                         Alert.error(response.message);
                         return;
                     }
                     Alert.generalError();
                 });
-            });
+            }, message);
         },
 
         /**

@@ -175,6 +175,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             Route::post('/{userId}/make-bill-paid', 'UsersManagerController@makeUserBillPaid');
             Route::post('/{userId}/make-bill-unpaid', 'UsersManagerController@makeUserBillUnpaid');
             Route::post('/{userId}/make-all-bills-paid', 'UsersManagerController@makeAllUserBillsPaid');
+            Route::post('/{userId}/make-all-bills-unpaid', 'UsersManagerController@makeAllUserBillsUnpaid');
             Route::post('/{userId}/disable-account', 'UsersManagerController@disableUserAccount');
             Route::post('/{userId}/enable-account', 'UsersManagerController@enableUserAccount');
             Route::post('/{userId}/delete-account', 'UsersManagerController@deleteUserAccount');

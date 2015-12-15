@@ -156,7 +156,7 @@
 
                                 <!-- BEGIN Make all user bills paid -->
                                 <li v-show="bills.total > 0">
-                                    <a href="#" v-on="click: makeAllUserBillsPaid">
+                                    <a href="#" v-on="click: changeUserBillsPaidStatus()">
                                         <span class="glyphicon glyphicon-ok">&nbsp;</span> {{ trans('users_manager.mark_all_bills_as_paid') }}
                                     </a>
                                 </li>
@@ -236,8 +236,8 @@
 
                                 <!-- BEGIN Make all user bills unpaid -->
                                 <li v-show="paid_bills.total > 0">
-                                    <a href="#" v-on="click: makeAllUserBillsPaid">
-                                        <span class="glyphicon glyphicon-ok">&nbsp;</span> {{ trans('users_manager.mark_all_bills_as_unpaid') }}
+                                    <a href="#" v-on="click: changeUserBillsPaidStatus(true)">
+                                        <span class="glyphicon glyphicon-remove">&nbsp;</span> {{ trans('users_manager.mark_all_bills_as_unpaid') }}
                                     </a>
                                 </li>
                                 <!-- END Make all user bills unpaid -->
