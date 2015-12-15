@@ -33,20 +33,20 @@
                 <table class="table table-hover table-bordered" v-show="clients.total">
                     <thead>
                         <tr>
-                            <th>{{ trans('clients.name') }}</th>
-                            <th>{{ trans('clients.phone_number') }}</th>
-                            <th>{{ trans('clients.number_of_orders') }}</th>
-                            <th>{{ trans('clients.client_from') }}</th>
-                            <th>{{ trans('common.delete') }}</th>
+                            <th class="text-center">{{ trans('clients.name') }}</th>
+                            <th class="text-center">{{ trans('clients.phone_number') }}</th>
+                            <th class="text-center">{{ trans('clients.number_of_orders') }}</th>
+                            <th class="text-center">{{ trans('clients.client_from') }}</th>
+                            <th class="text-center">{{ trans('common.delete') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-repeat="client in clients.data">
-                            <td class="vert-align"><a href="/clients/@{{ client.id }}">@{{ client.name }}</a></td>
-                            <td class="vert-align">@{{ client.phone_number }}</td>
-                            <td class="vert-align">4</td>
-                            <td class="vert-align">@{{ client.created_at }}</td>
-                            <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                            <td class="text-center vert-align"><a href="/clients/@{{ client.id }}">@{{ client.name }}</a></td>
+                            <td class="text-center vert-align">@{{ client.phone_number }}</td>
+                            <td class="text-center vert-align">4</td>
+                            <td class="text-center vert-align">@{{ client.created_at }}</td>
+                            <td class="text-center vert-align"><button class="btn btn-danger" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                         </tr>
                     </tbody>
                 </table>
