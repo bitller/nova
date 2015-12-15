@@ -21,14 +21,8 @@
         <!-- BEGIN User -->
         <div class="row">
 
-            <h4 class="user-email" v-show="user_email">@{{ user_email }}</h4>
-
-            <!-- BEGIN User options -->
-            <div class="btn-group user-options">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-th-large"></span>&nbsp;
-                    <span class="caret"></span>
-                </button>
+            <div v-show="!loading_user_bills" class="dropdown">
+                <h4 class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user-email">@{{ user_email }}</span><span class="caret"></span></h4>
                 <ul class="dropdown-menu">
 
                     <!-- BEGIN Edit email -->
@@ -89,7 +83,6 @@
 
                 </ul>
             </div>
-            <!-- END User options -->
 
             <!-- BEGIN User details -->
             <div class="well custom-well">
