@@ -59,6 +59,34 @@ new Vue({
         },
 
         /**
+         * Get clients of given user.
+         */
+        getUserClients: function() {
+
+            // Check if clients are already loaded to avoid useless requests
+            if (this.$get('clients')) {
+                return;
+            }
+
+            this.$set('loading_user_clients', true);
+            this.$http.get('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-clients', function(response) {
+
+                // Success response
+                this.$set('loading_user_clients', false);
+                this.$set('clients', response);
+
+            }).error(function(response) {
+
+                // Handle error response
+                if (response.message) {
+                    Alert.error(response.message);
+                    return;
+                }
+                Alert.generalError();
+            });
+        },
+
+        /**
          * Delete user bill.
          *
          * @param billId

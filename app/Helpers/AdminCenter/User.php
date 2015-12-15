@@ -2,6 +2,8 @@
 
 namespace App\Helpers\AdminCenter;
 
+use App\Bill;
+use App\Client;
 use App\Helpers\AjaxResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +27,28 @@ class User {
         $response->addExtraFields(['active' => $status]);
 
         return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Get clients of given user.
+     *
+     * @param bool $userId
+     * @return mixed
+     */
+    public static function getClients($userId = false) {
+
+        // If an user id is not given use the id of current logged in user
+        if (!$userId) {
+            $userId = Auth::user()->id;
+        }
+
+        $clients = Client::where('user_id', $userId)->paginate();
+
+        foreach ($clients as &$client) {
+            $client->orders = Bill::where('client_id', $client->id)->count();
+        }
+
+        return response($clients)->header('Content-Type', 'application/json');
     }
 
 }

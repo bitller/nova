@@ -101,7 +101,7 @@
                     <!-- END Paid bills tab -->
 
                     <!-- BEGIN Clients tab -->
-                    <li>
+                    <li v-on="click:getUserClients">
                         <a data-toggle="tab" href="#clients-tab">{{ trans('users_manager.clients') }}</a>
                     </li>
                     <!-- END Clients tab -->
@@ -281,12 +281,7 @@
                     </div>
                     <!-- END Paid bills tab content -->
 
-                    <!-- BEGIN Clients tab content -->
-                    <div id="clients-tab" class="tab-pane fade">
-                        <h3>{{ trans('users_manager.clients') }}</h3>
-                        <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
-                    </div>
-                    <!-- END Clients tab content -->
+                    @include('admin-center.users-manager.partials.clients-tab')
 
                     <!-- BEGIN Custom products tab content -->
                     <div id="custom-products-tab" class="tab-pane fade">

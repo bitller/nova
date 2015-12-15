@@ -8416,4 +8416,7 @@ body {
   text-decoration: underline;
   cursor: pointer; }
 
+.alert-top {
+  margin-top: 30px; }
+
 /*# sourceMappingURL=app.css.map */

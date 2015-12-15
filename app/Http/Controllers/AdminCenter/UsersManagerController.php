@@ -18,6 +18,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRe
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillUnpaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\ChangeUserPasswordRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Clients\GetUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EditUserEmailRequest;
@@ -117,12 +118,33 @@ class UsersManagerController extends BaseController {
     }
 
     /**
+     * Get bills of given user.
+     *
      * @param int $userId
      * @param GetUserBillsRequest $request
      * @return mixed
      */
     public function getUserBills($userId, GetUserBillsRequest $request) {
         return Bills::get(false, $userId);
+    }
+
+    /**
+     * Get clients of given user.
+     *
+     * @param int $userId
+     * @param GetUserClientsRequest $request
+     * @return mixed
+     */
+    public function getUserClients($userId, GetUserClientsRequest $request) {
+
+        // Make sure user id exists
+        if (!User::where('id', $userId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        return \App\Helpers\AdminCenter\User::getClients($userId);
     }
 
     /**
