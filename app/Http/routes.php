@@ -189,6 +189,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
 
             // User custom products
             Route::get('/{userId}/get-custom-products', 'UsersManagerController@getUserCustomProducts');
+            Route::post('/{userId}/delete-custom-product', 'UsersManagerController@deleteUserCustomProduct');
         });
     });
 

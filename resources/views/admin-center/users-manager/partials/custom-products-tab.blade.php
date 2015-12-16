@@ -17,7 +17,7 @@
         <ul class="dropdown-menu">
             <!-- BEGIN Delete all user custom products -->
             <li v-show="custom_products.total > 0">
-                <a href="#" v-on="click: deleteAllUserCustomProducts()">
+                <a href="#">
                     <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_custom_products') }}
                 </a>
             </li>
@@ -42,7 +42,7 @@
                 <td class="text-center">@{{ custom_product.code }}</td>
                 <td class="text-center">@{{ custom_product.name }}</td>
                 <td v-on="click:makeCustomProductOfficial(custom_product.id)" class="text-center"><span class="glyphicon glyphicon-th"></span></td>
-                <td v-on="click:deleteCustomProduct(custom_product.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
+                <td v-on="click:deleteUserCustomProducts(custom_product.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
             </tr>
             </tbody>
         </table>

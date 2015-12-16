@@ -317,6 +317,51 @@ new Vue({
         },
 
         /**
+         * Delete user custom product.
+         *
+         * @param custom_product_id If present, only product with given id will be deleted
+         */
+        deleteUserCustomProducts: function(custom_product_id) {
+
+            var thisInstance = this;
+            var url = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-custom-';
+            var message = 'delete user custom product?';
+
+            // Build post data
+            var data = {
+                _token: Token.get()
+            };
+
+            if (typeof custom_product_id === 'undefined') {
+                // Prepare to delete all user custom products
+                url = url + 'products';
+                message = 'delete all user custom products?';
+            } else {
+                url = url + 'product';
+                data.custom_product_id = custom_product_id;
+            }
+
+            // Ask for confirmation
+            Alert.confirmDelete(function() {
+                // Do post request
+                thisInstance.$http.post(url, data, function(response) {
+
+                    this.$set('custom_products', '');
+                    this.getUserCustomProducts();
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+                    // Error response
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                });
+            }, message);
+        },
+
+        /**
          * Disable user account.
          */
         disableUserAccount: function() {

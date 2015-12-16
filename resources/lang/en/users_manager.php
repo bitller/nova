@@ -70,6 +70,7 @@ return [
     'user_bill_is_unpaid' => 'User bill is marked as unpaid.',
     'user_client_deleted' => 'User client deleted!',
     'user_clients_deleted' => 'User clients deleted!',
+    'user_custom_product_deleted' => 'User custom product deleted!',
     'user_email_updated' => 'User email has been updated!',
     'user_has_no_bills' => 'Looks like this user has no bills created or all are paid.',
     'user_has_no_clients' => 'Looks like this user has no clients.',
