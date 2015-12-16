@@ -16,7 +16,7 @@
 
         <ul class="dropdown-menu">
             <!-- BEGIN Delete all user custom products -->
-            <li v-show="custom_products.total > 0">
+            <li v-show="custom_products.total > 0" v-on="click:deleteUserCustomProducts()">
                 <a href="#">
                     <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_custom_products') }}
                 </a>

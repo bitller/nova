@@ -81,6 +81,7 @@ return [
     'user_client_deleted' => 'Acest client a fost șters!',
     'user_clients_deleted' => 'Clienții acestui utilizator au fost șterși!',
     'user_custom_product_deleted' => 'Produsul adăugat de acest utilizator a fost şters!',
+    'user_custom_products_deleted' => 'Toate produsele adăugate de acest utilizator au fost şterse!',
     'user_email_updated' => 'Email-ul utilizatorului a fost actualizat!',
     'user_has_no_bills' => 'Se pare că acest utilizator nu are creată nicio factură sau toate sunt plătite.',
     'user_has_no_clients' => 'Se pare că acest utilizator nu are creat niciun client.',

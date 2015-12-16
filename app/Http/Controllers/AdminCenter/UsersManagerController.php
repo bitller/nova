@@ -24,6 +24,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Clients\DeleteUserClientRequ
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\DeleteUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\GetUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\CustomProducts\DeleteUserCustomProductRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\CustomProducts\DeleteUserCustomProductsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\CustomProducts\GetUserCustomProductsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
@@ -398,6 +399,29 @@ class UsersManagerController extends BaseController {
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
+    /**
+     * Allow admin to delete all user custom products.
+     *
+     * @param int $userId
+     * @param DeleteUserCustomProductsRequest $request
+     * @return mixed
+     */
+    public function deleteUserCustomProducts($userId, DeleteUserCustomProductsRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Make sure user id exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Delete custom products
+        Product::where('user_id', $userId)->delete();
+
+        $response->setSuccessMessage(trans('users_manager.user_custom_products_deleted'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
 
     /**
      * Allow admin to edit user email.
