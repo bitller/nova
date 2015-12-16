@@ -87,6 +87,34 @@ new Vue({
         },
 
         /**
+         * Get custom products of given user.
+         */
+        getUserCustomProducts: function() {
+
+            // Check if custom products are already loaded to avoid useless requests
+            if (this.$get('custom_products')) {
+                return;
+            }
+
+            this.$set('loading_user_custom_products', true);
+            this.$http.get('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-custom-products', function(response) {
+
+                // Success response
+                this.$set('loading_user_custom_products', false);
+                this.$set('custom_products', response);
+
+            }).error(function(response) {
+
+                // Handle error response
+                if (response.message) {
+                    Alert.error(response.message);
+                    return;
+                }
+                Alert.generalError();
+            });
+        },
+
+        /**
          * Delete user bill.
          *
          * @param billId

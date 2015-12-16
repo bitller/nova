@@ -5,6 +5,7 @@ namespace App\Helpers\AdminCenter;
 use App\Bill;
 use App\Client;
 use App\Helpers\AjaxResponse;
+use App\Product;
 use Illuminate\Support\Facades\Auth;
 
 class User {
@@ -49,6 +50,24 @@ class User {
         }
 
         return response($clients)->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Get custom products of give user.
+     *
+     * @param bool $userId
+     * @return mixed
+     */
+    public static function getCustomProducts($userId = false) {
+
+        // If user id is not given use the id of current logged in user
+        if (!$userId) {
+            $userId = Auth::user()->id;
+        }
+
+        $customProducts = Product::where('user_id', $userId)->paginate();
+
+        return response($customProducts)->header('Content-Type', 'application/json');
     }
 
 }

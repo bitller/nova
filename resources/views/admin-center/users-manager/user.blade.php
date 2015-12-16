@@ -107,7 +107,7 @@
                     <!-- END Clients tab -->
 
                     <!-- BEGIN Custom products -->
-                    <li>
+                    <li v-on="click:getUserCustomProducts">
                         <a data-toggle="tab" href="#custom-products-tab">{{ trans('users_manager.custom_products') }}</a>
                     </li>
                     <!-- END Custom products -->
@@ -283,12 +283,7 @@
 
                     @include('admin-center.users-manager.partials.clients-tab')
 
-                    <!-- BEGIN Custom products tab content -->
-                    <div id="custom-products-tab" class="tab-pane fade">
-                        <h3>{{ trans('users_manager.custom_products') }}</h3>
-                        <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
-                    </div>
-                    <!-- END Custom products tab content -->
+                    @include('admin-center.users-manager.partials.custom-products-tab')
 
                     <!-- BEGIN Statistics tab content -->
                     <div id="statistics-tab" class="tab-pane fade">

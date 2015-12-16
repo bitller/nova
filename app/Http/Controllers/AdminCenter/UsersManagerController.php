@@ -23,6 +23,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\ChangeUserPasswordRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\DeleteUserClientRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\DeleteUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\GetUserClientsRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\CustomProducts\GetUserCustomProductsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EditUserEmailRequest;
@@ -159,6 +160,25 @@ class UsersManagerController extends BaseController {
      */
     public function getUserPaidBills($userId, GetUserPaidBillsRequest $request) {
         return Bills::get(true, $userId);
+    }
+
+    /**
+     * Get custom products of a given user.
+     *
+     * @param int $userId
+     * @param GetUserCustomProductsRequest $request
+     * @return mixed
+     */
+    public function getUserCustomProducts($userId, GetUserCustomProductsRequest $request) {
+
+        // Make sure user id exists in database
+        if (!User::where('id', $userId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        return \App\Helpers\AdminCenter\User::getCustomProducts($userId);
     }
 
     /**
