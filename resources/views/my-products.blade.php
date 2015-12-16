@@ -25,16 +25,16 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>{{ trans('common.product_code') }}</th>
-                        <th>{{ trans('common.product_name') }}</th>
-                        <th>{{ trans('my_products.delete_product') }}</th>
+                        <th class="text-center">{{ trans('common.product_code') }}</th>
+                        <th class="text-center">{{ trans('common.product_name') }}</th>
+                        <th class="text-center">{{ trans('my_products.delete_product') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-repeat="product in myProducts.data">
-                        <td class="vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.code }}</a></td>
-                        <td class="vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.name }}</a></td>
-                        <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteMyProduct(product.id, myProducts.current_page, myProducts.to-myProducts.from)">{{ trans('common.delete') }}</button></td>
+                        <td class="text-center vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.code }}</a></td>
+                        <td class="text-center vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.name }}</a></td>
+                        <td class="text-center vert-align"><button class="btn btn-danger" v-on="click: deleteMyProduct(product.id, myProducts.current_page, myProducts.to-myProducts.from)">{{ trans('common.delete') }}</button></td>
                     </tr>
                     </tbody>
                 </table>
