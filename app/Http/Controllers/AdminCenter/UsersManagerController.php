@@ -16,6 +16,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserPaidBillsReq
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserUnpaidBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\GetUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsUnpaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillUnpaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\ChangeUserPasswordRequest;
@@ -283,10 +284,11 @@ class UsersManagerController extends BaseController {
      * Make unpaid all user bills.
      *
      * @param int $userId
+     * @param MakeAllUserBillsUnpaidRequest $request
      * @return mixed
      */
-    public function makeAllUserBillsUnpaid($userId) {
-        // todo use request
+    public function makeAllUserBillsUnpaid($userId, MakeAllUserBillsUnpaidRequest $request) {
+
         $response = new AjaxResponse();
 
         // Make sure user exists in database
