@@ -19,6 +19,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeAllUserBillsPaidRe
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillPaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\MakeUserBillUnpaidRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\ChangeUserPasswordRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Clients\DeleteUserClientRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\DeleteUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Clients\GetUserClientsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\DeleteUserAccountRequest;
@@ -26,6 +27,7 @@ use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EditUserEmailRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EnableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
+use App\Http\Requests\AjaxRequest;
 use App\Subscription;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -284,7 +286,7 @@ class UsersManagerController extends BaseController {
      * @return mixed
      */
     public function makeAllUserBillsUnpaid($userId) {
-
+        // todo use request
         $response = new AjaxResponse();
 
         // Make sure user exists in database
@@ -317,10 +319,34 @@ class UsersManagerController extends BaseController {
             return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
         }
 
-        // Delete user client
+        // Delete user clients
         Client::where('user_id', $userId)->delete();
 
         $response->setSuccessMessage(trans('users_manager.user_clients_deleted'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Allow admin to delete any client of given user.
+     *
+     * @param int $userId
+     * @param DeleteUserClientRequest $request
+     * @return mixed
+     */
+    public function deleteUserClient($userId, DeleteUserClientRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Make sure user id exists in database
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Delete client
+        Client::where('user_id', $userId)->where('id', $request->get('client_id'))->delete();
+
+        $response->setSuccessMessage(trans('users_manager.user_client_deleted'));
         return response($response->get())->header('Content-Type', 'application/json');
     }
 

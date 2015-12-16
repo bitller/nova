@@ -449,6 +449,41 @@ new Vue({
         },
 
         /**
+         * Allow admin to delete user client.
+         *
+         * @param clientId
+         */
+        deleteUserClient: function(clientId) {
+
+            var thisInstance = this;
+
+            Alert.confirmDelete(function() {
+                // Post data
+                var data = {
+                    _token: Token.get(),
+                    client_id: clientId
+                };
+
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-client', data, function(response) {
+
+                    // Success response
+                    this.$set('clients', '');
+                    this.getUserClients();
+                    Alert.success(response.title, response.message);
+
+                }).error(function(response) {
+                    // Handle error response
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+                });
+
+            }, 'message');
+        },
+
+        /**
          * Delete all user clients.
          */
         deleteAllUserClients: function() {

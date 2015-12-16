@@ -185,6 +185,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             // User clients
             Route::get('/{userId}/get-clients', 'UsersManagerController@getUserClients');
             Route::post('/{userId}/delete-clients', 'UsersManagerController@deleteUserClients');
+            Route::post('/{userId}/delete-client', 'UsersManagerController@deleteUserClient');
         });
     });
 

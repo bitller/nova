@@ -72,6 +72,7 @@ return [
     'user_bill_deleted' => 'Factura utilizatorului a fost ştearsă!',
     'user_bill_is_paid' => 'Factura utilizatorului a fost marcată ca platită.',
     'user_bill_is_unpaid' => 'Factura utilizatorului a fost marcată ca neplatită.',
+    'user_client_deleted' => 'Acest client a fost șters!',
     'user_clients_deleted' => 'Clienții acestui utilizator au fost șterși!',
     'user_email_updated' => 'Email-ul utilizatorului a fost actualizat!',
     'user_has_no_bills' => 'Se pare că acest utilizator nu are creată nicio factură sau toate sunt plătite.',

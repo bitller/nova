@@ -47,7 +47,7 @@
                 </td>
                 <td class="text-center">@{{ client.orders }}</td>
                 <td class="text-center">@{{ client.created_at }}</td>
-                <td class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
+                <td v-on="click:deleteUserClient(client.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
             </tr>
             </tbody>
         </table>
