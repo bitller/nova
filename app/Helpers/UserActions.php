@@ -113,11 +113,13 @@ class UserActions {
     private static function saveAction($userId, $type, $message) {
 
         $action = Action::where('type', $type)->select('id')->first();
-        UserAction::insert([
-            'action_id' => $action->id,
-            'message' => $message,
-            'user_id' => $userId
-        ]);
+
+        $userAction = new UserAction();
+        $userAction->action_id = $action->id;
+        $userAction->message = $message;
+        $userAction->user_id = $userId;
+        $userAction->save();
+
     }
 
     /**
