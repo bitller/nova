@@ -18,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\LogUserNewSession'
         ],
 
+        'App\Events\UserLoggedOut' => [
+            'App\Listeners\LogUserSessionEnd'
+        ],
+
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],

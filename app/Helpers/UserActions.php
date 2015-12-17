@@ -16,37 +16,41 @@ class UserActions {
     /**
      * Save allowed user action.
      *
+     * @param int $userId
      * @param string $message
      */
-    public static function allowed($message) {
-        self::saveAction('allowed', $message);
+    public static function allowed($userId, $message) {
+        self::saveAction($userId, 'allowed', $message);
     }
 
     /**
      * Save info user action.
      *
+     * @param int $userId
      * @param string $message
      */
-    public static function info($message) {
-        self::saveAction('info', $message);
+    public static function info($userId, $message) {
+        self::saveAction($userId, 'info', $message);
     }
 
     /**
      * Save wrong format user action.
      *
+     * @param int $userId
      * @param string $message
      */
-    public static function wrongFormat($message) {
-        self::saveAction('wrong_format', $message);
+    public static function wrongFormat($userId, $message) {
+        self::saveAction($userId, 'wrong_format', $message);
     }
 
     /**
      * Save not allowed user action.
      *
+     * @param int $userId
      * @param string $message
      */
-    public static function notAllowed($message) {
-        self::saveAction('not_allowed', $message);
+    public static function notAllowed($userId, $message) {
+        self::saveAction($userId, 'not_allowed', $message);
     }
 
     /**
@@ -102,16 +106,17 @@ class UserActions {
     /**
      * Save user action with given $type and $message.
      *
+     * @param int $userId
      * @param string $type
      * @param string $message
      */
-    private static function saveAction($type, $message) {
+    private static function saveAction($userId, $type, $message) {
 
         $action = Action::where('type', $type)->select('id')->first();
         UserAction::insert([
             'action_id' => $action->id,
             'message' => $message,
-            'user_id' => Auth::user()->id
+            'user_id' => $userId
         ]);
     }
 

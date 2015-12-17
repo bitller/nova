@@ -2,17 +2,17 @@
 
 namespace App\Listeners;
 
-use App\Events\UserLoggedIn;
+use App\Events\UserLoggedOut;
 use App\Helpers\UserActions;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 /**
- * LogUserNewSession listener.
+ * LogUserSessionEnd listener.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class LogUserNewSession {
+class LogUserSessionEnd {
 
     /**
      * Create the event listener.
@@ -25,10 +25,10 @@ class LogUserNewSession {
     /**
      * Handle the event.
      *
-     * @param  UserLoggedIn  $event
+     * @param  UserLoggedOut  $event
      * @return void
      */
-    public function handle(UserLoggedIn $event) {
-        UserActions::allowed($event->userId, 'Logged in.');
+    public function handle(UserLoggedOut $event) {
+        UserActions::allowed($event->userId, 'Logged out.');
     }
 }

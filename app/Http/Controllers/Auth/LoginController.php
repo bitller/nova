@@ -3,6 +3,7 @@
 use App\Events\Event;
 use App\Events\FailedLogIn;
 use App\Events\UserLoggedIn;
+use App\Events\UserLoggedOut;
 use App\Helpers\AjaxResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -78,13 +79,20 @@ class LoginController extends Controller {
     }
 
     /**
+     * Log user out.
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function logout() {
 
-        $this->auth->logout();
-        return redirect('/');
+        // Save user id to use later
+        $userId = $this->auth->user()->id;
 
+        // Log user out and fire event
+        $this->auth->logout();
+        event(new UserLoggedOut($userId));
+
+        return redirect('/');
     }
 
 }

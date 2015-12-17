@@ -80,7 +80,7 @@
                     text-primary : action.type=='info',
                     text-warning : action.type=='wrong_format',
                     text-danger : action.type=='not_allowed'
-                ">@{{ action.name }}</td>
+                "><b>@{{ action.name }}</b></td>
                 <td class="text-center">@{{ action.message }}</td>
                 <td class="text-center">@{{ action.created_at }}</td>
                 <td v-on="click:deleteUserAction(action.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
