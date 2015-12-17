@@ -16,6 +16,7 @@
         </h5>
 
         <ul v-show="actions.total > 0" class="dropdown-menu">
+
             <!-- BEGIN Delete all user actions -->
             <li>
                 <a href="#" v-on="click: deleteUserActions">
@@ -23,6 +24,16 @@
                 </a>
             </li>
             <!-- END Delete all user actions -->
+
+            <li class="divider"></li>
+
+            <!-- BEGIN View only allowed user actions -->
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-ok-circle">&nbsp;</span> {{ trans('users_manager.view_only_allowed_actions') }}
+                </a>
+            </li>
+            <!-- END View only allowed user actions -->
 
             <!-- BEGIN Delete allowed user actions -->
             <li>
@@ -32,6 +43,16 @@
             </li>
             <!-- END Delete allowed user actions -->
 
+            <li class="divider"></li>
+
+            <!-- BEGIN View only info user actions -->
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-info-sign">&nbsp;</span> {{ trans('users_manager.view_only_info_actions') }}
+                </a>
+            </li>
+            <!-- END View only info user actions -->
+
             <!-- BEGIN Delete info user actions -->
             <li>
                 <a href="#">
@@ -40,6 +61,16 @@
             </li>
             <!-- END Delete info user actions -->
 
+            <li class="divider"></li>
+
+            <!-- BEGIN View only wrong format user actions -->
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-exclamation-sign">&nbsp;</span> {{ trans('users_manager.view_only_wrong_format_actions') }}
+                </a>
+            </li>
+            <!-- END View only wrong format user actions -->
+
             <!-- BEGIN Delete wrong format user actions -->
             <li>
                 <a href="#">
@@ -47,6 +78,16 @@
                 </a>
             </li>
             <!-- END Delete wrong format user actions -->
+
+            <li class="divider"></li>
+
+            <!-- BEGIN View only not allowed actions -->
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-remove-circle">&nbsp;</span> {{ trans('users_manager.view_only_not_allowed_actions') }}
+                </a>
+            </li>
+            <!-- END View only not allowed actions -->
 
             <!-- BEGIN Delete not allowed user actions -->
             <li>
