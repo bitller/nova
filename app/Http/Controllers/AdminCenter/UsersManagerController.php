@@ -185,6 +185,12 @@ class UsersManagerController extends BaseController {
         return \App\Helpers\AdminCenter\User::getCustomProducts($userId);
     }
 
+    /**
+     * Paginate user actions.
+     *
+     * @param int $userId
+     * @return mixed
+     */
     public function getUserActions($userId) {
         // Make sure user id exists in database
         if (!User::where('id', $userId)->count()) {
@@ -433,6 +439,10 @@ class UsersManagerController extends BaseController {
 
         $response->setSuccessMessage(trans('users_manager.user_custom_products_deleted'));
         return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    public function deleteUserActions($userId) {
+        //
     }
 
     /**
