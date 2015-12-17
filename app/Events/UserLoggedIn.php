@@ -7,19 +7,22 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
- * UserLoggedIn event
+ * UserLoggedIn listener.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class UserLoggedIn extends Event {
 
+    use SerializesModels;
+
     /**
-     * @var int|null
+     * @var null
      */
     public $userId = null;
 
     /**
-     * Create a new event instance.
+     * Create new event instance.
+     *
      * @param int $userId
      */
     public function __construct($userId) {
@@ -34,5 +37,4 @@ class UserLoggedIn extends Event {
     public function broadcastOn() {
         return [];
     }
-
 }

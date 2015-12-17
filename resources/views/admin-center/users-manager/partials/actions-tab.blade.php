@@ -61,27 +61,29 @@
     <!-- END Actions of this user -->
 
     <!-- BEGIN User actions -->
-    <div class="panel panel-default" v-show="!loading_user_clients && clients.total > 0">
+    <div class="panel panel-default" v-show="!loading_user_actions && actions.total > 0">
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th class="text-center">{{ trans('users_manager.client_name') }}</th>
-                <th class="text-center">{{ trans('users_manager.phone_number') }}</th>
-                <th class="text-center">{{ trans('users_manager.number_of_orders') }}</th>
-                <th class="text-center">{{ trans('users_manager.client_since') }}</th>
-                <th class="text-center">{{ trans('users_manager.delete_client') }}</th>
+                <th class="text-center">{{ trans('users_manager.action_id') }}</th>
+                <th class="text-center">{{ trans('users_manager.action_type') }}</th>
+                <th class="text-center">{{ trans('users_manager.action_message') }}</th>
+                <th class="text-center">{{ trans('users_manager.created_at') }}</th>
+                <th class="text-center">{{ trans('users_manager.delete_action') }}</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-repeat="client in clients.data">
-                <td class="text-center">@{{ client.name }}</td>
-                <td class="text-center">
-                    <span v-show="client.phone_number">@{{ client.phone_number }}</span>
-                    <span v-show="!client.phone_number">{{ trans('users_manager.not_added') }}</span>
-                </td>
-                <td class="text-center">@{{ client.orders }}</td>
-                <td class="text-center">@{{ client.created_at }}</td>
-                <td v-on="click:deleteUserClient(client.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
+            <tr v-repeat="action in actions.data">
+                <td class="text-center">#@{{ action.id }}</td>
+                <td class="text-center" v-class="
+                    text-success : action.type=='allowed',
+                    text-primary : action.type=='info',
+                    text-warning : action.type=='wrong_format',
+                    text-danger : action.type=='not_allowed'
+                ">@{{ action.name }}</td>
+                <td class="text-center">@{{ action.message }}</td>
+                <td class="text-center">@{{ action.created_at }}</td>
+                <td v-on="click:deleteUserAction(action.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
             </tr>
             </tbody>
         </table>

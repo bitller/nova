@@ -151,3 +151,13 @@ $factory->define(App\SecuritySetting::class, function() {
 $factory->define(App\QuestionCategory::class, function() {
     return [];
 });
+
+// Empty action
+$factory->define(App\Action::class, function() {
+    return [];
+});
+
+// Empty user action
+$factory->define(App\UserAction::class, function() {
+    return [];
+});

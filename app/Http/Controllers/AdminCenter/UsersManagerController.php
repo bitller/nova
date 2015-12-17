@@ -7,6 +7,7 @@ use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Helpers\Searches;
+use App\Helpers\UserActions;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
@@ -182,6 +183,17 @@ class UsersManagerController extends BaseController {
         }
 
         return \App\Helpers\AdminCenter\User::getCustomProducts($userId);
+    }
+
+    public function getUserActions($userId) {
+        // Make sure user id exists in database
+        if (!User::where('id', $userId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        return UserActions::getAll($userId);
     }
 
     /**

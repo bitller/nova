@@ -119,7 +119,7 @@
                     <!-- END Statistics -->
 
                     <!-- BEGIN Actions -->
-                    <li>
+                    <li v-on="click:getUserActions">
                         <a data-toggle="tab" href="#actions-tab">{{ trans('users_manager.actions') }}</a>
                     </li>
                     <!-- END Actions -->

@@ -15,11 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
 
         'App\Events\UserLoggedIn' => [
-            'App\Listeners\SaveUserAccess'
-        ],
-
-        'App\Events\FailedLogIn' => [
-            'App\Listeners\LogLoginAttempt'
+            'App\Listeners\LogUserNewSession'
         ],
 
         'App\Events\SomeEvent' => [

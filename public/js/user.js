@@ -115,6 +115,34 @@ new Vue({
         },
 
         /**
+         * Get actions of given user.
+         */
+        getUserActions: function() {
+
+            // Check if actions are already loaded to avoid useless requests
+            if (this.$get('actions')) {
+                return;
+            }
+
+            this.$set('loading_user_actions', true);
+            this.$http.get('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-actions', function(response) {
+
+                // Success response
+                this.$set('loading_user_actions', false);
+                this.$set('actions', response);
+
+            }).error(function(response) {
+
+                // Handle error response
+                if (response.message) {
+                    Alert.error(response.message);
+                    return;
+                }
+                Alert.generalError();
+            });
+        },
+
+        /**
          * Delete user bill.
          *
          * @param billId
