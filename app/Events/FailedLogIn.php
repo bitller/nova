@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 /**
- * FailedLogIn event
+ * FailedLogIn event.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
@@ -16,12 +16,13 @@ class FailedLogIn extends Event {
     use SerializesModels;
 
     /**
-     * @var int
+     * @var null
      */
-    public $userId;
+    public $userId = null;
 
     /**
      * Create a new event instance.
+     *
      * @param $userId
      */
     public function __construct($userId) {

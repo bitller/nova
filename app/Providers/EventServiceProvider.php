@@ -22,9 +22,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\LogUserSessionEnd'
         ],
 
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        'App\Events\FailedLogIn' => [
+            'App\Listeners\LogFailedLogin'
         ],
+
     ];
 
     /**
