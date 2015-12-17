@@ -90,6 +90,13 @@
     </div>
     <!-- END User actions -->
 
+    <!-- BEGIN Pagination links -->
+    <ul class="pager" v-show="actions.total > actions.per_page && !loading_user_actions">
+        <li v-class="disabled : !actions.prev_page_url"><a href="#" v-on="click: getUserActions(actions.prev_page_url)">{{ trans('common.previous') }}</a></li>
+        <li v-class="disabled : !actions.next_page_url"><a href="#" v-on="click: getUserActions(actions.next_page_url)">{{ trans('common.next') }}</a></li>
+    </ul>
+    <!-- END Pagination links -->
+
     <div v-show="actions.total < 1 && !loading_user_actions" class="alert alert-danger alert-top">{{ trans('users_manager.user_has_no_actions') }}</div>
 
 </div>

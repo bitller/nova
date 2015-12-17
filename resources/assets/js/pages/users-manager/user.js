@@ -117,15 +117,20 @@ new Vue({
         /**
          * Get actions of given user.
          */
-        getUserActions: function() {
+        getUserActions: function(url) {
 
             // Check if actions are already loaded to avoid useless requests
-            if (this.$get('actions')) {
+            if (this.$get('actions') && typeof url === 'undefined') {
                 return;
             }
 
+            var requestUrl = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-actions';
+            if (typeof url !== 'undefined') {
+                requestUrl = url;
+            }
+
             this.$set('loading_user_actions', true);
-            this.$http.get('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-actions', function(response) {
+            this.$http.get(requestUrl, function(response) {
 
                 // Success response
                 this.$set('loading_user_actions', false);
