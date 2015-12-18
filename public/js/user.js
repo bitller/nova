@@ -128,7 +128,7 @@ new Vue({
             if (typeof url !== 'undefined') {
                 requestUrl = url;
             }
-            
+
             this.$set('loading_user_actions', true);
             this.$http.get(requestUrl, function(response) {
 
@@ -620,6 +620,35 @@ new Vue({
                 });
 
             }, 'delete all user clients');
+
+        },
+
+        deleteUserActions: function() {
+
+            var thisInstance = this;
+            var confirmMessage = 'translation goes here';
+
+            Alert.confirmDelete(function() {
+
+                var data = {
+                    _token: Token.get()
+                };
+
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-actions', data, function(response) {
+                    this.$set('actions', '');
+                    this.getUserActions();
+                    Alert.success(response.title, response.message);
+                }).error(function(response) {
+
+                    // Error response
+                    if (response.message) {
+                        Alert.error(response.message);
+                        return;
+                    }
+                    Alert.generalError();
+
+                });
+            });
 
         },
 

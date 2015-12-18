@@ -11,6 +11,7 @@ use App\Helpers\UserActions;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
+use App\Http\Requests\AdminCenter\UsersManager\User\Actions\DeleteUserActionsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteAllUserBillsRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserBillRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Bills\DeleteUserPaidBillsRequest;
@@ -36,6 +37,7 @@ use App\Http\Requests\AjaxRequest;
 use App\Product;
 use App\Subscription;
 use App\User;
+use App\UserAction;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -441,8 +443,28 @@ class UsersManagerController extends BaseController {
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
-    public function deleteUserActions($userId) {
-        //
+    /**
+     * Delete user actions.
+     *
+     * @param int $userId
+     * @param DeleteUserActionsRequest $request
+     * @return mixed
+     */
+    public function deleteUserActions($userId, DeleteUserActionsRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Make sure user id exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Delete user actions
+        UserAction::where('user_id', $userId)->delete();
+
+        $response->setSuccessMessage(trans('users_manager.user_actions_deleted'));
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
     /**

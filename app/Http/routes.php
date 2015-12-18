@@ -194,6 +194,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
 
             // User actions
             Route::get('/{userId}/get-actions', 'UsersManagerController@getUserActions');
+            Route::post('/{userId}/delete-actions', 'UsersManagerController@deleteUserActions');
         });
     });
 
