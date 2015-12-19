@@ -7,6 +7,7 @@ use App\Bill;
 use App\BillApplicationProduct;
 use App\BillProduct;
 use App\Client;
+use App\Events\UserCreatedNewBill;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Helpers\Clients;
@@ -98,6 +99,8 @@ class BillsController extends BaseController {
         $bill->client_id = $client->id;
         $bill->user_id = Auth::user()->id;
         $bill->save();
+
+        event(new UserCreatedNewBill(Auth::user()->id, $bill->id));
 
         // Return response
         $response = new AjaxResponse();
