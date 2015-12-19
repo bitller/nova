@@ -8,14 +8,22 @@
     <!-- END User actions loader -->
 
     <!-- BEGIN Actions of this user -->
-    <div v-show="!loading_user_actions && actions.total > 0" class="dropdown">
+    <div v-show="!loading_user_actions" class="dropdown">
 
         <h5 class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <span id="user-email">{{ trans('users_manager.actions_of_this_user') }}</span>
-            <span v-show="actions.total > 0" class="caret"></span>
+            <span class="caret"></span>
         </h5>
 
-        <ul v-show="actions.total > 0" class="dropdown-menu">
+        <ul class="dropdown-menu">
+
+            <!-- BEGIN View all user actions -->
+            <li v-on="click:getAllUserActions">
+                <a href="#">
+                    <span class="glyphicon glyphicon-asterisk">&nbsp;</span> {{ trans('users_manager.view_all_actions') }}
+                </a>
+            </li>
+            <!-- END View all user actions -->
 
             <!-- BEGIN Delete all user actions -->
             <li>
@@ -82,7 +90,7 @@
             <li class="divider"></li>
 
             <!-- BEGIN View only not allowed actions -->
-            <li>
+            <li v-on="click:getOnlyNotAllowedActions">
                 <a href="#">
                     <span class="glyphicon glyphicon-remove-circle">&nbsp;</span> {{ trans('users_manager.view_only_not_allowed_actions') }}
                 </a>

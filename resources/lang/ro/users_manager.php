@@ -105,6 +105,7 @@ return [
     'users_registered_today_percentage' => 'Procentajul utilizatorilor înregistraţi astăzi',
     'users_statistics' => 'Statistici utilizatori',
     'users_statistics_percentage' => 'Statisticile utilizatorilor în procentaje',
+    'view_all_actions' => 'Afişează toate acţiunile',
     'view_only_allowed_actions' => 'Afişează doar acţiunile permise',
     'view_only_info_actions' => 'Afişează doar acţiunile informative',
     'view_only_not_allowed_actions' => 'Afişează doar acţiunile nepermise',

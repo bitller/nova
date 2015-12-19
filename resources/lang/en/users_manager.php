@@ -89,4 +89,5 @@ return [
     'users_registered_today' => 'Users registered today',
     'users_statistics' => 'Users statistics',
     'users_statistics_percentage' => 'Users statistics in percentages',
+    'view_all_actions' => 'View all actions',
 ];
