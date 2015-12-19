@@ -98,7 +98,7 @@
             <!-- END View only not allowed actions -->
 
             <!-- BEGIN Delete not allowed user actions -->
-            <li>
+            <li v-on="click:deleteUserActions('not_allowed')">
                 <a href="#">
                     <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_not_allowed_user_actions') }}
                 </a>
