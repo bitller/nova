@@ -7,6 +7,7 @@ use App\Bill;
 use App\BillApplicationProduct;
 use App\BillProduct;
 use App\Client;
+use App\Events\HomepageAccessed;
 use App\Events\UserCreatedNewBill;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
@@ -57,6 +58,7 @@ class BillsController extends BaseController {
      * @return mixed
      */
     public function getBills() {
+        event(new HomepageAccessed(Auth::user()->id));
         return Bills::get();
     }
 

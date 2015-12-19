@@ -28,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
 
         'App\Events\UserCreatedNewBill' => [
             'App\Listeners\LogCreationOfNewBill'
+        ],
+
+        'App\Events\HomepageAccessed' => [
+            'App\Listeners\LogGetBillsRequest'
         ]
 
     ];
