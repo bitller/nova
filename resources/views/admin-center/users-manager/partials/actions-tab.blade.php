@@ -80,7 +80,7 @@
             <!-- END View only wrong format user actions -->
 
             <!-- BEGIN Delete wrong format user actions -->
-            <li>
+            <li v-on="click:deleteUserActions('wrong_format')">
                 <a href="#">
                     <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_wrong_format_user_actions') }}
                 </a>

@@ -495,7 +495,7 @@ class UsersManagerController extends BaseController {
             UserAction::where('user_id', $userId)->delete();
         } else {
             $action = Action::where('type', $type)->first();
-            UserAction::where('user_id', $userId)->where('action_id', $action->id);
+            UserAction::where('user_id', $userId)->where('action_id', $action->id)->delete();
         }
 
         $response->setSuccessMessage(trans('users_manager.user_actions_deleted'));
