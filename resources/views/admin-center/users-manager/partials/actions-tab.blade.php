@@ -28,7 +28,7 @@
             <li class="divider"></li>
 
             <!-- BEGIN View only allowed user actions -->
-            <li>
+            <li v-on="click:getOnlyAllowedActions">
                 <a href="#">
                     <span class="glyphicon glyphicon-ok-circle">&nbsp;</span> {{ trans('users_manager.view_only_allowed_actions') }}
                 </a>

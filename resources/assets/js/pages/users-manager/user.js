@@ -140,10 +140,24 @@ new Vue({
         },
 
         /**
+         * Get only allowed user actions.
+         */
+        getOnlyAllowedActions: function() {
+            this.$set('only_allowed', true);
+            this.$set('only_info', false);
+            this.$set('only_wrong_format', false);
+            this.$set('only_not_allowed', false);
+            this.getUserActions();
+        },
+
+        /**
          * Get only wrong format actions.
          */
         getOnlyWrongFormatActions: function() {
             this.$set('only_wrong_format', true);
+            this.$set('only_allowed', false);
+            this.$set('only_info', false);
+            this.$set('only_not_allowed', false);
             this.getUserActions();
         },
 
@@ -165,7 +179,7 @@ new Vue({
 
             // Use url for allowed actions
             if (this.$get('only_allowed')) {
-                return requestUrl + 'all';
+                return requestUrl + 'allowed';
             }
 
             // Use url for info actions

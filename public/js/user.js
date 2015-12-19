@@ -121,11 +121,6 @@ new Vue({
 
             var requestUrl = this._buildUrlForUserActions(url);
 
-            // Check if actions are already loaded to avoid useless requests
-            //if (this.$get('actions') && (typeof url === 'undefined' || url === false) && !this.$get('only_allowed' && !this.$get('only_info')) && !this.$get('only_wrong_format') && !this.$get('only_not_allowed')) {
-            //    return;
-            //}
-
             this.$set('loading_user_actions', true);
             this.$http.get(requestUrl, function(response) {
 
@@ -144,11 +139,35 @@ new Vue({
             });
         },
 
-        getOnlyWrongFormatActions: function() {
-            this.$set('only_wrong_format', true);
+        /**
+         * Get only allowed user actions.
+         */
+        getOnlyAllowedActions: function() {
+            this.$set('only_allowed', true);
+            this.$set('only_info', false);
+            this.$set('only_wrong_format', false);
+            this.$set('only_not_allowed', false);
             this.getUserActions();
         },
 
+        /**
+         * Get only wrong format actions.
+         */
+        getOnlyWrongFormatActions: function() {
+            this.$set('only_wrong_format', true);
+            this.$set('only_allowed', false);
+            this.$set('only_info', false);
+            this.$set('only_not_allowed', false);
+            this.getUserActions();
+        },
+
+        /**
+         * Build the url used to get user actions.
+         *
+         * @param url
+         * @returns {*}
+         * @private
+         */
         _buildUrlForUserActions: function(url) {
 
             var requestUrl = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-actions/';
@@ -160,7 +179,7 @@ new Vue({
 
             // Use url for allowed actions
             if (this.$get('only_allowed')) {
-                return requestUrl + 'all';
+                return requestUrl + 'allowed';
             }
 
             // Use url for info actions
