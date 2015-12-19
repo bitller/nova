@@ -46,7 +46,7 @@
             <li class="divider"></li>
 
             <!-- BEGIN View only info user actions -->
-            <li>
+            <li v-on="click:getOnlyInfoActions">
                 <a href="#">
                     <span class="glyphicon glyphicon-info-sign">&nbsp;</span> {{ trans('users_manager.view_only_info_actions') }}
                 </a>

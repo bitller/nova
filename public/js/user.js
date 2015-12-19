@@ -151,6 +151,17 @@ new Vue({
         },
 
         /**
+         * Get only info user actions.
+         */
+        getOnlyInfoActions: function() {
+            this.$set('only_info', true);
+            this.$set('only_allowed', false);
+            this.$set('only_wrong_format', false);
+            this.$set('only_not_allowed', false);
+            this.getUserActions();
+        },
+
+        /**
          * Get only wrong format actions.
          */
         getOnlyWrongFormatActions: function() {
