@@ -64,7 +64,7 @@
             <li class="divider"></li>
 
             <!-- BEGIN View only wrong format user actions -->
-            <li>
+            <li  v-on="click:getOnlyWrongFormatActions">
                 <a href="#">
                     <span class="glyphicon glyphicon-exclamation-sign">&nbsp;</span> {{ trans('users_manager.view_only_wrong_format_actions') }}
                 </a>

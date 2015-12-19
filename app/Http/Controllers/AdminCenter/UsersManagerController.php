@@ -191,9 +191,10 @@ class UsersManagerController extends BaseController {
      * Paginate user actions.
      *
      * @param int $userId
+     * @param string $type
      * @return mixed
      */
-    public function getUserActions($userId) {
+    public function getUserActions($userId, $type) {
         // Make sure user id exists in database
         if (!User::where('id', $userId)->count()) {
             $response = new AjaxResponse();
@@ -201,6 +202,27 @@ class UsersManagerController extends BaseController {
             return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
         }
 
+        // Paginate allowed user actions
+        if ($type === 'allowed') {
+            return UserActions::getAllowed($userId);
+        }
+
+        // Paginate info user actions
+        if ($type === 'info') {
+            return UserActions::getInfo($userId);
+        }
+
+        // Paginate wrong format user actions
+        if ($type === 'wrong_format') {
+            return UserActions::getWrongFormat($userId);
+        }
+
+        // Paginate not allowed user actions
+        if ($type === 'not_allowed') {
+            return UserActions::getNotAllowed($userId);
+        }
+
+        // By default return all user actions
         return UserActions::getAll($userId);
     }
 

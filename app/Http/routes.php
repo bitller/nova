@@ -193,7 +193,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             Route::post('/{userId}/delete-custom-products', 'UsersManagerController@deleteUserCustomProducts');
 
             // User actions
-            Route::get('/{userId}/get-actions', 'UsersManagerController@getUserActions');
+            Route::get('/{userId}/get-actions/{type}', 'UsersManagerController@getUserActions');
             Route::post('/{userId}/delete-actions', 'UsersManagerController@deleteUserActions');
         });
     });

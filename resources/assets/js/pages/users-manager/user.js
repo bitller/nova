@@ -119,15 +119,7 @@ new Vue({
          */
         getUserActions: function(url) {
 
-            // Check if actions are already loaded to avoid useless requests
-            if (this.$get('actions') && typeof url === 'undefined') {
-                return;
-            }
-
-            var requestUrl = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-actions';
-            if (typeof url !== 'undefined') {
-                requestUrl = url;
-            }
+            var requestUrl = this._buildUrlForUserActions(url);
 
             this.$set('loading_user_actions', true);
             this.$http.get(requestUrl, function(response) {
@@ -145,6 +137,52 @@ new Vue({
                 }
                 Alert.generalError();
             });
+        },
+
+        /**
+         * Get only wrong format actions.
+         */
+        getOnlyWrongFormatActions: function() {
+            this.$set('only_wrong_format', true);
+            this.getUserActions();
+        },
+
+        /**
+         * Build the url used to get user actions.
+         *
+         * @param url
+         * @returns {*}
+         * @private
+         */
+        _buildUrlForUserActions: function(url) {
+
+            var requestUrl = '/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/get-actions/';
+
+            // Check if an url was given
+            if (typeof url !== 'undefined' && url !== false) {
+                return url;
+            }
+
+            // Use url for allowed actions
+            if (this.$get('only_allowed')) {
+                return requestUrl + 'all';
+            }
+
+            // Use url for info actions
+            if (this.$get('only_info')) {
+                return requestUrl + 'info';
+            }
+
+            // Use url for wrong format actions
+            if (this.$get('only_wrong_format')) {
+                return requestUrl + 'wrong_format';
+            }
+
+            if (this.$get('only_not_allowed')) {
+                return requestUrl + 'not_allowed';
+            }
+
+            return requestUrl + 'all';
         },
 
         /**
