@@ -70,6 +70,7 @@ return [
     'settings' => 'Application settings',
     'statistics' => 'Statistics',
     'subscriptions' => 'Subscriptions',
+    'user_actions_deleted' => 'User actions deleted!',
     'user_bill_deleted' => 'User bill has been deleted!',
     'user_bill_is_paid' => 'User bill is marked as paid.',
     'user_bill_is_unpaid' => 'User bill is marked as unpaid.',

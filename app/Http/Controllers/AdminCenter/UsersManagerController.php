@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminCenter;
 
+use App\Action;
 use App\Bill;
 use App\Client;
 use App\Helpers\AjaxResponse;
@@ -469,10 +470,11 @@ class UsersManagerController extends BaseController {
      * Delete user actions.
      *
      * @param int $userId
+     * @param string $type
      * @param DeleteUserActionsRequest $request
      * @return mixed
      */
-    public function deleteUserActions($userId, DeleteUserActionsRequest $request) {
+    public function deleteUserActions($userId, $type, DeleteUserActionsRequest $request) {
 
         $response = new AjaxResponse();
 
@@ -482,8 +484,19 @@ class UsersManagerController extends BaseController {
             return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
         }
 
+        $typeUsedInQuery = false;
+
+        if ($type === 'allowed' || $type === 'info' || $type === 'wrong_format' || $type === 'not_allowed') {
+            $typeUsedInQuery = $type;
+        }
+
         // Delete user actions
-        UserAction::where('user_id', $userId)->delete();
+        if (!$typeUsedInQuery) {
+            UserAction::where('user_id', $userId)->delete();
+        } else {
+            $action = Action::where('type', $type)->first();
+            UserAction::where('user_id', $userId)->where('action_id', $action->id);
+        }
 
         $response->setSuccessMessage(trans('users_manager.user_actions_deleted'));
         return response($response->get())->header('Content-Type', 'application/json');

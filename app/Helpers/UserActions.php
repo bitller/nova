@@ -142,7 +142,7 @@ class UserActions {
             $query->where('user_actions.action_id', $action->id);
         }
 
-        return $query->paginate();
+        return $query->orderBy('user_actions.created_at', 'desc')->paginate();
     }
 
 }

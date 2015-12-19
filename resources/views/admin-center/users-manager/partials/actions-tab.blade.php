@@ -27,7 +27,7 @@
 
             <!-- BEGIN Delete all user actions -->
             <li>
-                <a href="#" v-on="click: deleteUserActions">
+                <a href="#" v-on="click: deleteUserActions('all')">
                     <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_actions') }}
                 </a>
             </li>

@@ -708,7 +708,7 @@ new Vue({
 
         },
 
-        deleteUserActions: function() {
+        deleteUserActions: function(type) {
 
             var thisInstance = this;
             var confirmMessage = 'translation goes here';
@@ -719,7 +719,7 @@ new Vue({
                     _token: Token.get()
                 };
 
-                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-actions', data, function(response) {
+                thisInstance.$http.post('/admin-center/users-manager/user/' + $('#user').attr('user-id') + '/delete-actions/' + type, data, function(response) {
                     this.$set('actions', '');
                     this.getUserActions();
                     Alert.success(response.title, response.message);

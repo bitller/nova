@@ -85,6 +85,7 @@ return [
     'subscribed_users' => 'Utilizatori abonaţi',
     'subscribed_users_percentage' => 'Precentajul utilizatorilor abonaţi',
     'subscriptions' => 'Abonamente',
+    'user_actions_deleted' => 'Acţiunile acestui utilizator au fost şterse!',
     'user_bill_deleted' => 'Factura utilizatorului a fost ştearsă!',
     'user_bill_is_paid' => 'Factura utilizatorului a fost marcată ca platită.',
     'user_bill_is_unpaid' => 'Factura utilizatorului a fost marcată ca neplatită.',
