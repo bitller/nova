@@ -62,7 +62,7 @@
             <!-- END View only info user actions -->
 
             <!-- BEGIN Delete info user actions -->
-            <li>
+            <li v-on="click:deleteUserActions('info')">
                 <a href="#">
                     <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_info_user_actions') }}
                 </a>
