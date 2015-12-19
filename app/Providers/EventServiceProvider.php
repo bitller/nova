@@ -32,7 +32,11 @@ class EventServiceProvider extends ServiceProvider
 
         'App\Events\HomepageAccessed' => [
             'App\Listeners\LogGetBillsRequest'
-        ]
+        ],
+
+        'App\Events\UserDeletedBill' => [
+            'App\Listeners\LogBillDeletion'
+        ],
 
     ];
 

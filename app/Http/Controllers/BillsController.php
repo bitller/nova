@@ -9,6 +9,7 @@ use App\BillProduct;
 use App\Client;
 use App\Events\HomepageAccessed;
 use App\Events\UserCreatedNewBill;
+use App\Events\UserDeletedBill;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Helpers\Clients;
@@ -120,7 +121,7 @@ class BillsController extends BaseController {
     public function delete($billId) {
 
         DB::table('bills')->where('id', $billId)->where('user_id', Auth::user()->id)->delete();
-
+        event(new UserDeletedBill(Auth::user()->id, $billId));
         return [
             'success' => true,
             'title' => trans('common.success'),
