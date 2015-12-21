@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\AdminCenter\UsersManager;
 
-use App\Events\UserAccessedNotAllowedPage;
 use App\Helpers\Roles;
 use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Authorize GetIndexDataRequest.

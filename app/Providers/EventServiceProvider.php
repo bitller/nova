@@ -38,9 +38,6 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\LogBillDeletion'
         ],
 
-        'App\Events\UserAccessedNotAllowedPage' => [
-            'App\Listeners\LogAccessToNotAllowedPage'
-        ],
     ];
 
     /**
