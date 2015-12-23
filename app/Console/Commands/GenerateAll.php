@@ -46,9 +46,6 @@ class GenerateAll extends Command {
         Artisan::call('migrate:refresh');
         $this->info('Database rolled back and migrated again.');
 
-        Artisan::call('generate:roles');
-        $this->info('Generated user roles.');
-
         Artisan::call('generate:log_types');
         $this->info('Generated log types.');
 
