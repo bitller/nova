@@ -14,7 +14,8 @@ use Illuminate\Http\Request;
 class SubscriptionEventsController extends BaseController {
 
     public function index(Request $request) {
-        $event = (array) $request->get('event');
+        $event = json_decode($request->all());
+        $event = $event['event'];
 //        $eventType = $event['event_type'];
 //        $eventResource = $event['event_resource'];
 
