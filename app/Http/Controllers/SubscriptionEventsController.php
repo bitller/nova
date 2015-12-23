@@ -16,14 +16,12 @@ class SubscriptionEventsController extends BaseController {
     public function index(Request $request) {
 
         $event = (array) $request->get('event');
-
-        $webhook = new Webhook();
-        $webhook->obj = $event['event_type'];
-        $webhook->save();
+        $eventType = $event['event_type'];
+        $eventResource = $event['event_resource'];
 
         // Handle case when subscription is active
-        if ($request->get('status') === 'active') {
-            Subscription::where('paymill_subscription_id' === $request->get('id'))->update([
+        if ($eventType === 'subscription.succeeded') {
+            Subscription::where('paymill_subscription_id' === $eventResource['subscription']['id'])->update([
                 'is_active' => 1,
                 'waiting_for_paymill' => 0
             ]);
