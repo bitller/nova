@@ -14,14 +14,14 @@ use Illuminate\Http\Request;
 class SubscriptionEventsController extends BaseController {
 
     public function index(Request $request) {
-        $event = json_decode($request->all());
-        $event = $event['event'];
+//        $event = json_decode($request->all());
+//        $event = $event['event'];
 //        $eventType = $event['event_type'];
 //        $eventResource = $event['event_resource'];
 
         $h = new Webhook();
-        $h->status = $event['event_type'];
-        $h->obj = $event['event_resource'];
+//        $h->status = $event['event_type'];
+        $h->obj = $request->all();
 //        $s = $eventResource['subscription'];
 //        $h->obj = $eventResource['subscription'];
 //        $h->obj = $eventResource['subscription']['id'];
