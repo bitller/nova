@@ -23,14 +23,14 @@ class SubscriptionEventsController extends BaseController {
         $a->status = 'called';
         $a->save();
 
-        $h = new Webhook();
+//        $h = new Webhook();
 
 //        $h->status = $event['event_type'];
-        $h->obj = $request->json()->all();
+//        $h->obj = $request->json()->all();
 //        $s = $eventResource['subscription'];
 //        $h->obj = $eventResource['subscription'];
 //        $h->obj = $eventResource['subscription']['id'];
-        $h->save();
+//        $h->save();
 
         // Handle case when subscription is active
 //        if ($eventType === 'subscription.succeeded') {
