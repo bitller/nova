@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "paymill/paymill": "dev-master",
-        "fzaninotto/faker": "~1.4",
+        "fzaninotto/faker": "~1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
