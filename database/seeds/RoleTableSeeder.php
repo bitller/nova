@@ -30,8 +30,8 @@ class RoleTableSeeder extends Seeder {
 
         foreach ($roles as $role) {
             $roleModel = new \App\Role();
-            $roleModel->name = $role->name;
-            $roleModel->level = $role->level;
+            $roleModel->name = $role['name'];
+            $roleModel->level = $role['level'];
             $roleModel->save();
         }
     }
