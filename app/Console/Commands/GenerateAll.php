@@ -49,16 +49,16 @@ class GenerateAll extends Command {
 //        Artisan::call('migrate');
 //        $this->info('Tables migrated again.');
 
-//        Artisan::call('generate:roles');
-//        $this->info('Generated user roles.');
+        Artisan::call('generate:roles');
+        $this->info('Generated user roles.');
 
-//        Artisan::call('generate:log_types');
-//        $this->info('Generated log types.');
+        Artisan::call('generate:log_types');
+        $this->info('Generated log types.');
 
         Artisan::call('db:seed');
         $this->info('Seeded tables.');
 
-//        Artisan::call('generate:admin');
-//        $this->info('Generated an admin user with default credentials.');
+        Artisan::call('generate:admin');
+        $this->info('Generated an admin user with default credentials.');
     }
 }
