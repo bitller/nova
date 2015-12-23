@@ -149,6 +149,9 @@ Route::group(['prefix' => 'help-center'], function() {
     Route::post('/ask-question', 'HelpCenterController@askQuestion');
 });
 
+// Subscription events listener
+Route::get('/subscription-events', 'SubscriptionEventsController@index');
+
 // Admin center
 Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], function() {
 
