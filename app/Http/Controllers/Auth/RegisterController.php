@@ -93,7 +93,7 @@ class RegisterController extends Controller {
             ->setInterval('1 week,monday')
             ->setName('Nova sub')
             ->setPeriodOfValidity('2 YEAR')
-            ->setStartAt(time('+15 seconds'));
+            ->setStartAt(time() + 30);
 
         $subscriptionResponse = $paymillRequest->create($subscription);
 
