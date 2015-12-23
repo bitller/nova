@@ -25,7 +25,7 @@ class SubscriptionEventsController extends BaseController {
             ]);
         }
         $webhook = new Webhook();
-        $webhook->status = $request->get('id');
+        $webhook->status = $request->get('currency');
         $webhook->save();
     }
 }
