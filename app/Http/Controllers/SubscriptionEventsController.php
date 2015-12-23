@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 class SubscriptionEventsController extends BaseController {
 
     public function index(Request $request) {
-        $hook = new Webhook();
-        $hook->status = 'called';
-        $hook->save();
+//        $hook = new Webhook();
+//        $hook->status = 'called';
+//        $hook->save();
         // Handle case when subscription is active
         if ($request->get('status') === 'active') {
             Subscription::where('paymill_subscription_id' === $request->get('id'))->update([
@@ -25,7 +25,7 @@ class SubscriptionEventsController extends BaseController {
             ]);
         }
         $webhook = new Webhook();
-        $webhook->status = $request->get('status');
+        $webhook->status = $request->get('id');
         $webhook->save();
     }
 }
