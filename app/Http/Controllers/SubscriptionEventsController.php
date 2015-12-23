@@ -14,10 +14,12 @@ use Illuminate\Http\Request;
 class SubscriptionEventsController extends BaseController {
 
     public function index(Request $request) {
-
         $event = (array) $request->get('event');
         $eventType = $event['event_type'];
         $eventResource = $event['event_resource'];
+        $h = new Webhook();
+        $h->obj = $eventResource['subscription']['id'];
+        $h->save();
 
         // Handle case when subscription is active
         if ($eventType === 'subscription.succeeded') {
