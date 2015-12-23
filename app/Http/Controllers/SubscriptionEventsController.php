@@ -16,9 +16,11 @@ class SubscriptionEventsController extends BaseController {
     public function index(Request $request) {
         $event = (array) $request->get('event');
         $eventType = $event['event_type'];
-//        $eventResource = $event['event_resource'];
+        $eventResource = $event['event_resource'];
         $h = new Webhook();
         $h->status = $eventType;
+        $s = $eventResource['subscription'];
+        $h->obj = $s['id'];
 //        $h->obj = $eventResource['subscription']['id'];
         $h->save();
 
