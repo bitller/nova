@@ -1,10 +1,17 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 
+/**
+ * Seed actions table.
+ *
+ * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
+ */
 class ActionTableSeeder extends Seeder {
 
+    /**
+     * Seed table.
+     */
     public function run() {
 
         $actions = [
@@ -29,7 +36,5 @@ class ActionTableSeeder extends Seeder {
         foreach ($actions as $action) {
             factory(App\Action::class)->create($action);
         }
-
     }
-
 }
