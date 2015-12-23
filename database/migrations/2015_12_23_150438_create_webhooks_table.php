@@ -13,6 +13,7 @@ class CreateWebhooksTable extends Migration
     public function up() {
         Schema::create('webhooks', function(Blueprint $table) {
             $table->string('status');
+            $table->text('obj');
             $table->timestamps();
         });
     }
