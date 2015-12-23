@@ -26,7 +26,7 @@ class SubscriptionEventsController extends BaseController {
         $h = new Webhook();
 
 //        $h->status = $event['event_type'];
-        $h->obj = $request->json('event');
+        $h->obj = $request->json()->all();
 //        $s = $eventResource['subscription'];
 //        $h->obj = $eventResource['subscription'];
 //        $h->obj = $eventResource['subscription']['id'];
