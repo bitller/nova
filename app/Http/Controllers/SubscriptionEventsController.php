@@ -20,7 +20,7 @@ class SubscriptionEventsController extends BaseController {
 //        $eventResource = $event['event_resource'];
 
         $b = new Webhook();
-        $b->status = 'called';
+        $b->status = '';
         $b->save();
 
         $data = $request->all();
@@ -31,7 +31,7 @@ class SubscriptionEventsController extends BaseController {
         $eventResource = $event['event_resource'];
 
         $a = new Webhook();
-        $a->obj = $eventResource['id'];
+        $a->obj = $eventType;
         $a->save();
 
         if ($eventType === 'subscription.created') {
