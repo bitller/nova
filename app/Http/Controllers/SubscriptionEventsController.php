@@ -23,7 +23,7 @@ class SubscriptionEventsController extends BaseController {
 
         $eventResource = $event['event_resource'];
 
-        if ($eventType === 'subscription.failed') {
+        if ($eventType === 'subscription.canceled') {
             $a = new Webhook();
             $a->status = $eventType;
             $a->obj = json_encode($event);
@@ -67,6 +67,13 @@ class SubscriptionEventsController extends BaseController {
                 'is_active' => 0,
                 'waiting_for_paymill' => 0
             ]);
+        }
+
+        // Handle subscription canceled event
+        if ($eventType === 'subscription.canceled') {
+
+            // Get user id
+
         }
     }
 }
