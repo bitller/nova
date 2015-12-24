@@ -29,7 +29,7 @@ class SubscriptionEventsController extends BaseController {
             $a->obj = json_encode($event);
             $a->save();
         }
-        
+
         // Handle subscription created event
         if ($eventType === 'subscription.created') {
             // Get user id
@@ -48,6 +48,23 @@ class SubscriptionEventsController extends BaseController {
             // Update database
             Subscription::where('paymill_subscription_id', $subscription['id'])->update([
                 'is_active' => 1,
+                'waiting_for_paymill' => 0
+            ]);
+        }
+
+        // Handle subscription failed event
+        if ($eventType === 'subscription.failed') {
+
+            // Get user id
+            $subscription = $event['subscription'];
+            $subscriptionDetails = Subscription::where('paymill_subscription_id', $subscription['id'])->first();
+
+            // Log to user actions
+            UserActions::info($subscriptionDetails->user_id, 'Subscription with id ' . $subscription['id'] . ' failed.');
+
+            // Update database
+            Subscription::where('paymill_subscription_id', $subscription['id'])->update([
+                'is_active' => 0,
                 'waiting_for_paymill' => 0
             ]);
         }
