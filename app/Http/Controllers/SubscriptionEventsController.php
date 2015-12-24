@@ -23,7 +23,7 @@ class SubscriptionEventsController extends BaseController {
         $b->status = 'called';
         $b->save();
 
-        $data = $request->json();
+        $data = (array) $request->json();
 
         $a = new Webhook();
         $a->obj = $data['event'];
