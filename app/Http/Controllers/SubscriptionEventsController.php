@@ -29,12 +29,12 @@ class SubscriptionEventsController extends BaseController {
             $a->save();
 //        }
 
-//        if ($eventType === 'subscription.created') {
-//            Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
-//                'is_active' => 1,
-//                'waiting_for_paymill' => 0
-//            ]);
-//        }
+        if ($eventType === 'subscription.created') {
+            Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
+                'is_active' => 1,
+                'waiting_for_paymill' => 0
+            ]);
+        }
 
         if ($eventType === 'subscription.succeeded') {
             $subscription = $eventResource['subscription'];
