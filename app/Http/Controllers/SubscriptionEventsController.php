@@ -26,7 +26,7 @@ class SubscriptionEventsController extends BaseController {
         $data = $request->json();
 
         $a = new Webhook();
-        $a->obj = $data->event;
+        $a->obj = json_encode($data);
         $a->save();
 
 //        $h = new Webhook();
