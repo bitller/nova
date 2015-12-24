@@ -14,14 +14,6 @@ use Illuminate\Http\Request;
 class SubscriptionEventsController extends BaseController {
 
     public function index(Request $request) {
-//        $event = json_decode($request->all());
-//        $event = $event['event'];
-//        $eventType = $event['event_type'];
-//        $eventResource = $event['event_resource'];
-
-        $b = new Webhook();
-        $b->status = '';
-        $b->save();
 
         $data = $request->all();
         $data = (array) $data;
@@ -30,37 +22,26 @@ class SubscriptionEventsController extends BaseController {
 
         $eventResource = $event['event_resource'];
 
-        if ($eventType === 'subscription.succeeded') {
-            $a = new Webhook();
-            $a->status = $eventType;
-            $a->obj = json_encode($event);
-            $a->save();
-        }
-
-        if ($eventType === 'subscription.created') {
-            Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
-                'is_active' => 1,
-                'waiting_for_paymill' => 0
-            ]);
-        }
-
-//        $h = new Webhook();
-
-//        $data = $request->json('event');
-
-//        $h->obj = $data['event_resource'];
-//        $h->obj = $request->json()->all();
-//        $s = $eventResource['subscription'];
-//        $h->obj = $eventResource['subscription'];
-//        $h->obj = $eventResource['subscription']['id'];
-//        $h->save();
-
-        // Handle case when subscription is active
 //        if ($eventType === 'subscription.succeeded') {
-//            Subscription::where('paymill_subscription_id' === $eventResource['subscription']['id'])->update([
+//            $a = new Webhook();
+//            $a->status = $eventType;
+//            $a->obj = json_encode($event);
+//            $a->save();
+//        }
+
+//        if ($eventType === 'subscription.created') {
+//            Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
 //                'is_active' => 1,
 //                'waiting_for_paymill' => 0
 //            ]);
 //        }
+
+        if ($eventType === 'subscription.succeeded') {
+            $subscription = $eventResource['subscription'];
+            Subscription::where('paymill_subscription_id', $subscription['id'])->update([
+                'is_active' => 1,
+                'waiting_for_paymill' => 0
+            ]);
+        }
     }
 }
