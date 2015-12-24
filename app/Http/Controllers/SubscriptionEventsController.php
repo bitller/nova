@@ -23,10 +23,10 @@ class SubscriptionEventsController extends BaseController {
         $eventResource = $event['event_resource'];
 
 //        if ($eventType === 'subscription.succeeded') {
-//            $a = new Webhook();
-//            $a->status = $eventType;
-//            $a->obj = json_encode($event);
-//            $a->save();
+            $a = new Webhook();
+            $a->status = $eventType;
+            $a->obj = json_encode($event);
+            $a->save();
 //        }
 
 //        if ($eventType === 'subscription.created') {
