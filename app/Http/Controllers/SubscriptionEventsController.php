@@ -23,12 +23,12 @@ class SubscriptionEventsController extends BaseController {
 
         $eventResource = $event['event_resource'];
 
-        if ($eventType === 'subscription.canceled') {
-            $a = new Webhook();
-            $a->status = $eventType;
-            $a->obj = json_encode($event);
-            $a->save();
-        }
+//        if ($eventType === 'subscription.canceled') {
+//            $a = new Webhook();
+//            $a->status = $eventType;
+//            $a->obj = json_encode($event);
+//            $a->save();
+//        }
 
         // Handle subscription created event
         if ($eventType === 'subscription.created') {
@@ -73,7 +73,16 @@ class SubscriptionEventsController extends BaseController {
         if ($eventType === 'subscription.canceled') {
 
             // Get user id
+            $subscriptionDetails = Subscription::where('paymill_subscription_id', $eventResource['id'])->first();
 
+            // Log user action
+            UserActions::info($subscriptionDetails->user_id, 'Subscription with id ' . $eventResource['id'] . ' was canceled.');
+
+            // Update database
+            Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
+                'is_active' => 0,
+                'waiting_for_paymill' => 0
+            ]);
         }
     }
 }
