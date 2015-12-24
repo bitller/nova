@@ -23,12 +23,12 @@ class SubscriptionEventsController extends BaseController {
 
         $eventResource = $event['event_resource'];
 
-//        if ($eventType === 'subscription.canceled') {
-//            $a = new Webhook();
-//            $a->status = $eventType;
-//            $a->obj = json_encode($event);
-//            $a->save();
-//        }
+        if ($eventType === 'subscription.deleted') {
+            $a = new Webhook();
+            $a->status = $eventType;
+            $a->obj = json_encode($event);
+            $a->save();
+        }
 
         // Handle subscription created event
         if ($eventType === 'subscription.created') {
@@ -83,6 +83,11 @@ class SubscriptionEventsController extends BaseController {
                 'is_active' => 0,
                 'waiting_for_paymill' => 0
             ]);
+        }
+
+        // Handle subscription deleted event
+        if ($eventType === 'subscription.deleted') {
+            //
         }
     }
 }
