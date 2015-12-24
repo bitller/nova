@@ -56,7 +56,7 @@ class SubscriptionEventsController extends BaseController {
         if ($eventType === 'subscription.failed') {
 
             // Get user id
-            $subscription = $event['subscription'];
+            $subscription = $eventResource['subscription'];
             $subscriptionDetails = Subscription::where('paymill_subscription_id', $subscription['id'])->first();
 
             // Log to user actions
