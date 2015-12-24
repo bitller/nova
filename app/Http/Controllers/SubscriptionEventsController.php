@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\UserActions;
 use App\Subscription;
 use App\Webhook;
 use Illuminate\Http\Request;
@@ -23,13 +24,19 @@ class SubscriptionEventsController extends BaseController {
         $eventResource = $event['event_resource'];
 
 //        if ($eventType === 'subscription.succeeded') {
-            $a = new Webhook();
-            $a->status = $eventType;
-            $a->obj = json_encode($event);
-            $a->save();
+//            $a = new Webhook();
+//            $a->status = $eventType;
+//            $a->obj = json_encode($event);
+//            $a->save();
 //        }
 
         if ($eventType === 'subscription.created') {
+            // Get user id
+            $subscriptionDetails = Subscription::where('paymill_subscription_id', $eventResource['id'])->first();
+
+            UserActions::info($subscriptionDetails->user_id, 'Subscription id ' . $eventResource['id'] . ' created.');
+
+            // Update database
             Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
                 'is_active' => 1,
                 'waiting_for_paymill' => 0
@@ -37,7 +44,12 @@ class SubscriptionEventsController extends BaseController {
         }
 
         if ($eventType === 'subscription.succeeded') {
+            // Get user id and log action
             $subscription = $eventResource['subscription'];
+            $subscriptionDetails = Subscription::where('paymill_subscription_id', $subscription['id'])->first();
+            UserActions::info($subscriptionDetails->user_id, 'Subscription succeeded with id ' . $subscription['id'] . ' succeeded.');
+
+            // Update database
             Subscription::where('paymill_subscription_id', $subscription['id'])->update([
                 'is_active' => 1,
                 'waiting_for_paymill' => 0
