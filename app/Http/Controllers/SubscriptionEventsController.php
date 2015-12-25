@@ -23,7 +23,7 @@ class SubscriptionEventsController extends BaseController {
 
         $eventResource = $event['event_resource'];
 
-        if ($eventType === 'subscription.deleted') {
+        if ($eventType === 'subscription.updated') {
             $a = new Webhook();
             $a->status = $eventType;
             $a->obj = json_encode($event);
@@ -97,5 +97,7 @@ class SubscriptionEventsController extends BaseController {
             // Delete also from database
             Subscription::where('paymill_subscription_id', $eventResource['id'])->delete();
         }
+
+        return response('Success.', 200);
     }
 }
