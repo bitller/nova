@@ -98,6 +98,11 @@ class SubscriptionEventsController extends BaseController {
             Subscription::where('paymill_subscription_id', $eventResource['id'])->delete();
         }
 
+        // Handle subscription updated event
+        if ($eventType === 'subscription.updated') {
+//            $eventResource['id'];
+        }
+
         return response('Success.', 200);
     }
 }
