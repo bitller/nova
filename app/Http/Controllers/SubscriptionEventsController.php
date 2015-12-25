@@ -87,7 +87,15 @@ class SubscriptionEventsController extends BaseController {
 
         // Handle subscription deleted event
         if ($eventType === 'subscription.deleted') {
-            //
+
+            // Get user id
+            $subscriptionDetails = Subscription::where('paymill_subscription_id', $eventResource['id'])->first();
+
+            // Log action
+            UserActions::info($subscriptionDetails->user_id, 'Subscription with id ' . $eventResource['id'] . ' was deleted.');
+
+            // Delete also from database
+            Subscription::where('paymill_subscription_id', $eventResource['id'])->delete();
         }
     }
 }
