@@ -41,7 +41,7 @@ class SubscriptionsController extends BaseController {
             $status = 'active';
         }
 
-        $query = Subscription::where('status', $status)
+        $query = Subscription::where('subscriptions.status', $status)
             ->leftJoin('users', 'users.id', '=', 'subscriptions.user_id')
             ->leftJoin('transactions', 'transactions.subscription_id', '=', 'subscriptions.id')
             ->paginate();
