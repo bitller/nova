@@ -40,6 +40,12 @@ class EventServiceProvider extends ServiceProvider
 
         'App\Events\SubscriptionCreated' => [
             'App\Listeners\LogCreationOfNewSubscription'
+        ],
+
+        'App\Events\SubscriptionSucceeded' => [
+            'App\Listeners\LogSubscriptionSucceeded',
+            'App\Listeners\UpdateSubscriptionStatusToActive',
+            'App\Listeners\SaveSuccessfulTransaction'
         ]
 
     ];

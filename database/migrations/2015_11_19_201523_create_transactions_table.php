@@ -23,6 +23,7 @@ class CreateTransactionsTable extends Migration {
             $table->bigInteger('subscription_id')->unsigned();
             $table->integer('amount')->unsigned();
             $table->string('status');
+            $table->string('response_code');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
