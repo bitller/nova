@@ -19,8 +19,7 @@ class CreateSubscriptionsTable extends Migration {
         Schema::create('subscriptions', function(Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('paymill_subscription_id');
-            $table->enum('is_active', [0,1])->default(0);
-            $table->enum('waiting_for_paymill', [0,1])->default(1);
+            $table->string('status')->default('waiting');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

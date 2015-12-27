@@ -7,6 +7,7 @@ return [
     'edit_subscription' => 'Edit subscription',
     'failed_subscriptions' => 'Failed subscriptions',
     'next_payment_term' => 'Next payment term',
+    'no_active_subscriptions' => 'Looks like there are no active subscriptions.',
     'offers' => 'Offers',
     'paid_until_now' => 'Paid until now',
     'subscriptions' => 'Subscriptions',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminCenter\Subscriptions;
 
 use App\Http\Controllers\BaseController;
+use App\Subscription;
 
 /**
  * Handle subscriptions management.
@@ -24,6 +25,23 @@ class SubscriptionsController extends BaseController {
      */
     public function index() {
         return view('admin-center.subscriptions.index');
+    }
+
+    /**
+     * Paginate subscriptions.
+     *
+     * @param $status
+     * @return mixed
+     */
+    public function get($status) {
+
+        // Make sure given status is allowed
+        $allowedStatuses = ['active', 'canceled', 'failed', 'waiting'];
+        if (!in_array($status, $allowedStatuses)) {
+            $status = 'active';
+        }
+
+        return Subscription::where('status', $status)->paginate();
     }
 
 }

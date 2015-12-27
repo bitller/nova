@@ -107,6 +107,7 @@ class RegisterController extends Controller {
         $subscriptionModel = new SubscriptionModel();
         $subscriptionModel->user_id = Auth::user()->id;
         $subscriptionModel->paymill_subscription_id = $subscriptionResponse->getId();
+        $subscriptionModel->status = 'waiting';
         $subscriptionModel->save();
 
         $response = new AjaxResponse();

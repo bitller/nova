@@ -7,6 +7,7 @@ return [
     'edit_subscription' => 'Editează abonamentul',
     'failed_subscriptions' => 'Abonamente eşuate',
     'next_payment_term' => 'Următorul termen de plată',
+    'no_active_subscriptions' => 'Se pare că nu sunt abonamente active.',
     'offers' => 'Oferte',
     'paid_until_now' => 'Plătit până acum',
     'subscriptions' => 'Abonamente',

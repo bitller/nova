@@ -53,7 +53,7 @@
     </div>
     <!-- END Active subscriptions -->
 
-    <div v-show="clients.total < 1 && !loading_user_clients" class="alert alert-danger alert-top">{{ trans('users_manager.user_has_no_clients') }}</div>
+    <div v-show="active_subscriptions.total < 1 && !loading_active_subscriptions" class="alert alert-danger alert-top">{{ trans('subscriptions.no_active_subscriptions') }}</div>
 
 </div>
 <!-- END Clients tab content -->

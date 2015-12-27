@@ -207,6 +207,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         // Subscriptions
         Route::get('/', 'SubscriptionsController@index');
         Route::get('/index', 'SubscriptionController@index');
+        Route::get('/get/{status}', 'SubscriptionsController@get');
 
         // Offers
         Route::group(['prefix' => 'offers'], function() {

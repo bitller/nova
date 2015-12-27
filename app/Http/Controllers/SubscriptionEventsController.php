@@ -47,8 +47,7 @@ class SubscriptionEventsController extends BaseController {
 
             // Update database
             Subscription::where('paymill_subscription_id', $subscription['id'])->update([
-                'is_active' => 1,
-                'waiting_for_paymill' => 0
+                'status' => 'active'
             ]);
         }
 
@@ -64,8 +63,7 @@ class SubscriptionEventsController extends BaseController {
 
             // Update database
             Subscription::where('paymill_subscription_id', $subscription['id'])->update([
-                'is_active' => 0,
-                'waiting_for_paymill' => 0
+                'status' => 'failed'
             ]);
         }
 
@@ -80,8 +78,7 @@ class SubscriptionEventsController extends BaseController {
 
             // Update database
             Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
-                'is_active' => 0,
-                'waiting_for_paymill' => 0
+                'status' => 'canceled'
             ]);
         }
 
