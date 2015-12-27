@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SubscriptionCreated;
+use App\Events\SubscriptionFailed;
 use App\Events\SubscriptionSucceeded;
 use App\Helpers\UserActions;
 use App\Subscription;
@@ -44,18 +45,7 @@ class SubscriptionEventsController extends BaseController {
 
         // Handle subscription failed event
         if ($eventType === 'subscription.failed') {
-
-            // Get user id
-            $subscription = $eventResource['subscription'];
-            $subscriptionDetails = Subscription::where('paymill_subscription_id', $subscription['id'])->first();
-
-            // Log to user actions
-            UserActions::info($subscriptionDetails->user_id, 'Subscription with id ' . $subscription['id'] . ' failed.');
-
-            // Update database
-            Subscription::where('paymill_subscription_id', $subscription['id'])->update([
-                'status' => 'failed'
-            ]);
+            event(new SubscriptionFailed($eventResource['subscription'], $eventResource['transaction']));
         }
 
         // Handle subscription canceled event
