@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SubscriptionCreated;
+use App\Events\SubscriptionSucceeded;
 use App\Helpers\UserActions;
 use App\Subscription;
 use App\Webhook;
@@ -38,15 +39,18 @@ class SubscriptionEventsController extends BaseController {
 
         // Handle subscription succeeded event
         if ($eventType === 'subscription.succeeded') {
-            // Get user id and log action
-            $subscription = $eventResource['subscription'];
-            $subscriptionDetails = Subscription::where('paymill_subscription_id', $subscription['id'])->first();
-            UserActions::info($subscriptionDetails->user_id, 'Subscription succeeded with id ' . $subscription['id'] . ' succeeded.');
 
-            // Update database
-            Subscription::where('paymill_subscription_id', $subscription['id'])->update([
-                'status' => 'active'
-            ]);
+            event(new SubscriptionSucceeded($eventResource['subscription'], $eventResource['transaction']));
+
+//            // Get user id and log action
+//            $subscription = $eventResource['subscription'];
+//            $subscriptionDetails = Subscription::where('paymill_subscription_id', $subscription['id'])->first();
+//            UserActions::info($subscriptionDetails->user_id, 'Subscription succeeded with id ' . $subscription['id'] . ' succeeded.');
+//
+//            // Update database
+//            Subscription::where('paymill_subscription_id', $subscription['id'])->update([
+//                'status' => 'active'
+//            ]);
         }
 
         // Handle subscription failed event
