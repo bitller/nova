@@ -26,7 +26,7 @@ class CreateTransactionsTable extends Migration {
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('subscription_id')->references('id')->on('subscription')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('subscription_id')->references('id')->on('subscriptions')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
