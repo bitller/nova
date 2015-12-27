@@ -201,6 +201,20 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         });
     });
 
+    // Subscriptions section
+    Route::group(['prefix' => 'subscriptions', 'namespace' => 'Subscriptions'], function() {
+
+        // Subscriptions
+        Route::get('/', 'SubscriptionsController@index');
+        Route::get('/index', 'SubscriptionController@index');
+
+        // Offers
+        Route::group(['prefix' => 'offers'], function() {
+            Route::get('/', 'OffersController@index');
+        });
+
+    });
+
     // Application settings
     Route::group(['prefix' => 'application-settings'], function() {
         Route::get('/', 'ApplicationSettingsController@index');

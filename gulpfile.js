@@ -48,5 +48,7 @@ elixir(function(mix) {
         .scripts(['pages/help-center-manager/category.js'], 'public/js/help-center-manager-category-page.js')
         .scripts(['pages/help-center/help-center.js'], 'public/js/help-center.js')
         .scripts(['pages/help-center/category.js'], 'public/js/help-center-category.js')
-        .scripts(['pages/login.js'], 'public/js/login.js');
+        .scripts(['pages/login.js'], 'public/js/login.js')
+        .scripts(['pages/subscriptions/index.js'], 'public/js/subscriptions-index.js');
+
 });
