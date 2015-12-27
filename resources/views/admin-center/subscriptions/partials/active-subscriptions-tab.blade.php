@@ -41,12 +41,12 @@
             </thead>
             <tbody>
             <tr v-repeat="active_subscription in active_subscriptions.data">
-                <td class="text-center">@{{ client.name }}</td>
-                <td class="text-center"></td>
+                <td class="text-center">@{{ active_subscription.email }}</td>
+                <td class="text-center">@{{ active_subscription.amount }}</td>
                 <td class="text-center">@{{ client.orders }}</td>
                 <td class="text-center">@{{ client.created_at }}</td>
                 <td class="text-center">@{{ client.created_at }}</td>
-                <td v-on="click:deleteUserClient(client.id)" class="text-center danger-hover"><span class="glyphicon glyphicon-trash"></span></td>
+                <td v-on="click:deleteUserClient(client.id)" class="text-center danger-hover"><span class="glyphicon ban-circle"></span></td>
             </tr>
             </tbody>
         </table>

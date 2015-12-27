@@ -20,8 +20,13 @@ class CreateTransactionsTable extends Migration {
             $table->bigIncrements('id');
             $table->string('paymill_transaction_id');
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('subscription_id')->unsigned();
+            $table->integer('amount')->unsigned();
+            $table->string('status');
             $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('subscription_id')->references('id')->on('subscription')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

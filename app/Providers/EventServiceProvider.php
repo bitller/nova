@@ -38,6 +38,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\LogBillDeletion'
         ],
 
+        'App\Events\SubscriptionCreated' => [
+            'App\Listeners\LogCreationOfNewSubscription'
+        ]
+
     ];
 
     /**

@@ -41,7 +41,11 @@ class SubscriptionsController extends BaseController {
             $status = 'active';
         }
 
-        return Subscription::where('status', $status)->paginate();
+        $query = Subscription::where('status', $status)
+            ->leftJoin('users', 'users.id', '=', 'subscriptions.user_id')
+            ->leftJoin('transactions', 'transactions.subscription_id', '=', 'subscriptions.id')
+            ->paginate();
+        return $query;
     }
 
 }

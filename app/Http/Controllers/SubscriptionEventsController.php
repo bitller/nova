@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SubscriptionCreated;
 use App\Helpers\UserActions;
 use App\Subscription;
 use App\Webhook;
@@ -32,10 +33,7 @@ class SubscriptionEventsController extends BaseController {
 
         // Handle subscription created event
         if ($eventType === 'subscription.created') {
-            // Get user id
-            $subscriptionDetails = Subscription::where('paymill_subscription_id', $eventResource['id'])->first();
-            // Log
-            UserActions::info($subscriptionDetails->user_id, 'Subscription id ' . $eventResource['id'] . ' created.');
+            event(new SubscriptionCreated($eventResource));
         }
 
         // Handle subscription succeeded event
