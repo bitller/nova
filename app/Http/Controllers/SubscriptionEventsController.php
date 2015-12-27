@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SubscriptionCanceled;
 use App\Events\SubscriptionCreated;
 use App\Events\SubscriptionFailed;
 use App\Events\SubscriptionSucceeded;
@@ -50,17 +51,7 @@ class SubscriptionEventsController extends BaseController {
 
         // Handle subscription canceled event
         if ($eventType === 'subscription.canceled') {
-
-            // Get user id
-            $subscriptionDetails = Subscription::where('paymill_subscription_id', $eventResource['id'])->first();
-
-            // Log user action
-            UserActions::info($subscriptionDetails->user_id, 'Subscription with id ' . $eventResource['id'] . ' was canceled.');
-
-            // Update database
-            Subscription::where('paymill_subscription_id', $eventResource['id'])->update([
-                'status' => 'canceled'
-            ]);
+            event(new SubscriptionCanceled($eventResource['subscription']));
         }
 
         // Handle subscription deleted event
