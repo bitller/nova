@@ -7,9 +7,11 @@
         'tab' => 'waiting',
         'name' => trans('subscriptions.waiting_subscriptions'),
         'options' => [
+            [
             'action_on_click' => 'getWaitingSubscriptions()',
             'icon' => 'glyphicon-trash',
             'name' => 'Delete something'
+            ]
         ]
     ])
 
