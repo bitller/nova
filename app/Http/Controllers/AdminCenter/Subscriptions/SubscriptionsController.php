@@ -41,6 +41,8 @@ class SubscriptionsController extends BaseController {
             $status = 'active';
         }
 
+        // todo select only required fields
+
         $query = Subscription::where('subscriptions.status', $status)
             ->leftJoin('users', 'users.id', '=', 'subscriptions.user_id')
             ->leftJoin('transactions', 'transactions.subscription_id', '=', 'subscriptions.id')
