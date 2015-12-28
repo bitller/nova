@@ -39,6 +39,12 @@
                     </li>
                     <!-- END Active subscriptions tab -->
 
+                    <!-- BEGIN Waiting subscriptions tab -->
+                    <li v-on="click:getWaitingSubscriptions">
+                        <a data-toggle="tab" href="#waiting-subscriptions-tab">{{ trans('subscriptions.waiting_subscriptions') }}</a>
+                    </li>
+                    <!-- END Waiting subscriptions tab -->
+
                     <!-- BEGIN Canceled subscriptions tab -->
                     <li v-on="click:getUserPaidBills">
                         <a data-toggle="tab" href="#paid-bills-tab">{{ trans('subscriptions.canceled_subscriptions') }}</a>
@@ -61,6 +67,8 @@
 
                 <div class="tab-content">
                     @include('admin-center.subscriptions.partials.active-subscriptions-tab')
+
+                    @include('admin-center.subscriptions.partials.waiting-subscriptions-tab')
 
                     @include('admin-center.users-manager.partials.paid-bills-tab')
 

@@ -12,4 +12,5 @@ return [
     'paid_until_now' => 'Paid until now',
     'subscriptions' => 'Subscriptions',
     'user_email' => 'User email',
+    'waiting_subscriptions' => 'Waiting subscriptions'
 ];

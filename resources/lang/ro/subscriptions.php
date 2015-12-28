@@ -11,5 +11,6 @@ return [
     'offers' => 'Oferte',
     'paid_until_now' => 'Plătit până acum',
     'subscriptions' => 'Abonamente',
-    'user_email' => 'Email-ul utilizatorului'
+    'user_email' => 'Email-ul utilizatorului',
+    'waiting_subscriptions' => 'Abonamente în așteptare'
 ];

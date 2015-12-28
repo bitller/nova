@@ -1,26 +1,17 @@
-<!-- BEGIN Active subscriptions tab content -->
+<!-- BEGIN Waiting subscriptions tab content -->
 <div id="active-subscriptions-tab" class="tab-pane fade in active">
 
-    @include('admin-center.subscriptions.partials.loader', ['loadedTab' => 'active'])
+    @include('admin-center.subscriptions.partials.loader', ['loadedTab' => 'waiting'])
 
-    <!-- BEGIN Active subscriptions options -->
-    <div v-show="!loading_active_subscriptions && active_subscriptions.total > 0" class="dropdown">
-
-        <h5 class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <span id="user-email">{{ trans('subscriptions.active_subscriptions') }}</span><span class="caret"></span>
-        </h5>
-
-        <ul class="dropdown-menu">
-            <!-- BEGIN Delete all user clients -->
-            <li v-show="clients.total > 0">
-                <a href="#" v-on="click: deleteAllUserClients()">
-                    <span class="glyphicon glyphicon-trash">&nbsp;</span> {{ trans('users_manager.delete_all_clients') }}
-                </a>
-            </li>
-            <!-- END Delete all user clients -->
-        </ul>
-    </div>
-    <!-- END Active subscriptions options -->
+    @include('admin-center.subscriptions.partials.options', [
+        'tab' => 'waiting',
+        'name' => trans('subscriptions.waiting_subscriptions'),
+        'options' => [
+            'action_on_click' => 'getWaitingSubscriptions()',
+            'icon' => 'glyphicon-trash',
+            'name' => 'Delete something'
+        ]
+    ])
 
     <!-- BEGIN Active subscriptions -->
     <div class="panel panel-default" v-show="!loading_active_subscriptions && active_subscriptions.total > 0">
@@ -52,4 +43,4 @@
     <div v-show="active_subscriptions.total < 1 && !loading_active_subscriptions" class="alert alert-danger alert-top">{{ trans('subscriptions.no_active_subscriptions') }}</div>
 
 </div>
-<!-- END Clients tab content -->
+<!-- END Waiting subscriptions tab content -->
