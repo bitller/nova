@@ -1,5 +1,5 @@
 <!-- BEGIN Waiting subscriptions tab content -->
-<div id="active-subscriptions-tab" class="tab-pane fade in active">
+<div id="waiting-subscriptions-tab" class="tab-pane fade in active">
 
     @include('admin-center.subscriptions.partials.loader', ['loadedTab' => 'waiting'])
 
@@ -16,7 +16,7 @@
     ])
 
     <!-- BEGIN Active subscriptions -->
-    <div class="panel panel-default" v-show="!loading_active_subscriptions && active_subscriptions.total > 0">
+    <div class="panel panel-default" v-show="!loading_waiting_subscriptions && waiting_subscriptions.total > 0">
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -29,7 +29,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-repeat="active_subscription in active_subscriptions.data">
+            <tr v-repeat="waiting_subscription in waiting_subscriptions.data">
                 <td class="text-center">@{{ active_subscription.email }}</td>
                 <td class="text-center">@{{ active_subscription.amount }}</td>
                 <td class="text-center">@{{ client.orders }}</td>
@@ -42,7 +42,7 @@
     </div>
     <!-- END Active subscriptions -->
 
-    <div v-show="active_subscriptions.total < 1 && !loading_active_subscriptions" class="alert alert-danger alert-top">{{ trans('subscriptions.no_active_subscriptions') }}</div>
+    <div v-show="waiting_subscriptions.total < 1 && !loading_waiting_subscriptions" class="alert alert-danger alert-top">{{ trans('subscriptions.no_active_subscriptions') }}</div>
 
 </div>
 <!-- END Waiting subscriptions tab content -->
