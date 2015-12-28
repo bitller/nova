@@ -57,6 +57,11 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SubscriptionCanceled' => [
             'App\Listeners\LogSubscriptionWasCanceled',
             'App\Listeners\UpdateSubscriptionStatusToCanceled'
+        ],
+
+        'App\Events\SubscriptionDeleted' => [
+            'App\Listeners\LogSubscriptionWasDeleted',
+            'App\Listeners\DeleteSubscription'
         ]
 
     ];
