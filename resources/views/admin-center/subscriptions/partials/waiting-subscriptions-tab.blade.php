@@ -3,17 +3,34 @@
 
     @include('admin-center.subscriptions.partials.loader', ['loadedTab' => 'waiting'])
 
-    @include('admin-center.subscriptions.partials.options', [
-        'tab' => 'waiting',
-        'name' => trans('subscriptions.waiting_subscriptions'),
-        'options' => [
-            [
-            'action_on_click' => 'getWaitingSubscriptions()',
-            'icon' => 'glyphicon-trash',
-            'name' => 'Delete something'
-            ]
-        ]
-    ])
+    {{--@include('admin-center.subscriptions.partials.options', [--}}
+        {{--'tab' => 'waiting',--}}
+        {{--'name' => trans('subscriptions.waiting_subscriptions'),--}}
+        {{--'options' => [--}}
+            {{--[--}}
+            {{--'action_on_click' => 'getWaitingSubscriptions()',--}}
+            {{--'icon' => 'glyphicon-trash',--}}
+            {{--'name' => 'Delete something'--}}
+            {{--]--}}
+        {{--]--}}
+    {{--])--}}
+
+    <!-- BEGIN Waiting subscriptions options -->
+    <div v-show="!loading_waiting_subscriptions && waiting_subscriptions.total > 0" class="dropdown">
+
+        <h5 class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span id="user-email">bla bla</span><span class="caret"></span>
+        </h5>
+
+        <ul class="dropdown-menu">
+            <li>
+                <a href="#">
+                    <span class="glyphicon glyphicon-adjust">&nbsp;</span> options
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END Waiting subscriptions options -->
 
     <!-- BEGIN Active subscriptions -->
     <div class="panel panel-default" v-show="!loading_waiting_subscriptions && waiting_subscriptions.total > 0">

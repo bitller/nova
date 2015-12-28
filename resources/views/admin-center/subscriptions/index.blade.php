@@ -40,7 +40,7 @@
                     <!-- END Active subscriptions tab -->
 
                     <!-- BEGIN Waiting subscriptions tab -->
-                    <li v-on="click:getWaitingSubscriptions">
+                    <li v-on="click: getWaitingSubscriptions">
                         <a data-toggle="tab" href="#waiting-subscriptions-tab">{{ trans('subscriptions.waiting_subscriptions') }}</a>
                     </li>
                     <!-- END Waiting subscriptions tab -->

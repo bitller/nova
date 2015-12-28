@@ -10,22 +10,39 @@ new Vue({
     },
 
     methods: {
+
+        /**
+         * Get active subscriptions.
+         */
         getActiveSubscriptions: function() {
             this._getSubscriptions('active');
         },
 
+        /**
+         * Get canceled subscriptions.
+         */
         getCanceledSubscriptions: function() {
-            //
+            this._getSubscriptions('canceled');
         },
 
+        /**
+         * Get failed subscriptions.
+         */
         getFailedSubscriptions: function() {
-            //
+            this._getSubscriptions('failed');
+        },
+
+        /**
+         * Get waiting subscriptions.
+         */
+        getWaitingSubscriptions: function() {
+            this._getSubscriptions('waiting');
         },
 
         _getSubscriptions: function(status) {
 
             // Set a default value
-            if (status !== 'active' && status !== 'canceled' && status !== 'failed') {
+            if (status !== 'active' && status !== 'canceled' && status !== 'failed' && status !== 'waiting') {
                 status = 'active';
             }
 
@@ -51,7 +68,6 @@ new Vue({
                 // Else display a general error message
                 Alert.generalError();
             });
-
         }
     }
 
