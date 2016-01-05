@@ -38,7 +38,7 @@ class CreateNewOfferRequest extends AjaxRequestWithFormedErrors {
         return [
             'user_password' => ['required', 'check_auth_user_password'],
             'promo_code' => ['string', 'between:1,25'],
-            'offer_amount' => ['required', 'numeric', 'min:0'],
+            'offer_amount' => ['required', 'numeric', 'min:2'],
             'offer_name' => ['required', 'between:3,20'],
         ];
     }

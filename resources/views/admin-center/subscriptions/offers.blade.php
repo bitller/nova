@@ -56,8 +56,8 @@
                         <td class="text-center">@{{ offer.amount }}</td>
                         <td class="text-center">@{{ offer.promo_code }}</td>
                         <td class="text-center">
-                            <span v-show="offer.use_on_sign_up" class="glyphicon glyphicon-ok"></span>
-                            <span v-show="!offer.use_on_sign_up" class="glyphicon glyphicon-cancel"></span>
+                            <span v-show="offer.use_on_sign_up > 0" class="glyphicon glyphicon-ok"></span>
+                            <span v-show="offer.use_on_sign_up < 1" class="glyphicon glyphicon-cancel"></span>
                         </td>
                         <td class="text-center">
                             <span v-show="offer.disabled">{{ trans('offers.enable_offer') }}</span>

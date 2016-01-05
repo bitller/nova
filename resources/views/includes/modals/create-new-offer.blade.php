@@ -50,14 +50,14 @@
 
                 <!-- BEGIN Use this offer on sign up -->
                 <div class="checkbox">
-                    <label><input type="checkbox" value="use" v-model="use_on_sign_up" />{{ trans('offers.use_this_offer_on_sign_up') }}</label>
+                    <label><input type="checkbox" v-model="use_on_sign_up" />{{ trans('offers.use_this_offer_on_sign_up') }}</label>
                     <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('offers.use_this_offer_on_sign_up_info') }}">?</span>
                 </div>
                 <!-- END Use this offer on sign up -->
 
                 <!-- BEGIN Enable offer -->
                 <div class="checkbox">
-                    <label><input type="checkbox" value="enable" v-model="offer_status" />{{ trans('offers.enable_offer') }}</label>
+                    <label><input type="checkbox" v-model="enable_offer" />{{ trans('offers.enable_offer') }}</label>
                     <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('offers.enable_offer_info') }}">?</span>
                 </div>
                 <!-- END Enable offer -->

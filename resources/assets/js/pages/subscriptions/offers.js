@@ -60,7 +60,7 @@ new Vue({
                 offer_amount: this.$get('offer_amount'),
                 promo_code: this.$get('promo_code'),
                 use_on_sign_up: this.$get('use_on_sign_up'),
-                offer_status: this.$get('offer_status'),
+                enable_offer: this.$get('enable_offer'),
                 user_password: this.$get('user_password')
             };
 
@@ -95,6 +95,11 @@ new Vue({
         resetCreateNewOfferModal: function() {
             this.$set('errors', '');
             this.$set('error', '');
+            this.$set('loading', false);
+            this.$set('offer_name', '');
+            this.$set('offer_amount', '');
+            this.$set('promo_code', '');
+            this.$set('user_password', '');
         }
     }
 })

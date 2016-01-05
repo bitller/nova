@@ -77,12 +77,12 @@ class OffersController extends BaseController {
         }
 
         // Check if this offer will be used on sign up
-        if ($request->get('use_on_ign_up') === 'use') {
+        if ($request->get('use_on_sign_up')) {
             $offer->use_on_sign_up = true;
         }
 
         // Check if offer status should changed
-        if ($request->get('offer_status') === 'enable') {
+        if ($request->get('enable_offer')) {
             $offer->disabled = false;
         }
 
