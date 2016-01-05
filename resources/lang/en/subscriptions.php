@@ -10,6 +10,7 @@ return [
     'no_active_subscriptions' => 'Looks like there are no active subscriptions.',
     'offers' => 'Offers',
     'paid_until_now' => 'Paid until now',
+    'price' => 'Price',
     'subscriptions' => 'Subscriptions',
     'user_email' => 'User email',
     'waiting_subscriptions' => 'Waiting subscriptions'

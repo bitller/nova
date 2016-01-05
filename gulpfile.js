@@ -16,7 +16,7 @@ elixir(function(mix) {
     mix.scripts([
         'jquery.min.js', 'bootstrap.min.js', 'vue/vue.js', 'vue/vue-resource.js', 'components/loader.js', 'sweetAlert.js',
         'custom-libs/alerts.js', 'custom-libs/swal-config.js', 'custom-libs/token.js', 'custom-libs/translations.js', 'custom-libs/data.js',
-        'custom-libs/url-builder.js', 'typeahead.js'
+        'custom-libs/url-builder.js', 'typeahead.js', 'jquery-scripts/tooltips.js'
     ], 'public/js/vendor.js')
         // Header search script
         .scripts(['jquery-scripts/header-search.js'], 'public/js/header-search.js')
@@ -49,6 +49,7 @@ elixir(function(mix) {
         .scripts(['pages/help-center/help-center.js'], 'public/js/help-center.js')
         .scripts(['pages/help-center/category.js'], 'public/js/help-center-category.js')
         .scripts(['pages/login.js'], 'public/js/login.js')
-        .scripts(['pages/subscriptions/index.js'], 'public/js/subscriptions-index.js');
+        .scripts(['pages/subscriptions/index.js'], 'public/js/subscriptions-index.js')
+        .scripts(['pages/subscriptions/offers.js'], 'public/js/offers.js');
 
 });

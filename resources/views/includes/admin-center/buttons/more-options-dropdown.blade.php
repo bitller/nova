@@ -12,11 +12,14 @@
 
         <!-- BEGIN Menu items -->
         @foreach($items as $item)
-        <li>
-            <a href="{{ $item['url'] }}">
-                <span class="glyphicon {{ $item['icon'] }}"></span>&nbsp; {{ $item['name'] }}
-            </a>
-        </li>
+            <li @if(isset($item['on_click'])) v-on="click: {{ $item['on_click'] }}" @endif
+                @if(isset($item['data_toggle'])) data-toggle="{{ $item['data_toggle'] }}" @endif
+                @if(isset($item['data_target'])) data-target="{{ $item['data_target'] }}" @endif
+            >
+                <a href="{{ $item['url'] }}">
+                    <span class="glyphicon {{ $item['icon'] }}"></span>&nbsp; {{ $item['name'] }}
+                </a>
+            </li>
         @endforeach
         <!-- END Menu items -->
 

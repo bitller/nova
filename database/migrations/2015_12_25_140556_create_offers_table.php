@@ -23,6 +23,10 @@ class CreateOffersTable extends Migration {
             $table->unsignedInteger('amount');
             $table->string('interval');
             $table->string('currency');
+            $table->string('promo_code');
+            $table->boolean('disabled')->default(true);
+            $table->boolean('use_on_sign_up')->default(false);
+            $table->timestamps();
         });
     }
 

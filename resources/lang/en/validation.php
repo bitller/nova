@@ -75,6 +75,8 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
 
+    'check_auth_user_password' => 'Looks like you entered an invalid password.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -103,6 +105,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'promo_code' => 'Promo code',
+        'user_password' => 'User password'
+    ],
 
 ];

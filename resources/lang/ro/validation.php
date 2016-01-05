@@ -74,6 +74,8 @@ return [
         'product_page' => 'pagina produsului',
         'product_price' => 'prețul produsului',
         'product_quantity' => 'cantitatea produsului',
+        'promo_code' => 'Codul promoțional',
+        'user_password' => 'parola dumneavoastră',
     ],
 
     'custom' => [
@@ -91,6 +93,6 @@ return [
         ],
         'password_confirmation' => [
             'required' => 'Parolele nu corespund.'
-        ]
+        ],
     ]
 ];

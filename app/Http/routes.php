@@ -212,6 +212,8 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         // Offers
         Route::group(['prefix' => 'offers'], function() {
             Route::get('/', 'OffersController@index');
+            Route::get('/get', 'OffersController@get');
+            Route::post('/create', 'OffersController@create');
         });
 
     });
