@@ -161,3 +161,19 @@ $factory->define(App\Action::class, function() {
 $factory->define(App\UserAction::class, function() {
     return [];
 });
+
+/**
+ * Generate new offer.
+ */
+$factory->define(App\Offer::class, function($faker) {
+
+    $paymillOfferId = 'offer_' . substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
+
+    return [
+        'paymill_offer_id' => $paymillOfferId,
+        'name' => $faker->word(),
+        'amount' => rand(2,9999),
+        'interval' => '1 MONTH',
+        'currency' => 'EUR'
+    ];
+});
