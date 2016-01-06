@@ -7,11 +7,11 @@ use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Authorize and validate DeleteOfferRequest.
+ * Authorize and validate DisableOfferRequest.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class DeleteOfferRequest extends AjaxRequest {
+class DisableOfferRequest extends AjaxRequest {
 
     /**
      * @param Guard $auth
@@ -28,10 +28,10 @@ class DeleteOfferRequest extends AjaxRequest {
     /**
      * @return array
      */
-    public function rules() {
+    public function roles() {
         return [
-            'user_password' => ['required', 'check_auth_user_password'],
             'offer_id' => ['required', 'exists:offers,id'],
+            'user_password' => ['required', 'check_auth_user_password']
         ];
     }
 

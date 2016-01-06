@@ -7,11 +7,11 @@ use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Authorize and validate DeleteOfferRequest.
+ * Authorize and validate EditOfferPromoCodeRequest.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class DeleteOfferRequest extends AjaxRequest {
+class EditOfferPromoCodeRequest extends AjaxRequest {
 
     /**
      * @param Guard $auth
@@ -30,8 +30,9 @@ class DeleteOfferRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'user_password' => ['required', 'check_auth_user_password'],
             'offer_id' => ['required', 'exists:offers,id'],
+            'promo_code' => ['string', 'between:2,25'],
+            'user_password' => ['required', 'check_auth_user_password']
         ];
     }
 

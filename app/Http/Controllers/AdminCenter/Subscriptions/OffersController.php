@@ -6,6 +6,12 @@ use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\Subscriptions\Offers\CreateNewOfferRequest;
 use App\Http\Requests\AdminCenter\Subscriptions\Offers\DeleteOfferRequest;
+use App\Http\Requests\AdminCenter\Subscriptions\Offers\DisableOfferRequest;
+use App\Http\Requests\AdminCenter\Subscriptions\Offers\EditOfferAmountRequest;
+use App\Http\Requests\AdminCenter\Subscriptions\Offers\EditOfferNameRequest;
+use App\Http\Requests\AdminCenter\Subscriptions\Offers\EditOfferPromoCodeRequest;
+use App\Http\Requests\AdminCenter\Subscriptions\Offers\EnableOfferRequest;
+use App\Http\Requests\AdminCenter\Subscriptions\Offers\UseOfferOnSignUpRequest;
 use App\Offer;
 use Paymill\Models\Response\Subscription;
 
@@ -66,8 +72,7 @@ class OffersController extends BaseController {
         $response = $paymillRequest->create($paymillOffer);
 
         // Save in database
-
-        $offer = Offer::create([
+        Offer::create([
             'paymill_offer_id' => $response->getId(),
             'name' => $request->get('offer_name'),
             'amount' => $request->get('offer_amount'),
@@ -78,9 +83,146 @@ class OffersController extends BaseController {
             'disabled' => !$request->get('enable_offer')
         ]);
 
+        // Return response
         $ajaxResponse = new AjaxResponse();
         $ajaxResponse->setSuccessMessage(trans('offers.offer_created'));
         return response($ajaxResponse->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Edit offer name.
+     *
+     * @param EditOfferNameRequest $request
+     * @return mixed
+     */
+    public function editOfferName(EditOfferNameRequest $request) {
+
+        // Create paymill request
+        $paymillRequest = new \Paymill\Request(env('PAYMILL_API_KEY'));
+
+        // Create new paymill offer object
+        $offer = new \Paymill\Models\Request\Offer();
+
+        // Set new name
+        $offer->setName($request->get('offer_name'))
+            ->updateSubscriptions(true);
+
+        // Save on paymill
+        $paymillResponse = $paymillRequest->update($offer);
+
+        // Update offer name in database
+        $offer = Offer::where('paymill_offer_id', $paymillResponse->getId());
+        $offer->name = $paymillResponse->name;
+        $offer->save();
+
+        // Return ajax response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('offers.offer_name_updated'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Edit offer amount.
+     *
+     * @param EditOfferAmountRequest $request
+     */
+    public function editOfferAmount(EditOfferAmountRequest $request) {
+
+        // Create paymill request
+        $paymillRequest = new \Paymill\Request(env('PAYMILL_API_KEY'));
+
+        // Create new paymill offer object and set new amount
+        $offer = new \Paymill\Models\Request\Offer();
+        $offer->setAmount($request->get('offer_amount'))
+            ->updateSubscriptions($request->get('update_subscriptions'));
+
+        // Save on paymill
+        $paymillResponse = $paymillRequest->update($offer);
+
+        // Update offer amount in database
+        $offer = Offer::where('paymill_offer_id', $paymillResponse->getId());
+        $offer->amount = $paymillResponse->amount;
+        $offer->save();
+
+        // Return json response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('offers.offer_amount_updated'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Edit offer promo code.
+     *
+     * @param EditOfferPromoCodeRequest $request
+     * @return mixed
+     */
+    public function editOfferPromoCode(EditOfferPromoCodeRequest $request) {
+
+        // Update offer promo code
+        $offer = Offer::find($request->get('offer_id'));
+        $offer->promo_code = $request->get('promo_code');
+        $offer->save();
+
+        // Return json response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('offers.promo_code_updated'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Use offer on sign up.
+     *
+     * @param UseOfferOnSignUpRequest $request
+     * @return mixed
+     */
+    public function useOfferOnSignUp(UseOfferOnSignUpRequest $request) {
+
+        // Remove other offer used on sign up
+        Offer::where('use_on_sign_up', true)->update(['use_on_sign_up' => false]);
+
+        // Update current offer to be used on sign up
+        $offer = Offer::find($request->get('offer_id'));
+        $offer->use_on_sign_up = true;
+        $offer->save();
+
+        // Return json response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('offers.offer_will_be_used_on_sign_up'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Enable offer.
+     *
+     * @param EnableOfferRequest $request
+     * @return mixed
+     */
+    public function enableOffer(EnableOfferRequest $request) {
+
+        $offer = Offer::find($request->get('offer_id'));
+        $offer->disabled = false;
+        $offer->save();
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('offers.offer_enabled'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Disable offer.
+     *
+     * @param DisableOfferRequest $request
+     * @return mixed
+     */
+    public function disableOffer(DisableOfferRequest $request) {
+
+        $offer = Offer::find($request->get('offer_id'));
+        $offer->disabled = true;
+        $offer->save();
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('offers.offer_disabled'));
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
     /**
