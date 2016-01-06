@@ -87,20 +87,15 @@ class RegisterController extends Controller {
         $paymentResponse = $paymillRequest->create($payment);
 
         // Get offer
-//        $offer = new \Paymill\Models\Request\Offer();
-        $offerModel = Offer::where('use_on_sign_up', true)->first();
-//        $offer->setId($offerModel->paymill_offer_id);
-//        $offerResponse = $paymillRequest->getOne($offer);
+        $offer = Offer::where('use_on_sign_up', true)->first();
+
 
 
         // Create subscription
         $subscription = new Subscription();
         $subscription->setAmount(30)
             ->setPayment($paymentResponse->getId())
-            ->setOffer($offerModel->paymill_offer_id)
-//            ->setCurrency('EUR')
-//            ->setInterval('1 week,monday')
-//            ->setName('Nova sub')
+            ->setOffer($offer->paymill_offer_id)
             ->setPeriodOfValidity('2 YEAR')
             ->setStartAt(time() + 30);
 
