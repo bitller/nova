@@ -10,5 +10,9 @@ use Illuminate\Database\Eloquent\Model;
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
 class Offer extends Model {
-    //
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 }
