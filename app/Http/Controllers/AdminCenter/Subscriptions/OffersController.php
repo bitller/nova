@@ -5,7 +5,9 @@ namespace App\Http\Controllers\AdminCenter\Subscriptions;
 use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\Subscriptions\Offers\CreateNewOfferRequest;
+use App\Http\Requests\AdminCenter\Subscriptions\Offers\DeleteOfferRequest;
 use App\Offer;
+use Paymill\Models\Response\Subscription;
 
 /**
  * Allow admin to create, edit and delete offers.
@@ -80,4 +82,28 @@ class OffersController extends BaseController {
         $ajaxResponse->setSuccessMessage(trans('offers.offer_created'));
         return response($ajaxResponse->get())->header('Content-Type', 'application/json');
     }
+
+    /**
+     * Delete offer.
+     *
+     * @param DeleteOfferRequest $request
+     * @return mixed
+     */
+    public function deleteOffer(DeleteOfferRequest $request) {
+
+        // Find offer
+        $offer = Offer::find($request->get('offer_id'));
+
+        // Delete all subscriptions that belongs to this offer
+        Subscription::where('offer_id', $offer->id)->delete();
+
+        // Delete offer
+        $offer->delete();
+
+        // Return success response
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('offers.offer_deleted'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
 }

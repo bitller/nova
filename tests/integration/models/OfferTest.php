@@ -207,7 +207,7 @@ class OfferTest extends TestCase {
     /**
      * Test deletion of an offer.
      */
-    public function test_it_delete_offer() {
+    public function test_it_delete_offer_with_no_subscriptions() {
 
         // Generate new offer
         $offer = factory(App\Offer::class)->create();
