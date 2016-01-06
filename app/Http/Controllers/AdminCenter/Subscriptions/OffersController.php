@@ -64,30 +64,18 @@ class OffersController extends BaseController {
         $response = $paymillRequest->create($paymillOffer);
 
         // Save in database
-        $offer = new Offer();
-        $offer->paymill_offer_id = $response->getId();
-        $offer->name = $request->get('offer_name');
-        $offer->amount = $request->get('offer_amount');
-        $offer->interval = $interval;
-        $offer->currency = $currency;
 
-        // Check if a promo code was given
-        if ($request->get('promo_code')) {
-            $offer->promo_code = $request->get('promo_code');
-        }
-
-        // Check if this offer will be used on sign up
-        if ($request->get('use_on_sign_up')) {
-            $offer->use_on_sign_up = true;
-        }
-
-        // Check if offer status should changed
-        if ($request->get('enable_offer')) {
-            $offer->disabled = false;
-        }
-
-        $offer->save();
-
+        $offer = Offer::create([
+            'paymill_offer_id' => $response->getId(),
+            'name' => $request->get('offer_name'),
+            'amount' => $request->get('offer_amount'),
+            'interval' => $interval,
+            'currency' => $currency,
+            'promo_code' => $request->get('promo_code'),
+            'use_on_sign_up' => $request->get('use_on_sign_up'),
+            'disabled' => !$request->get('enable_offer')
+        ]);
+        
         $ajaxResponse = new AjaxResponse();
         $ajaxResponse->setSuccessMessage(trans('offers.offer_created'));
         return response($ajaxResponse->get())->header('Content-Type', 'application/json');
