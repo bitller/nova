@@ -75,7 +75,7 @@ class OffersController extends BaseController {
             'use_on_sign_up' => $request->get('use_on_sign_up'),
             'disabled' => !$request->get('enable_offer')
         ]);
-        
+
         $ajaxResponse = new AjaxResponse();
         $ajaxResponse->setSuccessMessage(trans('offers.offer_created'));
         return response($ajaxResponse->get())->header('Content-Type', 'application/json');

@@ -8,6 +8,7 @@ use App\Helpers\Roles;
 use App\Helpers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateAccountRequest;
+use App\Offer;
 use App\User;
 use App\UserSetting;
 use Paymill\Request as PaymillRequest;
@@ -85,13 +86,21 @@ class RegisterController extends Controller {
         $payment->setToken($request->get('token'));
         $paymentResponse = $paymillRequest->create($payment);
 
+        // Get offer
+//        $offer = new \Paymill\Models\Request\Offer();
+        $offerModel = Offer::where('use_on_sign_up', true)->first();
+//        $offer->setId($offerModel->paymill_offer_id);
+//        $offerResponse = $paymillRequest->getOne($offer);
+
+
         // Create subscription
         $subscription = new Subscription();
         $subscription->setAmount(30)
             ->setPayment($paymentResponse->getId())
-            ->setCurrency('EUR')
-            ->setInterval('1 week,monday')
-            ->setName('Nova sub')
+            ->setOffer($offerModel->paymill_offer_id)
+//            ->setCurrency('EUR')
+//            ->setInterval('1 week,monday')
+//            ->setName('Nova sub')
             ->setPeriodOfValidity('2 YEAR')
             ->setStartAt(time() + 30);
 
