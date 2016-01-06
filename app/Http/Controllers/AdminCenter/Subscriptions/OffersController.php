@@ -46,7 +46,7 @@ class OffersController extends BaseController {
      * @return mixed
      */
     public function get() {
-        return Offer::paginate();
+        return Offer::countAssociatedSubscriptions()->paginate();
     }
 
     /**

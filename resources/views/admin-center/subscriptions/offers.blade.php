@@ -45,9 +45,9 @@
                         <th class="text-center">{{ trans('offers.offer_name') }}</th>
                         <th class="text-center">{{ trans('offers.price') }}</th>
                         <th class="text-center">{{ trans('offers.promo_code') }}</th>
-                        <th class="text-center">{{ trans('offers.use_this_offer_on_sign_up') }}</th>
-                        <th class="text-center">{{ trans('offers.enable_disable_offer') }}</th>
-                        <th class="text-center">{{ trans('offers.delete_offer') }}</th>
+                        <th class="text-center">{{ trans('offers.is_this_offer_used_on_sign_up') }}</th>
+                        <th class="text-center">{{ trans('offers.is_this_offer_enabled') }}</th>
+                        <th class="text-center">{{ trans('offers.associated_subscriptions') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -60,10 +60,10 @@
                             <span v-show="offer.use_on_sign_up < 1" class="glyphicon glyphicon-cancel"></span>
                         </td>
                         <td class="text-center">
-                            <span v-show="offer.disabled">{{ trans('offers.enable_offer') }}</span>
-                            <span v-show="!offer.disabled">{{ trans('offers.disable_offer') }}</span>
+                            <span v-show="offer.disabled">{{ ucfirst(trans('common.no')) }}</span>
+                            <span v-show="!offer.disabled">{{ ucfirst(trans('common.yes')) }}</span>
                         </td>
-                        <td class="text-center"><span class="glyphicon glyphicon-trash"></span></td>
+                        <td class="text-center">0</td>
                     </tr>
                     </tbody>
                 </table>
