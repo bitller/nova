@@ -23,7 +23,7 @@
                     <label for="offer-name">{{ trans('offers.offer_name') }}:</label>
                     <input id="offer-name" type="text" class="form-control" placeholder="@{{ offer.name }}" v-on="keyup: editOfferName | key 13" v-model="offer_name" />
                     <i class="glyphicon glyphicon-list-alt form-control-feedback icon-color"></i>
-                    <span class="text-danger" v-show="errors.plan_name">@{{ errors.plan_name }}</span>
+                    <span class="text-danger" v-show="errors.offer_name">@{{ errors.offer_name }}</span>
                 </div>
                 <!-- END Offer name -->
 

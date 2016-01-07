@@ -3,7 +3,7 @@
 namespace App\Http\Requests\AdminCenter\Subscriptions\Offers;
 
 use App\Helpers\Roles;
-use App\Http\Requests\AjaxRequest;
+use App\Http\Requests\AjaxRequestWithFormedErrors;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
@@ -11,7 +11,12 @@ use Illuminate\Contracts\Auth\Guard;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class EditOfferNameRequest extends AjaxRequest {
+class EditOfferNameRequest extends AjaxRequestWithFormedErrors {
+
+    /**
+     * @var array
+     */
+    public $fields = ['offer_name', 'user_password'];
 
     /**
      * @param Guard $auth

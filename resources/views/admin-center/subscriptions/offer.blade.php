@@ -43,7 +43,7 @@
                     <a href="#" class="list-group-item active">{{ trans('offers.offer_details') }}</a>
 
                     <!-- BEGIN Offer name -->
-                    <a data-toggle="modal" data-target="#edit-offer-name-modal" href="#" class="list-group-item"><span class="badge">@{{ offer.name }}</span>{{ trans('offers.offer_name') }}</a>
+                    <a v-on="click: resetEditOfferNameModal" data-toggle="modal" data-target="#edit-offer-name-modal" href="#" class="list-group-item"><span class="badge">@{{ offer.name }}</span>{{ trans('offers.offer_name') }}</a>
                     <!-- END Offer name -->
 
                     <!-- BEGIN Offer amount -->

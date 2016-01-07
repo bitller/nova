@@ -67,6 +67,7 @@ new Vue({
 
                 // Handle success response
                 this.$set('loading', false);
+                this.$set('offer', response.offer);
                 $('#edit-offer-name-modal').modal('hide');
                 Alert.success(response.title, response.message);
 
@@ -74,13 +75,22 @@ new Vue({
 
                 // Handle error response
                 this.$set('loading', false);
-                if (response.message) {
-                    this.$set('error', response.message);
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
                     return;
                 }
-                this.$set('error', Translation.common('general-error'));
+                this.$set('errors', response.errors);
             });
+        },
 
+        /**
+         * Reset edit offer name modal data.
+         */
+        resetEditOfferNameModal: function() {
+            this.$set('offer_name', '');
+            this.$set('user_password', '');
+            this.$set('error', '');
+            this.$set('errors', '');
         }
     }
 });

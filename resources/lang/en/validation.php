@@ -107,7 +107,7 @@ return [
 
     'attributes' => [
         'promo_code' => 'Promo code',
-        'user_password' => 'User password'
+        'user_password' => 'user password'
     ],
 
 ];
