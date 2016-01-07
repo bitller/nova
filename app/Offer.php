@@ -22,7 +22,7 @@ class Offer extends Model {
      */
     public function scopeCountAssociatedSubscriptions($query) {
         return $query->leftJoin('subscriptions', 'offers.id', '=', 'subscriptions.offer_id')
-            ->selectRaw('count(subscriptions.id) as associated_subscriptions')
+            ->selectRaw('offers.*, count(subscriptions.id) as associated_subscriptions')
             ->groupBy('offers.id');
     }
 

@@ -89,8 +89,6 @@ class RegisterController extends Controller {
         // Get offer
         $offer = Offer::where('use_on_sign_up', true)->first();
 
-
-
         // Create subscription
         $subscription = new Subscription();
         $subscription->setAmount(30)
