@@ -170,29 +170,39 @@ class OffersController extends BaseController {
     /**
      * Edit offer amount.
      *
+     * @param int $offerId
      * @param EditOfferAmountRequest $request
+     * @return
      */
-    public function editOfferAmount(EditOfferAmountRequest $request) {
+    public function editOfferAmount($offerId, EditOfferAmountRequest $request) {
+
+        $response = new AjaxResponse();
+        $offerModel = Offer::where('id', $offerId)->first();
+
+        // Make sure offer exists
+        if (!$offerModel) {
+            $response->setFailMessage(trans('offers.offer_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
 
         // Create paymill request
         $paymillRequest = new \Paymill\Request(env('PAYMILL_API_KEY'));
 
         // Create new paymill offer object and set new amount
         $offer = new \Paymill\Models\Request\Offer();
-        $offer->setAmount($request->get('offer_amount'))
-            ->updateSubscriptions($request->get('update_subscriptions'));
+        $offer->setId($offerModel->paymill_offer_id)
+            ->setAmount($request->get('offer_amount'));
 
         // Save on paymill
         $paymillResponse = $paymillRequest->update($offer);
 
         // Update offer amount in database
-        $offer = Offer::where('paymill_offer_id', $paymillResponse->getId());
-        $offer->amount = $paymillResponse->amount;
-        $offer->save();
+        $offerModel->amount = $request->get('offer_amount');
+        $offerModel->save();
 
         // Return json response
-        $response = new AjaxResponse();
         $response->setSuccessMessage(trans('offers.offer_amount_updated'));
+        $response->addExtraFields(['offer' => Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first()]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 

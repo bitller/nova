@@ -218,6 +218,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             Route::get('/{offerId}', 'OffersController@offer');
             Route::get('/{offerId}/get', 'OffersController@getOne');
             Route::post('/{offerId}/edit-name', 'OffersController@editOfferName');
+            Route::post('/{offerId}/edit-amount', 'OffersController@editOfferAmount');
         });
 
     });

@@ -3,7 +3,7 @@
 namespace App\Http\Requests\AdminCenter\Subscriptions\Offers;
 
 use App\Helpers\Roles;
-use App\Http\Requests\AjaxRequest;
+use App\Http\Requests\AjaxRequestWithFormedErrors;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
@@ -11,7 +11,14 @@ use Illuminate\Contracts\Auth\Guard;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class EditOfferAmountRequest extends AjaxRequest {
+class EditOfferAmountRequest extends AjaxRequestWithFormedErrors {
+
+    /**
+     * Fields to be validated with individual error.
+     *
+     * @var array
+     */
+    public $fields = ['offer_amount', 'user_password'];
 
     /**
      * @param Guard $auth
@@ -30,10 +37,8 @@ class EditOfferAmountRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'offer_id' => ['required', 'exists:offers,id'],
             'offer_amount' => ['required', 'numeric', 'between:2,99999'],
             'user_password' => ['required', 'check_auth_user_password'],
-            'update_subscriptions' => ['required', 'boolean']
         ];
     }
 

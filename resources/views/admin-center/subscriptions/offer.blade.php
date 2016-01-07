@@ -47,7 +47,7 @@
                     <!-- END Offer name -->
 
                     <!-- BEGIN Offer amount -->
-                    <a href="#" class="list-group-item"><span class="badge">@{{ offer.amount }}</span>{{ trans('offers.amount') }}</a>
+                    <a v-on="click: resetEditOfferAmountModal" data-toggle="modal" data-target="#edit-offer-amount-modal" href="#" class="list-group-item"><span class="badge">@{{ offer.amount }}</span>{{ trans('offers.amount') }}</a>
                     <!-- END Offer amount -->
 
                     <!-- BEGIN Offer promo code -->
@@ -89,6 +89,7 @@
         <!-- END Offers table -->
 
         @include('includes.modals.edit-offer-name')
+        @include('includes.modals.edit-offer-amount')
 
         @endsection
 

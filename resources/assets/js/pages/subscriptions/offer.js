@@ -91,6 +91,50 @@ new Vue({
             this.$set('user_password', '');
             this.$set('error', '');
             this.$set('errors', '');
+        },
+
+        /**
+         * Edit offer amount.
+         */
+        editOfferAmount: function() {
+
+            this.$set('loading', true);
+
+            // Build post data
+            var data = {
+                _token: Token.get(),
+                offer_amount: this.$get('offer_amount'),
+                user_password: this.$get('user_password')
+            };
+
+            this.$http.post('/admin-center/subscriptions/offers/' + $('#offer').attr('offer-id') + '/edit-amount', data, function(response) {
+
+                // Handle success response
+                this.$set('loading', false);
+                this.$set('offer', response.offer);
+                $('#edit-offer-amount-modal').modal('hide');
+                Alert.success(response.title, response.message);
+
+            }).error(function(response) {
+
+                // Handle error response
+                this.$set('loading', false);
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+                this.$set('errors', response.errors);
+            });
+        },
+
+        /**
+         * Reset offer amount modal data.
+         */
+        resetEditOfferAmountModal: function() {
+            this.$set('offer_amount', '');
+            this.$set('user_password', '');
+            this.$set('error', '');
+            this.$set('errors', '');
         }
     }
 });
