@@ -16,6 +16,7 @@ return [
     'price_with_promo_code' => 'Price with promo code',
     'promo_code' => 'Promo code',
     'use_this_offer_on_sign_up' => 'Use this offer on sign up',
+    'use_this_offer_on_sign_up_info' => 'This offer will be used on sign up and can not have a promotional code.',
     'use_this_offer_on_sign_up_page' => 'This offer will be used on sign up page and can not have a promo code.',
     'your_password' => 'To continue enter your password',
 ];

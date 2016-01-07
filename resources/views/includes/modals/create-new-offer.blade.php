@@ -40,7 +40,7 @@
                 <!-- END Offer amount -->
 
                 <!-- BEGIN Promo code -->
-                <div class="form-group has-feedback" v-class="has-error : errors.promo_code">
+                <div v-show="!use_on_sign_up" class="form-group has-feedback" v-class="has-error : errors.promo_code">
                     <label for="promo-code">{{ trans('offers.promo_code') }}:</label>
                     <input id="promo-code" type="text" class="form-control" v-on="keyup: createNewOffer | key 13" v-model="promo_code" />
                     <i class="glyphicon glyphicon-gift form-control-feedback icon-color"></i>
@@ -49,14 +49,14 @@
                 <!-- END Promo code -->
 
                 <!-- BEGIN Use this offer on sign up -->
-                <div class="checkbox">
+                <div v-show="!enable_offer" class="checkbox">
                     <label><input type="checkbox" v-model="use_on_sign_up" />{{ trans('offers.use_this_offer_on_sign_up') }}</label>
                     <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('offers.use_this_offer_on_sign_up_info') }}">?</span>
                 </div>
                 <!-- END Use this offer on sign up -->
 
                 <!-- BEGIN Enable offer -->
-                <div class="checkbox">
+                <div v-show="!use_on_sign_up" class="checkbox">
                     <label><input type="checkbox" v-model="enable_offer" />{{ trans('offers.enable_offer') }}</label>
                     <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('offers.enable_offer_info') }}">?</span>
                 </div>
