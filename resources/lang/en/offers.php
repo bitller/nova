@@ -14,6 +14,7 @@ return [
     'is_this_offer_enabled' => 'Is this offer active?',
     'is_this_offer_used_on_sign_up' => 'Is this offer used on sign up?',
     'offer_amount_updated' => 'Offer amount updated!',
+    'offer_created' => 'Offer created!',
     'offer_details' => 'Offer details',
     'offer_name' => 'Offer name',
     'offer_name_updated' => 'Offer name updated!',

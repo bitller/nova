@@ -116,8 +116,8 @@ class OffersController extends BaseController {
             'interval' => $interval,
             'currency' => $currency,
             'promo_code' => $promoCode,
-            'use_on_sign_up' => $useOnSignUp,
-            'disabled' => !$enableOffer
+            'use_on_sign_up' => (bool)$useOnSignUp,
+            'disabled' => !(bool)$enableOffer
         ]);
 
         // Return response

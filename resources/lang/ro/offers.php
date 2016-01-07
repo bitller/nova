@@ -14,6 +14,7 @@ return [
     'is_this_offer_enabled' => 'Este această ofertă activă?',
     'is_this_offer_used_on_sign_up' => 'Este această ofertă folosită la înregistrare?',
     'offer_amount_updated' => 'Preţul planului a fost actualizat!',
+    'offer_created' => 'Planul a fost creat!',
     'offer_details' => 'Detalii despre plan',
     'offer_name' => 'Numele planului',
     'offer_name_updated' => 'Numele planului a fost actualizat!',
