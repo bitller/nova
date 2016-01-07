@@ -51,7 +51,13 @@
                     <!-- END Offer amount -->
 
                     <!-- BEGIN Offer promo code -->
-                    <a href="#" class="list-group-item"><span class="badge">@{{ offer.promo_code }}</span>{{ trans('offers.promo_code') }}</a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge">
+                            <span v-show="offer.promo_code">@{{ offer.promo_code }}</span>
+                            <span v-show="!offer.promo_code">{{ ucfirst(trans('common.not_set')) }}</span>
+                        </span>
+                        {{ trans('offers.promo_code') }}
+                    </a>
                     <!-- END Offer promo code -->
 
                     <!-- BEGIN Offer is used on sign up -->
