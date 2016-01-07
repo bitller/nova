@@ -50,6 +50,7 @@ elixir(function(mix) {
         .scripts(['pages/help-center/category.js'], 'public/js/help-center-category.js')
         .scripts(['pages/login.js'], 'public/js/login.js')
         .scripts(['pages/subscriptions/index.js'], 'public/js/subscriptions-index.js')
-        .scripts(['pages/subscriptions/offers.js'], 'public/js/offers.js');
+        .scripts(['pages/subscriptions/offers.js'], 'public/js/offers.js')
+        .scripts(['pages/subscriptions/offer.js'], 'public/js/offer.js');
 
 });

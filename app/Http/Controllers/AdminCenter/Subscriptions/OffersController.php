@@ -50,6 +50,27 @@ class OffersController extends BaseController {
     }
 
     /**
+     * Render offer page.
+     *
+     * @param int $offerId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function offer($offerId) {
+        return view('admin-center.subscriptions.offer')->with('offerId', $offerId);
+    }
+
+    /**
+     * @param int $offerId
+     * @return mixed
+     */
+    public function getOne($offerId) {
+        $response = new AjaxResponse();
+        $response->setSuccessMessage('success');
+        $response->addExtraFields(['offer' => Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first()]);
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
      * Allow admin to create new offers.
      *
      * @param CreateNewOfferRequest $request
@@ -71,9 +92,20 @@ class OffersController extends BaseController {
 
         $response = $paymillRequest->create($paymillOffer);
 
+        $promoCode = $request->get('promo_code');
+        $enableOffer = $request->get('enable_offer');
+        $useOnSignUp = $request->get('use_on_sign_up');
+
         // If this offer will be used on sign up make sure it is the only one
-        if ($request->get('use_on_sign_up')) {
+        if ($useOnSignUp) {
             Offer::where('use_on_sign_up', true)->update(['use_on_sign_up' => false]);
+            $promoCode = '';
+            $enableOffer = false;
+        }
+
+        // An enabled offer can not be used on sign up
+        if ($enableOffer) {
+            $useOnSignUp = false;
         }
 
         // Save in database
@@ -83,9 +115,9 @@ class OffersController extends BaseController {
             'amount' => $request->get('offer_amount'),
             'interval' => $interval,
             'currency' => $currency,
-            'promo_code' => $request->get('promo_code'),
-            'use_on_sign_up' => $request->get('use_on_sign_up'),
-            'disabled' => !$request->get('enable_offer')
+            'promo_code' => $promoCode,
+            'use_on_sign_up' => $useOnSignUp,
+            'disabled' => !$enableOffer
         ]);
 
         // Return response
