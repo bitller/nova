@@ -13,6 +13,7 @@ return [
     'login_button' => 'Log In',
     'next' => 'Next',
     'no' => 'no',
+    'not_set' => 'Not set',
     'ok' => 'Ok',
     'or' => 'or',
     'page_details' => 'Details',

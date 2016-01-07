@@ -54,7 +54,10 @@
                     <tr v-repeat="offer in offers.data">
                         <td class="text-center"><a href="/admin-center/subscriptions/offers/@{{ offer.id }}">@{{ offer.name }}</a></td>
                         <td class="text-center">@{{ offer.amount }}</td>
-                        <td class="text-center">@{{ offer.promo_code }}</td>
+                        <td class="text-center">
+                            <span v-show="offer.promo_code">@{{ offer.promo_code }}</span>
+                            <span v-show="!offer.promo_code">{{ trans('common.not_set') }}</span>
+                        </td>
                         <td class="text-center">
                             <span v-show="offer.use_on_sign_up > 0" class="glyphicon glyphicon-ok"></span>
                             <span v-show="offer.use_on_sign_up < 1" class="glyphicon glyphicon-cancel"></span>

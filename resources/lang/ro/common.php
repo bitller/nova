@@ -13,6 +13,7 @@ return [
     'login_button' => 'Conectează-te',
     'next' => 'Înainte',
     'no' => 'nu',
+    'not_set' => 'Nu a fost setat',
     'ok' => 'Ok',
     'or' => 'sau',
     'page_details' => 'Detalii',
