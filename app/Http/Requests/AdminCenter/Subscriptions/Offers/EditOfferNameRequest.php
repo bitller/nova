@@ -30,7 +30,6 @@ class EditOfferNameRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'offer_id' => ['required', 'exists:offers,id'],
             'offer_name' => ['required', 'string', 'between:3,25'],
             'user_password' => ['required', 'check_auth_user_password']
         ];

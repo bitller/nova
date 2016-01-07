@@ -141,8 +141,7 @@ class OffersController extends BaseController {
         $offer = new \Paymill\Models\Request\Offer();
 
         // Set new name
-        $offer->setName($request->get('offer_name'))
-            ->updateSubscriptions(true);
+        $offer->setName($request->get('offer_name'));
 
         // Save on paymill
         $paymillResponse = $paymillRequest->update($offer);
