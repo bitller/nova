@@ -52,7 +52,7 @@
                     </thead>
                     <tbody>
                     <tr v-repeat="offer in offers.data">
-                        <td class="text-center">@{{ offer.name }}</td>
+                        <td class="text-center"><a href="/admin-center/subscriptions/offers/@{{ offer.id }}">@{{ offer.name }}</a></td>
                         <td class="text-center">@{{ offer.amount }}</td>
                         <td class="text-center">@{{ offer.promo_code }}</td>
                         <td class="text-center">
@@ -63,7 +63,7 @@
                             <span v-show="offer.disabled">{{ ucfirst(trans('common.no')) }}</span>
                             <span v-show="!offer.disabled">{{ ucfirst(trans('common.yes')) }}</span>
                         </td>
-                        <td class="text-center">0</td>
+                        <td class="text-center">@{{ offer.associated_subscriptions }}</td>
                     </tr>
                     </tbody>
                 </table>
