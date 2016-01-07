@@ -71,6 +71,11 @@ class OffersController extends BaseController {
 
         $response = $paymillRequest->create($paymillOffer);
 
+        // If this offer will be used on sign up make sure it is the only one
+        if ($request->get('use_on_sign_up')) {
+            Offer::where('use_on_sign_up', true)->update(['use_on_sign_up' => false]);
+        }
+
         // Save in database
         Offer::create([
             'paymill_offer_id' => $response->getId(),
