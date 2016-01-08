@@ -142,7 +142,36 @@ new Vue({
          * Reset use offer on sign up modal data.
          */
         resetUseOfferOnSignUpModal: function() {
-            this._resetModal(['user_password']);
+            this._resetModal(['user_password', 'error', 'errors']);
+        },
+
+        /**
+         * Enable or disable offer.
+         */
+        isOfferEnabled: function() {
+
+            var url = 'disable';
+            if (this.$get('enable_offer')) {
+                url = 'enable';
+            }
+
+            var config = {
+                action_url: url,
+                modal_selector: '#is-offer-enabled-modal',
+                post: {
+                    enable_offer: this.$get('enable_offer'),
+                    user_password: this.$get('user_password')
+                }
+            };
+
+            this._generalEdit(config);
+        },
+
+        /**
+         * Reset is offer enabled modal data.
+         */
+        resetIsOfferEnabledModal: function() {
+            this._resetModal(['enable_offer', 'user_password', 'error', 'errors']);
         },
 
         /**

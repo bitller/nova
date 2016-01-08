@@ -70,15 +70,15 @@
                     </a>
                     <!-- END Offer is used on sign up -->
 
-                    <!-- BEGIN Offer is disabled -->
-                    <a href="#" class="list-group-item">
+                    <!-- BEGIN Is offer enabled-->
+                    <a v-on="click: resetIsOfferEnabledModal" data-toggle="modal" data-target="#is-offer-enabled-modal" href="#" class="list-group-item">
                         <span class="badge">
-                            <span v-show="offer.disabled">{{ ucfirst(trans('common.no')) }}</span>
-                            <span v-show="!offer.disabled">{{ ucfirst(trans('common.yes')) }}</span>
+                            <span v-show="offer.disabled > 0">{{ ucfirst(trans('common.no')) }}</span>
+                            <span v-show="offer.disabled < 1">{{ ucfirst(trans('common.yes')) }}</span>
                         </span>
                         {{ trans('offers.is_this_offer_enabled') }}
                     </a>
-                    <!-- END Offer is disabled -->
+                    <!-- END Is offer disabled -->
 
                     <!-- BEGIN Offer associated subscriptions -->
                     <a href="#" class="list-group-item"><span class="badge">@{{ offer.associated_subscriptions }}</span>{{ trans('offers.associated_subscriptions') }}</a>
@@ -92,6 +92,7 @@
         @include('includes.modals.edit-offer-amount')
         @include('includes.modals.edit-offer-promo-code')
         @include('includes.modals.use-offer-on-sign-up')
+        @include('includes.modals.is-offer-enabled')
 
         @endsection
 

@@ -268,34 +268,52 @@ class OffersController extends BaseController {
     /**
      * Enable offer.
      *
+     * @param int $offerId
      * @param EnableOfferRequest $request
      * @return mixed
      */
-    public function enableOffer(EnableOfferRequest $request) {
+    public function enableOffer($offerId, EnableOfferRequest $request) {
 
-        $offer = Offer::find($request->get('offer_id'));
+        $offer = Offer::find($offerId);
+        $response = new AjaxResponse();
+
+        // Make sure offer exists
+        if (!$offer) {
+            $response->setFailMessage(trans('offers.offer_not_found'));
+            return response($response->get());
+        }
+
         $offer->disabled = false;
         $offer->save();
 
-        $response = new AjaxResponse();
         $response->setSuccessMessage(trans('offers.offer_enabled'));
+        $response->addExtraFields(['offer' => Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first()]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
     /**
      * Disable offer.
      *
+     * @param int $offerId
      * @param DisableOfferRequest $request
      * @return mixed
      */
-    public function disableOffer(DisableOfferRequest $request) {
+    public function disableOffer($offerId, DisableOfferRequest $request) {
 
-        $offer = Offer::find($request->get('offer_id'));
+        $offer = Offer::find($offerId);
+        $response = new AjaxResponse();
+
+        // Make sure offer exists
+        if (!$offer) {
+            $response->setFailMessage(trans('offers.offer_not_found'));
+            return response($response->get());
+        }
+
         $offer->disabled = true;
         $offer->save();
 
-        $response = new AjaxResponse();
         $response->setSuccessMessage(trans('offers.offer_disabled'));
+        $response->addExtraFields(['offer' => Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first()]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
