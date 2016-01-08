@@ -5,12 +5,7 @@
         <!-- Modal content-->
         <div class="modal-content">
 
-            <!-- BEGIN Modal header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" v-attr="disabled : loading">&times;</button>
-                <h4 class="modal-title">{{ trans('offers.create_new_offer') }}</h4>
-            </div>
-            <!-- END Modal header -->
+            @include('includes.modals.partials.header', ['title' => trans('offers.create_new_offer')])
 
             <!-- BEGIN Modal body -->
             <div class="modal-body col-md-12">
@@ -64,26 +59,11 @@
 
                 <div class="divider"></div>
 
-                <!-- BEGIN User password -->
-                <div class="form-group has-feedback" v-class="has-error : errors.user_password">
-                    <label for="user-password">{{ trans('offers.your_password') }}:</label>
-                    <input id="user-password" type="password" class="form-control" v-on="keyup: createNewOffer | key 13" v-model="user_password" />
-                    <i class="glyphicon glyphicon-lock form-control-feedback icon-color"></i>
-                    <span class="text-danger" v-show="errors.user_password">@{{ errors.user_password }}</span>
-                </div>
-                <!-- END User password -->
+                @include('includes.modals.partials.user-password-input', ['onEnter' => 'createNewOffer'])
             </div>
             <!-- END Modal body -->
 
-            <!-- BEGIN Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" v-attr="disabled : loading">{{ trans('common.cancel') }}</button>
-                <button type="button" class="btn btn-primary" v-on="click: createNewOffer" v-attr="disabled : loading">
-                    <span v-show="loading" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
-                    <span v-show="!loading">{{ trans('common.save') }}</span>
-                </button>
-            </div>
-            <!-- END Modal footer -->
+            @include('includes.modals.partials.footer', ['onClick' => 'createNewOffer'])
 
         </div>
         <!-- END Modal content -->
