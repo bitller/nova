@@ -24,6 +24,8 @@ return [
     'price_with_promo_code' => 'Price with promo code',
     'promo_code' => 'Promo code',
     'promo_code_updated' => 'Promo code updated!',
+    'this_offer_is_used_on_sign_up' => 'This offer is used on sign up!',
+    'to_use_offer_password_required' => 'To use this offer on sign up your password is required.',
     'use_this_offer_on_sign_up' => 'Use this offer on sign up',
     'use_this_offer_on_sign_up_info' => 'This offer will be used on sign up and can not have a promotional code.',
     'use_this_offer_on_sign_up_page' => 'This offer will be used on sign up page and can not have a promo code.',

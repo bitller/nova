@@ -142,33 +142,16 @@ new Vue({
          */
         editOfferPromoCode: function() {
 
-            this.$set('loading', true);
-
-            // Build post data
-            var data = {
-                _token: Token.get(),
-                promo_code: this.$get('promo_code'),
-                user_password: this.$get('user_password')
+            var config = {
+                action_url: 'edit-promo-code',
+                modal_selector: '#edit-offer-promo-code-modal',
+                post: {
+                    promo_code: this.$get('promo_code'),
+                    user_password: this.$get('user_password')
+                }
             };
 
-            this.$http.post('/admin-center/subscriptions/offers/' + $('#offer').attr('offer-id') + '/edit-promo-code', data, function(response) {
-
-                // Handle success response
-                this.$set('loading', false);
-                this.$set('offer', response.offer);
-                $('#edit-offer-promo-code-modal').modal('hide');
-                Alert.success(response.title, response.message);
-
-            }).error(function(response) {
-
-                // Handle error response
-                this.$set('loading', false);
-                if (!response.message) {
-                    this.$set('error', Translation.common('general-error'));
-                    return;
-                }
-                this.$set('errors', response.errors);
-            });
+            this._generalEdit(config);
         },
 
         /**
@@ -179,6 +162,77 @@ new Vue({
             this.$set('user_password', '');
             this.$set('error', '');
             this.$set('errors', '');
+        },
+
+        useOfferOnSignUp: function() {
+
+            var config = {
+                action_url: 'use-on-sign-up',
+                modal_selector: '#use-offer-on-sign-up-modal',
+                post: {
+                    use_on_sign_up: this.$get('use_on_sign_up'),
+                    user_password: this.$get('user_password')
+                }
+            };
+
+            this._generalEdit(config);
+        },
+
+        /**
+         * Reset use offer on sign up modal data.
+         */
+        resetUseOfferOnSignUpModal: function() {
+            this._resetModal(['user_password']);
+        },
+        
+        /**
+         * Edit offer data based on given config.
+         *
+         * @param config
+         * @private
+         */
+        _generalEdit: function(config) {
+
+            // Set loading variable to true. Use default if no loading variable name was given
+            if (!config.loading_variable_name) {
+                config.loading_variable_name = 'loading';
+            }
+            this.$set(config.loading_variable_name, true);
+
+            // Add token to post data
+            config.post._token = Token.get();
+
+            // Make post request
+            this.$http.post('/admin-center/subscriptions/offers/' + $('#offer').attr('offer-id') + '/' + config.action_url, config.post, function(response) {
+
+                // Handle success response
+                this.$set(config.loading_variable_name, false);
+                this.$set('offer', response.offer);
+                $(config.modal_selector).modal('hide');
+                Alert.success(response.title, response.message);
+
+            }).error(function(response) {
+
+                // Handle error response
+                this.$set(config.loading_variable_name, false);
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+                this.$set('errors', response.errors);
+            });
+        },
+
+        /**
+         * Reset given modal fields.
+         *
+         * @param fields
+         * @private
+         */
+        _resetModal: function(fields) {
+            for (var index = 0; index < fields.length; index++) {
+                this.$set(fields[index], '');
+            }
         }
     }
 });

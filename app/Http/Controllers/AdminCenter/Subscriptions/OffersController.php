@@ -237,22 +237,31 @@ class OffersController extends BaseController {
     /**
      * Use offer on sign up.
      *
+     * @param $offerId
      * @param UseOfferOnSignUpRequest $request
      * @return mixed
      */
-    public function useOfferOnSignUp(UseOfferOnSignUpRequest $request) {
+    public function useOfferOnSignUp($offerId, UseOfferOnSignUpRequest $request) {
+
+        $response = new AjaxResponse();
+        $offer = Offer::where('id', $offerId)->first();
+
+        // Make sure offer exists
+        if (!$offer) {
+            $response->setFailMessage(trans('offers.offer_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
 
         // Remove other offer used on sign up
         Offer::where('use_on_sign_up', true)->update(['use_on_sign_up' => false]);
 
         // Update current offer to be used on sign up
-        $offer = Offer::find($request->get('offer_id'));
         $offer->use_on_sign_up = true;
         $offer->save();
 
         // Return json response
-        $response = new AjaxResponse();
-        $response->setSuccessMessage(trans('offers.offer_will_be_used_on_sign_up'));
+        $response->setSuccessMessage(trans('offers.this_offer_is_used_on_sign_up'));
+        $response->addExtraFields(['offer' => Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first()]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 

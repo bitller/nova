@@ -61,10 +61,10 @@
                     <!-- END Offer promo code -->
 
                     <!-- BEGIN Offer is used on sign up -->
-                    <a href="#" class="list-group-item">
+                    <a v-on="click: resetUseOfferOnSignUpModal" data-toggle="modal" data-target="#use-offer-on-sign-up-modal" href="#" class="list-group-item">
                         <span class="badge">
-                            <span v-show="offer.use_on_sign_up">{{ ucfirst(trans('common.yes')) }}</span>
-                            <span v-show="!offer.use_on_sign_up">{{ ucfirst(trans('common.no')) }}</span>
+                            <span v-show="offer.use_on_sign_up > 0">{{ ucfirst(trans('common.yes')) }}</span>
+                            <span v-show="offer.use_on_sign_up < 1">{{ ucfirst(trans('common.no')) }}</span>
                         </span>
                         {{ trans('offers.is_this_offer_used_on_sign_up') }}
                     </a>
@@ -91,6 +91,7 @@
         @include('includes.modals.edit-offer-name')
         @include('includes.modals.edit-offer-amount')
         @include('includes.modals.edit-offer-promo-code')
+        @include('includes.modals.use-offer-on-sign-up')
 
         @endsection
 

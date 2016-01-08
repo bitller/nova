@@ -3,7 +3,7 @@
 namespace App\Http\Requests\AdminCenter\Subscriptions\Offers;
 
 use App\Helpers\Roles;
-use App\Http\Requests\AjaxRequest;
+use App\Http\Requests\AjaxRequestWithFormedErrors;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
@@ -11,7 +11,12 @@ use Illuminate\Contracts\Auth\Guard;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class UseOfferOnSignUpRequest extends AjaxRequest {
+class UseOfferOnSignUpRequest extends AjaxRequestWithFormedErrors {
+
+    /**
+     * @var array
+     */
+    public $fields = ['user_password'];
 
     /**
      * @param Guard $auth
@@ -30,7 +35,6 @@ class UseOfferOnSignUpRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'offer_id' => ['required', 'exists:offers,id'],
             'user_password' => ['required', 'check_auth_user_password']
         ];
     }

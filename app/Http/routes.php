@@ -220,6 +220,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
             Route::post('/{offerId}/edit-name', 'OffersController@editOfferName');
             Route::post('/{offerId}/edit-amount', 'OffersController@editOfferAmount');
             Route::post('/{offerId}/edit-promo-code', 'OffersController@editOfferPromoCode');
+            Route::post('/{offerId}/use-on-sign-up', 'OffersController@useOfferOnSignUp');
         });
 
     });

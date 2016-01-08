@@ -24,6 +24,8 @@ return [
     'price_with_promo_code' => 'Preţ cu codul promoţional',
     'promo_code' => 'Cod promoţional',
     'promo_code_updated' => 'Codul promoţional a fost actualizat!',
+    'this_offer_is_used_on_sign_up' => 'Această ofertă este folosită la înregistrare!',
+    'to_use_offer_password_required' => 'Pentru a folosi aceast plan la înregistrare, parola dumneavoastră este necesară.',
     'use_this_offer_on_sign_up' => 'Folosește această ofertă la înregistrare',
     'use_this_offer_on_sign_up_info' => 'Această ofertă va fi folosită pe pagina de înregistrare și nu poate avea un cod promoțional.',
     'your_password' => 'Pentru a continua, introduceţi parola dumneavoastră',
