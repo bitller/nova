@@ -13,7 +13,7 @@
                     [
                         'url' => '/admin-center/subscriptions',
                         'name' => trans('offers.go_back_to_subscriptions'),
-                        'icon' => 'glyphicon-th',
+                        'icon' => 'glyphicon-arrow-left',
                     ],
                     [
                         'url' => '#',
@@ -37,7 +37,7 @@
         <!-- END Top part -->
 
         <!-- BEGIN Offers table -->
-        <div class="row">
+        <div class="row" v-show="!loading">
             <div class="panel panel-default">
                 <table class="table table-bordered">
                     <thead>

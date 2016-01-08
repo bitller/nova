@@ -20,12 +20,14 @@ new Vue({
         getOffers: function(successCallback) {
 
             if (typeof successCallback === 'undefined') {
+                this.$set('loading', true);
                 Alert.loader();
             }
 
             this.$http.get('/admin-center/subscriptions/offers/get', function(response) {
 
                 // Handle success response case
+                this.$set('loading', false);
                 this.$set('offers', response);
 
                 // Check if a callback was given
@@ -40,6 +42,7 @@ new Vue({
             }).error(function(response) {
 
                 // Handle error response case
+                this.$set('loading', false);
                 if (response.message) {
                     Alert.error(response.title, response.message);
                     return;
