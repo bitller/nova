@@ -3,7 +3,7 @@
 namespace App\Http\Requests\AdminCenter\Subscriptions\Offers;
 
 use App\Helpers\Roles;
-use App\Http\Requests\AjaxRequest;
+use App\Http\Requests\AjaxRequestWithFormedErrors;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
@@ -11,7 +11,12 @@ use Illuminate\Contracts\Auth\Guard;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class EditOfferPromoCodeRequest extends AjaxRequest {
+class EditOfferPromoCodeRequest extends AjaxRequestWithFormedErrors {
+
+    /**
+     * @var array
+     */
+    public $fields = ['promo_code', 'user_password'];
 
     /**
      * @param Guard $auth
@@ -30,7 +35,6 @@ class EditOfferPromoCodeRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'offer_id' => ['required', 'exists:offers,id'],
             'promo_code' => ['string', 'between:2,25'],
             'user_password' => ['required', 'check_auth_user_password']
         ];

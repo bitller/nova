@@ -51,7 +51,7 @@
                     <!-- END Offer amount -->
 
                     <!-- BEGIN Offer promo code -->
-                    <a href="#" class="list-group-item">
+                    <a v-on="click: resetEditOfferPromoCodeModal" data-toggle="modal" data-target="#edit-offer-promo-code-modal" href="#" class="list-group-item">
                         <span class="badge">
                             <span v-show="offer.promo_code">@{{ offer.promo_code }}</span>
                             <span v-show="!offer.promo_code">{{ ucfirst(trans('common.not_set')) }}</span>
@@ -90,6 +90,7 @@
 
         @include('includes.modals.edit-offer-name')
         @include('includes.modals.edit-offer-amount')
+        @include('includes.modals.edit-offer-promo-code')
 
         @endsection
 

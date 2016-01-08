@@ -135,6 +135,50 @@ new Vue({
             this.$set('user_password', '');
             this.$set('error', '');
             this.$set('errors', '');
+        },
+
+        /**
+         * Edit offer promo code.
+         */
+        editOfferPromoCode: function() {
+
+            this.$set('loading', true);
+
+            // Build post data
+            var data = {
+                _token: Token.get(),
+                promo_code: this.$get('promo_code'),
+                user_password: this.$get('user_password')
+            };
+
+            this.$http.post('/admin-center/subscriptions/offers/' + $('#offer').attr('offer-id') + '/edit-promo-code', data, function(response) {
+
+                // Handle success response
+                this.$set('loading', false);
+                this.$set('offer', response.offer);
+                $('#edit-offer-promo-code-modal').modal('hide');
+                Alert.success(response.title, response.message);
+
+            }).error(function(response) {
+
+                // Handle error response
+                this.$set('loading', false);
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+                this.$set('errors', response.errors);
+            });
+        },
+
+        /**
+         * Reset edit offer promo code modal data.
+         */
+        resetEditOfferPromoCodeModal: function() {
+            this.$set('promo_code', '');
+            this.$set('user_password', '');
+            this.$set('error', '');
+            this.$set('errors', '');
         }
     }
 });

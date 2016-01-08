@@ -209,19 +209,28 @@ class OffersController extends BaseController {
     /**
      * Edit offer promo code.
      *
+     * @param int $offerId
      * @param EditOfferPromoCodeRequest $request
      * @return mixed
      */
-    public function editOfferPromoCode(EditOfferPromoCodeRequest $request) {
+    public function editOfferPromoCode($offerId, EditOfferPromoCodeRequest $request) {
+
+        $offer = Offer::find($offerId);
+        $response = new AjaxResponse();
+
+        // Make sure offer exists
+        if (!$offer) {
+            $response->setFailMessage(trans('offers.offer_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
 
         // Update offer promo code
-        $offer = Offer::find($request->get('offer_id'));
         $offer->promo_code = $request->get('promo_code');
         $offer->save();
 
         // Return json response
-        $response = new AjaxResponse();
         $response->setSuccessMessage(trans('offers.promo_code_updated'));
+        $response->addExtraFields(['offer' => Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first()]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
