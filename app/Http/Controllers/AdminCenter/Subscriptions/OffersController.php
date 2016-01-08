@@ -64,9 +64,18 @@ class OffersController extends BaseController {
      * @return mixed
      */
     public function getOne($offerId) {
+
         $response = new AjaxResponse();
+        $offer = Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first();
+
+        // Make sure offer exists
+        if (!$offer) {
+            $response->setFailMessage(trans('offers.offer_not_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
         $response->setSuccessMessage('success');
-        $response->addExtraFields(['offer' => Offer::countAssociatedSubscriptions()->where('offers.id', $offerId)->first()]);
+        $response->addExtraFields(['offer' => $offer]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
