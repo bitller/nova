@@ -4,6 +4,7 @@ return [
     'active_subscriptions' => 'Active subscriptions',
     'amount' => 'Amount',
     'canceled_subscriptions' => 'Canceled subscriptions',
+    'create_new_subscription' => 'Create new subscription',
     'edit_subscription' => 'Edit subscription',
     'failed_subscriptions' => 'Failed subscriptions',
     'next_payment_term' => 'Next payment term',

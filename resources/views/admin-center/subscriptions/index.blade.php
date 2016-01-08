@@ -14,6 +14,12 @@
                             'url' => '/admin-center/subscriptions/offers',
                             'name' => trans('subscriptions.offers'),
                             'icon' => 'glyphicon-list-alt'
+                        ],
+                        [
+                            'url' => '#',
+                            'name' => trans('subscriptions.create_new_subscription'),
+                            'icon' => 'glyphicon-plus',
+                            'on_click' => 'createNewOffer'
                         ]
                     ]
                 ])

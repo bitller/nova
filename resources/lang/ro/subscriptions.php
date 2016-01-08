@@ -4,6 +4,7 @@ return [
     'active_subscriptions' => 'Abonamente active',
     'amount' => 'De plată',
     'canceled_subscriptions' => 'Abonamente anulate',
+    'create_new_subscription' => 'Creează abonament nou',
     'edit_subscription' => 'Editează abonamentul',
     'failed_subscriptions' => 'Abonamente eşuate',
     'next_payment_term' => 'Următorul termen de plată',
