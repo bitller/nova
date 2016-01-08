@@ -54,43 +54,23 @@ new Vue({
          */
         editOfferName: function() {
 
-            this.$set('loading', true);
-
-            // Build post data
-            var data = {
-                _token: Token.get(),
-                offer_name: this.$get('offer_name'),
-                user_password: this.$get('user_password')
+            var config = {
+                action_url: 'edit-name',
+                modal_selector: '#edit-offer-name-modal',
+                post: {
+                    offer_name: this.$get('offer_name'),
+                    user_password: this.$get('user_password')
+                }
             };
 
-            this.$http.post('/admin-center/subscriptions/offers/' + $('#offer').attr('offer-id') + '/edit-name', data, function(response) {
-
-                // Handle success response
-                this.$set('loading', false);
-                this.$set('offer', response.offer);
-                $('#edit-offer-name-modal').modal('hide');
-                Alert.success(response.title, response.message);
-
-            }).error(function(response) {
-
-                // Handle error response
-                this.$set('loading', false);
-                if (!response.message) {
-                    this.$set('error', Translation.common('general-error'));
-                    return;
-                }
-                this.$set('errors', response.errors);
-            });
+            this._generalEdit(config);
         },
 
         /**
          * Reset edit offer name modal data.
          */
         resetEditOfferNameModal: function() {
-            this.$set('offer_name', '');
-            this.$set('user_password', '');
-            this.$set('error', '');
-            this.$set('errors', '');
+            this._resetModal(['offer_name', 'user_password', 'error', 'errors']);
         },
 
         /**
@@ -98,43 +78,23 @@ new Vue({
          */
         editOfferAmount: function() {
 
-            this.$set('loading', true);
-
-            // Build post data
-            var data = {
-                _token: Token.get(),
-                offer_amount: this.$get('offer_amount'),
-                user_password: this.$get('user_password')
+            var config = {
+                action_url: 'edit-amount',
+                modal_selector: '#edit-offer-amount-modal',
+                post: {
+                    offer_amount: this.$get('offer_amount'),
+                    user_password: this.$get('user_password')
+                }
             };
 
-            this.$http.post('/admin-center/subscriptions/offers/' + $('#offer').attr('offer-id') + '/edit-amount', data, function(response) {
-
-                // Handle success response
-                this.$set('loading', false);
-                this.$set('offer', response.offer);
-                $('#edit-offer-amount-modal').modal('hide');
-                Alert.success(response.title, response.message);
-
-            }).error(function(response) {
-
-                // Handle error response
-                this.$set('loading', false);
-                if (!response.message) {
-                    this.$set('error', Translation.common('general-error'));
-                    return;
-                }
-                this.$set('errors', response.errors);
-            });
+            this._generalEdit(config);
         },
 
         /**
          * Reset offer amount modal data.
          */
         resetEditOfferAmountModal: function() {
-            this.$set('offer_amount', '');
-            this.$set('user_password', '');
-            this.$set('error', '');
-            this.$set('errors', '');
+            this._resetModal(['offer_amount', 'user_password', 'error', 'errors']);
         },
 
         /**
@@ -158,12 +118,12 @@ new Vue({
          * Reset edit offer promo code modal data.
          */
         resetEditOfferPromoCodeModal: function() {
-            this.$set('promo_code', '');
-            this.$set('user_password', '');
-            this.$set('error', '');
-            this.$set('errors', '');
+            this._resetModal(['promo_code', 'user_password', 'error', 'errors']);
         },
 
+        /**
+         * Use offer on sign up.
+         */
         useOfferOnSignUp: function() {
 
             var config = {

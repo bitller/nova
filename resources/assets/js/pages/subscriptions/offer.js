@@ -56,7 +56,7 @@ new Vue({
 
             var config = {
                 action_url: 'edit-name',
-                modal_selector: '#edit-offer-name',
+                modal_selector: '#edit-offer-name-modal',
                 post: {
                     offer_name: this.$get('offer_name'),
                     user_password: this.$get('user_password')
@@ -121,6 +121,9 @@ new Vue({
             this._resetModal(['promo_code', 'user_password', 'error', 'errors']);
         },
 
+        /**
+         * Use offer on sign up.
+         */
         useOfferOnSignUp: function() {
 
             var config = {
