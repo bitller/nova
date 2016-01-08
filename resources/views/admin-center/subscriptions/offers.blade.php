@@ -37,7 +37,7 @@
         <!-- END Top part -->
 
         <!-- BEGIN Offers table -->
-        <div class="row" v-show="!loading">
+        <div class="row" v-show="!loaded">
             <div class="panel panel-default">
                 <table class="table table-bordered">
                     <thead>
