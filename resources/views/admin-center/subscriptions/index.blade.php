@@ -19,7 +19,8 @@
                             'url' => '#',
                             'name' => trans('subscriptions.create_new_subscription'),
                             'icon' => 'glyphicon-plus',
-                            'on_click' => 'createNewOffer'
+                            'data_toggle' => 'modal',
+                            'data_target' => '#create-new-subscription-modal'
                         ]
                     ]
                 ])
@@ -95,6 +96,9 @@
             </div>
             <!-- END Users details -->
             </div>
+
+            @include('includes.modals.create-new-subscription')
+
         </div>
     </div>
 @endsection

@@ -63,7 +63,7 @@ class UsersManagerController extends BaseController {
      * @return \Illuminate\View\View
      */
     public function index() {
-        return view('admin-center.users-manager');
+        return view('admin-center.users-manager.index');
     }
 
     /**
