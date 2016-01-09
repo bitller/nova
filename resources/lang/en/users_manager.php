@@ -27,6 +27,7 @@ return [
     'confirmed_users' => 'Confirmed users',
     'confirmed_users_percentage' => 'Confirmed users percentage',
     'create_bill' => 'Create bill',
+    'create_new_user' => 'Create new user',
     'created_at' => 'Created at',
     'custom_products' => 'Custom products',
     'custom_products_of_this_user' => 'Custom products of this user',

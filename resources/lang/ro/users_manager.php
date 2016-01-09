@@ -27,6 +27,7 @@ return [
     'confirmed_users' => 'Utilizatori confirmaţi',
     'confirmed_users_percentage' => 'Pocentajul utilizatorilor confirmaţi',
     'create_bill' => 'Creează o nouă factură',
+    'create_new_user' => 'Creează un utilizator nou',
     'created_at' => 'Creată în',
     'custom_products' => 'Produsele utilizatorului',
     'custom_products_of_this_user' => 'Produsele adăugate de acest utilizator',

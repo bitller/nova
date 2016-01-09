@@ -14,6 +14,13 @@
                             'url' => '/admin-center/users-manager/browse',
                             'name' => trans('users_manager.browse'),
                             'icon' => 'glyphicon-list'
+                        ],
+                        [
+                            'url' => '#',
+                            'name' => trans('users_manager.create_new_user'),
+                            'icon' => 'glyphicon-plus',
+                            'data_target' => '#create-new-user-modal',
+                            'data_toggle' => 'modal'
                         ]
                     ]
                 ])
