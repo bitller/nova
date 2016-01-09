@@ -7,25 +7,16 @@
             <div class="add-product-button row">
                 <span class="avon-products">{{ trans('users_manager.users_manager') }}</span>&nbsp;
 
-                <!-- BEGIN Edit button -->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-th-large"></span>&nbsp;
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-
-                        <!-- BEGIN Browse users -->
-                        <li>
-                            <a href="/admin-center/users-manager/browse">
-                                <span class="glyphicon glyphicon-list"></span>&nbsp; {{ trans('users_manager.browse') }}
-                            </a>
-                        </li>
-                        <!-- END Browser users -->
-
-                    </ul>
-                </div>
-                <!-- END Edit button -->
+                @include('includes.admin-center.buttons.more-options-dropdown', [
+                    'icon' => 'glyphicon-th-large',
+                    'items' => [
+                        [
+                            'url' => '/admin-center/users-manager/browse',
+                            'name' => trans('users_manager.browse'),
+                            'icon' => 'glyphicon-list'
+                        ]
+                    ]
+                ])
 
                 <div class="btn-group pull-right">
                     @include('includes.admin-center.buttons.subscriptions')
