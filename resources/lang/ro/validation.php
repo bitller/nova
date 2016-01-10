@@ -66,6 +66,9 @@ return [
 
     'attributes' => [
         'bill_product_id' => 'id-ul produsului din factură',
+        'new_user_email' => 'email-ul utilizatorului',
+        'new_user_password' => 'parola utilizatorului',
+        'new_user_password_confirmation' => 'confirmarea parolei utilizatorului',
         'password' => 'parolă',
         'product_id' => 'ID-ul produsului',
         'product_code' => 'codul produsului',

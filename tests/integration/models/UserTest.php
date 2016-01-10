@@ -18,4 +18,16 @@ class UserTest extends TestCase {
         ]);
     }
 
+    public function test_admin_create_user() {
+
+        // Generate user
+        $generatedUser = factory(App\User::class)->create();
+
+        $this->seeInDatabase('users', [
+            'email' => $generatedUser->email,
+            'special_user' => false
+        ]);
+
+    }
+
 }

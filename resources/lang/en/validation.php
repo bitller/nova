@@ -107,6 +107,9 @@ return [
     */
 
     'attributes' => [
+        'new_user_email' => 'new user email',
+        'new_user_password' => 'new user password',
+        'new_user_password_confirmation' => 'new user password confirmation',
         'promo_code' => 'Promo code',
         'user_password' => 'user password'
     ],
