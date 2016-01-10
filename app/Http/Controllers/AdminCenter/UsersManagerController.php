@@ -7,9 +7,11 @@ use App\Bill;
 use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
+use App\Helpers\Roles;
 use App\Helpers\Searches;
 use App\Helpers\UserActions;
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\AdminCenter\UsersManager\CreateNewUserRequest;
 use App\Http\Requests\AdminCenter\UsersManager\GetIndexDataRequest;
 use App\Http\Requests\AdminCenter\UsersManager\SearchUsersRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\Actions\DeleteUserActionsRequest;
@@ -34,7 +36,6 @@ use App\Http\Requests\AdminCenter\UsersManager\User\DisableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EditUserEmailRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\EnableUserAccountRequest;
 use App\Http\Requests\AdminCenter\UsersManager\User\PaidBills\GetUserPaidBillsRequest;
-use App\Http\Requests\AjaxRequest;
 use App\Product;
 use App\Subscription;
 use App\User;
@@ -91,6 +92,29 @@ class UsersManagerController extends BaseController {
         $response->addExtraFields($data);
 
         return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Allow admin to create new user.
+     *
+     * @param CreateNewUserRequest $request
+     * @return mixed
+     */
+    public function createNewUser(CreateNewUserRequest $request) {
+
+        $roles = new Roles();
+
+        User::create([
+            'email' => $request->get('new_user_email'),
+            'password' => bcrypt($request->get('new_user_password')),
+            'special_user' => (bool) $request->get('make_special_user'),
+            'role_id' => $roles->getUserRoleId()
+        ]);
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('users_manager.user_created_successfully'));
+        return response($response->get())->header('Content-Type', 'application/json');
+
     }
 
     /**

@@ -76,6 +76,7 @@ return [
     'url'                  => 'The :attribute format is invalid.',
 
     'check_auth_user_password' => 'Looks like you entered an invalid password.',
+    'not_exists' => 'Given :attribute is already used.',
 
     /*
     |--------------------------------------------------------------------------

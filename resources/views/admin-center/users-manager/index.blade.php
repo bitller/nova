@@ -20,7 +20,8 @@
                             'name' => trans('users_manager.create_new_user'),
                             'icon' => 'glyphicon-plus',
                             'data_target' => '#create-new-user-modal',
-                            'data_toggle' => 'modal'
+                            'data_toggle' => 'modal',
+                            'on_click' => 'resetCreateNewUserModal'
                         ]
                     ]
                 ])
@@ -73,8 +74,10 @@
                 </ul>
             </div>
             <!-- END Users statistics in percentages -->
-
         </div>
+
+        @include('includes.modals.users-manager.create-new-user')
+
     </div>
 @endsection
 

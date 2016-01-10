@@ -164,6 +164,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::get('/browse', 'UsersManagerController@browse');
         Route::get('/get-users', 'UsersManagerController@getUsers');
         Route::get('/search', 'UsersManagerController@search');
+        Route::post('/create-new-user', 'UsersManagerController@createNewUser');
 
         // Manage user
         Route::group(['prefix' => 'user'], function() {
