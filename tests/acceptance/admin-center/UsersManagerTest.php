@@ -194,4 +194,47 @@ class UsersManagerTest extends TestCase {
         ]);
     }
 
+    /**
+     * Admin create new user with empty admin password then with wrong admin password.
+     */
+    public function test_admin_create_new_user_with_empty_and_then_wrong_admin_password() {
+
+        $user = factory(App\User::class)->make();
+
+        $data = [
+            'new_user_email' => $user->email,
+            'new_user_password' => '123456',
+            'new_user_password_confirmation' => '123456',
+            'make_special_user' => false,
+        ];
+
+        // Make post request without admin password
+        $this->actingAs($this->admin)
+            ->post('/admin-center/users-manager/create-new-user', $data)
+            ->seeJson([
+                'success' => false,
+                'errors' => ['user_password' => trans('validation.required', ['attribute' => trans('validation.attributes.user_password')])]
+            ]);
+
+        // Make sure user was not inserted in database
+        $this->notSeeInDatabase('users', [
+            'email' => $user->email
+        ]);
+
+        $data['user_password'] = 'random wrong password';
+
+        // Make post request with wrong admin password
+        $this->actingAs($this->admin)
+            ->post('/admin-center/users-manager/create-new-user', $data)
+            ->seeJson([
+                'success' => false,
+                'errors' => ['user_password' => trans('validation.check_auth_user_password')]
+            ]);
+
+        // Make sure user was not inserted in database
+        $this->notSeeInDatabase('users', [
+            'email' => $user->email
+        ]);
+    }
+
 }
