@@ -9,6 +9,7 @@ use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
 use App\Helpers\Roles;
 use App\Helpers\Searches;
+use App\Helpers\Settings;
 use App\Helpers\UserActions;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\AdminCenter\UsersManager\CreateNewUserRequest;
@@ -40,6 +41,7 @@ use App\Product;
 use App\Subscription;
 use App\User;
 use App\UserAction;
+use App\UserSetting;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -104,11 +106,17 @@ class UsersManagerController extends BaseController {
 
         $roles = new Roles();
 
-        User::create([
+        $user = User::create([
             'email' => $request->get('new_user_email'),
             'password' => bcrypt($request->get('new_user_password')),
             'special_user' => (bool) $request->get('make_special_user'),
             'role_id' => $roles->getUserRoleId()
+        ]);
+
+        // Generate user settings
+        UserSetting::insert([
+            'user_id' => $user->id,
+            'language_id' => Settings::defaultLanguageId()
         ]);
 
         $response = new AjaxResponse();

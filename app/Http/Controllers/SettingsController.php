@@ -64,7 +64,7 @@ class SettingsController extends BaseController {
         $settings->email = Auth::user()->email;
 
         $response->addExtraFields(['data' => $settings]);
-        $response->setSuccessMessage('bau');
+        $response->setSuccessMessage('success');
         return response($response->get());
 
     }

@@ -42,6 +42,12 @@ class Settings {
      */
     public static function displayedBills() {
         $settings = Auth::user()->settings()->first();
+
+        // If settings does not exists return a default number
+        if (!$settings) {
+            return 10;
+        }
+
         return $settings->displayed_bills;
     }
 
@@ -52,6 +58,11 @@ class Settings {
      */
     public static function displayedClients() {
         $settings = Auth::user()->settings()->first();
+
+        // Make sure displayed clients exists
+        if (!$settings) {
+            return 10;
+        }
         return $settings->displayed_clients;
     }
 
@@ -62,6 +73,11 @@ class Settings {
      */
     public static function displayedProducts() {
         $settings = Auth::user()->settings()->first();
+
+        // Make sure displayed products exists
+        if (!$settings) {
+            return 10;
+        }
         return $settings->displayed_products;
     }
 
@@ -72,6 +88,11 @@ class Settings {
      */
     public static function displayedCustomProducts() {
         $settings = Auth::user()->settings()->first();
+
+        // Make sure displayed custom products exists
+        if (!$settings) {
+            return 10;
+        }
         return $settings->displayed_custom_products;
     }
 
@@ -87,6 +108,10 @@ class Settings {
         }
         return 'en';
     }
+
+    /**
+     * @return mixed
+     */
     public static function defaultLanguageId() {
         $language = Language::select('id')->first();
         return $language->id;
