@@ -58,6 +58,7 @@ class RegisterController extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function register(CreateAccountRequest $request) {
+        $response = new AjaxResponse();
         $roles = new Roles();
         // Build user data array
         $data = [
@@ -89,6 +90,12 @@ class RegisterController extends Controller {
         // Get offer
         $offer = Offer::where('use_on_sign_up', true)->first();
 
+        // Make sure offer exists
+        if (!$offer) {
+            $response->setFailMessage(trans('register.no_offer_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
         // Create subscription
         $subscription = new Subscription();
         $subscription->setAmount(30)
@@ -113,7 +120,6 @@ class RegisterController extends Controller {
         $subscriptionModel->status = 'waiting';
         $subscriptionModel->save();
 
-        $response = new AjaxResponse();
         $response->setSuccessMessage(trans('register.account_created'));
         return response($response->get());
 
