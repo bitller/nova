@@ -7,6 +7,7 @@ return [
     'can_i_cancel_answer' => 'Desigur. Durează câteva secunde și este foarte simplu. Vizitați pagina cu setări, dați click pe "Anulează abonamentul" și asta este, abonamentul dumneavoastră a fost anulat.',
     'can_i_cancel_question' => 'Pot întrerupe abonamentul oricând?',
     'card_number' => 'Numărul cardului',
+    'card_number_error' => 'Numărul cardului este invalid',
     'choose_password' => 'Alege o parolă',
     'confirm_password' => 'Confirmați parola',
     'copyright' => 'Nova App - toate drepturile rezervate',

@@ -5,6 +5,7 @@ return [
     'account_password' => 'Account password',
     'can_i_cancel_question' => 'Can I cancel my subscription at any time?',
     'card_number' => 'Credit card number',
+    'card_number_error' => 'Card number is invalid',
     'choose_password' => 'Please choose a password',
     'confirm_password' => 'Confirm password',
     'copyright' => 'Nova App - All rights reserved',
