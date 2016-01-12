@@ -34,7 +34,7 @@ class ChangeUserPasswordRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'new_password' => ['required', 'confirmed', 'min:6'],
+            'new_password' => ['required', 'confirmed', 'string', 'min:6'],
         ];
     }
 

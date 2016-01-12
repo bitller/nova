@@ -605,6 +605,14 @@ class UsersManagerController extends BaseController {
      * @return mixed
      */
     public function disableUserAccount($userId, DisableUserAccountRequest $request) {
+
+        // Make sure user id exists
+        if (!User::where('id', $userId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
         return \App\Helpers\AdminCenter\User::changeAccountStatus(0, $userId);
     }
 
@@ -628,9 +636,16 @@ class UsersManagerController extends BaseController {
      */
     public function deleteUserAccount($userId, DeleteUserAccountRequest $request) {
 
+        $response = new AjaxResponse();
+
+        // Make sure user id exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
         Subscription::where('user_id', $userId)->delete();
         User::where('id', $userId)->delete();
-        $response = new AjaxResponse();
         $response->setSuccessMessage(trans('users_manager.account_deleted'));
 
         return response($response->get())->header('Content-Type', 'application/json');
