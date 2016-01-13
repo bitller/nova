@@ -60,7 +60,6 @@ $factory->define(App\Client::class, function($faker) {
 
 // Generate a bill
 $factory->define(App\Bill::class, function($faker) {
-
     return [
         'campaign_order' => rand(1, 6),
         'campaign_number' => rand(1, 13),
@@ -68,7 +67,12 @@ $factory->define(App\Bill::class, function($faker) {
         'payment_term' => date('Y-m-d'),
         'other_details' => $faker->paragraph()
     ];
+});
 
+// Generate paid bill
+$factory->defineAs(App\Bill::class, 'paid', function($faker) use ($factory) {
+    $bill = $factory->raw(App\Bill::class);
+    return array_merge($bill, ['paid' => 1]);
 });
 
 // Generate product

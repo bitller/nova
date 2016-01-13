@@ -170,6 +170,13 @@ class UsersManagerController extends BaseController {
      * @return mixed
      */
     public function getUserBills($userId, GetUserBillsRequest $request) {
+
+        if (!User::where('id', $userId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
         return Bills::get(false, $userId);
     }
 
@@ -198,6 +205,14 @@ class UsersManagerController extends BaseController {
      * @return mixed
      */
     public function getUserPaidBills($userId, GetUserPaidBillsRequest $request) {
+
+        // Make sure user exists
+        if (!User::where('id', $userId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
         return Bills::get(true, $userId);
     }
 
