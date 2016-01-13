@@ -624,6 +624,14 @@ class UsersManagerController extends BaseController {
      * @return mixed
      */
     public function enableUserAccount($userId, EnableUserAccountRequest $request) {
+
+        // Make sure user exists
+        if (!User::where('id', $userId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
         return \App\Helpers\AdminCenter\User::changeAccountStatus(1, $userId);
     }
 
