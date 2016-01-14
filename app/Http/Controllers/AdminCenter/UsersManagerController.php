@@ -283,8 +283,15 @@ class UsersManagerController extends BaseController {
      */
     public function deleteUserBill($userId, DeleteUserBillRequest $request) {
 
-        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->delete();
         $response = new AjaxResponse();
+
+        // Make sure user bill exists
+        if (!Bill::where('user_id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.bill_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->delete();
         $response->setSuccessMessage(trans('users_manager.user_bill_deleted'));
 
         return response($response->get())->header('Content-Type', 'application/json');
@@ -331,8 +338,15 @@ class UsersManagerController extends BaseController {
      */
     public function deleteAllUserBills($userId, DeleteAllUserBillsRequest $request) {
 
-        Bill::where('user_id', $userId)->delete();
         $response = new AjaxResponse();
+
+        // Make sure user exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        Bill::where('user_id', $userId)->delete();
         $response->setSuccessMessage(trans('users_manager.all_user_bills_deleted'));
 
         return response($response->get())->header('Content-Type', 'application/json');
@@ -347,8 +361,15 @@ class UsersManagerController extends BaseController {
      */
     public function deleteUserUnpaidBills($userId, DeleteUserUnpaidBillsRequest $request) {
 
-        Bill::where('user_id', $userId)->where('paid', 0)->delete();
         $response = new AjaxResponse();
+
+        // Make sure user exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        Bill::where('user_id', $userId)->where('paid', 0)->delete();
         $response->setSuccessMessage(trans('users_manager.user_unpaid_bills_deleted'));
 
         return response($response->get())->header('Content-Type', 'application/json');
