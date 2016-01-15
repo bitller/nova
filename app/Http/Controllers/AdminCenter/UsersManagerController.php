@@ -306,8 +306,21 @@ class UsersManagerController extends BaseController {
      */
     public function makeUserBillPaid($userId, MakeUserBillPaidRequest $request) {
 
-        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->update(['paid' => 1]);
         $response = new AjaxResponse();
+
+        // Make sure user exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Make sure bill belongs to this user
+        if (!Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->count()) {
+            $response->setFailMessage(trans('users_manager.bill_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->update(['paid' => 1]);
         $response->setSuccessMessage(trans('users_manager.user_bill_is_paid'));
 
         return response($response->get())->header('Content-Type', 'application/json');
@@ -322,8 +335,21 @@ class UsersManagerController extends BaseController {
      */
     public function makeUserBillUnpaid($userId, MakeUserBillUnpaidRequest $request) {
 
-        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->update(['paid' => 0]);
         $response = new AjaxResponse();
+
+        // Make sure user exists
+        if (!User::where('id', $userId)->count()) {
+            $response->setFailMessage(trans('users_manager.user_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        // Make sure bill belongs to this user
+        if (!Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->count()) {
+            $response->setFailMessage(trans('users_manager.bill_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
+        Bill::where('user_id', $userId)->where('id', $request->get('bill_id'))->update(['paid' => 0]);
         $response->setSuccessMessage(trans('users_manager.user_bill_is_unpaid'));
 
         return response($response->get())->header('Content-Type', 'application/json');

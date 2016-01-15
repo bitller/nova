@@ -33,7 +33,9 @@ class MakeUserBillUnpaidRequest extends AjaxRequest {
      * @return array
      */
     public function rules() {
-        return [];
+        return [
+            'bill_id' => ['required', 'exists:bills,id']
+        ];
     }
 
 }
