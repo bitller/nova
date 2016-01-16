@@ -505,6 +505,12 @@ class UsersManagerController extends BaseController {
             return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
         }
 
+        // Make sure client belongs to current user
+        if (!Client::where('user_id', $userId)->where('id', $request->get('client_id'))->count()) {
+            $response->setFailMessage(trans('users_manager.client_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
         // Delete client
         Client::where('user_id', $userId)->where('id', $request->get('client_id'))->delete();
 

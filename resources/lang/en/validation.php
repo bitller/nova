@@ -108,6 +108,7 @@ return [
 
     'attributes' => [
         'bill_id' => 'bill id',
+        'client_id' => 'client id',
         'email' => 'email',
         'new_password' => 'new password',
         'new_user_email' => 'new user email',
