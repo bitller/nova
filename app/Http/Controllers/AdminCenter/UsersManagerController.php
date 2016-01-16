@@ -535,6 +535,12 @@ class UsersManagerController extends BaseController {
             return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
         }
 
+        // Make sure custom product belongs to current user
+        if (!Product::where('user_id', $userId)->where('id', $request->get('custom_product_id'))->count()) {
+            $response->setFailMessage(trans('users_manager.product_not_found'));
+            return response($response->get(), $response->badRequest())->header('Content-Type', 'application/json');
+        }
+
         // Delete custom product
         Product::where('id', $request->get('custom_product_id'))->where('user_id', $userId)->delete();
 
