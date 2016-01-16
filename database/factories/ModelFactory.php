@@ -161,9 +161,33 @@ $factory->define(App\Action::class, function() {
     return [];
 });
 
-// Empty user action
-$factory->define(App\UserAction::class, function() {
-    return [];
+// Allowed user action
+$factory->define(App\UserAction::class, function($faker) {
+    return [
+        'message' => $faker->sentence(),
+        'action_id' => \App\Action::where('type', 'allowed')->first()->id
+    ];
+});
+
+// Info user action
+$factory->defineAs(App\UserAction::class, 'info', function($faker) use ($factory) {
+    $userAction = $factory->raw(\App\UserAction::class);
+    $userAction['action_id'] = \App\Action::where('type', 'info')->first()->id;
+    return $userAction;
+});
+
+// Wrong format user action
+$factory->defineAs(\App\UserAction::class, 'wrong_format', function($faker) use ($factory) {
+    $userAction = $factory->raw(\App\UserAction::class);
+    $userAction['action_id'] = \App\Action::where('type', 'wrong_format')->first()->id;
+    return $userAction;
+});
+
+// Not allowed user action
+$factory->defineAs(\App\UserAction::class, 'not_allowed', function($faker) use ($factory) {
+    $userAction = $factory->raw(\App\UserAction::class);
+    $userAction['action_id'] = \App\Action::where('type', 'not_allowed')->first()->id;
+    return $userAction;
 });
 
 /**
