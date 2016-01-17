@@ -97,7 +97,7 @@
                         <tr>
                             <th class="text-center">{{ trans('bill.page') }}</th>
                             <th class="text-center">{{ trans('bill.code') }}</th>
-                            <th>{{ trans('bill.name') }}</th>
+                            <th class="text-center">{{ trans('bill.name') }}</th>
                             <th class="text-center">{{ trans('bill.quantity') }}</th>
                             <th class="text-center">{{ trans('bill.price') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.discount') }}</th>
@@ -109,7 +109,7 @@
                     <tr v-repeat="product in bill.products">
                         <td class="text-center editable"  v-on="click: editPage(product.page, product.id, product.code, product.bill_product_id)">@{{ product.page }}</td>
                         <td class="text-center">@{{ product.code }}</td>
-                        <td>@{{ product.name }}</td>
+                        <td class="text-center">@{{ product.name }}</td>
                         <td class="text-center editable" v-on="click: editQuantity(product.quantity, product.id, product.code, product.bill_product_id)">@{{ product.quantity }}</td>
                         <td class="text-center editable" v-on="click: editPrice(product.price, product.id, product.code, product.bill_product_id)">@{{ product.price }} ron</td>
                         <td class="text-center editable" v-show="bill.show_discount_column" v-on="click: editDiscount(product.discount, product.id, product.code, product.bill_product_id)">@{{ product.discount }}% - @{{ product.calculated_discount }} ron</td>
