@@ -33,14 +33,6 @@
                         </button>
                         <ul class="dropdown-menu">
 
-                            <!-- BEGIN Print bill -->
-                            <li v-on="click: printBill">
-                                <a href="#">
-                                    <span class="glyphicon glyphicon-print"></span> {{ trans('bill.print') }}
-                                </a>
-                            </li>
-                            <!-- END Print bill -->
-
                             <!-- BEGIN Edit other details -->
                             <li>
                                 <a href="#" v-on="click: resetOtherDetailsModal()" data-toggle="modal" data-target="#other-details-modal">
