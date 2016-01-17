@@ -8,7 +8,7 @@
 
             <!-- BEGIN Top part -->
             <div class="add-product-button row">
-                <span class="avon-products">@{{ name }}</span>
+                <span class="avon-products">@{{ name }} - @{{ product.code }}</span>
 
                 <div class="btn-toolbar pull-right" v-show="!product.is_application_product">
 
