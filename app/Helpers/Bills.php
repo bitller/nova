@@ -80,6 +80,8 @@ class Bills {
         $showDiscount = false;
         $price = 0;
         $finalPrice = 0;
+
+        // Calculate price and final price
         foreach ($secondQuery as $billProduct) {
             if ($billProduct->discount) {
                 $showDiscount = true;
@@ -234,7 +236,7 @@ class Bills {
         }
 
         Auth::user()->bills()->where('id', $billId)->update([
-            'payment_term' => $paymentTerm
+            'payment_term' => date('Y-m-d', time($paymentTerm))
         ]);
 
         $response->setSuccessMessage(trans('bill.payment_term_updated'));
