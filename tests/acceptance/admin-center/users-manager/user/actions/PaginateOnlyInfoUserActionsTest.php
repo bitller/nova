@@ -40,9 +40,9 @@ class PaginateOnlyInfoUserActionsTest extends TestCase {
         factory(\App\UserAction::class, 'info', 4)->create(['user_id' => $this->user->id]);
 
         $this->actingAs($this->admin)
-            ->post('/admin-center/users-manager/user/' . $this->user->id . '/get-actions/info')
+            ->get('/admin-center/users-manager/user/' . $this->user->id . '/get-actions/info')
             ->seeJson([
-                'total' => 11
+                'total' => 4
             ]);
     }
 
@@ -55,7 +55,7 @@ class PaginateOnlyInfoUserActionsTest extends TestCase {
         factory(\App\UserAction::class, 'wrong_format')->create(['user_id' => $this->user->id]);
 
         $this->actingAs($this->admin)
-            ->post('/admin-center/users-manager/user/' . rand(1000, 9999) . '/get-actions/info')
+            ->get('/admin-center/users-manager/user/string' . rand(1000, 9999) . '/get-actions/info')
             ->seeJson([
                 'success' => false,
                 'message' => trans('users_manager.user_not_found')
