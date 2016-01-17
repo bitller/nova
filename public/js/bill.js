@@ -646,7 +646,7 @@ $(document).ready(function() {
     });
 
 
-    $('#payment-term').datepicker({dateFormat: 'yy-m-d'});
+    $('#payment-term').datepicker({dateFormat: 'dd-mm-yy'});
 
     $('[data-toggle="tooltip"]').tooltip();
 
