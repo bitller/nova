@@ -226,7 +226,7 @@ class Bills {
     public static function updatePaymentTerm($billId, $paymentTerm) {
 
         $response = new AjaxResponse();
-
+        dd($paymentTerm);
         // Check if bill exists and belongs to current user
         $bill = Auth::user()->bills()->where('id', $billId)->first();
 
