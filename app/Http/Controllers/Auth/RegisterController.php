@@ -58,8 +58,10 @@ class RegisterController extends Controller {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function register(CreateAccountRequest $request) {
+
         $response = new AjaxResponse();
         $roles = new Roles();
+
         // Build user data array
         $data = [
             'email' => $request->get('email'),

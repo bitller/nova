@@ -22,22 +22,22 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
-                        <th><span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}</th>
-                        <th><span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}</th>
-                        <th><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.price') }}</th>
-                        <th><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bills.created_at') }}</th>
-                        <th><span class="glyphicon glyphicon-trash icon-color"></span>&nbsp; {{ trans('common.delete') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.price') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bills.created_at') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-trash icon-color"></span>&nbsp; {{ trans('common.delete') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-repeat="bill in paid_bills.data">
-                        <td class="vert-align"><a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a></td>
-                        <td class="vert-align">@{{ bill.campaign_order }}</td>
-                        <td class="vert-align">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
-                        <td class="vert-align">@{{ bill.price }} ron</td>
-                        <td class="vert-align">@{{ bill.human_date }}</td>
-                        <td class="vert-align"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, paid_bills.current_page, paid_bills.to-paid_bills.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                        <td class="vert-align text-center"><a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a></td>
+                        <td class="vert-align text-center">@{{ bill.campaign_order }}</td>
+                        <td class="vert-align text-center">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
+                        <td class="vert-align text-center">@{{ bill.price }} ron</td>
+                        <td class="vert-align text-center">@{{ bill.human_date }}</td>
+                        <td class="vert-align text-center"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, paid_bills.current_page, paid_bills.to-paid_bills.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                     </tr>
                     </tbody>
                 </table>
