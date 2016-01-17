@@ -236,8 +236,7 @@ class Bills {
         }
 
         Auth::user()->bills()->where('id', $billId)->update([
-//            'payment_term' => date('YYYY-mm-dd', time($paymentTerm))
-            'payment_term' => '2016-01-19'
+            'payment_term' => date('Y-m-d', strtotime($paymentTerm))
         ]);
 
         $response->setSuccessMessage(trans('bill.payment_term_updated'));
