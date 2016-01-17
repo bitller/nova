@@ -61,9 +61,12 @@
             </div>
             <!-- END Product statistics -->
 
+            <div class="fancy-divider">
+                <span>{{ trans('product_details.bills_that_contain_product') }}</span>
+            </div>
+
             <!-- BEGIN Not paid bills that contain this product -->
             <div class="row client-bills" v-show="product.not_paid_bills[0]">
-                <h4>{{ trans('product_details.bills_that_contain_product') }}</h4>
                 <div class="panel panel-default">
                     <table class="table table-bordered">
                         <thead>
@@ -88,9 +91,12 @@
             </div>
             <!-- END Not paid bills that contain this product -->
 
+            <div class="fancy-divider">
+                <span>{{ trans('product_details.paid_bills_that_contain_product') }}</span>
+            </div>
+
             <!-- BEGIN Paid bills that contain this product -->
             <div class="row client-bills" v-show="product.paid_bills[0]">
-                <h4>{{ trans('product_details.paid_bills_that_contain_product') }}</h4>
                 <div class="panel panel-default">
                     <table class="table table-bordered">
                         <thead>
