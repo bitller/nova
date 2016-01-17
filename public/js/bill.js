@@ -546,9 +546,9 @@ $(document).ready(function() {
                 }
             },
             cache: false,
-            url: 'http://localhost:8888/bills/11/suggest-products?product_code=',
+            url: '/bills/' + $('#bill').attr('bill-id') + '/suggest-products?product_code=',
             replace: function() {
-                var url = 'http://localhost:8888/bills/11/suggest-products?product_code=';
+                var url = '/bills/' + $('#bill').attr('bill-id') + '/suggest-products?product_code=';
                 if ($('#product-code').val()) {
                     url += encodeURIComponent($('#product-code').val())
                 }
