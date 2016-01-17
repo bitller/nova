@@ -62,6 +62,13 @@ new Vue({
         },
 
         /**
+         * Print bill.
+         */
+        printBill: function() {
+            window.print();
+        },
+
+        /**
          *
          * @param productId
          * @param productCode

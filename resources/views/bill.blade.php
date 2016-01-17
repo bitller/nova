@@ -27,7 +27,7 @@
                         <ul class="dropdown-menu">
 
                             <!-- BEGIN Print bill -->
-                            <li>
+                            <li v-on="click: printBill">
                                 <a href="#">
                                     <span class="glyphicon glyphicon-print"></span> {{ trans('bill.print') }}
                                 </a>
