@@ -74,6 +74,8 @@ class Bills {
 
         if ($bill->payment_term === '0000-00-00') {
             $bill->payment_term = false;
+        } else {
+            $bill->payment_term = date('d-m-Y', strtotime($bill->payment_term));
         }
 
         // Calculate bill price, saved money and check if discount column should be displayed
