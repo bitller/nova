@@ -61,7 +61,7 @@
             </div>
             <!-- END Product statistics -->
 
-            <div class="fancy-divider">
+            <div class="fancy-divider" v-show="product.not_paid_bills[0]">
                 <span class="product-details">{{ trans('product_details.bills_that_contain_product') }}</span>
             </div>
 
@@ -91,7 +91,7 @@
             </div>
             <!-- END Not paid bills that contain this product -->
 
-            <div class="fancy-divider">
+            <div class="fancy-divider" v-show="product.paid_bills[0]">
                 <span class="product-details">{{ trans('product_details.paid_bills_that_contain_product') }}</span>
             </div>
 
