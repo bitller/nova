@@ -240,7 +240,7 @@ class Bills {
         ]);
 
         $response->setSuccessMessage(trans('bill.payment_term_updated'));
-        $response->addExtraFields(['payment_term' => date('d-m-Y', strtotime($paymentTerm)]);
+        $response->addExtraFields(['payment_term' => date('d-m-Y', strtotime($paymentTerm))]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
