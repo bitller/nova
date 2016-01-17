@@ -18,6 +18,13 @@
 
                 <!-- BEGIN Action buttons -->
                 <div class="btn-toolbar pull-right">
+
+                    <!-- BEGIN Print button -->
+                    <button type="button" class="btn btn-warning" v-on="click: printBill">
+                        <span class="glyphicon glyphicon-print"></span>
+                    </button>
+                    <!-- END Print button -->
+
                     <!-- BEGIN Options button -->
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
