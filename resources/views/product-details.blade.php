@@ -62,7 +62,7 @@
             <!-- END Product statistics -->
 
             <div class="fancy-divider">
-                <span>{{ trans('product_details.bills_that_contain_product') }}</span>
+                <span class="product-details">{{ trans('product_details.bills_that_contain_product') }}</span>
             </div>
 
             <!-- BEGIN Not paid bills that contain this product -->
@@ -71,19 +71,19 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>{{ trans('product_details.client_name') }}</th>
-                            <th>{{ trans('bills.campaign_order') }}</th>
-                            <th>{{ trans('bills.campaign') }}</th>
-                            <th>{{ trans('bills.created_at') }}</th>
+                            <th class="text-center">{{ trans('product_details.client_name') }}</th>
+                            <th class="text-center">{{ trans('bills.campaign_order') }}</th>
+                            <th class="text-center">{{ trans('bills.campaign') }}</th>
+                            <th class="text-center">{{ trans('bills.created_at') }}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <tr v-repeat="not_paid_bill in product.not_paid_bills">
-                            <td><a href="/bills/@{{ not_paid_bill.id }}">@{{ not_paid_bill.client_name }}</a></td>
-                            <td>@{{ not_paid_bill.campaign_order }}</td>
-                            <td>@{{ not_paid_bill.campaign_number }}/@{{ not_paid_bill.campaign_year }}</td>
-                            <td>@{{ not_paid_bill.created_at }}</td>
+                            <td class="text-center"><a href="/bills/@{{ not_paid_bill.id }}">@{{ not_paid_bill.client_name }}</a></td>
+                            <td class="text-center">@{{ not_paid_bill.campaign_order }}</td>
+                            <td class="text-center">@{{ not_paid_bill.campaign_number }}/@{{ not_paid_bill.campaign_year }}</td>
+                            <td class="text-center">@{{ not_paid_bill.created_at }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -92,7 +92,7 @@
             <!-- END Not paid bills that contain this product -->
 
             <div class="fancy-divider">
-                <span>{{ trans('product_details.paid_bills_that_contain_product') }}</span>
+                <span class="product-details">{{ trans('product_details.paid_bills_that_contain_product') }}</span>
             </div>
 
             <!-- BEGIN Paid bills that contain this product -->
@@ -101,19 +101,19 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>{{ trans('product_details.client_name') }}</th>
-                            <th>{{ trans('bills.campaign_order') }}</th>
-                            <th>{{ trans('bills.campaign') }}</th>
-                            <th>{{ trans('bills.created_at') }}</th>
+                            <th class="text-center">{{ trans('product_details.client_name') }}</th>
+                            <th class="text-center">{{ trans('bills.campaign_order') }}</th>
+                            <th class="text-center">{{ trans('bills.campaign') }}</th>
+                            <th class="text-center">{{ trans('bills.created_at') }}</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <tr v-repeat="paid_bill in product.paid_bills">
-                            <td><a href="/bills/@{{ paid_bill.id }}">@{{ paid_bill.client_name }}</a></td>
-                            <td>@{{ paid_bill.campaign_order }}</td>
-                            <td>@{{ paid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
-                            <td>@{{ paid_bill.created_at }}</td>
+                            <td class="text-center"><a href="/bills/@{{ paid_bill.id }}">@{{ paid_bill.client_name }}</a></td>
+                            <td class="text-center">@{{ paid_bill.campaign_order }}</td>
+                            <td class="text-center">@{{ paid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
+                            <td class="text-center">@{{ paid_bill.created_at }}</td>
                         </tr>
                         </tbody>
                     </table>

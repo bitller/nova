@@ -7234,6 +7234,11 @@ button.close {
 .avon-products {
   font-size: 20px; }
 
+.fancy-divider .product-details {
+  font-size: 20px;
+  padding-top: 6px;
+  display: inline-block; }
+
 .custom-jumbotron {
   margin-top: -10px;
   color: #878787;
