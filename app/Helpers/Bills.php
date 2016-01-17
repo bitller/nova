@@ -226,7 +226,7 @@ class Bills {
     public static function updatePaymentTerm($billId, $paymentTerm) {
 
         $response = new AjaxResponse();
-        dd($paymentTerm);
+
         // Check if bill exists and belongs to current user
         $bill = Auth::user()->bills()->where('id', $billId)->first();
 
@@ -236,7 +236,7 @@ class Bills {
         }
 
         Auth::user()->bills()->where('id', $billId)->update([
-            'payment_term' => date('Y-m-d', time($paymentTerm))
+            'payment_term' => date('YYYY-mm-dd', time($paymentTerm))
         ]);
 
         $response->setSuccessMessage(trans('bill.payment_term_updated'));
