@@ -15,7 +15,8 @@
   display: none;
 }
 
-.print-detail {
-  display: inline;
+.print-details span {
+  display: inline-block;
   width: 100px;
+  border: 1px solid grey;
 }

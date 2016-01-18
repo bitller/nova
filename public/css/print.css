@@ -10,8 +10,9 @@
 .delete-product {
   display: none; }
 
-.print-details {
+.print-details span {
   display: inline-block;
-  width: 100px; }
+  width: 100px;
+  border: 1px solid grey; }
 
 /*# sourceMappingURL=print.css.map */
