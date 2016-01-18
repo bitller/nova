@@ -1,4 +1,9 @@
 @extends('layout')
+
+@section('styles')
+    <link rel="stylesheet" media="print" href="/css/print.css">
+@endsection
+
 @section('content')
     @include('includes.ajax-translations.bill')
 
@@ -17,10 +22,10 @@
                 <!-- END Client name and campaign details -->
 
                 <!-- BEGIN Action buttons -->
-                <div class="btn-toolbar pull-right">
+                <div class="action-buttons btn-toolbar pull-right">
 
                     <!-- BEGIN Print button -->
-                    <button type="button" class="btn btn-warning" v-on="click: printBill">
+                    <button type="button" class="btn btn-default" v-on="click: printBill">
                         <span class="glyphicon glyphicon-print"></span>
                     </button>
                     <!-- END Print button -->

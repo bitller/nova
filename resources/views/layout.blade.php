@@ -5,6 +5,7 @@
     <meta id="token" content="{{ csrf_token() }}">
     <title>Nova</title>
     <link rel="stylesheet" href="/css/app.css">
+    @yield('styles')
     <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     @yield('fonts')
 </head>

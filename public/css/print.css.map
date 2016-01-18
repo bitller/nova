@@ -1,0 +1,1 @@
+{"version":3,"sources":["print.scss"],"names":[],"mappings":"AAAA;EACE,eAAc,EADC;;AAIjB;EACE,oBAAmB,EADF","file":"print.css","sourcesContent":[".action-buttons {\n  display: none;\n}\n\n.my-clients-title {\n  text-align: center;\n}"],"sourceRoot":"/source/"}
