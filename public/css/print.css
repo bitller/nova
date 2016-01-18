@@ -10,9 +10,12 @@
 .delete-product {
   display: none; }
 
-.print-details span {
+.printed-details {
+  border: 1px solid blue; }
+
+.printed-details span {
   display: inline-block;
   width: 100px;
-  border: 1px solid grey; }
+  border: 1px solid red; }
 
 /*# sourceMappingURL=print.css.map */
