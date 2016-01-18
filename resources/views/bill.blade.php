@@ -168,8 +168,8 @@
             <div class="alert alert-info" v-show="!bill.total">{{ trans('bill.empty_bill') }}</div>
 
             <div class="printed-details">
-                <span>1st detail</span>
-                <span>2nd detail</span>
+                <span class="left">1st detail</span>
+                <span class="center">2nd detail</span>
                 <span>3th detail</span>
             </div>
 

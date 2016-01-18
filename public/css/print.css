@@ -17,11 +17,13 @@
 
 .printed-details span {
   display: inline-block;
-  text-align: center;
   width: 20%;
   border: 1px solid red; }
 
 .printed-details span .left {
-  left: 0; }
+  margin-right: 20%; }
+
+.printed-details span .center {
+  margin-right: 20%; }
 
 /*# sourceMappingURL=print.css.map */
