@@ -2,6 +2,12 @@
   display: none; }
 
 .my-clients-title {
-  text-align: center; }
+  display: none; }
+
+.bill-title-print {
+  display: block; }
+
+.delete-product {
+  display: none; }
 
 /*# sourceMappingURL=print.css.map */

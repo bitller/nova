@@ -21,6 +21,12 @@
                 </span>
                 <!-- END Client name and campaign details -->
 
+                <div class="text-center bill-title-print">
+                    <span>
+                        @{{ bill.data.client_name }}
+                    </span>
+                </div>
+
                 <!-- BEGIN Action buttons -->
                 <div class="action-buttons btn-toolbar pull-right">
 
@@ -106,7 +112,7 @@
                             <th class="text-center">{{ trans('bill.price') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.discount') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.final_price') }}</th>
-                            <th class="text-center">{{ trans('common.delete') }}</th>
+                            <th class="text-center delete-product">{{ trans('common.delete') }}</th>
                         </tr>
                     </thead>
                     <tbody>

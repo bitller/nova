@@ -3,5 +3,14 @@
 }
 
 .my-clients-title {
-  text-align: center;
+  display: none;
+}
+
+.bill-title-print {
+  display: block;
+}
+
+// Hide delte product column
+.delete-product {
+  display: none;
 }
