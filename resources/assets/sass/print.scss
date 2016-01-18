@@ -10,7 +10,12 @@
   display: block;
 }
 
-// Hide delte product column
+// Hide delete product column
 .delete-product {
   display: none;
+}
+
+.print-details {
+  display: inline-block;
+  width: 100px;
 }
