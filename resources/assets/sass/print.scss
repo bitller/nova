@@ -17,10 +17,17 @@
 
 .printed-details {
   border: 1px solid blue;
+  text-align: center;
+  width: 100%;
 }
 
 .printed-details span {
   display: inline-block;
-  width: 100px;
+  text-align: center;
+  width: 20%;
   border: 1px solid red;
+}
+
+.printed-details span .left {
+  left: 0;
 }
