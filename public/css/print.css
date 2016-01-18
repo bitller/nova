@@ -10,18 +10,21 @@
 .delete-product {
   display: none; }
 
+.print-detail {
+  display: none; }
+
 .printed-details {
-  border: 1px solid blue;
-  width: 1200px; }
+  text-align: center; }
 
 .printed-details span {
   display: inline-block;
   text-align: center;
   width: 20%;
-  border: 1px solid red; }
+  border: 1px solid grey;
+  border-radius: 2px; }
 
 .printed-details span .center {
-  margin-right: 20%;
-  margin-left: 20%; }
+  padding-right: 20%;
+  padding-left: 20%; }
 
 /*# sourceMappingURL=print.css.map */
