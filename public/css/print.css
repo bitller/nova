@@ -12,11 +12,11 @@
 
 .printed-details {
   border: 1px solid blue;
-  text-align: center;
   width: 100%; }
 
 .printed-details span {
   display: inline-block;
+  text-align: center;
   width: 20%;
   border: 1px solid red; }
 
