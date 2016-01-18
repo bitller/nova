@@ -17,7 +17,7 @@
 
 .printed-details {
   border: 1px solid blue;
-  width: 100%;
+  width: 1200px;
 }
 
 .printed-details span {
@@ -27,10 +27,7 @@
   border: 1px solid red;
 }
 
-.printed-details span .left {
-  margin-right: 20px;
-}
-
 .printed-details span .center {
   margin-right: 20%;
+  margin-left: 20%;
 }
