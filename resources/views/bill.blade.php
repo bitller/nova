@@ -142,7 +142,7 @@
             <!-- END Bill other details -->
 
             <!-- BEGIN Bill payment term -->
-            <div class="well well-sm custom-well col-md-3 text-center visible-print" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-3 text-center hide-print" v-show="bill.total">
                 <span v-show="payment_term" class="text-center">{{ trans('bill.payment_term') }}: <strong>@{{ payment_term }}</strong></span>
                 <span v-show="!payment_term" class="text-center">{{ trans('bill.payment_term_not_set') }}</span>
             </div>
@@ -151,7 +151,7 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total price -->
-            <div class="well well-sm custom-well col-md-2 text-center visible-print" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-2 text-center hide-print" v-show="bill.total">
                 <span class="text-center">{{ trans('bill.to_pay') }}: <strong>@{{ to_pay }} ron</strong></span>
             </div>
             <!-- END Bill total price -->
@@ -159,7 +159,7 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total discount -->
-            <div class="well well-sm custom-well col-md-3 text-center visible-print" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-3 text-center hide-print" v-show="bill.total">
                 <span v-show="saved_money">{{ trans('bill.saved_money') }}: <strong>@{{ saved_money }} ron</strong></span>
                 <span v-show="!saved_money">{{ trans('bill.number_of_products') }}: <strong>@{{ number_of_products }}</strong></span>
             </div>
@@ -167,7 +167,7 @@
 
             <div class="alert alert-info" v-show="!bill.total">{{ trans('bill.empty_bill') }}</div>
 
-            <div class="printed-details">
+            <div class="printed-details visible-print">
                 <span class="left">1st detail</span>
                 <span class="center">2nd detail</span>
                 <span>3th detail</span>

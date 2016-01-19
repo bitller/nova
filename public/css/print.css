@@ -19,12 +19,9 @@
 .printed-details span {
   display: inline-block;
   text-align: center;
-  width: 20%;
+  width: 33%;
   border: 1px solid grey;
-  border-radius: 2px; }
-
-.printed-details span .center {
-  padding-right: 20%;
-  padding-left: 20%; }
+  border-radius: 2px;
+  padding: 0 15px 0 15px; }
 
 /*# sourceMappingURL=print.css.map */
