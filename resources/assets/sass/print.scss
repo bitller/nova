@@ -26,8 +26,12 @@
 .printed-details span {
   display: inline-block;
   text-align: center;
-  width: 31%;
+  width: 30%;
   border: 1px solid grey;
   border-radius: 2px;
+}
+
+.printed-details span .center {
   margin-right: 15px;
+  margin-left: 15px;
 }
