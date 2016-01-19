@@ -13,6 +13,9 @@
 .print-detail {
   display: none; }
 
+.printed-details {
+  text-align: center; }
+
 .printed-details span {
   display: inline-block;
   text-align: center;
