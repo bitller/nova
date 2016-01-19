@@ -174,7 +174,7 @@
                 <div class="parent">
                     <div>{{ trans('bill.payment_term') }}:</div>
                     <div v-show="payment_term">@{{ payment_term }}</div>
-                    <div v-show="!payment_term">{{ trans('bill.payment_term_not_set') }}</div>
+                    <div v-show="!payment_term">{{ trans('bill.not_set') }}</div>
                 </div>
                 <!-- END Payment term -->
 

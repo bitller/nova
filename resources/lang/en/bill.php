@@ -30,6 +30,7 @@ return [
     'marked_as_unpaid' => 'Bill was marked as unpaid',
     'my_paid_bills' => 'My paid bills',
     'name' => 'Name',
+    'not_set' => 'not set',
     'number_of_products' => 'Number of products',
     'options' => 'Options',
     'order' => 'order',

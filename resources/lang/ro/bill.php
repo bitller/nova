@@ -30,6 +30,7 @@ return [
     'marked_as_unpaid' => 'Factura a fost marcată ca neplatită.',
     'my_paid_bills' => 'Facturile mele plătite',
     'name' => 'Nume',
+    'not_set' => 'nu a fost setat',
     'number_of_products' => 'Numărul de produse',
     'options' => 'Opțiuni',
     'order' => 'comanda',
