@@ -13,15 +13,12 @@
 .print-detail {
   display: none; }
 
-.printed-details {
-  text-align: center; }
-
 .printed-details span {
   display: inline-block;
   text-align: center;
   width: 33%;
   border: 1px solid grey;
   border-radius: 2px;
-  margin: 0 15px 0 15px; }
+  margin-left: s15px; }
 
 /*# sourceMappingURL=print.css.map */
