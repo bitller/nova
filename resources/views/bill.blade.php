@@ -171,7 +171,7 @@
             <div class="printed-details visible-print">
 
                 <!-- BEGIN Payment term -->
-                <div>
+                <div class="parent">
                     <div>{{ trans('bill.payment_term') }}:</div>
                     <div v-show="payment_term">@{{ payment_term }}</div>
                     <div v-show="!payment_term">{{ trans('bill.payment_term_not_set') }}</div>
@@ -179,21 +179,21 @@
                 <!-- END Payment term -->
 
                 <!-- BEGIN To pay -->
-                <div class="center">
+                <div class="center parent">
                     <div>{{ trans('bill.to_pay') }}:</div>
                     <div>@{{ to_pay }} ron</div>
                 </div>
                 <!-- END To pay -->
 
                 <!-- BEGIN Saved money -->
-                <div v-show="saved_money">
+                <div class="parent" v-show="saved_money">
                     <div>{{ trans('bill.saved_money') }}:</div>
                     <div>@{{ saved_money }} ron</div>
                 </div>
                 <!-- END Saved money -->
 
                 <!-- BEGIN Number of products -->
-                <div v-show="!saved_money">
+                <div class="parent" v-show="!saved_money">
                     <div>{{ trans('bill.number_of_products') }}:</div>
                     <div>@{{ number_of_products }}</div>
                 </div>

@@ -17,7 +17,7 @@
 .printed-details {
   text-align: center; }
 
-.printed-details div {
+.printed-details .parent {
   display: inline-block;
   text-align: center;
   width: 30%;
