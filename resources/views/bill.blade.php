@@ -167,13 +167,39 @@
 
             <div class="alert alert-info" v-show="!bill.total">{{ trans('bill.empty_bill') }}</div>
 
+            <!-- BEGIN Details displayed only on printed bills -->
             <div class="printed-details visible-print">
-                <span v-show="payment_term">{{ trans('bill.payment_term') }}: @{{ payment_term }}</span>
-                <span v-show="!payment_term">{{ trans('bill.payment_term_not_set') }}</span>
-                <span class="center">{{ trans('bill.to_pay') }}: @{{ to_pay }} ron</span>
-                <span v-show="saved_money">{{ trans('bill.saved_money') }}: @{{ saved_money }} ron</span>
-                <span v-show="!saved_money">{{ trans('bill.number_of_products') }}: @{{ number_of_products }}</span>
+
+                <!-- BEGIN Payment term -->
+                <div>
+                    <div>{{ trans('bill.payment_term') }}:</div>
+                    <div v-show="payment_term">@{{ payment_term }}</div>
+                    <div v-show="!payment_term">{{ trans('bill.payment_term_not_set') }}</div>
+                </div>
+                <!-- END Payment term -->
+
+                <!-- BEGIN To pay -->
+                <div class="center">
+                    <div>{{ trans('bill.to_pay') }}:</div>
+                    <div>@{{ to_pay }} ron</div>
+                </div>
+                <!-- END To pay -->
+
+                <!-- BEGIN Saved money -->
+                <div v-show="saved_money">
+                    <div>{{ trans('bill.saved_money') }}:</div>
+                    <div>@{{ saved_money }} ron</div>
+                </div>
+                <!-- END Saved money -->
+
+                <!-- BEGIN Number of products -->
+                <div v-show="!saved_money">
+                    <div>{{ trans('bill.number_of_products') }}:</div>
+                    <div>@{{ number_of_products }}</div>
+                </div>
+                <!-- END Number of products -->
             </div>
+            <!-- END Details displayed only on printed bills -->
 
         </div>
 

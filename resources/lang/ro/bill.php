@@ -39,7 +39,7 @@ return [
     'page' => 'Pagină',
     'page_updated' => 'Pagina produsului a fost actualizată!',
     'payment_term' => 'Termen de plată',
-    'payment_term_not_set' => 'Termen de plată nesetat',
+    'payment_term_not_set' => 'Termenul de plată nu a fost setat',
     'payment_term_updated' => 'Termenul de plată a fost actualizat!',
     'price' => 'Preţ',
     'price_updated' => 'Preţul produsului a fost actualizat!',
@@ -64,5 +64,5 @@ return [
     'set_payment_term_description' => 'Setează termenul de plată al facturii',
     'set_payment_term_placeholder' => 'ZZ/LL/AAAA',
     'tooltip' => 'Această factură a fost platită.',
-    'to_pay' => 'De plată',
+    'to_pay' => 'Trebuie să plătiți',
 ];
