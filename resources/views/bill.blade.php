@@ -168,9 +168,10 @@
             <div class="alert alert-info" v-show="!bill.total">{{ trans('bill.empty_bill') }}</div>
 
             <div class="printed-details visible-print">
-                <span class="left">1st detail</span>
-                <span class="center">2nd detail</span>
-                <span>3th detail</span>
+                <span class="left">{{ trans('bill.payment_term') }}: @{{ payment_term }}</span>
+                <span class="center">{{ trans('bill.to_pay') }}: @{{ to_pay }}</span>
+                <span v-show="saved_money">{{ trans('bill.saved_money') }}: @{{ saved_money }} ron</span>
+                <span v-show="!saved_money">{{ trans('bill.number_of_products') }}: @{{ number_of_products }}</span>
             </div>
 
         </div>

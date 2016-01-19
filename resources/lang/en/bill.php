@@ -32,7 +32,7 @@ return [
     'name' => 'Name',
     'number_of_products' => 'Number of products',
     'options' => 'Options',
-    'order' => 'Order',
+    'order' => 'order',
     'other_details' => 'Other details',
     'other_details_description' => 'If have to add some extra information or just say something to the client, write here and will appear at the bottom of the bill.',
     'other_details_updated' => 'Bill other details updated!',
