@@ -5,7 +5,8 @@
   display: none; }
 
 .bill-title-print {
-  display: block; }
+  display: block;
+  font-weight: bold; }
 
 .delete-product {
   display: none; }
