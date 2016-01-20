@@ -90,7 +90,7 @@ class BillsController extends BaseController {
     public function create(CreateBillRequest $request) {
 
         // Create new client if not exists
-        $client = DB::table('clients')->where('name', $request->get('client'))->first();
+        $client = DB::table('clients')->where('name', $request->get('client'))->where('user_id', Auth::user()->id)->first();
         if (!$client) {
             $client = new Client();
             $client->user_id = Auth::user()->id;
@@ -120,14 +120,19 @@ class BillsController extends BaseController {
      */
     public function delete($billId) {
 
+        $response = new AjaxResponse();
+
+        // Make sure bill exists and belongs to current user
+        if (!Bill::where('id', $billId)->where('user_id', Auth::user()->id)->count()) {
+            $response->setFailMessage(trans('bills.bill_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
         DB::table('bills')->where('id', $billId)->where('user_id', Auth::user()->id)->delete();
         event(new UserDeletedBill(Auth::user()->id, $billId));
-        return [
-            'success' => true,
-            'title' => trans('common.success'),
-            'message' => trans('bills.bill_deleted')
-        ];
 
+        $response->setSuccessMessage(trans('bills.bill_deleted'));
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 
     /**
