@@ -158,4 +158,21 @@ class BillDataTest extends TestCase {
         $this->assertEquals(BillData::getBillToPay($this->bill->id), $billData['final_price']);
         $this->assertEquals(BillData::getBillSavedMoney($this->bill->id), $billData['saved_money']);
     }
+
+    /**
+     * Make sure getPaymentTerm method works.
+     */
+    public function test_it_return_valid_bill_payment_term() {
+
+        // Test with bill that has payment term
+        $this->assertEquals(date('d-m-Y', strtotime($this->bill->payment_term)), BillData::getPaymentTerm($this->bill->id));
+
+        // Test with bill that does not have payment term
+        $bill = factory(\App\Bill::class)->create([
+            'user_id' => $this->user->id,
+            'client_id' => $this->client->id,
+            'payment_term' => ''
+        ]);
+        $this->assertEquals(false, BillData::getPaymentTerm($bill->id));
+    }
 }

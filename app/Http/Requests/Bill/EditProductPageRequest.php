@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Bill;
 
-use App\Http\Requests\Request;
+use App\Http\Requests\AjaxRequest;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Authorize and validate EditProductPageFromBillRequest
+ * Authorize and validate EditProductPageRequest.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class EditProductPageFromBillRequest extends AjaxRequest {
+class EditProductPageRequest extends AjaxRequest {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,4 +35,5 @@ class EditProductPageFromBillRequest extends AjaxRequest {
             'product_page' => ['required', 'numeric', 'between:1,2000']
         ];
     }
+
 }

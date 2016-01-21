@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Helpers;
+use App\ApplicationProduct;
 use App\Bill;
 use App\BillApplicationProduct;
 use App\BillProduct;
+use App\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -79,11 +81,7 @@ class Bills {
             )
             ->first();
 
-        if ($bill->payment_term === '0000-00-00') {
-            $bill->payment_term = false;
-        } else {
-            $bill->payment_term = date('d-m-Y', strtotime($bill->payment_term));
-        }
+        $bill->payment_term = BillData::getPaymentTerm($billId);
 
         // Check if discount column should be displayed
         $showDiscount = false;
@@ -161,7 +159,7 @@ class Bills {
     public static function deleteBill($billId) {
 
         $response = new AjaxResponse();
-        $response->setFailMessage(trans('common.general_error'));
+        $response->setFailMessage(trans('bill.bill_not_found'));
 
         // Make sure bill belongs to current user
         $bill = Auth::user()->bills()->where('id', $billId)->first();
@@ -308,6 +306,18 @@ class Bills {
         if (!$bill) {
             $response->setFailMessage(trans('common.general_error'));
             return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        }
+
+        // Make sure bill product exists and belongs to current user
+        if (!Product::where('id', $data['productId'])->count() && !ApplicationProduct::where('id', $data['productId'])->count()) {
+            $response->setFailMessage(trans('bill.product_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
+        // Make sure bill product belongs to current user
+        if (!BillProduct::where('id', $data['billProductId'])->count() && !BillApplicationProduct::where('id', $data['billProductId'])->count()) {
+            $response->setFailMessage(trans('bill.bill_product_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
         }
 
         // We will use this variable to check if operation was successful

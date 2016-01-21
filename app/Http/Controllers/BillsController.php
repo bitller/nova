@@ -18,11 +18,11 @@ use App\Http\Requests\Bill\AddProductRequest;
 use App\Http\Requests\Bill\EditOtherDetailsRequest;
 use App\Http\Requests\Bill\EditPaymentTermRequest;
 use App\Http\Requests\Bill\EditProductDiscountRequest;
+use App\Http\Requests\Bill\EditProductPageRequest;
 use App\Http\Requests\Bill\EditProductPriceRequest;
 use App\Http\Requests\Bill\SuggestClientRequest;
 use App\Http\Requests\Bill\SuggestProductRequest;
 use App\Http\Requests\CreateBillRequest;
-use App\Http\Requests\EditProductPageFromBillRequest;
 use App\Http\Requests\Bill\EditProductQuantityRequest;
 use App\Product;
 use Illuminate\Http\Request;
@@ -204,10 +204,10 @@ class BillsController extends BaseController {
      * Handle product page edit.
      *
      * @param int $billId
-     * @param EditProductPageFromBillRequest $request
+     * @param EditProductPageRequest $request
      * @return mixed
      */
-    public function editPage($billId, EditProductPageFromBillRequest $request) {
+    public function editPage($billId, EditProductPageRequest $request) {
 
         $data = Bills::getBillProductEditConfig($request, $billId, 'page');
         return Bills::handleBillProductEdit($data);

@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\ApplicationProduct;
+use App\Bill;
 use App\BillApplicationProduct;
 use App\BillProduct;
 
@@ -152,5 +153,21 @@ class BillData {
 
         $data['saved_money'] = $data['price'] - $data['final_price'];
         return $data;
+    }
+
+    /**
+     * Get bill payment term.
+     *
+     * @param int $billId
+     * @return bool
+     */
+    public static function getPaymentTerm($billId) {
+
+        $paymentTerm = Bill::where('id', $billId)->first()->payment_term;
+        if ($paymentTerm === '0000-00-00') {
+            return false;
+        }
+
+        return date('d-m-Y', strtotime($paymentTerm));
     }
 }

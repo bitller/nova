@@ -108,6 +108,7 @@ return [
 
     'attributes' => [
         'bill_id' => 'bill id',
+        'bill_product_id' => 'bill product id',
         'client' => 'client',
         'client_id' => 'client id',
         'custom_product_id' => 'custom product id',
@@ -118,6 +119,9 @@ return [
         'new_user_password_confirmation' => 'new user password confirmation',
         'other_details' => 'other details',
         'payment_term' => 'payment term',
+        'product_code' => 'product code',
+        'product_id' => 'product id',
+        'product_page' => 'product page',
         'promo_code' => 'Promo code',
         'user_password' => 'user password'
     ],
