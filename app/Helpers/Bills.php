@@ -22,6 +22,13 @@ class Bills {
      */
     public function getBill($billId) {
 
+        // Make sure bill exists and belongs to current logged in user
+        if (!Bill::where('user_id', Auth::user()->id)->where('id', $billId)->count()) {
+            $response = new AjaxResponse();
+            $response->setFailMessage(trans('bills.bill_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
         $productIds = $this->getProductIds($billId);
         $applicationProductIds = $this->getApplicationProductIds($billId);
 
@@ -78,28 +85,16 @@ class Bills {
             $bill->payment_term = date('d-m-Y', strtotime($bill->payment_term));
         }
 
-        // Calculate bill price, saved money and check if discount column should be displayed
+        // Check if discount column should be displayed
         $showDiscount = false;
-        $price = 0;
-        $finalPrice = 0;
 
-        // Calculate price and final price
-        foreach ($secondQuery as $billProduct) {
-            if ($billProduct->discount) {
-                $showDiscount = true;
-            }
-            $price += $billProduct->price;
-            $finalPrice += $billProduct->final_price;
-        }
-
-        $toPay = $finalPrice;
-        $savedMoney = $price-$finalPrice;
+        $billCalculations = BillData::getBillPriceFinalPriceToPaySavedMoneyAndNumberOfProducts($billId);
 
         return [
-            'to_pay' => $toPay,
-            'saved_money' => $savedMoney,
-            'total' => $price,
-            'number_of_products' => count($secondQuery),
+            'to_pay' => $billCalculations['final_price'],
+            'saved_money' => $billCalculations['saved_money'],
+            'total' => $billCalculations['price'],
+            'number_of_products' => $billCalculations['number_of_products'],
             'show_discount_column' => $showDiscount,
             'show_other_details_info' => true,
             'products' => $secondQuery,
@@ -204,7 +199,7 @@ class Bills {
         $bill = Auth::user()->bills()->where('id', $billId)->first();
 
         if (!$bill) {
-            $response->setFailMessage(trans('common.general_error'));
+            $response->setFailMessage(trans('bill.bill_not_found'));
             return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
         }
 
@@ -396,6 +391,13 @@ class Bills {
     public static function markAsPaid($billId) {
 
         $response = new AjaxResponse();
+
+        // Make sure bill exists
+        if (!Bill::where('id', $billId)->where('user_id', Auth::user()->id)->count()) {
+            $response->setFailMessage(trans('bill.bill_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
         Auth::user()->bills()->where('id', $billId)->update(['paid' => 1]);
 
         $response->setSuccessMessage(trans('bill.marked_as_paid'));
@@ -412,6 +414,13 @@ class Bills {
     public static function markAsUnpaid($billId) {
 
         $response = new AjaxResponse();
+
+        // Make sure bill exists
+        if (!Bill::where('id', $billId)->where('user_id', Auth::user()->id)->count()) {
+            $response->setFailMessage(trans('bill.bill_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
         Auth::user()->bills()->where('id', $billId)->update(['paid' => 0]);
 
         $response->setSuccessMessage(trans('bill.marked_as_unpaid'));
