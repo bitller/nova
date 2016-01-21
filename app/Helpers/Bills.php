@@ -200,7 +200,7 @@ class Bills {
 
         if (!$bill) {
             $response->setFailMessage(trans('bill.bill_not_found'));
-            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
         }
 
         Auth::user()->bills()->where('id', $billId)->update([
@@ -228,8 +228,8 @@ class Bills {
         $bill = Auth::user()->bills()->where('id', $billId)->first();
 
         if (!$bill) {
-            $response->setFailMessage(trans('common.general_error'));
-            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+            $response->setFailMessage(trans('bill.bill_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
         }
 
         Auth::user()->bills()->where('id', $billId)->update([

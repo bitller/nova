@@ -117,6 +117,7 @@ return [
         'new_user_password' => 'new user password',
         'new_user_password_confirmation' => 'new user password confirmation',
         'other_details' => 'other details',
+        'payment_term' => 'payment term',
         'promo_code' => 'Promo code',
         'user_password' => 'user password'
     ],

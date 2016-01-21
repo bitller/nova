@@ -29,7 +29,7 @@ class EditPaymentTermRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'payment_term' => ['date_format:"d-m-Y']
+            'payment_term' => ['required', 'date_format:d-m-Y']
         ];
     }
 
