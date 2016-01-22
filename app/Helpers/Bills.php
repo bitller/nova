@@ -257,7 +257,7 @@ class Bills {
         $bill = Auth::user()->bills()->where('id', $data['billId'])->first();
 
         if (!$bill) {
-            $response->setFailMessage(trans('common.general_error'));
+            $response->setFailMessage(trans('bill.bill_not_found'));
             return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
         }
 
