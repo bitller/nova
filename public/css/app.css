@@ -6012,21 +6012,37 @@ button.close {
 
 .first-section .welcome-text {
   font-weight: 200;
-  font-size: 40px; }
+  font-size: 35px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  color: #ffffff; }
 
-.first-section .welcome-text, .first-section .description-text {
+.first-section .welcome-text {
   color: #ffffff;
   font-family: 'Raleway', sans-serif; }
 
+.first-section .description-text {
+  color: #888a85;
+  font-size: 16px; }
+
+.ok-container {
+  background-color: #FAFAFA;
+  border-radius: 3px;
+  margin-bottom: 20px; }
+
+.ok-container span {
+  color: #3498DB; }
+
 .start-button {
-  padding: 20px 0 0 0; }
+  padding: 20px 0 60px 0; }
 
 .start-button button {
   padding: 15px; }
 
 .video {
-  text-align: center;
-  padding-top: 30px; }
+  margin-top: -90px;
+  margin-bottom: 40px;
+  text-align: center; }
 
 .second-section {
   background-color: #FAFAFA;
@@ -6039,6 +6055,13 @@ button.close {
 
 .gray-color {
   color: #777777; }
+
+.big-icon span {
+  font-size: 50px;
+  color: #3498DB; }
+
+.icons-row {
+  margin-bottom: 50px; }
 
 /******/
 .navbar-default {
@@ -8379,6 +8402,22 @@ body {
 
 .border-input:focus {
   border: 1px solid #3498DB; }
+
+.fancy-divider-welcome {
+  height: 2px;
+  background-color: #bcbcbc;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 60px; }
+
+.fancy-divider-welcome span {
+  color: #747474;
+  display: inline-block;
+  padding: 0 30px 0 30px;
+  background-color: #fafafa;
+  position: relative;
+  top: -20px;
+  font-size: 25px; }
 
 .fancy-divider-white {
   height: 2px;

@@ -23,17 +23,36 @@ $border-and-text-color: #ffffff;
 $text-color: #ffffff;
 
 .first-section .welcome-text {
+//  display: inline-block;
   font-weight: 200;
-  font-size: 40px;
+  font-size: 35px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  color: $text-color;
 }
 
-.first-section .welcome-text, .first-section .description-text {
-  color: $text-color;
-  font-family: 'Raleway', sans-serif;
+.first-section .welcome-text {
+    color: $text-color;
+    font-family: 'Raleway', sans-serif;
+}
+
+.first-section .description-text {
+  color: #888a85;
+  font-size: 16px;
+}
+
+.ok-container {
+  background-color: #FAFAFA;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.ok-container span {
+  color: $brand-primary;
 }
 
 .start-button {
-  padding: 20px 0 0 0;
+  padding: 20px 0 60px 0;
 }
 
 .start-button button {
@@ -41,9 +60,15 @@ $text-color: #ffffff;
 }
 
 .video {
+  margin-top: -90px;
+  margin-bottom: 40px;
   text-align: center;
-  padding-top: 30px;
 }
+
+//.video iframe {
+//  border: 2px solid #FAFAFA;
+//  border-radius: 2px;
+//}
 
 $second-section-background-color: #FAFAFA;
 
@@ -60,6 +85,15 @@ $second-section-background-color: #FAFAFA;
 
 .gray-color {
   color: #777777;
+}
+
+.big-icon span {
+  font-size: 50px;
+  color: $brand-primary;
+}
+
+.icons-row {
+  margin-bottom: 50px;
 }
 
 /******/

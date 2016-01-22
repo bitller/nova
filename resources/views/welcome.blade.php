@@ -37,11 +37,12 @@
 <div id="startchange">
     <div class="first-section">
         <div class="container">
-            <h2 class="text-center welcome-text">{{ Lang::get('welcome.welcome') }}</h2>
-            <h4 class="text-center description-text">{{ Lang::get('welcome.what_is_nova') }}</h4>
+            <h2 class="text-center welcome-text">{{ trans('welcome.principal_title') }}</h2>
 
-            <div class="video col-md-12">
-                <iframe src="http://www.youtube.com/embed/s2Q439DKqHE?rel=0;3&amp;autohide=1&amp;showinfo=0" frameborder="0" width="635" height="353"></iframe>
+            <div class="col-md-10 col-md-offset-1 ok-container">
+                <h4 class="description-text"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;{{ trans('welcome.first_ok') }}</h4>
+                <h4 class="description-text"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;{{ trans('welcome.second_ok') }}</h4>
+                <h4 class="description-text"><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;{{ trans('welcome.third_ok') }}</h4>
             </div>
 
             <div class="col-md-12 text-center start-button">
@@ -52,40 +53,48 @@
 
     <div class="second-section">
 
-        <div class="container">
-            <h3 class="text-center why-nova">{{ Lang::get('welcome.why') }}</h3>
+        <div class="container icons-row">
+
+            <div class="video col-md-12">
+                <iframe src="http://www.youtube.com/embed/s2Q439DKqHE?rel=0;3&amp;autohide=1&amp;showinfo=0" frameborder="0" width="635" height="353"></iframe>
+            </div>
+
+            <div class="col-md-12">
+                <div class="fancy-divider-welcome"><span>{{ trans('welcome.why') }}</span></div>
+            </div>
+
             <div class="col-md-4">
-                <img class="img-center center-block" src="{{ url('/img/add.png') }}">
+                <div class="text-center big-icon"><span class="glyphicon glyphicon-plus"></span></div>
                 <h4 class="text-center">{{ Lang::get('welcome.fast_bill_creation') }}</h4>
                 <h5 class="text-center gray-color">{{ Lang::get('welcome.fast_bill_creation_long') }}</h5>
             </div>
             <div class="col-md-4">
-                <img class="img-center center-block" src="{{ url('/img/easy-access.png') }}">
+                <div class="text-center big-icon"><span class="glyphicon glyphicon-folder-open"></span></div>
                 <h4 class="text-center">{{ Lang::get('welcome.fast_access') }}</h4>
                 <h5 class="text-center gray-color">{{ Lang::get('welcome.fast_access_long') }}</h5>
             </div>
             <div class="col-md-4">
-                <img class="img-center center-block" src="{{ url('/img/print.png') }}">
+                <div class="text-center big-icon"><span class="glyphicon glyphicon-pencil"></span></div>
                 <h4 class="text-center">{{ Lang::get('welcome.print_bills') }}</h4>
                 <h5 class="text-center gray-color">{{ Lang::get('welcome.print_bills_long') }}</h5>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container icons-row">
             <div class="col-md-4">
-                <img class="img-center center-block" src="{{ url('/img/code.png') }}">
+                <div class="text-center big-icon"><span class="glyphicon glyphicon-tag"></span></div>
                 <h4 class="text-center">{{ Lang::get('welcome.add_products_by_code') }}</h4>
                 <h5 class="text-center gray-color">{{ Lang::get('welcome.add_products_by_code_long') }}</h5>
             </div>
 
             <div class="col-md-4">
-                <img class="img-center center-block" src="{{ url('/img/stats.png') }}">
+                <div class="text-center big-icon"><span class="glyphicon glyphicon-stats"></span></div>
                 <h4 class="text-center">{{ Lang::get('welcome.statistics') }}</h4>
                 <h5 class="text-center gray-color">{{ Lang::get('welcome.statistics_long') }}</h5>
             </div>
 
             <div class="col-md-4">
-                <img class="img-center center-block" src="{{ url('/img/search.png') }}">
+                <div class="text-center big-icon"><span class="glyphicon glyphicon-search"></span></div>
                 <h4 class="text-center">{{ Lang::get('welcome.search_by_code') }}</h4>
                 <h5 class="text-center gray-color">{{ Lang::get('welcome.search_by_code_long') }}</h5>
             </div>
