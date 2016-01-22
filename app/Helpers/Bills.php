@@ -83,10 +83,13 @@ class Bills {
 
         $bill->payment_term = BillData::getPaymentTerm($billId);
 
+        $billCalculations = BillData::getBillPriceFinalPriceToPaySavedMoneyAndNumberOfProducts($billId);
+
         // Check if discount column should be displayed
         $showDiscount = false;
-
-        $billCalculations = BillData::getBillPriceFinalPriceToPaySavedMoneyAndNumberOfProducts($billId);
+        if ($billCalculations['saved_money'] > 0) {
+            $showDiscount = true;
+        }
 
         return [
             'to_pay' => $billCalculations['final_price'],
