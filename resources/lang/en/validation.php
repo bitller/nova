@@ -122,6 +122,7 @@ return [
         'product_code' => 'product code',
         'product_id' => 'product id',
         'product_page' => 'product page',
+        'product_quantity' => 'product quantity',
         'promo_code' => 'Promo code',
         'user_password' => 'user password'
     ],
