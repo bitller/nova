@@ -1,12 +1,12 @@
 @extends('layout')
 @section('content')
     @include('includes.ajax-translations.client')
-    <div id="client">
+    <div id="client" client-id="{{ $clientId }}">
         <div class="container" v-show="loaded">
 
             <div class="add-client-button">
                 <span class="my-clients-title">
-                    <a href="#">@{{ name }}</a>
+                    <a v-on="click: resetEditClientNameModal" href="#" data-target="#edit-client-name-modal" data-toggle="modal">@{{ name }}</a>
                 </span>
                 @include('includes.admin-center.buttons.more-options-dropdown', [
                 'class' => 'pull-right',
@@ -179,7 +179,7 @@
                 {{--</div>--}}
             {{--</div>--}}
             {{--<!-- END Client bills -->--}}
-
+            @include('includes.modals.edit-client-name')
         </div>
     </div>
 @endsection

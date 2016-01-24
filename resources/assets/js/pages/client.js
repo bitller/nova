@@ -49,33 +49,45 @@ new Vue({
         /**
          * Allow user to edit clients name
          */
-        saveName: function() {
+        editClientName: function() {
 
-            Nova.showLoader(Nova.getClientTranslation('loading'));
+            this.$set('loading', true);
 
-            // Build url and data to post
-            var url = '/clients/' + Nova.getClientTranslation('client-id') + '/edit-name';
+            // Build post data
             var data = {
-                name: this.$get('name'),
-                _token: Nova.getToken()
+                _token: Token.get(),
+                client_name: this.$get('client_name')
             };
 
-            var thisInstance = this;
+            // Make post request
+            this.$http.post('/clients/' + $('#client').attr('client-id') + '/edit-name', data, function(response) {
 
-            // Make request
-            this.$http.post(url, data).success(function(response) {
-
-                Nova.showSuccessAlert(response.title, response.message);
+                // Update client name, stop loading, close modal and show success alert
+                this.$set('name', data.client_name);
+                $('#edit-client-name-modal').modal('hide');
+                this.$set('loading', false);
+                Alert.success(response.message);
 
             }).error(function(response) {
 
-                Nova.showErrorAlert(response.title, response.message);
+                // Handle error response
+                this.$set('loading', false);
 
-                // Typed name is not valid so display the old one
-                thisInstance.$set('name', thisInstance.$get('oldName'));
+                // Set corresponded error
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                }
 
+                this.$set('errors', response.errors);
             });
+        },
 
+        /**
+         * Reset edit client name modal data.
+         */
+        resetEditClientNameModal: function() {
+            this.$set('loading', false);
+            Reset.vueData(this, ['errors', 'error', 'client_name']);
         },
 
         /**
