@@ -8,8 +8,8 @@ use App\Helpers\AjaxResponse;
 use App\Helpers\Clients;
 use App\Helpers\Settings;
 use App\Http\Requests\Clients\CreateClientRequest;
+use App\Http\Requests\Clients\EditClientNameRequest;
 use App\Http\Requests\DeleteClientRequest;
-use App\Http\Requests\EditClientNameRequest;
 use App\Http\Requests\EditClientPhoneRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -107,8 +107,14 @@ class ClientsController extends BaseController {
 
         $response = new AjaxResponse();
 
+        // Make sure client exists and belongs to current user
+        if (!Client::where('id', $clientId)->where('user_id', Auth::user()->id)->count()) {
+            $response->setFailMessage(trans('clients.client_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
         Client::where('id', $clientId)->where('user_id', Auth::user()->id)
-            ->update(['name' => $request->get('name')]);
+            ->update(['name' => $request->get('client_name')]);
 
         $response->setSuccessMessage(trans('clients.client_name_updated'));
         return response($response->get());

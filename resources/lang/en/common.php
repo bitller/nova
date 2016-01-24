@@ -15,6 +15,7 @@ return [
     'no' => 'no',
     'not_set' => 'Not set',
     'ok' => 'Ok',
+    'options' => 'Options',
     'or' => 'or',
     'page_details' => 'Details',
     'previous' => 'Previous',

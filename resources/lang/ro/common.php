@@ -15,6 +15,7 @@ return [
     'no' => 'nu',
     'not_set' => 'Nu a fost setat',
     'ok' => 'Ok',
+    'options' => 'Opțiuni',
     'or' => 'sau',
     'page_details' => 'Detalii',
     'previous' => 'Înapoi',

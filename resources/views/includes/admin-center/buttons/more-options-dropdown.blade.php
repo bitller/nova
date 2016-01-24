@@ -1,9 +1,14 @@
 <!-- BEGIN Dropdown -->
-<div class="btn-group">
+<div class="btn-group @if(isset($class)) {{ $class }} @endif">
 
     <!-- BEGIN Button -->
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <span class="glyphicon {{ $icon or 'glyphicon-th-large' }}"></span>&nbsp;
+        @if(isset($text))
+            {{ $text }}
+        @endif
+        @if(isset($icon))
+            <span class="glyphicon {{ $icon }}"></span>&nbsp;
+        @endif
         <span class="caret"></span>
     </button>
     <!-- END Button -->
