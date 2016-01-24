@@ -7,7 +7,7 @@ use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Clients;
 use App\Helpers\Settings;
-use App\Http\Requests\CreateClientRequest;
+use App\Http\Requests\Clients\CreateClientRequest;
 use App\Http\Requests\DeleteClientRequest;
 use App\Http\Requests\EditClientNameRequest;
 use App\Http\Requests\EditClientPhoneRequest;
@@ -135,12 +135,11 @@ class ClientsController extends BaseController {
 
     }
 
-
     /**
-     * Create a new client.
+     * Create new client.
      *
      * @param CreateClientRequest $request
-     * @return array|\Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function create(CreateClientRequest $request) {
 
@@ -153,26 +152,16 @@ class ClientsController extends BaseController {
             return response($response->get(), $response->getDefaultErrorResponseCode());
         }
 
-        // Create client array
-        $clientData = [
-            'name' => $request->get('name'),
+        $client = Client::create([
+            'name' => $request->get('client_name'),
+            'email' => $request->get('client_email'),
+            'phone_number' => $request->get('client_phone_number'),
             'user_id' => Auth::user()->id
-        ];
+        ]);
 
-        $client = new Client();
-        $client->name = $clientData['name'];
-        $client->user_id = $clientData['user_id'];
-
-        // Check if a phone number was given
-        if ($request->get('phone')) {
-            $client->phone_number = $request->get('phone');
-        }
-
-        $client->save();
 
         $response->setSuccessMessage(trans('clients.client_added'));
         return response($response->get());
-
     }
 
     /**

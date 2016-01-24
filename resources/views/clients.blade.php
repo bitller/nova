@@ -19,7 +19,7 @@
 
             <div class="add-client-button">
                 <span class="my-clients-title">{{ trans('clients.my_clients') }} <span class="badge">@{{ clients.total }}</span></span>
-                <button type="button" class="btn btn-primary pull-right" v-on="click: createClient()">
+                <button v-on="click: resetCreateClientModal" type="button" class="btn btn-primary pull-right" data-target="#create-new-client-modal" data-toggle="modal">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('clients.add') }}
                 </button>
             </div>
@@ -63,6 +63,8 @@
             </ul>
             <!-- END Pagination links -->
         </div>
+
+        @include('includes.modals.create-new-client')
     </div>
 @endsection
 

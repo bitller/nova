@@ -53,7 +53,8 @@ $factory->define(App\Client::class, function($faker) {
 
     return [
         'name' => $faker->name,
-        'phone_number' => $faker->phoneNumber
+        'phone_number' => substr(str_shuffle('01234456789'), 0, 10),
+        'email' => $faker->email
     ];
 
 });

@@ -60,110 +60,35 @@ new Vue({
          */
         createClient: function() {
 
-            var thisInstance = this;
-            var clientsSelector = $('#clients');
+            // Build post data
+            var data = {
+                _token: Token.get(),
+                client_name: this.$get('client_name'),
+                client_email: this.$get('client_email'),
+                client_phone_number: this.$get('client_phone_number')
+            };
 
-            // Show prompt
-            swal({
-                    title: clientsSelector.attr('add-client'),
-                    text: clientsSelector.attr('insert-client-name'),
-                    type: "input",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    animation: "slide-from-top",
-                    cancelButtonText: clientsSelector.attr('cancel'),
-                    confirmButtonText: clientsSelector.attr('continue'),
-                    inputPlaceholder: clientsSelector.attr('client-name')
-                },
-                function(inputValue) {
-                    if (inputValue === false) {
-                        return false;
-                    }
+            this.$set('loading', true);
 
-                    if (inputValue === "") {
-                        swal.showInputError(clientsSelector.attr('client-name-required'));
-                        return false
-                    }
+            this.$http.post('/clients/create', data, function(response) {
 
-                    // Show phone number prompt
-                    swal({
-                        title: clientsSelector.attr('add-client'),
-                        text: clientsSelector.attr('phone-is-optional'),
-                        type: "input",
-                        closeOnConfirm: false,
-                        confirmButtonText: clientsSelector.attr('continue'),
-                        inputPlaceholder: clientsSelector.attr('client-phone-number')
-                    }, function(phoneInput) {
-
-                        swal({
-                            title: clientsSelector.attr('loading'),
-                            type: "info",
-                            showConfirmButton: false
-                        });
-
-                        var dataToPost = {
-                            name: inputValue,
-                            phone: phoneInput,
-                            _token: $('#token').attr('content')
-                        };
-
-                        // Make create client request
-                        thisInstance.$http.post('/clients/create', dataToPost).success(function(response) {
-
-                            // Make request to get clients
-                            thisInstance.$http.get('/clients/get', function(data) {
-
-                                thisInstance.$set('loaded', true);
-                                thisInstance.$set('clients', data);
-
-                                if (response.success) {
-                                    swal({
-                                        title: response.title,
-                                        text: response.message,
-                                        type: "success",
-                                        timer: 1750,
-                                        showConfirmButton: false
-                                    });
-                                    return true;
-                                }
-
-                                swal({
-                                    title: response.title,
-                                    text: response.message,
-                                    type: "error",
-                                    confirmationButtonText: clientsSelector.attr('ok-button')
-                                });
-
-                            });
-                        }).error(function(response) {
-                            // Make request to get clients
-                            thisInstance.$http.get('/clients/get', function(data) {
-
-                                thisInstance.$set('loaded', true);
-                                thisInstance.$set('clients', data);
-
-                                if (response.success) {
-                                    swal({
-                                        title: response.title,
-                                        text: response.message,
-                                        type: "success",
-                                        timer: 1750,
-                                        showConfirmButton: false
-                                    });
-                                    return true;
-                                }
-
-                                swal({
-                                    title: response.title,
-                                    text: response.message,
-                                    type: "error",
-                                    confirmationButtonText: clientsSelector.attr('ok-button')
-                                });
-
-                            });
-                        });
-                    });
+                this.getClients('/clients/get', function() {
+                    this.$set('loading', false);
+                    $('#create-new-client-modal').modal('hide');
+                    Alert.success(response.message);
                 });
+
+            }).error(function(response) {
+
+                this.$set('loading', false);
+
+                if (!response.message) {
+                    Alert.generalError();
+                    return;
+                }
+
+                this.$set('errors', response.errors);
+            });
         },
 
         /**
@@ -181,22 +106,38 @@ new Vue({
          * Make getClients request
          *
          * @param url
+         * @param callback
          */
-        getClients: function(url) {
+        getClients: function(url, callback) {
 
             // Show loader
-            swal({
-                title: $('#clients').attr('loading'),
-                type: "info",
-                showConfirmButton: false
-            });
+            if (typeof callback === 'undefined') {
+                swal({
+                    title: $('#clients').attr('loading'),
+                    type: "info",
+                    showConfirmButton: false
+                });
+            }
 
             // Make request
             this.$http.get(url).success(function(data) {
                 this.$set('loaded', true);
                 this.$set('clients', data);
-                swal.close();
+
+                if (typeof callback === 'undefined') {
+                    swal.close();
+                } else {
+                    callback();
+                }
             });
+        },
+
+        /**
+         * Reset create client modal data.
+         */
+        resetCreateClientModal: function() {
+            this.$set('loading', false);
+            Reset.vueData(this, ['errors', 'error', 'client_name', 'client_phone_number', 'client_email'])
         },
 
         /**

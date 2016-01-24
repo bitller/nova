@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,22 @@ class AppServiceProvider extends ServiceProvider {
     public function boot() {
         Validator::extend('check_auth_user_password', function($attribute, $value, $parameters, $validator) {
             return Hash::check($value, Auth::user()->password);
+        });
+
+        // Make sure client email is not used by another client of current user
+        Validator::extend('email_not_used_by_another_user_client', function($attribute, $value, $parameters, $validator) {
+            if (Client::where('user_id', Auth::user()->id)->where('email', $value)->count()) {
+                return false;
+            }
+            return true;
+        });
+
+        // Make sure client phone number is not user by another client of current user
+        Validator::extend('phone_number_not_used_by_another_user_client', function($attribute, $value, $parameters, $validator) {
+            if (Client::where('user_id', Auth::user()->id)->where('phone_number', $value)->count()) {
+                return false;
+            }
+            return true;
         });
 
         Validator::extend('not_exists', function($attribute, $value, $parameters, $validator) {

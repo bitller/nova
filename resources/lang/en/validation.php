@@ -77,6 +77,7 @@ return [
 
     'check_auth_user_password' => 'Looks like you entered an invalid password.',
     'not_exists' => 'Given :attribute is already used.',
+    'email_not_used_by_another_user_client' => 'This email is already used by one of your clients.',
 
     /*
     |--------------------------------------------------------------------------
@@ -111,6 +112,8 @@ return [
         'bill_product_id' => 'bill product id',
         'client' => 'client',
         'client_id' => 'client id',
+        'client_name' => 'client name',
+        'client_phone_number' => 'client phone number',
         'custom_product_id' => 'custom product id',
         'email' => 'email',
         'new_password' => 'new password',

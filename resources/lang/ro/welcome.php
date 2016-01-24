@@ -7,7 +7,7 @@ return [
     'fast_access_long'          => 'Vrei să găsești o factură de acum o lună sau un an? Nimic mai simplu. Ai access rapid la toate facturile.',
     'fast_bill_creation'        => 'Creează o nouă factură în câteva secunde',
     'fast_bill_creation_long'   => 'Ai primit o nouă comandă? Durează doar câteva secunde să creezi și să tipărești o nouă factură.',
-    'first_ok' => 'Creezi și tipărești o factură pentru comanda fiecărui client.',
+    'first_ok' => 'Creezi și tipărești facturi pentru comenzile clienților tăi.',
     'principal_title' => 'Manager pentru comenzile Avon',
     'print_bills'               => 'Imprimează facturile simplu și rapid',
     'print_bills_long'          => 'Ai creat o nouă comandă? Ai adăugat toate produsele și totul este gata? Atunci imprimează factura pentru a o da clientului.',
@@ -20,5 +20,5 @@ return [
     'third_ok' => 'Ai acces de oriunde la comenzile clienților tăi, statistici despre vânzările efectuare și performanțele tale ca reprezentant.',
     'welcome'                   => 'Bun venit',
     'what_is_nova'              => 'Nova este o aplicație de facturare și management al facturilor dedicată reprezentanților Avon',
-    'why'                       => 'De ce să folosești Nova?',
+    'why'                       => 'Nu ești convins încă?',
 ];

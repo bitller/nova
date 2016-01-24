@@ -20,7 +20,8 @@ class CreateClientsTable extends Migration {
 
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('phone_number');
+            $table->string('email')->nullable()->default('');
+            $table->string('phone_number')->nullable()->default('');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
 
