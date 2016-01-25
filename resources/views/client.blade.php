@@ -6,9 +6,9 @@
 
             <div class="add-client-button">
                 <span class="my-clients-title">
-                    <span v-on="click: resetEditClientNameModal" data-target="#edit-client-name-modal" data-toggle="modal">@{{ name }}</span>
-                    <span v-show="email" data-target="#edit-client-email-modal" data-toggle="modal"> - <span>@{{ email }}</span></span>
-                    <span v-show="phone_number" data-target="#edit-client-phone-number-modal" data-toggle="modal"> (@{{ phone_number }})</span>
+                    <span class="pointer-underline" v-on="click: resetEditClientNameModal" data-target="#edit-client-name-modal" data-toggle="modal">@{{ name }}</span>
+                    <span v-show="email" data-target="#edit-client-email-modal" data-toggle="modal"> - <span class="pointer-underline">@{{ email }}</span></span>
+                    <span class="pointer-underline" v-show="phone_number" data-target="#edit-client-phone-number-modal" data-toggle="modal"> (@{{ phone_number }})</span>
                 </span>
                 @include('includes.admin-center.buttons.more-options-dropdown', [
                 'class' => 'pull-right',

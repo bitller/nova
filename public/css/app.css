@@ -8466,4 +8466,8 @@ body {
 .alert-top {
   margin-top: 30px; }
 
+.pointer-underline:hover {
+  text-decoration: underline;
+  cursor: pointer; }
+
 /*# sourceMappingURL=app.css.map */
