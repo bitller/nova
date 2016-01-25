@@ -8,6 +8,7 @@ use App\Helpers\AjaxResponse;
 use App\Helpers\Clients;
 use App\Helpers\Settings;
 use App\Http\Requests\Clients\CreateClientRequest;
+use App\Http\Requests\Clients\EditClientEmailRequest;
 use App\Http\Requests\Clients\EditClientNameRequest;
 use App\Http\Requests\DeleteClientRequest;
 use App\Http\Requests\EditClientPhoneRequest;
@@ -121,6 +122,30 @@ class ClientsController extends BaseController {
 
     }
 
+    /**
+     * Edit client email.
+     *
+     * @param int $clientId
+     * @param EditClientEmailRequest $request
+     * @return mixed
+     */
+    public function editEmail($clientId, EditClientEmailRequest $request) {
+
+        $response = new AjaxResponse();
+
+        // Make sure client exists and belongs to current user
+        if (!Client::where('id', $clientId)->where('user_id', Auth::user()->id)->count()) {
+            $response->setFailMessage(trans('clients.client_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
+        Client::where('id', $clientId)->where('user_id', Auth::user()->id)->update([
+            'email' => $request->get('client_email')
+        ]);
+
+        $response->setSuccessMessage(trans('clients.client_email_updated'));
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
 
     /**
      * Allow user to edit clients phone number.

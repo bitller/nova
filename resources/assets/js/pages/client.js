@@ -25,6 +25,7 @@ new Vue({
 
                 // Update models
                 this.$set('name', response.data.name);
+                this.$set('email', response.data.email);
                 this.$set('phone', response.data.phone_number);
                 this.$set('oldName', this.$get('name'));
                 this.$set('oldPhone', this.$get('phone'));
@@ -76,10 +77,56 @@ new Vue({
                 // Set corresponded error
                 if (!response.message) {
                     this.$set('error', Translation.common('general-error'));
+                    return;
                 }
 
                 this.$set('errors', response.errors);
             });
+        },
+
+        /**
+         * Edit client email.
+         */
+        editClientEmail: function() {
+
+            this.$set('loading', true);
+
+            // Build post data
+            var data = {
+                _token: Token.get(),
+                client_email: this.$get('client_email')
+            };
+
+            // Make post request
+            this.$http.post('/clients/' + $('#client').attr('client-id') + '/edit-email', data, function(response) {
+
+                // Handle success response
+                this.$set('loading', false);
+                this.$set('email', data.client_email);
+                $('#edit-client-email-modal').modal('hide');
+                Alert.success(response.message);
+
+            }).error(function(response) {
+
+                this.$set('loading', false);
+
+                // Handle error response
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
+
+                this.$set('errors', response.errors);
+            });
+
+        },
+
+        /**
+         * Reset edit client email modal data.
+         */
+        resetEditClientEmailModal: function() {
+            this.$set('loading', false);
+            Reset.vueData(this, ['errors', 'error', 'client_email']);
         },
 
         /**

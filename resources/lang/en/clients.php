@@ -6,6 +6,7 @@ return [
     'bills_of_this_client' => 'Bills of this client',
     'client_added' => 'Client added!',
     'client_email' => 'Client email',
+    'client_email_updated' => 'Client email updated!',
     'client_deleted' => 'Client deleted!',
     'client_exists' => 'A client with same name already exists.',
     'client_from' => 'Client from',

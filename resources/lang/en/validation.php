@@ -111,6 +111,7 @@ return [
         'bill_id' => 'bill id',
         'bill_product_id' => 'bill product id',
         'client' => 'client',
+        'client_email' => 'client email',
         'client_id' => 'client id',
         'client_name' => 'client name',
         'client_phone_number' => 'client phone number',

@@ -69,6 +69,7 @@ Route::group(['prefix' => 'clients'], function() {
     Route::get('/{clientId}/delete', 'ClientsController@delete');
     Route::post('/{clientId}/edit-name', 'ClientsController@editName');
     Route::post('/{clientId}/edit-phone', 'ClientsController@editPhone');
+    Route::post('/{clientId}/edit-email', 'ClientsController@editEmail');
 });
 
 // Products page

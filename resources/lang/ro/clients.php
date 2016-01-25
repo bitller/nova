@@ -7,6 +7,7 @@ return [
     'client_added' => 'Clientul a fost adăugat!',
     'client_email' => 'Email-ul clientului',
     'client_email_description' => 'Adresa validă de email a clientului. Este necesară în cazul în care doriți să trimiteți factura clientului pe mail.',
+    'client_email_updated' => 'Email-ul clientului a fost actualizat!',
     'client_deleted' => 'Clientul a fost șters!',
     'client_exists' => 'Un client cu același nume există deja.',
     'client_from' => 'Client din',

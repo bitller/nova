@@ -6,7 +6,9 @@
 
             <div class="add-client-button">
                 <span class="my-clients-title">
-                    <a v-on="click: resetEditClientNameModal" href="#" data-target="#edit-client-name-modal" data-toggle="modal">@{{ name }}</a>
+                    <span v-on="click: resetEditClientNameModal" data-target="#edit-client-name-modal" data-toggle="modal">@{{ name }}</span>
+                    <span v-show="email" data-target="#edit-client-email-modal" data-toggle="modal"> - <span>@{{ email }}</span></span>
+                    <span v-show="phone" data-target="#edit-client-phone-number-modal" data-toggle="modal"> (@{{ phone }})</span>
                 </span>
                 @include('includes.admin-center.buttons.more-options-dropdown', [
                 'class' => 'pull-right',
@@ -180,6 +182,7 @@
             {{--</div>--}}
             {{--<!-- END Client bills -->--}}
             @include('includes.modals.edit-client-name')
+            @include('includes.modals.edit-client-email')
         </div>
     </div>
 @endsection
