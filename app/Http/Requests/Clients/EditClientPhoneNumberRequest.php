@@ -12,6 +12,9 @@ use Illuminate\Contracts\Auth\Guard;
  */
 class EditClientPhoneNumberRequest extends AjaxRequestWithFormedErrors {
 
+    /**
+     * @var array
+     */
     public $fields = ['client_phone_number'];
 
     /**

@@ -26,7 +26,7 @@ new Vue({
                 // Update models
                 this.$set('name', response.data.name);
                 this.$set('email', response.data.email);
-                this.$set('phone', response.data.phone_number);
+                this.$set('phone_number', response.data.phone_number);
                 this.$set('oldName', this.$get('name'));
                 this.$set('oldPhone', this.$get('phone'));
 
@@ -85,6 +85,14 @@ new Vue({
         },
 
         /**
+         * Reset edit client email modal data.
+         */
+        resetEditClientEmailModal: function() {
+            this.$set('loading', false);
+            Reset.vueData(this, ['errors', 'error', 'client_email']);
+        },
+
+        /**
          * Edit client email.
          */
         editClientEmail: function() {
@@ -122,14 +130,6 @@ new Vue({
         },
 
         /**
-         * Reset edit client email modal data.
-         */
-        resetEditClientEmailModal: function() {
-            this.$set('loading', false);
-            Reset.vueData(this, ['errors', 'error', 'client_email']);
-        },
-
-        /**
          * Reset edit client name modal data.
          */
         resetEditClientNameModal: function() {
@@ -140,33 +140,47 @@ new Vue({
         /**
          * Allow user to edit clients phone number
          */
-        savePhone: function() {
+        editClientPhoneNumber: function() {
 
-            Nova.showLoader(Nova.getClientTranslation('loading'));
+            this.$set('loading', true);
 
-            // Build url and data object to post
-            var url = '/clients/' + Nova.getClientTranslation('client-id') + '/edit-phone';
+            // Post data
             var data = {
-                phone: this.$get('phone'),
-                _token: Nova.getToken()
+                _token: Token.get(),
+                client_phone_number: this.$get('client_phone_number')
             };
 
-            var thisInstance = this;
+            // Make post request
+            this.$http.post('/clients/' + $('#client').attr('client-id') + '/edit-phone', data, function(response) {
 
-            // Make request
-            this.$http.post(url, data, function(response) {
+                // Stop loading and set new phone number
+                this.$set('loading', false);
+                this.$set('phone_number', data.client_phone_number);
 
-                Nova.showSuccessAlert(response.title, response.message);
+                // Hide modal and show success alert
+                $('#edit-client-phone-number-modal').modal('hide');
+                Alert.success(response.message);
 
             }).error(function(response) {
 
-                Nova.showErrorAlert(response.title, response.message);
+                // Stop loading and set proper error message
+                this.$set('loading', false);
 
-                // Typed phone is not valid so display the old one
-                thisInstance.$set('phone', thisInstance.$get('oldPhone'));
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
+                }
 
+                this.$set('errors', response.errors);
             });
+        },
 
+        /**
+         * Reset edit client phone number modal data.
+         */
+        resetEditClientPhoneNumberModal: function() {
+            this.$set('loading', false);
+            Reset.vueData(this, ['errors', 'error', 'client_phone_number'])
         }
     }
 });
