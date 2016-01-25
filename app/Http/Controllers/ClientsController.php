@@ -10,8 +10,8 @@ use App\Helpers\Settings;
 use App\Http\Requests\Clients\CreateClientRequest;
 use App\Http\Requests\Clients\EditClientEmailRequest;
 use App\Http\Requests\Clients\EditClientNameRequest;
+use App\Http\Requests\Clients\EditClientPhoneNumberRequest;
 use App\Http\Requests\DeleteClientRequest;
-use App\Http\Requests\EditClientPhoneRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -151,15 +151,21 @@ class ClientsController extends BaseController {
      * Allow user to edit clients phone number.
      *
      * @param int $clientId
-     * @param EditClientPhoneRequest $request
+     * @param EditClientPhoneNumberRequest $request
      * @return array
      */
-    public function editPhone($clientId, EditClientPhoneRequest $request) {
+    public function editPhone($clientId, EditClientPhoneNumberRequest $request) {
 
         $response = new AjaxResponse();
 
+        // Make sure client exists and belongs to current user
+        if (!Client::where('id', $clientId)->where('user_id', Auth::user()->id)->count()) {
+            $response->setFailMessage(trans('clients.client_not_found'));
+            return response($response->get(), 404)->header('Content-Type', 'application/json');
+        }
+
         Client::where('id', $clientId)->where('user_id', Auth::user()->id)
-            ->update(['phone_number' => $request->get('phone')]);
+            ->update(['phone_number' => $request->get('client_phone_number')]);
 
         $response->setSuccessMessage(trans('clients.client_phone_updated'));
         return response($response->get());

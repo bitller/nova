@@ -78,6 +78,7 @@ return [
     'check_auth_user_password' => 'Looks like you entered an invalid password.',
     'not_exists' => 'Given :attribute is already used.',
     'email_not_used_by_another_user_client' => 'This email is already used by one of your clients.',
+    'phone_number_not_used_by_another_user_client' => 'This phone number is already used by one of your clients.',
 
     /*
     |--------------------------------------------------------------------------
