@@ -7,6 +7,7 @@ use App\Client;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Clients;
 use App\Helpers\Settings;
+use App\Helpers\Statistics\ClientStatistics;
 use App\Http\Requests\Clients\CreateClientRequest;
 use App\Http\Requests\Clients\EditClientEmailRequest;
 use App\Http\Requests\Clients\EditClientNameRequest;
@@ -66,13 +67,14 @@ class ClientsController extends BaseController {
      */
     public function getClient($clientId) {
 
+        $response = new AjaxResponse();
+
+        // Get client
         $client = Client::where('clients.id', $clientId)
             ->where('clients.user_id', Auth::user()->id)
             ->join('bills', 'clients.id', '=', 'bills.client_id')
             ->select('clients.*', DB::raw('COUNT(bills.id) as total_bills'))
             ->first();
-
-        $response = new AjaxResponse();
 
         // Make sure client exists
         if (!$client->id) {
@@ -81,14 +83,26 @@ class ClientsController extends BaseController {
             return response($response->get(), $response->getDefaultErrorResponseCode());
         }
 
-        // Get client bills
-        $client->bills = Bill::where('client_id', $clientId)
-            ->where('user_id', Auth::user()->id)
-            ->select('id', 'campaign_number', 'campaign_year', 'created_at')
-            ->get();
+        // Get client last unpaid bills
+        $client->last_unpaid_bills = Clients::lastUnpaidBills($clientId);
 
-        $client->total_price = Clients::getTotalSellsByBillIds($client->bills);
-        $client->total_discount = Clients::getTotalSellsWithoutDiscountByBillIds($client->bills) - $client->total_price;
+        // Get client last paid bills
+        $client->last_paid_bills = Clients::lastPaidBills($clientId);
+
+        // Get client statistics
+        $client->statistics = ClientStatistics::all($clientId);
+
+        // Money user has to receive from this client
+        $client->money_user_has_to_receive = 0;
+        if ($client->statistics['money_user_has_to_receive'] > 0) {
+            $client->money_user_has_to_receive = trans('clients.client_has_to_pay', ['sum' => $client->statistics['money_user_has_to_receive']]);
+        }
+
+        // Money client owes
+        $client->money_owed_due_passed_payment_term = 0;
+        if ($client->statistics['money_owed_due_passed_payment_term'] > 0) {
+            $client->money_owed_due_passed_payment_term = trans('clients.client_has_to_pay_due_passed_payment_term', ['sum' => $client->statistics['money_owed_due_passed_payment_term']]);
+        }
 
         $response->setSuccessMessage('');
         $response->addExtraFields(['data' => $client]);

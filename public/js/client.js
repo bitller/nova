@@ -197,6 +197,11 @@ new Vue({
                 this.$set('phone_number', response.data.phone_number);
                 this.$set('oldName', this.$get('name'));
                 this.$set('oldPhone', this.$get('phone'));
+                this.$set('statistics', response.data.statistics);
+                this.$set('money_user_has_to_receive', response.data.money_user_has_to_receive);
+                this.$set('money_owed_due_passed_payment_term', response.data.money_owed_due_passed_payment_term);
+                this.$set('last_paid_bills', response.data.last_paid_bills);
+                this.$set('last_unpaid_bills', response.data.last_unpaid_bills);
 
                 this.$set('client', response.data);
 
