@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'access_bill' => 'Access this bill',
     'add' => 'Add new client',
     'all_bills_will_be_deleted' => 'All bills related to this client will be deleted!',
     'bills_of_this_client' => 'Bills of this client',

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'access_bill' => 'Deschide factura',
     'add' => 'Adaugă client nou',
     'all_bills_will_be_deleted' => 'Toate facturile acestui client vor fi șterse!',
     'bills_of_this_client' => 'Facturile acestui client',
