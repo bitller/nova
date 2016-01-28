@@ -116,7 +116,7 @@
                                 <td class="text-center">@{{ unpaid_bill.total }}</td>
                                 <td class="text-center">@{{ unpaid_bill.campaign_number }}</td>
                                 <td class="text-center">@{{ unpaid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
-                                <td class="text-center"><a href="/bills/@{{ unpaid_bill.id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right">{{ trans('clients.access_bill') }}</span></button></a></td>
+                                <td class="text-center"><a href="/bills/@{{ unpaid_bill.id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -136,6 +136,7 @@
                             <th class="text-center">{{ trans('bills.price') }}</th>
                             <th class="text-center">{{ trans('clients.order_number') }}</th>
                             <th class="text-center">{{ trans('bills.campaign') }}</th>
+                            <th class="text-center">{{ trans('clients.access_bill') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -145,6 +146,7 @@
                             <td class="text-center">@{{ paid_bill.total_price }}</td>
                             <td class="text-center">@{{ paid_bill.campaign_number }}</td>
                             <td class="text-center">@{{ paid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
+                            <td class="text-center"><a href="/bills/@{{ paid_bill.id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
                         </tr>
                         </tbody>
                     </table>
