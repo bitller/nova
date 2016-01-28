@@ -85,11 +85,11 @@ class BillData {
         $billApplicationProducts = BillApplicationProduct::where('bill_id', $billId)->get();
 
         foreach($billProducts as $billProduct) {
-            $finalPrice += $billProduct->final_price * $billProduct->quantity;
+            $finalPrice += $billProduct->final_price;
         }
 
         foreach ($billApplicationProducts as $billApplicationProduct) {
-            $finalPrice += $billApplicationProduct->final_price * $billApplicationProduct->quantity;
+            $finalPrice += $billApplicationProduct->final_price;
         }
 
         return $finalPrice;
@@ -139,15 +139,15 @@ class BillData {
 
         // Loop trough bill products
         foreach ($billProducts as $billProduct) {
-            $data['price'] += $billProduct->price * $billProduct->quantity;
-            $data['final_price'] += $billProduct->final_price * $billProduct->quantity;
+            $data['price'] += $billProduct->price;
+            $data['final_price'] += $billProduct->final_price;
             $data['number_of_products'] += $billProduct->quantity;
         }
 
         // Loop trough bill application products
         foreach ($billApplicationProducts as $billApplicationProduct) {
-            $data['price'] += $billApplicationProduct->price * $billApplicationProduct->quantity;
-            $data['final_price'] += $billApplicationProduct->final_price * $billApplicationProduct->quantity;
+            $data['price'] += $billApplicationProduct->price;
+            $data['final_price'] += $billApplicationProduct->final_price;
             $data['number_of_products'] += $billApplicationProduct->quantity;
         }
 

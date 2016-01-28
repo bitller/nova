@@ -112,7 +112,7 @@
                             <tr v-repeat="unpaid_bill in last_unpaid_bills">
                                 <td class="text-center">@{{ unpaid_bill.number_of_products }}</td>
                                 <td class="text-center">@{{ unpaid_bill.payment_term }}</td>
-                                <td class="text-center">@{{ unpaid_bill.total_price }}</td>
+                                <td class="text-center">@{{ unpaid_bill.total }}</td>
                                 <td class="text-center">@{{ unpaid_bill.campaign_number }}</td>
                                 <td class="text-center">@{{ unpaid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
                             </tr>

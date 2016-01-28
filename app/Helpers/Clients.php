@@ -37,28 +37,90 @@ class Clients {
 
     public static function lastBills($clientId, $limit = 5, $paid = false) {
 
-        $select = 'SUM(bill_products.final_price * bill_products.quantity) as bill_products_total_price, SUM(bill_application_products.final_price * bill_application_products.quantity) as bill_application_products_total_price';
-        $select .= ', SUM(bill_products.quantity + bill_application_products.quantity) as number_of_products';
-        $query = Bill::select('bills.*', DB::raw($select))
-            ->where('client_id', $clientId)
-            ->leftJoin('bill_products', 'bill_products.bill_id', '=', 'bills.id')
-            ->leftJoin('bill_application_products', 'bill_application_products.bill_id', '=', 'bills.id')
-            ->where('bills.paid', $paid)
-            ->orderBy('bills.created_at', 'desc')
-            ->groupBy('bills.id')
-            ->take($limit)
-            ->get();
+        if ($paid) {
+            $paid = 1;
+        } else {
+            $paid = 0;
+        }
 
-        if (!count($query)) {
+        // Do a first query to get bill ids
+        $billIdsQuery = Bill::where('client_id', $clientId)->where('paid', $paid)->get();
+
+        if (!count($billIdsQuery)) {
             return 0;
         }
 
-        foreach ($query as $result) {
-            $result->total_price = $result->bill_products_total_price + $result->bill_application_products_total_price;
-            $result->total_price = number_format($result->total_price, 2);
+        // Build string with question marks
+        $billIdsQuestionMarks = '';
+        foreach($billIdsQuery as $result) {
+            $billIdsQuestionMarks .= "?,";
         }
 
-        return $query;
+        // Remove last comma from generated string
+        $billIdsQuestionMarks = substr($billIdsQuestionMarks, 0, -1);
+
+        // Build array with values
+        $stop = 2;
+        $billIds = [];
+        for ($i = 1; $i <= $stop; $i++) {
+            foreach ($billIdsQuery as $result) {
+                $billIds[] = $result->id;
+            }
+        }
+
+        $query = "SELECT SUM(bill_products.final_price) as total, SUM(bill_products.quantity) as number_of_products, bill_products.bill_id as bill_id FROM ";
+        $query .= "(SELECT final_price, bill_id, quantity FROM bill_products WHERE bill_id IN ($billIdsQuestionMarks) ";
+        $query .= "UNION ALL SELECT final_price, bill_id, quantity FROM bill_application_products WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
+        $query .= "GROUP BY bill_products.bill_id";
+        $results = DB::select($query, $billIds);
+
+        // Make new query to get payment term, order number, campaign number and campaign year
+        if (count($results)) {
+            foreach ($results as $result) {
+                $billQuery = Bill::select('payment_term', 'campaign_year', 'campaign_number', 'campaign_order')->where('id', $result->bill_id)->first();
+                $result->payment_term = $billQuery->payment_term;
+                $result->campaign_year = $billQuery->campaign_year;
+                $result->campaign_number = $billQuery->campaign_number;
+                $result->campaign_order = $billQuery->campaign_order;
+            }
+        }
+
+        return $results;
+//        dd($results);
+//        $select = 'SUM(bill_products.final_price) as bill_products_total_price, SUM(bill_products.quantity) as number_of_products';
+//        $billProductsQuery = Bill::select('bills.*', DB::raw($select))
+//            ->where('bills.client_id', $clientId)
+//            ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
+//            ->leftJoin('bill_products', 'bill_products.bill_id', '=', 'bills.id')
+//            ->where('bills.paid', $paid)
+//            ->orderBy('bills.created_at', 'desc')
+//            ->groupBy('bill_products.id')
+//            ->take($limit)
+//            ->get();
+//
+//        $select = 'SUM(bill_application_products.final_price) as bill_application_products_total_price, SUM(bill_application_products.quantity) as number_of_products';
+//        $billApplicationProductsQuery = Bill::select('bills.*', DB::raw($select))
+//            ->where('bills.client_id', $clientId)
+//            ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
+//            ->leftJoin('bill_application_products', 'bill_application_products.bill_id', '=', 'bills.id')
+//            ->where('bills.paid', $paid)
+//            ->orderBy('bills.created_at', 'desc')
+//            ->groupBy('bill_application_products.id')
+//            ->take($limit)
+//            ->get();
+//
+//        if (!count($billProductsQuery) && !count($billApplicationProductsQuery)) {
+//            return 0;
+//        }
+//
+//        $totalPrice = 0;
+//        // Sum bill products and bill application products total price
+//        foreach ($billProductsQuery as $result) {
+//            $totalPrice += $result->bill_products_total_price;
+//            $result->total_price = number_format($result->total_price, 2);
+//        }
+//
+//        return $query;
     }
 
     /**
