@@ -69,9 +69,9 @@ class Clients {
         }
 
         $query = "SELECT SUM(bill_products.final_price) as total, SUM(bill_products.quantity) as number_of_products, bill_products.bill_id as bill_id FROM ";
-        $query .= "(SELECT final_price, bill_id, quantity FROM bill_products WHERE bill_id IN ($billIdsQuestionMarks) ";
-        $query .= "UNION ALL SELECT final_price, bill_id, quantity FROM bill_application_products WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
-        $query .= "GROUP BY bill_products.bill_id";
+        $query .= "(SELECT final_price, bill_id, quantity, bills.created_at as created_at FROM bill_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks) ";
+        $query .= "UNION ALL SELECT final_price, bill_id, quantity, bills.created_at as created_at FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
+        $query .= "GROUP BY bill_products.bill_id ORDER BY bill_products.created_at DESC LIMIT $limit";
         $results = DB::select($query, $billIds);
 
         // Make new query to get payment term, order number, campaign number and campaign year
@@ -82,7 +82,7 @@ class Clients {
 
                 // If payment term is not set use an appropriate message
                 if ($billQuery->payment_term === '0000-00-00') {
-                    $result->payment_term = trans('bill.payment_term_not_set');
+                    $result->payment_term = trans('bill.not_set');
                 } else {
                     $result->payment_term = $billQuery->payment_term;
                 }
