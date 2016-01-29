@@ -12,7 +12,7 @@ return [
     'client_deleted' => 'Clientul a fost șters!',
     'client_exists' => 'Un client cu același nume există deja.',
     'client_from' => 'Client din',
-    'client_has_to_pay' => 'Trebuie să primiți de la acest client :sum ron, aceasta fiind suma facturilor al căror termen de plată nu a fost depășit.',
+    'client_has_to_pay' => 'Trebuie să primiți de la acest client :sum ron, aceasta fiind suma facturilor neplătite al căror termen de plată nu a fost depășit.',
     'client_has_to_pay_due_passed_payment_term' => 'Acest client are facturi în valoare de :sum ron al căror termen de plată a fost depășit sau nu a fost setat.',
     'client_name' => 'Numele clientului',
     'client_name_description' => 'Prenumele si numele clientului',
