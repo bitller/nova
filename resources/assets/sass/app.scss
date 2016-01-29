@@ -206,7 +206,7 @@ body {
 
 .blue-well {
   color: #ffffff;
-  background-color: #6AB3E4;
+  background-color: lighten($brand-primary, 10%);
   border-bottom: 2px solid darken($brand-primary, 5);
   border-left: 1px solid darken($brand-primary, 5);
   border-right: 1px solid darken($brand-primary, 5);

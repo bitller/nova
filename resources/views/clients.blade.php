@@ -49,7 +49,7 @@
                             </td>
                             <td class="text-center vert-align">4</td>
                             <td class="text-center vert-align">@{{ client.created_at }}</td>
-                            <td class="text-center vert-align"><button class="btn btn-danger" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                            <td class="text-center vert-align"><button class="btn btn-default" v-on="click: deleteClient(client.id, clients.current_page, clients.to-clients.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                         </tr>
                     </tbody>
                 </table>

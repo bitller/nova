@@ -1,10 +1,12 @@
-$brand-primary: #D73A8B;
+$brand-primary: #D2527F;
 $brand-warning: #F0AD4E;
+$brand-success: #26C281;
 $default-grey: #E1E1E1;
-$danger-color: #F25D5C;
+$danger-color: #F39C12;
+$brand-gray: #C1C1C1;
 
 // Navbar
-$navbar-default-bg: #3498DB;
+$navbar-default-bg: $brand-primary;
 $navbar-default-border: $navbar-default-bg;
 
 $navbar-color-for-links: #EFEFEF;
@@ -57,6 +59,6 @@ $alert-danger-bg: $danger-color;
 $alert-danger-text: #ffffff;
 $alert-danger-border: $danger-color;
 
-$alert-success-bg: #2CC36B;
+$alert-success-bg: lighten($brand-primary, 7%);
 $alert-success-text: #ffffff;
-$alert-success-border: #2CC36B;
+$alert-success-border: lighten($brand-primary, 7%);

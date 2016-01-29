@@ -41,7 +41,7 @@
                     <td class="text-center vert-align">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
                     <td class="text-center vert-align">@{{ bill.price }} ron</td>
                     <td class="text-center vert-align">@{{ bill.human_date }}</td>
-                    <td class="text-center vert-align"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                    <td class="text-center vert-align"><button class="btn btn-default" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                 </tr>
                 </tbody>
             </table>

@@ -116,7 +116,7 @@
                                 <td class="text-center vert-align">@{{ unpaid_bill.total }}</td>
                                 <td class="text-center vert-align">@{{ unpaid_bill.campaign_number }}</td>
                                 <td class="text-center vert-align">@{{ unpaid_bill.campaign_number }}/@{{ unpaid_bill.campaign_year }}</td>
-                                <td class="text-center vert-align"><a href="/bills/@{{ unpaid_bill.bill_id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
+                                <td class="text-center vert-align"><a href="/bills/@{{ unpaid_bill.bill_id }}"><button class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -146,7 +146,7 @@
                             <td class="text-center vert-align">@{{ paid_bill.total }}</td>
                             <td class="text-center vert-align">@{{ paid_bill.campaign_number }}</td>
                             <td class="text-center vert-align">@{{ paid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
-                            <td class="text-center vert-align"><a href="/bills/@{{ paid_bill.bill_id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
+                            <td class="text-center vert-align"><a href="/bills/@{{ paid_bill.bill_id }}"><button class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
                         </tr>
                         </tbody>
                     </table>
