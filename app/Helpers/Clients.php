@@ -68,28 +68,31 @@ class Clients {
             }
         }
 
-        $query = "SELECT SUM(bill_products.final_price) as total, SUM(bill_products.quantity) as number_of_products, bill_products.bill_id as bill_id FROM ";
-        $query .= "(SELECT final_price, bill_id, quantity, bills.created_at as created_at FROM bill_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks) ";
-        $query .= "UNION ALL SELECT final_price, bill_id, quantity, bills.created_at as created_at FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
+        // Select total price, number of products and bill id to be used in group statement
+        $query = "SELECT SUM(bill_products.final_price) as total, SUM(bill_products.quantity) as number_of_products, bill_products.bill_id as bill_id, ";
+        $query .= "bill_products.payment_term as payment_term, bill_products.campaign_order as campaign_order, ";
+        $query .= "bill_products.campaign_year as campaign_year, bill_products.campaign_number as campaign_number FROM ";
+
+        // Select other required columns
+        $query .= "(SELECT final_price, bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, bills.campaign_year as campaign_year, ";
+        $query .= "bills.campaign_number as campaign_number, bills.campaign_order as campaign_order ";
+        $query .= "FROM bill_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks) ";
+
+        // Do the same for other table
+        $query .= "UNION ALL SELECT final_price, bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, bills.campaign_year as campaign_year, ";
+        $query .= "bills.campaign_number as campaign_number, bills.campaign_order as campaign_order ";
+        $query .= "FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
         $query .= "GROUP BY bill_products.bill_id ORDER BY bill_products.created_at DESC LIMIT $limit";
         $results = DB::select($query, $billIds);
 
-        // Make new query to get payment term, order number, campaign number and campaign year
-        if (count($results)) {
-            foreach ($results as $result) {
-                // Query for details
-                $billQuery = Bill::select('payment_term', 'campaign_year', 'campaign_number', 'campaign_order')->where('id', $result->bill_id)->first();
+        // Loop trough results and set an appropriate message when a bill has no payment term set
+        if (!count($results)) {
+            return 0;
+        }
 
-                // If payment term is not set use an appropriate message
-                if ($billQuery->payment_term === '0000-00-00') {
-                    $result->payment_term = trans('bill.not_set');
-                } else {
-                    $result->payment_term = $billQuery->payment_term;
-                }
-
-                $result->campaign_year = $billQuery->campaign_year;
-                $result->campaign_number = $billQuery->campaign_number;
-                $result->campaign_order = $billQuery->campaign_order;
+        foreach ($results as $result) {
+            if ($result->payment_term === '0000-00-00') {
+                $result->payment_term = trans('bill.not_set');
             }
         }
 

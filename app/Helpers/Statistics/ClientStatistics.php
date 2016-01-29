@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Statistics;
 
+use App\Bill;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -137,44 +138,42 @@ class ClientStatistics {
      */
     public static function moneyOwedDuePassedPaymentTerm($clientId) {
 
-        $money = 0;
+        $billIdsQuery = Bill::where('client_id', $clientId)->where('payment_term', '<', date('Y-m-d'))->where('paid', 0)->get();
 
-        // Get only not paid bills
-        $paid = 0;
-
-        $query = DB::table('clients')
-            ->select(DB::raw('SUM(bill_products.final_price * bill_products.quantity) as earnings'))
-            ->leftJoin('users', 'clients.user_id', '=', 'users.id')
-            ->leftJoin('products', 'products.user_id', '=', 'users.id')
-            ->leftJoin('bills', 'bills.client_id', '=', 'clients.id')
-            ->leftJoin('bill_products', 'bill_products.bill_id', '=', 'bills.id')
-            ->where('bills.paid', $paid)
-            ->where('bills.payment_term', '<', date('Y-m-d'))
-            ->where('clients.id', $clientId)
-            ->groupBy('products.id')
-            ->get();
-
-        $secondQuery = DB::table('application_products')
-            ->select(DB::raw('SUM(bill_application_products.final_price * bill_application_products.quantity) as earnings'))
-            ->leftJoin('bill_application_products', function($join) {
-                $join->on('application_products.id', '=', 'bill_application_products.product_id');
-            })
-            ->leftJoin('bills', 'bills.id', '=', 'bill_application_products.bill_id')
-            ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
-            ->where('bills.paid', $paid)
-            ->where('bills.payment_term', '<', date('Y-m-d'))
-            ->where('clients.id', $clientId)
-            ->groupBy('clients.id')
-            ->get();
-
-        if (isset($query[0]->earnings)) {
-            $money += $query[0]->earnings;
-        }
-        if (isset($secondQuery[0]->earnings)) {
-            $money += $secondQuery[0]->earnings;
+        // Check if query returned something
+        if (!count($billIdsQuery)) {
+            return 0;
         }
 
-        return $money;
+        $questionMarks = '';
+        // Build question marks string
+        foreach ($billIdsQuery as $result) {
+            $questionMarks .= '?,';
+        }
+
+        // Remove last comma
+        $questionMarks = substr($questionMarks, 0, -1);
+
+        // Build array with ids
+        $billIds = [];
+        $stop = 2;
+
+        for ($i = 1; $i <= $stop; $i++) {
+            foreach ($billIdsQuery as $result) {
+                $billIds[] = $result->id;
+            }
+        }
+
+        $query = "SELECT SUM(bill_products.final_price) as total FROM(SELECT final_price, bill_id FROM bill_products WHERE bill_id IN ($questionMarks) ";
+        $query .= "UNION ALL SELECT final_price, bill_id FROM bill_application_products WHERE bill_id IN ($questionMarks)) bill_products";
+
+        $result = DB::select($query, $billIds);
+
+        if (isset($result[0]->total)) {
+            return $result[0]->total;
+        }
+
+        return 0;
     }
 
     /**
