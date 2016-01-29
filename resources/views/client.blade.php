@@ -94,7 +94,7 @@
 
             </ul>
 
-            <!-- BEGIN Last unpaid bills of this user -->
+            <!-- BEGIN Last unpaid bills of this client -->
             <div v-show="last_unpaid_bills">
                 <h4>{{ trans('clients.last_unpaid_bills', ['number' => 4]) }}</h4>
                 <div class="panel panel-default">
@@ -111,20 +111,20 @@
                         </thead>
                         <tbody>
                             <tr v-repeat="unpaid_bill in last_unpaid_bills">
-                                <td class="text-center">@{{ unpaid_bill.number_of_products }}</td>
-                                <td class="text-center">@{{ unpaid_bill.payment_term }}</td>
-                                <td class="text-center">@{{ unpaid_bill.total }}</td>
-                                <td class="text-center">@{{ unpaid_bill.campaign_number }}</td>
-                                <td class="text-center">@{{ unpaid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
-                                <td class="text-center"><a href="/bills/@{{ unpaid_bill.id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
+                                <td class="text-center vert-align">@{{ unpaid_bill.number_of_products }}</td>
+                                <td class="text-center vert-align">@{{ unpaid_bill.payment_term }}</td>
+                                <td class="text-center vert-align">@{{ unpaid_bill.total }}</td>
+                                <td class="text-center vert-align">@{{ unpaid_bill.campaign_number }}</td>
+                                <td class="text-center vert-align">@{{ unpaid_bill.campaign_number }}/@{{ unpaid_bill.campaign_year }}</td>
+                                <td class="text-center vert-align"><a href="/bills/@{{ unpaid_bill.bill_id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- END Last unpaid bills of this user -->
+            <!-- END Last unpaid bills of this client -->
 
-            <!-- BEGIN Last paid bills of this user -->
+            <!-- BEGIN Last paid bills of this client -->
             <div v-show="last_paid_bills">
                 <h4>{{ trans('clients.last_paid_bills') }}</h4>
                 <div class="panel panel-default">
@@ -141,44 +141,19 @@
                         </thead>
                         <tbody>
                         <tr v-repeat="paid_bill in last_paid_bills">
-                            <td class="text-center">@{{ paid_bill.number_of_products }}</td>
-                            <td class="text-center">@{{ paid_bill.payment_term }}</td>
-                            <td class="text-center">@{{ paid_bill.total_price }}</td>
-                            <td class="text-center">@{{ paid_bill.campaign_number }}</td>
-                            <td class="text-center">@{{ paid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
-                            <td class="text-center"><a href="/bills/@{{ paid_bill.id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
+                            <td class="text-center vert-align">@{{ paid_bill.number_of_products }}</td>
+                            <td class="text-center vert-align">@{{ paid_bill.payment_term }}</td>
+                            <td class="text-center vert-align">@{{ paid_bill.total }}</td>
+                            <td class="text-center vert-align">@{{ paid_bill.campaign_number }}</td>
+                            <td class="text-center vert-align">@{{ paid_bill.campaign_number }}/@{{ paid_bill.campaign_year }}</td>
+                            <td class="text-center vert-align"><a href="/bills/@{{ paid_bill.bill_id }}"><button class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;{{ trans('clients.access_bill') }}</button></a></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!-- END Last paid bills of this user -->
+            <!-- END Last paid bills of this client -->
 
-            {{--<!-- BEGIN Client bills -->--}}
-            {{--<div class="client-bills" v-show="client.total_bills > 0">--}}
-                {{--<h4>{{ trans('clients.bills_of_this_client') }}</h4>--}}
-                {{--<div class="panel panel-default">--}}
-                    {{--<table class="table table-bordered">--}}
-                        {{--<thead>--}}
-                        {{--<tr>--}}
-                            {{--<th>{{ trans('bills.client') }}</th>--}}
-                            {{--<th>{{ trans('bills.number_of_products') }}</th>--}}
-                            {{--<th>{{ trans('bills.campaign') }}</th>--}}
-                            {{--<th>{{ trans('bills.created_at') }}</th>--}}
-                        {{--</tr>--}}
-                        {{--</thead>--}}
-                        {{--<tbody>--}}
-                        {{--<tr v-repeat="bill in client.bills">--}}
-                            {{--<td><a href="#">@{{ client.name }}</a></td>--}}
-                            {{--<td>0</td>--}}
-                            {{--<td>@{{ bill.campaign_number }}</td>--}}
-                            {{--<td>@{{ bill.created_at }}</td>--}}
-                        {{--</tr>--}}
-                        {{--</tbody>--}}
-                    {{--</table>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<!-- END Client bills -->--}}
             @include('includes.modals.edit-client-name')
             @include('includes.modals.edit-client-email')
             @include('includes.modals.edit-client-phone-number')

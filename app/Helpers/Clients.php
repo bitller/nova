@@ -77,8 +77,16 @@ class Clients {
         // Make new query to get payment term, order number, campaign number and campaign year
         if (count($results)) {
             foreach ($results as $result) {
+                // Query for details
                 $billQuery = Bill::select('payment_term', 'campaign_year', 'campaign_number', 'campaign_order')->where('id', $result->bill_id)->first();
-                $result->payment_term = $billQuery->payment_term;
+
+                // If payment term is not set use an appropriate message
+                if ($billQuery->payment_term === '0000-00-00') {
+                    $result->payment_term = trans('bill.payment_term_not_set');
+                } else {
+                    $result->payment_term = $billQuery->payment_term;
+                }
+
                 $result->campaign_year = $billQuery->campaign_year;
                 $result->campaign_number = $billQuery->campaign_number;
                 $result->campaign_order = $billQuery->campaign_order;
