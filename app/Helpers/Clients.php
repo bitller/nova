@@ -74,14 +74,14 @@ class Clients {
         $query .= "bill_products.campaign_year as campaign_year, bill_products.campaign_number as campaign_number FROM ";
 
         // Select other required columns
-        $query .= "(SELECT final_price, bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, bills.campaign_year as campaign_year, ";
-        $query .= "bills.campaign_number as campaign_number, bills.campaign_order as campaign_order ";
-        $query .= "FROM bill_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks) ";
+        $query .= "(SELECT final_price, bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, campaigns.year as campaign_year, ";
+        $query .= "campaigns.number as campaign_number, bills.campaign_order as campaign_order ";
+        $query .= "FROM bill_products LEFT JOIN bills ON bills.id = bill_id LEFT JOIN campaigns ON bills.campaign_id = campaigns.id WHERE bill_id IN ($billIdsQuestionMarks) ";
 
         // Do the same for other table
-        $query .= "UNION ALL SELECT final_price, bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, bills.campaign_year as campaign_year, ";
-        $query .= "bills.campaign_number as campaign_number, bills.campaign_order as campaign_order ";
-        $query .= "FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
+        $query .= "UNION ALL SELECT final_price, bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, campaigns.year as campaign_year, ";
+        $query .= "campaigns.number as campaign_number, bills.campaign_order as campaign_order ";
+        $query .= "FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id LEFT JOIN campaigns ON bills.campaign_id = campaigns.id WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
         $query .= "GROUP BY bill_products.bill_id ORDER BY bill_products.created_at DESC LIMIT $limit";
         $results = DB::select($query, $billIds);
 

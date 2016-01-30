@@ -60,8 +60,14 @@ new Vue({
             // Build post data
             var data = {
                 _token: Token.get(),
-                client: $('#client-name').val()
+                client: $('#client-name').val(),
+                use_current_campaign: this.$get('use_current_campaign')
             };
+
+            if (!this.$get('use_current_campaign')) {
+                data.campaign_year = this.$get('campaign_year');
+                data.campaign_number = this.$get('campaign_number');
+            }
 
             this.$http.post('/bills/create', data, function(response) {
 

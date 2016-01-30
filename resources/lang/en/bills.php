@@ -5,6 +5,8 @@ return [
     'bill_deleted' => 'Bill has been deleted!',
     'campaign' => 'Campaign',
     'campaign_order' => 'Campaign order number',
+    'campaign_order_number' => 'Campaign order number',
+    'campaign_order_number_description' => '',
     'client' => 'Client',
     'client_name' => 'Client name',
     'client_name_required' => 'Client name is required.',

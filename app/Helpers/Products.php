@@ -390,8 +390,9 @@ class Products {
             $billIds[] = $billProduct->bill_id;
         }
 
-        return Bill::select('bills.*', 'clients.name as client_name')
+        return Bill::select('bills.*', 'clients.name as client_name', 'campaigns.year as campaign_year', 'campaigns.number as campaign_number')
             ->leftJoin('clients', 'bills.client_id', '=', 'clients.id')
+            ->leftJoin('campaigns', 'campaigns.id', '=', 'bills.campaign_id')
             ->whereIn('bills.id', $billIds)
             ->where('bills.user_id', Auth::user()->id)
             ->where('bills.paid', $paidBill)

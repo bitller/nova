@@ -3,6 +3,8 @@
 namespace App\Helpers\Statistics;
 
 use App\Bill;
+use App\Campaign;
+use App\Helpers\Campaigns;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -66,8 +68,8 @@ class ClientStatistics {
         $earningsInCurrentCampaign = 0;
 
         // Query the two tables
-        $billProductsQuery = self::_earningsProductsQuery($clientId, ['bills.campaign_number' => 1, 'bills.campaign_year' => date('Y')]);
-        $billApplicationsQuery = self::_earningsApplicationProductsQuery($clientId, ['bills.campaign_number' => 1, 'bills.campaign_year' => date('Y')]);
+        $billProductsQuery = self::_earningsProductsQuery($clientId, ['campaigns.number' => Campaigns::current()->number, 'campaigns.year' => date('Y')]);
+        $billApplicationsQuery = self::_earningsApplicationProductsQuery($clientId, ['campaigns.number' => Campaigns::current()->number, 'campaigns.year' => date('Y')]);
 
         // Check if first query returned something and add to existent value
         if (isset($billProductsQuery[0]->earnings)) {
@@ -264,6 +266,7 @@ class ClientStatistics {
             ->leftJoin('users', 'clients.user_id', '=', 'users.id')
             ->leftJoin('products', 'products.user_id', '=', 'users.id')
             ->leftJoin('bills', 'bills.client_id', '=', 'clients.id')
+            ->leftJoin('campaigns', 'campaigns.id', '=', 'bills.campaign_id')
             ->leftJoin('bill_products', 'bill_products.bill_id', '=', 'bills.id')
             ->where('bills.paid', $paid)
             ->where('clients.id', $clientId);
@@ -297,6 +300,7 @@ class ClientStatistics {
                 $join->on('application_products.id', '=', 'bill_application_products.product_id');
             })
             ->leftJoin('bills', 'bills.id', '=', 'bill_application_products.bill_id')
+            ->leftJoin('campaigns', 'campaigns.id', '=', 'bills.campaign_id')
             ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
             ->where('bills.paid', $paid)
             ->where('clients.id', $clientId);

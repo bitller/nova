@@ -69,12 +69,13 @@ class Bills {
 
         $bill = Auth::user()->bills()->where('bills.id', $billId)
             ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
+            ->leftJoin('campaigns', 'campaigns.id', '=', 'bills.campaign_id')
             ->select(
                 'clients.id as client_id',
                 'clients.name as client_name',
                 'bills.campaign_order',
-                'bills.campaign_number',
-                'bills.campaign_year',
+                'campaigns.number as campaign_number',
+                'campaigns.year as campaign_year',
                 'bills.other_details',
                 'bills.payment_term',
                 'bills.paid'
@@ -121,9 +122,11 @@ class Bills {
         }
 
         $bills = Bill::select(
-            'bills.id', 'bills.campaign_order', 'bills.campaign_number', 'bills.campaign_year',
+            'bills.id', 'bills.campaign_order', 'campaigns.number as campaign_number', 'campaigns.year as campaign_year',
             'bills.other_details', 'bills.created_at', 'bills.payment_term as payment_term', 'clients.name as client_name'
-        )->where('bills.user_id', $userId)
+        )
+        ->leftJoin('campaigns', 'campaigns.id', '=', 'bills.campaign_id')
+        ->where('bills.user_id', $userId)
         ->where('bills.paid', $paid)
         ->orderBy('bills.created_at', 'desc')
         ->join('clients', function($join){

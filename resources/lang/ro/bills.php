@@ -6,6 +6,8 @@ return [
     'campaign' => 'Campania',
     'campaign_number' => 'Numărul',
     'campaign_order' => 'Comanda',
+    'campaign_order_number' => 'Comanda cu numărul',
+    'campaign_order_number_description' => 'Aici introduci numărul comenzi în această campanie pentru acest client. Dacă câmpul nu este completat, se va folosi valoarea 1. De exemplu, dacă un client comandă de două ori într-o campanie, la a doua factură o să completați acest câmp cu valoarea 2.',
     'campaign_year' => 'Anul campaniei',
     'client' => 'Client',
     'client_name' => 'Numele clientului',

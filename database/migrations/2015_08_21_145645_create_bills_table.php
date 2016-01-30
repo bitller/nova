@@ -21,9 +21,8 @@ class CreateBillsTable extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('client_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('campaign_id')->unsigned();
             $table->tinyInteger('campaign_order')->default(1);
-            $table->tinyInteger('campaign_number')->default(1);
-            $table->string('campaign_year')->default(date('Y'));
             $table->date('payment_term');
             $table->text('other_details');
             $table->enum('paid', [0, 1])->default(0);
@@ -31,6 +30,7 @@ class CreateBillsTable extends Migration {
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }

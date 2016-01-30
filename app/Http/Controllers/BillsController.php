@@ -6,15 +6,18 @@ use App\ApplicationProduct;
 use App\Bill;
 use App\BillApplicationProduct;
 use App\BillProduct;
+use App\Campaign;
 use App\Client;
 use App\Events\HomepageAccessed;
 use App\Events\UserCreatedNewBill;
 use App\Events\UserDeletedBill;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Bills;
+use App\Helpers\Campaigns;
 use App\Helpers\Clients;
 use App\Helpers\Settings;
 use App\Http\Requests\Bill\AddProductRequest;
+use App\Http\Requests\Bill\CreateBillRequest;
 use App\Http\Requests\Bill\EditOtherDetailsRequest;
 use App\Http\Requests\Bill\EditPaymentTermRequest;
 use App\Http\Requests\Bill\EditProductDiscountRequest;
@@ -22,7 +25,6 @@ use App\Http\Requests\Bill\EditProductPageRequest;
 use App\Http\Requests\Bill\EditProductPriceRequest;
 use App\Http\Requests\Bill\SuggestClientRequest;
 use App\Http\Requests\Bill\SuggestProductRequest;
-use App\Http\Requests\CreateBillRequest;
 use App\Http\Requests\Bill\EditProductQuantityRequest;
 use App\Product;
 use Illuminate\Http\Request;
@@ -89,18 +91,36 @@ class BillsController extends BaseController {
      */
     public function create(CreateBillRequest $request) {
 
+        // Save request data
+        $clientName = $request->get('client');
+        $useCurrentCampaign = $request->get('use_current_campaign');
+        $campaignYear = $request->get('campaign_year');
+        $campaignNumber = $request->get('campaign_number');
+
+        $client = DB::table('clients')->where('name', $clientName)->where('user_id', Auth::user()->id)->first();
+
         // Create new client if not exists
-        $client = DB::table('clients')->where('name', $request->get('client'))->where('user_id', Auth::user()->id)->first();
         if (!$client) {
             $client = new Client();
             $client->user_id = Auth::user()->id;
-            $client->name = $request->get('client');
+            $client->name = $clientName;
             $client->save();
         }
 
+        // Create new bill
         $bill = new Bill();
         $bill->client_id = $client->id;
         $bill->user_id = Auth::user()->id;
+
+        $campaign = Campaigns::current();
+
+        // Check if current campaign should be used
+        if (!$useCurrentCampaign) {
+            $campaign = Campaign::where('year', $campaignYear)->where('number', $campaignNumber)->first();
+        }
+
+        $bill->campaign_id = $campaign->id;
+        $bill->campaign_order = Campaigns::autoDetermineOrderNumber($campaign, $client->id);
         $bill->save();
 
         event(new UserCreatedNewBill(Auth::user()->id, $bill->id));
@@ -109,7 +129,6 @@ class BillsController extends BaseController {
         $response = new AjaxResponse();
         $response->setSuccessMessage(trans('bills.bill_created'));
         return response($response->get());
-
     }
 
     /**
