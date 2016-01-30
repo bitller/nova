@@ -50,4 +50,6 @@ return [
     'save_client_phone_number' => 'Save phone number',
     'total_discount_received' => 'Total discount received by this client',
     'total_number_of_products_ordered' => 'Total number of products ordered by this client',
+    'view_all_paid_bills' => 'View all paid bills',
+    'view_all_unpaid_bills' => 'View all unpaid bills',
 ];

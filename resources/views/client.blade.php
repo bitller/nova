@@ -96,7 +96,11 @@
 
             <!-- BEGIN Last unpaid bills of this client -->
             <div v-show="last_unpaid_bills">
-                <h4>{{ trans('clients.last_unpaid_bills', ['number' => 4]) }}</h4>
+                <h4>
+                    {{ trans('clients.last_unpaid_bills') }}
+                    <span>-</span>
+                    <a href="/clients/{{ $clientId  }}/bills/unpaid">{{ trans('clients.view_all_unpaid_bills') }}</a>
+                </h4>
                 <div class="panel panel-default">
                     <table class="table table-bordered">
                         <thead>
@@ -126,7 +130,11 @@
 
             <!-- BEGIN Last paid bills of this client -->
             <div v-show="last_paid_bills">
-                <h4>{{ trans('clients.last_paid_bills') }}</h4>
+                <h4>
+                    {{ trans('clients.last_paid_bills') }}
+                    <span>-</span>
+                    <a href="/clients/{{ $clientId  }}/bills/paid">{{ trans('clients.view_all_paid_bills') }}</a>
+                </h4>
                 <div class="panel panel-default">
                     <table class="table table-bordered">
                         <thead>

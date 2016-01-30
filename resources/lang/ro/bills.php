@@ -4,7 +4,9 @@ return [
     'bill_created' => 'Factura a fost creată!',
     'bill_deleted' => 'Factura a fost ștearsă!',
     'campaign' => 'Campania',
+    'campaign_number' => 'Numărul',
     'campaign_order' => 'Comanda',
+    'campaign_year' => 'Anul campaniei',
     'client' => 'Client',
     'client_name' => 'Numele clientului',
     'client_name_required' => 'Numele clientului este necesar.',
@@ -20,5 +22,7 @@ return [
     'number_of_products' => 'Numărul de produse',
     'order' => 'Comanda',
     'price' => 'Preţ',
+    'use_current_campaign' => 'Folosește campania actuală (:current_campaign_number/:current_campaign_year)',
+    'use_current_campaign_description' => 'Folosește campania actuală pentru această factură. Dacă doriți să folosiți altă campanie, debifati această căsuță și alegeți campania dorită.',
     'year' => 'anul',
 ];

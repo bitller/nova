@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder {
             'language_id' => 1
         ]);
 
-        factory(App\SecuritySetting::class)->create();
+//        factory(App\SecuritySetting::class)->create();
 
         // Generate users
         factory(App\User::class, 2)->create()->each(function($user) {

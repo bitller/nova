@@ -31,6 +31,56 @@
                 </div>
                 <!-- END Client name -->
 
+                <!-- BEGIN Use current campaign -->
+                <div class="checkbox col-md-12">
+                    <label><input type="checkbox" checked="use_current_campaign" v-model="use_current_campaign" />{{ trans('bills.use_current_campaign', ['current_campaign_number' => \App\Helpers\Campaigns::current()->number, 'current_campaign_year' => \App\Helpers\Campaigns::current()->year]) }}</label>
+                    <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('bills.use_current_campaign_description') }}">?</span>
+                </div>
+                <!-- END Use current campaign -->
+
+                <!-- BEGIN Choose another campaign -->
+                <div v-show="!use_current_campaign" class="col-md-12">
+                    <div class="form-group col-md-4">
+                        <label for="sel1">{{ trans('bills.campaign_year') }}</label>
+                        <select class="form-control" id="sel1">
+                            <option>2015</option>
+                            <option>2016</option>
+                            <option>2017</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="sel1">{{ trans('bills.campaign_number') }}</label>
+                        <select class="form-control" id="sel1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="sel1">{{ trans('bills.campaign_order') }}</label>
+                        <select class="form-control" id="sel1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- END Choose another campaign -->
+
             </div>
             <!-- END Modal body -->
 

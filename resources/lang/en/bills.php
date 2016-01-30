@@ -19,5 +19,7 @@ return [
     'number_of_products' => 'Number of products',
     'order' => 'Order',
     'price' => 'Price',
+    'use_current_campaign' => 'Use current campaign (:current_campaign_number/:current_campaign_year)',
+    'use_current_campaign_description' => 'Use current campaign for this bill. If you want to use another campaign, un check this box and select other campaign.',
     'year' => 'year',
 ];

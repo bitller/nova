@@ -52,4 +52,6 @@ return [
     'save_client_phone_number' => 'Salvează numărul de telefon',
     'total_discount_received' => 'Reducerea totală primită de acest client',
     'total_number_of_products_ordered' => 'Numărul total de produse comandate de acest client',
+    'view_all_paid_bills' => 'Vezi toate facturile plătite',
+    'view_all_unpaid_bills' => 'Vezi toate facturile neplătite',
 ];
