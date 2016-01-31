@@ -58,11 +58,12 @@ class BillsController extends BaseController {
     }
 
     /**
+     * @param Request $request
      * @return mixed
      */
-    public function getBills() {
+    public function getBills(Request $request) {
         event(new HomepageAccessed(Auth::user()->id));
-        return Bills::get();
+        return Bills::get(false, false, $request->get('page'));
     }
 
     /**

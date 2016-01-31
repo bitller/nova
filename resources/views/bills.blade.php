@@ -27,20 +27,58 @@
                 <thead>
                 <tr>
                     <th class="text-center"><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
+                    <th class="text-center"><span class="glyphicon glyphicon-th icon-color"></span>&nbsp; {{ trans('bills.number_of_products') }}</th>
+                    <th class="text-center"><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.price') }}</th>
                     <th class="text-center"><span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}</th>
                     <th class="text-center"><span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}</th>
-                    <th class="text-center"><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.price') }}</th>
-                    <th class="text-center"><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bills.created_at') }}</th>
+                    <th class="text-center"><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bill.payment_term') }}</th>
                     <th class="text-center"><span class="glyphicon glyphicon-trash icon-color"></span>&nbsp; {{ trans('common.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-repeat="bill in bills.data">
-                    <td class="text-center vert-align"><a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a></td>
-                    <td class="text-center vert-align">@{{ bill.campaign_order }}</td>
-                    <td class="text-center vert-align">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
-                    <td class="text-center vert-align">@{{ bill.price }} ron</td>
-                    <td class="text-center vert-align">@{{ bill.human_date }}</td>
+
+                    <!-- BEGIN Client name -->
+                    <td class="text-center vert-align">
+                        <a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a>
+                    </td>
+                    <!-- END Client name -->
+
+                    <!-- BEGIN Number of products -->
+                    <td class="text-center vert-align">
+                        <span v-show="bill.number_of_products > 0">@{{ bill.number_of_products }}</span>
+                        <span v-show="bill.number_of_products < 1">0</span>
+                    </td>
+                    <!-- END Number of products -->
+
+                    <!-- BEGIN Price -->
+                    <td class="text-center vert-align">
+                        <span v-show="bill.final_price > 0">@{{ bill.final_price }} ron</span>
+                        <span v-show="bill.final_price < 1">0 ron</span>
+                    </td>
+                    <!-- END Price -->
+
+                    <!-- BEGIN Campaign order -->
+                    <td class="text-center vert-align">
+                        @{{ bill.campaign_order }}
+                    </td>
+                    <!-- END Campaign order -->
+
+                    <!-- BEGIN Campaign -->
+                    <td class="text-center vert-align">
+                        <a href="/statistics/campaign/@{{ bill.campaign_number }}/@{{ bill.campaign_year }}">
+                            @{{ bill.campaign_number }}/@{{ bill.campaign_year }}
+                        </a>
+                    </td>
+                    <!-- END Campaign -->
+
+                    <!-- BEGIN Payment term -->
+                    <td class="text-center vert-align">
+                        <span v-show="bill.payment_term == '0000-00-00'">{{ trans('bill.not_set') }}</span>
+                        <span v-show="bill.payment_term != '0000-00-00'">@{{ bill.payment_term }}</span>
+                    </td>
+                    <!-- END Payment term -->
+
                     <td class="text-center vert-align"><button class="btn btn-default" v-on="click: deleteBill(bill.id, bills.current_page, bills.to-bills.from,'{{ trans('common.loading') }}')"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                 </tr>
                 </tbody>

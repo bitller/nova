@@ -45,7 +45,6 @@ class Clients {
 
         // Do a first query to get bill ids
         $billIdsQuery = Bill::where('client_id', $clientId)->where('paid', $paid)->get();
-
         if (!count($billIdsQuery)) {
             return 0;
         }
@@ -83,6 +82,7 @@ class Clients {
         $query .= "campaigns.number as campaign_number, bills.campaign_order as campaign_order ";
         $query .= "FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id LEFT JOIN campaigns ON bills.campaign_id = campaigns.id WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
         $query .= "GROUP BY bill_products.bill_id ORDER BY bill_products.created_at DESC LIMIT $limit";
+
         $results = DB::select($query, $billIds);
 
         // Loop trough results and set an appropriate message when a bill has no payment term set
@@ -97,41 +97,6 @@ class Clients {
         }
 
         return $results;
-//        dd($results);
-//        $select = 'SUM(bill_products.final_price) as bill_products_total_price, SUM(bill_products.quantity) as number_of_products';
-//        $billProductsQuery = Bill::select('bills.*', DB::raw($select))
-//            ->where('bills.client_id', $clientId)
-//            ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
-//            ->leftJoin('bill_products', 'bill_products.bill_id', '=', 'bills.id')
-//            ->where('bills.paid', $paid)
-//            ->orderBy('bills.created_at', 'desc')
-//            ->groupBy('bill_products.id')
-//            ->take($limit)
-//            ->get();
-//
-//        $select = 'SUM(bill_application_products.final_price) as bill_application_products_total_price, SUM(bill_application_products.quantity) as number_of_products';
-//        $billApplicationProductsQuery = Bill::select('bills.*', DB::raw($select))
-//            ->where('bills.client_id', $clientId)
-//            ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
-//            ->leftJoin('bill_application_products', 'bill_application_products.bill_id', '=', 'bills.id')
-//            ->where('bills.paid', $paid)
-//            ->orderBy('bills.created_at', 'desc')
-//            ->groupBy('bill_application_products.id')
-//            ->take($limit)
-//            ->get();
-//
-//        if (!count($billProductsQuery) && !count($billApplicationProductsQuery)) {
-//            return 0;
-//        }
-//
-//        $totalPrice = 0;
-//        // Sum bill products and bill application products total price
-//        foreach ($billProductsQuery as $result) {
-//            $totalPrice += $result->bill_products_total_price;
-//            $result->total_price = number_format($result->total_price, 2);
-//        }
-//
-//        return $query;
     }
 
     /**
