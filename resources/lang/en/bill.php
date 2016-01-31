@@ -51,7 +51,7 @@ return [
     'product_discount' => 'Product discount',
     'product_discount_required' => 'Product discount is required!',
     'product_not_found' => 'Product not found.',
-    'product_page' => 'Product price',
+    'product_page' => 'Product page',
     'product_page_required' => 'Product page is required!',
     'product_price' => 'Product price',
     'product_price_required' => 'Product price is required!',
