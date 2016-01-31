@@ -25,10 +25,10 @@ class CreateBillRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'client' => ['required', 'string', 'min:3', 'max:60'],
-            'use_current_campaign' => ['bool'],
-            'campaign_year' => ['required_unless:use_current_campaign,true', 'exists:campaigns,year'],
             'campaign_number' => ['required_unless:use_current_campaign,true', 'exists:campaigns,number'],
+            'campaign_year' => ['required_unless:use_current_campaign,true', 'exists:campaigns,year'],
+            'use_current_campaign' => ['bool'],
+            'client' => ['required', 'string', 'min:3', 'max:60'],
         ];
     }
 }

@@ -59,6 +59,7 @@ return [
     'regex'                => 'The :attribute format is invalid.',
     'required'             => 'The :attribute field is required.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
+    'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
     'required_with_all'    => 'The :attribute field is required when :values is present.',
     'required_without'     => 'The :attribute field is required when :values is not present.',
@@ -111,6 +112,8 @@ return [
     'attributes' => [
         'bill_id' => 'bill id',
         'bill_product_id' => 'bill product id',
+        'campaign_year' => 'campaign year',
+        'campaign_number' => 'campaign number',
         'client' => 'client',
         'client_email' => 'client email',
         'client_id' => 'client id',
@@ -129,6 +132,7 @@ return [
         'product_page' => 'product page',
         'product_quantity' => 'product quantity',
         'promo_code' => 'Promo code',
+        'use_current_campaign' => 'use current campaign',
         'user_password' => 'user password'
     ],
 
