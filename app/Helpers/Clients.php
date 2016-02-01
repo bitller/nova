@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Bill;
 use App\Client;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,37 @@ class Clients {
      */
     public static function lastPaidBills($clientId, $limit = 5) {
         return self::lastBills($clientId, $limit, 1);
+    }
+
+    /**
+     * Paginate paid bills of given client.
+     *
+     * @param int $clientId
+     * @param int $page
+     * @return LengthAwarePaginator
+     */
+    public static function paginatePaidBills($clientId, $page = 1) {
+
+        $bills = self::lastBills($clientId, 'all', 1);
+
+        // Make sure page is positive
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $perPage = Settings::displayedBills();
+
+        // Calculate start from
+        $start = ($perPage * ($page - 1));
+
+        // Slice results
+        $sliced = array_slice($bills, $start, $perPage);
+
+        // Build paginator
+        $paginate = new LengthAwarePaginator($sliced, count($bills), $perPage);
+        $paginate->setPath('/clients/' . $clientId . '/bills/paid/get');
+
+        return $paginate;
     }
 
     public static function lastBills($clientId, $limit = 5, $paid = false) {
@@ -81,7 +113,11 @@ class Clients {
         $query .= "UNION ALL SELECT final_price, bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, campaigns.year as campaign_year, ";
         $query .= "campaigns.number as campaign_number, bills.campaign_order as campaign_order ";
         $query .= "FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id LEFT JOIN campaigns ON bills.campaign_id = campaigns.id WHERE bill_id IN ($billIdsQuestionMarks)) bill_products ";
-        $query .= "GROUP BY bill_products.bill_id ORDER BY bill_products.created_at DESC LIMIT $limit";
+        $query .= "GROUP BY bill_products.bill_id ORDER BY bill_products.created_at DESC";
+
+        if ($limit !== 'all') {
+            $query .= " LIMIT $limit";
+        }
 
         $results = DB::select($query, $billIds);
 

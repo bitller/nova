@@ -70,6 +70,8 @@ Route::group(['prefix' => 'clients'], function() {
     Route::post('/{clientId}/edit-name', 'ClientsController@editName');
     Route::post('/{clientId}/edit-phone', 'ClientsController@editPhone');
     Route::post('/{clientId}/edit-email', 'ClientsController@editEmail');
+    Route::get('/{clientId}/bills/paid', 'ClientsController@paidBillsOfThisClient');
+    Route::get('/{clientId}/bills/paid/get', 'ClientsController@getPaidBillsOfThisClient');
 });
 
 // Products page

@@ -67,7 +67,6 @@ new Vue({
             if (!this.$get('use_current_campaign')) {
                 data.campaign_year = this.$get('campaign_year');
                 data.campaign_number = this.$get('campaign_number');
-                data.campaign_order = this.$get('campaign_order');
             }
 
             this.$http.post('/bills/create', data, function(response) {

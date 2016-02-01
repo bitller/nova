@@ -12,6 +12,7 @@ use App\Http\Requests\Clients\CreateClientRequest;
 use App\Http\Requests\Clients\EditClientEmailRequest;
 use App\Http\Requests\Clients\EditClientNameRequest;
 use App\Http\Requests\Clients\EditClientPhoneNumberRequest;
+use App\Http\Requests\Clients\GetClientPaidBillsRequest;
 use App\Http\Requests\DeleteClientRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -241,6 +242,43 @@ class ClientsController extends BaseController {
         $response->setFailMessage(trans('common.delete_error'));
         return response($response->get(), $response->getDefaultErrorResponseCode());
 
+    }
+
+    /**
+     * Render paid bills of given client.
+     *
+     * @param int $clientId
+     * @return $this
+     */
+    public function paidBillsOfThisClient($clientId) {
+
+        $client = Client::where('id', $clientId)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+        // Make sure client exists
+        if (!$client) {
+            return view('client-paid-bills')->with('client_not_found', true);
+        }
+
+        $totalPaidBills = Bill::where('paid', 1)->where('client_id', $clientId)->where('user_id', Auth::user()->id)->count();
+
+        return view('client-paid-bills')->with('clientId', $clientId)->with('name', $client->name)->with('totalPaidBills', $totalPaidBills);
+    }
+
+    /**
+     * Paginate paid bills of given client.
+     *
+     * @param int $clientId
+     * @param GetClientPaidBillsRequest $request
+     * @return mixed
+     */
+    public function getPaidBillsOfThisClient($clientId, GetClientPaidBillsRequest $request) {
+
+        $paidBills = Clients::paginatePaidBills($clientId, $request->get('page'));
+        $paidBills->name = Client::where('id', $clientId)->where('user_id', Auth::user()->id)->first()->name;
+
+        return $paidBills;
     }
 
 }
