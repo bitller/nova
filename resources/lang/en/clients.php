@@ -37,6 +37,7 @@ return [
     'my_clients' => 'My clients',
     'name' => 'Name',
     'no_clients' => 'Here appear your clients. Right now you don\'t have any clients. To add clients use the button on top. After you add a client, you can start creating bills for them.',
+    'number_of_clients' => 'Number of your clients',
     'number_of_orders' => 'Number of orders',
     'order_number' => 'Order number',
     'page_help' => 'Here you find all your clients and useful details about them. Also you can add new clients or delete old ones.',

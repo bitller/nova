@@ -39,6 +39,7 @@ return [
     'name' => 'Nume',
     'no_clients' => 'Aici apar clienții tăi. Pentru a adăuga un client nou folosește butonul de mai sus. Odată adăugat un client, poți începe să creezi facturi pentru el.',
     'number_of_orders' => 'Comenzi efectuate',
+    'number_of_clients' => 'Numărul dumneavoastră de clienți',
     'number_of_products' => 'Numărul de produse',
     'order_number' => 'Numărul comenzii',
     'page_help' => 'Aici găsiți toți clienții dumneavoastră și detalii despre aceștia. Puteți adăuga clienți noi sau să îi stergeți pe cei existenți. ',

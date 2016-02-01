@@ -18,7 +18,7 @@
         <div v-show="loaded">
 
             <div class="add-client-button">
-                <span class="my-clients-title">{{ trans('clients.my_clients') }} <span class="badge">@{{ clients.total }}</span></span>
+                <span class="my-clients-title">{{ trans('clients.my_clients') }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('clients.number_of_clients') }}">@{{ clients.total }}</span></span>
                 <button v-on="click: resetCreateClientModal" type="button" class="btn btn-primary pull-right" data-target="#create-new-client-modal" data-toggle="modal">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('clients.add') }}
                 </button>
