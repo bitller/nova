@@ -258,7 +258,7 @@ class ClientsController extends BaseController {
 
         // Make sure client exists
         if (!$client) {
-            return view('client-paid-bills')->with('client_not_found', true);
+            return redirect('/clients');
         }
 
         $totalPaidBills = Bill::where('paid', 1)->where('client_id', $clientId)->where('user_id', Auth::user()->id)->count();

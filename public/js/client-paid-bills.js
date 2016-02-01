@@ -22,7 +22,7 @@ new Vue({
                 Alert.close();
 
             }).error(function(response) {
-                //
+                Alert.generalError();
             });
         }
     }
