@@ -29,8 +29,8 @@
             </div>
 
             <!-- BEGIN Clients table-->
-            <div class="panel panel-default">
-                <table class="table table-hover table-bordered" v-show="clients.total">
+            <div class="panel panel-default" v-show="clients.total">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th class="text-center">{{ trans('clients.name') }}</th>
