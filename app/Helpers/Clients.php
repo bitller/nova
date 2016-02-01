@@ -44,8 +44,31 @@ class Clients {
      * @return LengthAwarePaginator
      */
     public static function paginatePaidBills($clientId, $page = 1) {
+        return self::paginateBills($clientId, $page, 1);
+    }
 
-        $bills = self::lastBills($clientId, 'all', 1);
+    /**
+     * Paginate unpaid bills of given client.
+     *
+     * @param int $clientId
+     * @param int $page
+     * @return LengthAwarePaginator
+     */
+    public static function paginateUnpaidBills($clientId, $page = 1) {
+        return self::paginateBills($clientId, $page, 0);
+    }
+
+    /**
+     * Paginate bills of given client.
+     *
+     * @param int $clientId
+     * @param int $page
+     * @param int $paid
+     * @return LengthAwarePaginator
+     */
+    public static function paginateBills($clientId, $page = 1, $paid = 1) {
+
+        $bills = self::lastBills($clientId, 'all', $paid);
 
         // Make sure page is positive
         if ($page < 1) {

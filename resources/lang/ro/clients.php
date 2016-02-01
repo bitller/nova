@@ -43,6 +43,7 @@ return [
     'number_of_orders' => 'Comenzi efectuate',
     'number_of_paid_bills' => 'Numărul de facturi plătite ale acestui client.',
     'number_of_products' => 'Numărul de produse',
+    'number_of_unpaid_bills' => 'Numărul de facturi neplătite ale acestui client.',
     'order_number' => 'Numărul comenzii',
     'page_help' => 'Aici găsiți toți clienții dumneavoastră și detalii despre aceștia. Puteți adăuga clienți noi sau să îi stergeți pe cei existenți. ',
     'paid_bills_of' => 'Facturile plătite ale clientului',
@@ -56,6 +57,7 @@ return [
     'save_client_phone_number' => 'Salvează numărul de telefon',
     'total_discount_received' => 'Reducerea totală primită de acest client',
     'total_number_of_products_ordered' => 'Numărul total de produse comandate de acest client',
+    'unpaid_bills_of' => 'Facturile neplătite ale clientului',
     'view_all_paid_bills' => 'Vezi toate facturile plătite',
     'view_all_unpaid_bills' => 'Vezi toate facturile neplătite',
 ];

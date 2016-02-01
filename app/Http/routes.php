@@ -70,8 +70,14 @@ Route::group(['prefix' => 'clients'], function() {
     Route::post('/{clientId}/edit-name', 'ClientsController@editName');
     Route::post('/{clientId}/edit-phone', 'ClientsController@editPhone');
     Route::post('/{clientId}/edit-email', 'ClientsController@editEmail');
+
+    // Paginate paid bills of given client
     Route::get('/{clientId}/bills/paid', 'ClientsController@paidBillsOfThisClient');
     Route::get('/{clientId}/bills/paid/get', 'ClientsController@getPaidBillsOfThisClient');
+
+    // Paginate unpaid bills of give client
+    Route::get('/{clientId}/bills/unpaid', 'ClientsController@unpaidBillsOfThisClient');
+    Route::get('/{clientId}/bills/unpaid/get', 'ClientsController@getUnpaidBillsOfThisClient');
 });
 
 // Products page

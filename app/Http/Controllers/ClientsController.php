@@ -13,6 +13,7 @@ use App\Http\Requests\Clients\EditClientEmailRequest;
 use App\Http\Requests\Clients\EditClientNameRequest;
 use App\Http\Requests\Clients\EditClientPhoneNumberRequest;
 use App\Http\Requests\Clients\GetClientPaidBillsRequest;
+use App\Http\Requests\Clients\GetClientUnpaidBillsRequest;
 use App\Http\Requests\DeleteClientRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -279,6 +280,30 @@ class ClientsController extends BaseController {
         $paidBills->name = Client::where('id', $clientId)->where('user_id', Auth::user()->id)->first()->name;
 
         return $paidBills;
+    }
+
+    /**
+     * Render unpaid bills page of given client.
+     *
+     * @param int $clientId
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function unpaidBillsOfThisClient($clientId) {
+
+        $client = Client::where('id', $clientId)->where('user_id', Auth::user()->id)->first();
+
+        // Make sure client existe
+        if (!$client) {
+            return redirect('/clients');
+        }
+
+        $totalUnpaidBills = Bill::where('paid', 0)->where('client_id', $clientId)->where('user_id', Auth::user()->id)->count();
+
+        return view('client-unpaid-bills')->with('clientId', $clientId)->with('name', $client->name)->with('totalUnpaidBills', $totalUnpaidBills);
+    }
+
+    public function getUnpaidBillsOfThisClient($clientId, GetClientUnpaidBillsRequest $request) {
+        //
     }
 
 }

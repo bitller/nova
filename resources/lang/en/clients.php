@@ -41,6 +41,7 @@ return [
     'number_of_clients' => 'Number of your clients',
     'number_of_orders' => 'Number of orders',
     'number_of_paid_bills' => 'Number of paid bills of this client.',
+    'number_of_unpaid_bills' => 'NUmber of unpaid bills of this client.',
     'order_number' => 'Order number',
     'page_help' => 'Here you find all your clients and useful details about them. Also you can add new clients or delete old ones.',
     'paid_bills_of' => 'Paid bills of',
@@ -54,6 +55,7 @@ return [
     'save_client_phone_number' => 'Save phone number',
     'total_discount_received' => 'Total discount received by this client',
     'total_number_of_products_ordered' => 'Total number of products ordered by this client',
+    'unpaid_bills_of' => 'Unpaid bills of',
     'view_all_paid_bills' => 'View all paid bills',
     'view_all_unpaid_bills' => 'View all unpaid bills',
 ];
