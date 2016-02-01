@@ -21,6 +21,7 @@ return [
     'my_bills' => 'My bills',
     'no_bills' => 'Looks like you don\'t have any bill. Use the top button to get started.',
     'number_of_bills' => 'Number of your unpaid bills',
+    'number_of_paid_bills' => 'Number of your paid bills. Remember, paid bills are included in statistics.',
     'number_of_products' => 'Number of products',
     'order' => 'Order',
     'price' => 'Price',

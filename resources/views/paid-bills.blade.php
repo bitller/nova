@@ -13,7 +13,7 @@
 
             <!-- BEGIN Add bill button -->
             <div class="add-bill-button" v-show="paid_bills.total">
-                <span class="my-bills-title">{{ trans('bill.my_paid_bills') }} <span class="badge">@{{ paid_bills.total }}</span></span>
+                <span class="my-bills-title">{{ trans('bill.my_paid_bills') }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('bills.number_of_paid_bills') }}">@{{ paid_bills.total }}</span></span>
             </div>
             <!-- END Add bill button -->
 
