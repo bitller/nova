@@ -8,7 +8,7 @@
 
             <!-- BEGIN Add bill button -->
             <div class="add-bill-button">
-                <span class="my-bills-title">{{ trans('bills.my_bills') }} <span class="badge">@{{ bills.total }}</span></span>
+                <span class="my-bills-title">{{ trans('bills.my_bills') }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('bills.number_of_bills') }}">@{{ bills.total }}</span></span>
                 <button type="button" data-toggle="modal" data-target="#create-bill-modal" v-on="click: resetCreateBillModal()" class="btn btn-primary pull-right">
                     <span class="glyphicon glyphicon-plus"></span> {{ trans('bills.create') }}
                 </button>
