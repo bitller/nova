@@ -23,21 +23,53 @@
                     <thead>
                     <tr>
                         <th class="text-center"><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.number_of_products') }}</th>
                         <th class="text-center"><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.price') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bills.created_at') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}</th>
+                        <th class="text-center"><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bill.payment_term') }}</th>
                         <th class="text-center"><span class="glyphicon glyphicon-trash icon-color"></span>&nbsp; {{ trans('common.delete') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-repeat="bill in paid_bills.data">
-                        <td class="vert-align text-center"><a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a></td>
+
+                        <!-- BEGIN Client name -->
+                        <td class="vert-align text-center">
+                            <a href="/bills/@{{bill.id}}">@{{ bill.client_name }}</a>
+                        </td>
+                        <!-- END Client name -->
+
+                        <!-- BEGIN Number of products -->
+                        <td class="vert-align text-center">
+                            <span v-show="bill.number_of_products > 0">@{{ bill.number_of_products }}</span>
+                            <span v-show="bill.number_of_products < 1">0</span>
+                        </td>
+                        <!-- END Number of products -->
+
+                        <!-- BEGIN Price -->
+                        <td class="vert-align text-center">
+                            <span v-show="bill.final_price > 0">@{{ bill.final_price }} ron</span>
+                            <span v-show="bill.final_price < 0.1">0 ron</span>
+                        </td>
+                        <!-- END Price -->
+
+                        <!-- BEGIN Campaign order number -->
                         <td class="vert-align text-center">@{{ bill.campaign_order }}</td>
-                        <td class="vert-align text-center">@{{ bill.campaign_number }} {{ trans('bills.from') }} @{{ bill.campaign_year }}</td>
-                        <td class="vert-align text-center">@{{ bill.price }} ron</td>
-                        <td class="vert-align text-center">@{{ bill.human_date }}</td>
-                        <td class="vert-align text-center"><button class="btn btn-danger" v-on="click: deleteBill(bill.id, paid_bills.current_page, paid_bills.to-paid_bills.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
+                        <!-- END Campaign order number -->
+
+                        <!-- BEGIN Campaign -->
+                        <td class="vert-align text-center">@{{ bill.campaign_number }}/@{{ bill.campaign_year }}</td>
+                        <!-- END Campaign -->
+
+                        <!-- BEGIN Payment term -->
+                        <td class="vert-align text-center">
+                            <span v-show="bill.payment_term != '0000-00-00'">@{{ bill.payment_term }}</span>
+                            <span v-show="bill.payment_term == '0000-00-00'">{{ trans('bill.not_set') }}</span>
+                        </td>
+                        <!-- END Payment term -->
+
+                        <td class="vert-align text-center"><button class="btn btn-default" v-on="click: deleteBill(bill.id, paid_bills.current_page, paid_bills.to-paid_bills.from)"><span class="glyphicon glyphicon-trash"></span> {{ trans('common.delete') }}</button></td>
                     </tr>
                     </tbody>
                 </table>
