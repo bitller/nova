@@ -145,20 +145,27 @@ class Bills {
             }
         }
 
-        $query = "SELECT SUM(bills.final_price) as final_price, SUM(bills.quantity) as number_of_products, bills.client_name, bills.campaign_order, bills.campaign_year, bills.campaign_number, bills.payment_term FROM ";
-        $query .= "(SELECT bill_products.final_price as final_price, bill_products.quantity, bills.id, clients.name as client_name, bills.campaign_order, ";
-        $query .= "campaigns.year as campaign_year, campaigns.number as campaign_number, bills.payment_term ";
+        if (strlen($questionMarks) < 1) {
+            return 0;
+        }
+
+        $query = "SELECT SUM(bills.final_price) AS final_price, SUM(bills.quantity) AS number_of_products, bills.id, bills.client_name, bills.campaign_order, bills.campaign_year, bills.campaign_number, bills.payment_term, bills.created_at FROM ";
+        $query .= "(SELECT bill_products.final_price AS final_price, bill_products.quantity, bills.id, clients.name AS client_name, bills.campaign_order, ";
+        $query .= "campaigns.year AS campaign_year, campaigns.number AS campaign_number, bills.payment_term, bills.created_at ";
         $query .= "FROM bills LEFT JOIN bill_products ON bill_products.bill_id = bills.id ";
         // Join campaigns
         $query .= "LEFT JOIN campaigns ON bills.campaign_id = campaigns.id ";
-        $query .= "LEFT JOIN clients ON clients.id = bills.client_id WHERE bills.id IN($questionMarks) ";
+        // Join clients table
+        $query .= "LEFT JOIN clients ON clients.id = bills.client_id WHERE bills.id IN ($questionMarks) ";
         $query .= "UNION ALL SELECT bill_application_products.final_price as final_price, bill_application_products.quantity as quantity, bills.id, ";
-        $query .= "clients.name as client_name, bills.campaign_order, campaigns.year as campaign_year, campaigns.number as campaign_number, bills.payment_term FROM bills ";
+        $query .= "clients.name as client_name, bills.campaign_order, campaigns.year as campaign_year, campaigns.number as campaign_number, bills.payment_term, bills.created_at FROM bills ";
+        // Join bill application products table
         $query .= "LEFT JOIN bill_application_products ON bill_application_products.bill_id = bills.id ";
         // Join campaigns table
-        $query .= "LEFT JOIN campaigns on campaigns.id = bills.campaign_id ";
+        $query .= "LEFT JOIN campaigns ON campaigns.id = bills.campaign_id ";
+        // Join clients table
         $query .= "LEFT JOIN clients ON clients.id = bills.client_id WHERE bills.id IN ($questionMarks)) bills ";
-        $query .= "GROUP BY bills.id";
+        $query .= "GROUP BY bills.id ORDER BY bills.created_at DESC";
 
         // Execute query
         $results = DB::select($query, $billIds);
@@ -170,79 +177,16 @@ class Bills {
 
         $perPage = Settings::displayedBills();
 
-        // Calculate start and end
-        if ($page === 1) {
-            $startFrom = 0;
-            $end = $perPage;
-        } else {
-            $startFrom = ($page-1)*10;
-            $end = ($page * 10) - 1;
-        }
+        // Calculate start from
+        $startFrom = ($perPage * ($page - 1));
 
-        $sliced = array_slice($results, $startFrom, $end);
+        $sliced = array_slice($results, $startFrom, $perPage);
 
         $paginate = new LengthAwarePaginator($sliced, count($results), $perPage);
         $paginate->setPath('/bills/get');
 
 
         return $paginate;
-//
-//        // todo check if query returned results
-//
-//
-//
-//        // Select total price, number of products and bill id to be used in group statement
-//        $query = "SELECT SUM(bill_products.final_price) as total, SUM(bill_products.quantity) as number_of_products, bill_products.bill_id as bill_id, ";
-//        $query .= "bill_products.payment_term as payment_term, bill_products.campaign_order as campaign_order, ";
-//        $query .= "bill_products.campaign_year as campaign_year, bill_products.campaign_number as campaign_number FROM ";
-//
-//        // Select other required columns
-//        $query .= "(SELECT final_price, bills.id as bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, campaigns.year as campaign_year, ";
-//        $query .= "campaigns.number as campaign_number, bills.campaign_order as campaign_order ";
-//        $query .= "FROM bill_products LEFT JOIN bills ON bills.id = bill_id LEFT JOIN campaigns ON bills.campaign_id = campaigns.id WHERE bill_id IN ($questionMarks) ";
-//
-//        // Do the same for other table
-//        $query .= "UNION ALL SELECT final_price, bills.id as bill_id, quantity, bills.created_at as created_at, bills.payment_term as payment_term, campaigns.year as campaign_year, ";
-//        $query .= "campaigns.number as campaign_number, bills.campaign_order as campaign_order ";
-//        $query .= "FROM bill_application_products LEFT JOIN bills ON bills.id = bill_id LEFT JOIN campaigns ON bills.campaign_id = campaigns.id WHERE bill_id IN ($questionMarks)) bill_products ";
-//        $query .= "GROUP BY bill_products.bill_id ORDER BY bill_products.created_at DESC";
-//        $results = DB::select($query, $billIds);
-//        dd($results);
-//        $paginator = new Paginator(array_slice($results, 0, 10), $results, 10);
-//
-//        return $paginator->make();
-////        $query = "SUM(bills.final_price) as final_price, SUM(bills.quantity) as number_of_products FROM ";
-////        $query .= "(SELECT final_price, bill_id, quantity FROM bill_products) bills";
-//
-////        $results = DB::selectRaw($query)->paginate(10);
-//
-//        $results = Bill::leftJoin('bill_products', 'bill_products.bill_id', '=', 'bills.id')
-//            ->selectRaw('SUM(bill_products.final_price) as final_price')
-//            ->where('paid', $paid)->where('user_id', $userId)
-//            ->groupBy('bills.id')
-//            ->paginate(10);
-//
-//        return $results;
-////        $bills = Bill::select(
-////            'bills.id', 'bills.campaign_order', 'campaigns.number as campaign_number', 'campaigns.year as campaign_year',
-////            'bills.other_details', 'bills.created_at', 'bills.payment_term as payment_term', 'clients.name as client_name'
-////        )
-////        ->leftJoin('campaigns', 'campaigns.id', '=', 'bills.campaign_id')
-////        ->where('bills.user_id', $userId)
-////        ->where('bills.paid', $paid)
-////        ->orderBy('bills.created_at', 'desc')
-////        ->join('clients', function($join){
-////            $join->on('bills.client_id', '=', 'clients.id');
-////        })
-////        ->paginate(Settings::displayedBills());
-//
-////        // Append price to each bill
-////        foreach ($bills->items() as $bill) {
-////            $bill['human_date'] = date('d-m-Y', time($bill->created_at));
-////            $bill['price'] = Bills::getPrice($bill->id, $userId);
-////        }
-////
-////        return $bills;
     }
 
     /**
