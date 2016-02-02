@@ -52,6 +52,7 @@ class ClientsController extends BaseController {
             ->leftJoin('bills', 'bills.client_id', '=', 'clients.id')
             ->where('clients.user_id', Auth::user()->id)
             ->orderBy('clients.created_at', 'desc')
+            ->groupBy('clients.id')
             ->paginate(Settings::displayedClients());
     }
 
