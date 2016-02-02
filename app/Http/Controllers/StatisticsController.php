@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AjaxResponse;
+use App\Helpers\Statistics\CampaignStatistics;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -39,6 +40,13 @@ class StatisticsController extends BaseController {
     }
 
     public function getCampaignStatistics($campaignNumber, $campaignYear) {
-        //
+
+        $response = new AjaxResponse();
+
+        $response->setSuccessMessage(trans('common.success'));
+        $statistics = CampaignStatistics::all($campaignNumber, $campaignYear);
+        $response->addExtraFields(['statistics' => $statistics]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 }
