@@ -48,7 +48,11 @@ class ClientsController extends BaseController {
      * @return mixed
      */
     public function getClients() {
-        return Client::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(Settings::displayedClients());
+        return Client::select(DB::raw('clients.*, COUNT(bills.id) as number_of_orders'))
+            ->leftJoin('bills', 'bills.client_id', '=', 'clients.id')
+            ->where('clients.user_id', Auth::user()->id)
+            ->orderBy('clients.created_at', 'desc')
+            ->paginate(Settings::displayedClients());
     }
 
     /**

@@ -28,6 +28,7 @@ return [
     'edit_client_email' => 'Edit client email',
     'edit_client_name' => 'Edit client name',
     'edit_client_phone_number' => 'Edit client phone number',
+    'email' => 'Email',
     'go_back' => 'Go back to client statistics',
     'insert_client_name' => 'Insert client name',
     'last_paid_bills' => 'Last paid bills of this client',

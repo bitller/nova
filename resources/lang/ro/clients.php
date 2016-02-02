@@ -29,6 +29,7 @@ return [
     'edit_client_email' => 'Editează email-ul clientului',
     'edit_client_name' => 'Editează numele clientului',
     'edit_client_phone_number' => 'Editează numărul de telefon al clientului',
+    'email' => 'Email',
     'go_back' => 'Mergi înapoi la statisticile clientului',
     'insert_client_name' => 'Introduceți numele si prenumele clientului',
     'last_paid_bills' => 'Ultimele facturi plătite ale acestui client',
