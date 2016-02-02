@@ -55,7 +55,7 @@ class Clients {
      * @return LengthAwarePaginator
      */
     public static function paginateUnpaidBills($clientId, $page = 1) {
-        return self::paginateBills($clientId, $page, 0);
+        return self::paginateBills($clientId, $page);
     }
 
     /**
@@ -66,7 +66,7 @@ class Clients {
      * @param int $paid
      * @return LengthAwarePaginator
      */
-    public static function paginateBills($clientId, $page = 1, $paid = 1) {
+    public static function paginateBills($clientId, $page = 1, $paid = 0) {
 
         $bills = self::lastBills($clientId, 'all', $paid);
 
@@ -85,7 +85,16 @@ class Clients {
 
         // Build paginator
         $paginate = new LengthAwarePaginator($sliced, count($bills), $perPage);
-        $paginate->setPath('/clients/' . $clientId . '/bills/paid/get');
+
+        // Set path in function of wanted bills
+        $path = '/clients/' .$clientId . '/bills/';
+        if ($paid) {
+            $path .= 'paid/get';
+        } else {
+            $path .= 'unpaid/get';
+        }
+
+        $paginate->setPath($path);
 
         return $paginate;
     }

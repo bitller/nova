@@ -275,11 +275,7 @@ class ClientsController extends BaseController {
      * @return mixed
      */
     public function getPaidBillsOfThisClient($clientId, GetClientPaidBillsRequest $request) {
-
-        $paidBills = Clients::paginatePaidBills($clientId, $request->get('page'));
-        $paidBills->name = Client::where('id', $clientId)->where('user_id', Auth::user()->id)->first()->name;
-
-        return $paidBills;
+        return Clients::paginatePaidBills($clientId, $request->get('page'));
     }
 
     /**
@@ -292,7 +288,7 @@ class ClientsController extends BaseController {
 
         $client = Client::where('id', $clientId)->where('user_id', Auth::user()->id)->first();
 
-        // Make sure client existe
+        // Make sure client exists
         if (!$client) {
             return redirect('/clients');
         }
@@ -302,8 +298,15 @@ class ClientsController extends BaseController {
         return view('client-unpaid-bills')->with('clientId', $clientId)->with('name', $client->name)->with('totalUnpaidBills', $totalUnpaidBills);
     }
 
+    /**
+     * Paginate unpaid bills of given client.
+     *
+     * @param int $clientId
+     * @param GetClientUnpaidBillsRequest $request
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
     public function getUnpaidBillsOfThisClient($clientId, GetClientUnpaidBillsRequest $request) {
-        //
+        return Clients::paginateUnpaidBills($clientId, $request->get('page'));
     }
 
 }

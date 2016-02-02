@@ -27,7 +27,10 @@ elixir(function(mix) {
         .scripts(['pages/bills.js', 'jquery-scripts/bills.js'], 'public/js/bills.js')
         .scripts(['pages/clients.js'], 'public/js/clients.js')
         .scripts(['pages/base.js', 'pages/client.js'], 'public/js/client.js')
+        // Client paid bills page
         .scripts(['pages/client-paid-bills.js'], 'public/js/client-paid-bills.js')
+        // Client unpaid bills page
+        .scripts(['pages/client-unpaid-bills.js'], 'public/js/client-unpaid-bills.js')
         .scripts(['pages/base.js', 'pages/products.js', 'jquery-scripts/products.js'], 'public/js/products.js')
         .scripts(['pages/base.js', 'pages/my-products.js'], 'public/js/my-products.js')
 

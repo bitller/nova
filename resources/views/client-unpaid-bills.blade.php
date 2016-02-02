@@ -6,7 +6,7 @@
         <!-- BEGIN Top part -->
         <div class="add-client-button">
             <span class="my-clients-title">
-                <span>{{ trans('clients.unpaid_bills_of')}} {{ $name }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('clients.number_of_unpaid_bills') }}">{{ $totalPaidBills }}</span></span>
+                <span>{{ trans('clients.unpaid_bills_of')}} {{ $name }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('clients.number_of_unpaid_bills') }}">{{ $totalUnpaidBills }}</span></span>
             </span>
             <a href="/clients/{{ $clientId }}">
                 <button type="button" class="btn btn-default pull-right">
