@@ -1,13 +1,30 @@
 <?php
 
 return [
+    'bills' => 'bills',
+    'cashed_bills' => 'cashed bills',
+    'campaign_statistics' => 'Statistics of campaign',
+    'compare' => 'Compare with another campaign',
     'custom_products' => 'Number of products added by you',
     'description' => 'Here you will find statistics about your bills. Also, you can print them and give to your customers.',
+    'earned_in_this_campaign' => 'earned in this campaign',
     'general' => 'General statistics',
+    'have_been_created' => 'have been created',
     'number_of_bills' => 'Number of bills',
     'number_of_clients' => 'Number of clients',
+    'of_bills' => 'bills',
+    'of_clients' => 'clients',
+    'offered_discount' => 'offered discount',
+    'ordered_in_this_campaign' => 'ordered in this campaign',
     'print' => 'Print statistics',
+    'products_day' => 'products/day',
     'products_sold' => 'Products sold',
+    'products_sold_in_this_campaign' => 'products sold in this campaign',
+    'sold' => 'sold',
+    'sum_already_cashed' => 'already cashed',
+    'to_receive' => 'you need to receive',
     'total_discount' => 'Total discount',
     'total_price' => 'Total sales price',
+    'value_of_all_orders' => 'is value of all orders',
+    'with_passed_payment_term' => 'with passed payment term'
 ];

@@ -8469,4 +8469,12 @@ body {
   text-decoration: underline;
   cursor: pointer; }
 
+.big-icon {
+  font-size: 30px;
+  color: #737373; }
+
+.big-text {
+  font-size: 35px;
+  color: #737373; }
+
 /*# sourceMappingURL=app.css.map */

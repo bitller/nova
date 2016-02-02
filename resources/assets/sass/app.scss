@@ -47,9 +47,6 @@ body {
 
 .app-logo {
   display: inline-block;
-//  margin-top: -2px;
-//  font-family: 'Quicksand', sans-serif;
-//  font-size: 30px;
 }
 
 .print-statistics-button {
@@ -225,4 +222,14 @@ body {
 .pointer-underline:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.big-icon {
+  font-size: 30px;
+  color: #737373;
+}
+
+.big-text {
+  font-size: 35px;
+  color: #737373;
 }

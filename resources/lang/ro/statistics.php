@@ -1,13 +1,30 @@
 <?php
 
 return [
+    'bills' => 'facturi',
+    'cashed_bills' => 'facturi deja încasate',
+    'campaign_statistics' => 'Statisticile campaniei',
+    'compare' => 'Compară cu altă campanie',
     'custom_products' => 'Numărul produselor adăugate de tine',
     'description' => 'Aici găsești statistici despre facturi și vânzările efectuate. De asemenea le poți imprima pentru a le da clienților tăi!',
+    'earned_in_this_campaign' => 'încasați până acum în această campanie',
     'general' => 'Statistici generale',
+    'have_been_created' => 'au fost emise',
     'number_of_bills' => 'Numărul de facturi',
     'number_of_clients' => 'Numărul de clienți',
+    'of_bills' => 'facturi',
+    'of_clients' => 'clienți',
+    'offered_discount' => 'este valoarea totală a reducerilor oferite',
+    'ordered_in_this_campaign' => 'au comandat în această campanie',
     'print' => 'Imprimează statisticile',
+    'products_day' => 'produse/zi',
     'products_sold' => 'Produse vândute',
+    'products_sold_in_this_campaign' => 'produse vândute în această campanie',
+    'sold' => 'vândute',
+    'sum_already_cashed' => 'deja încasați',
+    'to_receive' => 'mai trebuie să primiți',
     'total_discount' => 'Reducerea totală oferită',
     'total_price' => 'Prețul total al facturilor',
+    'value_of_all_orders' => 'este valoarea totală a comenzilor',
+    'with_passed_payment_term' => 'cu termenul de plată depăşit'
 ];

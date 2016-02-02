@@ -34,4 +34,11 @@ class StatisticsController extends BaseController {
 
     }
 
+    public function campaign($campaignNumber, $campaignYear) {
+        return view('statistics.campaign')->with('campaignNumber', $campaignNumber)->with('campaignYear', $campaignYear);
+    }
+
+    public function getCampaignStatistics($campaignNumber, $campaignYear) {
+        //
+    }
 }
