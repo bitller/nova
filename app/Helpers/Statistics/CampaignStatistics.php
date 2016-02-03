@@ -295,7 +295,8 @@ class CampaignStatistics {
             ->leftJoin('users', 'users.id', '=', 'bills.user_id')
             ->where('campaigns.number', $campaignNumber)
             ->where('campaigns.year', $campaignYear)
-            ->where('bills.payment_term', '>', date('Y-m-d'))
+            ->where('bills.paid', 0)
+            ->where('bills.payment_term', '<', date('Y-m-d'))
             ->where('users.id', Auth::user()->id)
             ->get();
 
@@ -305,9 +306,4 @@ class CampaignStatistics {
 
         return 0;
     }
-
-    public static function moneyToReceive() {
-        //
-    }
-
 }
