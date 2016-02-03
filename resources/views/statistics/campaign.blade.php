@@ -23,15 +23,15 @@
                 <div class="col-xs-5 col-xs-offset-1 text-center">
                     <span class="glyphicon glyphicon-usd big-icon"></span>
                     <span class="big-text">@{{ statistics.total_bills_price }} ron</span>
-                    <div>{{ trans('statistics.value_of_all_orders') }}</div>
+                    <div class="grey-text">{{ trans('statistics.value_of_all_orders') }}</div>
                 </div>
                 <!-- END Total sum of orders -->
 
                 <!-- BEGIN Number of clients who ordered in this campaign -->
                 <div class="col-xs-5 text-center">
-                    <span class="glyphicon glyphicon-user big-icon"></span>
+                    <span class="glyphicon glyphicon-user big-icon"></span>&nbsp;
                     <span class="big-text">@{{ statistics.number_of_clients }} {{ trans('statistics.of_clients') }}</span>
-                    <div>{{ trans('statistics.ordered_in_this_campaign') }}</div>
+                    <div class="grey-text">{{ trans('statistics.ordered_in_this_campaign') }}</div>
                 </div>
                 <!-- END Number of clients who ordered in this campaign -->
             </div>
@@ -44,17 +44,17 @@
 
                 <!-- BEGIN Number of created bills -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
-                    <span class="glyphicon glyphicon-list-alt big-icon"></span>
+                    <span class="glyphicon glyphicon-list-alt big-icon"></span>&nbsp;
                     <span class="big-text">@{{ statistics.number_of_bills }} {{ trans('statistics.of_bills') }}</span>
-                    <div>{{ trans('statistics.have_been_created') }}</div>
+                    <div class="grey-text">{{ trans('statistics.have_been_created') }}</div>
                 </div>
                 <!-- END Number of created bills -->
 
                 <!-- BEGIN Total discount offered -->
                 <div class="col-xs-5 text-center">
-                    <span class="glyphicon glyphicon-stats big-icon"></span>
+                    <span class="glyphicon glyphicon-stats big-icon"></span>&nbsp;
                     <span class="big-text">@{{ statistics.total_discount }} ron</span>
-                    <div>{{ trans('statistics.offered_discount') }}</div>
+                    <div class="grey-text">{{ trans('statistics.offered_discount') }}</div>
                 </div>
                 <!-- END Total discount offered -->
 
@@ -68,17 +68,17 @@
 
                 <!-- BEGIN Number of products sold -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
-                    <span class="glyphicon glyphicon-th big-icon"></span>
-                    <span class="big-text">@{{ statistics.number_of_products }}-</span>
-                    <div>{{ trans('statistics.products_sold_in_this_campaign') }}</div>
+                    <span class="glyphicon glyphicon-th big-icon"></span>&nbsp;
+                    <span class="big-text">@{{ statistics.number_of_sold_products }} {{ trans('statistics.products') }}</span>
+                    <div class="grey-text">{{ trans('statistics.sold_in_this_campaign') }}</div>
                 </div>
                 <!-- END Number of products sold -->
 
                 <!-- BEGIN Number of products sold per day -->
                 <div class="col-xs-5 text-center">
-                    <span class="glyphicon glyphicon-th-large big-icon"></span>
-                    <span class="big-text">- {{ trans('statistics.products_day') }}</span>
-                    <div>{{ trans('statistics.sold') }}</div>
+                    <span class="glyphicon glyphicon-th-large big-icon"></span>&nbsp;
+                    <span class="big-text">@{{ statistics.products_sold_per_day }} {{ trans('statistics.products_day') }}</span>
+                    <div class="grey-text">{{ trans('statistics.sold') }}</div>
                 </div>
                 <!-- END Number of products sold per day -->
 
@@ -91,17 +91,17 @@
             <div class="row">
                 <!-- BEGIN Cashed bills -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
-                    <span class="glyphicon glyphicon-ok big-icon"></span>
+                    <span class="glyphicon glyphicon-ok big-icon"></span>&nbsp;
                     <span class="big-text">@{{ statistics.number_of_cashed_bills }} {{ trans('statistics.bills') }}</span>
-                    <div>{{ trans('statistics.cashed_bills') }}</div>
+                    <div class="grey-text">{{ trans('statistics.cashed_bills') }}</div>
                 </div>
                 <!-- END Cashed bills -->
 
                 <!-- BEGIN Cashed bills sum -->
                 <div class="col-xs-5 text-center">
                     <span class="glyphicon glyphicon-usd big-icon"></span>
-                    <span class="big-text">- ron</span>
-                    <div>{{ trans('statistics.sum_already_cashed') }}</div>
+                    <span class="big-text">@{{ statistics.cashed_money }} ron</span>
+                    <div class="grey-text">{{ trans('statistics.sum_already_cashed') }}</div>
                 </div>
                 <!-- END Cashed bills sum -->
             </div>
@@ -114,17 +114,17 @@
 
                 <!-- BEGIN Bills with payment term passed -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
-                    <span class="glyphicon glyphicon-calendar big-icon"></span>
+                    <span class="glyphicon glyphicon-calendar big-icon"></span>&nbsp;
                     <span class="big-text">@{{ statistics.number_of_bills_with_passed_payment_term }} {{ trans('statistics.bills') }}</span>
-                    <div>{{ trans('statistics.with_passed_payment_term') }}</div>
+                    <div class="grey-text">{{ trans('statistics.with_passed_payment_term') }}</div>
                 </div>
                 <!-- END Bills with payment term passed -->
 
                 <!-- BEGIN Money to receive -->
                 <div class="col-xs-5 text-center">
                     <span class="glyphicon glyphicon-usd big-icon"></span>
-                    <span class="big-text">- ron</span>
-                    <div>{{ trans('statistics.to_receive') }}</div>
+                    <span class="big-text">@{{ statistics.money_to_receive }} ron</span>
+                    <div class="grey-text">{{ trans('statistics.to_receive') }}</div>
                 </div>
                 <!-- END Money to receive -->
 

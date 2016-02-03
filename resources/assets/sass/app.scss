@@ -226,10 +226,14 @@ body {
 
 .big-icon {
   font-size: 30px;
-  color: #737373;
+  color: $brand-primary;
 }
 
 .big-text {
   font-size: 35px;
+  color: #737373;
+}
+
+.grey-text {
   color: #737373;
 }

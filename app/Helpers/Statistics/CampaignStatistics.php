@@ -14,15 +14,41 @@ use Illuminate\Support\Facades\DB;
  */
 class CampaignStatistics {
 
+    /**
+     * Return all statistics for given campaign.
+     *
+     * @param int $campaignNumber
+     * @param int $campaignYear
+     * @return array
+     */
     public static function all($campaignNumber, $campaignYear) {
-        return [
+
+        $stats = [
             'total_bills_price' => self::totalBillsPrice($campaignNumber, $campaignYear),
             'number_of_clients' => self::numberOfClients($campaignNumber, $campaignYear),
             'number_of_bills' => self::numberOfBills($campaignNumber, $campaignYear),
             'number_of_cashed_bills' => self::numberOfCashedBills($campaignNumber, $campaignYear),
             'number_of_bills_with_passed_payment_term' => self::numberOfBillsWithPassedPaymentTerm($campaignNumber, $campaignYear),
-            'total_discount' => self::totalDiscount($campaignNumber, $campaignYear)
+            'total_discount' => self::totalDiscount($campaignNumber, $campaignYear),
+            'number_of_sold_products' => self::numberOfProducts($campaignNumber, $campaignYear),
+            'cashed_money' => self::cashedMoney($campaignNumber, $campaignYear)
         ];
+
+        // Calculate number of day passed
+        $campaign = Campaign::where('number', $campaignNumber)->where('year', $campaignYear)->first();
+        $campaignStartDate = new \DateTime($campaign->start_date);
+        $todayDate = new \DateTime(date('Y-m-d'));
+
+        $numberOfDays = $todayDate->diff($campaignStartDate)->format('%a');
+        $numberOfDays++;
+
+        // Calculate products sold per day
+        $stats['products_sold_per_day'] = number_format($stats['number_of_sold_products'] / $numberOfDays, 2);
+
+        // Calculate money to receive
+        $stats['money_to_receive'] = $stats['total_bills_price'] - $stats['cashed_money'];
+
+        return $stats;
     }
 
     /**
@@ -40,6 +66,13 @@ class CampaignStatistics {
         return 0;
     }
 
+    /**
+     * Return total bills price from given campaign.
+     *
+     * @param int $campaignNumber
+     * @param int $campaignYear
+     * @return int
+     */
     public static function totalBillsPrices($campaignNumber, $campaignYear) {
         $campaign = Campaign::where('year', $campaignYear)->where('number', $campaignNumber)->first();
         $billIdsQuery = Bill::where('user_id', Auth::user()->id)->where('campaign_id', $campaign->id)->get();
@@ -69,6 +102,7 @@ class CampaignStatistics {
 
         $result = DB::select($query, $billIds);
 
+        // Make sure result was returned
         if (isset($result[0])) {
             return $result[0];
         }
@@ -134,9 +168,18 @@ class CampaignStatistics {
         return 0.00;
     }
 
+    /**
+     * Return number of sold products in given campaign.
+     *
+     * @param int $campaignNumber
+     * @param int $campaignYear
+     * @return int
+     */
     public static function numberOfProducts($campaignNumber, $campaignYear) {
 
-        $billIdsQuery = Bill::where('campaign_id', Campaign::where('number', $campaignNumber)->where('year', $campaignYear)->first()->id)->get();
+        $billIdsQuery = Bill::where('campaign_id', Campaign::where('number', $campaignNumber)->where('year', $campaignYear)->first()->id)
+            ->where('user_id', Auth::user()->id)
+            ->get();
         $billIds = [];
         $questionMarks = '';
 
@@ -156,7 +199,7 @@ class CampaignStatistics {
             }
         }
 
-        $query = "SELECT SUM(bills.quanity) as number_of_products FROM (SELECT bill_products.quantity FROM bill_products WHERE bill_products.bill_id IN($questionMarks)";
+        $query = "SELECT SUM(bills.quantity) as number_of_products FROM (SELECT bill_products.quantity FROM bill_products WHERE bill_products.bill_id IN($questionMarks)";
         $query .= "UNION ALL SELECT bill_application_products.quantity FROM bill_application_products WHERE bill_application_products.bill_id IN($questionMarks) ) bills";
 
         $results = DB::select($query, $billIds);
@@ -169,7 +212,7 @@ class CampaignStatistics {
     }
 
     /**
-     * Return number of cahsed bills in given campaign.
+     * Return number of cashed bills in given campaign.
      *
      * @param int $campaignNumber
      * @param int $campaignYear
@@ -193,8 +236,49 @@ class CampaignStatistics {
         return 0;
     }
 
+    /**
+     * Return number of cashed money in given campaign.
+     *
+     * @param int $campaignNumber
+     * @param int $campaignYear
+     * @return float
+     */
     public static function cashedMoney($campaignNumber, $campaignYear) {
-        //
+
+        $billIdsQuery = Bill::where('user_id', Auth::user()->id)
+            ->where('campaign_id', Campaign::where('number', $campaignNumber)->where('year', $campaignYear)->first()->id)
+            ->where('paid', 1)
+            ->get();
+
+        // Build question marks string
+        $questionMarks = '';
+        foreach ($billIdsQuery as $result) {
+            $questionMarks .= '?,';
+        }
+
+        // Remove last comma
+        $questionMarks = substr($questionMarks, 0, -1);
+
+        // Build bill ids array
+        $billIds = [];
+        $stop = 2;
+        for ($i = 1; $i <= $stop; $i++) {
+            foreach ($billIdsQuery as $result) {
+                $billIds[] = $result->id;
+            }
+        }
+
+        $query = "SELECT SUM(bills.cashed_money) as cashed_money FROM (SELECT bill_products.final_price as cashed_money FROM bill_products WHERE bill_products.bill_id IN ($questionMarks) ";
+        $query .= "UNION ALL SELECT bill_application_products.final_price as cashed_money FROM bill_application_products WHERE bill_application_products.bill_id IN ($questionMarks)) bills";
+
+        $result = DB::select($query, $billIds);
+
+        // Make sure result was returned
+        if (isset($result[0]->cashed_money)) {
+            return $result[0]->cashed_money;
+        }
+
+        return 0.00;
     }
 
     /**
