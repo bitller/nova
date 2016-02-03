@@ -21,6 +21,7 @@ class CampaignStatistics {
             'number_of_bills' => self::numberOfBills($campaignNumber, $campaignYear),
             'number_of_cashed_bills' => self::numberOfCashedBills($campaignNumber, $campaignYear),
             'number_of_bills_with_passed_payment_term' => self::numberOfBillsWithPassedPaymentTerm($campaignNumber, $campaignYear),
+            'total_discount' => self::totalDiscount($campaignNumber, $campaignYear)
         ];
     }
 
@@ -32,7 +33,14 @@ class CampaignStatistics {
      * @return int
      */
     public static function totalBillsPrice($campaignNumber, $campaignYear) {
+        $totalPrices = self::totalBillsPrices($campaignNumber, $campaignYear);
+        if (isset($totalPrices->total_bills_price)) {
+            return $totalPrices->total_bills_price;
+        }
+        return 0;
+    }
 
+    public static function totalBillsPrices($campaignNumber, $campaignYear) {
         $campaign = Campaign::where('year', $campaignYear)->where('number', $campaignNumber)->first();
         $billIdsQuery = Bill::where('user_id', Auth::user()->id)->where('campaign_id', $campaign->id)->get();
         $billIds = [];
@@ -54,15 +62,15 @@ class CampaignStatistics {
         }
 
         // Build sql query
-        $query = "SELECT SUM(bills.final_price) as total_bills_price FROM (SELECT bill_products.final_price FROM bill_products ";
+        $query = "SELECT SUM(bills.final_price) as total_bills_price, SUM(bills.price) as price_without_discount FROM (SELECT bill_products.final_price, bill_products.price FROM bill_products ";
         $query .= "WHERE bill_products.bill_id IN($questionMarks)";
-        $query .= "UNION ALL SELECT bill_application_products.final_price FROM bill_application_products ";
+        $query .= "UNION ALL SELECT bill_application_products.final_price, bill_application_products.price FROM bill_application_products ";
         $query .= "WHERE bill_application_products.bill_id IN($questionMarks)) bills";
 
         $result = DB::select($query, $billIds);
 
-        if (isset($result[0]->total_bills_price)) {
-            return $result[0]->total_bills_price;
+        if (isset($result[0])) {
+            return $result[0];
         }
 
         return 0;
@@ -76,19 +84,11 @@ class CampaignStatistics {
      * @return int
      */
     public static function numberOfClients($campaignNumber, $campaignYear) {
-        $result = Campaign::select(DB::raw('COUNT(clients.id) as number_of_clients'))
-            ->leftJoin('bills', 'bills.campaign_id', '=', 'campaigns.id')
-            ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
-            ->where('campaigns.number', $campaignNumber)
-            ->where('campaigns.year', $campaignYear)
-            ->groupBy('clients.id')
-            ->get();
 
-        if (isset($result[0]->number_of_clients)) {
-            return $result[0]->number_of_clients;
-        }
-
-        return 0;
+        return Bill::where('campaign_id', Campaign::where('number', $campaignNumber)->where('year', $campaignYear)->first()->id)
+            ->where('user_id', Auth::user()->id)
+            ->distinct('client_id')
+            ->count('client_id');
     }
 
     /**
@@ -102,8 +102,10 @@ class CampaignStatistics {
 
         $result = Campaign::select(DB::raw('COUNT(bills.id) as number_of_bills'))
             ->leftJoin('bills', 'bills.campaign_id', '=', 'campaigns.id')
+            ->leftJoin('users', 'users.id', '=', 'bills.user_id')
             ->where('campaigns.number', $campaignNumber)
             ->where('campaigns.year', $campaignYear)
+            ->where('users.id', Auth::user()->id)
             ->get();
 
         // Make sure result was returned
@@ -114,12 +116,56 @@ class CampaignStatistics {
         return 0;
     }
 
-    public static function totalDiscount() {
-        //
+    /**
+     * Return total discount offered in given campaign.
+     *
+     * @param int $campaignNumber
+     * @param int $campaignYear
+     * @return float|string
+     */
+    public static function totalDiscount($campaignNumber, $campaignYear) {
+
+        $prices = self::totalBillsPrices($campaignNumber, $campaignYear);
+
+        if (isset($prices->total_bills_price) && isset($prices->price_without_discount)) {
+            return number_format($prices->price_without_discount - $prices->total_bills_price, 2);
+        }
+
+        return 0.00;
     }
 
-    public static function numberOfProducts() {
-        //
+    public static function numberOfProducts($campaignNumber, $campaignYear) {
+
+        $billIdsQuery = Bill::where('campaign_id', Campaign::where('number', $campaignNumber)->where('year', $campaignYear)->first()->id)->get();
+        $billIds = [];
+        $questionMarks = '';
+
+        // Build question marks string
+        foreach ($billIdsQuery as $result) {
+            $questionMarks .= '?,';
+        }
+
+        // Remove last comma
+        $questionMarks = substr($questionMarks, 0, -1);
+
+        // Build array with ids
+        $stop = 2;
+        for ($i = 1; $i <= $stop; $i++) {
+            foreach ($billIdsQuery as $result) {
+                $billIds[] = $result->id;
+            }
+        }
+
+        $query = "SELECT SUM(bills.quanity) as number_of_products FROM (SELECT bill_products.quantity FROM bill_products WHERE bill_products.bill_id IN($questionMarks)";
+        $query .= "UNION ALL SELECT bill_application_products.quantity FROM bill_application_products WHERE bill_application_products.bill_id IN($questionMarks) ) bills";
+
+        $results = DB::select($query, $billIds);
+
+        if (isset($results[0]->number_of_products)) {
+            return $results[0]->number_of_products;
+        }
+
+        return 0;
     }
 
     /**
@@ -133,8 +179,11 @@ class CampaignStatistics {
 
         $result = Campaign::select(DB::raw('COUNT(bills.id) as number_of_cashed_bills'))
             ->leftJoin('bills', 'bills.campaign_id', '=', 'campaigns.id')
+            ->leftJoin('users', 'users.id', '=', 'bills.user_id')
             ->where('campaigns.number', $campaignNumber)
             ->where('campaigns.year', $campaignYear)
+            ->where('bills.paid', 1)
+            ->where('users.id', Auth::user()->id)
             ->get();
 
         if (isset($result[0]->number_of_cashed_bills)) {
@@ -159,9 +208,11 @@ class CampaignStatistics {
 
         $result = Campaign::select(DB::raw('COUNT(bills.id) as number_of_bills_with_passed_payment_term'))
             ->leftJoin('bills', 'bills.campaign_id', '=', 'campaigns.id')
+            ->leftJoin('users', 'users.id', '=', 'bills.user_id')
             ->where('campaigns.number', $campaignNumber)
             ->where('campaigns.year', $campaignYear)
             ->where('bills.payment_term', '>', date('Y-m-d'))
+            ->where('users.id', Auth::user()->id)
             ->get();
 
         if (isset($result[0]->number_of_bills_with_passed_payment_term)) {

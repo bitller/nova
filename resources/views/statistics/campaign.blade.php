@@ -1,6 +1,8 @@
 @extends('layout')
 @section('content')
-    <div id="campaign-statistics" class="container" campaign-number="{{ $campaignNumber }}" campaign-year="{{ $campaignYear }}">
+    <div id="campaign-statistics" class="container" v-show="!loading" campaign-number="{{ $campaignNumber }}" campaign-year="{{ $campaignYear }}">
+
+        @include('includes.ajax-translations.common')
 
         <!-- BEGIN Top part -->
         <div class="add-client-button">
@@ -20,7 +22,7 @@
                 <!-- BEGIN Total sum of orders -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
                     <span class="glyphicon glyphicon-usd big-icon"></span>
-                    <span class="big-text">1932.21 ron</span>
+                    <span class="big-text">@{{ statistics.total_bills_price }} ron</span>
                     <div>{{ trans('statistics.value_of_all_orders') }}</div>
                 </div>
                 <!-- END Total sum of orders -->
@@ -28,7 +30,7 @@
                 <!-- BEGIN Number of clients who ordered in this campaign -->
                 <div class="col-xs-5 text-center">
                     <span class="glyphicon glyphicon-user big-icon"></span>
-                    <span class="big-text">94 {{ trans('statistics.of_clients') }}</span>
+                    <span class="big-text">@{{ statistics.number_of_clients }} {{ trans('statistics.of_clients') }}</span>
                     <div>{{ trans('statistics.ordered_in_this_campaign') }}</div>
                 </div>
                 <!-- END Number of clients who ordered in this campaign -->
@@ -43,7 +45,7 @@
                 <!-- BEGIN Number of created bills -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
                     <span class="glyphicon glyphicon-list-alt big-icon"></span>
-                    <span class="big-text">105 {{ trans('statistics.of_bills') }}</span>
+                    <span class="big-text">@{{ statistics.number_of_bills }} {{ trans('statistics.of_bills') }}</span>
                     <div>{{ trans('statistics.have_been_created') }}</div>
                 </div>
                 <!-- END Number of created bills -->
@@ -51,7 +53,7 @@
                 <!-- BEGIN Total discount offered -->
                 <div class="col-xs-5 text-center">
                     <span class="glyphicon glyphicon-stats big-icon"></span>
-                    <span class="big-text">2812 ron</span>
+                    <span class="big-text">@{{ statistics.total_discount }} ron</span>
                     <div>{{ trans('statistics.offered_discount') }}</div>
                 </div>
                 <!-- END Total discount offered -->
@@ -67,7 +69,7 @@
                 <!-- BEGIN Number of products sold -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
                     <span class="glyphicon glyphicon-th big-icon"></span>
-                    <span class="big-text">5644</span>
+                    <span class="big-text">@{{ statistics.number_of_products }}-</span>
                     <div>{{ trans('statistics.products_sold_in_this_campaign') }}</div>
                 </div>
                 <!-- END Number of products sold -->
@@ -75,7 +77,7 @@
                 <!-- BEGIN Number of products sold per day -->
                 <div class="col-xs-5 text-center">
                     <span class="glyphicon glyphicon-th-large big-icon"></span>
-                    <span class="big-text">204 {{ trans('statistics.products_day') }}</span>
+                    <span class="big-text">- {{ trans('statistics.products_day') }}</span>
                     <div>{{ trans('statistics.sold') }}</div>
                 </div>
                 <!-- END Number of products sold per day -->
@@ -90,7 +92,7 @@
                 <!-- BEGIN Cashed bills -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
                     <span class="glyphicon glyphicon-ok big-icon"></span>
-                    <span class="big-text">142 {{ trans('statistics.bills') }}</span>
+                    <span class="big-text">@{{ statistics.number_of_cashed_bills }} {{ trans('statistics.bills') }}</span>
                     <div>{{ trans('statistics.cashed_bills') }}</div>
                 </div>
                 <!-- END Cashed bills -->
@@ -98,7 +100,7 @@
                 <!-- BEGIN Cashed bills sum -->
                 <div class="col-xs-5 text-center">
                     <span class="glyphicon glyphicon-usd big-icon"></span>
-                    <span class="big-text">4329 ron</span>
+                    <span class="big-text">- ron</span>
                     <div>{{ trans('statistics.sum_already_cashed') }}</div>
                 </div>
                 <!-- END Cashed bills sum -->
@@ -113,7 +115,7 @@
                 <!-- BEGIN Bills with payment term passed -->
                 <div class="col-xs-5 col-xs-offset-1 text-center">
                     <span class="glyphicon glyphicon-calendar big-icon"></span>
-                    <span class="big-text">40 {{ trans('statistics.bills') }}</span>
+                    <span class="big-text">@{{ statistics.number_of_bills_with_passed_payment_term }} {{ trans('statistics.bills') }}</span>
                     <div>{{ trans('statistics.with_passed_payment_term') }}</div>
                 </div>
                 <!-- END Bills with payment term passed -->
@@ -121,7 +123,7 @@
                 <!-- BEGIN Money to receive -->
                 <div class="col-xs-5 text-center">
                     <span class="glyphicon glyphicon-usd big-icon"></span>
-                    <span class="big-text">134 ron</span>
+                    <span class="big-text">- ron</span>
                     <div>{{ trans('statistics.to_receive') }}</div>
                 </div>
                 <!-- END Money to receive -->
@@ -131,4 +133,10 @@
 
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="/js/vendor.js"></script>
+    <script src="/js/header-search.js"></script>
+    <script src="/js/campaign-statistics.js"></script>
 @endsection
