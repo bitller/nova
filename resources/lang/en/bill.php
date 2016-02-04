@@ -43,6 +43,7 @@ return [
     'other_details_description' => 'If have to add some extra information or just say something to the client, write here and will appear at the bottom of the bill.',
     'other_details_updated' => 'Bill other details updated!',
     'page' => 'Page',
+    'page_column_description' => 'Catalogue page number where the product appears.',
     'page_updated' => 'Product page updated!',
     'payment_term' => 'Payment term',
     'payment_term_not_set' => 'Payment term not set',

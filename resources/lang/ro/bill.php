@@ -43,6 +43,7 @@ return [
     'other_details_description' => 'Ai de adăugat informații în plus sau doar vrei să îi spui ceva clientului? Completează câmpul de mai jos și va apărea la sfârșitul facturii.',
     'other_details_updated' => 'Câmpul Alte detalii a fost actualizat cu succes',
     'page' => 'Pagină',
+    'page_column_description' => 'Numărul din catalog al paginii unde apare produsul.',
     'page_updated' => 'Pagina produsului a fost actualizată!',
     'payment_term' => 'Termen de plată',
     'payment_term_not_set' => 'Termenul de plată nu a fost setat',

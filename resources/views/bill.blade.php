@@ -105,7 +105,13 @@
                 <table class="table table-bordered bill-products-table">
                     <thead>
                         <tr>
-                            <th class="text-center">{{ trans('bill.page') }}</th>
+                            <!-- BEGIN Page column -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.page_column_description') }}">
+                                    {{ trans('bill.page') }}
+                                </span>
+                            </th>
+                            <!-- END Page column -->
 
                             <!-- BEGIN Code column -->
                             <th class="text-center">
