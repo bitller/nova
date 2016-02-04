@@ -170,4 +170,17 @@ class BillData {
 
         return date('d-m-Y', strtotime($paymentTerm));
     }
+
+    /**
+     * Check if payment term is passed for given bill.
+     *
+     * @param int $billId
+     * @return bool
+     */
+    public static function paymentTermPassed($billId) {
+        if (Bill::where('id', $billId)->where('payment_term', '!=', '0000-00-00')->where('payment_term', '<', date('Y-m-d'))->count()) {
+            return true;
+        }
+        return false;
+    }
 }

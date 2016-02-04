@@ -85,6 +85,7 @@ class Bills {
             ->first();
 
         $bill->payment_term = BillData::getPaymentTerm($billId);
+        $bill->payment_term_passed = BillData::paymentTermPassed($billId);
 
         $billCalculations = BillData::getBillPriceFinalPriceToPaySavedMoneyAndNumberOfProducts($billId);
 
@@ -287,7 +288,10 @@ class Bills {
         ]);
 
         $response->setSuccessMessage(trans('bill.payment_term_updated'));
-        $response->addExtraFields(['payment_term' => date('d-m-Y', strtotime($paymentTerm))]);
+        $response->addExtraFields([
+            'payment_term' => date('d-m-Y', strtotime($paymentTerm)),
+            'payment_term_passed' => BillData::paymentTermPassed($billId)
+        ]);
         return response($response->get())->header('Content-Type', 'application/json');
     }
 

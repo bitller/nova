@@ -49,6 +49,7 @@ new Vue({
                 this.$set('to_pay', response.to_pay);
                 this.$set('paid', response.data.paid);
                 this.$set('number_of_products', response.number_of_products);
+                this.$set('payment_term_passed', response.data.payment_term_passed);
                 this.$set('loaded', true);
                 this.$set('loading', false);
 
@@ -434,6 +435,7 @@ new Vue({
                 if (response.success) {
                     $('#payment-term-modal').modal('toggle');
                     this.$set('payment_term', response.payment_term);
+                    this.$set('payment_term_passed', response.payment_term_passed);
                     Alert.success(response.title, response.message);
                     return;
                 }

@@ -100,6 +100,15 @@
             </div>
             <!-- BEGIN Bill top part -->
 
+            <div v-show="!payment_term" class="alert alert-warning">
+                {{ trans('bill.payment_term_not_set') }}.
+                <a href="#" v-on="click: resetPaymentTermModal()" data-toggle="modal" data-target="#payment-term-modal">{{ trans('bill.set_now') }}</a>
+            </div>
+
+            <div v-show="payment_term_passed" class="alert alert-danger">
+                {{ trans('bill.payment_term_passed') }}
+            </div>
+
             <!-- BEGIN Bill table -->
             <div class="panel panel-default" v-show="bill.total">
                 <table class="table table-bordered bill-products-table">
