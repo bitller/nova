@@ -16,7 +16,7 @@
             <div class="add-client-button btn-toolbar">
                 <!-- BEGIN Client name and campaign details -->
                 <span class="my-clients-title">
-                    <a href="/clients/@{{ bill.data.client_id }}">@{{ bill.data.client_name }}</a> - comanda @{{ bill.data.campaign_order }} din campania <a href="/statistics/campaign/@{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}">@{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}
+                    <a href="/clients/@{{ bill.data.client_id }}">@{{ bill.data.client_name }}</a> - comanda @{{ bill.data.campaign_order }} din campania <a href="/statistics/campaign/@{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}">@{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}</a>
                     &nbsp;&nbsp;<span v-show="paid > 0" class="paid-bill glyphicon glyphicon-ok" data-toggle="tooltip" title="{{ trans('bill.tooltip') }}" data-placement="right"></span>
                 </span>
                 <!-- END Client name and campaign details -->
