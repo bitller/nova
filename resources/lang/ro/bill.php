@@ -8,6 +8,7 @@ return [
     'bill_not_found_description' => 'Se pare că această factură nu există. În câteva secunde vei fi redirecționat.',
     'bill_will_be_deleted' => 'Această factură va fi ştearsă definitiv!',
     'code' => 'Cod',
+    'code_column_description' => 'Codul din 5 cifre al produslui.',
     'delete' => 'Şterge factura',
     'delete_column_description' => 'Aici aveți posibilitatea să ștergeți individual produse din această factură.',
     'deleted' => 'Factura a fost ştearsă!',

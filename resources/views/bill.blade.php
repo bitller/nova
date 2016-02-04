@@ -106,7 +106,14 @@
                     <thead>
                         <tr>
                             <th class="text-center">{{ trans('bill.page') }}</th>
-                            <th class="text-center">{{ trans('bill.code') }}</th>
+
+                            <!-- BEGIN Code column -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.code_column_description') }}">
+                                    {{ trans('bill.code') }}
+                                </span>
+                            </th>
+                            <!-- END Code column -->
 
                             <!-- BEGIN Name column -->
                             <th class="text-center">

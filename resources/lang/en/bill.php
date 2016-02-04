@@ -8,6 +8,7 @@ return [
     'bill_not_found_description' => 'Looks like this bill does not exists. In a few seconds you will be redirected.',
     'bill_will_be_deleted' => 'This bill will be deleted permanently!',
     'code' => 'Code',
+    'code_column_description' => 'Product 5 numbers code',
     'delete' => 'Delete bill',
     'delete_column_description' => 'Allows you to delete selected product from this bill.',
     'deleted' => 'Bill deleted!',
