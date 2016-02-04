@@ -59,7 +59,9 @@
                         <!-- END Campaign order number -->
 
                         <!-- BEGIN Campaign -->
-                        <td class="vert-align text-center">@{{ bill.campaign_number }}/@{{ bill.campaign_year }}</td>
+                        <td class="vert-align text-center">
+                            <a href="/statistics/campaign/@{{ bill.campaign_number }}/@{{ bill.campaign_year }}">@{{ bill.campaign_number }}/@{{ bill.campaign_year }}</a>
+                        </td>
                         <!-- END Campaign -->
 
                         <!-- BEGIN Payment term -->
