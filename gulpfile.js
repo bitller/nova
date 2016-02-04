@@ -58,6 +58,7 @@ elixir(function(mix) {
         .scripts(['pages/subscriptions/offers.js'], 'public/js/offers.js')
         .scripts(['pages/subscriptions/offer.js'], 'public/js/offer.js')
         // Campaign statistics
-        .scripts(['pages/campaign-statistics.js'], 'public/js/campaign-statistics.js');
+        .scripts(['pages/campaign-statistics.js'], 'public/js/campaign-statistics.js')
+        .scripts(['libs/chart.js', 'pages/compare-campaigns.js'], 'public/js/compare-campaigns.js');
 
 });

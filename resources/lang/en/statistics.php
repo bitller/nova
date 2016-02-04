@@ -5,6 +5,7 @@ return [
     'cashed_bills' => 'cashed bills',
     'campaign_statistics' => 'Statistics of campaign',
     'compare' => 'Compare with another campaign',
+    'compare_campaign' => 'Comparison of campaign',
     'custom_products' => 'Number of products added by you',
     'description' => 'Here you will find statistics about your bills. Also, you can print them and give to your customers.',
     'earned_in_this_campaign' => 'earned in this campaign',
@@ -27,5 +28,6 @@ return [
     'total_discount' => 'Total discount',
     'total_price' => 'Total sales price',
     'value_of_all_orders' => 'is value of all orders',
+    'with_campaign' => 'with campaign',
     'with_passed_payment_term' => 'with passed payment term'
 ];

@@ -5,6 +5,7 @@ return [
     'cashed_bills' => 'facturi deja încasate',
     'campaign_statistics' => 'Statisticile campaniei',
     'compare' => 'Compară cu altă campanie',
+    'compare_campaign' => 'Comparația campaniei',
     'custom_products' => 'Numărul produselor adăugate de tine',
     'description' => 'Aici găsești statistici despre facturi și vânzările efectuate. De asemenea le poți imprima pentru a le da clienților tăi!',
     'earned_in_this_campaign' => 'încasați până acum în această campanie',
@@ -27,5 +28,6 @@ return [
     'total_discount' => 'Reducerea totală oferită',
     'total_price' => 'Prețul total al facturilor',
     'value_of_all_orders' => 'este valoarea totală a comenzilor',
+    'with_campaign' => 'cu campania',
     'with_passed_payment_term' => 'cu termenul de plată depăşit'
 ];

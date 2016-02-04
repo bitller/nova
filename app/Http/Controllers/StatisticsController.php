@@ -49,4 +49,18 @@ class StatisticsController extends BaseController {
 
         return response($response->get())->header('Content-Type', 'application/json');
     }
+
+    /**
+     * Compare given campaigns.
+     *
+     * @param int $campaignNumber
+     * @param int $campaignYear
+     * @param int $otherCampaignNumber
+     * @param int $otherCampaignYear
+     * @return mixed
+     */
+    public function compareCampaigns($campaignNumber, $campaignYear, $otherCampaignNumber, $otherCampaignYear) {
+        return view('statistics.compare-campaigns')->with('campaignNumber', $campaignNumber)->with('campaignYear', $campaignYear)
+            ->with('otherCampaignNumber', $otherCampaignNumber)->with('otherCampaignYear', $otherCampaignYear);
+    }
 }
