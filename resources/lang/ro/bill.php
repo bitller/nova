@@ -45,6 +45,7 @@ return [
     'payment_term_not_set' => 'Termenul de plată nu a fost setat',
     'payment_term_updated' => 'Termenul de plată a fost actualizat!',
     'price' => 'Preţ',
+    'price_column_description' => 'Această coloană afișează prețul produsului înmulțit cu cantitatea, fără a aplica reducerea.',
     'price_updated' => 'Preţul produsului a fost actualizat!',
     'print' => 'Imprimează factura',
     'product_added' => 'Produsul a fost adăugat!',

@@ -109,7 +109,15 @@
                             <th class="text-center">{{ trans('bill.code') }}</th>
                             <th class="text-center">{{ trans('bill.name') }}</th>
                             <th class="text-center">{{ trans('bill.quantity') }}</th>
-                            <th class="text-center">{{ trans('bill.price') }}</th>
+
+                            <!-- BEGIN Price column -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.price_column_description') }}">
+                                    {{ trans('bill.price') }}
+                                </span>
+                            </th>
+                            <!-- END Price column -->
+
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.discount') }}</th>
 
                             <!-- BEGIN Final price column -->

@@ -45,6 +45,7 @@ return [
     'payment_term_not_set' => 'Payment term not set',
     'payment_term_updated' => 'Payment term updated!',
     'price' => 'Price',
+    'price_column_description' => 'This column display product price multiplied by quantity, without applying the discount.',
     'price_updated' => 'Product price updated!',
     'print' => 'Print bill',
     'product_added' => 'Product added!',
