@@ -112,7 +112,7 @@
                             <th class="text-center">{{ trans('bill.price') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.discount') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.final_price') }}</th>
-                            <th class="text-center">{{ trans('common.delete') }}</th>
+                            <th class="text-center" data-toggle="tooltip" data-placement="top" title="{{ trans('bill.delete_column_description') }}">{{ trans('common.delete') }}</th>
                         </tr>
                     </thead>
                     <tbody>

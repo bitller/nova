@@ -9,6 +9,7 @@ return [
     'bill_will_be_deleted' => 'Această factură va fi ştearsă definitiv!',
     'code' => 'Cod',
     'delete' => 'Şterge factura',
+    'delete_column_description' => 'Aici aveți posibilitatea să ștergeți individual produse din această factură.',
     'deleted' => 'Factura a fost ştearsă!',
     'discount' => 'Reducere',
     'discount_updated' => 'Discount-ul a fost actualizat!',

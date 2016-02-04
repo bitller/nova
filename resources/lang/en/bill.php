@@ -9,6 +9,7 @@ return [
     'bill_will_be_deleted' => 'This bill will be deleted permanently!',
     'code' => 'Code',
     'delete' => 'Delete bill',
+    'delete_column_description' => 'Allows you to delete selected product from this bill.',
     'deleted' => 'Bill deleted!',
     'discount' => 'Discount',
     'discount_updated' => 'Product discount was updated!',
