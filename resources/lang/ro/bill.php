@@ -24,6 +24,7 @@ return [
     'edit_quantity_description' => 'Dacă clientul dvs. dorește mai multe produse la fel, adaugă aici numărul lor.',
     'empty_bill' => 'Această factură nu conține niciun produs. Petru a începe adăugarea produselor folosește butonul "Adaugă produs". Dacă ai nelămuriri nu ezita să ne contactezi.',
     'final_price' => 'Preț final',
+    'final_price_column_description' => 'Această coloană indică prețul final, după calcularea reducerii aplicate în funcție de cantitatea aleasă, pentru fiecare produs.',
     'from_campaign' => 'din campania',
     'mark_as_paid' => 'Marchează factura ca platită',
     'mark_as_unpaid' => 'Marchează factura ca neplatită',

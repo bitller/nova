@@ -111,8 +111,22 @@
                             <th class="text-center">{{ trans('bill.quantity') }}</th>
                             <th class="text-center">{{ trans('bill.price') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.discount') }}</th>
-                            <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.final_price') }}</th>
-                            <th class="text-center" data-toggle="tooltip" data-placement="top" title="{{ trans('bill.delete_column_description') }}">{{ trans('common.delete') }}</th>
+
+                            <!-- BEGIN Final price column -->
+                            <th class="text-center" v-show="bill.show_discount_column">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.final_price_column_description') }}">
+                                    {{ trans('bill.final_price') }}
+                                </span>
+                            </th>
+                            <!-- END Final price column -->
+
+                            <!-- BEGIN Delete column -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.delete_column_description') }}">
+                                    {{ trans('common.delete') }}
+                                </span>
+                            </th>
+                            <!-- END Delete column -->
                         </tr>
                     </thead>
                     <tbody>

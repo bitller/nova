@@ -24,6 +24,7 @@ return [
     'edit_quantity_description' => 'This represents how many products your client want to buy.',
     'empty_bill' => 'This bill has no products. To start adding products use "Add product button". If you have questions contact us.',
     'final_price' => 'Final price',
+    'final_price_column_description' => 'This column display final price for each product, after calculating the discount in function of quantity.',
     'from_campaign' => 'from campaign',
     'mark_as_paid' => 'Mark as paid',
     'mark_as_unpaid' => 'Mark as unpaid',
