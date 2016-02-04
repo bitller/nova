@@ -63,6 +63,7 @@ return [
     'product_quantity_required' => 'Product quantity is required!',
     'product_will_be_deleted' => 'Product will be deleted from this bill!',
     'quantity' => 'Quantity',
+    'quantity_column_description' => 'Display product quantity',
     'quantity_updated' => 'Product quantity was updated!',
     'saved_money' => 'You saved',
     'set_payment_term' => 'Set payment term',

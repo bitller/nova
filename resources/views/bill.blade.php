@@ -108,7 +108,14 @@
                             <th class="text-center">{{ trans('bill.page') }}</th>
                             <th class="text-center">{{ trans('bill.code') }}</th>
                             <th class="text-center">{{ trans('bill.name') }}</th>
-                            <th class="text-center">{{ trans('bill.quantity') }}</th>
+
+                            <!-- BEGIN Quantity column -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.quantity_column_description') }}">
+                                    {{ trans('bill.quantity') }}
+                                </span>
+                            </th>
+                            <!-- END Quantity column -->
 
                             <!-- BEGIN Price column -->
                             <th class="text-center">

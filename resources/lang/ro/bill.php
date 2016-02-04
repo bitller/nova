@@ -63,6 +63,7 @@ return [
     'product_quantity_required' => 'Cantitatea produsului este obligatorie!',
     'product_will_be_deleted' => 'Produsul va fi șters din această factură!',
     'quantity' => 'Cantitate',
+    'quantity_column_description' => 'Indică cantitatea produsului.',
     'quantity_updated' => 'Cantitatea produsului a fost actualizată!',
     'saved_money' => 'Economisiți',
     'set_payment_term' => 'Setează termenul de plată',
