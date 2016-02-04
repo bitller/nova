@@ -112,7 +112,7 @@
                             <th class="text-center">{{ trans('bill.price') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.discount') }}</th>
                             <th class="text-center" v-show="bill.show_discount_column">{{ trans('bill.final_price') }}</th>
-                            <th class="text-center delete-product">{{ trans('common.delete') }}</th>
+                            <th class="text-center">{{ trans('common.delete') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,7 +124,7 @@
                         <td class="text-center editable" v-on="click: editPrice(product.price, product.id, product.code, product.bill_product_id)">@{{ product.price }} ron</td>
                         <td class="text-center editable" v-show="bill.show_discount_column" v-on="click: editDiscount(product.discount, product.id, product.code, product.bill_product_id)">@{{ product.discount }}% - @{{ product.calculated_discount }} ron</td>
                         <td class="text-center" v-show="bill.show_discount_column">@{{ product.final_price }} ron</td>
-                        <td class="text-center editable delete-product"  v-on="click: deleteProduct(product.id, product.code, product.bill_product_id)"><span class="glyphicon glyphicon-trash"></span></td>
+                        <td class="text-center editabl delete-product"  v-on="click: deleteProduct(product.id, product.code, product.bill_product_id)"><span class="glyphicon glyphicon-trash"></span></td>
                     </tr>
 
                     </tbody>
