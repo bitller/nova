@@ -12,6 +12,7 @@ return [
     'delete_column_description' => 'Aici aveți posibilitatea să ștergeți individual produse din această factură.',
     'deleted' => 'Factura a fost ştearsă!',
     'discount' => 'Reducere',
+    'discount_column_description' => 'Această coloană afișează reducerea în procente și în ron pentru fiecare produs.',
     'discount_updated' => 'Discount-ul a fost actualizat!',
     'edit_discount' => 'Editează discount-ul produsului',
     'edit_discount_description' => 'Schimbați reducerea aplicată acestui produs',

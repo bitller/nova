@@ -12,6 +12,7 @@ return [
     'delete_column_description' => 'Allows you to delete selected product from this bill.',
     'deleted' => 'Bill deleted!',
     'discount' => 'Discount',
+    'discount_column_description' => 'This column display discount in percentages then calculated in ron.',
     'discount_updated' => 'Product discount was updated!',
     'edit_discount' => 'Edit product discount',
     'edit_discount_description' => 'Change discount applied to this product',
