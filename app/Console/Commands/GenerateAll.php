@@ -43,8 +43,7 @@ class GenerateAll extends Command {
 
         $this->info('Creating a new data set for the application...');
 
-        Artisan::call('migrate:rollback');
-        Artisan::call('migrate --env=production');
+        Artisan::call('migrate:refresh');
         $this->info('Database rolled back and migrated again.');
 
         Artisan::call('generate:log_types');
