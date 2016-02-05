@@ -63,4 +63,8 @@ class StatisticsController extends BaseController {
         return view('statistics.compare-campaigns')->with('campaignNumber', $campaignNumber)->with('campaignYear', $campaignYear)
             ->with('otherCampaignNumber', $otherCampaignNumber)->with('otherCampaignYear', $otherCampaignYear);
     }
+
+    public function getCompareCampaignsData($campaignNumber, $campaignYear, $otherCampaignNumber, $otherCampaignYear) {
+        //
+    }
 }

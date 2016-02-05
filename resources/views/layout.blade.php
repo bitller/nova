@@ -8,6 +8,9 @@
     @yield('styles')
     <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     @yield('fonts')
+
+    @yield('top-scripts')
+
 </head>
 
 <body id="layout">
