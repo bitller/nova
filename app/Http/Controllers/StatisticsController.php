@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AjaxResponse;
+use App\Helpers\Statistics\CompareCampaignsStatistics;
 use App\Helpers\Statistics\CampaignStatistics;
 use Illuminate\Http\Request;
 
@@ -65,6 +66,17 @@ class StatisticsController extends BaseController {
     }
 
     public function getCompareCampaignsData($campaignNumber, $campaignYear, $otherCampaignNumber, $otherCampaignYear) {
-        //
+
+        $firstCampaign = [
+            'number' => $campaignNumber,
+            'year' => $campaignYear
+        ];
+
+        $secondCampaign = [
+            'number' => $otherCampaignNumber,
+            'year' => $otherCampaignYear
+        ];
+
+        dd(CompareCampaignsStatistics::soldProductsDetails($firstCampaign, $secondCampaign));
     }
 }

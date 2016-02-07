@@ -106,7 +106,7 @@ Route::group(['prefix' => 'statistics'], function() {
     Route::get('/campaign/{campaignNumber}/{campaignYear}', 'StatisticsController@campaign');
     Route::get('/campaign/{campaignNumber}/{campaignYear}/get', 'StatisticsController@getCampaignStatistics');
     Route::get('/campaign/{campaignNumber}/{campaignYear}/compare-with/{otherCampaignNumber}/{otherCampaignYear}', 'StatisticsController@compareCampaigns');
-
+    Route::get('/campaign/{campaignNumber}/{campaignYear}/compare-with/{otherCampaignNumber}/{otherCampaignYear}/get', 'StatisticsController@getCompareCampaignsData');
 });
 
 // Settings page

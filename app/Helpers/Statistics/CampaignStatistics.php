@@ -199,6 +199,10 @@ class CampaignStatistics {
             }
         }
 
+        if (count($billIds) < 1) {
+            return 0;
+        }
+
         $query = "SELECT SUM(bills.quantity) as number_of_products FROM (SELECT bill_products.quantity FROM bill_products WHERE bill_products.bill_id IN($questionMarks)";
         $query .= "UNION ALL SELECT bill_application_products.quantity FROM bill_application_products WHERE bill_application_products.bill_id IN($questionMarks) ) bills";
 
