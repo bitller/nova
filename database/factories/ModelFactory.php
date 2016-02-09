@@ -113,6 +113,16 @@ $factory->define(App\BillProduct::class, function() use ($factory) {
 
 });
 
+$factory->defineAs(App\BillProduct::class, 'no-discount', function() use ($factory) {
+
+    $billProduct = $factory->raw(\App\BillProduct::class);
+    $billProduct['discount'] = 0;
+    $billProduct['calculated_discount'] = 0;
+    $billProduct['final_price'] = $billProduct['price'];
+
+    return $billProduct;
+});
+
 $factory->define(App\BillApplicationProduct::class, function() use ($factory) {
 
     return $factory->raw(App\BillProduct::class);
