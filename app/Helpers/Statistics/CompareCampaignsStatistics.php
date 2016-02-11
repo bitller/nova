@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Statistics;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Traits\CapsuleManagerTrait;
 
 /**
  * Work with data to compare campaigns statistics.
@@ -10,6 +11,121 @@ use Illuminate\Support\Facades\Auth;
  */
 class CompareCampaignsStatistics {
 
+    /**
+     * Return details about sales after two campaigns are compared.
+     *
+     * @param array $campaign
+     * @param array $campaignToCompare
+     * @return array
+     */
+    public static function detailsAboutSales($campaign, $campaignToCompare) {
+
+        $campaignSales = CampaignStatistics::totalBillsPrice($campaign['number'], $campaign['year']);
+        $campaignToCompareSales = CampaignStatistics::totalBillsPrice($campaignToCompare['number'], $campaignToCompare['year']);
+
+        $translationData = [
+            'campaign_number' => $campaign['number'],
+            'campaign_year' => $campaign['year'],
+            'sales' => $campaignSales,
+            'other_campaign_number' => $campaignToCompare['number'],
+            'other_campaign_year' => $campaignToCompare['year']
+        ];
+
+        // Handle case when both campaigns have no sales
+        if ($campaignSales <= 0 && $campaignToCompareSales <= 0) {
+            return [
+                'message' => trans('statistics.details_about_sales_equal_trend', $translationData),
+                'title' => trans('statistics.details_about_sales_equal_trend_title'),
+                'sales' => $campaignSales,
+                'sales_in_campaign_to_compare' => $campaignToCompareSales
+            ];
+        }
+
+        // Handle case when only first campaign have sales
+        if ($campaignSales > 0 && $campaignToCompareSales <= 0) {
+
+            $translationData['plus'] = $campaignSales;
+
+            return [
+                'message' => trans('statistics.details_about_sales_up_trend', $translationData),
+                'title' => trans('statistics.details_about_sales_up_trend_title', ['percent' => 100]),
+                'sales' => $campaignSales,
+                'sales_in_campaign_to_compare' => $campaignToCompareSales
+            ];
+        }
+
+        // Handle case when only campaign to compare have sales
+        if ($campaignSales <= 0 && $campaignToCompareSales > 0) {
+
+            $translationData['minus'] = $campaignToCompareSales;
+
+            return [
+                'message' => trans('statistics.details_about_sales_down_trend', $translationData),
+                'title' => trans('statistics.details_about_sales_down_trend_title', ['percent' => 100]),
+                'sales' => 0,
+                'sales_in_campaign_to_compare' => $campaignToCompareSales
+            ];
+        }
+
+        // Calculate difference and make sure is always positive
+        $difference = number_format($campaignSales - $campaignToCompareSales, 2);
+        if ($difference < 0) {
+            $difference = number_format($difference * -1, 2);
+        }
+
+        $divider = $campaignSales;
+        if ($campaignSales < $campaignToCompareSales) {
+            $divider = $campaignToCompareSales;
+        }
+
+        // Calculate percent
+        $percent = ($difference * 100) / $divider;
+
+        // Handle case when first campaign have more sales
+        if ($campaignSales > $campaignToCompareSales) {
+
+            $translationData['plus'] = $difference;
+            $translationData['sales'] = $campaignSales;
+
+            $output = [
+                'message' => trans('statistics.details_about_sales_up_trend', $translationData),
+                'title' => trans('statistics.details_about_sales_up_trend_title', ['percent' => $percent]),
+                'sales' => $campaignSales,
+                'sales_in_campaign_to_compare' => $campaignToCompareSales
+            ];
+
+        } else if ($campaignSales < $campaignToCompareSales) {
+
+            $translationData['minus'] = $difference;
+            $translationData['sales'] = $campaignSales;
+
+            $output = [
+                'message' => trans('statistics.details_about_sales_down_trend', $translationData),
+                'title' => trans('statistics.details_about_sales_down_trend_title', ['percent' => $percent]),
+                'sales' => $campaignSales,
+                'sales_in_campaign_to_compare' => $campaignToCompareSales
+            ];
+
+        } else {
+
+            $output = [
+                'message' => trans('statistics.details_about_sales_equal_trend', $translationData),
+                'title' => trans('statistics.details_about_sales_equal_trend_title', ['percent' => $percent]),
+                'sales' => $campaignSales,
+                'sales_in_campaign_to_compare' => $campaignToCompareSales
+            ];
+        }
+
+        return $output;
+    }
+
+    /**
+     * Details about number of clients after comparing given campaigns.
+     *
+     * @param array $campaign
+     * @param array $campaignToCompare
+     * @return array
+     */
     public static function detailsAboutNumberOfClients($campaign, $campaignToCompare) {
 
         $campaignClients = CampaignStatistics::numberOfClients($campaign['number'], $campaign['year']);
@@ -63,6 +179,52 @@ class CompareCampaignsStatistics {
                 'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
             ];
         }
+
+        // Calculate difference and make sure is always positive
+        $difference = $campaignClients - $campaignToCompareClients;
+        if ($difference < 0) {
+            $difference *= -1;
+        }
+
+        $divider = $campaignClients;
+        if ($divider < $campaignToCompareClients) {
+            $divider = $campaignToCompareClients;
+        }
+
+        $percent = number_format($difference * 100) / $divider;
+
+        // First campaign have more clients
+        if ($campaignClients > $campaignToCompareClients) {
+
+            $translationData['plus'] = $difference;
+
+            $output = [
+                'message' => trans('statistics.details_about_number_of_clients_up_trend', $translationData),
+                'title' => trans('statistics.details_about_number_of_clients_up_trend_title', ['percent' => $percent]),
+                'number_of_clients' => $campaignClients,
+                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
+            ];
+        } else if ($campaignClients < $campaignToCompareClients) {
+
+            $translationData['minus'] = $difference;
+
+            $output = [
+                'message' => trans('statistics.details_about_number_of_clients_down_trend', $translationData),
+                'title' => trans('statistics.details_about_number_of_clients_down_trend_title', ['percent' => $percent]),
+                'number_of_clients' => $campaignClients,
+                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
+            ];
+
+        } else {
+            $output = [
+                'message' => trans('statistics.details_about_number_of_clients_equal_trend', $translationData),
+                'title' => trans('statistics.details_about_number_of_clients_equal_trend_title'),
+                'number_of_clients' => $campaignClients,
+                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
+            ];
+        }
+
+        return $output;
     }
 
     /**

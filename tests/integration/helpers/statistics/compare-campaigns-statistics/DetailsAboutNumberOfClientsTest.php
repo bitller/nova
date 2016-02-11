@@ -128,4 +128,114 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
     }
+
+    /**
+     * Test detailsAboutNumberOfClients works as expected when first campaign have more clients.
+     */
+    public function test_details_about_number_of_clients_when_first_campaign_have_more_clients() {
+
+        $clients = factory(\App\Client::class, 5)->create(['user_id' => $this->user->id]);
+
+        foreach ($clients as $client) {
+            factory(\App\Bill::class)->create([
+                'client_id' => $client->id,
+                'user_id' => $this->user->id,
+                'campaign_id' => \App\Campaign::where('number', $this->firstCampaign['number'])->where('year', $this->firstCampaign['year'])->first()->id
+            ]);
+        }
+
+        foreach ($clients as $client) {
+            factory(\App\Bill::class)->create([
+                'client_id' => $client->id,
+                'user_id' => $this->user->id,
+                'campaign_id' => \App\Campaign::where('number', $this->secondCampaign['number'])->where('year', $this->secondCampaign['year'])->first()->id
+            ]);
+            break;
+        }
+
+        $this->translationData['clients'] = 5;
+        $this->translationData['plus'] = 4;
+
+        $expected = [
+            'message' => trans('statistics.details_about_number_of_clients_up_trend', $this->translationData),
+            'title' => trans('statistics.details_about_number_of_clients_up_trend_title', ['percent' => 80]),
+            'number_of_clients' => 5,
+            'number_of_clients_in_campaign_to_compare' => 1
+        ];
+
+        $this->actingAs($this->user)
+            ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
+    }
+
+    /**
+     * Make sure detailsAboutNumberOfClients works as expected when campaign to compare have more clients.
+     */
+    public function test_details_about_number_of_clients_when_campaign_to_compare_have_more_clients() {
+
+        $clients = factory(\App\Client::class, 5)->create(['user_id' => $this->user->id]);
+
+        foreach ($clients as $client) {
+            factory(\App\Bill::class)->create([
+                'client_id' => $client->id,
+                'user_id' => $this->user->id,
+                'campaign_id' => \App\Campaign::where('number', $this->firstCampaign['number'])->where('year', $this->firstCampaign['year'])->first()->id
+            ]);
+            break;
+        }
+
+        foreach ($clients as $client) {
+            factory(\App\Bill::class)->create([
+                'client_id' => $client->id,
+                'user_id' => $this->user->id,
+                'campaign_id' => \App\Campaign::where('number', $this->secondCampaign['number'])->where('year', $this->secondCampaign['year'])->first()->id
+            ]);
+        }
+
+        $this->translationData['clients'] = 1;
+        $this->translationData['minus'] = 4;
+
+        $expected = [
+            'message' => trans('statistics.details_about_number_of_clients_down_trend', $this->translationData),
+            'title' => trans('statistics.details_about_number_of_clients_down_trend_title', ['percent' => 80]),
+            'number_of_clients' => 1,
+            'number_of_clients_in_campaign_to_compare' => 5
+        ];
+
+        $this->actingAs($this->user)
+            ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
+    }
+
+    /**
+     * Make sure detailsAboutNumberOfClients works as expected when both campaigns have same number of clients.
+     */
+    public function test_details_about_number_of_clients_when_both_campaigns_have_same_number_of_clients() {
+
+        $clients = factory(\App\Client::class, 4)->create(['user_id' => $this->user->id]);
+
+        foreach ($clients as $client) {
+            factory(\App\Bill::class)->create([
+                'client_id' => $client->id,
+                'user_id' => $this->user->id,
+                'campaign_id' => \App\Campaign::where('number', $this->firstCampaign['number'])->where('year', $this->firstCampaign['year'])->first()->id
+            ]);
+
+            factory(\App\Bill::class)->create([
+                'client_id' => $client->id,
+                'user_id' => $this->user->id,
+                'campaign_id' => \App\Campaign::where('number', $this->secondCampaign['number'])->where('year', $this->secondCampaign['year'])->first()->id
+            ]);
+        }
+
+        $this->translationData['clients'] = 4;
+
+        $expected = [
+            'message' => trans('statistics.details_about_number_of_clients_equal_trend', $this->translationData),
+            'title' => trans('statistics.details_about_number_of_clients_equal_trend_title'),
+            'number_of_clients' => 4,
+            'number_of_clients_in_campaign_to_compare' => 4
+        ];
+
+        $this->actingAs($this->user)
+            ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
+    }
 }

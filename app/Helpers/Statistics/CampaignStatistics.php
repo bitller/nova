@@ -61,7 +61,7 @@ class CampaignStatistics {
     public static function totalBillsPrice($campaignNumber, $campaignYear) {
         $totalPrices = self::totalBillsPrices($campaignNumber, $campaignYear);
         if (isset($totalPrices->total_bills_price)) {
-            return $totalPrices->total_bills_price;
+            return number_format($totalPrices->total_bills_price, 2);
         }
         return 0;
     }
@@ -92,6 +92,10 @@ class CampaignStatistics {
             foreach ($billIdsQuery as $result) {
                 $billIds[] = $result->id;
             }
+        }
+
+        if (count($billIds) < 1) {
+            return 0;
         }
 
         // Build sql query
