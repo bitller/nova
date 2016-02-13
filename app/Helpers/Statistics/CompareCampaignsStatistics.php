@@ -12,6 +12,25 @@ use Illuminate\Support\Traits\CapsuleManagerTrait;
 class CompareCampaignsStatistics {
 
     /**
+     * Return all comparison statistics.
+     *
+     * @param array $campaign
+     * @param array $campaignToCompare
+     * @return array
+     */
+    public static function all($campaign, $campaignToCompare) {
+
+        return [
+            'details_about_sales' => self::detailsAboutSales($campaign, $campaignToCompare),
+            'details_about_number_of_clients' => self::detailsAboutNumberOfClients($campaign, $campaignToCompare),
+            'details_about_number_of_bills' => self::detailsAboutNumberOfBills($campaign, $campaignToCompare),
+            'details_about_offered_discount' => self::offeredDiscountDetails($campaign, $campaignToCompare),
+            'details_about_sold_products' => self::soldProductsDetails($campaign, $campaignToCompare)
+        ];
+
+    }
+
+    /**
      * Return details about sales after two campaigns are compared.
      *
      * @param array $campaign
@@ -31,14 +50,22 @@ class CompareCampaignsStatistics {
             'other_campaign_year' => $campaignToCompare['year']
         ];
 
+        $baseOutput = [
+            'sales' => $campaignSales,
+            'sales_in_campaign_to_compare' => $campaignToCompareSales,
+            'sales_label' => trans('statistics.details_about_sales_label', ['campaign_number' => $campaign['number'], 'campaign_year' => $campaign['year']]),
+            'sales_in_campaign_to_compare_label' => trans('statistics.details_about_sales_label', ['campaign_number' => $campaignToCompare['number'], 'campaign_year' => $campaignToCompare['year']])
+        ];
+
         // Handle case when both campaigns have no sales
         if ($campaignSales <= 0 && $campaignToCompareSales <= 0) {
-            return [
+
+            $output = [
                 'message' => trans('statistics.details_about_sales_equal_trend', $translationData),
                 'title' => trans('statistics.details_about_sales_equal_trend_title'),
-                'sales' => $campaignSales,
-                'sales_in_campaign_to_compare' => $campaignToCompareSales
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when only first campaign have sales
@@ -46,12 +73,12 @@ class CompareCampaignsStatistics {
 
             $translationData['plus'] = $campaignSales;
 
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_sales_up_trend', $translationData),
                 'title' => trans('statistics.details_about_sales_up_trend_title', ['percent' => 100]),
-                'sales' => $campaignSales,
-                'sales_in_campaign_to_compare' => $campaignToCompareSales
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when only campaign to compare have sales
@@ -59,12 +86,12 @@ class CompareCampaignsStatistics {
 
             $translationData['minus'] = $campaignToCompareSales;
 
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_sales_down_trend', $translationData),
                 'title' => trans('statistics.details_about_sales_down_trend_title', ['percent' => 100]),
-                'sales' => 0,
-                'sales_in_campaign_to_compare' => $campaignToCompareSales
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Calculate difference and make sure is always positive
@@ -90,8 +117,6 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.details_about_sales_up_trend', $translationData),
                 'title' => trans('statistics.details_about_sales_up_trend_title', ['percent' => $percent]),
-                'sales' => $campaignSales,
-                'sales_in_campaign_to_compare' => $campaignToCompareSales
             ];
 
         } else if ($campaignSales < $campaignToCompareSales) {
@@ -102,8 +127,6 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.details_about_sales_down_trend', $translationData),
                 'title' => trans('statistics.details_about_sales_down_trend_title', ['percent' => $percent]),
-                'sales' => $campaignSales,
-                'sales_in_campaign_to_compare' => $campaignToCompareSales
             ];
 
         } else {
@@ -111,12 +134,10 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.details_about_sales_equal_trend', $translationData),
                 'title' => trans('statistics.details_about_sales_equal_trend_title', ['percent' => $percent]),
-                'sales' => $campaignSales,
-                'sales_in_campaign_to_compare' => $campaignToCompareSales
             ];
         }
 
-        return $output;
+        return array_merge($output, $baseOutput);
     }
 
     /**
@@ -139,17 +160,30 @@ class CompareCampaignsStatistics {
             'other_campaign_year' => $campaignToCompare['year']
         ];
 
+        $baseOutput = [
+            'number_of_clients' => $campaignClients,
+            'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients,
+            'number_of_clients_label' => trans('statistics.details_about_number_of_clients_label', [
+                'campaign_number' => $campaign['number'],
+                'campaign_year' => $campaign['year']
+            ]),
+            'number_of_clients_in_campaign_to_compare_label' => trans('statistics.details_about_number_of_clients_label',  [
+                'campaign_number' => $campaignToCompare['number'],
+                'campaign_year' => $campaignToCompare['year']
+            ])
+        ];
+
         // Handle case when both campaigns have no clients
         if ($campaignClients <= 0 && $campaignToCompareClients <= 0) {
 
             $translationData['clients'] = $campaignClients;
 
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_number_of_clients_equal_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_clients_equal_trend_title'),
-                'number_of_clients' => $campaignClients,
-                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when only first campaign have clients who ordered
@@ -158,12 +192,12 @@ class CompareCampaignsStatistics {
             $translationData['clients'] = $campaignClients;
             $translationData['plus'] = $campaignClients;
 
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_number_of_clients_up_trend', $translationData),
-                'title' => trans('statistics.details_about_number_of_clients_up_trend_title', ['percent' => 100]),
-                'number_of_clients' => $campaignClients,
-                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
+                'title' => trans('statistics.details_about_number_of_clients_up_trend_title', ['percent' => 100])
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when only campaign to compare have clients who ordered
@@ -172,12 +206,12 @@ class CompareCampaignsStatistics {
             $translationData['clients'] = $campaignClients;
             $translationData['minus'] = $campaignToCompareClients;
 
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_number_of_clients_down_trend', $translationData),
-                'title' => trans('statistics.details_about_number_of_clients_down_trend_title', ['percent' => 100]),
-                'number_of_clients' => $campaignClients,
-                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
+                'title' => trans('statistics.details_about_number_of_clients_down_trend_title', ['percent' => 100])
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Calculate difference and make sure is always positive
@@ -201,8 +235,6 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.details_about_number_of_clients_up_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_clients_up_trend_title', ['percent' => $percent]),
-                'number_of_clients' => $campaignClients,
-                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
             ];
         } else if ($campaignClients < $campaignToCompareClients) {
 
@@ -211,20 +243,16 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.details_about_number_of_clients_down_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_clients_down_trend_title', ['percent' => $percent]),
-                'number_of_clients' => $campaignClients,
-                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
             ];
 
         } else {
             $output = [
                 'message' => trans('statistics.details_about_number_of_clients_equal_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_clients_equal_trend_title'),
-                'number_of_clients' => $campaignClients,
-                'number_of_clients_in_campaign_to_compare' => $campaignToCompareClients
             ];
         }
 
-        return $output;
+        return array_merge($output, $baseOutput);
     }
 
     /**
@@ -247,14 +275,21 @@ class CompareCampaignsStatistics {
             'other_campaign_year' => $campaignToCompare['year']
         ];
 
+        $baseOutput = [
+            'number_of_bills' => $campaignBills,
+            'number_of_bills_in_campaign_to_compare' => $campaignToCompareBills,
+            'number_of_bills_label' => trans('statistics.details_about_number_of_bills_label', ['campaign_number' => $campaign['number'], 'campaign_year' => $campaign['year']]),
+            'number_of_bills_in_campaign_to_compare_label' => trans('statistics.details_about_number_of_bills_label', ['campaign_number' => $campaignToCompare['number'], 'campaign_year' => $campaignToCompare['year']])
+        ];
+
         // Handle case when both campaigns have no bills
         if ($campaignBills <= 0 && $campaignToCompareBills <= 0) {
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_number_of_bills_equal_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_bills_equal_trend_title'),
-                'number_of_bills' => $campaignBills,
-                'number_of_bills_in_campaign_to_compare' => $campaignToCompareBills
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when only first campaign contain bills
@@ -262,12 +297,12 @@ class CompareCampaignsStatistics {
 
             $translationData['plus'] = $campaignBills;
 
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_number_of_bills_up_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_bills_up_trend_title', ['percent' => 100]),
-                'number_of_bills' => $campaignBills,
-                'number_of_bills_in_campaign_to_compare' => $campaignToCompareBills
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when only campaign to compare contains bills
@@ -275,12 +310,12 @@ class CompareCampaignsStatistics {
 
             $translationData['minus'] = $campaignToCompareBills;
 
-            return [
+            $output = [
                 'message' => trans('statistics.details_about_number_of_bills_down_trend', $translationData),
-                'title' => trans('statistics.details_about_number_of_bills_down_trend_title', ['percent' => 100]),
-                'number_of_bills' => $campaignBills,
-                'number_of_bills_in_campaign_to_compare' => $campaignToCompareBills
+                'title' => trans('statistics.details_about_number_of_bills_down_trend_title', ['percent' => 100])
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Calculate difference and make sure is always positive
@@ -304,8 +339,6 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.details_about_number_of_bills_up_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_bills_up_trend_title', ['percent' => $percent]),
-                'number_of_bills' => $campaignBills,
-                'number_of_bills_in_campaign_to_compare' => $campaignToCompareBills
             ];
         } else if ($campaignBills < $campaignToCompareBills) {
 
@@ -315,19 +348,15 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.details_about_number_of_bills_down_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_bills_down_trend_title', ['percent' => $percent]),
-                'number_of_bills' => $campaignBills,
-                'number_of_bills_in_campaign_to_compare' => $campaignToCompareBills
             ];
         } else {
             $output = [
                 'message' => trans('statistics.details_about_number_of_bills_equal_trend', $translationData),
                 'title' => trans('statistics.details_about_number_of_bills_equal_trend_title'),
-                'number_of_bills' => $campaignBills,
-                'number_of_bills_in_campaign_to_compare' => $campaignToCompareBills
             ];
         }
 
-        return $output;
+        return array_merge($output, $baseOutput);
     }
 
     /**
@@ -350,14 +379,27 @@ class CompareCampaignsStatistics {
             'other_campaign_year' => $campaignToCompare['year']
         ];
 
+        $baseOutput = [
+            'discount_offered' => $campaignDiscount,
+            'discount_offered_in_campaign_to_compare' => $campaignToCompareDiscount,
+            'discount_offered_label' => trans('statistics.offered_discount_label', [
+                'campaign_number' => $campaign['number'],
+                'campaign_year' => $campaign['year']
+            ]),
+            'discount_offered_in_campaign_to_compare_label' => trans('statistics.offered_discount_label', [
+                'campaign_number' => $campaignToCompare['number'],
+                'campaign_year' => $campaignToCompare['year']
+            ])
+        ];
+
         // Handle case when there is no discount in both campaigns
         if ($campaignDiscount <= 0 && $campaignToCompareDiscount <= 0) {
-            return [
+            $output = [
                 'message' => trans('statistics.offered_discount_equal_trend', $translationData),
                 'title' => trans('statistics.offered_discount_equal_trend_title'),
-                'discount_offered' => $campaignDiscount,
-                'discount_offered_in_campaign_to_compare' => $campaignToCompareDiscount
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when is no discount in first campaign
@@ -365,12 +407,12 @@ class CompareCampaignsStatistics {
 
             $translationData['minus'] = $campaignToCompareDiscount;
 
-            return [
+            $output = [
                 'message' => trans('statistics.offered_discount_down_trend', $translationData),
-                'title' => trans('statistics.offered_discount_down_trend_title', ['percent' => 100]),
-                'discount_offered' => $campaignDiscount,
-                'discount_offered_in_campaign_to_compare' => $campaignToCompareDiscount
+                'title' => trans('statistics.offered_discount_down_trend_title', ['percent' => 100])
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when is no discount in campaign to compare
@@ -378,12 +420,12 @@ class CompareCampaignsStatistics {
 
             $translationData['plus'] = $campaignDiscount;
 
-            return [
+            $output = [
                 'message' => trans('statistics.offered_discount_up_trend', $translationData),
-                'title' => trans('statistics.offered_discount_up_trend_title', ['percent' => 100]),
-                'discount_offered' => $campaignDiscount,
-                'discount_offered_in_campaign_to_compare' => $campaignToCompareDiscount
+                'title' => trans('statistics.offered_discount_up_trend_title', ['percent' => 100])
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when both campaigns have discount
@@ -402,7 +444,6 @@ class CompareCampaignsStatistics {
 
         $percent = ($difference * 100) / $divider;
 
-        $output = [];
         if ($campaignDiscount > $campaignToCompareDiscount) {
 
             $translationData['plus'] = $difference;
@@ -410,9 +451,8 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.offered_discount_up_trend', $translationData),
                 'title' => trans('statistics.offered_discount_up_trend_title', ['percent' => $percent]),
-                'discount_offered' => $campaignDiscount,
-                'discount_offered_in_campaign_to_compare' => $campaignToCompareDiscount
             ];
+
         } else if ($campaignDiscount < $campaignToCompareDiscount) {
 
             $translationData['minus'] = $difference;
@@ -420,19 +460,16 @@ class CompareCampaignsStatistics {
             $output = [
                 'message' => trans('statistics.offered_discount_down_trend', $translationData),
                 'title' => trans('statistics.offered_discount_down_trend_title', ['percent' => $percent]),
-                'discount_offered' => $campaignDiscount,
-                'discount_offered_in_campaign_to_compare' => $campaignToCompareDiscount
             ];
+
         } else {
             $output = [
                 'message' => trans('statistics.offered_discount_equal_trend', $translationData),
                 'title' => trans('statistics.offered_discount_equal_trend_title'),
-                'discount_offered' => $campaignDiscount,
-                'discount_offered_in_campaign_to_compare' => $campaignToCompareDiscount
             ];
         }
 
-        return $output;
+        return array_merge($output, $baseOutput);
     }
 
     /**
@@ -457,14 +494,27 @@ class CompareCampaignsStatistics {
             'other_campaign_year' => $campaignToCompare['year']
         ];
 
+        $baseOutput = [
+            'products_sold_in_campaign' => $campaignProducts,
+            'products_in_campaign_to_compare' => $campaignToCompareProducts,
+            'sold_products_label' => trans('statistics.sold_products_label', [
+                'campaign_number' => $campaign['number'],
+                'campaign_year' => $campaign['year']
+            ]),
+            'sold_products_in_campaign_to_compare_label' => trans('statistics.sold_products_label', [
+                'campaign_number' => $campaignToCompare['number'],
+                'campaign_year' => $campaignToCompare['year']
+            ])
+        ];
+
         // Handle case when there are no sold products in both campaigns
         if ($campaignProducts < 1 && $campaignToCompareProducts < 1) {
-            return [
+            $output = [
                 'message' => trans('statistics.sold_products_equal_trend', $translationData),
-                'title' => trans('statistics.sold_products_equal_trend_title'),
-                'products_sold_in_campaign' => $campaignProducts,
-                'products_in_campaign_to_compare' => $campaignToCompareProducts
+                'title' => trans('statistics.sold_products_equal_trend_title')
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when in first campaign are no products
@@ -472,12 +522,12 @@ class CompareCampaignsStatistics {
 
             $translationData['minus'] = $campaignToCompareProducts;
 
-            return [
+            $output = [
                 'message' => trans('statistics.sold_products_down_trend', $translationData),
-                'title' => trans('statistics.sold_products_down_trend_title', ['percent' => 100]),
-                'products_sold_in_campaign' => $campaignProducts,
-                'products_in_campaign_to_compare' => (string) $campaignToCompareProducts
+                'title' => trans('statistics.sold_products_down_trend_title', ['percent' => 100])
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Handle case when in campaign to compare are no products
@@ -485,12 +535,12 @@ class CompareCampaignsStatistics {
 
             $translationData['plus'] = $campaignProducts;
 
-            return [
+            $output = [
                 'message' => trans('statistics.sold_products_up_trend', $translationData),
-                'title' => trans('statistics.sold_products_up_trend_title', ['percent' => 100]),
-                'products_sold_in_campaign' => $campaignProducts,
-                'products_in_campaign_to_compare' => $campaignToCompareProducts
+                'title' => trans('statistics.sold_products_up_trend_title', ['percent' => 100])
             ];
+
+            return array_merge($output, $baseOutput);
         }
 
         // Calculate difference
@@ -541,11 +591,11 @@ class CompareCampaignsStatistics {
         }
 
         // Return the response
-        return [
+        $output = [
             'message' => trans($translationName, $translationData),
             'title' => trans($titleTranslationName, ['percent' => $percent]),
-            'products_sold_in_campaign' => $campaignProducts,
-            'products_in_campaign_to_compare' => $campaignToCompareProducts
         ];
+
+        return array_merge($output, $baseOutput);
     }
 }

@@ -48,6 +48,11 @@ class SoldProductsDetailsTest extends TestCase {
     ];
 
     /**
+     * @var array
+     */
+    private $baseExpected = [];
+
+    /**
      * Called before each test.
      */
     public function setUp() {
@@ -70,6 +75,17 @@ class SoldProductsDetailsTest extends TestCase {
             'client_id' => $this->client->id,
             'campaign_id' => \App\Campaign::where('year', $this->secondCampaign['year'])->where('number', $this->secondCampaign['number'])->first()->id
         ]);
+
+        $this->baseExpected = [
+            'sold_products_label' => trans('statistics.sold_products_label', [
+                'campaign_number' => $this->firstCampaign['number'],
+                'campaign_year' => $this->firstCampaign['year']
+            ]),
+            'sold_products_in_campaign_to_compare_label' => trans('statistics.sold_products_label', [
+                'campaign_number' => $this->secondCampaign['number'],
+                'campaign_year' => $this->secondCampaign['year']
+            ])
+        ];
     }
 
     /**
@@ -98,6 +114,8 @@ class SoldProductsDetailsTest extends TestCase {
             'products_sold_in_campaign' => 0,
             'products_in_campaign_to_compare' => '2'
         ];
+
+        $expectedStatistics = array_merge($expectedStatistics, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertSame($expectedStatistics, \App\Helpers\Statistics\CompareCampaignsStatistics::soldProductsDetails($this->firstCampaign, $this->secondCampaign));
@@ -130,6 +148,8 @@ class SoldProductsDetailsTest extends TestCase {
             'products_in_campaign_to_compare' => 0
         ];
 
+        $expectedStatistics = array_merge($expectedStatistics, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertSame($expectedStatistics, \App\Helpers\Statistics\CompareCampaignsStatistics::soldProductsDetails($this->firstCampaign, $this->secondCampaign));
     }
@@ -152,6 +172,8 @@ class SoldProductsDetailsTest extends TestCase {
             'products_sold_in_campaign' => 0,
             'products_in_campaign_to_compare' => 0
         ];
+
+        $expectedStatistics = array_merge($expectedStatistics, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertSame($expectedStatistics, \App\Helpers\Statistics\CompareCampaignsStatistics::soldProductsDetails($this->firstCampaign, $this->secondCampaign));
@@ -188,6 +210,8 @@ class SoldProductsDetailsTest extends TestCase {
             'products_sold_in_campaign' => '2',
             'products_in_campaign_to_compare' => '4'
         ];
+
+        $expectedStatistics = array_merge($expectedStatistics, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertSame($expectedStatistics, \App\Helpers\Statistics\CompareCampaignsStatistics::soldProductsDetails($this->firstCampaign, $this->secondCampaign));
@@ -226,6 +250,8 @@ class SoldProductsDetailsTest extends TestCase {
             'products_in_campaign_to_compare' => '8'
         ];
 
+        $expectedStatistics = array_merge($expectedStatistics, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expectedStatistics, \App\Helpers\Statistics\CompareCampaignsStatistics::soldProductsDetails($this->firstCampaign, $this->secondCampaign));
     }
@@ -262,6 +288,8 @@ class SoldProductsDetailsTest extends TestCase {
             'products_sold_in_campaign' => '18',
             'products_in_campaign_to_compare' => '20'
         ];
+
+        $expectedStatistics = array_merge($expectedStatistics, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expectedStatistics, \App\Helpers\Statistics\CompareCampaignsStatistics::soldProductsDetails($this->firstCampaign, $this->secondCampaign));

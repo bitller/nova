@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    <div id="compare-campaigns" v-show="!loading" campaign-number="{{ $campaignNumber }}" campaign-year="{{ $campaignYear }}" other-campaign-number="{{ $otherCampaignNumber }}" other-campiagn-year="{{ $otherCampaignYear }}">
+    <div id="compare-campaigns" v-show="!loading" campaign-number="{{ $campaignNumber }}" campaign-year="{{ $campaignYear }}" other-campaign-number="{{ $otherCampaignNumber }}" other-campaign-year="{{ $otherCampaignYear }}">
 
         @include('includes.ajax-translations.common')
 
@@ -20,15 +20,19 @@
             <!-- BEGIN Earnings -->
             <div class="row">
                 <div class="col-xs-5 col-xs-offset-1">
-                    <span class="glyphicon glyphicon-arrow-up green-big-icon"></span>
-                    <span class="medium-text">40% mai multe incasari</span>
+
+                    <span v-show="sales_plus" class="glyphicon glyphicon-arrow-up green-big-icon"></span>
+                    <span v-show="sales_minus" class="glyphicon glyphicon-arrow-down big-icon"></span>
+                    <span v-show="sales_equal" class="glyphicon glyphicon-resize-horizontal big-icon"></span>
+
+                    <span class="medium-text">@{{ sales_title }}</span>
                     <div>
-                        <span class="grey-text">In aceasta campanie ai avut incasari mai mari cu 2033 ron decat in campania 1/2016</span>
+                        <span class="grey-text">@{{ sales_message }}</span>
                     </div>
                 </div>
 
                 <div class="col-xs-5 text-center">
-
+                    <canvas id="sales-chart" width="530" height="120"></canvas>
                 </div>
 
             </div>
@@ -39,15 +43,19 @@
             <!-- BEGIN Number of clients -->
             <div class="row">
                 <div class="col-xs-5 col-xs-offset-1">
-                    <span class="glyphicon glyphicon-arrow-down big-icon"></span>
-                    <span class="medium-text">10% mai putini clienti</span>
+
+                    <span v-show="number_of_clients_plus" class="glyphicon glyphicon-arrow-up green-big-icon"></span>
+                    <span v-show="number_of_clients_minus" class="glyphicon glyphicon-arrow-down big-icon"></span>
+                    <span v-show="number_of_clients_equal" class="glyphicon glyphicon-resize-horizontal big-icon"></span>
+
+                    <span class="medium-text">@{{ clients_title }}</span>
                     <div>
-                        <span class="grey-text">In aceasta campania ai avut o scadere a numarului de clienti, mai exact cu 5 mai putini. Campania trecuta ai avut 50 de client, acum 45.</span>
+                        <span class="grey-text">@{{ clients_message }}</span>
                     </div>
                 </div>
 
                 <div class="col-xs-5 text-center">
-                    <canvas id="number-of-clients-chart" width="530" height="120"></canvas>
+                    <canvas id="clients-chart" width="530" height="120"></canvas>
                 </div>
 
             </div>
@@ -57,12 +65,21 @@
 
             <!-- BEGIN Number of bills -->
             <div class="row">
+
                 <div class="col-xs-5 col-xs-offset-1">
-                    <span class="glyphicon glyphicon-arrow-down big-icon"></span>
-                    <span class="medium-text">10% mai putine facturi</span>
+
+                    <span v-show="number_of_bills_plus" class="glyphicon glyphicon-arrow-up green-big-icon"></span>
+                    <span v-show="number_of_bills_minus" class="glyphicon glyphicon-arrow-down big-icon"></span>
+                    <span v-show="number_of_bills_equal" class="glyphicon glyphicon-resize-horizontal big-icon"></span>
+
+                    <span class="medium-text">@{{ bills_title }}</span>
                     <div>
-                        <span class="grey-text">In campania 2/2016 ai avut o scadere a numarului de facturi, cu 10 mai putine. In campania 1/2016 ai avut 70 de facturi, iar in campania 1/2016 60 de facturi.</span>
+                        <span class="grey-text">@{{ bills_message }}</span>
                     </div>
+                </div>
+
+                <div class="col-xs-5 text-center">
+                    <canvas id="bills-chart" width="530" height="120"></canvas>
                 </div>
             </div>
             <!-- END Number of bills -->
@@ -71,13 +88,23 @@
 
             <!-- BEGIN Offered discount -->
             <div class="row">
+
                 <div class="col-xs-5 col-xs-offset-1">
-                    <span class="glyphicon glyphicon-arrow-up green-big-icon"></span>
-                    <span class="medium-text">Reduceri cu 20% mai mari</span>
+
+                    <span v-show="discount_plus" class="glyphicon glyphicon-arrow-up green-big-icon"></span>
+                    <span v-show="discount_minus" class="glyphicon glyphicon-arrow-down big-icon"></span>
+                    <span v-show="discount_equal" class="glyphicon glyphicon-resize-horizontal big-icon"></span>
+
+                    <span class="medium-text">@{{ discount_title }}</span>
                     <div>
-                        <span class="grey-text">In campania 2/2016 ai oferit reduceri in valoare de 1023 ron, in cresetere cu 200 ron fata de campania 1/2016</span>
+                        <span class="grey-text">@{{ discount_message }}</span>
                     </div>
                 </div>
+
+                <div class="col-xs-5 text-center">
+                    <canvas id="discount-chart" width="530" height="120"></canvas>
+                </div>
+
             </div>
             <!-- END Offered discount -->
 
@@ -86,12 +113,21 @@
             <!-- BEGIN Sold products -->
             <div class="row">
                 <div class="col-xs-5 col-xs-offset-1">
-                    <span class="glyphicon glyphicon-arrow-up green-big-icon"></span>
-                    <span class="medium-text">Ai vandut cu 34% mai multe produse</span>
+
+                    <span v-show="sold_products_plus" class="glyphicon glyphicon-arrow-up green-big-icon"></span>
+                    <span v-show="sold_products_minus" class="glyphicon glyphicon-arrow-down big-icon"></span>
+                    <span v-show="sold_products_equal" class="glyphicon glyphicon-resize-horizontal big-icon"></span>
+
+                    <span class="medium-text">@{{ sold_products_title }}</span>
                     <div>
-                        <span class="grey-text">In campania 2/2016 ai vandut 289 produse, in crestere cu 32 de produse fata de campania 1/2016</span>
+                        <span class="grey-text">@{{ sold_products_message }}</span>
                     </div>
                 </div>
+
+                <div class="col-xs-5 text-center">
+                    <canvas id="sold-products-chart" width="530" height="120"></canvas>
+                </div>
+
             </div>
             <!-- END Sold products -->
         </div>

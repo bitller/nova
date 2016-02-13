@@ -9,7 +9,7 @@
             <span class="my-clients-title">
                 <span>{{ trans('statistics.campaign_statistics') . " $campaignNumber/$campaignYear" }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('clients.number_of_paid_bills') }}"></span></span>
             </span>
-            <button type="button" class="btn btn-primary pull-right">
+            <button v-on="click: getCampaignsYears" type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#compare-campaigns-modal">
                 <span class="glyphicon glyphicon-duplicate"></span> {{ trans('statistics.compare') }}
             </button>
         </div>
@@ -132,6 +132,9 @@
             <!-- END Fifth row -->
 
         </div>
+
+        @include('includes.modals.compare-campaigns-modal')
+
     </div>
 @endsection
 

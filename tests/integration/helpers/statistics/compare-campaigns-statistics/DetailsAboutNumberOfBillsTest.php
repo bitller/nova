@@ -42,6 +42,11 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
     private $translationData = [];
 
     /**
+     * @var array
+     */
+    private $baseExpected = [];
+
+    /**
      * Called before each test.
      */
     public function setUp() {
@@ -59,6 +64,17 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
             'other_campaign_number' => $this->secondCampaign['number'],
             'other_campaign_year' => $this->secondCampaign['year']
         ];
+
+        $this->baseExpected = [
+            'number_of_bills_label' => trans('statistics.details_about_number_of_bills_label', [
+                'campaign_number' => $this->firstCampaign['number'],
+                'campaign_year' => $this->firstCampaign['year']
+            ]),
+            'number_of_bills_in_campaign_to_compare_label' => trans('statistics.details_about_number_of_bills_label', [
+                'campaign_number' => $this->secondCampaign['number'],
+                'campaign_year' => $this->secondCampaign['year']
+            ])
+        ];
     }
 
     /**
@@ -74,6 +90,8 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
             'number_of_bills' => 0,
             'number_of_bills_in_campaign_to_compare' => 0
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfBills($this->firstCampaign, $this->secondCampaign));
@@ -100,6 +118,8 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
             'number_of_bills_in_campaign_to_compare' => 0
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfBills($this->firstCampaign, $this->secondCampaign));
     }
@@ -124,6 +144,8 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
             'number_of_bills' => 0,
             'number_of_bills_in_campaign_to_compare' => 4
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfBills($this->firstCampaign, $this->secondCampaign));
@@ -156,6 +178,8 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
             'number_of_bills_in_campaign_to_compare' => 8
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfBills($this->firstCampaign, $this->secondCampaign));
     }
@@ -187,6 +211,8 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
             'number_of_bills_in_campaign_to_compare' => 100
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfBills($this->firstCampaign, $this->secondCampaign));
     }
@@ -216,6 +242,8 @@ class DetailsAboutNumberOfBillsTest extends TestCase {
             'number_of_bills' => 4,
             'number_of_bills_in_campaign_to_compare' => 4
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfBills($this->firstCampaign, $this->secondCampaign));

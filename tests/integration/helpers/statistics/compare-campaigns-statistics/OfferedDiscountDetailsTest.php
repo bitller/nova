@@ -53,6 +53,11 @@ class OfferedDiscountDetailsTest extends TestCase {
     private $translationData = [];
 
     /**
+     * @var array
+     */
+    private $baseExpected = [];
+
+    /**
      * Called before each test.
      */
     public function setUp() {
@@ -82,6 +87,17 @@ class OfferedDiscountDetailsTest extends TestCase {
             'campaign_year' => $this->firstCampaign['year'],
             'other_campaign_number' => $this->secondCampaign['number'],
             'other_campaign_year' => $this->secondCampaign['year']
+        ];
+
+        $this->baseExpected = [
+            'discount_offered_label' => trans('statistics.offered_discount_label', [
+                'campaign_number' => $this->firstCampaign['number'],
+                'campaign_year' => $this->firstCampaign['year']
+            ]),
+            'discount_offered_in_campaign_to_compare_label' => trans('statistics.offered_discount_label', [
+                'campaign_number' => $this->secondCampaign['number'],
+                'campaign_year' => $this->secondCampaign['year']
+            ])
         ];
     }
 
@@ -119,6 +135,8 @@ class OfferedDiscountDetailsTest extends TestCase {
             'discount_offered_in_campaign_to_compare' => '0.00'
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::offeredDiscountDetails($this->firstCampaign, $this->secondCampaign));
     }
@@ -154,6 +172,8 @@ class OfferedDiscountDetailsTest extends TestCase {
             'discount_offered_in_campaign_to_compare' => number_format($secondBillProduct->calculated_discount, 2)
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::offeredDiscountDetails($this->firstCampaign, $this->secondCampaign));
     }
@@ -188,6 +208,8 @@ class OfferedDiscountDetailsTest extends TestCase {
             'discount_offered' => number_format($billProduct->calculated_discount, 2),
             'discount_offered_in_campaign_to_compare' => '0.00'
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::offeredDiscountDetails($this->firstCampaign, $this->secondCampaign));
@@ -230,6 +252,8 @@ class OfferedDiscountDetailsTest extends TestCase {
             'discount_offered_in_campaign_to_compare' => '5.00'
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::offeredDiscountDetails($this->firstCampaign, $this->secondCampaign));
     }
@@ -271,6 +295,8 @@ class OfferedDiscountDetailsTest extends TestCase {
             'discount_offered_in_campaign_to_compare' => '100.00'
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::offeredDiscountDetails($this->firstCampaign, $this->secondCampaign));
     }
@@ -310,6 +336,8 @@ class OfferedDiscountDetailsTest extends TestCase {
             'discount_offered' => '50.00',
             'discount_offered_in_campaign_to_compare' => '50.00'
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::offeredDiscountDetails($this->firstCampaign, $this->secondCampaign));

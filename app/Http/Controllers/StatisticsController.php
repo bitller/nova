@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Campaign;
 use App\Helpers\AjaxResponse;
 use App\Helpers\Statistics\CompareCampaignsStatistics;
 use App\Helpers\Statistics\CampaignStatistics;
+use App\Http\Requests\Statistics\GetCampaignNumbersRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -77,6 +79,41 @@ class StatisticsController extends BaseController {
             'year' => $otherCampaignYear
         ];
 
-        dd(CompareCampaignsStatistics::soldProductsDetails($firstCampaign, $secondCampaign));
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('common.success'));
+        $response->addExtraFields(['statistics' => CompareCampaignsStatistics::all($firstCampaign, $secondCampaign)]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Return all years used by campaigns.
+     *
+     * @return mixed
+     */
+    public function getCampaignsYears() {
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('common.success'));
+
+        $response->addExtraFields(['years' => Campaign::select('year')->distinct()->get()]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Return all campaign numbers for given year.
+     *
+     * @param Requests\Statistics\GetCampaignNumbersRequest $request
+     * @return mixed
+     */
+    public function getCampaignNumbers(GetCampaignNumbersRequest $request) {
+
+        $response = new AjaxResponse();
+        $response->setSuccessMessage(trans('common.success'));
+
+        $response->addExtraFields(['numbers' => Campaign::select('number')->distinct()->where('year', $request->get('year'))->get()]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 }
