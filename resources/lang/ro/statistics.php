@@ -14,7 +14,7 @@ return [
     'details_about_number_of_bills_equal_trend_title' => 'Acelaşi număr de facturi',
     'details_about_number_of_bills_label' => 'Numărul de facturi create în campania :campaign_number/:campaign_year',
     'details_about_number_of_bills_up_trend' => 'În campania :campaign_number/:campaign_year ai creeat :bills facturi, cu :plus mai mult decât în campania :other_campaign_number/:other_campaign_year.',
-    'details_about_number_of_bills_up_trend_title' => 'Cu :percent% mai multe facturi creeate.',
+    'details_about_number_of_bills_up_trend_title' => 'Cu :percent% mai multe facturi create.',
     'details_about_number_of_clients_down_trend' => 'În campania :campaign_number/:campaign_year :clients clienți au comandat, cu :minus mai puțini decât în campania :other_campaign_number/:other_campaign_year.',
     'details_about_number_of_clients_down_trend_title' => 'Au comandat cu :percent% mai puțini clienți',
     'details_about_number_of_clients_equal_trend' => 'În campania :campaign_number/:campaign_year :clients clienți au comandat de la tine, la fel ca în campania :other_campaign_number/:other_campaign_year.',

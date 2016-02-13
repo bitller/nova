@@ -37,6 +37,11 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
     private $translationData = [];
 
     /**
+     * @var array
+     */
+    private $baseExpected = [];
+
+    /**
      * Called before each test.
      */
     public function setUp() {
@@ -50,6 +55,17 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
             'campaign_year' => $this->firstCampaign['year'],
             'other_campaign_number' => $this->secondCampaign['number'],
             'other_campaign_year' => $this->secondCampaign['year']
+        ];
+
+        $this->baseExpected = [
+            'number_of_clients_label' => trans('statistics.details_about_number_of_clients_label', [
+                'campaign_number' => $this->firstCampaign['number'],
+                'campaign_year' => $this->firstCampaign['year']
+            ]),
+            'number_of_clients_in_campaign_to_compare_label' => trans('statistics.details_about_number_of_clients_label', [
+                'campaign_number' => $this->secondCampaign['number'],
+                'campaign_year' => $this->secondCampaign['year']
+            ])
         ];
     }
 
@@ -66,6 +82,8 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
             'number_of_clients' => 0,
             'number_of_clients_in_campaign_to_compare' => 0
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
@@ -96,6 +114,8 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
             'number_of_clients_in_campaign_to_compare' => 0
         ];
 
+        $expected = array_merge($expected, $this->baseExpected);
+
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
     }
@@ -124,6 +144,8 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
             'number_of_clients' => 0,
             'number_of_clients_in_campaign_to_compare' => 5
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
@@ -158,10 +180,12 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
 
         $expected = [
             'message' => trans('statistics.details_about_number_of_clients_up_trend', $this->translationData),
-            'title' => trans('statistics.details_about_number_of_clients_up_trend_title', ['percent' => 80]),
+            'title' => trans('statistics.details_about_number_of_clients_up_trend_title', ['percent' => '80.00']),
             'number_of_clients' => 5,
             'number_of_clients_in_campaign_to_compare' => 1
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
@@ -196,10 +220,12 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
 
         $expected = [
             'message' => trans('statistics.details_about_number_of_clients_down_trend', $this->translationData),
-            'title' => trans('statistics.details_about_number_of_clients_down_trend_title', ['percent' => 80]),
+            'title' => trans('statistics.details_about_number_of_clients_down_trend_title', ['percent' => '80.00']),
             'number_of_clients' => 1,
             'number_of_clients_in_campaign_to_compare' => 5
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));
@@ -234,6 +260,8 @@ class DetailsAboutNumberOfClientsTest extends TestCase {
             'number_of_clients' => 4,
             'number_of_clients_in_campaign_to_compare' => 4
         ];
+
+        $expected = array_merge($expected, $this->baseExpected);
 
         $this->actingAs($this->user)
             ->assertEquals($expected, \App\Helpers\Statistics\CompareCampaignsStatistics::detailsAboutNumberOfClients($this->firstCampaign, $this->secondCampaign));

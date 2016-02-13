@@ -225,7 +225,7 @@ class CompareCampaignsStatistics {
             $divider = $campaignToCompareClients;
         }
 
-        $percent = number_format($difference * 100) / $divider;
+        $percent = number_format(($difference * 100) / $divider, 2);
 
         // First campaign have more clients
         if ($campaignClients > $campaignToCompareClients) {
