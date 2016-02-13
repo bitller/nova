@@ -13,22 +13,21 @@
 
         <div class="first-step">
             <div class="well custom-well">
-                <h4>Incepe sa creezi facturi pentru clientii tai</h4>
-                <h5 class="grey-text">Acceseaza pagina cu facturi dand click pe "Nova" din bara de sus, apoi click pe "Creaza factura" si completeaza cu numele clientului. Gata, tocami ai creat prima ta factura. Felicitari! <a href="#">Click aici pentru video</a></h5>
+                <h4>{{ trans('next.start_creating_bills') }} - <a href="#">{{ trans('next.click_here_to_see_the_video') }}</a></h4>
+                <h5 class="grey-text">{{ trans('next.how_to_create_my_first_bill') }}</h5>
             </div>
         </div>
 
         <div class="second-step">
             <div class="well custom-well">
-                <h4>Adauga produse in factura tocmai creata</h4>
-                <h5 class="grey-text">O factura este inutila daca nu contine produse. <a href="#">Vezi aici cum adaugi produse in factura ta!</a></h5>
+                <h4>{{ trans('next.add_products_to_bill') }} - <a href="#">{{ trans('next.click_here_to_see_the_video') }}</a></h4>
             </div>
         </div>
 
         <div>
             <div class="well custom-well">
-                <h4>Tipareste factura</h4>
-                <h5 class="grey-text">Ai adaugat toate produsele? Aplicatia a calculat tot ce era de calculat? Acum trebuie doar sa tiparesti factura pentru a o inmana clientului impreuna cu comanda sa. <a href="#">Vezi aici cum</a></h5>
+                <h4>{{ trans('next.print_bill_title') }} - <a href="#">{{ trans('next.click_here_to_see_the_video') }}</a></h4>
+                <h5 class="grey-text">{{ trans('next.print_bill') }}</h5>
             </div>
         </div>
 
