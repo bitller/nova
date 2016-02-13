@@ -4,6 +4,8 @@ return [
     'bills' => 'facturi',
     'cashed_bills' => 'facturi deja încasate',
     'campaign_statistics' => 'Statisticile campaniei',
+    'chart_not_available' => 'Grafic indisponibil',
+    'chart_not_available_due_missing_info' => 'Aces grafic este indisponibil pentru că nu există suficiente informații.',
     'choose_campaign_to_compare_with' => 'Alege campania pentru a fi folosită în comparație',
     'compare' => 'Compară cu altă campanie',
     'compare_campaign' => 'Comparația campaniei',

@@ -8,7 +8,7 @@
         <div class="add-client-button">
             <span class="my-clients-title">
                 <span>
-                    {{ trans('statistics.compare_campaign') }} <a href="#">{{  " $campaignNumber/$campaignYear " }}</a> {{ trans('statistics.with_campaign') }} <a href="#">{{ " $otherCampaignNumber/$otherCampaignYear" }}</a>
+                    {{ trans('statistics.compare_campaign') }} <a href="/statistics/campaign/{{ $campaignNumber }}/{{ $campaignYear }}">{{  " $campaignNumber/$campaignYear " }}</a> {{ trans('statistics.with_campaign') }} <a href="/statistics/campaign/{{ $otherCampaignNumber }}/{{ $otherCampaignYear }}">{{ " $otherCampaignNumber/$otherCampaignYear" }}</a>
                     <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('clients.number_of_paid_bills') }}"></span>
                 </span>
             </span>
@@ -32,7 +32,16 @@
                 </div>
 
                 <div class="col-xs-5 text-center">
-                    <canvas id="sales-chart" width="530" height="120"></canvas>
+                    <!-- BEGIN Chart -->
+                    <canvas v-show="show_sales_chart" id="sales-chart" width="400" height="120"></canvas>
+                    <!-- END Chart -->
+
+                    <!-- BEGIN Chart alternative -->
+                    <h3 v-show="!show_sales_chart" class="grey-text">{{ trans('statistics.chart_not_available') }}</h3>
+                    <div v-show="!show_sales_chart" class="col-xs-8 col-xs-offset-2">
+                        <h5 class="grey-text">{{ trans('statistics.chart_not_available_due_missing_info') }}</h5>
+                    </div>
+                    <!-- END Chart alternative -->
                 </div>
 
             </div>
@@ -55,7 +64,16 @@
                 </div>
 
                 <div class="col-xs-5 text-center">
-                    <canvas id="clients-chart" width="530" height="120"></canvas>
+                    <!-- BEGIN Chart -->
+                    <canvas v-show="show_clients_chart" id="clients-chart" width="400" height="120"></canvas>
+                    <!-- END Chart -->
+
+                    <!-- BEGIN Chart alternative -->
+                    <h3 v-show="!show_clients_chart" class="grey-text">{{ trans('statistics.chart_not_available') }}</h3>
+                    <div v-show="!show_clients_chart" class="col-xs-8 col-xs-offset-2">
+                        <h5 class="grey-text">{{ trans('statistics.chart_not_available_due_missing_info') }}</h5>
+                    </div>
+                    <!-- END Chart alternative -->
                 </div>
 
             </div>
@@ -79,7 +97,16 @@
                 </div>
 
                 <div class="col-xs-5 text-center">
-                    <canvas id="bills-chart" width="530" height="120"></canvas>
+                    <!-- BEGIN Chart -->
+                    <canvas v-show="show_bills_chart" id="bills-chart" width="400" height="120"></canvas>
+                    <!-- END Chart -->
+
+                    <!-- BEGIN Chart alternative -->
+                    <h3 v-show="!show_bills_chart" class="grey-text">{{ trans('statistics.chart_not_available') }}</h3>
+                    <div v-show="!show_bills_chart" class="col-xs-8 col-xs-offset-2">
+                        <h5 class="grey-text">{{ trans('statistics.chart_not_available_due_missing_info') }}</h5>
+                    </div>
+                    <!-- END Chart alternative -->
                 </div>
             </div>
             <!-- END Number of bills -->
@@ -102,7 +129,16 @@
                 </div>
 
                 <div class="col-xs-5 text-center">
-                    <canvas id="discount-chart" width="530" height="120"></canvas>
+                    <!-- BEGIN Chart -->
+                    <canvas v-show="show_discount_chart" id="discount-chart" width="400" height="120"></canvas>
+                    <!-- END Chart -->
+
+                    <!-- BEGIN Chart alternative -->
+                    <h3 v-show="!show_discount_chart" class="grey-text">{{ trans('statistics.chart_not_available') }}</h3>
+                    <div v-show="!show_discount_chart" class="col-xs-8 col-xs-offset-2">
+                        <h5 class="grey-text">{{ trans('statistics.chart_not_available_due_missing_info') }}</h5>
+                    </div>
+                    <!-- END Chart alternative -->
                 </div>
 
             </div>
@@ -125,7 +161,16 @@
                 </div>
 
                 <div class="col-xs-5 text-center">
-                    <canvas id="sold-products-chart" width="530" height="120"></canvas>
+                    <!-- BEGIN Chart -->
+                    <canvas v-show="show_sold_products_chart" id="sold-products-chart" width="400" height="120"></canvas>
+                    <!-- END Chart -->
+
+                    <!-- BEGIN Chart alternative -->
+                    <h3 v-show="!show_sold_products_chart" class="grey-text">{{ trans('statistics.chart_not_available') }}</h3>
+                    <div v-show="!show_sold_products_chart" class="col-xs-8 col-xs-offset-2">
+                        <h5 class="grey-text">{{ trans('statistics.chart_not_available_due_missing_info') }}</h5>
+                    </div>
+                    <!-- END Chart alternative -->
                 </div>
 
             </div>

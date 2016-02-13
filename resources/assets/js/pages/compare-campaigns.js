@@ -69,6 +69,10 @@ new Vue({
             this.$set('sales_title', data.title);
             this.$set('sales_message', data.message);
 
+            if (data.sales > 0 || data.sales_in_campaign_to_compare > 0) {
+                this.$set('show_sales_chart', true);
+            }
+
             // Set displayed icon
             if (data.sales > data.sales_in_campaign_to_compare) {
                 this.$set('sales_plus', true);
@@ -112,6 +116,10 @@ new Vue({
             this.$set('clients_title', data.title);
             this.$set('clients_message', data.message);
 
+            if (data.number_of_clients > 0 || data.number_of_clients_in_campaign_to_compare > 0) {
+                this.$set('show_clients_chart', true);
+            }
+
             // Set displayed icon
             if (data.number_of_clients > data.number_of_clients_in_campaign_to_compare) {
                 this.$set('number_of_clients_plus', true);
@@ -153,6 +161,10 @@ new Vue({
             // Set title and message
             this.$set('bills_title', data.title);
             this.$set('bills_message', data.message);
+
+            if (data.number_of_bills > 0 || data.number_of_bills_in_campaign_to_compare > 0) {
+                this.$set('show_bills_chart', true);
+            }
 
             // Set displayed icon
             if (data.number_of_bills > data.number_of_bills_in_campaign_to_compare) {
@@ -196,6 +208,10 @@ new Vue({
             this.$set('discount_title', data.title);
             this.$set('discount_message', data.message);
 
+            if (data.discount_offered > 0 || data.discount_offered_in_campaign_to_compare > 0) {
+                this.$set('show_discount_chart', true);
+            }
+
             // Check what icon should be displayed
             if (data.discount_offered > data.discount_offered_in_campaign_to_compare) {
                 this.$set('discount_plus', true);
@@ -236,6 +252,10 @@ new Vue({
 
             this.$set('sold_products_title', data.title);
             this.$set('sold_products_message', data.message);
+
+            if (data.products_sold_in_campaign > 0 || data.products_in_campaign_to_compare > 0) {
+                this.$set('show_sold_products_chart', true);
+            }
 
             // Check which icon should be displayed
             if (parseInt(data.products_sold_in_campaign) > parseInt(data.products_in_campaign_to_compare)) {

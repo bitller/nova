@@ -4,6 +4,8 @@ return [
     'bills' => 'bills',
     'cashed_bills' => 'cashed bills',
     'campaign_statistics' => 'Statistics of campaign',
+    'chart_not_available' => 'Chart not available',
+    'chart_not_available_due_missing_info' => 'Chart not available because both campaign have no information about this.',
     'choose_campaign_to_compare_with' => 'Choose a campaign to use in comparison',
     'compare' => 'Compare with another campaign',
     'compare_campaign' => 'Comparison of campaign',
