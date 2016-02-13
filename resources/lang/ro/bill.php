@@ -75,5 +75,5 @@ return [
     'set_payment_term_description' => 'Setează termenul de plată al facturii',
     'set_payment_term_placeholder' => 'ZZ/LL/AAAA',
     'tooltip' => 'Această factură a fost platită.',
-    'to_pay' => 'Trebuie să plătiți',
+    'to_pay' => 'Total de plată',
 ];

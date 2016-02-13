@@ -1,3 +1,9 @@
+.bill-products-table, .printed-details {
+  font-size: 10px; }
+
+.bill-products-table, .bill-products-table td {
+  border: 1px solid #000000; }
+
 .action-buttons {
   display: none; }
 

@@ -100,7 +100,7 @@
             </div>
             <!-- BEGIN Bill top part -->
 
-            <div v-show="!payment_term" class="alert alert-warning">
+            <div v-show="!payment_term" class="alert alert-warning hidden-print">
                 {{ trans('bill.payment_term_not_set') }}.
                 <a href="#" v-on="click: resetPaymentTermModal()" data-toggle="modal" data-target="#payment-term-modal">{{ trans('bill.set_now') }}</a>
             </div>
@@ -111,7 +111,7 @@
 
             <!-- BEGIN Bill table -->
             <div class="panel panel-default" v-show="bill.total">
-                <table class="table table-bordered bill-products-table">
+                <table class="table table-bordered table-condensed bill-products-table">
                     <thead>
                         <tr>
                             <!-- BEGIN Page column -->
@@ -171,7 +171,7 @@
                             <!-- END Final price column -->
 
                             <!-- BEGIN Delete column -->
-                            <th class="text-center">
+                            <th class="text-center hidden-print">
                                 <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.delete_column_description') }}">
                                     {{ trans('common.delete') }}
                                 </span>
@@ -181,14 +181,17 @@
                     </thead>
                     <tbody>
                     <tr v-repeat="product in bill.products">
-                        <td class="text-center editable"  v-on="click: editPage(product.page, product.id, product.code, product.bill_product_id)">@{{ product.page }}</td>
+                        <td class="text-center editable"  v-on="click: editPage(product.page, product.id, product.code, product.bill_product_id)">
+                            <span v-show="product.page != '0'">@{{ product.page }}</span>
+                            <span v-show="product.page < 1">-</span>
+                        </td>
                         <td class="text-center">@{{ product.code }}</td>
                         <td class="text-center">@{{ product.name }}</td>
                         <td class="text-center editable" v-on="click: editQuantity(product.quantity, product.id, product.code, product.bill_product_id)">@{{ product.quantity }}</td>
                         <td class="text-center editable" v-on="click: editPrice(product.price, product.id, product.code, product.bill_product_id)">@{{ product.price }} ron</td>
                         <td class="text-center editable" v-show="bill.show_discount_column" v-on="click: editDiscount(product.discount, product.id, product.code, product.bill_product_id)">@{{ product.discount }}% - @{{ product.calculated_discount }} ron</td>
                         <td class="text-center" v-show="bill.show_discount_column">@{{ product.final_price }} ron</td>
-                        <td class="text-center editabl delete-product"  v-on="click: deleteProduct(product.id, product.code, product.bill_product_id)"><span class="glyphicon glyphicon-trash"></span></td>
+                        <td class="hidden-print text-center editabl delete-product"  v-on="click: deleteProduct(product.id, product.code, product.bill_product_id)"><span class="glyphicon glyphicon-trash"></span></td>
                     </tr>
 
                     </tbody>
