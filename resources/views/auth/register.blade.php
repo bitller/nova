@@ -20,16 +20,14 @@
         <div class="col-md-10 col-md-offset-1">
 
             @if ($allowNewUsers)
-            <!-- Price divider -->
+            <!-- BEGIN Free divider -->
             <div class="fancy-divider-white">
-                <span>{{ trans('register.subscription_price') }}</span>
+                <span>Trei luni gratuit!</span>
             </div>
-            <!-- END Price divider -->
+            <!-- END Free divider -->
 
             <div class="text-center">
-                <span class="price">19.99</span>
-                <span class="currency">{{ trans('register.currency') }}</span>
-                <span class="period">/{{ trans('register.period') }}</span>
+                <span class="grey-text">Ai acces gratuit timp de trei luni la aplicatie. Dupa aceasta perioada poti sa renunti oricand, fara a plati nimic!</span>
             </div>
 
             <!-- BEGIN Profile divider -->
@@ -64,40 +62,52 @@
             </div>
             <!-- END Confirm password -->
 
-            <!-- BEGIN Billing information -->
-            <div class="fancy-divider-white">
-                <span>{{ trans('register.billing_information') }}</span>
-            </div>
-            <!-- END Billing information -->
+            {{--<!-- BEGIN Price divider -->--}}
+            {{--<div class="fancy-divider-white">--}}
+                {{--<span>{{ trans('register.subscription_price') }}</span>--}}
+            {{--</div>--}}
+            {{--<!-- END Price divider -->--}}
 
-            <!-- BEGIN Card number -->
-            <div class="form-group" v-class="has-error : card_number_error">
-                <input v-model="card_number" v-on="keyup:register | key 13" class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />
-                <span v-show="card_number_error" class="text-danger">@{{ card_number_error }}</span>
-            </div>
-            <!-- END Card number -->
+            {{--<div class="text-center">--}}
+                {{--<span class="price">19.99</span>--}}
+                {{--<span class="currency">{{ trans('register.currency') }}</span>--}}
+                {{--<span class="period">/{{ trans('register.period') }}</span>--}}
+            {{--</div>--}}
 
-            <!-- BEGIN Card cvc code -->
-            <div class="form-group" v-class="has-error : card_cvc_error">
-                <input v-model="card_cvc" v-on="keyup:register | key 13" class="form-control border-input" type="text" placeholder="{{ trans('register.cvc_code') }}" />
-                <span v-show="card_cvc_error" class="text-danger">@{{ card_cvc_error }}</span>
-            </div>
-            <!-- END Card cvc code -->
+            {{--<!-- BEGIN Billing information -->--}}
+            {{--<div class="fancy-divider-white">--}}
+                {{--<span>{{ trans('register.billing_information') }}</span>--}}
+            {{--</div>--}}
+            {{--<!-- END Billing information -->--}}
 
-            <!-- BEGIN Card expiry date -->
-            <label for="expiry" class="expiry-text">{{ trans('register.expiry_date') }}</label>
-            <div class="form-inline" id="expiry">
+            {{--<!-- BEGIN Card number -->--}}
+            {{--<div class="form-group" v-class="has-error : card_number_error">--}}
+                {{--<input v-model="card_number" v-on="keyup:register | key 13" class="form-control border-input" type="text" placeholder="{{ trans('register.card_number') }}" />--}}
+                {{--<span v-show="card_number_error" class="text-danger">@{{ card_number_error }}</span>--}}
+            {{--</div>--}}
+            {{--<!-- END Card number -->--}}
 
-                <div class="form-group" v-class="has-error : card_expiry_date_error">
-                    <input v-model="card_expiry_month" v-on="keyup:register | key 13" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">
-                </div>
-                /
-                <div class="form-group" v-class="has-error : card_expiry_date_error">
-                    <input v-model="card_expiry_year" v-on="keyup:register | key 13" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">
-                </div>
-                <span v-show="card_expiry_date_error" class="text-danger">@{{ card_expiry_date_error }}</span>
-            </div>
-            <!-- END Card expiry date -->
+            {{--<!-- BEGIN Card cvc code -->--}}
+            {{--<div class="form-group" v-class="has-error : card_cvc_error">--}}
+                {{--<input v-model="card_cvc" v-on="keyup:register | key 13" class="form-control border-input" type="text" placeholder="{{ trans('register.cvc_code') }}" />--}}
+                {{--<span v-show="card_cvc_error" class="text-danger">@{{ card_cvc_error }}</span>--}}
+            {{--</div>--}}
+            {{--<!-- END Card cvc code -->--}}
+
+            {{--<!-- BEGIN Card expiry date -->--}}
+            {{--<label for="expiry" class="expiry-text">{{ trans('register.expiry_date') }}</label>--}}
+            {{--<div class="form-inline" id="expiry">--}}
+
+                {{--<div class="form-group" v-class="has-error : card_expiry_date_error">--}}
+                    {{--<input v-model="card_expiry_month" v-on="keyup:register | key 13" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_month') }}">--}}
+                {{--</div>--}}
+                {{--/--}}
+                {{--<div class="form-group" v-class="has-error : card_expiry_date_error">--}}
+                    {{--<input v-model="card_expiry_year" v-on="keyup:register | key 13" type="text" class="form-control border-input" placeholder="{{ trans('register.expiry_year') }}">--}}
+                {{--</div>--}}
+                {{--<span v-show="card_expiry_date_error" class="text-danger">@{{ card_expiry_date_error }}</span>--}}
+            {{--</div>--}}
+            {{--<!-- END Card expiry date -->--}}
 
             <div class="form-group register-button">
                 <button v-attr="disabled : loading" v-on="click: register()" class="btn-block btn btn-primary">

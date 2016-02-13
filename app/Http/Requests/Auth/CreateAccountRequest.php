@@ -35,7 +35,7 @@ class CreateAccountRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'token' => ['required', 'min:9'],
+//            'token' => ['required', 'min:9'],
             'password_confirmation' => ['required', 'min:6'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'email' => ['required', 'email', 'unique:users,email'],

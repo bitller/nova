@@ -80,6 +80,48 @@ class RegisterController extends Controller {
 
         Auth::login($user);
 
+        // Try to create subscription
+        $privateKey = 'cf803e2147fd65a0d2a6b3d5afbfa9af';
+        $paymillRequest = new PaymillRequest($privateKey);
+
+        // Create credit card payment
+        $payment = new Payment();
+        $payment->setToken($request->get('token'));
+        $paymentResponse = $paymillRequest->create($payment);
+
+        // Get offer
+        $offer = Offer::where('use_on_sign_up', true)->first();
+
+        // Make sure offer exists
+        if (!$offer) {
+            $response->setFailMessage(trans('register.no_offer_found'));
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        // Create subscription
+        $subscription = new Subscription();
+        $subscription->setAmount(30)
+            ->setPayment($paymentResponse->getId())
+            ->setOffer($offer->paymill_offer_id)
+            ->setPeriodOfValidity('2 YEAR')
+            ->setStartAt(time() + 30);
+
+        $subscriptionResponse = $paymillRequest->create($subscription);
+
+        // Save in database
+        $paymentModel = new PaymentModel();
+        $paymentModel->user_id = Auth::user()->id;
+        $paymentModel->paymill_payment_id = $paymentResponse->getId();
+        $paymentModel->save();
+
+        // Save subscription
+        $subscriptionModel = new SubscriptionModel();
+        $subscriptionModel->user_id = Auth::user()->id;
+        $subscriptionModel->offer_id = $offer->id;
+        $subscriptionModel->paymill_subscription_id = $subscriptionResponse->getId();
+        $subscriptionModel->status = 'waiting';
+        $subscriptionModel->save();
+
         $response->setSuccessMessage(trans('register.account_created'));
         return response($response->get());
 
