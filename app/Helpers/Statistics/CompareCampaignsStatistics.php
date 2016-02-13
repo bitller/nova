@@ -106,7 +106,7 @@ class CompareCampaignsStatistics {
         }
 
         // Calculate percent
-        $percent = ($difference * 100) / $divider;
+        $percent = number_format(($difference * 100) / $divider, 2);
 
         // Handle case when first campaign have more sales
         if ($campaignSales > $campaignToCompareSales) {

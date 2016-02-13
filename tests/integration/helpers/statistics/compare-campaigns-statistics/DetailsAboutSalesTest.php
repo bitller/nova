@@ -199,7 +199,7 @@ class DetailsAboutSalesTest extends TestCase {
 
         $expected = [
             'message' => trans('statistics.details_about_sales_up_trend', $this->translationData),
-            'title' => trans('statistics.details_about_sales_up_trend_title', ['percent' => 50]),
+            'title' => trans('statistics.details_about_sales_up_trend_title', ['percent' => '50.00']),
             'sales' => $this->translationData['sales'],
             'sales_in_campaign_to_compare' => number_format(50, 2)
         ];
@@ -254,7 +254,7 @@ class DetailsAboutSalesTest extends TestCase {
 
         $expected = [
             'message' => trans('statistics.details_about_sales_down_trend', $this->translationData),
-            'title' => trans('statistics.details_about_sales_down_trend_title', ['percent' => 50]),
+            'title' => trans('statistics.details_about_sales_down_trend_title', ['percent' => '50.00']),
             'sales' => $this->translationData['sales'],
             'sales_in_campaign_to_compare' => number_format(100, 2)
         ];
