@@ -206,7 +206,7 @@ class SoldProductsDetailsTest extends TestCase {
                 'other_campaign_number' => $this->secondCampaign['number'],
                 'other_campaign_year' => $this->secondCampaign['year']
             ]),
-            'title' => trans('statistics.sold_products_down_trend_title', ['percent' => 50]),
+            'title' => trans('statistics.sold_products_down_trend_title', ['percent' => '50.00']),
             'products_sold_in_campaign' => '2',
             'products_in_campaign_to_compare' => '4'
         ];
@@ -245,7 +245,7 @@ class SoldProductsDetailsTest extends TestCase {
                 'other_campaign_number' => $this->secondCampaign['number'],
                 'other_campaign_year' => $this->secondCampaign['year']
             ]),
-            'title' => trans('statistics.sold_products_up_trend_title', ['percent' => 20]),
+            'title' => trans('statistics.sold_products_up_trend_title', ['percent' => '20.00']),
             'products_sold_in_campaign' => '10',
             'products_in_campaign_to_compare' => '8'
         ];
@@ -284,7 +284,7 @@ class SoldProductsDetailsTest extends TestCase {
                 'other_campaign_number' => $this->secondCampaign['number'],
                 'other_campaign_year' => $this->secondCampaign['year']
             ]),
-            'title' => trans('statistics.sold_products_down_trend_title', ['percent' => 10]),
+            'title' => trans('statistics.sold_products_down_trend_title', ['percent' => '10.00']),
             'products_sold_in_campaign' => '18',
             'products_in_campaign_to_compare' => '20'
         ];

@@ -50,6 +50,7 @@ return [
     'products' => 'products',
     'products_day' => 'products/day',
     'products_sold' => 'Products sold',
+    'select_campaign_number' => 'Select campaign number',
     'select_campaign_year' => 'Select campaign year',
     'sold' => 'sold',
     'sold_in_this_campaign' => 'sold in this campaign',

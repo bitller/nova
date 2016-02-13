@@ -78,7 +78,9 @@ new Vue({
          */
         compareCampaigns: function() {
             Alert.loader();
+            $('#compare-campaigns-modal').modal('hide');
             window.location.href = '/statistics/campaign/' + $('#campaign-statistics').attr('campaign-number') + '/' + $('#campaign-statistics').attr('campaign-year') + '/compare-with/' + this.$get('selected_number') + '/' + this.$get('selected_year');
+            Alert.close();
         },
 
         /**

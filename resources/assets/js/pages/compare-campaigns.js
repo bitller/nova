@@ -21,11 +21,18 @@ new Vue({
          */
         getData: function(callback) {
 
+            Alert.loader();
+            this.$set('loading', true);
+
             var thisInstance = this;
 
             this.$http.get(this._buildRequestUrl(), function(response) {
+
                 thisInstance.$set('data', response.statistics);
+                Alert.close();
+                thisInstance.$set('loading', false);
                 callback();
+
             }).error(function(response) {
                 //
             });
@@ -231,9 +238,9 @@ new Vue({
             this.$set('sold_products_message', data.message);
 
             // Check which icon should be displayed
-            if (data.products_sold_in_campaign > data.products_in_campaign_to_compare) {
-                this.$set('sold_products_plus', true);
-            } else if (data.products_sold_in_campaign < data.products_in_campaign_to_compare) {
+            if (parseInt(data.products_sold_in_campaign) > parseInt(data.products_in_campaign_to_compare)) {
+                this.$set('sold_products_plus', true);;
+            } else if (parseInt(data.products_sold_in_campaign) < parseInt(data.products_in_campaign_to_compare)) {
                 this.$set('sold_products_minus', true);
             } else {
                 this.$set('sold_products_equal', true);

@@ -247,7 +247,7 @@ class OfferedDiscountDetailsTest extends TestCase {
 
         $expected = [
             'message' => trans('statistics.offered_discount_up_trend', $this->translationData),
-            'title' => trans('statistics.offered_discount_up_trend_title', ['percent' => 50]),
+            'title' => trans('statistics.offered_discount_up_trend_title', ['percent' => '50.00']),
             'discount_offered' => $this->translationData['money'],
             'discount_offered_in_campaign_to_compare' => '5.00'
         ];
@@ -290,7 +290,7 @@ class OfferedDiscountDetailsTest extends TestCase {
 
         $expected = [
             'message' => trans('statistics.offered_discount_down_trend', $this->translationData),
-            'title' => trans('statistics.offered_discount_down_trend_title', ['percent' => 90]),
+            'title' => trans('statistics.offered_discount_down_trend_title', ['percent' => '90.00']),
             'discount_offered' => '10.00',
             'discount_offered_in_campaign_to_compare' => '100.00'
         ];

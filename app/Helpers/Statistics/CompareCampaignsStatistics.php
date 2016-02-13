@@ -442,7 +442,7 @@ class CompareCampaignsStatistics {
             $divider = $campaignToCompareDiscount;
         }
 
-        $percent = ($difference * 100) / $divider;
+        $percent = number_format(($difference * 100) / $divider, 2);
 
         if ($campaignDiscount > $campaignToCompareDiscount) {
 
@@ -570,7 +570,7 @@ class CompareCampaignsStatistics {
         }
 
         // Now calculate the percentage
-        $percent = ($difference * 100) / $divider;
+        $percent = number_format(($difference * 100) / $divider, 2);
 
         // Choose right translation
         if ($upTrend > 0) {

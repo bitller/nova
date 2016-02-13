@@ -63,6 +63,11 @@ class StatisticsController extends BaseController {
      * @return mixed
      */
     public function compareCampaigns($campaignNumber, $campaignYear, $otherCampaignNumber, $otherCampaignYear) {
+
+        if (!Campaign::where('number', $campaignNumber)->where('year', $campaignYear)->count() || !Campaign::where('number', $otherCampaignNumber)->where('year', $otherCampaignYear)->count()) {
+            return redirect('/bills');
+        }
+
         return view('statistics.compare-campaigns')->with('campaignNumber', $campaignNumber)->with('campaignYear', $campaignYear)
             ->with('otherCampaignNumber', $otherCampaignNumber)->with('otherCampaignYear', $otherCampaignYear);
     }
