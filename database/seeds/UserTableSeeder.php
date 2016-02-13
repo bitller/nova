@@ -19,12 +19,6 @@ class UserTableSeeder extends Seeder {
         factory(App\QuestionCategory::class)->create(['name' => 'first category']);
         factory(App\QuestionCategory::class)->create(['name' => 'second category']);
 
-        factory(App\UserDefaultSetting::class)->create([
-            'language_id' => 1
-        ]);
-
-//        factory(App\SecuritySetting::class)->create();
-
         // Generate users
         factory(App\User::class, 2)->create()->each(function($user) {
 

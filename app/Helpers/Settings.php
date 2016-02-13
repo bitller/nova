@@ -113,7 +113,7 @@ class Settings {
      * @return mixed
      */
     public static function defaultLanguageId() {
-        $language = Language::select('id')->first();
+        $language = Language::select('id')->where('key', 'ro')->first();
         return $language->id;
     }
 
