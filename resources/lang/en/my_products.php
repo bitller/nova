@@ -6,6 +6,7 @@ return [
     'add_product' => 'Add product',
     'add_product_description' => 'Add your own product',
     'delete_product' => 'Delete product',
+    'delete_product_info' => 'Delete selected product. Remember, the product will be also deleted from all bills and statistics.',
     'delete_warning' => 'This product will disappear from all your bills!',
     'my_products' => 'My products',
     'no_products' => 'Here are all products created by you. If you want to add other products use the button on top.',
@@ -19,4 +20,5 @@ return [
     'product_name' => 'Product name',
     'product_name_example' => 'Example: Asier watch',
     'product_name_info' => 'Product name from catalogue.',
+    'product_name_info_two' => 'Product name from catalogue.'
 ];

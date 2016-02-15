@@ -25,9 +25,29 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th class="text-center">{{ trans('common.product_code') }}</th>
-                        <th class="text-center">{{ trans('common.product_name') }}</th>
-                        <th class="text-center">{{ trans('my_products.delete_product') }}</th>
+                        <!-- BEGIN Product code -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('my_products.product_code_info') }}">
+                                {{ trans('common.product_code') }}
+                            </span>
+                        </th>
+                        <!-- END Product code -->
+
+                        <!-- BEGIN Product name -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('my_products.product_name_info_two') }}">
+                                {{ trans('common.product_name') }}
+                            </span>
+                        </th>
+                        <!-- END Product name -->
+
+                        <!-- BEGIN Delete product -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('my_products.delete_product_info') }}">
+                                {{ trans('my_products.delete_product') }}
+                            </span>
+                        </th>
+                        <!-- END Delete product -->
                     </tr>
                     </thead>
                     <tbody>

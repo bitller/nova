@@ -6,6 +6,7 @@ return [
     'add_product' => 'Adaugă produs',
     'add_product_description' => 'Adaugă propriul produs',
     'delete_product' => 'Şterge produsul',
+    'delete_product_info' => 'Șterge produsul selectat. Ține minte, produsul va fi șters și din toate facturile și statisticile în care apare.',
     'delete_warning' => 'Odată şters, acest produs va dispărea din toate facturile dumneavoastră!',
     'my_products' => 'Produsele mele',
     'no_products' => 'Această pagină conține produsele create de tine. Dacă vrei să adaugi alte produse pe lângă cele care le oferă aplicația, o poți face folosind butonul de mai sus.',
@@ -18,5 +19,6 @@ return [
     'product_code_info' => 'Codul produsului din catalogul Avon. Trebuie să conțină 5 numere.',
     'product_name' => 'Numele produsului',
     'product_name_example' => 'Exemplu: Ceas Asier',
-    'product_name_info' => 'Numele produsului pe care doriți să îl adăugați',
+    'product_name_info' => 'Numele produsului pe care doriți să îl adăugați.',
+    'product_name_info_two' => 'Numele din catalog al produsului.',
 ];
