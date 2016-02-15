@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
     @include('includes.ajax-translations.users-manager')
-    <div id="users-manager">
+    <div id="users_manager">
         <div v-show="loaded">
             <!-- BEGIN Top part -->
             <div class="add-product-button row">
@@ -11,7 +11,7 @@
                     'icon' => 'glyphicon-th-large',
                     'items' => [
                         [
-                            'url' => '/admin-center/users-manager/browse',
+                            'url' => '/admin-center/users_manager/browse',
                             'name' => trans('users_manager.browse'),
                             'icon' => 'glyphicon-list'
                         ],
@@ -50,14 +50,14 @@
             <!-- BEGIN Users statistics -->
             <div class="row">
                 <ul class="list-group">
-                    <li class="list-group-item active"><span class="glyphicon glyphicon-stats"></span> {{ trans('users-manager.users_statistics') }}</li>
+                    <li class="list-group-item active"><span class="glyphicon glyphicon-stats"></span> {{ trans('users_manager.users_statistics') }}</li>
 
-                    <li class="list-group-item"><span class="badge">@{{ registered_users }}</span> {{ trans('users-manager.registered_users') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ confirmed_users }}</span> {{ trans('users-manager.confirmed_users') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ not_confirmed_users }}</span> {{ trans('users-manager.not_confirmed_users') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users-manager.subscribed_users') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users-manager.not_subscribed_users') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users-manager.users_registered_today') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ registered_users }}</span> {{ trans('users_manager.registered_users') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ confirmed_users }}</span> {{ trans('users_manager.confirmed_users') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ not_confirmed_users }}</span> {{ trans('users_manager.not_confirmed_users') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users_manager.subscribed_users') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users_manager.not_subscribed_users') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users_manager.users_registered_today') }}</li>
                 </ul>
             </div>
             <!-- END Users statistics -->
@@ -65,12 +65,12 @@
             <!-- BEGIN Users statistics in percentages -->
             <div class="row">
                 <ul class="list-group">
-                    <li class="list-group-item active"><span class="glyphicon glyphicon-stats"></span> {{ trans('users-manager.users_statistics_percentage') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ confirmed_users_percentage }}%</span> {{ trans('users-manager.confirmed_users_percentage') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ not_confirmed_users_percentage }}%</span> {{ trans('users-manager.not_confirmed_users_percentage') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }}%</span> {{ trans('users-manager.subscribed_users_percentage') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users-manager.not_subscribed_users_percentage') }}</li>
-                    <li class="list-group-item"><span class="badge">@{{ users_registered_today_percentage }}%</span> {{ trans('users-manager.users_registered_today_percentage') }}</li>
+                    <li class="list-group-item active"><span class="glyphicon glyphicon-stats"></span> {{ trans('users_manager.users_statistics_percentage') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ confirmed_users_percentage }}%</span> {{ trans('users_manager.confirmed_users_percentage') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ not_confirmed_users_percentage }}%</span> {{ trans('users_manager.not_confirmed_users_percentage') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }}%</span> {{ trans('users_manager.subscribed_users_percentage') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ statistics.total_discount }} ron</span> {{ trans('users_manager.not_subscribed_users_percentage') }}</li>
+                    <li class="list-group-item"><span class="badge">@{{ users_registered_today_percentage }}%</span> {{ trans('users_manager.users_registered_today_percentage') }}</li>
                 </ul>
             </div>
             <!-- END Users statistics in percentages -->
@@ -83,5 +83,5 @@
 
 @section('scripts')
     <script src="/js/header-search.js"></script>
-    <script src="/js/users-manager.js"></script>
+    <script src="/js/users_manager.js"></script>
 @endsection
