@@ -33,11 +33,45 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-center">{{ trans('clients.name') }}</th>
-                            <th class="text-center">{{ trans('clients.phone_number') }}</th>
-                            <th class="text-center">{{ trans('clients.email') }}</th>
-                            <th class="text-center">{{ trans('clients.number_of_orders') }}</th>
-                            <th class="text-center">{{ trans('common.delete') }}</th>
+                            <!-- BEGIN Name -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('clients.name_tooltip') }}">
+                                    <span class="glyphicon glyphicon-user icon-color"></span>&nbsp;{{ trans('clients.name') }}
+                                </span>
+                            </th>
+                            <!-- END Name -->
+
+                            <!-- BEGIN Phone number -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" dta-placement="top" title="{{ trans('clients.phone_number_tooltip') }}">
+                                    <span class="glyphicon glyphicon-phone icon-color"></span>&nbsp;{{ trans('clients.phone_number') }}
+                                </span>
+                            </th>
+                            <!-- END Phone number -->
+
+                            <!-- BEGIN Email -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('clients.email_tooltip') }}">
+                                    <span class="glyphicon glyphicon-envelope icon-color"></span>&nbsp;{{ trans('clients.email') }}
+                                </span>
+                            </th>
+                            <!-- END Email -->
+
+                            <!-- BEGIN Number of orders -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('clients.number_of_orders_tooltip') }}">
+                                    <span class="glyphicon glyphicon-th icon-color"></span>&nbsp;{{ trans('clients.number_of_orders') }}
+                                </span>
+                            </th>
+                            <!-- END Number of orders -->
+
+                            <!-- BEGIN Delete client -->
+                            <th class="text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ trans('clients.delete_client_tooltip') }}">
+                                    <span class="glyphicon glyphicon-trash icon-color"></span>&nbsp;{{ trans('common.delete') }}
+                                </span>
+                            </th>
+                            <!-- END Delete client -->
                         </tr>
                     </thead>
                     <tbody>
