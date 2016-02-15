@@ -19,8 +19,21 @@
                 <table class="table table-bordered" v-show="products.total">
                     <thead>
                     <tr>
-                        <th class="text-center">{{ trans('common.product_code') }}</th>
-                        <th class="text-center">{{ trans('common.product_name') }}</th>
+                        <!-- BEGIN Product code -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('products.product_code_tooltip') }}">
+                                {{ trans('common.product_code') }}
+                            </span>
+                        </th>
+                        <!-- END Product code -->
+
+                        <!-- BEGIN Product name -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('products.product_name_tooltip') }}">
+                                {{ trans('common.product_name') }}
+                            </span>
+                        </th>
+                        <!-- END Product name -->
                     </tr>
                     </thead>
                     <tbody>
