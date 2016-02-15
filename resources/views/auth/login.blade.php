@@ -29,7 +29,7 @@
 
             <!-- BEGIN Email input -->
             <div class="form-group has-feedback" v-class="has-error : errors.email">
-                <input v-model="email" v-on="keyup:login | key 13" type="text" class="form-control" placeholder="{{ trans('login.email_placeholder') }}">
+                <input id="login-email" v-model="email" v-on="keyup:login | key 13" type="text" class="form-control" placeholder="{{ trans('login.email_placeholder') }}">
                 <span v-show="errors.email" class="text-danger">@{{ errors.email }}</span>
                 <i class="glyphicon glyphicon-user form-control-feedback icon-color"></i>
             </div>

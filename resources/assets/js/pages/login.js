@@ -5,6 +5,13 @@ new Vue({
      */
     el: '#login',
 
+    /**
+     * Called on ready.
+     */
+    ready: function() {
+        $('#login-email').focus();
+    },
+
     methods: {
 
         /**
