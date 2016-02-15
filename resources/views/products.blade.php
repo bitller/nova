@@ -19,14 +19,14 @@
                 <table class="table table-bordered" v-show="products.total">
                     <thead>
                     <tr>
-                        <th>{{ trans('common.product_code') }}</th>
-                        <th>{{ trans('common.product_name') }}</th>
+                        <th class="text-center">{{ trans('common.product_code') }}</th>
+                        <th class="text-center">{{ trans('common.product_name') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-repeat="product in products.data">
-                        <td class="vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.code }}</a></td>
-                        <td class="vert-align"><a href="/product-details/@{{ product.code }}">@{{ product.name }}</a></td>
+                        <td class="vert-align text-center"><a href="/product-details/@{{ product.code }}">@{{ product.code }}</a></td>
+                        <td class="vert-align text-center"><a href="/product-details/@{{ product.code }}">@{{ product.name }}</a></td>
                     </tr>
                     </tbody>
                 </table>
