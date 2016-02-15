@@ -22,13 +22,62 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
-                        <th class="text-center"><span class="glyphicon glyphicon-user icon-color"></span>&nbsp; {{ trans('bills.client') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.number_of_products') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.price') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bill.payment_term') }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-trash icon-color"></span>&nbsp; {{ trans('common.delete') }}</th>
+                        <!-- BEGIN Client -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('bills.client_tooltip') }}">
+                                <span class="glyphicon glyphicon-user icon-color"></span>&nbsp;{{ trans('bills.client') }}
+                            </span>
+                        </th>
+                        <!-- END Client -->
+
+                        <!-- BEGIN Number of products -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('bills.number_of_products_tooltip') }}">
+                                <span class="glyphicon glyphicon-tag icon-color"></span>&nbsp; {{ trans('bills.number_of_products') }}
+                            </span>
+                        </th>
+                        <!-- END Number of products -->
+
+                        <!-- BEGIN Price -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('bills.price_tooltip') }}">
+                                <span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.price') }}
+                            </span>
+                        </th>
+                        <!-- END Price -->
+
+                        <!-- BEGIN Campaign order -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('bills.campaign_order_tooltip') }}">
+                                <span class="glyphicon glyphicon-euro icon-color"></span>&nbsp; {{ trans('bills.campaign_order') }}
+                            </span>
+                        </th>
+                        <!-- END Campaign order -->
+
+                        <!-- BEGIN Campaign -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('bills.campaign_tooltip') }}">
+                                <span class="glyphicon glyphicon-tags icon-color"></span>&nbsp; {{ trans('bills.campaign') }}
+                            </span>
+                        </th>
+                        <!-- END Campaign -->
+
+                        <!-- BEGIN Payment term -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('bills.payment_term_tooltip') }}">
+                                <span class="glyphicon glyphicon-calendar icon-color"></span>&nbsp; {{ trans('bill.payment_term') }}
+                            </span>
+                        </th>
+                        <!-- END Payment term -->
+
+                        <!-- BEGIN Delete bill -->
+                        <th class="text-center">
+                            <span data-toggle="tooltip" data-placemet="top" title="{{ trans('bills.delete_bill_tooltip') }}">
+                                <span class="glyphicon glyphicon-trash icon-color"></span>&nbsp; {{ trans('common.delete') }}
+                            </span>
+                        </th>
+                        <!-- END Delete bill -->
+
                     </tr>
                     </thead>
                     <tbody>
