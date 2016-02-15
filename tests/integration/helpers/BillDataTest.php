@@ -59,9 +59,7 @@ class BillDataTest extends TestCase {
             'product_id' => $customProduct->id
         ]);
 
-        $expectedPrice = $firstBillProduct->price * $firstBillProduct->quantity;
-        $expectedPrice += $secondBillProduct->price * $secondBillProduct->quantity;
-        $expectedPrice += $thirdBillProduct->price * $thirdBillProduct->quantity;
+        $expectedPrice = number_format($firstBillProduct->price + $secondBillProduct->price + $thirdBillProduct->price, 2);
 
         $this->assertEquals($expectedPrice, BillData::getBillPrice($this->bill->id));
     }
@@ -107,7 +105,9 @@ class BillDataTest extends TestCase {
             'product_id' => $applicationProduct->id
         ]);
 
-        $this->assertEquals($billApplicationProduct->final_price * $billApplicationProduct->quantity + $billProduct->final_price * $billProduct->quantity, BillData::getBillToPay($this->bill->id));
+        $expected = number_format($billApplicationProduct->final_price + $billProduct->final_price, 2);
+
+        $this->assertEquals($expected, BillData::getBillToPay($this->bill->id));
     }
 
     /**
@@ -128,7 +128,7 @@ class BillDataTest extends TestCase {
             'product_id' => $applicationProduct->id
         ]);
 
-        $savedMoney = (($billApplicationProduct->price * $billApplicationProduct->quantity) + ($billProduct->price * $billProduct->quantity)) - BillData::getBillToPay($this->bill->id);
+        $savedMoney = number_format(($billApplicationProduct->price + $billProduct->price) - BillData::getBillToPay($this->bill->id), 2);
 
         $this->assertEquals($savedMoney, BillData::getBillSavedMoney($this->bill->id));
     }

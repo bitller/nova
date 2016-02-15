@@ -32,7 +32,7 @@ class LastUnpaidBillsTest extends TestCase {
         $this->user = factory(\App\User::class)->create();
 
         // Generate client
-        $this->client = factory(\App\Client::class)->create();
+        $this->client = factory(\App\Client::class)->create(['user_id' => $this->user->id]);
     }
 
     /**
@@ -40,12 +40,22 @@ class LastUnpaidBillsTest extends TestCase {
      */
     public function test_last_unpaid_bills() {
 
-        factory(\App\Bill::class, 17)->create([
+        $unpaidBills = factory(\App\Bill::class, 17)->create([
             'user_id' => $this->user->id,
-            'client_id' => $this->client->id
+            'client_id' => $this->client->id,
+            'paid' => 0
         ]);
 
-        $this->assertEquals(17, Clients::lastUnpaidBills($this->client->id));
+        $product = factory(\App\Product::class)->create(['user_id' => $this->user->id]);
+
+        foreach ($unpaidBills as $bill) {
+            factory(\App\BillProduct::class)->create([
+                'bill_id' => $bill->id,
+                'product_id' => $product->id
+            ]);
+        }
+
+        $this->assertEquals(5, count(Clients::lastUnpaidBills($this->client->id)));
     }
 
     /**

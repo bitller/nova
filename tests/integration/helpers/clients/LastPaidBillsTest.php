@@ -46,6 +46,15 @@ class LastPaidBillsTest extends TestCase {
             'paid' => 1
         ]);
 
+        $product = factory(\App\Product::class)->create(['user_id' => $this->user->id]);
+
+        foreach ($paidBills as $bill) {
+            factory(\App\BillProduct::class)->create([
+                'bill_id' => $bill->id,
+                'product_id' => $product->id
+            ]);
+        }
+
         $unpaidBills = factory(\App\Bill::class, 4)->create([
             'client_id' => $this->client->id,
             'user_id' => $this->user->id
