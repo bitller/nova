@@ -56,7 +56,7 @@ class ClientStatistics {
             $earnings += $billApplicationProductsQuery[0]->earnings;
         }
 
-        return $earnings;
+        return number_format($earnings, 2);
     }
 
     /**
@@ -67,9 +67,11 @@ class ClientStatistics {
 
         $earningsInCurrentCampaign = 0;
 
+        $currentCampaignId = Campaigns::current()->id;
+
         // Query the two tables
-        $billProductsQuery = self::_earningsProductsQuery($clientId, ['campaigns.number' => Campaigns::current()->number, 'campaigns.year' => date('Y')]);
-        $billApplicationsQuery = self::_earningsApplicationProductsQuery($clientId, ['campaigns.number' => Campaigns::current()->number, 'campaigns.year' => date('Y')]);
+        $billProductsQuery = self::_earningsProductsQuery($clientId, ['bills.campaign_id' => $currentCampaignId]);
+        $billApplicationsQuery = self::_earningsApplicationProductsQuery($clientId, ['bills.campaign_id' => $currentCampaignId]);
 
         // Check if first query returned something and add to existent value
         if (isset($billProductsQuery[0]->earnings)) {
@@ -81,7 +83,7 @@ class ClientStatistics {
             $earningsInCurrentCampaign += $billApplicationsQuery[0]->earnings;
         }
 
-        return $earningsInCurrentCampaign;
+        return number_format($earningsInCurrentCampaign, 2);
     }
 
     /**
@@ -262,7 +264,7 @@ class ClientStatistics {
         }
 
         $query = DB::table('clients')
-            ->select(DB::raw('SUM(bill_products.final_price * bill_products.quantity) as earnings'))
+            ->select(DB::raw('SUM(bill_products.final_price) as earnings'))
             ->leftJoin('users', 'clients.user_id', '=', 'users.id')
             ->leftJoin('products', 'products.user_id', '=', 'users.id')
             ->leftJoin('bills', 'bills.client_id', '=', 'clients.id')
@@ -295,7 +297,7 @@ class ClientStatistics {
         }
 
         $query = DB::table('application_products')
-            ->select(DB::raw('SUM(bill_application_products.final_price * bill_application_products.quantity) as earnings'))
+            ->select(DB::raw('SUM(bill_application_products.final_price) as earnings'))
             ->leftJoin('bill_application_products', function($join) {
                 $join->on('application_products.id', '=', 'bill_application_products.product_id');
             })

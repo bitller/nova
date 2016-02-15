@@ -80,8 +80,7 @@ class ClientStatisticsTest extends TestCase {
             'user_id' => $this->user->id,
             'client_id' => $this->client->id,
             'paid' => 1,
-            'campaign_number' => rand(2, 10),
-            'campaign_year' => 2019
+            'campaign_id' => \App\Helpers\Campaigns::current()->id
         ]);
 
         // Generate products and application products
@@ -118,116 +117,14 @@ class ClientStatisticsTest extends TestCase {
 
         // Calculate expected earnings
         $expectedEarnings = 0;
-        $expectedEarnings += ($this->billProduct->final_price * $this->billProduct->quantity);
-        $expectedEarnings += ($this->secondBillProduct->final_price * $this->secondBillProduct->quantity);
-        $expectedEarnings += ($this->billApplicationProduct->final_price * $this->billApplicationProduct->quantity);
-        $expectedEarnings += ($this->secondBillApplicationProduct->final_price * $this->secondBillApplicationProduct->quantity);
+        $expectedEarnings += ($this->billProduct->final_price);
+        $expectedEarnings += ($this->secondBillProduct->final_price);
+        $expectedEarnings += ($this->billApplicationProduct->final_price);
+        $expectedEarnings += ($this->secondBillApplicationProduct->final_price);
+        $expectedEarnings = number_format($expectedEarnings, 2);
 
-        $this->assertEquals(floor($expectedEarnings), floor(ClientStatistics::earnings($this->client->id)));
+        $this->assertEquals($expectedEarnings, ClientStatistics::earnings($this->client->id));
     }
-
-    /**
-     * Make sure earningsInCurrentCampaign method works.
-     */
-    public function test_earnings_in_current_campaign() {
-
-        // Create another bill
-        $anotherBill = factory(\App\Bill::class)->create([
-            'user_id' => $this->user->id,
-            'client_id' => $this->client->id,
-            'paid' => 1,
-            'campaign_number' => 1,
-            'campaign_year' => date('Y')
-        ]);
-
-        // Add product to the bill that belongs to current campaign
-        $billProduct = factory(\App\BillProduct::class)->create([
-            'bill_id' => $anotherBill->id,
-            'product_id' => $this->product->id,
-        ]);
-
-        // Add application product to the bill that belongs to current campaign
-        $billApplicationProduct = factory(\App\BillApplicationProduct::class)->create([
-            'bill_id' => $anotherBill->id,
-            'product_id' => $this->applicationProduct->id,
-        ]);
-
-        // Add application product to the bill that not belongs to current campaign
-        $secondBillApplicationProduct = factory(\App\BillApplicationProduct::class)->create([
-            'bill_id' => $this->bill->id,
-            'product_id' => $this->secondApplicationProduct->id
-        ]);
-
-        $expected = ($billProduct->final_price * $billProduct->quantity) + ($billApplicationProduct->final_price * $billApplicationProduct->quantity);
-        $this->assertEquals(floor($expected), floor(ClientStatistics::earningsInCurrentCampaign($this->client->id)));
-    }
-
-//    /**
-//     * Make sure moneyUserHasToReceive works fine.
-//     */
-//    public function test_get_money_user_has_to_receive() {
-//
-//        $user = factory(\App\User::class)->create();
-//        $client = factory(\App\Client::class)->create(['user_id' => $user->id]);
-//
-//        $bill = factory(\App\Bill::class)->create([
-//            'user_id' => $user->id,
-//            'client_id' => $client->id,
-//            'paid' => 0,
-////            'payment_term' => '2016-01-04'
-//        ]);
-//
-//        $product = factory(\App\Product::class)->create(['user_id' => $user->id]);
-//
-//        $billProduct = factory(\App\BillProduct::class)->create([
-//            'bill_id' => $bill->id,
-//            'product_id' => $product->id
-//        ]);
-//
-//        $expected = $billProduct->final_price * $billProduct->quantity;
-////        // Create one unpaid bill
-////        $unpaidBill = factory(\App\Bill::class)->create([
-////            'user_id' => $this->user->id,
-////            'client_id' => $this->client->id,
-////            'paid' => 0,
-////            'campaign_number' => 1,
-////            'campaign_year' => date('Y'),
-////            'payment_term' => '2016-01-04'
-////        ]);
-////
-////        // Add product to bill
-////        $billProduct = factory(\App\BillProduct::class)->create([
-////            'bill_id' => $unpaidBill->id,
-////            'product_id' => $this->product->id
-////        ]);
-////
-////        // Add application product
-////        $billApplicationProduct = factory(\App\BillApplicationProduct::class)->create([
-////            'bill_id' => $unpaidBill->id,
-////            'product_id' => $this->applicationProduct->id
-////        ]);
-////
-////        // Create another unpaid bill
-////        $anotherUnpaidBill = factory(\App\Bill::class)->create([
-////            'user_id' => $this->user->id,
-////            'client_id' => $this->client->id,
-////            'paid' => 0,
-////            'campaign_number' => 1,
-////            'campaign_year' => date('Y')
-////        ]);
-////
-////        // And product to the new bill
-////        $secondBillProduct = factory(\App\BillProduct::class)->create([
-////            'product_id' => $this->secondProduct->id,
-////            'bill_id' => $anotherUnpaidBill->id
-////        ]);
-//
-////        $expected = $billProduct->final_price * $billProduct->quantity;
-////        $expected += $billApplicationProduct->final_price * $billApplicationProduct->quantity;
-////        $expected += $secondBillProduct->final_price * $secondBillProduct->quantity;
-//
-//        $this->assertEquals(floor($expected), floor(ClientStatistics::moneyUserHasToReceive($this->client->id)));
-//    }
 
     /**
      * Make sure totalDiscountReceived method works.
@@ -324,8 +221,9 @@ class ClientStatisticsTest extends TestCase {
     public function test_all_client_statistics_method() {
 
         // Calculate expected earnings
-        $expectedEarnings = ($this->billProduct->final_price * $this->billProduct->quantity) + ($this->secondBillProduct->final_price * $this->secondBillProduct->quantity);
-        $expectedEarnings += ($this->billApplicationProduct->final_price * $this->billApplicationProduct->quantity) + ($this->secondBillApplicationProduct->final_price * $this->secondBillApplicationProduct->quantity);
+        $expectedEarnings = $this->billProduct->final_price + $this->secondBillProduct->final_price;
+        $expectedEarnings += $this->billApplicationProduct->final_price + $this->secondBillApplicationProduct->final_price;
+        $expectedEarnings = number_format($expectedEarnings, 2);
 
         // Calculate earnings in current campaign
         $expectedEarningsInCurrentCampaign = 0;
@@ -343,8 +241,7 @@ class ClientStatisticsTest extends TestCase {
         $expectedDiscountReceived += ($this->billApplicationProduct->price - $this->billApplicationProduct->final_price) * $this->billApplicationProduct->quantity;
         $expectedDiscountReceived += ($this->secondBillApplicationProduct->price - $this->secondBillApplicationProduct->final_price) * $this->secondBillApplicationProduct->quantity;
 
-        $this->assertEquals(floor($expectedEarnings), floor(ClientStatistics::earnings($this->client->id)));
-        $this->assertEquals(floor($expectedEarningsInCurrentCampaign), floor(ClientStatistics::earningsInCurrentCampaign($this->client->id)));
+        $this->assertEquals($expectedEarnings, ClientStatistics::earnings($this->client->id));
         $this->assertEquals(floor($expectedMoneyUserHasToReceive), floor(ClientStatistics::moneyUserHasToReceive($this->client->id)));
         $this->assertEquals($expectedNumberOfProductsOrdered, ClientStatistics::totalNumberOfProductsOrdered($this->client->id));
         $this->assertEquals(floor($expectedDiscountReceived), floor(ClientStatistics::totalDiscountReceived($this->client->id)));
