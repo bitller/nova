@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\ApplicationProduct;
 use App\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

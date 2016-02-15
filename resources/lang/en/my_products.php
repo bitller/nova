@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'add_another_product' => 'Add another product after',
+    'add_another_product_info' => 'Check this box if you want to add another product after this one is added.',
     'add_product' => 'Add product',
     'add_product_description' => 'Add your own product',
     'delete_product' => 'Delete product',
@@ -10,8 +12,11 @@ return [
     'number_of_products_added' => 'Number of products added by you.',
     'page_help' => 'You can add your own products to use in bills.',
     'product_added' => 'Product added!',
-    'product_code_available' => 'Product code is available.',
-    'product_code_required' => 'Product code is required.',
-    'product_code_used' => 'Product code is already used.',
-    'product_name_required' => 'Product name is required.',
+    'product_code' => 'Product code',
+    'product_code_already_used' => 'This product code is already used by another product.',
+    'product_code_example' => 'Example: 24984',
+    'product_code_info' => 'Product code from catalogue. Must have 5 numbers.',
+    'product_name' => 'Product name',
+    'product_name_example' => 'Example: Asier watch',
+    'product_name_info' => 'Product name from catalogue.',
 ];

@@ -217,67 +217,66 @@ new Vue({
             }
         },
 
-        addProduct: function(current_page, rows_on_page) {
+        /**
+         * Add product.
+         */
+        addProduct: function() {
+
+            // Reset errors
+            this.$set('error', '');
+            this.$set('errors', '');
 
             var thisInstance = this;
+            this.$set('loading', true);
 
-            // Show product code prompt
-            swal(this.getAddProductSwalConfig(), function(code) {
+            var postData = {
+                _token: Token.get(),
+                name: this.$get('name'),
+                code: this.$get('code')
+            };
 
-                if (!thisInstance.isProductCodeValid(code)) {
-                    return false;
+            this.$http.post('/my-products/add', postData, function(response) {
+
+                this.getMyProducts('/my-products/get', function() {
+
+                    thisInstance.$set('loading', false);
+
+                    // Reset modal
+                    thisInstance.resetAddProductModal();
+
+                    Alert.success(response.message);
+
+                    // Hide if is required
+                    if (!thisInstance.$get('add_another_product')) {
+                        $('#add-custom-product-modal').modal('hide');
+                    }
+                });
+
+            }).error(function(response) {
+
+                thisInstance.$set('loading', false);
+
+                if (!response.message) {
+                    this.$set('error', Translation.common('general-error'));
+                    return;
                 }
 
-                // Check if code is already used
-                thisInstance.$http.get('/my-products/check/' + code).success(function(response) {
+                this.$set('errors', response.errors);
 
-                    if (!response.success) {
-                        swal.showInputError(response.message);
-                        return false;
-                    }
-
-                    // Get product name
-                    swal(this.getAddProductNameSwalConfig(), function(name) {
-
-                        if (!thisInstance.isProductNameValid(name)) {
-                            return false;
-                        }
-
-                        // Build data object and make request
-                        var data = {
-                            code: code,
-                            name: name,
-                            _token: Nova.getToken()
-                        };
-
-                        thisInstance.$http.post('/my-products/add', data, function(response) {
-
-                            var paginationUrl = Nova.buildPaginationRequestUrl('/my-products/get', rows_on_page, current_page);
-                            this.paginate(paginationUrl);
-                            Nova.showSuccessAlert(response.title, response.message);
-
-                        }).error(function(response) {
-                            if (!response.message) {
-                                Nova.showGeneralErrorAlert();
-                                return false;
-                            }
-                            Nova.showErrorAlert(response.title, response.message);
-                        });
-
-                    });
-
-                }).error(function(response) {
-
-                    // Handle situations with an error response
-                    if (!response.message) {
-                        Nova.showGeneralErrorAlert();
-                        return false;
-                    }
-
-                    Nova.showErrorAlert(response.title, response.message);
-                });
             });
+        },
 
+        /**
+         * Reset add product modal.
+         */
+        resetAddProductModal: function() {
+
+            this.$set('name', '');
+            this.$set('code', '');
+
+            $('#product-code').val('');
+            $('#product-name').val('');
+            $('#product-code').focus();
         },
 
         /**

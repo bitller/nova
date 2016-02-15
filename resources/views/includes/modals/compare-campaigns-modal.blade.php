@@ -1,4 +1,4 @@
-<!-- BEGIN Is offer enabled modal modal -->
+<!-- BEGIN Compare campaigns modal -->
 <div id="compare-campaigns-modal" data-backdrop="static" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -48,4 +48,4 @@
         <!-- END Modal content -->
     </div>
 </div>
-<!-- END Use offer on sign up modal -->
+<!-- END Compare campaigns modal -->

@@ -8,6 +8,7 @@ use App\Helpers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\CheckProductCodeRequest;
+use App\Http\Requests\MyProducts\AddCustomProductRequest;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -46,23 +47,28 @@ class MyProductsController extends BaseController {
     /**
      * Insert new product in database
      *
-     * @param AddProductRequest $request
+     * @param AddCustomProductRequest $request
      * @return mixed
      */
-    public function addProduct(AddProductRequest $request) {
+    public function addProduct(AddCustomProductRequest $request) {
 
         $response = new AjaxResponse();
         $code = $request->get('code');
+        $name = $request->get('name');
 
-        // Make sure product code is available
-        if ($this->isProductCodeAlreadyUsed($code)) {
-            $response->setFailMessage(trans('my_products.product_code_used'));
-            return response($response->get(), $response->getDefaultErrorResponseCode())->header('Content-Type', 'application/json');
+        // Make sure product code is not already used by current user
+        if (Product::where('code', $code)->where('user_id', Auth::user()->id)->count()) {
+            $response->setFailMessage(trans('common.error'));
+            $response->addExtraFields(['errors' => [
+                'code' => trans('my_products.product_code_already_used')
+            ]]);
+
+            return response($response->get(), 400)->header('Content-Type', 'application/json');
         }
 
         // Insert product
         $product = new Product();
-        $product->name = $request->get('name');
+        $product->name = $name;
         $product->code = $code;
         $product->user_id = Auth::user()->id;
         $product->save();

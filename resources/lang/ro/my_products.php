@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'add_another_product' => 'Adaugă alt produs după',
+    'add_another_product_info' => 'Bifați această căsuță dacă doriți să adăugați încă un produs după ce îl adăugați pe acesta.',
     'add_product' => 'Adaugă produs',
     'add_product_description' => 'Adaugă propriul produs',
     'delete_product' => 'Şterge produsul',
@@ -10,8 +12,11 @@ return [
     'number_of_products_added' => 'Numărul produselor adăugate de tine.',
     'page_help' => 'Puteţi adăuga propriile dumneavoastră produse pentru a le folosi în facturi.',
     'product_added' => 'Produsul a fost adăgat!',
-    'product_code_available' => 'Codul produsului este disponibil.',
-    'product_code_required' => 'Codul produsului este necesar.',
-    'product_code_used' => 'Codul produsului este deja folosit.',
-    'product_name_required' => 'Numele produsului este necesar.',
+    'product_code' => 'Codul produsului',
+    'product_code_already_used' => 'Acest code este deja folosit de alt produs.',
+    'product_code_example' => 'Exemplu: 24984',
+    'product_code_info' => 'Codul produsului din catalogul Avon. Trebuie să conțină 5 numere.',
+    'product_name' => 'Numele produsului',
+    'product_name_example' => 'Exemplu: Ceas Asier',
+    'product_name_info' => 'Numele produsului pe care doriți să îl adăugați',
 ];
