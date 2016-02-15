@@ -43,5 +43,6 @@ return [
     'reset_to_defaults' => 'Resetează la valorile predefinite',
     'restored_to_default_settings' => 'Setările au fost restabilite la valorile iniţiale.',
     'settings' => 'Setări',
+    'settings_tooltip' => 'Aici găseşti setările contului tău',
     'settings_will_be_restored' => 'Setările vor fi restabilite la valorile iniţiale.'
 ];

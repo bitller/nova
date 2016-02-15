@@ -43,5 +43,6 @@ return [
     'reset_to_defaults' => 'Reset to default values',
     'restored_to_default_settings' => 'Settings restored to their default values.',
     'settings' => 'Settings',
+    'settings_tooltip' => 'Settings for your account',
     'settings_will_be_restored' => 'Settings will be restored to their initial values.'
 ];

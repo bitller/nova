@@ -6,7 +6,7 @@
 
         <!-- BEGIN Reset to defaults button -->
         <div class="print-statistics-button">
-            <span class="avon-products">{{ trans('settings.settings') }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('statistics.description') }}">?</span></span>
+            <span class="avon-products">{{ trans('settings.settings') }} <span class="badge" data-toggle="tooltip" data-placement="right" title="{{ trans('settings.settings_tooltip') }}">?</span></span>
             <button type="button" class="btn btn-primary pull-right" v-on="click: resetToDefaultValues()">
                 <span class="glyphicon glyphicon-print"></span> {{ trans('settings.reset_to_defaults') }}
             </button>
