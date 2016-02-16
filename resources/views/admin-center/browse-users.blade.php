@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     browse users
 @endsection

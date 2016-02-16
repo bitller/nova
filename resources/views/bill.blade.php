@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 
 @section('styles')
     <link rel="stylesheet" media="print" href="/css/print.css">

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 
 @section('fonts')
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>

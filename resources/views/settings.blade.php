@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     @include('includes.ajax-translations.common')
     @include('includes.ajax-translations.settings')

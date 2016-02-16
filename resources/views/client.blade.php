@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     @include('includes.ajax-translations.client')
     <div id="client" client-id="{{ $clientId }}">

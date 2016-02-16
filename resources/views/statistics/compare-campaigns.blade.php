@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     <div id="compare-campaigns" v-show="!loading" campaign-number="{{ $campaignNumber }}" campaign-year="{{ $campaignYear }}" other-campaign-number="{{ $otherCampaignNumber }}" other-campaign-year="{{ $otherCampaignYear }}">
 

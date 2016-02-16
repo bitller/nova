@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     @include('includes.ajax-translations.help-center-manager')
     <div id="help-center-manager-category-page" v-show="loaded" category-id="{{ $categoryId }}">

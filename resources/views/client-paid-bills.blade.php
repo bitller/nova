@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     @include('includes.ajax-translations.common')
     <div id="client-paid-bills" class="container" v-show="loaded" client-id="{{ $clientId }}">

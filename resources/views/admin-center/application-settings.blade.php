@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     @include('includes.ajax-translations.application-settings')
     <div id="application-settings" v-show="loaded">

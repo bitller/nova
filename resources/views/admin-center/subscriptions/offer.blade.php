@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     <div id="offer" offer-id="{{ $offerId }}">
         @include('includes.ajax-translations.common')

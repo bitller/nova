@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
 
     <div id="help-center-category" v-show="loaded" category-id="{{ $categoryId }}">

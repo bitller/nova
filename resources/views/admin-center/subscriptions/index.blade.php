@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout.index')
 @section('content')
     <div id="subscriptions">
         @include('includes.ajax-translations.common')
