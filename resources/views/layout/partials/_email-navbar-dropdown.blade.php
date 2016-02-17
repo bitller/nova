@@ -24,7 +24,7 @@
                 <!-- END Admin center option -->
                 <li role="separator" class="divider"></li>
             @endif
-                    
+
             <!-- BEGIN Settings option -->
             <li>
                 <a href="/settings">

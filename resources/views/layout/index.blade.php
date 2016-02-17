@@ -30,74 +30,14 @@
         <div id="navbar" class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav">
-                <!---->
-
-                <li>
-                    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                        <i class="glyphicon glyphicon-bell"></i>(3)
-                    </a>
-
-                    <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
-
-                        <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
-                        </div>
-                        <li class="divider"></li>
-                        <div class="notifications-wrapper">
-                            <a class="content" href="#">
-
-                                <div class="notification-item">
-                                    <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                                    <p class="item-info">Marketing 101, Video Assignment</p>
-                                </div>
-
-                            </a>
-                            <a class="content" href="#">
-                                <div class="notification-item">
-                                    <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                                    <p class="item-info">Marketing 101, Video Assignment</p>
-                                </div>
-                            </a>
-                            <a class="content" href="#">
-                                <div class="notification-item">
-                                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                                    <p class="item-info">Marketing 101, Video Assignment</p>
-                                </div>
-                            </a>
-                            <a class="content" href="#">
-                                <div class="notification-item">
-                                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                                    <p class="item-info">Marketing 101, Video Assignment</p>
-                                </div>
-
-                            </a>
-                            <a class="content" href="#">
-                                <div class="notification-item">
-                                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                                    <p class="item-info">Marketing 101, Video Assignment</p>
-                                </div>
-                            </a>
-                            <a class="content" href="#">
-                                <div class="notification-item">
-                                    <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                                    <p class="item-info">Marketing 101, Video Assignment</p>
-                                </div>
-                            </a>
-
-                        </div>
-                        <li class="divider"></li>
-                        <div class="notification-footer"><h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4></div>
-                    </ul>
-                </li>
-
-                <!---->
-
-                <li><a href="/paid-bills"><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ trans('navbar.paid_bills') }}</a></li>
-                <li><a href="/products"><span class="glyphicon glyphicon-th"></span>&nbsp;{{ trans('navbar.products') }}</a></li>
-                <li><a href="/clients"><span class="glyphicon glyphicon-user"></span>&nbsp;{{ trans('navbar.clients') }}</a></li>
-                <li><a href="/my-products"><span class="glyphicon glyphicon-th-list"></span>&nbsp;{{ trans('navbar.my_products') }}</a></li>
-                <li><a href="/help-center"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;{{ trans('navbar.help') }}</a></li>
+                @include('layout.partials._notifications-navbar-item')
+                @include('layout.partials._products-navbar-item')
+                @include('layout.partials._clients-navbar-item')
+                @include('layout.partials._my-products-navbar-item')
+                @include('layout.partials._help-navbar-item')
             </ul>
 
+            @include('layout.partials._email-navbar-dropdown')
 
         </div><!--/.nav-collapse -->
     </div>
