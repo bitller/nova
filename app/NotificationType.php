@@ -16,5 +16,14 @@ class NotificationType extends Model {
      *
      * @var array
      */
-    protected $guarded = [];    
+    protected $guarded = [];
+
+    /**
+     * Return all notifications with this type.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notifications() {
+        return $this->hasMany('App/Notification');
+    }
 }

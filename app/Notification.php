@@ -16,5 +16,12 @@ class Notification extends Model {
      *
      * @var array
      */
-    protected $guarded = [];    
+    protected $guarded = [];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function type() {
+        return $this->hasOne('App/NotificationType');
+    }
 }

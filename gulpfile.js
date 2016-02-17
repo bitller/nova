@@ -17,7 +17,7 @@ elixir(function(mix) {
     mix.scripts([
         'jquery.min.js', 'bootstrap.min.js', 'vue/vue.js', 'vue/vue-resource.js', 'components/loader.js', 'sweetAlert.js',
         'custom-libs/alerts.js', 'custom-libs/swal-config.js', 'custom-libs/token.js', 'custom-libs/translations.js', 'custom-libs/data.js',
-        'custom-libs/url-builder.js', 'typeahead.js', 'jquery-scripts/tooltips.js', 'custom-libs/reset.js'
+        'custom-libs/url-builder.js', 'typeahead.js', 'jquery-scripts/tooltips.js', 'custom-libs/reset.js', 'pages/notifications.js'
     ], 'public/js/vendor.js')
         // Header search script
         .scripts(['jquery-scripts/header-search.js'], 'public/js/header-search.js')

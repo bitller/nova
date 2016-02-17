@@ -25,6 +25,15 @@ class UserTableSeeder extends Seeder {
             // Settings
             $user->settings()->save(factory(App\UserSetting::class)->make(['user_id' => $user->id, 'language_id' => 1]));
 
+            // Generate notifications
+            $notifications = \App\Notification::all();
+            foreach ($notifications as $notification) {
+                $user->notifications()->save(factory(\App\UserNotification::class)->make([
+                    'user_id' => $user->id,
+                    'notification_id' => $notification->id
+                ]));
+            }
+
             // Bills per user
             $rows = 12;
 

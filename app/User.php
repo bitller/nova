@@ -88,6 +88,13 @@ class User extends Model implements AuthenticatableContract {
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notifications() {
+        return $this->hasMany('App\UserNotification');
+    }
+
+    /**
      * @param $query
      * @return mixed
      */

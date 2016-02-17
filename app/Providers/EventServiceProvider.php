@@ -62,7 +62,11 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SubscriptionDeleted' => [
             'App\Listeners\LogSubscriptionWasDeleted',
             'App\Listeners\DeleteSubscription'
-        ]
+        ],
+
+        'App\Events\NotificationsWereRead' => [
+            'App\Listeners\MarkNotificationsAsRead'
+        ],
 
     ];
 

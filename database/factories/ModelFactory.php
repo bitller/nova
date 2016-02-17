@@ -215,3 +215,24 @@ $factory->define(App\Offer::class, function($faker) {
         'currency' => 'EUR'
     ];
 });
+
+// Generate notification type
+$factory->define(App\NotificationType::class, function($faker) {
+    return [
+        'type' => $faker->numerify('rand_####'),
+        'name' => $faker->name()
+    ];
+});
+
+// Generate notification
+$factory->define(\App\Notification::class, function($faker) {
+    return [
+        'title' => $faker->title(),
+        'message' => $faker->sentence()
+    ];
+});
+
+// Generate user notification
+$factory->define(\App\UserNotification::class, function($faker) {
+    return [];
+});

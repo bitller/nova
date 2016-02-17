@@ -289,3 +289,9 @@ Route::group(['prefix' => 'subscribe'], function() {
     Route::get('/', 'SubscribeController@index');
     Route::post('/process', 'SubscribeController@process');
 });
+
+// Notifications page
+Route::group(['prefix' => 'notifications'], function() {
+    Route::get('/', 'NotificationsController@getUnreadNotifications');
+    Route::get('/mark-notifications-as-read', 'NotificationsController@markNotificationsAsRead');
+});

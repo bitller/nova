@@ -20,6 +20,7 @@ class CreateNotificationTypesTable extends Migration {
             $table->smallIncrements('id');
             $table->string('type');
             $table->string('name');
+            $table->timestamps();
         });
     }
 
