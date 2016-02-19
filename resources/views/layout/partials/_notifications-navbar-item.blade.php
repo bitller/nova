@@ -2,7 +2,7 @@
 <li id="notifications">
     <a v-on="click: markNotificationsAsRead" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
         <i class="glyphicon glyphicon-bell"></i>&nbsp;
-        <strong v-show="!loading_notifications">+@{{ number_of_notifications }}</strong>
+        <strong v-show="!loading_notifications">@{{ number_of_notifications }}</strong>
         <span v-show="loading_notifications" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
     </a>
 

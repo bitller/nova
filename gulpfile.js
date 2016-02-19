@@ -59,6 +59,8 @@ elixir(function(mix) {
         .scripts(['pages/subscriptions/offer.js'], 'public/js/offer.js')
         // Campaign statistics
         .scripts(['pages/campaign-statistics.js'], 'public/js/campaign-statistics.js')
-        .scripts(['libs/chart.js', 'pages/compare-campaigns.js'], 'public/js/compare-campaigns.js');
+        .scripts(['libs/chart.js', 'pages/compare-campaigns.js'], 'public/js/compare-campaigns.js')
+        // Notifications manager
+        .scripts(['pages/notifications-manager/index.js'], 'public/js/notifications-manager.js');
 
 });

@@ -220,6 +220,18 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         });
     });
 
+    // Notifications manager
+    Route::group(['namespace' => 'Notifications', 'prefix' => 'notifications'], function() {
+
+        Route::get('/', 'NotificationsController@index');
+        Route::get('/types', 'NotificationsController@types');
+        Route::get('/last', 'NotificationsController@getLast');
+        Route::get('/all', 'NotificationsController@getAll');
+        Route::post('/new', 'NotificationsController@create');
+        Route::post('/edit-title', 'NotificationsController@editTitle');
+        Route::post('/delete', 'NotificationsController@delete');
+    });
+
     // Subscriptions section
     Route::group(['prefix' => 'subscriptions', 'namespace' => 'Subscriptions'], function() {
 

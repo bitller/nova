@@ -8288,4 +8288,10 @@ body {
   background: #ccc;
   border-radius: 4px; }
 
+/**/
+.admin-center-title {
+  font-size: 20px;
+  display: inline-block;
+  padding-top: 10px; }
+
 /*# sourceMappingURL=app.css.map */

@@ -5,7 +5,7 @@
         <div>
             <!-- BEGIN Top part -->
             <div class="add-product-button row">
-                <span class="avon-products">{{ trans('subscriptions.subscriptions') }}</span>&nbsp;
+                <span class="admin-center-title">{{ trans('subscriptions.subscriptions') }}</span>&nbsp;
 
                 @include('includes.admin-center.buttons.more-options-dropdown', [
                     'icon' => 'glyphicon-th',
@@ -26,10 +26,6 @@
                 ])
 
                 <div class="btn-group pull-right">
-                    @include('includes.admin-center.buttons.users-manager')
-                    @include('includes.admin-center.buttons.products-manager')
-                    @include('includes.admin-center.buttons.logs')
-                    @include('includes.admin-center.buttons.application-settings')
                     @include('includes.admin-center.buttons.more')
                 </div>
             </div>

@@ -6,13 +6,12 @@
         <!-- BEGIN Top part -->
         <div class="add-product-button row">
 
-            <span class="avon-products">{{ trans('application_settings.application_settings') }}</span>&nbsp;
-
+            <span class="admin-center-title">{{ trans('application_settings.application_settings') }}</span>&nbsp;
             <div class="btn-group pull-right">
-                @include('includes.admin-center.buttons.users-manager')
-                @include('includes.admin-center.buttons.subscriptions')
-                @include('includes.admin-center.buttons.products-manager')
-                @include('includes.admin-center.buttons.logs')
+                {{--@include('includes.admin-center.buttons.users-manager')--}}
+                {{--@include('includes.admin-center.buttons.subscriptions')--}}
+{{--                @include('includes.admin-center.buttons.products-manager')--}}
+{{--                @include('includes.admin-center.buttons.logs')--}}
                 @include('includes.admin-center.buttons.more')
             </div>
         </div>

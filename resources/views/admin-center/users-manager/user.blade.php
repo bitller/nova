@@ -9,10 +9,6 @@
             <a href="/admin-center/users-manager"><button class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;{{ trans('users_manager.go_back') }}</button></a>
 
             <div class="btn-group pull-right">
-                @include('includes.admin-center.buttons.subscriptions')
-                @include('includes.admin-center.buttons.products-manager')
-                @include('includes.admin-center.buttons.logs')
-                @include('includes.admin-center.buttons.application-settings')
                 @include('includes.admin-center.buttons.more')
             </div>
         </div>

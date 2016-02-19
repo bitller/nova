@@ -7,13 +7,9 @@
 
         <!-- BEGIN Top part -->
         <div class="add-product-button">
-            <span class="avon-products">{{ trans('help_center.help_center_manager') }}</span>&nbsp;
+            <span class="admin-center-title">{{ trans('help_center.help_center_manager') }}</span>&nbsp;
             <button class="btn btn-default" v-on="click: addCategory()"><span class="glyphicon glyphicon-plus"></span></button>
             <div class="btn-group pull-right">
-                @include('includes.admin-center.buttons.subscriptions')
-                @include('includes.admin-center.buttons.products-manager')
-                @include('includes.admin-center.buttons.logs')
-                @include('includes.admin-center.buttons.application-settings')
                 @include('includes.admin-center.buttons.more')
             </div>
         </div>

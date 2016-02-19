@@ -2,7 +2,7 @@
 <div class="btn-group @if(isset($class)) {{ $class }} @endif">
 
     <!-- BEGIN Button -->
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         @if(isset($text))
             {{ $text }}
         @endif
