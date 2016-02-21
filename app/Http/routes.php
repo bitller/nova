@@ -34,6 +34,7 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'recover'], function() {
 
 // Bills page
 Route::group(['prefix' => 'bills'], function() {
+
     Route::get('/', 'BillsController@index');
     Route::get('/get', 'BillsController@getBills');
     Route::get('/{billId}', 'BillsController@bill');
@@ -44,12 +45,14 @@ Route::group(['prefix' => 'bills'], function() {
     Route::get('/{billId}/delete-bill', 'BillsController@deleteBill');
     Route::get('/{billId}/mark-as-paid', 'BillsController@markAsPaid');
     Route::get('/{billId}/mark-as-unpaid', 'BillsController@markAsUnpaid');
+
     Route::post('/create', 'BillsController@create');
     Route::post('/{billId}/edit-page', 'BillsController@editPage');
     Route::post('/{billId}/edit-quantity', 'BillsController@editQuantity');
     Route::post('/{billId}/edit-price', 'BillsController@editPrice');
     Route::post('/{billId}/edit-discount', 'BillsController@editDiscount');
     Route::post('/{billId}/add', 'BillsController@addProduct');
+    post('/{billId}/add-not-existent-product', 'BillsController@addNotExistentProduct');
     Route::post('/{billId}/edit-other-details', 'BillsController@editOtherDetails');
     Route::post('/{billId}/edit-payment-term', 'BillsController@editPaymentTerm');
 });

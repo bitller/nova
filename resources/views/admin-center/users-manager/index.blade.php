@@ -1,7 +1,7 @@
 @extends('layout.index')
 @section('content')
     @include('includes.ajax-translations.users-manager')
-    <div id="users_manager">
+    <div id="users-manager">
         <div v-show="loaded">
             <!-- BEGIN Top part -->
             <div class="add-product-button row">
@@ -78,6 +78,5 @@
 @endsection
 
 @section('scripts')
-    <script src="/js/header-search.js"></script>
-    <script src="/js/users_manager.js"></script>
+    <script src="/js/users-manager.js"></script>
 @endsection

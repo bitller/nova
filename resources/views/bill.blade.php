@@ -100,7 +100,7 @@
             </div>
             <!-- BEGIN Bill top part -->
 
-            <div v-show="!payment_term" class="alert alert-warning hidden-print">
+            <div v-show="!payment_term && bill.total > 0" class="alert alert-warning hidden-print">
                 {{ trans('bill.payment_term_not_set') }}.
                 <a href="#" v-on="click: resetPaymentTermModal()" data-toggle="modal" data-target="#payment-term-modal">{{ trans('bill.set_now') }}</a>
             </div>
@@ -110,7 +110,7 @@
             </div>
 
             <!-- BEGIN Bill table -->
-            <div class="panel panel-default" v-show="bill.total">
+            <div class="panel panel-default" v-show="total !== '0.00'">
                 <table class="table table-bordered table-condensed bill-products-table">
                     <thead>
                         <tr>
@@ -200,7 +200,7 @@
             <!-- END Bill table -->
 
             <!-- BEGIN Bill other details -->
-            <div class="panel panel-default" v-show="other_details && bill.total">
+            <div class="panel panel-default" v-show="other_details && total !== '0.00'">
                 <div class="panel-heading">{{ trans('bill.other_details') }}</div>
                 <div class="panel-body">
                     @{{{ other_details }}}
@@ -209,7 +209,7 @@
             <!-- END Bill other details -->
 
             <!-- BEGIN Bill payment term -->
-            <div class="well well-sm custom-well col-md-3 text-center hidden-print" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-3 text-center hidden-print" v-show="total !== '0.00'">
                 <span v-show="payment_term" class="text-center">{{ trans('bill.payment_term') }}: <strong>@{{ payment_term }}</strong></span>
                 <span v-show="!payment_term" class="text-center">{{ trans('bill.payment_term_not_set') }}</span>
             </div>
@@ -218,7 +218,7 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total price -->
-            <div class="well well-sm custom-well col-md-2 text-center hidden-print" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-2 text-center hidden-print" v-show="total !== '0.00'">
                 <span class="text-center">{{ trans('bill.to_pay') }}: <strong>@{{ to_pay }} ron</strong></span>
             </div>
             <!-- END Bill total price -->
@@ -226,13 +226,13 @@
             <div class="col-md-2"></div>
 
             <!-- BEGIN Bill total discount -->
-            <div class="well well-sm custom-well col-md-3 text-center hidden-print" v-show="bill.total">
+            <div class="well well-sm custom-well col-md-3 text-center hidden-print" v-show="total !== '0.00'">
                 <span v-show="saved_money">{{ trans('bill.saved_money') }}: <strong>@{{ saved_money }} ron</strong></span>
                 <span v-show="!saved_money">{{ trans('bill.number_of_products') }}: <strong>@{{ number_of_products }}</strong></span>
             </div>
             <!-- END Bill total discount -->
 
-            <div class="alert alert-info" v-show="!bill.total">{{ trans('bill.empty_bill') }}</div>
+            <div class="alert alert-info" v-show="total === '0.00'">{{ trans('bill.empty_bill') }}</div>
 
             <!-- BEGIN Details displayed only on printed bills -->
             <div class="printed-details visible-print">

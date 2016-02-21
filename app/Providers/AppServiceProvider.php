@@ -41,6 +41,10 @@ class AppServiceProvider extends ServiceProvider {
         Validator::extend('not_exists', function($attribute, $value, $parameters, $validator) {
             return !DB::table($parameters[0])->where($parameters[1], $value)->count();
         });
+
+        Validator::extend('is_not_in_auth_user_products', function($attribute, $value, $parameters, $validator) {
+            return !DB::table('products')->where('user_id', \Auth::user()->id)->where('code', $value)->count();
+        });
     }
 
     /**

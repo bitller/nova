@@ -86,6 +86,7 @@ new Vue({
 
             if ($('#product-code').val()) {
                 data.product_code = $('#product-code').val();
+                this.$set('code', $('#product-code').val());
             }
 
             if (this.$get('page')) {
@@ -100,6 +101,8 @@ new Vue({
             if (this.$get('quantity')) {
                 data.product_quantity = this.$get('quantity');
             }
+
+            this.$set('post_data', data);
 
             // Make post request
             this.$http.post('/bills/' + Data.getBillId() + '/add', data, function(response) {
@@ -118,15 +121,52 @@ new Vue({
 
             }).error(function(response) {
 
+                if (response.product_not_exists) {
+                    this.$set('product_not_exists', true);
+                }
+
                 if (!response.message) {
                     this.$set('error', Translation.common('error'));
                     return;
                 }
+
                 this.$set('add_product', Translation.bill('add-product'));
-                this.$set('errors', response.errors)
+                this.$set('errors', response.errors);
                 this.$set('loading', false);
             });
+        },
 
+        /**
+         * Handle case when a product does not exists in database.
+         */
+        addNotExistentProduct: function() {
+
+            this.$set('loading', true);
+            var thisInstance = this;
+
+            var postData = this.$get('post_data');
+            postData.product_name = this.$get('name');
+
+            this.$http.post('/bills/' + Data.getBillId() + '/add-not-existent-product', postData, function (response) {
+
+                this.getBill(function() {
+                    thisInstance.$set('add_product', Translation.bill('add-product'));
+                    thisInstance.$set('loading', false);
+                    $('#addProductToBillModal').modal('hide');
+                    Alert.success(response.title, response.message);
+                }, true);
+
+            }).error(function (response) {
+
+                this.$set('loading', false);
+
+                if (!response.message) {
+                    this.$set('error', Translation.common('error'));
+                    return;
+                }
+
+                this.$set('errors', response.errors);
+            });
         },
 
         /**
@@ -143,6 +183,11 @@ new Vue({
             this.$set('loading', false);
             this.$set('add_product', Translation.bill('add-product'));
             this.$set('errors', []);
+            this.$set('code', '');
+            this.$set('product_not_exists', false);
+            this.$set('post_data', false);
+            this.$set('product_name', '');
+
             // Reset inputs
             $('#product-code').val('');
             $('#product-price').val('');

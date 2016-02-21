@@ -199,6 +199,24 @@ class BillsController extends BaseController {
     }
 
     /**
+     * Add not existent product to bill.
+     *
+     * @param int $billId
+     * @param Requests\Bill\AddNotExistentProductRequest $request
+     * @return mixed
+     */
+    public function addNotExistentProduct($billId, Requests\Bill\AddNotExistentProductRequest $request) {
+
+        $product = new Product();
+        $product->user_id = Auth::user()->id;
+        $product->code = $request->get('product_code');
+        $product->name = $request->get('product_name');
+        $product->save();
+
+        return Products::insertProduct($billId, $request->all());
+    }
+
+    /**
      * Edit bill other details.
      *
      * @param int $billId
