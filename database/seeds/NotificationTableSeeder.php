@@ -18,7 +18,8 @@ class NotificationTableSeeder extends Seeder {
 
         foreach ($types as $type) {
             factory(\App\Notification::class)->create([
-                'notification_type_id' => $type->id
+                'notification_type_id' => $type->id,
+                'targeted_user_id' => \App\TargetedUser::where('key', 'none')->first()->id
             ]);
         }
 

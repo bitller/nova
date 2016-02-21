@@ -22,6 +22,12 @@
                             'data_target' => '#create-new-notification-modal',
                             'data_toggle' => 'modal',
                             'on_click' => 'getTypes()'
+                        ],
+                        [
+                            'url' => '#',
+                            'name' => trans('notifications.delete_all_notifications'),
+                            'icon' => 'glyphicon-trash',
+                            'on_click' => 'deleteAllNotifications()'
                         ]
                     ]
             ])
@@ -64,6 +70,15 @@
                         </th>
                         <!-- END Message -->
 
+                        <!-- BEGIN Targeted users -->
+                        <th class="text-center">
+                            <span>
+                                <span class="glyphicon glyphicon-plus-sign icon-color"></span>&nbsp;
+                                {{ trans('notifications.targeted_users') }}
+                            </span>
+                        </th>
+                        <!-- END Targeted users -->
+
                         <!-- BEGIN Created at -->
                         <th class="text-center">
                             <span>
@@ -99,10 +114,16 @@
                         <!-- END Title -->
 
                         <!-- BEGIN Message -->
-                        <td class="text-center vert-align">
+                        <td v-on="click:setCurrentMessage(notification.message, notification.id)" class="text-center vert-align" data-toggle="modal" data-target="#edit-notification-message-modal">
                             <span>@{{ notification.message }}</span>
                         </td>
                         <!-- END Message -->
+
+                        <!-- BEGIN Targeted users -->
+                        <td v-on="click:setCurrentId(notification.id, notification.title)" class="text-center vert-align" data-toggle="modal" data-target="#add-targeted-users-modal">
+                            <span>@{{ notification.target_group }}</span>
+                        </td>
+                        <!-- END Targeted users -->
 
                         <!-- BEGIN Created at -->
                         <td class="text-center vert-align">
@@ -123,14 +144,24 @@
             </table>
         </div>
 
-        <button class="btn btn-default btn-block" v-on="click:viewAllNotifications()" v-attr="disabled:show_all_notifications_button_loader">
+        <!-- BEGIN Show/hide all notifications button -->
+        <button class="btn btn-default btn-block" v-show="number_of_notifications > 0" v-on="click:viewAllNotifications()" v-attr="disabled:show_all_notifications_button_loader">
             <span v-show="!all_notifications_are_displayed && !show_all_notifications_button_loader">{{ trans('notifications.show_all_notifications') }}</span>
             <span v-show="all_notifications_are_displayed && !show_all_notifications_button_loader">{{ trans('notifications.hide_all_notifications') }}</span>
             <span v-show="show_all_notifications_button_loader" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
         </button>
+        <!-- END Show/hide all notifications button -->
+
+        <!-- BEGIN No notifications alert -->
+        <div class="alert alert-warning" v-show="number_of_notifications < 0">
+            {{ trans('notifications.no_notifications') }}
+        </div>
+        <!-- END No notifications alert -->
 
         @include('includes.modals.notifications.create-notification-modal')
         @include('includes.modals.notifications.edit-notification-title-modal')
+        @include('includes.modals.notifications.edit-notification-message-modal')
+        @include('includes.modals.notifications.add-targeted-users-modal')
 
     </div>
     <!-- END Notifications table -->

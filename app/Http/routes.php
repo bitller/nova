@@ -227,9 +227,14 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::get('/types', 'NotificationsController@types');
         Route::get('/last', 'NotificationsController@getLast');
         Route::get('/all', 'NotificationsController@getAll');
+        Route::get('/targeted-users', 'NotificationsController@getTargetedUsers');
+
         Route::post('/new', 'NotificationsController@create');
         Route::post('/edit-title', 'NotificationsController@editTitle');
+        Route::post('/edit-message', 'NotificationsController@editMessage');
         Route::post('/delete', 'NotificationsController@delete');
+        Route::post('/delete-all', 'NotificationsController@deleteAll');
+        Route::post('/set-targeted-users', 'NotificationsController@setTargetedUsers');
     });
 
     // Subscriptions section

@@ -19,8 +19,11 @@ class Notifications {
      */
     public static function get($limit = false) {
 
-        $notifications = Notification::select('notifications.id', 'notification_types.type', 'notifications.title', 'notifications.message', 'notifications.created_at', 'notifications.updated_at')
-            ->leftJoin('notification_types', 'notifications.notification_type_id', '=', 'notification_types.id')
+        $notifications = Notification::select(
+                'notifications.id', 'notification_types.type', 'notifications.title', 'notifications.message', 'notifications.created_at',
+                'notifications.updated_at', 'targeted_users.key', 'targeted_users.name as target_group'
+            )->leftJoin('notification_types', 'notifications.notification_type_id', '=', 'notification_types.id')
+            ->leftJoin('targeted_users', 'notifications.targeted_user_id', '=', 'targeted_users.id')
             ->groupBy('notifications.id')
             ->orderBy('notifications.created_at', 'desc');
 

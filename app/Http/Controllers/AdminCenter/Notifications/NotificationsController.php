@@ -5,14 +5,21 @@ namespace App\Http\Controllers\AdminCenter\Notifications;
 use App\Helpers\AdminCenter\Notifications;
 use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\AdminCenter\NotificationsManager\SetTargetedUsersRequest;
 use App\Http\Requests\AdminCenter\NotificationsManager\CreateNotificationRequest;
+use App\Http\Requests\AdminCenter\NotificationsManager\DeleteAllNotificationsRequest;
 use App\Http\Requests\AdminCenter\NotificationsManager\DeleteNotificationRequest;
+use App\Http\Requests\AdminCenter\NotificationsManager\EditNotificationMessageRequest;
 use App\Http\Requests\AdminCenter\NotificationsManager\EditNotificationTitleRequest;
 use App\Http\Requests\AdminCenter\NotificationsManager\GetAllNotificationsRequest;
 use App\Http\Requests\AdminCenter\NotificationsManager\GetLastNotificationsRequest;
 use App\Http\Requests\AdminCenter\NotificationsManager\GetNotificationTypesRequest;
+use App\Http\Requests\AdminCenter\NotificationsManager\GetTargetedUsersRequest;
 use App\Notification;
 use App\NotificationType;
+use App\TargetedUser;
+use App\User;
+use App\UserNotification;
 
 /**
  * Notifications controller.
@@ -144,7 +151,110 @@ class NotificationsController extends BaseController {
         return response($response->get())->header('Content-Type', 'application/json');
     }
 
-    public function deleteAll() {
-        //
+    /**
+     * Edit notification message.
+     *
+     * @param EditNotificationMessageRequest $request
+     * @param AjaxResponse $response
+     * @return mixed
+     */
+    public function editMessage(EditNotificationMessageRequest $request, AjaxResponse $response) {
+
+        Notification::where('id', $request->get('notification_id'))
+            ->update([
+                'message' => $request->get('notification_message')
+            ]);
+
+        $response->setSuccessMessage(trans('notifications.notification_message_updated'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Delete all notifications.
+     *
+     * @param DeleteAllNotificationsRequest $request
+     * @param AjaxResponse $response
+     * @return mixed
+     */
+    public function deleteAll(DeleteAllNotificationsRequest $request, AjaxResponse $response) {
+
+        \DB::table('notifications')->delete();
+
+        $response->setSuccessMessage(trans('notifications.all_notifications_deleted'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Return targeted users.
+     *
+     * @param GetTargetedUsersRequest $request
+     * @param AjaxResponse $response
+     * @return mixed
+     */
+    public function getTargetedUsers(GetTargetedUsersRequest $request, AjaxResponse $response) {
+
+        $targetedUsers = TargetedUser::all();
+
+        $response->setSuccessMessage(trans('notifications.targeted_users_returned'));
+        $response->addExtraFields([
+            'targeted_users' => $targetedUsers,
+            'number_of_targeted_users' => count($targetedUsers)
+        ]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Set targeted users.
+     *
+     * @param SetTargetedUsersRequest $request
+     * @param AjaxResponse $response
+     * @return mixed
+     */
+    public function setTargetedUsers(SetTargetedUsersRequest $request, AjaxResponse $response) {
+
+        $response->setSuccessMessage(trans('notifications.targeted_users_set'));
+        $notificationId = $request->get('notification_id');
+        $targetGroup = $request->get('target_group');
+
+        Notification::where('id', $notificationId)->update([
+            'targeted_user_id' => TargetedUser::where('name', $targetGroup)->first()->id
+        ]);
+
+        if ($targetGroup === 'None') {
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        // Notify all users
+        if ($targetGroup === 'all') {
+
+            $usersIds = [];
+            $usersQuery = User::all();
+
+            // Build an array with all users ids
+            foreach ($usersQuery as $user) {
+                $usersIds[] = $user->id;
+            }
+
+            // Build array with insert data
+            $usersNotifications = [];
+
+            foreach ($usersIds as $userId) {
+                $usersNotifications[] = [
+                    'user_id' => $userId,
+                    'notification_id' => $notificationId
+                ];
+            }
+
+            \DB::table('user_notifications')->insert($usersNotifications);
+
+            return response($response->get())->header('Content-Type', 'application/json');
+        }
+
+        $response->setFailMessage(trans('common.general_error'));
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 }

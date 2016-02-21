@@ -20,11 +20,13 @@ class CreateNotificationsTable extends Migration {
 
             $table->bigIncrements('id');
             $table->smallInteger('notification_type_id')->unsigned();
+            $table->smallInteger('targeted_user_id')->unsigned();
             $table->string('title');
             $table->string('message');
             $table->timestamps();
 
             $table->foreign('notification_type_id')->references('id')->on('notification_types')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('targeted_user_id')->references('id')->on('targeted_users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
