@@ -146,8 +146,16 @@
 
         <!-- BEGIN Show/hide all notifications button -->
         <button class="btn btn-default btn-block" v-show="number_of_notifications > 0" v-on="click:viewAllNotifications()" v-attr="disabled:show_all_notifications_button_loader">
-            <span v-show="!all_notifications_are_displayed && !show_all_notifications_button_loader">{{ trans('notifications.show_all_notifications') }}</span>
-            <span v-show="all_notifications_are_displayed && !show_all_notifications_button_loader">{{ trans('notifications.hide_all_notifications') }}</span>
+            <span v-show="!all_notifications_are_displayed && !show_all_notifications_button_loader">
+                <span class="glyphicon glyphicon-arrow-down"></span>
+                {{ trans('notifications.show_all_notifications') }}
+            </span>
+
+            <span v-show="all_notifications_are_displayed && !show_all_notifications_button_loader">
+                <span class="glyphicon glyphicon-arrow-up"></span>
+                {{ trans('notifications.hide_all_notifications') }}
+            </span>
+
             <span v-show="show_all_notifications_button_loader" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
         </button>
         <!-- END Show/hide all notifications button -->

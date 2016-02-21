@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta id="token" content="{{ csrf_token() }}">
+    @if (Auth::check())
+        <meta id="logged-user-id" content="{{ Auth::user()->id }}">
+    @endif
     <title>Nova</title>
     <link rel="stylesheet" href="/css/app.css">
     @yield('styles')

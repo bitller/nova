@@ -90,7 +90,8 @@ class NotificationsController extends BaseController {
         Notification::create([
             'title' => $request->get('title'),
             'message' => $request->get('message'),
-            'notification_type_id' => NotificationType::where('type', $request->get('type'))->first()->id
+            'notification_type_id' => NotificationType::where('type', $request->get('type'))->first()->id,
+            'targeted_user_id' => TargetedUser::first()->id
         ]);
 
         $response = new AjaxResponse();
@@ -219,42 +220,6 @@ class NotificationsController extends BaseController {
         $notificationId = $request->get('notification_id');
         $targetGroup = $request->get('target_group');
 
-        Notification::where('id', $notificationId)->update([
-            'targeted_user_id' => TargetedUser::where('name', $targetGroup)->first()->id
-        ]);
-
-        if ($targetGroup === 'None') {
-            return response($response->get())->header('Content-Type', 'application/json');
-        }
-
-        // Notify all users
-        if ($targetGroup === 'all') {
-
-            $usersIds = [];
-            $usersQuery = User::all();
-
-            // Build an array with all users ids
-            foreach ($usersQuery as $user) {
-                $usersIds[] = $user->id;
-            }
-
-            // Build array with insert data
-            $usersNotifications = [];
-
-            foreach ($usersIds as $userId) {
-                $usersNotifications[] = [
-                    'user_id' => $userId,
-                    'notification_id' => $notificationId
-                ];
-            }
-
-            \DB::table('user_notifications')->insert($usersNotifications);
-
-            return response($response->get())->header('Content-Type', 'application/json');
-        }
-
-        $response->setFailMessage(trans('common.general_error'));
-
-        return response($response->get())->header('Content-Type', 'application/json');
+        return Notifications::handle($targetGroup, $notificationId);
     }
 }

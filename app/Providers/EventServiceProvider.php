@@ -68,6 +68,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\MarkNotificationsAsRead'
         ],
 
+        'App\Events\NotificationCreated' => [
+            'App\Listeners\NotifyUser'
+        ]
+
     ];
 
     /**
