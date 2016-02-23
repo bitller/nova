@@ -2,7 +2,7 @@ $brand-primary: #D2527F;
 $brand-warning: #F0AD4E;
 $brand-success: #26C281;
 $default-grey: #E1E1E1;
-$danger-color: #F39C12;
+$danger-color: #e74c3c;
 $brand-gray: #C1C1C1;
 
 // Navbar
@@ -59,6 +59,10 @@ $alert-danger-bg: $danger-color;
 $alert-danger-text: #ffffff;
 $alert-danger-border: $danger-color;
 
-$alert-success-bg: lighten($brand-primary, 7%);
+$alert-success-bg: #2ecc71;
 $alert-success-text: #ffffff;
-$alert-success-border: lighten($brand-primary, 7%);
+$alert-success-border: $alert-success-bg;
+
+// Lists
+$list-group-active-bg: $default-grey;
+$list-group-active-color: $brand-primary;
