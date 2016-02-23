@@ -101,6 +101,11 @@ new Vue({
             if (this.$get('quantity')) {
                 data.product_quantity = this.$get('quantity');
             }
+            if (this.$get('product_not_available')) {
+                data.product_not_available = true;
+            } else {
+                data.product_not_available = false;
+            }
 
             this.$set('post_data', data);
 

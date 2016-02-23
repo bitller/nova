@@ -27,6 +27,7 @@ class CreateBillProductsTable extends Migration {
             $table->tinyInteger('discount')->default(0);
             $table->float('calculated_discount');
             $table->float('final_price');
+            $table->boolean('available')->default(true);
             $table->timestamps();
 
             $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');

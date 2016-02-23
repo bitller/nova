@@ -454,6 +454,8 @@ class Products {
             $insertData['final_price'] = $insertData['price'];
         }
 
+        $insertData['available'] = !$inputs['product_not_available'];
+
         $insertQuery->insert($insertData);
     }
 

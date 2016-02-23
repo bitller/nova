@@ -1,0 +1,1 @@
+<div class="alert alert-info" v-show="total === '0.00'">{{ trans('bill.empty_bill') }}</div>

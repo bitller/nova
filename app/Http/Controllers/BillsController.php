@@ -160,7 +160,7 @@ class BillsController extends BaseController {
      * @return $this
      */
     public function bill($billId) {
-        return view('bill')->with('billId', $billId);
+        return view('bill.index')->with('billId', $billId);
     }
 
     /**

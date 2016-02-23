@@ -33,42 +33,13 @@ class Bills {
             return response($response->get(), 404)->header('Content-Type', 'application/json');
         }
 
-        $productIds = $this->getProductIds($billId);
-        $applicationProductIds = $this->getApplicationProductIds($billId);
+        $dataForProductsQuery = [
+            'productIds' => $this->getProductIds($billId),
+            'applicationProductIds' => $this->getApplicationProductIds($billId),
+            'billId' => $billId
+        ];
 
-        $firstQuery = DB::table('products')
-            ->whereIn('products.id', $productIds)
-            ->where('bill_products.bill_id', $billId)
-            ->leftJoin('bill_products', 'bill_products.product_id', '=', 'products.id')
-            ->select(
-                'products.id',
-                'products.name',
-                'products.code',
-                'bill_products.id as bill_product_id',
-                'bill_products.page',
-                'bill_products.quantity',
-                'bill_products.price',
-                'bill_products.discount',
-                'bill_products.calculated_discount',
-                'bill_products.final_price'
-            );
-
-        $secondQuery = DB::table('application_products')->whereIn('application_products.id', $applicationProductIds)
-            ->where('bill_application_products.bill_id', $billId)
-            ->leftJoin('bill_application_products', 'bill_application_products.product_id', '=', 'application_products.id')
-            ->select(
-                'application_products.id',
-                'application_products.name',
-                'application_products.code',
-                'bill_application_products.id as bill_product_id',
-                'bill_application_products.page',
-                'bill_application_products.quantity',
-                'bill_application_products.price',
-                'bill_application_products.discount',
-                'bill_application_products.calculated_discount',
-                'bill_application_products.final_price'
-            )->union($firstQuery)->orderBy('page', 'asc')->get();
-
+        //
         $bill = Auth::user()->bills()->where('bills.id', $billId)
             ->leftJoin('clients', 'clients.id', '=', 'bills.client_id')
             ->leftJoin('campaigns', 'campaigns.id', '=', 'bills.campaign_id')
@@ -102,10 +73,62 @@ class Bills {
             'number_of_products' => $billCalculations['number_of_products'],
             'show_discount_column' => $showDiscount,
             'show_other_details_info' => true,
-            'products' => $secondQuery,
+            'products' => self::_getBillProducts($dataForProductsQuery, true),
+            'not_available_products' => self::_getBillProducts($dataForProductsQuery, false),
             'data' => $bill
         ];
+    }
 
+    /**
+     * Return available bill products or not available bill products, indicated by $available.
+     *
+     * @param array $data
+     *      ['productIds'] array Contain products ids
+     *      ['billId'] int Bill id
+     *      ['applicationIds'] array Contain application products ids
+     *
+     * @param bool $available
+     */
+    private static function _getBillProducts($data = [], $available = true) {
+
+        // Query products table
+        $firstQuery = DB::table('products')
+            ->whereIn('products.id', $data['productIds'])
+            ->where('bill_products.bill_id', $data['billId'])
+            ->where('bill_products.available', $available)
+            ->leftJoin('bill_products', 'bill_products.product_id', '=', 'products.id')
+            ->select(
+                'products.id',
+                'products.name',
+                'products.code',
+                'bill_products.id as bill_product_id',
+                'bill_products.page',
+                'bill_products.quantity',
+                'bill_products.price',
+                'bill_products.discount',
+                'bill_products.calculated_discount',
+                'bill_products.final_price'
+            );
+
+        // Now query application products table and union results
+        $secondQuery = DB::table('application_products')->whereIn('application_products.id', $data['applicationProductIds'])
+            ->where('bill_application_products.bill_id', $data['billId'])
+            ->where('bill_application_products.available', $available)
+            ->leftJoin('bill_application_products', 'bill_application_products.product_id', '=', 'application_products.id')
+            ->select(
+                'application_products.id',
+                'application_products.name',
+                'application_products.code',
+                'bill_application_products.id as bill_product_id',
+                'bill_application_products.page',
+                'bill_application_products.quantity',
+                'bill_application_products.price',
+                'bill_application_products.discount',
+                'bill_application_products.calculated_discount',
+                'bill_application_products.final_price'
+            )->union($firstQuery)->orderBy('page', 'asc')->get();
+
+        return $secondQuery;
     }
 
     /**

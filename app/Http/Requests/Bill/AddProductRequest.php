@@ -36,6 +36,7 @@ class AddProductRequest extends AjaxRequest {
             'product_page' => ['numeric', 'between:1,2000'],
             'product_price' => ['required', 'numeric', 'between:0,9999'],
             'product_code' => ['required', 'digits:5'],
+            'product_not_available' => ['required', 'bool']
         ];
     }
 

@@ -27,6 +27,7 @@
                 <!-- END Product not exists alert -->
 
                 <div v-show="!product_not_exists">
+
                     <!-- BEGIN Product code input -->
                     <div role="form" class="col-md-12">
                         <div class="form-group has-feedback product-code" v-class="has-error : errors.product_code">
@@ -77,6 +78,14 @@
                         <span class="text-danger" v-show="errors.product_name">@{{ errors.product_name }}</span>
                     </div>
                     <!-- END Product name -->
+                </div>
+
+                <div class="checkbox col-md-12">
+                    <label>
+                        <input v-model="product_not_available" type="checkbox" value="1">
+                        {{ trans('bill.this_product_is_not_available') }}
+                        <span data-toggle="tooltip" data-placement="top" title="{{ trans('bill.product_not_available_info') }}" class="badge">?</span>
+                    </label>
                 </div>
 
             </div>
