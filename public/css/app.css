@@ -4529,7 +4529,7 @@ button.list-group-item {
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
-  color: #D2527F;
+  color: #626262;
   background-color: #E1E1E1;
   border-color: #E1E1E1; }
   .list-group-item.active .list-group-item-heading,
@@ -8306,5 +8306,8 @@ body {
   font-size: 20px;
   display: inline-block;
   padding-top: 10px; }
+
+.primary-color {
+  color: #D2527F; }
 
 /*# sourceMappingURL=app.css.map */

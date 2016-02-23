@@ -65,4 +65,4 @@ $alert-success-border: $alert-success-bg;
 
 // Lists
 $list-group-active-bg: $default-grey;
-$list-group-active-color: $brand-primary;
+$list-group-active-color: darken($default-grey, 50);

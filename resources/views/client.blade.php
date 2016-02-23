@@ -58,7 +58,7 @@
             <ul class="list-group">
                 <!-- BEGIN Title -->
                 <li class="list-group-item active">
-                    <span class="glyphicon glyphicon-stats"></span> {{ trans('clients.client_statistics') }}
+                    <span class="glyphicon glyphicon-stats primary-color"></span> {{ trans('clients.client_statistics') }}
                 </li>
                 <!-- END Title -->
 
