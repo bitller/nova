@@ -7,7 +7,7 @@
     </a>
     <!-- END Client name -->
 
-    - comanda @{{ bill.data.campaign_order }} din campania
+    - {{ trans('bill.order') }} @{{ bill.data.campaign_order }} {{ trans('bill.from_campaign') }}
 
     <!-- BEGIN Campaign details -->
     <a href="/statistics/campaign/@{{ bill.data.campaign_number }}/@{{ bill.data.campaign_year }}">
