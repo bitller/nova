@@ -4348,22 +4348,22 @@ a.thumbnail.active {
     color: #e6e6e6; }
 
 .alert-info {
-  background-color: #3498db;
-  border-color: #3498db;
+  background-color: #639FAB;
+  border-color: #639FAB;
   color: #ffffff; }
   .alert-info hr {
-    border-top-color: #258cd1; }
+    border-top-color: #56939f; }
   .alert-info .alert-link {
     color: #e6e6e6; }
 
 .alert-warning {
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-  color: #8a6d3b; }
+  background-color: #DCC48E;
+  border-color: #DCC48E;
+  color: #ffffff; }
   .alert-warning hr {
-    border-top-color: #f7e1b5; }
+    border-top-color: #d6ba7b; }
   .alert-warning .alert-link {
-    color: #66512c; }
+    color: #e6e6e6; }
 
 .alert-danger {
   background-color: #e74c3c;
@@ -4529,9 +4529,9 @@ button.list-group-item {
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
-  color: #626262;
-  background-color: #E1E1E1;
-  border-color: #E1E1E1; }
+  color: #ffffff;
+  background-color: #f4baa1;
+  border-color: #f4baa1; }
   .list-group-item.active .list-group-item-heading,
   .list-group-item.active .list-group-item-heading > small,
   .list-group-item.active .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading,

@@ -32,7 +32,10 @@ class BaseController extends Controller {
                 'showAdminCenter' => $showAdminCenter
             ]);
 
+            // Set language
             App::setLocale(Settings::language());
+
+            // Check if user subscription is expired
         }
     }
 

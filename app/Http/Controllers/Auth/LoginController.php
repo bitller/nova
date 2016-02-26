@@ -64,7 +64,9 @@ class LoginController extends Controller {
         if ($this->auth->attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
 
             event(new UserLoggedIn($this->auth->user()->id));
+
             $response->setSuccessMessage(trans('common.success'));
+
             return response($response->get())->header('Content-Type', 'application/json');
         }
 

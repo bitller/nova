@@ -51,10 +51,15 @@ $pager-disabled-color:                 #ffffff !default;
 $pager-disabled-bg: lighten($brand-primary, 9%);
 
 // Alerts
-$info-bg: #3498db;
+$info-bg: #639FAB;
 $alert-info-bg: $info-bg;
 $alert-info-text: #ffffff;
 $alert-info-border: $info-bg;
+
+$warning-bg: #DCC48E;
+$alert-warning-bg: $warning-bg;
+$alert-warning-border: $warning-bg;
+$alert-warning-text: #ffffff;
 
 $alert-danger-bg: $danger-color;
 $alert-danger-text: #ffffff;
@@ -65,5 +70,5 @@ $alert-success-text: #ffffff;
 $alert-success-border: $alert-success-bg;
 
 // Lists
-$list-group-active-bg: $default-grey;
-$list-group-active-color: darken($default-grey, 50);
+$list-group-active-bg: #f4baa1;
+$list-group-active-color: #ffffff;

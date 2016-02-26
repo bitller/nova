@@ -67,7 +67,7 @@ class SettingsController extends BaseController {
 
         $response->addExtraFields([
             'data' => $settings,
-            'subscription_info' => UserHelper::remainingSubscription(),
+            'subscription_info' => UserHelper::remainingSubscriptionFormatted(),
         ]);
         $response->setSuccessMessage('success');
         return response($response->get());

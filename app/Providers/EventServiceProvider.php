@@ -15,7 +15,8 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
 
         'App\Events\UserLoggedIn' => [
-            'App\Listeners\LogUserNewSession'
+            'App\Listeners\LogUserNewSession',
+            'App\Listeners\CheckUserSubscription'
         ],
 
         'App\Events\UserLoggedOut' => [
