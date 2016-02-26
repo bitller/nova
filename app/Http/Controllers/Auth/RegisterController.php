@@ -9,8 +9,10 @@ use App\Helpers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateAccountRequest;
 use App\Offer;
+use App\TrialPeriod;
 use App\User;
 use App\UserSetting;
+use App\UserTrialPeriod;
 use Paymill\Request as PaymillRequest;
 use App\Payment as PaymentModel;
 use App\Subscription as SubscriptionModel;
@@ -76,6 +78,12 @@ class RegisterController extends Controller {
         UserSetting::insert([
             'user_id' => $user->id,
             'language_id' => Settings::defaultLanguageId()
+        ]);
+
+        // Create trial period
+        UserTrialPeriod::create([
+            'user_id' => $user->id,
+            'trial_period_id' => TrialPeriod::first()->id
         ]);
 
         Auth::login($user);

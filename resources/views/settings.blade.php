@@ -13,6 +13,8 @@
         </div>
         <!-- END Reset to defaults button -->
 
+        <div class="alert alert-info">@{{ subscription_info }}</div>
+
         <!-- BEGIN Settings list -->
         <ul class="list-group">
 

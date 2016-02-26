@@ -44,5 +44,6 @@ return [
     'restored_to_default_settings' => 'Settings restored to their default values.',
     'settings' => 'Settings',
     'settings_tooltip' => 'Settings for your account',
-    'settings_will_be_restored' => 'Settings will be restored to their initial values.'
+    'settings_will_be_restored' => 'Settings will be restored to their initial values.',
+    'subscription_period_info' => 'You have :remaining_days days left of your trial period, most exactly until :end.',
 ];

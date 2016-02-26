@@ -44,5 +44,6 @@ return [
     'restored_to_default_settings' => 'Setările au fost restabilite la valorile iniţiale.',
     'settings' => 'Setări',
     'settings_tooltip' => 'Aici găseşti setările contului tău',
-    'settings_will_be_restored' => 'Setările vor fi restabilite la valorile iniţiale.'
+    'settings_will_be_restored' => 'Setările vor fi restabilite la valorile iniţiale.',
+    'subscription_period_info' => 'Mai ai :remaining_days de zile rămase din perioada gratuită, mai exact până în :end.',
 ];

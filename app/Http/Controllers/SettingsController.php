@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\AjaxResponse;
 use App\Helpers\PermissionsHelper;
 use App\Helpers\Settings;
+use App\Helpers\UserHelper;
 use App\Http\Requests\Settings\ChangeLanguageRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedBillsRequest;
 use App\Http\Requests\Settings\EditNumberOfDisplayedClientsRequest;
@@ -60,10 +61,14 @@ class SettingsController extends BaseController {
 
         $response = new AjaxResponse();
 
+        // Get user settings
         $settings = Auth::user()->settings()->public()->first();
         $settings->email = Auth::user()->email;
 
-        $response->addExtraFields(['data' => $settings]);
+        $response->addExtraFields([
+            'data' => $settings,
+            'subscription_info' => UserHelper::remainingSubscription(),
+        ]);
         $response->setSuccessMessage('success');
         return response($response->get());
 

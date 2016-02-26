@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder {
         $this->call(NotificationTableSeeder::class);
         $this->call(SecuritySettingTableSeeder::class);
         $this->call(UserDefaultSettingTableSeeder::class);
+        $this->call(TrialPeriodTableSeeder::class);
         $this->call(UserTableSeeder::class);
 
         Model::reguard();

@@ -51,9 +51,10 @@ $pager-disabled-color:                 #ffffff !default;
 $pager-disabled-bg: lighten($brand-primary, 9%);
 
 // Alerts
-$alert-info-bg: $brand-primary;
+$info-bg: #3498db;
+$alert-info-bg: $info-bg;
 $alert-info-text: #ffffff;
-$alert-info-border: $brand-primary;
+$alert-info-border: $info-bg;
 
 $alert-danger-bg: $danger-color;
 $alert-danger-text: #ffffff;

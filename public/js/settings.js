@@ -24,6 +24,7 @@ new Vue({
                 this.$set('displayed_products', response.data.displayed_products);
                 this.$set('displayed_custom_products', response.data.displayed_custom_products);
                 this.$set('language_name', response.data.language);
+                this.$set('subscription_info', response.subscription_info);
                 Alert.close();
             }).error(function(response) {
                 Alert.generalError();

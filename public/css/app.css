@@ -4348,11 +4348,11 @@ a.thumbnail.active {
     color: #e6e6e6; }
 
 .alert-info {
-  background-color: #D2527F;
-  border-color: #D2527F;
+  background-color: #3498db;
+  border-color: #3498db;
   color: #ffffff; }
   .alert-info hr {
-    border-top-color: #cd3e70; }
+    border-top-color: #258cd1; }
   .alert-info .alert-link {
     color: #e6e6e6; }
 
