@@ -1,4 +1,12 @@
 @charset "UTF-8";
+.search-bar {
+  display: none; }
+
+.results-info span {
+  display: inline-block;
+  padding-top: 10px;
+  color: #888888; }
+
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -4339,20 +4347,20 @@ a.thumbnail.active {
     color: inherit; }
 
 .alert-success {
-  background-color: #2ecc71;
-  border-color: #2ecc71;
+  background-color: #06D6A0;
+  border-color: #06D6A0;
   color: #ffffff; }
   .alert-success hr {
-    border-top-color: #29b765; }
+    border-top-color: #05bd8d; }
   .alert-success .alert-link {
     color: #e6e6e6; }
 
 .alert-info {
-  background-color: #639FAB;
-  border-color: #639FAB;
+  background-color: #54C6EB;
+  border-color: #54C6EB;
   color: #ffffff; }
   .alert-info hr {
-    border-top-color: #56939f; }
+    border-top-color: #3dbee8; }
   .alert-info .alert-link {
     color: #e6e6e6; }
 

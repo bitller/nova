@@ -1,16 +1,63 @@
 new Vue({
+
+    /**
+     * Target element.
+     */
     el: '#bills',
 
     data: {
         rows: 0,
-        create_button: Translation.bills('create-button')
+        create_button: Translation.bills('create-button'),
+
+        /**
+         * Indicate if pagination section should be displayed.
+         */
+        show_pagination: true,
+
+        /**
+         * Indicate if there are search results.
+         */
+        search_results: false
     },
 
+    /**
+     * Called when everything ready.
+     */
     ready: function() {
         this.getBills('/bills/get');
     },
 
     methods: {
+
+        /**
+         * Toggle search bar.
+         */
+        toggleSearchBar: function () {
+            $('.search-bar').slideToggle();
+        },
+
+        /**
+         * Search for bills.
+         */
+        search: function() {
+
+            if (this.$get('search_input')) {
+                this.$set('search_results', true);
+            } else {
+                this.$set('search_results', false);
+            }
+            this.getBills('/bills/get/search?term=' + this.$get('search_input'))
+        },
+
+        /**
+         * Reset search results.
+         */
+        hideSearch: function() {
+            this.$set('search_results', false);
+            this.$set('search_input', '');
+            $('.search-bar input').val('');
+            this.getBills('/bills/get');
+        },
 
         /**
          * Make request to delete bill.
@@ -73,6 +120,8 @@ new Vue({
 
                 // Handle success response
                 this.getBills('/bills/get', function() {
+                    this.$set('search_input', '');
+                    $('.search-bar input').val('');
                     this.$set('loading', false);
                     $('#create-bill-modal').modal('hide');
                     Alert.success(response.title, response.message);

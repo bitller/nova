@@ -19,11 +19,18 @@ class PaidBillsController extends BaseController {
         $this->middleware('auth');
     }
 
+    /**
+     * Render paid bills index page.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
         return view('paid-bills');
     }
 
     public function get() {
+
+
         return Bills::get(true);
     }
 

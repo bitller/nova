@@ -43,7 +43,7 @@ use App\Helpers\Products;
 class BillsController extends BaseController {
 
     /**
-     * Initialize required stuff
+     * Initialize required stuff.
      */
     public function __construct() {
         parent::__construct();
@@ -51,19 +51,30 @@ class BillsController extends BaseController {
     }
 
     /**
+     * Render bills index page.
+     *
      * @return \Illuminate\View\View
      */
     public function index() {
-        return view('bills');
+        return view('bills.index');
     }
 
     /**
+     * Return paginated bills in json format.
+     *
      * @param Request $request
      * @return mixed
+     * @internal param bool $first_time
      */
     public function getBills(Request $request) {
+
+        // Fire event
         event(new HomepageAccessed(Auth::user()->id));
-        return Bills::get(false, false, $request->get('page'));
+
+        // Build config and paginate bills
+        $billsConfig = ['page' => $request->get('page'), 'bau' => 'ss'];
+
+        return Bills::get($billsConfig);
     }
 
     /**
@@ -77,7 +88,7 @@ class BillsController extends BaseController {
     }
 
     /**
-     * Return client suggestions base on given name.
+     * Return client suggestions based on given name.
      *
      * @param SuggestClientRequest $request
      * @return mixed
@@ -87,6 +98,8 @@ class BillsController extends BaseController {
     }
 
     /**
+     * Handle creation of new bill.
+     *
      * @param CreateBillRequest $request
      * @return array
      */
@@ -156,6 +169,8 @@ class BillsController extends BaseController {
     }
 
     /**
+     * Render bill index page.
+     *
      * @param int $billId
      * @return $this
      */
@@ -164,6 +179,8 @@ class BillsController extends BaseController {
     }
 
     /**
+     * Return bill data in json format.
+     *
      * @param int $billId
      * @return mixed
      */

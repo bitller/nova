@@ -32,29 +32,36 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'recover'], function() {
     Route::post('/{userId}/{code}', 'RecoverController@setNewPassword');
 });
 
+
+
 // Bills page
-Route::group(['prefix' => 'bills'], function() {
+Route::group(['prefix' => 'bills', 'namespace' => 'Bills'], function() {
 
-    Route::get('/', 'BillsController@index');
-    Route::get('/get', 'BillsController@getBills');
-    Route::get('/{billId}', 'BillsController@bill');
-    Route::get('/{billId}/get', 'BillsController@getBill');
-    Route::get('/{billId}/delete', 'BillsController@delete');
-    Route::get('/{billId}/delete/{productId}/{code}/{billProductId}', 'BillsController@deleteProduct');
-    Route::get('/{billId}/suggest-products', 'BillsController@suggestProducts');
-    Route::get('/{billId}/delete-bill', 'BillsController@deleteBill');
-    Route::get('/{billId}/mark-as-paid', 'BillsController@markAsPaid');
-    Route::get('/{billId}/mark-as-unpaid', 'BillsController@markAsUnpaid');
+    // Bills page
+    get('/', 'IndexController@index');
+    get('/get', 'IndexController@get');
+    get('/get/search', 'IndexController@search');
+    post('/create', 'IndexController@create');
 
-    Route::post('/create', 'BillsController@create');
-    Route::post('/{billId}/edit-page', 'BillsController@editPage');
-    Route::post('/{billId}/edit-quantity', 'BillsController@editQuantity');
-    Route::post('/{billId}/edit-price', 'BillsController@editPrice');
-    Route::post('/{billId}/edit-discount', 'BillsController@editDiscount');
-    Route::post('/{billId}/add', 'BillsController@addProduct');
-    post('/{billId}/add-not-existent-product', 'BillsController@addNotExistentProduct');
-    Route::post('/{billId}/edit-other-details', 'BillsController@editOtherDetails');
-    Route::post('/{billId}/edit-payment-term', 'BillsController@editPaymentTerm');
+    // Bill page
+    get('/{billId}', 'BillController@index');
+    get('/{billId}/get', 'BillController@get');
+    get('/{billId}/delete', 'BillController@delete');
+    get('/{billId}/delete/{productId}/{code}/{billProductId}', 'BillController@deleteProduct');
+    get('/{billId}/suggest-products', 'BillController@suggestProducts');
+    get('/{billId}/mark-as-paid', 'BillController@markAsPaid');
+    get('/{billId}/mark-as-unpaid', 'BillController@markAsUnpaid');
+    post('/{billId}/edit-page', 'BillController@editPage');
+    post('/{billId}/edit-quantity', 'BillController@editQuantity');
+    post('/{billId}/edit-price', 'BillController@editPrice');
+    post('/{billId}/edit-discount', 'BillController@editDiscount');
+    post('/{billId}/add', 'BillController@addProduct');
+    post('/{billId}/add-not-existent-product', 'BillController@addNotExistentProduct');
+    post('/{billId}/edit-other-details', 'BillController@editOtherDetails');
+    post('/{billId}/edit-payment-term', 'BillController@editPaymentTerm');
+
+//    Route::get('/{billId}/delete-bill', 'BillsController@deleteBill');
+
 });
 
 // Suggestions

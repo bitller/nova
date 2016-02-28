@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Helpers;
+
 use App\ApplicationProduct;
 use App\Bill;
 use App\BillApplicationProduct;
 use App\BillProduct;
+use App\Client;
+use App\Helpers\Bills\ProtectedHelpers;
 use App\Product;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\DB;
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
-class Bills {
+class Bills extends ProtectedHelpers {
 
     /**
      * Query database for products of a given bill.
@@ -132,85 +134,34 @@ class Bills {
     }
 
     /**
-     * @param bool $onlyPaidBills
-     * @param bool $useAnotherUserId
-     * @param int $page
+     * @param $config
+     *      'onlyPaidBills' bool Indicate if should be returned only paid bills. Default value is false.
+     *      'userId' bool|int User id to be used in query. Default is used current logged in user.
+     *      'page' int Current pagination page. Default is 1.
+     *      'searchTerm' bool|string Return only bills that match given client name. Default value is false.
      * @return mixed
      */
-    public static function get($onlyPaidBills = false, $useAnotherUserId = false, $page = 1) {
+    public static function get($config) {
+        // Add default values to optional parameters that are not given
+        self::inspectGetConfigAndAddDefaultValuesToMissingOptions($config);
 
-        $paid = 0;
-        $userId = Auth::user()->id;
-        if ($onlyPaidBills) {
-            $paid = 1;
-        }
-        if ($useAnotherUserId) {
-            $userId = $useAnotherUserId;
-        }
+        // Get client ids
+        $clientIds = self::performGetClientIdsQuery($config);
 
-        // Get bill ids
-        $billIdsQuery = Bill::where('user_id', $userId)->where('paid', $paid)->get();
+        // Get bill ids and question marks
+        $billResults = self::performGetBillDataQuery($config, $clientIds);
+        $questionMarks = $billResults['questionMarks'];
+        $billIds = $billResults['billIds'];
 
-        // Build string with question marks
-        $questionMarks = '';
-        foreach ($billIdsQuery as $result) {
-            $questionMarks .= '?,';
-        }
-
-        // Remove last comma
-        $questionMarks = substr($questionMarks, 0, -1);
-
-        // Build array with values
-        $billIds = [];
-        $stop = 2;
-        for ($i = 1; $i <= $stop; $i++) {
-            foreach ($billIdsQuery as $result) {
-                $billIds[] = $result->id;
-            }
-        }
-
+        // Make sure are results returned
         if (strlen($questionMarks) < 1) {
-            return 0;
+            return [
+                'bills' => 0
+            ];
         }
 
-        $query = "SELECT SUM(bills.final_price) AS final_price, SUM(bills.quantity) AS number_of_products, bills.id, bills.client_name, bills.campaign_order, bills.campaign_year, bills.campaign_number, bills.payment_term, bills.created_at FROM ";
-        $query .= "(SELECT bill_products.final_price AS final_price, bill_products.quantity, bills.id, clients.name AS client_name, bills.campaign_order, ";
-        $query .= "campaigns.year AS campaign_year, campaigns.number AS campaign_number, bills.payment_term, bills.created_at ";
-        $query .= "FROM bills LEFT JOIN bill_products ON bill_products.bill_id = bills.id ";
-        // Join campaigns
-        $query .= "LEFT JOIN campaigns ON bills.campaign_id = campaigns.id ";
-        // Join clients table
-        $query .= "LEFT JOIN clients ON clients.id = bills.client_id WHERE bills.id IN ($questionMarks) ";
-        $query .= "UNION ALL SELECT bill_application_products.final_price as final_price, bill_application_products.quantity as quantity, bills.id, ";
-        $query .= "clients.name as client_name, bills.campaign_order, campaigns.year as campaign_year, campaigns.number as campaign_number, bills.payment_term, bills.created_at FROM bills ";
-        // Join bill application products table
-        $query .= "LEFT JOIN bill_application_products ON bill_application_products.bill_id = bills.id ";
-        // Join campaigns table
-        $query .= "LEFT JOIN campaigns ON campaigns.id = bills.campaign_id ";
-        // Join clients table
-        $query .= "LEFT JOIN clients ON clients.id = bills.client_id WHERE bills.id IN ($questionMarks)) bills ";
-        $query .= "GROUP BY bills.id ORDER BY bills.created_at DESC";
-
-        // Execute query
-        $results = DB::select($query, $billIds);
-
-        // Make sure page is always positive
-        if ($page < 1) {
-            $page = 1;
-        }
-
-        $perPage = Settings::displayedBills();
-
-        // Calculate start from
-        $startFrom = ($perPage * ($page - 1));
-
-        $sliced = array_slice($results, $startFrom, $perPage);
-
-        $paginate = new LengthAwarePaginator($sliced, count($results), $perPage);
-        $paginate->setPath('/bills/get');
-
-
-        return $paginate;
+        // Paginate and return results
+        return self::performBillsPaginationQuery($config, $questionMarks, $billIds);
     }
 
     /**
@@ -620,7 +571,5 @@ class Bills {
         }
 
         return $applicationProductIds;
-
     }
-
 }
