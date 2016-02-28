@@ -94,7 +94,7 @@ class LoginController extends Controller {
         $this->auth->logout();
         event(new UserLoggedOut($userId));
 
-        return redirect('/');
+        return redirect(\URL::previous());
     }
 
 }
