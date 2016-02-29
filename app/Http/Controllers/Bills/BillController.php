@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bills;
 
 use App\Helpers\Bills;
+use App\Helpers\Clients;
 use App\Helpers\Products;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Bill\AddNotExistentProductRequest;
@@ -13,6 +14,7 @@ use App\Http\Requests\Bill\EditProductDiscountRequest;
 use App\Http\Requests\Bill\EditProductPageRequest;
 use App\Http\Requests\Bill\EditProductPriceRequest;
 use App\Http\Requests\Bill\EditProductQuantityRequest;
+use App\Http\Requests\Bill\SuggestClientRequest;
 use App\Http\Requests\Bill\SuggestProductRequest;
 use App\Http\Requests\DeleteProductFromBillRequest;
 use App\Product;
@@ -218,5 +220,15 @@ class BillController extends BaseController {
      */
     public function suggestProducts(SuggestProductRequest $request) {
         return Products::suggestProducts($request->get('product_code'));
+    }
+
+    /**
+     * Return client suggestions based on given name.
+     *
+     * @param SuggestClientRequest $request
+     * @return mixed
+     */
+    public function suggestClients(SuggestClientRequest $request) {
+        return Clients::suggestClients($request->get('name'));
     }
 }

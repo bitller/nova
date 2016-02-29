@@ -5845,6 +5845,17 @@ button.close {
   color: #888888;
   font-size: 13px; }
 
+#products-manager-index .search-results-text {
+  color: #888888;
+  font-size: 15px;
+  margin-bottom: 5px; }
+
+#products-manager-index .search-results-text span {
+  display: inline-block; }
+
+#products-manager-index .no-search-results-text {
+  color: #6e6e6e; }
+
 #products-manager-index .product-title a {
   color: #6e6e6e;
   font-size: 17px; }
@@ -5855,6 +5866,9 @@ button.close {
 
 #products-manager-index .search-product {
   cursor: pointer; }
+
+#products-manager-index .search-application-products {
+  display: none; }
 
 .custom-button {
   background-color: transparent;

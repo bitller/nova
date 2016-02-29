@@ -65,8 +65,8 @@ Route::group(['prefix' => 'bills', 'namespace' => 'Bills'], function() {
 });
 
 // Suggestions
-Route::group(['prefix' => 'suggest'], function() {
-    Route::get('clients', 'BillsController@suggestClients');
+Route::group(['prefix' => 'suggest', 'namespace' => 'Bills'], function() {
+    Route::get('clients', 'BillController@suggestClients');
 });
 
 // Clients page
@@ -313,6 +313,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     Route::group(['prefix' => 'products-manager', 'namespace' => 'ProductsManager'], function() {
         get('/', 'IndexController@index');
         get('/get', 'IndexController@get');
+        get('/get/search', 'IndexController@search');
     });
 
 });
