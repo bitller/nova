@@ -312,6 +312,7 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
     // Products manager
     Route::group(['prefix' => 'products-manager', 'namespace' => 'ProductsManager'], function() {
         get('/', 'IndexController@index');
+        get('/get', 'IndexController@get');
     });
 
 });

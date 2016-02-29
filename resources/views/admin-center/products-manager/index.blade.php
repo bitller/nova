@@ -1,8 +1,10 @@
 @extends('layout.index')
 @section('content')
 
+    @include('includes.ajax-translations.common')
+
     <!-- BEGIN Products manager -->
-    <div id="products-manager-index" class="well custom-well-with-no-padding">
+    <div id="products-manager-index" class="well custom-well-with-no-padding" v-show="loaded">
 
         <div>
             <!-- BEGIN Top part -->
@@ -19,7 +21,7 @@
 
                     <!-- BEGIN Number of application products -->
                     <div class="number-of-application-products">
-                        {{ trans('products_manager.there_are') }} 104 {{ trans('products_manager.products') }}.
+                        {{ trans('products_manager.there_are') }} @{{ products.total }} {{ trans('products_manager.products') }}.
                     </div>
                     <!-- END Number of application products -->
 
@@ -37,69 +39,27 @@
             </div>
 
             <!-- BEGIN Application product -->
-            <div class="application-products">
+            <div class="application-products" style="background-color: #F6F7F8">
+
                 <div class="row">
-
-                    <div class="col-md-6">
+                    <div class="col-md-6" v-repeat="product in products.data">
                         <div class="well custom-well">
 
                             <strong class="product-title">
-                                <a href="#">00212 - ceas asier</a>
+                                <a href="/admin-center/products-manager/product/@{{ product.id }}/@{{ product.code }}">@{{ product.code }} - @{{ product.name }}</a>
                             </strong>
 
                             <div class="product-details">
-                                <strong>{{ trans('products_manager.added_on') }}:</strong> 20-02-2016
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="well custom-well">
-
-                            <strong class="product-title">
-                                <a href="#">00212 - ceas asier</a>
-                            </strong>
-
-                            <div class="product-details">
-                                <strong>{{ trans('products_manager.added_on') }}:</strong> 20-02-2016
+                                <strong>{{ trans('products_manager.added_on') }}:</strong> @{{ product.created_at }}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <div class="well custom-well">
-
-                            <strong class="product-title">
-                                <a href="#">00212 - ceas asier</a>
-                            </strong>
-
-                            <div class="product-details">
-                                <strong>{{ trans('products_manager.added_on') }}:</strong> 20-02-2016
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="well custom-well">
-
-                            <strong class="product-title">
-                                <a href="#">00212 - ceas asier</a>
-                            </strong>
-
-                            <div class="product-details">
-                                <strong>{{ trans('products_manager.added_on') }}:</strong> 20-02-2016
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @include('admin-center.products-manager.partials._pagination')
 
             </div>
             <!-- END Application product -->
-
-            @include('admin-center.products-manager.partials._pagination')
 
         </div>
     </div>
@@ -107,5 +67,5 @@
 @endsection
 
 @section('scripts')
-
+<script src="/js/admin-center_products-manager_index.js"></script>
 @endsection

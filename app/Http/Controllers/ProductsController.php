@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Add, edit and delete products
+ * Add, edit and delete products.
  *
  * @author Alexandru Bugarin <alexandru.bugarin@gmail.com>
  */
