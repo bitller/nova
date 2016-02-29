@@ -5814,6 +5814,48 @@ button.close {
   color: #555555;
   font-weight: bold; }
 
+/**
+ * Import products manager page.
+ */
+#products-manager-index .top-part {
+  padding: 20px; }
+
+#products-manager-index .application-products {
+  padding: 20px; }
+
+#products-manager-index .title-and-number-of-products {
+  display: inline-block; }
+
+#products-manager-index .primary-divider {
+  display: inline-block;
+  background-color: #D2527F;
+  color: #ffffff;
+  vertical-align: middle;
+  height: 3 40px;
+  width: 100%;
+  line-height: 40px;
+  padding: 0 20px 0 20px;
+  font-size: 17px; }
+
+#products-manager-index .title {
+  font-size: 17px;
+  cursor: pointer; }
+
+#products-manager-index .number-of-application-products {
+  color: #888888;
+  font-size: 13px; }
+
+#products-manager-index .product-title a {
+  color: #6e6e6e;
+  font-size: 17px; }
+
+#products-manager-index .product-details {
+  color: #888888;
+  font-size: 14px; }
+
+#products-manager-index .search-product {
+  cursor: pointer; }
+
 .custom-button {
   background-color: transparent;
   border: 2px solid #ffffff;
@@ -7157,6 +7199,15 @@ button.close {
   font-size: 25px; }
 
 .custom-well {
+  background-color: #ffffff;
+  box-shadow: none;
+  border-top: 1px solid #F0F0F0;
+  border-left: 1px solid #E2E2E2;
+  border-right: 1px solid #E2E2E2;
+  border-bottom: 2px solid #E2E2E2; }
+
+.custom-well-with-no-padding {
+  padding: 0;
   background-color: #ffffff;
   box-shadow: none;
   border-top: 1px solid #F0F0F0;

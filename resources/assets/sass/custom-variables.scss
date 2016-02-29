@@ -39,7 +39,7 @@ $pagination-hover-bg: darken($brand-primary, 8%);
 $pager-bg:                             $pagination-bg !default;
 $pager-border:                         $pagination-border !default;
 $pager-border-radius:                  15px !default;
-$pager-color: #ffffff;
+$pager-color: #ffffff !default;
 $pager-border-radius: 5px;
 
 $pager-hover-bg:                       $pagination-hover-bg !default;

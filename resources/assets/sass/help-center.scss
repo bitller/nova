@@ -95,6 +95,17 @@
   border-bottom: 2px solid $border-color;
 }
 
+.custom-well-with-no-padding {
+  padding: 0;
+  $border-color: #E2E2E2;
+  background-color: #ffffff;
+  box-shadow: none;
+  border-top: 1px solid #F0F0F0;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom: 2px solid $border-color;
+}
+
 .well-text {
   color: #7A7A7A;
 }

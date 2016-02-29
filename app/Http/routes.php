@@ -309,6 +309,11 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         Route::get('/get', 'SupportCenterController@get');
     });
 
+    // Products manager
+    Route::group(['prefix' => 'products-manager', 'namespace' => 'ProductsManager'], function() {
+        get('/', 'IndexController@index');
+    });
+
 });
 
 // Subscribe page
