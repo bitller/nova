@@ -3,6 +3,7 @@
 namespace App\Helpers\AdminCenter\ProductsManager;
 use App\ApplicationProduct;
 use App\Helpers\Settings;
+use DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
@@ -12,6 +13,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
  */
 class ProtectedHelpers {
 
+    /**
+     * Paginate searched products.
+     *
+     * @param string $searchTerm
+     * @param int $page
+     * @return LengthAwarePaginator
+     */
     protected static function paginateSearchedProducts($searchTerm, $page) {
 
         // Query for results
@@ -44,4 +52,39 @@ class ProtectedHelpers {
         return $paginate;
     }
 
+    protected static function addNewProduct($data) {
+
+        // Check if product is used by some user and alert those users about the change
+        $userIds = self::checkIfProductIsUsedByUsers($data['code']);
+
+        if (count($userIds)) {
+            // Product is used, update current product code
+        }
+
+        // Product is used, alert users about the change
+    }
+
+    /**
+     * Check if given $code is used by some user. If is used, ids of that users will be returned, otherwise false.
+     *
+     * @param string $code
+     * @return array|bool
+     */
+    private static function checkIfProductIsUsedByUsers($code) {
+
+        $query = DB::table('products')->where('code', $code)->get();
+
+        // Product is not used
+        if (!count($query)) {
+            return false;
+        }
+
+        // Product is used, return an array with all user ids
+        $userIds = [];
+        foreach ($query as $result) {
+            $userIds[] = $result->user_id;
+        }
+
+        return $userIds;
+    }
 }

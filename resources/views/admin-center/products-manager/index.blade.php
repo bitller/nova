@@ -19,11 +19,11 @@
                     </div>
                     <!-- END Page title -->
 
-                    <!-- BEGIN Number of application products -->
+                    <!-- BEGIN Page short description -->
                     <div class="number-of-application-products">
-                        {{ trans('products_manager.there_are') }} @{{ products.total }} {{ trans('products_manager.products') }}.
+                        {{ trans('products_manager.short_page_description') }}
                     </div>
-                    <!-- END Number of application products -->
+                    <!-- END Page short description -->
 
                 </div>
                 <!-- END Page title and number of application products -->
@@ -83,6 +83,7 @@
             <!-- END Application product -->
 
         </div>
+        @include('includes.modals.admin-center.products-manager.add-application-product.add-application-product')
     </div>
     <!-- END Products manager -->
 @endsection

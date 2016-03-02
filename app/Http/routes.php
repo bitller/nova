@@ -314,6 +314,9 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
         get('/', 'IndexController@index');
         get('/get', 'IndexController@get');
         get('/get/search', 'IndexController@search');
+
+        post('/add-new', 'IndexController@addNew');
+        post('/check-if-code-is-used', 'IndexController@checkIfCodeIsUsed');
     });
 
 });

@@ -56,10 +56,10 @@ $alert-info-bg: $info-bg;
 $alert-info-text: #ffffff;
 $alert-info-border: $info-bg;
 
-$warning-bg: #DCC48E;
+$warning-bg: #FFE7B7;
 $alert-warning-bg: $warning-bg;
-$alert-warning-border: $warning-bg;
-$alert-warning-text: #ffffff;
+$alert-warning-border: darken($warning-bg, 6);
+$alert-warning-text: darken($warning-bg, 40);
 
 $alert-danger-bg: $danger-color;
 $alert-danger-text: #ffffff;

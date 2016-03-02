@@ -4323,7 +4323,7 @@ a.thumbnail.active {
 .alert {
   padding: 15px;
   margin-bottom: 20px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 4px; }
   .alert h4 {
     margin-top: 0;
@@ -4365,13 +4365,13 @@ a.thumbnail.active {
     color: #e6e6e6; }
 
 .alert-warning {
-  background-color: #DCC48E;
-  border-color: #DCC48E;
-  color: #ffffff; }
+  background-color: #FFE7B7;
+  border-color: #ffdd98;
+  color: #ea9c00; }
   .alert-warning hr {
-    border-top-color: #d6ba7b; }
+    border-top-color: #ffd47f; }
   .alert-warning .alert-link {
-    color: #e6e6e6; }
+    color: #b77a00; }
 
 .alert-danger {
   background-color: #e74c3c;
@@ -5869,6 +5869,10 @@ button.close {
 
 #products-manager-index .search-application-products {
   display: none; }
+
+#products-manager-index .check-code-link {
+  display: inline-block;
+  padding: 5px 0 5px 0; }
 
 .custom-button {
   background-color: transparent;

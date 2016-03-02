@@ -20,4 +20,7 @@ class ProductsManagerHelper extends ProtectedHelpers {
         return self::paginateSearchedProducts($searchTerm, $page);
     }
 
+    public static function addNew($data) {
+        //
+    }
 }

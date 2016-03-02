@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\AdminCenter\ProductsManager;
 
 use App\ApplicationProduct;
+use App\Forms\AddNewApplicationProductForm;
 use App\Helpers\AdminCenter\ProductsManager\ProductsManagerHelper;
+use App\Helpers\AjaxResponse;
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\AdminCenter\ProductsManager\AddNewApplicationProductRequest;
+use App\Http\Requests\AdminCenter\ProductsManager\CheckIfProductCodeIsUsedRequest;
 use App\Http\Requests\AdminCenter\ProductsManager\GetProductsRequest;
 use App\Http\Requests\AdminCenter\ProductsManager\SearchProductsRequest;
+use App\Product;
 
 /**
  * Handle management of application products.
@@ -50,5 +55,34 @@ class IndexController extends BaseController {
      */
     public function search(SearchProductsRequest $request) {
         return ProductsManagerHelper::searchedBillsPagination($request->get('term'), $request->get('page'));
+    }
+
+    public function addNew(AddNewApplicationProductRequest $request) {
+
+        $applicationProductForm = new AddNewApplicationProductForm($request->all());
+
+        return $applicationProductForm->add();
+    }
+
+    /**
+     * Check if given product code is used by some user or not.
+     *
+     * @param CheckIfProductCodeIsUsedRequest $request
+     * @param AjaxResponse $response
+     * @return mixed
+     */
+    public function checkIfCodeIsUsed(CheckIfProductCodeIsUsedRequest $request, AjaxResponse $response) {
+
+        $response->setSuccessMessage(trans('common.success'));
+
+        // Assume product is not used and update status if is used
+        $used = false;
+        if (Product::where('code', $request->get('product_code'))->count() || ApplicationProduct::where('code', $request->get('product_code'))->count()) {
+            $used = true;
+        }
+
+        $response->addExtraFields(['used' => $used]);
+
+        return response($response->get())->header('Content-Type', 'application/json');
     }
 }
