@@ -2,56 +2,101 @@
 @section('content')
     @include('includes.ajax-translations.common')
     @include('includes.ajax-translations.products')
-    <div id="products">
-        <div v-show="loaded">
 
-            <!-- BEGIN Add product button -->
-            <div class="add-product-button">
-                <span class="avon-products">{{ trans('products.avon_products') }} <span class="badge" data-toggle="tooltip" title="{{ trans('products.tooltip') }}" data-placement="right">@{{ products.total }}</span></span>
-                <a href="/my-products"><button type="button" class="btn btn-primary pull-right" v-on="click: addClient()">
-                    <span class="glyphicon glyphicon-link"></span> {{ trans('products.my_products') }}
-                </button></a>
+    <div id="products" class="well custom-well-with-no-padding">
+        <div>
+            <!-- BEGIN Top part -->
+            <div class="ff-top-part">
+
+                <!-- BEGIN Page title and description -->
+                <div class="ff-title-and-description">
+
+                    <!-- BEGIN Page title -->
+                    <div class="ff-title">
+                        {{ trans('products.page_title') }}
+                    </div>
+                    <!-- END Page title -->
+
+                    <!-- BEGIN Page short description -->
+                    <div class="ff-description">
+                        {{ trans('products.page_description') }}
+                    </div>
+                    <!-- END Page short description -->
+
+                </div>
+                <!-- END Page title and description -->
+
+                <!-- BEGIN My products button -->
+                <a href="/my-products">
+                    <button class="btn btn-primary pull-right">
+                        <i class="glyphicon glyphicon-link"></i>
+                        {{ trans('products.my_products') }}
+                    </button>
+                </a>
+                <!-- END My products button -->
+
             </div>
-            <!-- END Add product button -->
+            <!-- END Top part -->
 
-            <!-- BEGIN Products table-->
-            <div class="panel panel-default">
-                <table class="table table-bordered" v-show="products.total">
-                    <thead>
-                    <tr>
-                        <!-- BEGIN Product code -->
-                        <th class="text-center">
-                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('products.product_code_tooltip') }}">
-                                {{ trans('common.product_code') }}
-                            </span>
-                        </th>
-                        <!-- END Product code -->
-
-                        <!-- BEGIN Product name -->
-                        <th class="text-center">
-                            <span data-toggle="tooltip" data-placement="top" title="{{ trans('products.product_name_tooltip') }}">
-                                {{ trans('common.product_name') }}
-                            </span>
-                        </th>
-                        <!-- END Product name -->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-repeat="product in products.data">
-                        <td class="vert-align text-center"><a href="/product-details/@{{ product.code }}">@{{ product.code }}</a></td>
-                        <td class="vert-align text-center"><a href="/product-details/@{{ product.code }}">@{{ product.name }}</a></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <!-- BEGIN Primary divider -->
+            <div class="ff-primary-divider">
+                <span class="search-product pointer" v-on="click: toggleSearch">{{ trans('products.search_product') }}</span>
             </div>
-            <!-- END Products table -->
+            <!-- END Primary divider -->
 
-            <!-- BEGIN Pagination links -->
-            <ul class="pager" v-show="products.total > products.per_page">
-                <li v-class="disabled : !products.prev_page_url"><a href="#" v-on="click: paginate(products.prev_page_url)">{{ trans('common.previous') }}</a></li>
-                <li v-class="disabled : !products.next_page_url"><a href="#" v-on="click: paginate(products.next_page_url)">{{ trans('common.next') }}</a></li>
-            </ul>
-            <!-- END Pagination links -->
+            <!-- BEGIN Content -->
+            <div class="ff-content">
+                <div class="row">
+
+                    <!-- BEGIN Search application products -->
+                    <div class="form-group col-md-12 search-application-products">
+                        <input v-model="search_term" v-on="keyup:search | key 13" id="search-application-products-input" type="text" class="form-control" placeholder="{{ trans('products_manager.search_placeholder') }}" />
+                    </div>
+                    <!-- END Search application products -->
+
+                    <!-- BEGIN Search results text -->
+                    <div v-show="searched" class="col-md-12 search-results-text">
+                        <span>{{ trans('products_manager.search_results') }}:</span>
+                    </div>
+                    <!-- END Search results text -->
+
+                    <!-- BEGIN No search results -->
+                    <div class="col-md-12" v-show="searched && products.total < 1">
+                        <div class="well custom-well no-search-results-text">
+                            <strong>{{ trans('products_manager.no_search_results') }}</strong>
+                            <a href="#" v-on="click:resetSearch">{{ trans('products_manager.click_here_to_show_all_products') }}</a>
+                        </div>
+                    </div>
+                    <!-- END No search results -->
+
+                    <!-- BEGIN Products -->
+                    <div class="col-md-6" v-repeat="product in products.data">
+
+                        <!-- BEGIN Product -->
+                        <div class="well custom-well">
+
+                            <!-- BEGIN Product title -->
+                            <strong class="product-title">
+                                <a href="/product-details/@{{ product.code }}">@{{ product.code }} - @{{ product.name }}</a>
+                            </strong>
+                            <!-- END Product title -->
+
+                            <!-- BEGIN Product added on -->
+                            <div class="product-details">
+                                <strong>{{ trans('products_manager.added_on') }}:</strong> @{{ product.created_at }}
+                            </div>
+                            <!-- END Product added on -->
+                        </div>
+                        <!-- END Product -->
+
+                    </div>
+                    <!-- END Products -->
+                </div>
+
+                @include('admin-center.products-manager.partials._pagination')
+
+            </div>
+            <!-- END Content -->
 
         </div>
     </div>

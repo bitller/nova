@@ -21,7 +21,7 @@
 
                     <!-- BEGIN Page short description -->
                     <div class="number-of-application-products">
-                        {{ trans('products_manager.short_page_description') }} @{{ products.total }} {{ trans('products_manager.products') }}.
+                        {{ trans('products_manager.short_page_description') }}
                     </div>
                     <!-- END Page short description -->
 

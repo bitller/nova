@@ -5831,7 +5831,7 @@ button.close {
   background-color: #D2527F;
   color: #ffffff;
   vertical-align: middle;
-  height: 3 40px;
+  height: 40px;
   width: 100%;
   line-height: 40px;
   padding: 0 20px 0 20px;
@@ -5873,6 +5873,37 @@ button.close {
 #products-manager-index .check-code-link {
   display: inline-block;
   padding: 5px 0 5px 0; }
+
+/**
+ * Import flat format design
+ */
+.ff-top-part, .ff-content {
+  padding: 20px; }
+
+.ff-content {
+  background-color: #F6F7F8; }
+
+.ff-title-and-description {
+  display: inline-block; }
+
+.ff-title {
+  font-size: 17px;
+  cursor: pointer; }
+
+.ff-description {
+  color: #888888;
+  font-size: 13px; }
+
+.ff-primary-divider {
+  display: inline-block;
+  background-color: #D2527F;
+  color: #ffffff;
+  vertical-align: middle;
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+  padding: 0 20px 0 20px;
+  font-size: 17px; }
 
 .custom-button {
   background-color: transparent;
@@ -7144,6 +7175,31 @@ button.close {
   font-size: 20px;
   padding-top: 6px;
   display: inline-block; }
+
+.search-results-text {
+  color: #888888;
+  font-size: 15px;
+  margin-bottom: 5px; }
+
+.search-results-text span {
+  display: inline-block; }
+
+.no-search-results-text {
+  color: #6e6e6e; }
+
+.product-title a {
+  color: #6e6e6e;
+  font-size: 17px; }
+
+.product-details {
+  color: #888888;
+  font-size: 14px; }
+
+.search-product {
+  cursor: pointer; }
+
+.search-application-products {
+  display: none; }
 
 .custom-jumbotron {
   margin-top: -10px;

@@ -8,9 +8,11 @@ return [
     'my_products' => 'My products',
     'name' => 'Product name',
     'page_help' => 'Here you find all products from Avon catalogue, ordered ascending by their 5 number unique code.',
+    'page_title' => 'Products from catalogue',
     'product_code_tooltip' => 'Product code from catalogue',
     'product_name_edit' => 'Product name edited!',
     'product_name_tooltip' => 'Product name from catalogue',
     'products_list' => 'Products list',
+    'search_products' => 'Search product',
     'tooltip' => 'Number of Avon products'
 ];
