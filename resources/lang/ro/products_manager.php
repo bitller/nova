@@ -6,9 +6,15 @@ return [
     'application_products' => 'Produsele aplicaţiei',
     'check_if_code_is_used' => 'Verifică dacă acest cod este folosit',
     'click_here_to_show_all_products' => 'Click aici pentru a afișa toate produsele.',
+    'edit_product_name' => 'Editează numele acestui produs',
+    'generated_money_by_this_product' => 'Aces produs a generat :money ron.',
+    'more_details' => 'Mai multe detalii',
     'no_search_results' => 'Nu a fost găsit niciun produs.',
     'not_used_product_code' => 'Un cod care nu este folosit',
     'not_used_product_code_placeholder' => 'Codul care va înlocui actualul cod folosit de alte produse',
+    'number_of_bills_that_use_this_product' => 'Acest produs este folosit în :number (de) facturi.',
+    'number_of_users_that_use_this_product' => 'Acest produs este folosit de :number (de) utilizatori.',
+    'options' => 'Opțiuni',
     'other_product_code' => 'Un cod nefolosit',
     'other_product_code_available' => 'Perfect. Acest cod nu este folosit și îl va înlocui pe cel care este deja folosit',
     'other_product_code_tooltip' => 'Noul cod care va înlocui codul deja folosit pentru a îl face dispnibil',
@@ -29,5 +35,6 @@ return [
     'search_results' => 'Rezultatele căutării',
     'short_page_description' => 'Vizualizează, caută, adaugă sau editează produsele aplicației.',
     'showing' => 'Sunt afișate',
+    'sold_pieces_of_this_product' => 'Aces produs a fost vândut în :number (de) bucăți.',
     'there_are' => 'Aplicaţia conţine'
 ];

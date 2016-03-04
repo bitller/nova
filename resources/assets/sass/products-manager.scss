@@ -1,18 +1,18 @@
 $padding: 20px;
 
-#products-manager-index .top-part {
+#products-manager-index .top-part, #products-manager-product .top-part {
   padding: $padding;
 }
 
-#products-manager-index .application-products {
+#products-manager-index .application-products, #products-manager-product .application-products {
   padding: $padding;
 }
 
-#products-manager-index .title-and-number-of-products {
+#products-manager-index .title-and-number-of-products, #products-manager-product .title-and-number-of-products {
   display: inline-block;
 }
 
-#products-manager-index .primary-divider {
+#products-manager-index .primary-divider, #products-manager-product .primary-divider {
   $height: 40px;
   display: inline-block;
   background-color: $brand-primary;
@@ -25,12 +25,12 @@ $padding: 20px;
   font-size: 17px;
 }
 
-#products-manager-index .title {
+#products-manager-index .title, #products-manager-product .title {
   font-size: 17px;
   cursor: pointer;
 }
 
-#products-manager-index .number-of-application-products {
+#products-manager-index .number-of-application-products, #products-manager-product .number-of-application-products {
   color: darken($default-grey, 35);
   font-size: 13px;
 }

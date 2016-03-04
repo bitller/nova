@@ -317,6 +317,13 @@ Route::group(['prefix' => 'admin-center', 'namespace' => 'AdminCenter'], functio
 
         post('/add-new', 'IndexController@addNew');
         post('/check-if-code-is-used', 'IndexController@checkIfCodeIsUsed');
+
+        // Application product page
+        Route::group(['prefix' => 'product/{productId}/{productCode}'], function() {
+            get('/', 'ProductController@index');
+            get('/get', 'ProductController@get');
+        });
+
     });
 
 });

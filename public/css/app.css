@@ -5817,16 +5817,16 @@ button.close {
 /**
  * Import products manager page.
  */
-#products-manager-index .top-part {
+#products-manager-index .top-part, #products-manager-product .top-part {
   padding: 20px; }
 
-#products-manager-index .application-products {
+#products-manager-index .application-products, #products-manager-product .application-products {
   padding: 20px; }
 
-#products-manager-index .title-and-number-of-products {
+#products-manager-index .title-and-number-of-products, #products-manager-product .title-and-number-of-products {
   display: inline-block; }
 
-#products-manager-index .primary-divider {
+#products-manager-index .primary-divider, #products-manager-product .primary-divider {
   display: inline-block;
   background-color: #D2527F;
   color: #ffffff;
@@ -5837,11 +5837,11 @@ button.close {
   padding: 0 20px 0 20px;
   font-size: 17px; }
 
-#products-manager-index .title {
+#products-manager-index .title, #products-manager-product .title {
   font-size: 17px;
   cursor: pointer; }
 
-#products-manager-index .number-of-application-products {
+#products-manager-index .number-of-application-products, #products-manager-product .number-of-application-products {
   color: #888888;
   font-size: 13px; }
 
