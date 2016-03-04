@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'added_on' => 'Adăugat în data de',
     'bills_that_contain_product' => 'Facturile neplătite în care apare acest produs',
     'client_name' => 'Numele clientului',
     'code_already_used' => 'Codul introdus aparține altui produs.',
@@ -17,6 +18,10 @@ return [
     'product_code_input_required' => 'Introduceți noul code al produsului!',
     'product_deleted' => 'Produsul a fost şters!',
     'product_name_input_required' => 'Introduceți noul nume al produsului!',
+    'product_not_appear_in_any_paid_bill' => 'Acest produs nu apare în nicio factură marcată ca plătită.',
+    'product_not_appear_in_any_unpaid_bill' => 'Acest produs nu apare în nicio factură marcată ca neplătită.',
     'product_statistics' => 'Statisticile produsului',
-    'total_price' => 'Preţ total'
+    'statistics' => 'Statistici despre acest produs',
+    'total_price' => 'Preţ total',
+    'unpaid_bills_that_contain_this_product' => 'Facturile neplătite care conțin acest produs',
 ];

@@ -70,7 +70,7 @@ new Vue({
                 thisInstance.$http.post('/product-details/' + Data.getProductCode() + '/edit-name', data, function(response) {
 
                     // Handle success response
-                    this.$set('name', response.name);
+                    this.$set('product.name', response.name);
                     Alert.success(response.title, response.message);
 
                 }).error(function(response) {

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'added_on' => 'Added on',
     'bills_that_contain_product' => 'Not paid bills that contain this product',
     'client_name' => 'Client name',
     'code_already_used' => 'This code is already used by another product.',
@@ -17,6 +18,9 @@ return [
     'product_code_input_required' => 'New product code is required!',
     'product_deleted' => 'Product deleted!',
     'product_name_input_required' => 'New product name is required!',
+    'product_not_appear_in_any_paid_bill' => 'This product does not appear in any paid bill.',
+    'product_not_appear_in_any_unpaid_bill' => 'This product does not appear in any unpaid bill.',
     'product_statistics' => 'Product statistics',
+    'statistics' => 'Statistics about this product',
     'total_price' => 'Total price',
 ];

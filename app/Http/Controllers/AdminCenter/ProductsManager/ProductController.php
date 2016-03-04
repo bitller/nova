@@ -23,10 +23,26 @@ class ProductController extends BaseController {
         $this->middleware('admin');
     }
 
+    /**
+     * Render product details index page.
+     *
+     * @param int $productId
+     * @param string $productCode
+     * @return mixed
+     */
     public function index($productId, $productCode) {
         return view('admin-center.products-manager.product')->with('productId', $productId)->with('productCode', $productCode);
     }
 
+    /**
+     * Get product data.
+     *
+     * @param int $productId
+     * @param string $productCode
+     * @param GetProductRequest $request
+     * @param AjaxResponse $response
+     * @return mixed
+     */
     public function get($productId, $productCode, GetProductRequest $request, AjaxResponse $response) {
 
         // Make sure product exists
