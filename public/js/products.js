@@ -183,15 +183,23 @@ new Vue({
          * Get products data
          *
          * @param url
+         * @param callback
          */
-        getProducts: function(url) {
+        getProducts: function(url, callback) {
 
-            Nova.showLoader(Nova.getCommonTranslation('loading'));
+            Alert.loader();
 
             this.$http.get(url, function(response) {
+
                 this.$set('products', response);
                 this.$set('loaded', true);
-                Nova.hideLoader();
+
+                if (typeof callback === 'undefined') {
+                    Nova.hideLoader();
+                    return;
+                }
+
+                callback();
             });
         },
 
@@ -275,8 +283,53 @@ new Vue({
 
             // Do request and show errors or success message if all is ok
 
-        }
+        },
 
+        /**
+         * Toggle search application products bar.
+         */
+        toggleSearch: function() {
+            $('.search-application-products').toggle();
+        },
+
+        /**
+         * Search application products.
+         */
+        search: function() {
+
+            Alert.loader();
+            var thisInstance = this;
+
+            var url = '/products/get/search?term=';
+            if (typeof this.$get('search_term') !== 'undefined') {
+                url += this.$get('search_term');
+            }
+
+            this.getProducts(url, function() {
+
+                var searched = false;
+                if (thisInstance.$get('search_term')) {
+                    searched = true;
+                }
+
+                thisInstance.$set('searched', searched);
+                Alert.close();
+            });
+        },
+
+        /**
+         * Reset search input and results.
+         */
+        resetSearch: function() {
+            Alert.loader();
+            var thisInstance = this;
+
+            this.getProducts('/products/get', function() {
+                thisInstance.$set('search_term', '');
+                $('#search-application-products-input').val('');
+                Alert.close();
+            });
+        }
     }
 
 });

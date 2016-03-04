@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\DB;
  */
 class Products {
 
+    public static function search()
+
     /**
      * Calculate new price of a product when quantity is updated.
      *

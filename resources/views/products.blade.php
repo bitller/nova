@@ -56,15 +56,17 @@
 
                     <!-- BEGIN Search results text -->
                     <div v-show="searched" class="col-md-12 search-results-text">
-                        <span>{{ trans('products_manager.search_results') }}:</span>
+                        <strong>{{ trans('products_manager.search_results') }}:</strong>
                     </div>
                     <!-- END Search results text -->
 
                     <!-- BEGIN No search results -->
                     <div class="col-md-12" v-show="searched && products.total < 1">
                         <div class="well custom-well no-search-results-text">
-                            <strong>{{ trans('products_manager.no_search_results') }}</strong>
-                            <a href="#" v-on="click:resetSearch">{{ trans('products_manager.click_here_to_show_all_products') }}</a>
+                            <strong>
+                                {{ trans('products_manager.no_search_results') }}
+                                <a href="#" v-on="click:resetSearch">{{ trans('products_manager.click_here_to_show_all_products') }}</a>
+                            </strong>
                         </div>
                     </div>
                     <!-- END No search results -->

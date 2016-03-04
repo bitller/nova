@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Helpers\Paginators\PaginateApplicationProductsSearchResults;
 use App\Helpers\Settings;
 use App\Http\Requests\EditProductNameRequest;
+use App\Http\Requests\Products\SearchApplicationProductRequest;
 use App\Product;
 use App\ApplicationProduct;
 use Illuminate\Http\Request;
@@ -61,7 +63,16 @@ class ProductsController extends BaseController {
         ];
 
         return response($response)->header('Content-Type', 'application/json');
+    }
 
+    /**
+     * Handle search of application products.
+     *
+     * @param SearchApplicationProductRequest $request
+     * @return LengthAwarePaginator
+     */
+    public function search(SearchApplicationProductRequest $request) {
+        return PaginateApplicationProductsSearchResults::get($request->get('term'), $request->get('page'));
     }
 
 }

@@ -92,10 +92,13 @@ Route::group(['prefix' => 'clients'], function() {
 
 // Products page
 Route::group(['prefix' => 'products'], function() {
-    Route::get('/', 'ProductsController@index');
-    Route::get('/get', 'ProductsController@getProducts');
-    Route::get('/create', 'ProductsController@create');
-    Route::post('/{productId}/edit-name', 'ProductsController@editName');
+
+    get('/', 'ProductsController@index');
+    get('/get', 'ProductsController@getProducts');
+    get('/get/search', 'ProductsController@search');
+    get('/create', 'ProductsController@create');
+
+    post('/{productId}/edit-name', 'ProductsController@editName');
 });
 
 // My products page
