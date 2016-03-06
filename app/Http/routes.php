@@ -103,11 +103,14 @@ Route::group(['prefix' => 'products'], function() {
 
 // My products page
 Route::group(['prefix' => 'my-products'], function() {
-    Route::get('/', 'MyProductsController@index');
-    Route::get('/get', 'MyProductsController@getProducts');
-    Route::get('/{productId}/delete', 'MyProductsController@deleteProduct');
-    Route::get('/check/{code}', 'MyProductsController@checkProductCode');
-    Route::post('/add', 'MyProductsController@addProduct');
+
+    get('/', 'MyProductsController@index');
+    get('/get', 'MyProductsController@getProducts');
+    get('/get/search', 'MyProductsController@search');
+    get('/{productId}/delete', 'MyProductsController@deleteProduct');
+    get('/check/{code}', 'MyProductsController@checkProductCode');
+
+    post('/add', 'MyProductsController@addProduct');
 });
 
 // Statistics page

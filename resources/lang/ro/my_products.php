@@ -11,6 +11,7 @@ return [
     'my_products' => 'Produsele mele',
     'no_products' => 'Această pagină conține produsele create de tine. Dacă vrei să adaugi alte produse pe lângă cele care le oferă aplicația, o poți face folosind butonul de mai sus.',
     'number_of_products_added' => 'Numărul produselor adăugate de tine.',
+    'page_description' => 'Toate produsele adăugate de tine',
     'page_help' => 'Puteţi adăuga propriile dumneavoastră produse pentru a le folosi în facturi.',
     'product_added' => 'Produsul a fost adăgat!',
     'product_code' => 'Codul produsului',
@@ -21,4 +22,5 @@ return [
     'product_name_example' => 'Exemplu: Ceas Asier',
     'product_name_info' => 'Numele produsului pe care doriți să îl adăugați.',
     'product_name_info_two' => 'Numele din catalog al produsului.',
+    'search_product' => 'Caută produs',
 ];

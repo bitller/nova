@@ -11,6 +11,7 @@ return [
     'my_products' => 'My products',
     'no_products' => 'Here are all products created by you. If you want to add other products use the button on top.',
     'number_of_products_added' => 'Number of products added by you.',
+    'page_description' => 'Products added by you',
     'page_help' => 'You can add your own products to use in bills.',
     'product_added' => 'Product added!',
     'product_code' => 'Product code',
@@ -20,5 +21,6 @@ return [
     'product_name' => 'Product name',
     'product_name_example' => 'Example: Asier watch',
     'product_name_info' => 'Product name from catalogue.',
-    'product_name_info_two' => 'Product name from catalogue.'
+    'product_name_info_two' => 'Product name from catalogue.',
+    'search_product' => 'Search product',
 ];

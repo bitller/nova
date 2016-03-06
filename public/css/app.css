@@ -5880,6 +5880,9 @@ button.close {
 .ff-top-part, .ff-content {
   padding: 20px; }
 
+.ff-top-part {
+  background-color: #ffffff; }
+
 .ff-content {
   background-color: #F6F7F8; }
 
@@ -5904,6 +5907,12 @@ button.close {
   line-height: 40px;
   padding: 0 20px 0 20px;
   font-size: 17px; }
+
+/**
+ * Import style for my products page
+ */
+.search-products {
+  display: none; }
 
 .custom-button {
   background-color: transparent;

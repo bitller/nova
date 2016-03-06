@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\ApplicationProduct;
 use App\Helpers\AjaxResponse;
+use App\Helpers\Paginators\PaginateProductsSearchResults;
 use App\Helpers\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\CheckProductCodeRequest;
 use App\Http\Requests\MyProducts\AddCustomProductRequest;
+use App\Http\Requests\MyProducts\SearchProductsRequest;
 use App\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -32,7 +34,7 @@ class MyProductsController extends BaseController {
      * @return \Illuminate\View\View
      */
     public function index() {
-        return view('my-products');
+        return view('my-products.index');
     }
 
     /**
@@ -42,6 +44,16 @@ class MyProductsController extends BaseController {
      */
     public function getProducts() {
         return Product::where('user_id', Auth::user()->id)->orderBy('code', 'asc')->paginate(Settings::displayedCustomProducts());
+    }
+
+    /**
+     * Allow user to search products.
+     *
+     * @param SearchProductsRequest $request
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function search(SearchProductsRequest $request) {
+        return PaginateProductsSearchResults::get($request->get('term'), $request->get('page'));
     }
 
     /**

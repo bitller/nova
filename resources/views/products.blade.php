@@ -3,7 +3,7 @@
     @include('includes.ajax-translations.common')
     @include('includes.ajax-translations.products')
 
-    <div id="products" class="well custom-well-with-no-padding">
+    <div id="products" class="well custom-well-with-no-padding" v-show="loaded">
         <div>
             <!-- BEGIN Top part -->
             <div class="ff-top-part">

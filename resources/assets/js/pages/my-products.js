@@ -99,6 +99,44 @@ new Vue({
         },
 
         /**
+         * Toggle search products bar.
+         */
+        toggleSearch: function() {
+            $('.search-products').toggle();
+        },
+
+        /**
+         * Search user custom products.
+         */
+        search: function() {
+
+            var thisInstance = this;
+            
+            this.getMyProducts('/my-products/get/search?term=' + this.$get('search_term'), function() {
+
+                var searched = false;
+
+                if (thisInstance.$get('search_term')) {
+                    searched = true;
+                }
+
+                thisInstance.$set('searched', searched);
+                Alert.close();
+            });
+        },
+
+        resetSearch: function() {
+            Alert.loader();
+            var thisInstance = this;
+
+            this.paginate('/my-products/get', function() {
+                thisInstance.$set('search_term', '');
+                $('#search-products-input').val('');
+                Alert.close();
+            });
+        },
+
+        /**
          * Reset add product modal.
          */
         resetAddProductModal: function() {
