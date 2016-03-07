@@ -63,7 +63,7 @@ class ClientsController extends BaseController {
      * @return \Illuminate\View\View
      */
     public function client($clientId) {
-        return view('client')->with('clientId', $clientId);
+        return view('clients.client')->with('clientId', $clientId);
     }
 
     /**
