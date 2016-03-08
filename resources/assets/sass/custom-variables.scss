@@ -23,6 +23,10 @@ $btn-default-color: #ffffff;
 $btn-default-bg: #C1C1C1;
 $btn-default-border: $btn-default-bg;
 
+$btn-success-color: #ffffff;
+$btn-success-bg: #06D6A0;
+$btn-success-border: #06D6A0;
+
 $btn-primary-border: $brand-primary;
 
 $btn-warning-border: $brand-warning;
@@ -56,10 +60,10 @@ $alert-info-bg: $info-bg;
 $alert-info-text: darken($info-bg, 25);
 $alert-info-border: darken($info-bg, 7);
 
-$warning-bg: #FFE7B7;
+$warning-bg: #F7CA18;
 $alert-warning-bg: $warning-bg;
-$alert-warning-border: darken($warning-bg, 6);
-$alert-warning-text: darken($warning-bg, 40);
+$alert-warning-border: $warning-bg;
+$alert-warning-text: #ffffff;
 
 $alert-danger-bg: $danger-color;
 $alert-danger-text: #ffffff;

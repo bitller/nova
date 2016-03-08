@@ -1,6 +1,16 @@
 <!-- BEGIN Last unpaid bills of this client divider -->
 <div class="ff-primary-divider">
     <span>{{ trans('clients.last_unpaid_bills') }}</span>
+
+    <!-- BEGIN View all unpaid bills -->
+    <span v-show="last_unpaid_bills">
+        &nbsp;
+        <i class="glyphicon glyphicon-arrow-right"></i>
+        &nbsp;
+        <a href="/clients/{{ $clientId }}/bills/unpaid" class="underline clients-link">{{ trans('clients.view_all_unpaid_bills') }}</a>
+    </span>
+    <!-- END View all unpaid bills -->
+
 </div>
 <!-- END Last unpaid bills of this client divider -->
 
@@ -8,7 +18,7 @@
 <div class="ff-content">
 
     <!-- BEGIN Client does not have unpaid bills -->
-    <div class="well custom-well" v-show="!last_unpaid_bills">
+    <div class="well custom-well grey-text" v-show="!last_unpaid_bills">
         <strong>{{ trans('clients.client_does_not_have_unpaid_bills') }}</strong>
     </div>
     <!-- END Client does not have unpaid bills -->

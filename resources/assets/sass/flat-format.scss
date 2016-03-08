@@ -1,4 +1,6 @@
 $default-padding: 20px;
+$content-background: #f6f7f8;
+$content-border: darken($content-background, 9%);
 
 .ff-top-part, .ff-content {
   padding: $default-padding;
@@ -9,7 +11,14 @@ $default-padding: 20px;
 }
 
 .ff-content {
-  background-color: #F6F7F8
+  background-color: $content-background;
+  border-left: 1px solid $content-border;
+  border-right: 1px solid $content-border;
+}
+
+.ff-content-end {
+  background-color: $content-background;
+  border-bottom: 1px solid $content-border;
 }
 
 .ff-title-and-description {

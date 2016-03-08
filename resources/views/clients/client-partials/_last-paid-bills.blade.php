@@ -1,6 +1,16 @@
 <!-- BEGIN Last paid bills of this client divider -->
 <div class="ff-primary-divider">
     <span>{{ trans('clients.last_paid_bills') }}</span>
+
+    <!-- BEGIN View all paid bills -->
+    <span v-show="last_paid_bills">
+        &nbsp;
+        <i class="glyphicon glyphicon-arrow-right"></i>
+        &nbsp;
+        <a href="/clients/{{ $clientId }}/bills/paid" class="underline clients-link">{{ trans('clients.view_all_paid_bills') }}</a>
+    </span>
+    <!-- END View all paid bills -->
+
 </div>
 <!-- END Last paid bills of this client divider -->
 
@@ -8,7 +18,7 @@
 <div class="ff-content">
 
     <!-- BEGIN Client does not have paid bills -->
-    <div class="well custom-well" v-show="!last_paid_bills">
+    <div class="well custom-well grey-text" v-show="!last_paid_bills">
         <strong>{{ trans('clients.client_does_not_have_paid_bills') }}</strong>
     </div>
     <!-- END Client does not have paid bills -->
