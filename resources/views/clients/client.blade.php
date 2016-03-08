@@ -22,10 +22,22 @@
                 <div class="row">
                     @include('clients.client-partials._money-user-has-to-receive')
                     @include('clients.client-partials._money-owed-due-passed-payment-term')
+                </div>
 
+                <div class="row">
                     @include('clients.client-partials._money-generated-by-this-client')
                     @include('clients.client-partials._number-of-products-ordered')
                 </div>
+
+                <div class="row">
+                    @include('clients.client-partials._money-generated-by-this-client-this-year')
+                    @include('clients.client-partials._number-of-products-ordered-this-year')
+                </div>
+
+                <div class="row">
+                    @include('clients.client-partials._statistics-info')
+                </div>
+
             </div>
             <!-- END Content -->
 

@@ -99,6 +99,12 @@ class ClientsController extends BaseController {
         // Get client statistics
         $client->statistics = ClientStatistics::all($clientId);
 
+        $client->money_generated = trans('clients.money_generated', ['money' => $client->statistics['earnings']]);
+        $client->money_generated_in_current_year = trans('clients.money_generated_by_this_client_in_this_year_more_details', ['money' => $client->statistics['earnings_in_current_year']]);
+
+        $client->number_of_products_sold = trans('clients.number_of_products_sold', ['number' => $client->statistics['number_of_products_ordered']]);
+        $client->number_of_products_sold_this_year = trans('clients.number_of_products_sold_this_year', ['number' => $client->statistics['number_of_products_ordered_this_year']]);
+
         // Money user has to receive from this client
         $client->money_user_has_to_receive = 0;
         if ($client->statistics['money_user_has_to_receive'] > 0) {

@@ -29,7 +29,7 @@
         <!-- BEGIN Table -->
         <table class="table table-bordered">
             <thead>
-                <tr>
+                <tr class="grey-text">
                     <!-- BEGIN Number of products -->
                     <th class="text-center">
                         {{ trans('clients.number_of_products') }}

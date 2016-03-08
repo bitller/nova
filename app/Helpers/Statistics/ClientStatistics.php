@@ -24,9 +24,11 @@ class ClientStatistics {
         return [
             'earnings' => self::earnings($clientId),
             'earnings_in_current_campaign' => self::earningsInCurrentCampaign($clientId),
+            'earnings_in_current_year' => self::earningsInCurrentYear($clientId),
             'money_user_has_to_receive' => self::moneyUserHasToReceive($clientId),
             'money_owed_due_passed_payment_term' => self::moneyOwedDuePassedPaymentTerm($clientId),
             'number_of_products_ordered' => self::totalNumberOfProductsOrdered($clientId),
+            'number_of_products_ordered_this_year' => self::totalNumberOfProductsOrdered($clientId, true),
             'total_discount_received' => self::totalDiscountReceived($clientId)
         ];
     }
@@ -84,6 +86,34 @@ class ClientStatistics {
         }
 
         return number_format($earningsInCurrentCampaign, 2);
+    }
+
+    /**
+     * Return how much money generated the given client in current year.
+     *
+     * @param int $clientId
+     * @return string
+     */
+    public static function earningsInCurrentYear($clientId) {
+
+        $earningsInCurrentYear = 0;
+        $whereCondition = ['campaigns.year' => Campaigns::current()->year];
+
+        // Query the two tables
+        $billProductsQuery = self::_earningsProductsQuery($clientId, $whereCondition);
+        $billApplicationProductsQuery = self::_earningsApplicationProductsQuery($clientId, $whereCondition);
+
+        // Check if first query returned something
+        if (isset($billProductsQuery[0]->earnings)) {
+            $earningsInCurrentYear += $billProductsQuery[0]->earnings;
+        }
+
+        // Now check if second query returned something
+        if (isset($billApplicationProductsQuery[0]->earnings)) {
+            $earningsInCurrentYear += $billApplicationProductsQuery[0]->earnings;
+        }
+
+        return number_format($earningsInCurrentYear, 2);
     }
 
     /**
@@ -184,25 +214,39 @@ class ClientStatistics {
      * Return number of total products ordered by given client.
      *
      * @param int $clientId
+     * @param bool $thisYear Indicate if should be counted only products sold in current year
      * @return mixed
      */
-    public static function totalNumberOfProductsOrdered($clientId) {
+    public static function totalNumberOfProductsOrdered($clientId, $thisYear = false) {
 
         // Count number of bill products
         $billProducts = DB::table('bill_products')
-            ->leftJoin('bills', 'bill_products.bill_id', '=', 'bills.id')
-            ->where('bills.client_id', $clientId)
-            ->where('bills.paid', 1)
-            ->sum('bill_products.quantity');
+            ->leftJoin('bills', 'bill_products.bill_id', '=', 'bills.id');
 
         // Count number of bill application products
         $billApplicationProducts = DB::table('bill_application_products')
-            ->leftJoin('bills', 'bill_application_products.bill_id', '=', 'bills.id')
-            ->where('bills.client_id', $clientId)
-            ->where('bills.paid', 1)
-            ->sum('bill_application_products.quantity');
+            ->leftJoin('bills', 'bill_application_products.bill_id', '=', 'bills.id');
 
-        return $billProducts + $billApplicationProducts;
+        // Check if should be counted only products sold in this year
+        if ($thisYear) {
+
+            $billProducts->leftJoin('campaigns', 'bills.campaign_id', '=', 'campaigns.id')
+                ->where('campaigns.year', Campaigns::current()->year);
+
+            $billApplicationProducts->leftJoin('campaigns', 'bills.campaign_id', '=', 'campaigns.id')
+                ->where('campaigns.year', Campaigns::current()->year);
+        }
+
+        // Continue bill products query
+        $billProducts->where('bills.client_id', $clientId)
+            ->where('bills.paid', 1);
+
+        // Resume bill application products query
+        $billApplicationProducts->where('bills.client_id', $clientId)
+            ->where('bills.paid', 1);
+
+        // R
+        return $billProducts->sum('bill_products.quantity') + $billApplicationProducts->sum('bill_application_products.quantity');
     }
 
     /**

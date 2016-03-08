@@ -7196,6 +7196,10 @@ button.close {
 .clients-link-underline:hover {
   color: #ffffff; }
 
+.more-details {
+  display: inline-block;
+  padding-top: 7px; }
+
 .add-product-button {
   margin-top: 20px;
   margin-bottom: 20px; }
@@ -8366,6 +8370,9 @@ body {
 
 .tt-suggestion p {
   margin: 0; }
+
+.underlined {
+  text-decoration: underline; }
 
 .underline:hover {
   text-decoration: underline; }
