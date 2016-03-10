@@ -68,6 +68,16 @@ class Bills extends ProtectedHelpers {
             $showDiscount = true;
         }
 
+        $notAvailableProducts = self::_getBillProducts($dataForProductsQuery, false);
+        if (!$notAvailableProducts) {
+            $notAvailableProducts = false;
+        }
+
+        $products = self::_getBillProducts($dataForProductsQuery, true);
+        if (!$products) {
+            $products = false;
+        }
+
         return [
             'to_pay' => $billCalculations['final_price'],
             'saved_money' => $billCalculations['saved_money'],
@@ -75,8 +85,8 @@ class Bills extends ProtectedHelpers {
             'number_of_products' => $billCalculations['number_of_products'],
             'show_discount_column' => $showDiscount,
             'show_other_details_info' => true,
-            'products' => self::_getBillProducts($dataForProductsQuery, true),
-            'not_available_products' => self::_getBillProducts($dataForProductsQuery, false),
+            'products' => $products,
+            'not_available_products' => $notAvailableProducts,
             'data' => $bill
         ];
     }

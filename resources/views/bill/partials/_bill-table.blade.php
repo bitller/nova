@@ -1,5 +1,5 @@
 <!-- BEGIN Bill table -->
-<div class="panel panel-default" v-show="total !== '0.00'">
+<div class="panel panel-default" v-show="total !== '0.00' && bill.products">
     <table class="table table-bordered table-condensed bill-products-table">
         <thead>
             <tr>

@@ -1,8 +1,8 @@
 <!-- BEGIN Not available products table -->
 
-<h4>{{ trans('bill.unavailable_products') }}</h4>
+<h4 v-show="total !== '0.00' && bill.not_available_products">{{ trans('bill.unavailable_products') }}</h4>
 
-<div class="panel panel-default" v-show="total !== '0.00'">
+<div class="panel panel-default" v-show="total !== '0.00' && bill.not_available_products">
 
     <table class="table table-bordered table-condensed bill-products-table">
         <thead>

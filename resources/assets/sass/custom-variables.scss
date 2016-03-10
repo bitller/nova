@@ -55,23 +55,23 @@ $pager-disabled-color:                 #ffffff !default;
 $pager-disabled-bg: lighten($brand-primary, 9%);
 
 // Alerts
-$info-bg: #54C6EB;
-$alert-info-bg: $info-bg;
-$alert-info-text: darken($info-bg, 25);
-$alert-info-border: darken($info-bg, 7);
-
-$warning-bg: #F7CA18;
-$alert-warning-bg: $warning-bg;
-$alert-warning-border: $warning-bg;
-$alert-warning-text: #ffffff;
-
-$alert-danger-bg: $danger-color;
-$alert-danger-text: #ffffff;
-$alert-danger-border: $danger-color;
-
-$alert-success-bg: #06D6A0;
-$alert-success-text: #ffffff;
-$alert-success-border: $alert-success-bg;
+//$info-bg: #54C6EB;
+//$alert-info-bg: $info-bg;
+//$alert-info-text: darken($info-bg, 25);
+//$alert-info-border: darken($info-bg, 7);
+//
+//$warning-bg: #F7CA18;
+//$alert-warning-bg: $warning-bg;
+//$alert-warning-border: $warning-bg;
+//$alert-warning-text: #ffffff;
+//
+//$alert-danger-bg: $danger-color;
+//$alert-danger-text: #ffffff;
+//$alert-danger-border: $danger-color;
+//
+//$alert-success-bg: #06D6A0;
+//$alert-success-text: #ffffff;
+//$alert-success-border: $alert-success-bg;
 
 // Lists
 $list-group-active-bg: #f4baa1;
