@@ -120,4 +120,10 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
 
+    $('#summernote').summernote({
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline']]
+        ]
+    });
+
 });

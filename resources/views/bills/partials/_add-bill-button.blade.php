@@ -8,7 +8,7 @@
     <!-- END Bills title -->
 
     <!-- BEGIN Search button -->
-    <button v-on="click: toggleSearchBar()" class="btn btn-info">
+    <button v-on="click: toggleSearchBar()" class="btn btn-default">
         <i class="glyphicon glyphicon-search"></i>
     </button>
     <!-- END Search button -->

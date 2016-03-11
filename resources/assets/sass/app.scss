@@ -1,9 +1,8 @@
 @import "custom-variables";
+@import "imports";
 @import "partials";
 
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
-@import "imports";
 
 // Welcome page
 @import "welcome";

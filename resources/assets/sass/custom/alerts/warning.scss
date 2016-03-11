@@ -1,0 +1,19 @@
+$href-color: #a1887f;
+
+.warning-alert-bold-text {
+  color: $href-color;
+  font-weight: bold;
+}
+
+.warning-alert-bold-text:hover {
+  color: $href-color;
+  text-decoration: underline;
+}
+
+.warning-alert-bold-text:active {
+  color: $href-color;
+}
+
+.warning-alert-bold-text:focus {
+  color: $href-color;
+}

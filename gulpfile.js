@@ -35,7 +35,7 @@ elixir(function(mix) {
         .scripts(['pages/base.js', 'pages/my-products.js'], 'public/js/my-products.js')
 
         // Scripts for bill page
-        .scripts(['pages/bill.js', 'jquery-scripts/bill.js', 'libs/jquery-ui.js'], 'public/js/bill.js')
+        .scripts(['pages/bill.js', 'jquery-scripts/bill.js', 'libs/jquery-ui.js', 'libs/trumbowyg.js'], 'public/js/bill.js')
         .scripts(['pages/statistics.js', 'jquery-scripts/statistics.js'], 'public/js/statistics.js')
         .scripts(['pages/settings.js', 'jquery-scripts/settings.js'], 'public/js/settings.js')
         .scripts(['pages/paid-bills.js'], 'public/js/paid-bills.js')

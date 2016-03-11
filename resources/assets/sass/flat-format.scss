@@ -8,6 +8,11 @@ $content-border: darken($content-background, 9%);
 
 .ff-top-part {
   background-color: #ffffff;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-left: 1px solid $content-border;
+  border-right: 1px solid $content-border;
+  border-top: 1px solid $content-border;
 }
 
 .ff-content {

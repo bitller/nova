@@ -1,5 +1,34 @@
 @import "css/jquery-ui";
 
+$bill-title-color: #607d8b;
+$bill-title-link-color: #455a64;
+$bill-head-color: $bill-title-link-color;
+$bill-content-color: $bill-title-link-color;
+
+.bill-normal-text-color {
+  color: $bill-title-color;
+}
+
+.bill-title {
+  color: $bill-title-color;
+}
+
+.bill-title a {
+  color: $bill-title-link-color;
+}
+
+.bill-table-head {
+  color: $bill-title-link-color;
+}
+
+.bill-table-content {
+  color: $bill-content-color;
+}
+
+.dropdown-option {
+  color: $bill-title-link-color;
+}
+
 .bill-menu {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -11,10 +40,6 @@
 
 .bill-products-table {
   border-radius: 3px;
-}
-
-.bill-title {
-  color: #828282;
 }
 
 .editable:hover {

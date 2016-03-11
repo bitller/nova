@@ -1,5 +1,5 @@
 <!-- BEGIN Client name and campaign details -->
-<span class="my-clients-title">
+<span class="my-clients-title bill-title">
 
     <!-- BEGIN Client name -->
     <a href="/clients/@{{ bill.data.client_id }}">
