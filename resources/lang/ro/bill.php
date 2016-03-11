@@ -62,7 +62,7 @@ return [
     'product_discount_required' => 'Discount-ul produsului este obligatoriu!',
     'product_name' => 'Numele produsului',
     'product_name_placeholder' => 'Exemplu: Ceas Asier',
-    'product_not_available_info' => 'Bifează doar când produsul adăugat nu poate fi livrat împreună cu celelante. În acest caz produsul va fi evidențiat și clientul va ști acest lucru.',
+    'product_not_available_info' => 'Bifează doar când produsul adăugat nu poate fi livrat împreună cu celălalte. În acest caz produsul va fi evidențiat și clientul va ști acest lucru.',
     'product_not_exists_info' => 'Se pare că acest produs nu există. Pentru a continua, completați câmpul următor cu numele produsului. După ce ați făcut asta o să puteți folosi acest produs în toate facturile.',
     'product_not_found' => 'Produsul nu a fost găsit.',
     'product_page' => 'Pagina produsului',

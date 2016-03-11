@@ -170,15 +170,16 @@ new Vue({
          */
         getBills: function(url, callback) {
 
-
             if (typeof callback === 'undefined') {
                 this.$set('loaded', false);
                 Alert.loader();
             }
 
             this.$http.get(url).success(function(data) {
+
                 this.$set('bills', data);
                 this.$set('loaded', true);
+
 
                 if (typeof callback === 'undefined') {
                     swal.close();

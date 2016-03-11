@@ -21,11 +21,7 @@
                 </div>
                 <!-- END Error message -->
 
-                {{--<div class="form-group">--}}
-                    {{--<label for="other-details">{{ trans('bill.add_bill_other_details') }}:</label>--}}
-                    {{--<textarea v-model="otherDetails" name="other-details" id="other-details" class="form-control" rows="6">@{{ other_details }}</textarea>--}}
-                {{--</div>--}}
-                <div id="summernote">Hello Summernote</div>
+                <div id="other-details" v-attr="current:other_details"></div>
 
             </div>
             <!-- END Modal body -->

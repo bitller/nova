@@ -427,7 +427,7 @@ new Vue({
             // Post data
             var data = {
                 _token: Token.get(),
-                other_details: this.$get('otherDetails')
+                other_details: $('#other-details').summernote('code')
             };
 
             this.$set('loading', true);
@@ -709,12 +709,17 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $('#summernote').summernote({
+    $('#other-details').summernote({
+        focus: true,
+        height: 300,
         toolbar: [
             ['style', ['bold', 'italic', 'underline']]
         ]
     });
 
+    $('.edit-other-details').click(function() {
+        $('#other-details').summernote('code', $('#other-details').attr('current'));
+    });
 });
 /*! jQuery UI - v1.11.4 - 2015-10-11
 * http://jqueryui.com

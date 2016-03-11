@@ -120,10 +120,15 @@ $(document).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $('#summernote').summernote({
+    $('#other-details').summernote({
+        focus: true,
+        height: 300,
         toolbar: [
             ['style', ['bold', 'italic', 'underline']]
         ]
     });
 
+    $('.edit-other-details').click(function() {
+        $('#other-details').summernote('code', $('#other-details').attr('current'));
+    });
 });

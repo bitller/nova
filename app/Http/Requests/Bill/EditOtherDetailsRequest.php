@@ -29,7 +29,7 @@ class EditOtherDetailsRequest extends AjaxRequest {
      */
     public function rules() {
         return [
-            'other_details' => ['string', 'max:2000']
+            'other_details' => ['string', 'max:10000']
         ];
     }
 

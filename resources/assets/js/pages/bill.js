@@ -427,7 +427,7 @@ new Vue({
             // Post data
             var data = {
                 _token: Token.get(),
-                other_details: this.$get('otherDetails')
+                other_details: $('#other-details').summernote('code')
             };
 
             this.$set('loading', true);
