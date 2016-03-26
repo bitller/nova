@@ -2,7 +2,7 @@
 
 return [
     'access_to_client_history' => 'Access rapid la istoricul fiecărui client.',
-    'access_to_client_history_description' => 'Pentru fiecare client în parte ai acces la numărul și suma totală a comenzilor efectuate, precum și numărul de produse comandate. Plus multe altele',
+    'access_to_client_history_description' => 'Pentru fiecare client în parte ai acces la numărul și suma totală a comenzilor efectuate, precum și numărul de produse comandate. Plus multe altele.',
     'add_products_by_code'      => 'Adaugă produsele după codul lor',
     'add_products_by_code_long' => 'Pentru a adaugă un produs la o factură, trebuie doar să introduceți codul produsului din catalogul avon iar de restul ne ocupăm noi.',
     'bills_in_seconds' => 'Generează facturi în câteva secunde.',

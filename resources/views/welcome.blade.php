@@ -62,6 +62,18 @@
         </div>
     </div>
 
+    <!-- BEGIN Campaign statistics -->
+    <div class="container-fluid campaign-statistics">
+
+    </div>
+    <!-- END Campaign statistics -->
+
+    <!-- BEGIN Compare campaigns -->
+    <div class="container-fluid">
+
+    </div>
+    <!-- END Compare campaigns -->
+
     <!-- BEGIN Fast access to client history feature -->
     <div class="container-fluid client-history-feature">
     <div class="row">
@@ -148,7 +160,7 @@
 
         <div class="row">
             <div class="container">
-                <h5>{{ trans('welcome.first_three_months_are_free') }}</h5>
+{{--                <h5>{{ trans('welcome.first_three_months_are_free') }}</h5>--}}
             </div>
         </div>
 

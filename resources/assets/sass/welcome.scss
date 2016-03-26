@@ -39,9 +39,10 @@ $border-and-text-color: #ffffff;
 }
 
 .custom-button {
-  background-color: rgba(0, 0, 0, 0.0);
-  border: 2px solid $border-and-text-color;
+  //background-color: rgba(0, 0, 0, 0.0);
+  //border: 2px solid $border-and-text-color;
   border-radius: 4px;
+  background-color: #ECECE6;
   color: $border-and-text-color;
   transition: 300ms;
 }
