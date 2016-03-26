@@ -44,6 +44,7 @@
         @include('includes.modals.add-product-to-bill')
         @include('includes.modals.other-details')
         @include('includes.modals.payment-term')
+        @include('includes.modals.help.how-to-add-product-to-bill')
         <!-- END Include modals -->
 
     </div>

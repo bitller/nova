@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Helpers\Roles;
+use App\TrialPeriod;
 use App\User;
 use App\UserSetting;
+use App\UserTrialPeriod;
 use Illuminate\Console\Command;
 
 /**
@@ -53,10 +55,17 @@ class GenerateAdmin extends Command {
         $user->role_id = $roles->getAdminRoleId();
         $user->save();
 
+        // Settings
         $settings = new UserSetting();
         $settings->user_id = $user->id;
-        $settings->language_id = 1;
+        $settings->language_id = 2;
         $settings->save();
+
+        // Trial period
+        UserTrialPeriod::create([
+            'user_id' => $user->id,
+            'trial_period_id' => TrialPeriod::first()->id
+        ]);
 
         $this->info('User with admin privileges was generated');
 

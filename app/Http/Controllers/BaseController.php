@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Helpers\Roles;
+use App\Helpers\UserHelper;
+use App\UserTrialPeriod;
 use Illuminate\Support\Facades\App;
 use App\Helpers\Settings;
 use Illuminate\Support\Facades\Auth;
@@ -29,13 +31,17 @@ class BaseController extends Controller {
             }
 
             View::share([
-                'showAdminCenter' => $showAdminCenter
+                'showAdminCenter' => $showAdminCenter,
+                'validSubscription' => UserHelper::validSubscription()
             ]);
 
             // Set language
             App::setLocale(Settings::language());
 
             // Check if user subscription is expired
+            if (UserHelper::subscriptionLeftDays(Auth::user()->id) < 0) {
+                UserTrialPeriod::where('user_id', Auth::user()->id)->update(['expired' => true]);
+            }
         }
     }
 

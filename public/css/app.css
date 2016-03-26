@@ -199,6 +199,44 @@
 .search-products {
   display: none; }
 
+/**
+ * Import style for create subscription page
+ */
+.payment-well {
+  text-align: center; }
+
+.payment-well .icon {
+  font-size: 40px;
+  vertical-align: middle; }
+
+.payment-well .payment-method-title {
+  vertical-align: middle; }
+
+.payment-well .price {
+  padding-bottom: 20px; }
+
+.payment-well-selected {
+  color: #D2527F; }
+
+.payment-intervals {
+  margin-top: 15px; }
+
+.selected-interval-info {
+  margin-top: 15px; }
+
+.payment-interval {
+  background-color: #E1E1E1;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer; }
+
+.selected-interval {
+  background-color: #D2527F;
+  color: #ffffff; }
+
+.user-does-not-have-printer {
+  margin-top: 7px; }
+
 .search-bar {
   display: none; }
 
@@ -4523,7 +4561,7 @@ a.thumbnail.active {
 .alert {
   padding: 15px;
   margin-bottom: 20px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: 4px; }
   .alert h4 {
     margin-top: 0;
@@ -5957,6 +5995,34 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.big-button {
+  padding: 20px;
+  font-size: 20px;
+  color: #ffffff; }
+
+.second-section {
+  padding: 70px 0 70px 0; }
+
+.second-section .free-text {
+  padding: 10px 0 10px 0; }
+
+.client-history-feature {
+  background-color: #ECECE6;
+  padding: 70px 0 70px 0; }
+
+.customized-bills-feature {
+  background-color: #fafafa;
+  padding: 70px 0 70px 0; }
+
+.create-bills-in-seconds-and-statistics-features {
+  padding: 70px 0 70px 0;
+  background-color: #ECECE6; }
+
+.footer {
+  background-color: #2E3435;
+  padding: 30px 0 30px 0;
+  color: #ECECE6; }
+
 .custom-button {
   background-color: transparent;
   border: 2px solid #ffffff;
@@ -5971,19 +6037,19 @@ button.close {
   transition: background-color 300ms; }
 
 .first-section {
-  background-color: #D2527F;
-  padding-bottom: 50px; }
+  background-color: #ECECE6; }
 
 .first-section .welcome-text {
   font-weight: 200;
   font-size: 35px;
   padding-top: 10px;
   padding-bottom: 30px;
-  color: #ffffff; }
+  color: #D2527F; }
 
 .first-section .welcome-text {
-  color: #ffffff;
-  font-family: 'Raleway', sans-serif; }
+  color: #D2527F;
+  font-family: 'Raleway', sans-serif;
+  padding: 60px 0 70px 0; }
 
 .first-section .description-text {
   color: #888a85;
@@ -6010,8 +6076,7 @@ button.close {
 
 .second-section {
   background-color: #FAFAFA;
-  color: #515253;
-  padding: 20px 0 40px 0; }
+  color: #515253; }
 
 .why-nova {
   padding-bottom: 20px;
@@ -6043,16 +6108,6 @@ button.close {
 
 .spacer {
   height: 100px; }
-
-.third-section {
-  padding: 80px 0 80px 0; }
-
-.third-section .title {
-  font-family: 'Raleway', sans-serif; }
-
-.third-section .description {
-  font-family: 'Raleway', sans-serif;
-  line-height: 160%; }
 
 #login-page .login-form {
   margin-top: -80px; }
@@ -8354,7 +8409,8 @@ body.stop-scrolling {
 
 body {
   padding-top: 40px;
-  background-color: #EDF1F2; }
+  background-color: #EDF1F2;
+  overflow-x: hidden; }
 
 #layout {
   padding-top: 60px; }
@@ -8524,6 +8580,9 @@ body {
 
 .grey-text {
   color: #737373; }
+
+.light-grey-text {
+  color: #999999; }
 
 /**/
 .admin-center-title {

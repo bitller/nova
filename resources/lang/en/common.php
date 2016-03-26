@@ -2,6 +2,7 @@
 
 return [
     'cancel' => 'Cancel',
+    'close' => 'Close',
     'confirm' => 'Are you sure?',
     'confirm_delete' => 'Yes, I\'m sure!',
     'continue' => 'Continue',

@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'agree' => 'Continuing you agree with our terms and conditions',
+    'bank_method_description' => 'You need to make a bank transfer.',
+    'cardholder_name' => 'Card holder name',
+    'cardholder_name_placeholder' => 'Exactly how appears on card',
+    'card_number' => 'Card number',
+    'card_number_placeholder' => 'Exactly how appears on card',
+    'choose_this_method' => 'Choose this method',
+    'create_subscription' => 'Create subscription',
+    'credit_card_method_description' => 'Billing is done automatically each month, simple and fast.',
+    'cvc' => 'CVC (Card verification code)',
+    'cvc_placeholder' => 'Last 3 digits, example: 123',
+    'expired_subscription' => 'Your subscription has expired. You can no more create bills or add new clients.',
+    'expiry_month' => 'Card expiry month',
+    'expiry_month_placeholder' => 'Eg. 01',
+    'expiry_year' => 'Card expiry year',
+    'expiry_year_placeholder' => 'Eg. 2016',
+    'free_period_expired' => 'Your free period of 3 months expired. If you still want to have access to Nova, please choose one of the following payment methods.',
+    'pay_with_bank_transfer' => 'Pay with bank transfer',
+    'print_company_details' => 'Print company details',
+    'renew' => 'Renew it here',
+    'view_company_details' => 'View company details',
+];

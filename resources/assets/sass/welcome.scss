@@ -1,7 +1,45 @@
 $border-and-text-color: #ffffff;
 
+.image-video-container {
+}
+
+.big-button {
+  padding: 20px;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.second-section {
+  padding: 70px 0 70px 0;
+}
+
+.second-section .free-text {
+  padding: 10px 0 10px 0;
+}
+
+.client-history-feature {
+  background-color: #ECECE6;
+  padding: 70px 0 70px 0;
+}
+
+.customized-bills-feature {
+  background-color: #fafafa;
+  padding: 70px 0 70px 0;
+}
+
+.create-bills-in-seconds-and-statistics-features {
+  padding: 70px 0 70px 0;
+  background-color: #ECECE6;
+}
+
+.footer {
+  background-color: #2E3435;
+  padding: 30px 0 30px 0;
+  color: #ECECE6;
+}
+
 .custom-button {
-  background-color: rgba(0,0,0,0.0);
+  background-color: rgba(0, 0, 0, 0.0);
   border: 2px solid $border-and-text-color;
   border-radius: 4px;
   color: $border-and-text-color;
@@ -16,14 +54,12 @@ $border-and-text-color: #ffffff;
 }
 
 .first-section {
-  background-color: $navbar-default-bg;
-  padding-bottom: 50px;
+  background-color: #ECECE6;
 }
 
-$text-color: #ffffff;
+$text-color: $brand-primary;
 
 .first-section .welcome-text {
-//  display: inline-block;
   font-weight: 200;
   font-size: 35px;
   padding-top: 10px;
@@ -32,8 +68,9 @@ $text-color: #ffffff;
 }
 
 .first-section .welcome-text {
-    color: $text-color;
-    font-family: 'Raleway', sans-serif;
+  color: $text-color;
+  font-family: 'Raleway', sans-serif;
+  padding: 60px 0 70px 0;
 }
 
 .first-section .description-text {
@@ -75,7 +112,7 @@ $second-section-background-color: #FAFAFA;
 .second-section {
   background-color: $second-section-background-color;
   color: #515253;
-  padding: 20px 0 40px 0;
+  //padding: 20px 0 40px 0;
 }
 
 .why-nova {
@@ -97,35 +134,38 @@ $second-section-background-color: #FAFAFA;
 }
 
 /******/
-.navbar-default{
-//  background-color:#3498DB;
-  border:none !important;
-}
-.navbar-nav>li>a:hover{
-  color:#1a1a1a;
-}
-.collapse.in{
-
-  background-color:#f2f2f2 !important;
-}
-.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus
-.spacer{
-  background-color:#888;
+.navbar-default {
+  //  background-color:#3498DB;
+  border: none !important;
 }
 
-.spacer{
-  height:100px;
+.navbar-nav > li > a:hover {
+  color: #1a1a1a;
 }
 
-.third-section {
-  padding: 80px 0 80px 0;
+.collapse.in {
+
+  background-color: #f2f2f2 !important;
 }
 
-.third-section .title {
-  font-family: 'Raleway', sans-serif;
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus
+.spacer {
+  background-color: #888;
 }
 
-.third-section .description {
-  font-family: 'Raleway', sans-serif;
-  line-height: 160%;
+.spacer {
+  height: 100px;
 }
+
+//.third-section {
+//  //padding: 80px 0 80px 0;
+//}
+//
+//.third-section .title {
+//  font-family: 'Raleway', sans-serif;
+//}
+//
+//.third-section .description {
+//  font-family: 'Raleway', sans-serif;
+//  //line-height: 160%;
+//}

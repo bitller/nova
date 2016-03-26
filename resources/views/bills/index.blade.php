@@ -11,7 +11,11 @@
 
         @include('bills.partials._add-bill-button')
 
-        @include('bills.partials._no-bills-info')
+        @if (!$validSubscription)
+            @include('includes.alerts.expired-subscription')
+        @else
+            @include('bills.partials._no-bills-info')
+        @endif
 
         @include('bills.partials._no-search-results')
 
@@ -51,6 +55,7 @@
     <!-- END Bills table -->
 
     @include('includes.modals.create-bill')
+    @include('includes.modals.help.how-to-create-bills')
 
 </div>
 <!-- END Bills page -->

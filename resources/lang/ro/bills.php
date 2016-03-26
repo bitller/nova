@@ -13,7 +13,7 @@ return [
     'campaign_tooltip' => 'Campania în care comanda este plasată',
     'campaign_year' => 'Anul campaniei',
     'click_here_to_see_all_bills' => 'Click aici pentru a te întoarce la toate facturile',
-    'click_here_to_see_what_to_do' => 'Click aici dacă nu ști ce să faci',
+    'click_here_to_see_what_to_do' => 'Vezi aici cum se creează o factură',
     'client' => 'Client',
     'client_name' => 'Numele clientului',
     'client_name_required' => 'Numele clientului este necesar.',

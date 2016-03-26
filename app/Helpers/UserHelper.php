@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers;
+
 use App\UserTrialPeriod;
 
 /**
@@ -10,24 +11,40 @@ use App\UserTrialPeriod;
  */
 class UserHelper {
 
+    public static function validSubscription() {
+        if (self::subscriptionLeftDays(\Auth::user()->id) < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     /**
      * Return a string with information about remaining subscription time.
      *
      * @return string
      */
     public static function remainingSubscriptionFormatted() {
-        // Check if trial is expired
 
+        // Check if trial is expired
         $userTrial = self::_userTrialPeriodQuery(\Auth::user()->id);
+
         // Calculate trial end date
         $endDate = date('d-m-Y', strtotime("+" . $userTrial['validity_days'] . " days", strtotime($userTrial['start'])));
 
         $remainingDays = strtotime($endDate) - strtotime($userTrial['start']);
         $remainingDays = floor($remainingDays/(60*60*24));
 
+
         // Check if period is expired
-        if ($remainingDays < 1) {
+        if ($remainingDays < 0) {
+            return trans('settings.subscription_free_expired');
             // todo create message for expired period
+        }
+
+        // Check if is last day
+        if ($remainingDays >= 0 && $remainingDays < 1) {
+            return trans('settings.subscription_free_last_day');
         }
 
         // you still have x free days, until date

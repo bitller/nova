@@ -16,6 +16,11 @@ class TrialPeriodTableSeeder extends Seeder {
 
         $trials = [
             [
+                'name' => '0 day - for testing only',
+                'validity_days' => 0,
+                'active' => 1
+            ],
+            [
                 'name' => '90 days free',
                 'validity_days' => 90,
                 'active' => 1

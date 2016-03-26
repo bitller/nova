@@ -183,6 +183,12 @@ Route::group(['prefix' => 'help-center'], function() {
     Route::post('/ask-question', 'HelpCenterController@askQuestion');
 });
 
+Route::group(['prefix' => 'create-subscription'], function() {
+    get('/', 'SubscriptionController@index');
+    get('/card', 'SubscriptionController@card');
+    get('/bank', 'SubscriptionController@bank');
+});
+
 // Subscription events listener
 Route::post('/subscription-events', 'SubscriptionEventsController@index');
 

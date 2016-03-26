@@ -45,5 +45,7 @@ return [
     'settings' => 'Settings',
     'settings_tooltip' => 'Settings for your account',
     'settings_will_be_restored' => 'Settings will be restored to their initial values.',
-    'subscription_period_info' => 'You have :remaining_days days left of your trial period, most exactly until :end.',
+    'subscription_free_expired' => 'Your free period has expired.',
+    'subscription_free_last_day' => 'This is your last day of your free period.',
+    'subscription_period_info' => 'You have :remaining_days days left of your trial period, most exactly until :end at 23:59.',
 ];
