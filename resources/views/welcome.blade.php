@@ -24,6 +24,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                {{--<li>--}}
+                    {{--<a href="#">{{ trans('welcome.pricing') }}</a>--}}
+                {{--</li>--}}
                 <li>
                     <p class="navbar-btn">
                         <a href="/login" class="btn btn-default custom-button">{{ Lang::get('common.login_button') }}</a>
@@ -50,14 +53,21 @@
 
         <div class="row">
 
+            <div class="col-md-12 text-center">
+                <img src="{{ url('/img/free.svg') }}">
+            </div>
+
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <h3 class="free-text grey-text">{{ trans('welcome.free_period') }}</h3>
+                <h4 class="free-text-description light-grey-text">{{ trans('welcome.free_period_description') }}</h4>
+            </div>
+
+
             <div class="col-md-4 col-md-offset-4 big-button-container">
                 <div class="btn btn-block btn-primary big-button">{{ trans('welcome.start') }}</div>
             </div>
 
-            <div class="col-md-4 col-md-offset-4 text-center">
-                <h3 class="free-text">{{ trans('welcome.free_period') }}</h3>
-                <h4 class="free-text-description grey-text">{{ trans('welcome.free_period_description') }}</h4>
-            </div>
+
 
         </div>
     </div>
@@ -65,14 +75,40 @@
     <!-- BEGIN Campaign statistics -->
     <div class="container-fluid campaign-statistics">
 
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3">
+
+                <!-- BEGIN Feature title and description -->
+                <div class="col-md-8">
+
+                    <!-- BEGIN Feature title -->
+                    <div class="row">
+                        <h3 class="grey-text">{{ trans('welcome.statistics_for_campaigns') }}</h3>
+                    </div>
+                    <!-- END Feature title -->
+
+                    <!-- BEGIN Feature description -->
+                    <div class="row">
+                        <h4 class="light-grey-text">{{ trans('welcome.statistics_for_campaigns_description') }}</h4>
+                    </div>
+                    <!-- END Feature description -->
+
+                </div>
+                <!-- END Feature title and description -->
+
+                <!-- BEGIN Feature image -->
+                <div class="col-md-3 col-md-offset-1">
+                    <img src="{{ url('/img/campaigns.svg') }}">
+                </div>
+                <!-- END Feature image -->
+
+            </div>
+
+        </div>
+
     </div>
     <!-- END Campaign statistics -->
-
-    <!-- BEGIN Compare campaigns -->
-    <div class="container-fluid">
-
-    </div>
-    <!-- END Compare campaigns -->
 
     <!-- BEGIN Fast access to client history feature -->
     <div class="container-fluid client-history-feature">
@@ -80,11 +116,11 @@
 
         <div class="col-md-6 col-md-offset-3">
 
-            <div class="col-md-3">
-                <img class="img-responsive col-md-offset-1" src="http://placehold.it/200x200" />
+            <div class="col-md-4">
+                <img class="img-responsive col-md-offset-1" src="{{ url('/img/history.svg') }}" />
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="row">
                     <h3 class="col-md-11 col-md-offset-1 title grey-text">{{ trans('welcome.access_to_client_history') }}</h3>
                 </div>
@@ -105,7 +141,7 @@
             <div class="col-md-6 col-md-offset-3">
 
                 <!-- BEGIN Feature title and description -->
-                <div class="col-md-9">
+                <div class="col-md-8">
 
                     <!-- BEGIN Feature title -->
                     <div class="row">
@@ -123,8 +159,8 @@
                 <!-- END Feature title and description -->
 
                 <!-- BEGIN Feature image -->
-                <div class="col-md-3">
-                    <img src="http://placehold.it/200x200">
+                <div class="col-md-3 col-md-offset-1">
+                    <img src="{{ url('/img/custom-bills.svg') }}">
                 </div>
                 <!-- END Feature image -->
 
@@ -140,12 +176,12 @@
         <div class="row">
             <div class="container text-center">
             <div class="col-md-4 col-md-offset-2">
-                <img src="http://placehold.it/210x210">
+                <img src="{{ url('/img/time.svg') }}">
                 <h3 class="grey-text">{{ trans('welcome.bills_in_seconds') }}</h3>
                 <h5 class="grey-text">{{ trans('welcome.bills_in_seconds_description') }}</h5>
             </div>
             <div class="col-md-4">
-                <img src="http://placehold.it/210x210">
+                <img src="{{ url('/img/wallet.svg') }}">
                 <h3 class="grey-text">{{ trans('welcome.details_about_earnings') }}</h3>
                 <h5 class="grey-text">{{ trans('welcome.details_about_earnings_description') }}</h5>
             </div>
@@ -176,26 +212,25 @@
                 <!-- BEGIN Nova -->
                 <div class="col-md-3">
                     <h3>Nova</h3>
-                    <h5>Made with passion in Europe by:</h5>
-                    <h5>Bitller S.R.L</h5>
-                    <h5>Registration id: 12345678</h5>
+                    <h5>{{ trans('welcome.made_by') }}</h5>
+                    <h5>{{ trans('welcome.made_by_company_name') }}</h5>
+                    <h5>{{ trans('welcome.registration_id') }}: 12345678</h5>
                 </div>
                 <!-- END Nova -->
 
                 <!-- BEGIN Contact -->
                 <div class="col-md-3 col-md-offset-3">
-                    <h3>Contact</h3>
+                    <h3>{{ trans('welcome.contact') }}</h3>
                     <h5><a href="mailto:contact@nova-manager.com">contact@nova-manager.com</a></h5>
-                    <h5>44 Caragiale street</h5>
-                    <h5>Bl. 4 Ap. 8, 259178</h5>
-                    <h5>Timisoara, Romania</h5>
+                    <h5>{{ trans('welcome.address_1') }}</h5>
+                    <h5>{{ trans('welcome.address_2') }}</h5>
+                    <h5>{{ trans('welcome.address_3') }}</h5>
                 </div>
                 <!-- END Contact -->
 
                 <!-- BEGIN About and legal -->
                 <div class="col-md-3">
                     <h3>About and legal</h3>
-                    <h5><a href="#">About</a></h5>
                     <h5><a href="#">Pricing</a></h5>
                     <h5><a href="#">Terms and conditions</a></h5>
                     <h5><a href="#">Privacy policy</a></h5>

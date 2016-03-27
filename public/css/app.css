@@ -5995,10 +5995,16 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.big-button-container {
+  padding-top: 30px; }
+
 .big-button {
   padding: 20px;
   font-size: 20px;
   color: #ffffff; }
+
+.campaign-statistics {
+  padding: 50px 0 50px 0; }
 
 .second-section {
   padding: 70px 0 70px 0; }
@@ -6024,14 +6030,15 @@ button.close {
   color: #ECECE6; }
 
 .custom-button {
+  background-color: transparent;
+  border: 2px solid #ffffff;
   border-radius: 4px;
-  background-color: #ECECE6;
   color: #ffffff;
   transition: 300ms; }
 
 .custom-button:hover {
   background-color: #ffffff;
-  color: #3498DB;
+  color: #D2527F;
   border-color: #ffffff;
   transition: background-color 300ms; }
 

@@ -1,12 +1,17 @@
 $border-and-text-color: #ffffff;
 
-.image-video-container {
+.big-button-container {
+  padding-top: 30px;
 }
 
 .big-button {
   padding: 20px;
   font-size: 20px;
   color: #ffffff;
+}
+
+.campaign-statistics {
+  padding: 50px 0 50px 0;
 }
 
 .second-section {
@@ -39,17 +44,16 @@ $border-and-text-color: #ffffff;
 }
 
 .custom-button {
-  //background-color: rgba(0, 0, 0, 0.0);
-  //border: 2px solid $border-and-text-color;
+  background-color: rgba(0, 0, 0, 0.0);
+  border: 2px solid $border-and-text-color;
   border-radius: 4px;
-  background-color: #ECECE6;
   color: $border-and-text-color;
   transition: 300ms;
 }
 
 .custom-button:hover {
   background-color: $border-and-text-color;
-  color: #3498DB;
+  color: $brand-primary;
   border-color: $border-and-text-color;
   transition: background-color 300ms;
 }
