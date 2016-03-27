@@ -189,6 +189,11 @@ Route::group(['prefix' => 'create-subscription'], function() {
     get('/bank', 'SubscriptionController@bank');
 });
 
+// Legal
+Route::group(['namespace' => 'Legal'], function() {
+    get('/imprint', 'ImprintController@index');
+});
+
 // Subscription events listener
 Route::post('/subscription-events', 'SubscriptionEventsController@index');
 

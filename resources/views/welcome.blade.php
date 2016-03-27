@@ -1,44 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Nova</title>
-    <link rel="stylesheet" href="/css/app.css">
-    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-</head>
-
-<body>
-
-<!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Nova</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                {{--<li>--}}
-                    {{--<a href="#">{{ trans('welcome.pricing') }}</a>--}}
-                {{--</li>--}}
-                <li>
-                    <p class="navbar-btn">
-                        <a href="/login" class="btn btn-default custom-button">{{ Lang::get('common.login_button') }}</a>
-                    </p>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
-
-<div id="startchange">
-
+@extends('layout.welcome.index')
+@section('content')
     <div class="first-section">
         <div class="container">
             <h2 class="text-center welcome-text">{{ trans('welcome.principal_title') }}</h2>
@@ -54,7 +15,7 @@
         <div class="row">
 
             <div class="col-md-12 text-center">
-                <img src="{{ url('/img/free.svg') }}">
+                <img src="{{ url('/img/star.svg') }}">
             </div>
 
             <div class="col-md-4 col-md-offset-4 text-center">
@@ -99,7 +60,7 @@
 
                 <!-- BEGIN Feature image -->
                 <div class="col-md-3 col-md-offset-1">
-                    <img src="{{ url('/img/campaigns.svg') }}">
+                    <img src="{{ url('/img/stats.svg') }}">
                 </div>
                 <!-- END Feature image -->
 
@@ -112,25 +73,25 @@
 
     <!-- BEGIN Fast access to client history feature -->
     <div class="container-fluid client-history-feature">
-    <div class="row">
+        <div class="row">
 
-        <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-6 col-md-offset-3">
 
-            <div class="col-md-4">
-                <img class="img-responsive col-md-offset-1" src="{{ url('/img/history.svg') }}" />
-            </div>
-
-            <div class="col-md-8">
-                <div class="row">
-                    <h3 class="col-md-11 col-md-offset-1 title grey-text">{{ trans('welcome.access_to_client_history') }}</h3>
+                <div class="col-md-4">
+                    <img class="img-responsive col-md-offset-1" src="{{ url('/img/easy-access.svg') }}" />
                 </div>
-                <div class="row">
-                    <h4 class="col-md-11 col-md-offset-1 description light-grey-text">{{ trans('welcome.access_to_client_history_description') }}</h4>
-                </div>
-            </div>
 
+                <div class="col-md-8">
+                    <div class="row">
+                        <h3 class="col-md-11 col-md-offset-1 title grey-text">{{ trans('welcome.access_to_client_history') }}</h3>
+                    </div>
+                    <div class="row">
+                        <h4 class="col-md-11 col-md-offset-1 description light-grey-text">{{ trans('welcome.access_to_client_history_description') }}</h4>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
     </div>
     <!-- END Fast access to client history feature -->
 
@@ -160,7 +121,7 @@
 
                 <!-- BEGIN Feature image -->
                 <div class="col-md-3 col-md-offset-1">
-                    <img src="{{ url('/img/custom-bills.svg') }}">
+                    <img src="{{ url('/img/news.svg') }}">
                 </div>
                 <!-- END Feature image -->
 
@@ -175,17 +136,17 @@
 
         <div class="row">
             <div class="container text-center">
-            <div class="col-md-4 col-md-offset-2">
-                <img src="{{ url('/img/time.svg') }}">
-                <h3 class="grey-text">{{ trans('welcome.bills_in_seconds') }}</h3>
-                <h5 class="grey-text">{{ trans('welcome.bills_in_seconds_description') }}</h5>
-            </div>
-            <div class="col-md-4">
-                <img src="{{ url('/img/wallet.svg') }}">
-                <h3 class="grey-text">{{ trans('welcome.details_about_earnings') }}</h3>
-                <h5 class="grey-text">{{ trans('welcome.details_about_earnings_description') }}</h5>
-            </div>
+                <div class="col-md-4 col-md-offset-2">
+                    <img src="{{ url('/img/time.svg') }}">
+                    <h3 class="grey-text">{{ trans('welcome.bills_in_seconds') }}</h3>
+                    <h5 class="grey-text">{{ trans('welcome.bills_in_seconds_description') }}</h5>
                 </div>
+                <div class="col-md-4">
+                    <img src="{{ url('/img/money.svg') }}">
+                    <h3 class="grey-text">{{ trans('welcome.details_about_earnings') }}</h3>
+                    <h5 class="grey-text">{{ trans('welcome.details_about_earnings_description') }}</h5>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -196,59 +157,10 @@
 
         <div class="row">
             <div class="container">
-{{--                <h5>{{ trans('welcome.first_three_months_are_free') }}</h5>--}}
+
             </div>
         </div>
 
     </div>
     <!-- END 30 seconds away -->
-
-    <!-- BEGIN Footer -->
-    <div class="fluid-container footer">
-
-        <div class="row">
-            <div class="container">
-
-                <!-- BEGIN Nova -->
-                <div class="col-md-3">
-                    <h3>Nova</h3>
-                    <h5>{{ trans('welcome.made_by') }}</h5>
-                    <h5>{{ trans('welcome.made_by_company_name') }}</h5>
-                    <h5>{{ trans('welcome.registration_id') }}: 12345678</h5>
-                </div>
-                <!-- END Nova -->
-
-                <!-- BEGIN Contact -->
-                <div class="col-md-3 col-md-offset-3">
-                    <h3>{{ trans('welcome.contact') }}</h3>
-                    <h5><a href="mailto:contact@nova-manager.com">contact@nova-manager.com</a></h5>
-                    <h5>{{ trans('welcome.address_1') }}</h5>
-                    <h5>{{ trans('welcome.address_2') }}</h5>
-                    <h5>{{ trans('welcome.address_3') }}</h5>
-                </div>
-                <!-- END Contact -->
-
-                <!-- BEGIN About and legal -->
-                <div class="col-md-3">
-                    <h3>About and legal</h3>
-                    <h5><a href="#">Pricing</a></h5>
-                    <h5><a href="#">Terms and conditions</a></h5>
-                    <h5><a href="#">Privacy policy</a></h5>
-                    <h5><a href="#">Imprint</a></h5>
-                </div>
-                <!-- END About and legal -->
-            </div>
-
-        </div>
-
-    </div>
-    <!-- END Footer -->
-
-</div>
-
-<script src="/js/vendor.js"></script>
-<script src="js/welcome.js"></script>
-
-</body>
-
-</html>
+@endsection
