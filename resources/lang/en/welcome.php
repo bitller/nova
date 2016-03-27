@@ -15,6 +15,7 @@ return [
     'fast_bill_creation_long'   => 'Did you get a new order? Takes only few seconds to create a new bill.',
     'first_ok' => 'Create and print one bill for each client order',
     'fiscal_code' => 'Fiscal code',
+    'gathering_personal_information' => 'Gathering of Personally-Identifying Information',
     'imprint' => 'Imprint',
     'made_by'                   => 'Created with passion in Europe by:',
     'made_by_company_name'      => 'Bitller S.R.L.',
@@ -24,6 +25,7 @@ return [
     'print_bills_long'          => 'Did you get a new order? Did you added all products? Now it\'s time to print the bill.',
     'privacy_policy' => 'Privacy policy',
     'registration_id'           => 'Registration id',
+    'revision_date' => 'Revision date',
     'search_by_code'            => 'Search a product by their code',
     'search_by_code_long'       => 'You can search through all Avon products by their code.',
     'second_ok' => 'Bills with elegant aspect, which denotes professionalism and respect, two values that matters more and more for your clients',
@@ -36,6 +38,7 @@ return [
     'terms_and_conditions'      => 'Terms and conditions',
     'third_ok' => 'You have access to all your orders and statistics about sells from anywhere',
     'vat_id' => 'VAT ID',
+    'website_visitors' => 'Website Visitors',
     'welcome'                   => 'Welcome',
     'what_is_nova'              => 'Nova is a billing and products management application for Avon representatives',
     'why'                       => 'Why use Nova?'

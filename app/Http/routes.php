@@ -192,6 +192,7 @@ Route::group(['prefix' => 'create-subscription'], function() {
 // Legal
 Route::group(['namespace' => 'Legal'], function() {
     get('/imprint', 'ImprintController@index');
+    get('/privacy', 'PrivacyController@index');
 });
 
 // Subscription events listener

@@ -1,11 +1,27 @@
-.imprint {
+.imprint, .privacy {
   padding-top: 25px;
 }
 
-.imprint-content {
+.imprint-content, .privacy-content {
   margin: 10px 0 50px 0;
 }
 
 .product-of {
   padding: 20px 0 20px 0;
+}
+
+.revision {
+  padding-bottom: 10px;
+}
+
+.top-space {
+  padding-top: 10px;
+}
+
+.bottom-space {
+  padding-bottom: 10px;
+}
+
+.top-bottom-space {
+  padding: 10px 0 10px 0;
 }
