@@ -189,6 +189,9 @@ Route::group(['prefix' => 'create-subscription'], function() {
     get('/bank', 'SubscriptionController@bank');
 });
 
+// Prices
+Route::get('/pricing', 'PricingController@index');
+
 // Legal
 Route::group(['namespace' => 'Legal'], function() {
     get('/imprint', 'ImprintController@index');
