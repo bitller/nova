@@ -70,7 +70,7 @@
                 <div class="col-xs-6 col-xs-offset-0 col-sm-4 col-sm-offset-0 col-md-3 col-lg-3">
                     <h3>{{ trans('welcome.about_and_legal') }}</h3>
                     <h5><a href="/prices">{{ trans('welcome.pricing') }}</a></h5>
-                    <h5><a href="/terms">{{ trans('welcome.terms_and_conditions') }}</a></h5>
+                    <h5><a href="/terms-and-conditions">{{ trans('welcome.terms_and_conditions') }}</a></h5>
                     <h5><a href="/privacy">{{ trans('welcome.privacy_policy') }}</a></h5>
                     <h5><a href="/imprint">{{ trans('welcome.imprint') }}</a></h5>
                 </div>
