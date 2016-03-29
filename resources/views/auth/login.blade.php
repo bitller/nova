@@ -19,11 +19,10 @@
     <div class="well custom-well login-form col-md-6 col-md-offset-3">
         <div class="col-md-10 col-md-offset-1">
 
-            <!-- BEGIN Your account divider -->
-            <div class="fancy-divider-white">
-                <span>{{ trans('login.your_account') }}</span>
+            <div class="row">
+                <img class="img-responsive center-responsive-image" src="/img/lock.svg">
             </div>
-            <!-- END Your account divider -->
+            <br>
 
             <div class="alert alert-danger" v-show="general_error">@{{ general_error }}</div>
 
