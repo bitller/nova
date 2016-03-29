@@ -15,7 +15,7 @@ return [
     'recover' => 'Recuperează parola',
     'remember_password' => 'Ţi-ai amintit parola? Conectează-te',
     'reset_password' => 'Resetează parola',
-    'short_description' => 'Pentru a reseta parola trebuie sa aveti acces la adresa dumneavoastra de email.',
+    'short_description' => 'Pentru a reseta parola trebuie să aveți acces la adresa dumneavoastră de email.',
     'title' => 'Recuperează-ți parola - Nova',
     'your_email' => 'Email-ul tău'
 ];

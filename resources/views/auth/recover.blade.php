@@ -18,6 +18,12 @@
     <div class="well custom-well recover-form col-md-6 col-md-offset-3">
         <div class="col-md-10 col-md-offset-1">
 
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="img-responsive center-responsive-image" src="/img/briefcase.svg">
+                </div>
+            </div>
+
             <!-- BEGIN Your account divider -->
             <div class="fancy-divider-white">
                 <span>{{ trans('recover.your_email') }}</span>

@@ -15,6 +15,8 @@ return [
     'expiry_date' => 'Expiry date',
     'expiry_month' => 'Month',
     'expiry_year' => 'Year',
+    'free_period' => '90 days free!',
+    'free_period_description' => 'First 90 days are free. After that you decide if Nova is for you. Until then you don\'t have to pay anything.',
     'got_questions' => 'Got questions?',
     'join' => 'Join',
     'login' => 'Log in',
