@@ -237,6 +237,9 @@
 .user-does-not-have-printer {
   margin-top: 7px; }
 
+/**
+ * Legal pages
+ */
 .imprint, .privacy, .terms {
   padding-top: 25px; }
 
@@ -257,6 +260,21 @@
 
 .top-bottom-space {
   padding: 10px 0 10px 0; }
+
+/**
+ * Pricing page
+ */
+.pricing {
+  margin-top: 10px; }
+
+.bank-method {
+  padding-top: 40px; }
+
+.create-account-free {
+  padding-top: 20px; }
+
+.create-account-free button {
+  padding: 10px; }
 
 .search-bar {
   display: none; }
@@ -8619,5 +8637,8 @@ body {
 
 .primary-color {
   color: #D2527F; }
+
+.center-responsive-image {
+  margin: 0 auto; }
 
 /*# sourceMappingURL=app.css.map */
