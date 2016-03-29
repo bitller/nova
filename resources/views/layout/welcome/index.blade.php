@@ -29,7 +29,7 @@
                 {{--</li>--}}
                 <li>
                     <p class="navbar-btn">
-                        <a href="/login" class="btn btn-default custom-button">{{ Lang::get('common.login_button') }}</a>
+                        <a href="/login" class="btn custom-button">{{ Lang::get('common.login_button') }}</a>
                     </p>
                 </li>
             </ul>

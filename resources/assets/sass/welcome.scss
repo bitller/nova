@@ -51,12 +51,20 @@ $border-and-text-color: #ffffff;
   transition: 300ms;
 }
 
-.custom-button:hover {
+.custom-button:hover, .custom-button:active, .custom-button:focus {
   background-color: $border-and-text-color;
   color: $brand-primary;
   border-color: $border-and-text-color;
   transition: background-color 300ms;
 }
+
+.custom-button a {
+  color: #ffffff;
+}
+
+//.custom-button:hover a, .custom-button:active a, .custom-button:focus a {
+//  color: $brand-primary;
+//}
 
 .first-section {
   background-color: #ECECE6;

@@ -6075,11 +6075,14 @@ button.close {
   color: #ffffff;
   transition: 300ms; }
 
-.custom-button:hover {
+.custom-button:hover, .custom-button:active, .custom-button:focus {
   background-color: #ffffff;
   color: #D2527F;
   border-color: #ffffff;
   transition: background-color 300ms; }
+
+.custom-button a {
+  color: #ffffff; }
 
 .first-section {
   background-color: #ECECE6; }
