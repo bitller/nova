@@ -83,7 +83,7 @@ class RegisterController extends Controller {
         // Create trial period
         UserTrialPeriod::create([
             'user_id' => $user->id,
-            'trial_period_id' => TrialPeriod::first()->id
+            'trial_period_id' => TrialPeriod::where('validity_days', 90)->first()->id
         ]);
 
         Auth::login($user);

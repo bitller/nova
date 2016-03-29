@@ -25,7 +25,7 @@
 
 
             <div class="col-md-4 col-md-offset-4 big-button-container">
-                <div class="btn btn-block btn-primary big-button">{{ trans('welcome.start') }}</div>
+                <a class="no-underline-href" href="/register"><div class="btn btn-block btn-primary big-button">{{ trans('welcome.start') }}</div></a>
             </div>
 
 

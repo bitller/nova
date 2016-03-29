@@ -275,4 +275,18 @@ body {
   margin: 0 auto;
 }
 
+.alert-col {
+  padding-top: 12px;
+}
 
+.other-link-color, .other-link-color:hover, .other-link-color:active {
+  color: #1a526e;
+}
+
+.no-underline-href:hover {
+  text-decoration: none;
+}
+
+.margin-bottom {
+  margin-bottom: 100px;
+}

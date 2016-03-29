@@ -16,7 +16,7 @@
 <div class="container" id="register">
     @include('includes.ajax-translations.register')
 
-    <div class="well custom-well register-form col-md-6 col-md-offset-3">
+    <div class="well custom-well margin-bottom register-form col-md-6 col-md-offset-3">
         <div class="col-md-10 col-md-offset-1">
 
             @if ($allowNewUsers)
@@ -78,11 +78,6 @@
             @endif
         </div>
     </div>
-    @if ($allowNewUsers)
-    <div class="secure-form col-md-6 col-md-offset-3">
-        {{ trans('register.secure_form') }}
-    </div>
-    @endif
 </div>
 <!-- END Register form -->
 
